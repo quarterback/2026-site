@@ -429,7 +429,12 @@ import { SITE } from "@/config";
 </script>
 
 <style>
-  /* Ensure theme cards respect their data-theme attribute for CSS variables */
+  /*
+   * These theme definitions are intentionally duplicated from global.css
+   * to enable side-by-side theme comparison within embedded containers.
+   * The global CSS applies to html[data-theme], but these scoped styles
+   * apply to any element with data-theme, allowing multiple themes on one page.
+   */
   [data-theme="light"] {
     --background: #f8f5f0;
     --foreground: #1f1a17;
