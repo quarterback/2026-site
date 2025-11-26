@@ -1,0 +1,464 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/layouts/Main.astro";
+import { SITE } from "@/config";
+---
+
+<Layout title={`Theme Preview | ${SITE.title}`}>
+  <Header />
+  <Main
+    pageTitle="Theme Preview"
+    pageDesc="Compare light and dark themes side-by-side with sample UI components."
+  >
+    <!-- Global Theme Toggle -->
+    <div class="mb-8 flex flex-wrap items-center gap-4">
+      <span class="font-semibold">Document Theme:</span>
+      <button
+        id="toggle-light"
+        class="rounded border border-border bg-muted px-4 py-2 hover:bg-accent hover:text-background focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed"
+      >
+        Light
+      </button>
+      <button
+        id="toggle-dark"
+        class="rounded border border-border bg-muted px-4 py-2 hover:bg-accent hover:text-background focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed"
+      >
+        Dark
+      </button>
+      <button
+        id="toggle-light-hc"
+        class="rounded border border-border bg-muted px-4 py-2 hover:bg-accent hover:text-background focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed"
+      >
+        Light HC
+      </button>
+      <button
+        id="toggle-dark-hc"
+        class="rounded border border-border bg-muted px-4 py-2 hover:bg-accent hover:text-background focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed"
+      >
+        Dark HC
+      </button>
+    </div>
+
+    <!-- Side-by-side comparison -->
+    <h2 class="mb-4 text-xl font-semibold">Side-by-Side Theme Comparison</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      <!-- Light Theme Card -->
+      <div
+        data-theme="light"
+        class="rounded-lg border border-border bg-background p-6 text-foreground"
+      >
+        <h3 class="mb-4 text-lg font-semibold">Light Theme</h3>
+
+        <!-- Sample Text -->
+        <div class="mb-4">
+          <h4 class="font-medium">Typography</h4>
+          <p class="text-sm">
+            This is regular paragraph text. The foreground color should have
+            sufficient contrast against the background.
+          </p>
+          <p class="mt-2 text-sm text-accent">
+            This text uses the accent color for emphasis.
+          </p>
+        </div>
+
+        <!-- Sample Link -->
+        <div class="mb-4">
+          <h4 class="font-medium">Links</h4>
+          <a
+            href="#"
+            class="text-accent underline decoration-dashed underline-offset-4 hover:no-underline"
+          >
+            Sample link with accent color
+          </a>
+        </div>
+
+        <!-- Sample Buttons -->
+        <div class="mb-4">
+          <h4 class="mb-2 font-medium">Buttons</h4>
+          <div class="flex flex-wrap gap-2">
+            <button
+              class="rounded border border-border bg-muted px-4 py-2 hover:bg-accent hover:text-background"
+            >
+              Muted Button
+            </button>
+            <button
+              class="rounded bg-accent px-4 py-2 text-background hover:opacity-90"
+            >
+              Accent Button
+            </button>
+          </div>
+        </div>
+
+        <!-- Sample Input -->
+        <div class="mb-4">
+          <h4 class="mb-2 font-medium">Input</h4>
+          <input
+            type="text"
+            placeholder="Sample input field"
+            class="w-full rounded border border-border bg-background px-3 py-2 text-foreground placeholder:text-foreground/50 focus:outline-2 focus:outline-accent focus:outline-dashed"
+          />
+        </div>
+
+        <!-- Sample Card -->
+        <div class="rounded border border-border bg-muted p-4">
+          <h4 class="font-medium">Sample Card</h4>
+          <p class="text-sm">
+            A card component using muted background with border styling.
+          </p>
+        </div>
+
+        <!-- Color Swatches -->
+        <div class="mt-4">
+          <h4 class="mb-2 font-medium">Color Palette</h4>
+          <div class="grid grid-cols-5 gap-2 text-xs">
+            <div class="text-center">
+              <div
+                class="mb-1 h-8 w-full rounded border border-border bg-background"
+              >
+              </div>
+              <span>BG</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-foreground"></div>
+              <span>FG</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-accent"></div>
+              <span>Accent</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-muted"></div>
+              <span>Muted</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-border"></div>
+              <span>Border</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Theme Card -->
+      <div
+        data-theme="dark"
+        class="rounded-lg border border-border bg-background p-6 text-foreground"
+      >
+        <h3 class="mb-4 text-lg font-semibold">Dark Theme</h3>
+
+        <!-- Sample Text -->
+        <div class="mb-4">
+          <h4 class="font-medium">Typography</h4>
+          <p class="text-sm">
+            This is regular paragraph text. The foreground color should have
+            sufficient contrast against the background.
+          </p>
+          <p class="mt-2 text-sm text-accent">
+            This text uses the accent color for emphasis.
+          </p>
+        </div>
+
+        <!-- Sample Link -->
+        <div class="mb-4">
+          <h4 class="font-medium">Links</h4>
+          <a
+            href="#"
+            class="text-accent underline decoration-dashed underline-offset-4 hover:no-underline"
+          >
+            Sample link with accent color
+          </a>
+        </div>
+
+        <!-- Sample Buttons -->
+        <div class="mb-4">
+          <h4 class="mb-2 font-medium">Buttons</h4>
+          <div class="flex flex-wrap gap-2">
+            <button
+              class="rounded border border-border bg-muted px-4 py-2 hover:bg-accent hover:text-background"
+            >
+              Muted Button
+            </button>
+            <button
+              class="rounded bg-accent px-4 py-2 text-background hover:opacity-90"
+            >
+              Accent Button
+            </button>
+          </div>
+        </div>
+
+        <!-- Sample Input -->
+        <div class="mb-4">
+          <h4 class="mb-2 font-medium">Input</h4>
+          <input
+            type="text"
+            placeholder="Sample input field"
+            class="w-full rounded border border-border bg-background px-3 py-2 text-foreground placeholder:text-foreground/50 focus:outline-2 focus:outline-accent focus:outline-dashed"
+          />
+        </div>
+
+        <!-- Sample Card -->
+        <div class="rounded border border-border bg-muted p-4">
+          <h4 class="font-medium">Sample Card</h4>
+          <p class="text-sm">
+            A card component using muted background with border styling.
+          </p>
+        </div>
+
+        <!-- Color Swatches -->
+        <div class="mt-4">
+          <h4 class="mb-2 font-medium">Color Palette</h4>
+          <div class="grid grid-cols-5 gap-2 text-xs">
+            <div class="text-center">
+              <div
+                class="mb-1 h-8 w-full rounded border border-border bg-background"
+              >
+              </div>
+              <span>BG</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-foreground"></div>
+              <span>FG</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-accent"></div>
+              <span>Accent</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-muted"></div>
+              <span>Muted</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-border"></div>
+              <span>Border</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- High Contrast Themes -->
+    <h2 class="mt-8 mb-4 text-xl font-semibold">High Contrast Variants</h2>
+    <div class="grid gap-6 md:grid-cols-2">
+      <!-- Light HC Theme Card -->
+      <div
+        data-theme="light-hc"
+        class="rounded-lg border border-border bg-background p-6 text-foreground"
+      >
+        <h3 class="mb-4 text-lg font-semibold">Light High Contrast</h3>
+
+        <!-- Sample Text -->
+        <div class="mb-4">
+          <h4 class="font-medium">Typography</h4>
+          <p class="text-sm">
+            High contrast mode uses pure white and black for maximum
+            readability.
+          </p>
+          <p class="mt-2 text-sm text-accent">Accent text for emphasis.</p>
+        </div>
+
+        <!-- Sample Link -->
+        <div class="mb-4">
+          <h4 class="font-medium">Links</h4>
+          <a
+            href="#"
+            class="text-accent underline decoration-dashed underline-offset-4 hover:no-underline"
+          >
+            Sample link with accent color
+          </a>
+        </div>
+
+        <!-- Sample Buttons -->
+        <div class="mb-4">
+          <h4 class="mb-2 font-medium">Buttons</h4>
+          <div class="flex flex-wrap gap-2">
+            <button
+              class="rounded border border-border bg-muted px-4 py-2 hover:bg-accent hover:text-background"
+            >
+              Muted Button
+            </button>
+            <button
+              class="rounded bg-accent px-4 py-2 text-background hover:opacity-90"
+            >
+              Accent Button
+            </button>
+          </div>
+        </div>
+
+        <!-- Color Swatches -->
+        <div class="mt-4">
+          <h4 class="mb-2 font-medium">Color Palette</h4>
+          <div class="grid grid-cols-5 gap-2 text-xs">
+            <div class="text-center">
+              <div
+                class="mb-1 h-8 w-full rounded border border-border bg-background"
+              >
+              </div>
+              <span>BG</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-foreground"></div>
+              <span>FG</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-accent"></div>
+              <span>Accent</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-muted"></div>
+              <span>Muted</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-border"></div>
+              <span>Border</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark HC Theme Card -->
+      <div
+        data-theme="dark-hc"
+        class="rounded-lg border border-border bg-background p-6 text-foreground"
+      >
+        <h3 class="mb-4 text-lg font-semibold">Dark High Contrast</h3>
+
+        <!-- Sample Text -->
+        <div class="mb-4">
+          <h4 class="font-medium">Typography</h4>
+          <p class="text-sm">
+            High contrast mode uses pure white and black for maximum
+            readability.
+          </p>
+          <p class="mt-2 text-sm text-accent">Accent text for emphasis.</p>
+        </div>
+
+        <!-- Sample Link -->
+        <div class="mb-4">
+          <h4 class="font-medium">Links</h4>
+          <a
+            href="#"
+            class="text-accent underline decoration-dashed underline-offset-4 hover:no-underline"
+          >
+            Sample link with accent color
+          </a>
+        </div>
+
+        <!-- Sample Buttons -->
+        <div class="mb-4">
+          <h4 class="mb-2 font-medium">Buttons</h4>
+          <div class="flex flex-wrap gap-2">
+            <button
+              class="rounded border border-border bg-muted px-4 py-2 hover:bg-accent hover:text-background"
+            >
+              Muted Button
+            </button>
+            <button
+              class="rounded bg-accent px-4 py-2 text-background hover:opacity-90"
+            >
+              Accent Button
+            </button>
+          </div>
+        </div>
+
+        <!-- Color Swatches -->
+        <div class="mt-4">
+          <h4 class="mb-2 font-medium">Color Palette</h4>
+          <div class="grid grid-cols-5 gap-2 text-xs">
+            <div class="text-center">
+              <div
+                class="mb-1 h-8 w-full rounded border border-border bg-background"
+              >
+              </div>
+              <span>BG</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-foreground"></div>
+              <span>FG</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-accent"></div>
+              <span>Accent</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-muted"></div>
+              <span>Muted</span>
+            </div>
+            <div class="text-center">
+              <div class="mb-1 h-8 w-full rounded bg-border"></div>
+              <span>Border</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selection Demo -->
+    <h2 class="mt-8 mb-4 text-xl font-semibold">Text Selection Demo</h2>
+    <p class="mb-4">
+      Select this text to see the selection colors. The selection background
+      uses the accent color with transparency, and the selection text uses the
+      background color for contrast.
+    </p>
+  </Main>
+  <Footer />
+</Layout>
+
+<script>
+  function initThemeToggle() {
+    const toggleLight = document.getElementById("toggle-light");
+    const toggleDark = document.getElementById("toggle-dark");
+    const toggleLightHc = document.getElementById("toggle-light-hc");
+    const toggleDarkHc = document.getElementById("toggle-dark-hc");
+
+    function setTheme(theme: string) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    }
+
+    toggleLight?.addEventListener("click", () => setTheme("light"));
+    toggleDark?.addEventListener("click", () => setTheme("dark"));
+    toggleLightHc?.addEventListener("click", () => setTheme("light-hc"));
+    toggleDarkHc?.addEventListener("click", () => setTheme("dark-hc"));
+  }
+
+  initThemeToggle();
+
+  // Runs on view transitions navigation
+  document.addEventListener("astro:after-swap", initThemeToggle);
+</script>
+
+<style>
+  /* Ensure theme cards respect their data-theme attribute for CSS variables */
+  [data-theme="light"] {
+    --background: #f8f5f0;
+    --foreground: #1f1a17;
+    --accent: #0a7cc4;
+    --muted: #e3ddd3;
+    --border: #d6cfc5;
+  }
+
+  [data-theme="dark"] {
+    --background: #0e1218;
+    --foreground: #e9eef6;
+    --accent: #ff7a1a;
+    --muted: #2a3442;
+    --border: #3a4758;
+  }
+
+  [data-theme="light-hc"] {
+    --background: #ffffff;
+    --foreground: #000000;
+    --accent: #005bbb;
+    --muted: #ededed;
+    --border: #b3b3b3;
+  }
+
+  [data-theme="dark-hc"] {
+    --background: #000000;
+    --foreground: #ffffff;
+    --accent: #ffd300;
+    --muted: #333333;
+    --border: #666666;
+  }
+</style>
