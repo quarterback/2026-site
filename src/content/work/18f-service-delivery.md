@@ -1,15 +1,12 @@
 ---
-
-title: "Service Delivery at Scale"
-summary: "Design leadership across federal programs serving millions."
-systemType: "Eligibility + intake systems"
-outcome: 'Patterns adopted across multiple agencies on what "success" meant'
-order: 1
-featured: true
-tags: ["Service Delivery", "Decision Systems", "Federal"]
-role: "Design Lead"
-timeframe: "Multi-year"
------------------------
+title: "State Capacity AI"
+summary: "Exploring how AI can strengthen public institutions."
+systemType: "AI + decision systems"
+outcome: "Ongoing research and prototyping"
+order: 3
+featured: false
+tags: ["AI", "Policy", "Research"]
+---
 
 ## Snapshot
 
