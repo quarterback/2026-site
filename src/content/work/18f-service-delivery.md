@@ -1,146 +1,115 @@
 ---
-title: "State Capacity AI"
-summary: "Exploring how AI can strengthen public institutions."
-systemType: "AI + decision systems"
-outcome: "Ongoing research and prototyping"
-order: 3
-featured: false
-tags: ["AI", "Policy", "Research"]
+title: "Service Delivery at Scale"
+summary: "Design leadership across federal programs serving millions."
+systemType: "Eligibility + intake systems"
+outcome: "Patterns adopted across multiple agencies"
+order: 1
+featured: true
+tags: ["Service Design", "Federal", "Systems"]
 ---
 
 ## Snapshot
 
-**Context**
-Federal service delivery where policy rules, legacy infrastructure, and operational constraints shape the user experience.
-
-**My role**
-Design lead responsible for research synthesis, pattern development, and cross-program alignment.
-
-**What I worked on**
-Eligibility, intake, and case-management touchpoints where decisions are made and consequences compound.
-
-**What changed**
-Reusable service patterns and decision clarity methods adopted across multiple programs.
+**Context:** Federal service delivery systems where policy rules and legacy infrastructure shape user outcomes.  
+**Role:** Design lead (research synthesis, pattern development, cross-team alignment)  
+**Scope:** Cross-program work spanning intake, eligibility, verification, and service recovery  
+**What changed:** Shared patterns and decision clarity methods adopted across multiple programs
 
 ---
 
 ## The problem
 
-Government services often fail at the moments that matter most: when someone needs help navigating a complex system under time pressure.
+Government services fail at the moments that matter most: when someone needs help navigating a complex system under time pressure.
 
-The core issue wasn’t just poor interfaces. Eligibility systems, intake processes, and case workflows were designed primarily for compliance and processing volume—not for error recovery, service completion, or the downstream consequences of a “small” design decision.
+The issue wasn’t just bad interfaces. Eligibility systems, intake processes, and case management tools were built to satisfy policy compliance and processing volume—not to support completion, recovery from errors, or the downstream consequences of ambiguous decisions.
 
 ---
 
 ## Constraints
 
-* Multi-program coordination across different technical stacks
-* Policy requirements that couldn’t be changed—only interpreted and implemented
-* Legacy systems with limited or inconsistent integration points
-* Stakeholders measuring success by throughput rather than user outcomes
-* High consequence error states (incomplete submissions, ineligibility confusion, avoidable rejection loops)
+- Multi-program coordination across different technical stacks
+- Policy requirements that couldn’t be changed (only interpreted and implemented)
+- Legacy systems with limited or inconsistent integration points
+- Stakeholders measuring success by throughput rather than completion/correctness
+- High-risk error states: missing documents, misunderstood eligibility, dead ends
 
 ---
 
 ## My role
 
-I led design work that sat between policy intent and delivery reality.
+I led design work at the intersection of policy intent and delivery reality.
 
-This included:
-
-* synthesizing research signals across programs
-* translating failure patterns into shared language teams could act on
-* shaping patterns and guidelines that could travel across contexts (not just “fix one screen”)
+I was responsible for:
+- synthesizing research signals into actionable patterns
+- shaping decision-focused service language teams could share
+- aligning multi-disciplinary stakeholders on what “success” meant in practice
 
 ---
 
 ## What I did
 
-### 1) Mapped decision points and failure states
+### 1) Mapped decision points + failure states
+- Identified where people most commonly failed, abandoned, or got stuck
+- Documented “drop-off” and “dead-end” moments as operational failures, not UX quirks
 
-I documented where people most commonly:
-
-* abandoned
-* misinterpreted requirements
-* submitted incorrect info
-* got trapped in loops they couldn’t recover from
-
-The output wasn’t a journey map for show—it was a failure map designed to drive decisions.
-
-### 2) Defined “consequence moments”
-
-I identified moments where UX decisions created downstream harm, including:
-
-* late-stage requirement surprises
-* ambiguous eligibility thresholds
-* unclear “next step” states after rejection or missing info
-* mismatched mental models between policy teams and delivery teams
-
-These became anchor points for prioritization and critique.
+### 2) Defined consequence moments
+- Flagged places where small design choices created downstream harm
+- Made the cost of ambiguity visible: delays, rework, support burden, mistrust
 
 ### 3) Built a shared vocabulary across teams
+- Established terms teams could use to debate service mechanics without bikeshedding UI
+- Created critique prompts focused on decision clarity, recovery, and accountability
 
-I created language that let cross-program teams discuss problems as *service mechanics*, not opinions:
+### 4) Developed intake patterns that prevent late-stage failure
+- Built reusable patterns for surfacing requirements earlier
+- Improved legibility of “what happens next” and “why this is needed”
+- Prioritized recoverability over perfect happy-path flow
 
-* decision clarity vs. decision opacity
-* recoverability vs. dead ends
-* compliance success vs. human success
-* exception handling as a first-class requirement
-
-This reduced translation overhead between policy, product, engineering, and operations.
-
-### 4) Developed intake patterns that prevented late-stage failure
-
-I created reusable patterns to:
-
-* surface requirements earlier (without overwhelming users)
-* structure information collection around decision logic
-* reduce “invisible rules” that only appeared at submission time
-* make error states legible and recoverable
-
-### 5) Aligned success metrics to service outcomes
-
-I helped teams move beyond “processing volume” as the default KPI by introducing operationally meaningful measures, including:
-
-* completion
-* correctness
-* avoidable rework
-* service recovery time after errors
+### 5) Aligned policy + delivery on measurable outcomes
+- Shifted conversations from “processed” to “completed correctly”
+- Connected service design choices to support load and operational performance
 
 ---
 
 ## Key decisions
 
-* **Optimized for recoverability over polish**
-  Because high-stakes services don’t fail gracefully by default—and “dead ends” are the real design debt.
+- **Optimized for recoverability over polish**  
+  Because dead ends are the true failure mode in high-stakes services.
 
-* **Surfaced constraints earlier instead of hiding complexity**
-  Because late-stage surprises create abandonment, mistrust, and support burden.
+- **Surfaced requirements earlier instead of hiding complexity**  
+  Because late-stage surprises drive abandonment and increase rework.
 
-* **Designed patterns that travel across programs**
-  Because the real impact comes from system-level repeatability, not one-off UI fixes.
+- **Built patterns that travel across programs**  
+  Because the real leverage is repeatability, not one-off fixes.
 
 ---
 
 ## Artifacts
 
-* Intake decision flow map (eligibility → verification → submission → recovery)
-* “Consequence moments” mapping (where harm is introduced)
-* Cross-program pattern library (intake + requirements + error recovery)
-* Workshop prompts + critique frameworks for service failure analysis
+### Intake decision flow mapping
+![Intake flow (decision points + failure states)](/images/work/service-delivery-at-scale/intake-flow.png)
+
+### Consequence mapping workshop output
+![Consequence map](/images/work/service-delivery-at-scale/consequence-map.png)
+
+### Pattern library examples
+![Pattern library](/images/work/service-delivery-at-scale/pattern-library.png)
+
+### Service blueprint (handoffs + recovery)
+![Service blueprint](/images/work/service-delivery-at-scale/service-blueprint.png)
 
 ---
 
 ## Outcomes
 
-* Patterns adopted across 4+ federal programs
-* Reduced avoidable abandonment during intake and submission
-* “Consequence mapping” method reused in training and cross-team critique
+- Patterns adopted across 4+ federal programs
+- Reduced avoidable abandonment during intake and verification moments
+- “Consequence mapping” approach reused in training and cross-team critique
 
 ---
 
 ## What this demonstrates
 
-I can enter complex, politically constrained delivery environments and find leverage points where design decisions create outsized impact.
+I can walk into complex, politically constrained delivery environments and find leverage points where design decisions create outsized impact.
 
-I don’t need clean slates. I work inside real systems—policy constraints, legacy tools, operational reality—and improve how decisions get made, communicated, and recovered from when they fail.
+I don’t need clean slates. I work inside real systems—policy constraints, legacy tooling, operational reality—and improve how decisions get made, communicated, and recovered from when they fail.
