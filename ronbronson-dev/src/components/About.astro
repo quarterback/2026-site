@@ -1,0 +1,65 @@
+---
+interface Props {
+  bio: string;
+  details?: string[];
+}
+
+const { bio, details = [] } = Astro.props;
+---
+
+<div class="about">
+  <div class="about__bio">
+    <p set:html={bio} />
+  </div>
+  {details.length > 0 && (
+    <aside class="about__details">
+      <ul>
+        {details.map(detail => <li>{detail}</li>)}
+      </ul>
+    </aside>
+  )}
+</div>
+
+<style>
+  .about {
+    display: grid;
+    gap: var(--size-fluid-4);
+  }
+
+  @media (min-width: 768px) {
+    .about {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .about__bio {
+    font-size: var(--font-size-fluid-1);
+    line-height: var(--font-lineheight-4);
+    color: var(--text-2);
+  }
+
+  .about__bio :global(strong) {
+    color: var(--text-1);
+    font-weight: var(--font-weight-5);
+  }
+
+  .about__details {
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+  }
+
+  .about__details ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .about__details li::before {
+    content: "//";
+    font-family: var(--font-mono);
+    color: var(--brand-accent);
+    margin-inline-end: var(--size-2);
+  }
+</style>

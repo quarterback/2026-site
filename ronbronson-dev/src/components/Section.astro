@@ -1,0 +1,43 @@
+---
+interface Props {
+  id: string;
+  number: string;
+  title: string;
+}
+
+const { id, number, title } = Astro.props;
+---
+
+<section id={id} class="section">
+  <div class="container">
+    <header class="section__header">
+      <span class="section-number">{number}</span>
+      <h2 class="section__title">{title}</h2>
+    </header>
+    <div class="section__content">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .section {
+    padding-block: var(--section-spacing);
+  }
+
+  .section__header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--size-3);
+    margin-block-end: var(--size-fluid-4);
+  }
+
+  .section__title {
+    font-size: var(--font-size-fluid-2);
+    font-weight: var(--font-weight-6);
+  }
+
+  .section__content {
+    /* Content styles handled by children */
+  }
+</style>
