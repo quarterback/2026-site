@@ -3,41 +3,49 @@
 @import "open-props/normalize";
 
 :root {
-  /* Color: warm amber/orange accent with earthy neutrals */
-  --brand: var(--orange-6);
-  --brand-dim: var(--orange-8);
-  --brand-bright: var(--orange-4);
-
-  /* Dark mode surfaces - warm sand/stone, not cold gray */
-  --surface-1: var(--sand-9);
-  --surface-2: var(--sand-8);
-  --surface-3: var(--sand-7);
-  --surface-4: var(--sand-6);
-
-  /* Text */
-  --text-1: var(--sand-0);
-  --text-2: var(--sand-3);
-  --text-3: var(--sand-5);
-
   /* Layout */
   --content-width: 1100px;
   --content-width-narrow: 720px;
   --section-gap: var(--size-8);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --surface-1: #fafaf9;
-    --surface-2: #f5f5f4;
-    --surface-3: #e7e5e4;
-    --surface-4: #d6d3d1;
-    --text-1: #1c1917;
-    --text-2: #44403c;
-    --text-3: #78716c;
-    --brand: var(--orange-7);
-    --brand-dim: var(--orange-9);
-    --brand-bright: var(--orange-5);
-  }
+/* Light theme (default) */
+:root,
+[data-theme="light"] {
+  /* Electric blue accent */
+  --brand: #2323FF;
+  --brand-dim: #1a1acc;
+  --brand-bright: #4d4dff;
+
+  /* Light surfaces - off-white */
+  --surface-1: #F2F0EF;
+  --surface-2: #e8e6e5;
+  --surface-3: #d9d7d6;
+  --surface-4: #c5c3c2;
+
+  /* Text */
+  --text-1: #1a1a1a;
+  --text-2: #404040;
+  --text-3: #737373;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  /* Electric blue accent - same */
+  --brand: #2323FF;
+  --brand-dim: #4d4dff;
+  --brand-bright: #6b6bff;
+
+  /* Dark surfaces - cool gray */
+  --surface-1: #0a0a0a;
+  --surface-2: #171717;
+  --surface-3: #262626;
+  --surface-4: #404040;
+
+  /* Text */
+  --text-1: #fafafa;
+  --text-2: #d4d4d4;
+  --text-3: #a3a3a3;
 }
 
 html { color-scheme: dark light; }
