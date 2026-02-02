@@ -1,0 +1,76 @@
+---
+interface Props {
+  name: string;
+  tagline: string;
+  impactStatement?: string;
+}
+
+const { name, tagline, impactStatement } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__name">{name}</h1>
+    <p class="hero__tagline">{tagline}</p>
+    {impactStatement && (
+      <p class="hero__impact">{impactStatement}</p>
+    )}
+    <nav class="hero__nav">
+      <a href="#work">Work</a>
+      <a href="#media">Media</a>
+      <a href="#about">About</a>
+      <a href="#now">Now</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: var(--size-fluid-6);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__name {
+    font-size: var(--font-size-fluid-3);
+    font-weight: var(--font-weight-7);
+    margin-block-end: var(--size-3);
+  }
+
+  .hero__tagline {
+    font-size: var(--font-size-fluid-2);
+    color: var(--text-2);
+    max-width: 60ch;
+    margin-block-end: var(--size-4);
+  }
+
+  .hero__impact {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    color: var(--brand-accent);
+    letter-spacing: var(--font-letterspacing-2);
+    text-transform: uppercase;
+    margin-block-end: var(--size-6);
+  }
+
+  .hero__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-4);
+  }
+
+  .hero__nav a {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    padding-block: var(--size-2);
+    border-bottom: 2px solid transparent;
+    transition: all var(--ease-2) 0.2s;
+  }
+
+  .hero__nav a:hover {
+    color: var(--text-1);
+    border-bottom-color: var(--brand-accent);
+  }
+</style>

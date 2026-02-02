@@ -1,0 +1,69 @@
+---
+interface Props {
+  title: string;
+  source: string;
+  type: 'podcast' | 'feature' | 'talk' | 'interview';
+  date?: string;
+  link?: string;
+}
+
+const { title, source, type, date, link } = Astro.props;
+
+const typeLabels = {
+  podcast: 'Podcast',
+  feature: 'Feature',
+  talk: 'Talk',
+  interview: 'Interview'
+};
+---
+
+<article class="media-item">
+  <span class="media-item__type">{typeLabels[type]}</span>
+  <h3 class="media-item__title">
+    {link ? <a href={link} target="_blank" rel="noopener">{title}</a> : title}
+  </h3>
+  <div class="media-item__meta">
+    <span class="media-item__source">{source}</span>
+    {date && <span class="media-item__date">{date}</span>}
+  </div>
+</article>
+
+<style>
+  .media-item {
+    padding-block: var(--size-3);
+    border-bottom: 1px solid var(--surface-3);
+  }
+
+  .media-item:last-child {
+    border-bottom: none;
+  }
+
+  .media-item__type {
+    font-size: var(--font-size-00);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: var(--font-letterspacing-3);
+    color: var(--brand-accent);
+  }
+
+  .media-item__title {
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+    margin-block: var(--size-1);
+  }
+
+  .media-item__title a {
+    color: inherit;
+  }
+
+  .media-item__title a:hover {
+    color: var(--brand-accent);
+  }
+
+  .media-item__meta {
+    display: flex;
+    gap: var(--size-3);
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+  }
+</style>
