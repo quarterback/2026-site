@@ -39,4 +39,13 @@ const work = defineCollection({
   }),
 });
 
-export const collections = { work };
+const essays = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    date: z.date(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { work, essays };

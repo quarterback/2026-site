@@ -6,6 +6,8 @@ import WorkCard from '../components/WorkCard.astro';
 import MediaShowcase from '../components/MediaShowcase.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
+import Writing from '../components/Writing.astro';
+import Footer from '../components/Footer.astro';
 
 const allWork = await getCollection('work', ({ data }) => !data.draft);
 const work = allWork.sort((a, b) => a.data.order - b.data.order);
@@ -39,6 +41,26 @@ const socials = [
   { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
   { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
   { name: "GitHub", url: "https://github.com/ronbronson" },
+];
+
+const blogPosts = [
+  {
+    title: "Example Blog Post",
+    url: "https://blog.ronbronson.com/example-post",
+    date: new Date("2024-01-15"),
+    excerpt: "This is a placeholder for curated blog posts from your Blot blog."
+  },
+];
+
+const techStack = [
+  "Astro",
+  "Open Props",
+  "TypeScript"
+];
+
+const fonts = [
+  "Urbanist",
+  "Halant"
 ];
 ---
 
@@ -110,6 +132,13 @@ const socials = [
       </div>
     </section>
 
+    <!-- Writing -->
+    <section id="writing">
+      <div class="container">
+        <Writing posts={blogPosts} />
+      </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact">
       <div class="container">
@@ -121,19 +150,15 @@ const socials = [
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; {new Date().getFullYear()} Ron Bronson</p>
-    </div>
-  </footer>
+  <Footer
+    newsletterUrl="https://makingpublicwork.com"
+    techStack={techStack}
+    fonts={fonts}
+  />
 </Base>
 
 <style>
   /* Featured section */
-  .featured {
-    border-bottom: 1px solid var(--surface-3);
-  }
-
   .featured__link {
     display: block;
     text-decoration: none;
@@ -197,14 +222,5 @@ const socials = [
     display: flex;
     flex-direction: column;
     gap: var(--size-8);
-  }
-
-  /* Footer */
-  .footer {
-    padding-block: var(--size-5);
-    border-top: 1px solid var(--surface-3);
-    text-align: center;
-    font-size: var(--font-size-0);
-    color: var(--text-3);
   }
 </style>

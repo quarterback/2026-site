@@ -1,0 +1,153 @@
+---
+interface Book {
+  title: string;
+  author: string;
+  cover?: string;
+  url?: string;
+  status?: 'reading' | 'completed' | 'want-to-read';
+  year?: number;
+}
+
+interface Props {
+  books: Book[];
+  title?: string;
+}
+
+const { books, title = 'Reading' } = Astro.props;
+---
+
+<section class="books">
+  <h2 class="books__title">{title}</h2>
+
+  <ul class="books__list">
+    {books.map((book) => (
+      <li class="book">
+        {book.cover && (
+          <div class="book__cover">
+            <img src={book.cover} alt={`${book.title} cover`} />
+          </div>
+        )}
+        <div class="book__info">
+          {book.url ? (
+            <a href={book.url} target="_blank" rel="noopener" class="book__title">
+              {book.title}
+            </a>
+          ) : (
+            <h3 class="book__title">{book.title}</h3>
+          )}
+          <p class="book__author">{book.author}</p>
+          {book.status && (
+            <span class="book__status" data-status={book.status}>
+              {book.status === 'reading' && 'Currently Reading'}
+              {book.status === 'completed' && book.year ? `Read ${book.year}` : book.status === 'completed' && 'Completed'}
+              {book.status === 'want-to-read' && 'Want to Read'}
+            </span>
+          )}
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .books {
+    margin-block: var(--size-10);
+  }
+
+  .books__title {
+    font-size: var(--font-size-4);
+    font-weight: var(--font-weight-6);
+    margin-block-end: var(--size-6);
+  }
+
+  .books__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--size-4);
+  }
+
+  .book {
+    display: flex;
+    gap: var(--size-4);
+    padding: var(--size-4);
+    background: var(--surface-2);
+    border-radius: var(--radius-2);
+    transition: background-color 0.2s ease;
+  }
+
+  .book:hover {
+    background: var(--surface-3);
+  }
+
+  .book__cover {
+    flex-shrink: 0;
+    width: 80px;
+    height: 120px;
+    border-radius: var(--radius-1);
+    overflow: hidden;
+    background: var(--surface-3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .book__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .book__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  .book__title {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin: 0;
+    line-height: var(--font-lineheight-2);
+  }
+
+  a.book__title {
+    text-decoration: none;
+  }
+
+  a.book__title:hover {
+    color: var(--brand);
+    text-decoration: underline;
+  }
+
+  .book__author {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    margin: 0;
+  }
+
+  .book__status {
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: auto;
+  }
+
+  .book__status[data-status="reading"] {
+    color: var(--blue-6);
+  }
+
+  .book__status[data-status="completed"] {
+    color: var(--green-6);
+  }
+
+  @media (max-width: 640px) {
+    .book__cover {
+      width: 60px;
+      height: 90px;
+    }
+  }
+</style>

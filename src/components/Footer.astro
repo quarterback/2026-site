@@ -1,0 +1,101 @@
+---
+interface Props {
+  newsletterUrl?: string;
+  fonts?: string[];
+  techStack?: string[];
+}
+
+const {
+  newsletterUrl = 'https://makingpublicwork.com',
+  fonts = [],
+  techStack = []
+} = Astro.props;
+---
+
+<footer class="footer">
+  <div class="footer__content">
+    {newsletterUrl && (
+      <div class="footer__newsletter">
+        <a href={newsletterUrl} target="_blank" rel="noopener" class="newsletter-link">
+          Subscribe to Making Public Work
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    )}
+
+    <div class="footer__colophon">
+      <p class="colophon__title">Colophon</p>
+
+      {techStack.length > 0 && (
+        <p class="colophon__text">
+          Built with {techStack.join(', ')}
+        </p>
+      )}
+
+      {fonts.length > 0 && (
+        <p class="colophon__text">
+          {fonts.join(', ')}
+        </p>
+      )}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-block-start: var(--size-8);
+    padding-block: var(--size-6);
+  }
+
+  .footer__content {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: var(--size-4);
+  }
+
+  .footer__newsletter {
+    margin-block-end: var(--size-6);
+  }
+
+  .newsletter-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-5);
+    color: var(--text-1);
+    text-decoration: none;
+    padding: var(--size-3) var(--size-4);
+    background: var(--surface-2);
+    border-radius: var(--radius-2);
+    transition: all 0.2s ease;
+  }
+
+  .newsletter-link:hover {
+    background: var(--surface-3);
+    color: var(--brand);
+  }
+
+  .footer__colophon {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .colophon__title {
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-5);
+    color: var(--text-3);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .colophon__text {
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    margin: 0;
+  }
+</style>

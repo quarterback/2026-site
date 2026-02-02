@@ -118,7 +118,9 @@ artifacts:
 ### Auto-detected Embeds
 - **YouTube**: Any youtube.com or youtu.be URL
 - **Vimeo**: Any vimeo.com URL
-- **Spotify**: Podcast episodes and shows
+- **Spotify**: Podcast episodes, shows, tracks, albums, playlists
+- **Apple Music**: Any music.apple.com URL
+- **Mixcloud**: Any mixcloud.com URL
 
 ### Direct URLs
 - **Images**: .jpg, .png, .gif, .webp
@@ -127,6 +129,91 @@ artifacts:
 
 ### Custom Embeds
 Use the `embedCode` field for platforms not auto-detected.
+
+## New Features
+
+### Writing Section
+
+Add curated blog posts to your homepage by editing the `blogPosts` array in `src/pages/index.astro`:
+
+```javascript
+const blogPosts = [
+  {
+    title: "Your Post Title",
+    url: "https://blog.ronbronson.com/your-post",
+    date: new Date("2024-01-15"),
+    excerpt: "Brief description of the post"
+  },
+];
+```
+
+### Music Section
+
+Display recently played tracks or embed playlists using the `Music` component:
+
+```astro
+import Music from '../components/Music.astro';
+
+<Music
+  title="Recently Played"
+  embedUrl="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID"
+  embedType="spotify"
+  tracks={[
+    {
+      name: "Track Name",
+      artist: "Artist Name",
+      url: "https://last.fm/...",
+      image: "https://...",
+      playcount: "42"
+    }
+  ]}
+/>
+```
+
+Supported embed types: `spotify`, `apple`, `mixcloud`
+
+### Books Section
+
+Display your reading list using the `Books` component:
+
+```astro
+import Books from '../components/Books.astro';
+
+<Books
+  title="Currently Reading"
+  books={[
+    {
+      title: "Book Title",
+      author: "Author Name",
+      cover: "https://covers.openlibrary.org/...",
+      url: "https://openlibrary.org/...",
+      status: "reading",
+      year: 2024
+    }
+  ]}
+/>
+```
+
+Book statuses: `reading`, `completed`, `want-to-read`
+
+### Essay Pages
+
+Create expanded writing pieces in `src/content/essays/`:
+
+```markdown
+---
+title: "Your Essay Title"
+date: 2024-01-15
+draft: false
+---
+
+Write your expanded content here. This could be coaching philosophy,
+year in review, or any long-form content.
+
+Images will automatically get bordered styling.
+```
+
+Access at `/essays/your-essay-slug`
 
 ## Tips
 

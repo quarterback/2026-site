@@ -1,0 +1,151 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const essays = await getCollection('essays', ({ data }) => !data.draft);
+  return essays.map((essay) => ({
+    params: { slug: essay.slug },
+    props: { essay },
+  }));
+}
+
+const { essay } = Astro.props;
+const { Content } = await essay.render();
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+}).format(essay.data.date);
+---
+
+<Base title={essay.data.title}>
+  <article class="essay">
+    <div class="essay__header">
+      <time class="essay__date" datetime={essay.data.date.toISOString()}>
+        {formattedDate}
+      </time>
+      <h1 class="essay__title">{essay.data.title}</h1>
+    </div>
+
+    <div class="essay__body">
+      <Content />
+    </div>
+  </article>
+</Base>
+
+<style>
+  .essay {
+    max-width: 70ch;
+    margin-inline: auto;
+    padding-block: var(--size-10);
+    padding-inline: var(--size-4);
+  }
+
+  .essay__header {
+    margin-block-end: var(--size-8);
+  }
+
+  .essay__date {
+    display: block;
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    margin-block-end: var(--size-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .essay__title {
+    font-size: var(--font-size-6);
+    font-weight: var(--font-weight-7);
+    line-height: var(--font-lineheight-2);
+    margin: 0;
+  }
+
+  .essay__body {
+    font-size: var(--font-size-2);
+    line-height: var(--font-lineheight-4);
+  }
+
+  .essay__body :global(h2) {
+    font-size: var(--font-size-4);
+    font-weight: var(--font-weight-6);
+    margin-block-start: var(--size-8);
+    margin-block-end: var(--size-4);
+    line-height: var(--font-lineheight-2);
+  }
+
+  .essay__body :global(h3) {
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-6);
+    margin-block-start: var(--size-6);
+    margin-block-end: var(--size-3);
+    line-height: var(--font-lineheight-2);
+  }
+
+  .essay__body :global(p) {
+    margin-block: var(--size-4);
+  }
+
+  .essay__body :global(ul),
+  .essay__body :global(ol) {
+    margin-block: var(--size-4);
+    padding-inline-start: var(--size-6);
+  }
+
+  .essay__body :global(li) {
+    margin-block: var(--size-2);
+  }
+
+  .essay__body :global(a) {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .essay__body :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+
+  .essay__body :global(img) {
+    max-width: 100%;
+    border-radius: var(--radius-2);
+    margin-block: var(--size-6);
+    border: 1px solid var(--surface-3);
+    padding: var(--size-2);
+    background: var(--surface-1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .essay__body :global(blockquote) {
+    margin-block: var(--size-6);
+    margin-inline: 0;
+    padding-inline-start: var(--size-4);
+    border-inline-start: 3px solid var(--surface-3);
+    color: var(--text-2);
+    font-style: italic;
+  }
+
+  .essay__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--surface-2);
+    padding: 0.125em 0.375em;
+    border-radius: var(--radius-1);
+  }
+
+  .essay__body :global(pre) {
+    background: var(--surface-2);
+    padding: var(--size-4);
+    border-radius: var(--radius-2);
+    overflow-x: auto;
+    margin-block: var(--size-4);
+  }
+
+  .essay__body :global(pre code) {
+    background: transparent;
+    padding: 0;
+  }
+</style>
