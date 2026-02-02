@@ -2,75 +2,139 @@
 interface Props {
   name: string;
   tagline: string;
-  impactStatement?: string;
+  seeking?: string;
+  email: string;
+  proofPoints: string[];
 }
 
-const { name, tagline, impactStatement } = Astro.props;
+const { name, tagline, seeking, email, proofPoints } = Astro.props;
 ---
 
 <section class="hero">
-  <div class="container">
-    <h1 class="hero__name">{name}</h1>
-    <p class="hero__tagline">{tagline}</p>
-    {impactStatement && (
-      <p class="hero__impact">{impactStatement}</p>
-    )}
-    <nav class="hero__nav">
-      <a href="#work">Work</a>
-      <a href="#media">Media</a>
-      <a href="#about">About</a>
-      <a href="#now">Now</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <div class="container hero__grid">
+    <div class="hero__main">
+      <h1 class="hero__name">{name}</h1>
+      <p class="hero__tagline">{tagline}</p>
+      {seeking && <p class="hero__seeking">{seeking}</p>}
+      <div class="hero__cta">
+        <a href="#work" class="btn btn--primary">View work</a>
+        <a href={`mailto:${email}`} class="btn btn--secondary">Email me</a>
+      </div>
+    </div>
+    <aside class="hero__proof">
+      <ul class="proof-stack">
+        {proofPoints.map(point => (
+          <li>{point}</li>
+        ))}
+      </ul>
+    </aside>
   </div>
 </section>
 
 <style>
   .hero {
-    padding-block: var(--size-fluid-6);
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
+    padding-block: var(--size-8) var(--size-10);
+    border-bottom: 1px solid var(--surface-3);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: var(--size-8);
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-6);
+    }
   }
 
   .hero__name {
-    font-size: var(--font-size-fluid-3);
-    font-weight: var(--font-weight-7);
-    margin-block-end: var(--size-3);
+    margin-bottom: var(--size-3);
   }
 
   .hero__tagline {
-    font-size: var(--font-size-fluid-2);
+    font-size: var(--font-size-3);
     color: var(--text-2);
-    max-width: 60ch;
-    margin-block-end: var(--size-4);
+    margin-bottom: var(--size-3);
+    max-width: 50ch;
   }
 
-  .hero__impact {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-0);
-    color: var(--brand-accent);
-    letter-spacing: var(--font-letterspacing-2);
-    text-transform: uppercase;
-    margin-block-end: var(--size-6);
-  }
-
-  .hero__nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--size-4);
-  }
-
-  .hero__nav a {
+  .hero__seeking {
     font-size: var(--font-size-1);
-    color: var(--text-2);
-    padding-block: var(--size-2);
-    border-bottom: 2px solid transparent;
-    transition: all var(--ease-2) 0.2s;
+    color: var(--text-3);
+    margin-bottom: var(--size-5);
+    max-width: 55ch;
   }
 
-  .hero__nav a:hover {
+  .hero__cta {
+    display: flex;
+    gap: var(--size-3);
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: var(--size-2) var(--size-4);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+    border-radius: var(--radius-2);
+    transition: all 0.15s ease;
+  }
+
+  .btn--primary {
+    background: var(--brand);
+    color: var(--stone-9);
+  }
+  .btn--primary:hover {
+    background: var(--brand-bright);
+    color: var(--stone-9);
+  }
+
+  .btn--secondary {
+    background: var(--surface-2);
     color: var(--text-1);
-    border-bottom-color: var(--brand-accent);
+    border: 1px solid var(--surface-3);
+  }
+  .btn--secondary:hover {
+    background: var(--surface-3);
+    color: var(--text-1);
+  }
+
+  /* Proof stack - compact credibility */
+  .hero__proof {
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-4);
+  }
+
+  .proof-stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .proof-stack li {
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    padding-left: var(--size-4);
+    position: relative;
+  }
+
+  .proof-stack li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    background: var(--brand);
+    border-radius: 50%;
   }
 </style>
