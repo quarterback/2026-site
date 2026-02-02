@@ -8,6 +8,7 @@ import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import Writing from '../components/Writing.astro';
 import Footer from '../components/Footer.astro';
+import NowPlaying from '../components/NowPlaying.astro';
 
 const allWork = await getCollection('work', ({ data }) => !data.draft);
 const work = allWork.sort((a, b) => a.data.order - b.data.order);
@@ -118,17 +119,27 @@ const fonts = [
       </div>
     </section>
 
-    <!-- About -->
+    <!-- About & Now Playing -->
     <section id="about">
       <div class="container">
         <h2 class="section-heading">About</h2>
-        <About
-          content={`<p>I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
+        <div class="about-grid">
+          <div class="about-content">
+            <About
+              content={`<p>I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
 
-          <p>I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of design decisions, especially in high-stakes systems where getting it wrong has real human impact.</p>
+              <p>I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of design decisions, especially in high-stakes systems where getting it wrong has real human impact.</p>
 
-          <p>Outside of work, I'm a tea sommelier, high school tennis coach, and host a local radio show. I believe the same systems thinking that helps design better public services also helps you steep a perfect cup of tea.</p>`}
-        />
+              <p>Outside of work, I'm a tea sommelier, high school tennis coach, and host a local radio show. I believe the same systems thinking that helps design better public services also helps you steep a perfect cup of tea.</p>`}
+            />
+          </div>
+          <div class="now-playing-sidebar">
+            <NowPlaying
+              service="lastfm"
+              username="ronbronson"
+            />
+          </div>
+        </div>
       </div>
     </section>
 
@@ -154,6 +165,7 @@ const fonts = [
     newsletterUrl="https://makingpublicwork.com"
     techStack={techStack}
     fonts={fonts}
+    socials={socials}
   />
 </Base>
 
@@ -222,5 +234,23 @@ const fonts = [
     display: flex;
     flex-direction: column;
     gap: var(--size-8);
+  }
+
+  /* About grid with now playing */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--size-6);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .now-playing-sidebar {
+      order: -1;
+    }
   }
 </style>

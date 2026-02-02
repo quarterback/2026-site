@@ -1,0 +1,125 @@
+---
+interface Props {
+  service?: 'lastfm' | 'spotify' | 'applemusic';
+  username?: string;
+  embedUrl?: string;
+  spotifyUri?: string;
+}
+
+const {
+  service = 'lastfm',
+  username,
+  embedUrl,
+  spotifyUri
+} = Astro.props;
+
+const getEmbedContent = () => {
+  if (service === 'lastfm' && username) {
+    return {
+      type: 'lastfm',
+      url: `https://www.last.fm/user/${username}`,
+      embedSrc: `https://lastfm-recently-played.vercel.app/api?user=${username}`
+    };
+  }
+
+  if (service === 'spotify' && (embedUrl || spotifyUri)) {
+    const uri = spotifyUri || embedUrl?.split('/').pop();
+    return {
+      type: 'spotify',
+      embedSrc: `https://open.spotify.com/embed/track/${uri}?utm_source=generator&theme=0`
+    };
+  }
+
+  if (service === 'applemusic' && embedUrl) {
+    return {
+      type: 'applemusic',
+      embedSrc: embedUrl
+    };
+  }
+
+  return null;
+};
+
+const embedContent = getEmbedContent();
+---
+
+{embedContent && (
+  <div class="now-playing">
+    <h3 class="now-playing__title">Now Playing</h3>
+    <div class="now-playing__card">
+      {embedContent.type === 'lastfm' && (
+        <div class="lastfm-embed">
+          <a href={embedContent.url} target="_blank" rel="noopener" class="lastfm-link">
+            <img src={embedContent.embedSrc} alt="Last.fm recent tracks" />
+          </a>
+        </div>
+      )}
+
+      {embedContent.type === 'spotify' && (
+        <iframe
+          src={embedContent.embedSrc}
+          width="100%"
+          height="152"
+          frameborder="0"
+          allowfullscreen
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      )}
+
+      {embedContent.type === 'applemusic' && (
+        <iframe
+          src={embedContent.embedSrc}
+          width="100%"
+          height="175"
+          frameborder="0"
+          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+          loading="lazy"
+        ></iframe>
+      )}
+    </div>
+  </div>
+)}
+
+<style>
+  .now-playing {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .now-playing__title {
+    font-size: var(--font-size-2);
+    margin: 0;
+  }
+
+  .now-playing__card {
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-3);
+    overflow: hidden;
+  }
+
+  .lastfm-embed {
+    width: 100%;
+  }
+
+  .lastfm-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .lastfm-link img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-1);
+  }
+
+  iframe {
+    display: block;
+    border-radius: var(--radius-1);
+  }
+</style>
