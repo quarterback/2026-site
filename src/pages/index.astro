@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import WorkCard from '../components/WorkCard.astro';
-import MediaItem from '../components/MediaItem.astro';
+import MediaShowcase from '../components/MediaShowcase.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 
@@ -14,27 +14,24 @@ const featuredWork = work.find(w => w.data.featured);
 const media = [
   {
     title: "Consequence Design and Public Systems",
-    source: "Design Matters",
-    type: "podcast" as const,
-    link: "#",
+    source: "Design Matters Podcast",
+    mediaType: "podcast" as const,
+    embedUrl: "https://open.spotify.com/episode/YOUR_EPISODE_ID",
+    date: "2024",
   },
   {
     title: "Designing Government Services at Scale",
-    source: "UX Conference",
-    type: "talk" as const,
-    link: "#",
+    source: "UXDX Conference",
+    mediaType: "talk" as const,
+    embedUrl: "https://youtube.com/watch?v=YOUR_VIDEO_ID",
+    date: "2023",
   },
   {
     title: "Building for the Public Good",
     source: "A List Apart",
-    type: "feature" as const,
-    link: "#",
-  },
-  {
-    title: "The Future of Civic Tech",
-    source: "Gov Tech Magazine",
-    type: "interview" as const,
-    link: "#",
+    mediaType: "article" as const,
+    url: "https://alistapart.com/article/building-public-good",
+    date: "2023",
   },
 ];
 
@@ -88,17 +85,12 @@ const socials = [
 
     <!-- Media -->
     <section id="media">
-      <div class="container">
+      <div class="container container--narrow">
         <h2 class="section-heading">Media</h2>
-        <p class="section-intro">Invited conversations about service design, public-sector delivery, and system consequences.</p>
-        <div class="media-grid">
+        <p class="section-intro">Talks, podcasts, and writing about service design, public-sector delivery, and system consequences.</p>
+        <div class="media-showcase-list">
           {media.map(item => (
-            <MediaItem
-              title={item.title}
-              source={item.source}
-              type={item.type}
-              link={item.link}
-            />
+            <MediaShowcase {...item} />
           ))}
         </div>
       </div>
@@ -200,18 +192,11 @@ const socials = [
     }
   }
 
-  /* Media grid */
-  .media-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--size-3);
-    max-width: var(--content-width-narrow);
-  }
-
-  @media (max-width: 600px) {
-    .media-grid {
-      grid-template-columns: 1fr;
-    }
+  /* Media showcase */
+  .media-showcase-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-8);
   }
 
   /* Footer */

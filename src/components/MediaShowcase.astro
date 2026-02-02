@@ -1,0 +1,95 @@
+---
+import MediaEmbed from './MediaEmbed.astro';
+
+interface Props {
+  title: string;
+  source: string;
+  mediaType: 'podcast' | 'video' | 'audio' | 'article' | 'talk';
+  url?: string;
+  embedUrl?: string;
+  embedCode?: string;
+  date?: string;
+}
+
+const { title, source, mediaType, url, embedUrl, embedCode, date } = Astro.props;
+
+const embedType = mediaType === 'talk' ? 'video' : mediaType;
+const finalUrl = embedUrl || url;
+---
+
+<article class="media-showcase">
+  <div class="media-showcase__meta">
+    <span class="media-showcase__type">{mediaType}</span>
+    <span class="media-showcase__source">{source}</span>
+    {date && <span class="media-showcase__date">{date}</span>}
+  </div>
+
+  <h3 class="media-showcase__title">{title}</h3>
+
+  {(finalUrl || embedCode) && embedType !== 'article' ? (
+    <div class="media-showcase__embed">
+      <MediaEmbed
+        type={embedType}
+        url={finalUrl || ''}
+        embedCode={embedCode}
+      />
+    </div>
+  ) : url ? (
+    <a href={url} target="_blank" rel="noopener" class="media-showcase__link">
+      View article →
+    </a>
+  ) : null}
+</article>
+
+<style>
+  .media-showcase {
+    margin-bottom: var(--size-8);
+  }
+
+  .media-showcase__meta {
+    display: flex;
+    gap: var(--size-3);
+    margin-bottom: var(--size-2);
+    font-size: var(--font-size-0);
+    font-family: var(--font-mono);
+  }
+
+  .media-showcase__type {
+    color: var(--brand);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .media-showcase__source {
+    color: var(--text-3);
+  }
+
+  .media-showcase__date {
+    color: var(--text-3);
+    margin-left: auto;
+  }
+
+  .media-showcase__title {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    margin-bottom: var(--size-4);
+    color: var(--text-1);
+  }
+
+  .media-showcase__embed {
+    margin-top: var(--size-4);
+  }
+
+  .media-showcase__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    font-size: var(--font-size-1);
+    color: var(--brand);
+    font-weight: var(--font-weight-5);
+  }
+
+  .media-showcase__link:hover {
+    text-decoration: underline;
+  }
+</style>
