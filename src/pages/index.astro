@@ -1,61 +1,42 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
-import ProjectCard from '../components/ProjectCard.astro';
+import WorkCard from '../components/WorkCard.astro';
+import Seeking from '../components/Seeking.astro';
 import MediaItem from '../components/MediaItem.astro';
-import NowSection from '../components/NowSection.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 
-// Sample data - replace with your actual content or data fetching
-const projects = [
-  {
-    title: "18F / Federal Government",
-    description: "Designing systems that help millions of people navigate government services.",
-    impact: "Served millions of users",
-    tags: ["Service Design", "Public Sector", "Systems Thinking"],
-  },
-  {
-    title: "State Capacity AI",
-    description: "Exploring how AI can strengthen public institutions and decision-making.",
-    tags: ["AI", "Policy", "Research"],
-  },
-  {
-    title: "Consequence Design",
-    description: "Framework for understanding how design decisions create downstream effects.",
-    tags: ["Framework", "Design Theory", "Speaking"],
-    link: "#", // Link to talk or article
-  },
-];
+// Get work from content collection
+const allWork = await getCollection('work', ({ data }) => !data.draft);
+const work = allWork.sort((a, b) => a.data.order - b.data.order);
+const featuredWork = work.find(w => w.data.featured);
 
+// Media appearances - update with your actual content
 const media = [
   {
     title: "Consequence Design and Public Systems",
-    source: "Design Matters Podcast",
+    source: "Design Matters",
     type: "podcast" as const,
-    date: "2024",
+    link: "#",
+  },
+  {
+    title: "Designing Government Services at Scale",
+    source: "UX Conference",
+    type: "talk" as const,
     link: "#",
   },
   {
     title: "Building for the Public Good",
     source: "A List Apart",
     type: "feature" as const,
-    date: "2024",
-    link: "#",
-  },
-  {
-    title: "Designing Government Services",
-    source: "UX Conference",
-    type: "talk" as const,
-    date: "2024",
     link: "#",
   },
   {
     title: "The Future of Civic Tech",
-    source: "Tech & Society Interview",
+    source: "Gov Tech Magazine",
     type: "interview" as const,
-    date: "2023",
     link: "#",
   },
 ];
@@ -64,8 +45,22 @@ const socials = [
   { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
   { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
   { name: "GitHub", url: "https://github.com/ronbronson" },
-  { name: "Letterboxd", url: "#" },
-  { name: "Last.fm", url: "#" },
+];
+
+const proofPoints = [
+  "18F alum (10+ years in civic tech)",
+  "University faculty",
+  "Millions of users served",
+  "Speaker & workshop facilitator",
+  "State Capacity AI researcher",
+  "Based in Portland, OR",
+];
+
+const seekingItems = [
+  "Decision-heavy products (policy, rules, risk)",
+  "Services where failure has real consequences",
+  "AI introduced into real workflows, not demos",
+  "Teams building public infrastructure",
 ];
 ---
 
@@ -74,57 +69,82 @@ const socials = [
     <Hero
       name="Ron Bronson"
       tagline="I design how public systems make decisions."
-      impactStatement="18F alumni · Professor · Consequence Design"
+      seeking="I'm exploring roles in service delivery, decision systems, and AI-enabled operations."
+      email="hello@ronbronson.dev"
+      proofPoints={proofPoints}
     />
 
-    <Section id="work" number="01" title="Work">
-      <div class="grid grid-2">
-        {projects.map(project => (
-          <ProjectCard
-            title={project.title}
-            description={project.description}
-            impact={project.impact}
-            tags={project.tags}
-            link={project.link}
-          />
-        ))}
+    <!-- Featured case study -->
+    {featuredWork && (
+      <section class="featured">
+        <div class="container">
+          <p class="label">Featured</p>
+          <a href={featuredWork.data.externalUrl || `/work/${featuredWork.slug}`} class="featured__link">
+            <h2>{featuredWork.data.title}</h2>
+            <p>{featuredWork.data.summary}</p>
+            <span class="featured__cta">Read case study →</span>
+          </a>
+        </div>
+      </section>
+    )}
+
+    <!-- Work grid -->
+    <section id="work">
+      <div class="container">
+        <h2 class="section-heading">Selected Work</h2>
+        <div class="work-grid">
+          {work.map(item => (
+            <WorkCard
+              title={item.data.title}
+              summary={item.data.summary}
+              systemType={item.data.systemType}
+              outcome={item.data.outcome}
+              href={item.data.externalUrl || `/work/${item.slug}`}
+              tags={item.data.tags}
+            />
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
 
-    <Section id="media" number="02" title="Media">
-      <div class="media-list">
-        {media.map(item => (
-          <MediaItem
-            title={item.title}
-            source={item.source}
-            type={item.type}
-            date={item.date}
-            link={item.link}
-          />
-        ))}
+    <!-- What I'm looking for -->
+    <Seeking items={seekingItems} />
+
+    <!-- Media -->
+    <section id="media">
+      <div class="container">
+        <h2 class="section-heading">Media</h2>
+        <p class="section-intro">Invited conversations about service design, public-sector delivery, and system consequences.</p>
+        <div class="media-grid">
+          {media.map(item => (
+            <MediaItem
+              title={item.title}
+              source={item.source}
+              type={item.type}
+              link={item.link}
+            />
+          ))}
+        </div>
       </div>
-    </Section>
+    </section>
 
-    <Section id="about" number="03" title="About">
-      <About
-        bio="<strong>Designer, educator, and systems thinker</strong> focused on how public institutions serve people. I've spent my career at the intersection of design, policy, and technology — from federal agencies to universities. I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of the systems we create."
-        details={[
-          "Tea sommelier",
-          "High school tennis coach",
-          "Local radio host",
-          "Portland, OR"
-        ]}
-      />
-    </Section>
+    <!-- About -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-heading">About</h2>
+        <About
+          bio="<strong>Designer, educator, and systems thinker</strong> focused on how public institutions serve people. I've spent my career at the intersection of design, policy, and technology—from federal agencies to universities. I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of the systems we create."
+          details={[
+            "Tea sommelier",
+            "High school tennis coach",
+            "Local radio host",
+            "Portland, OR"
+          ]}
+        />
+      </div>
+    </section>
 
-    <Section id="now" number="04" title="Now">
-      <NowSection
-        listening={{ track: "Loading...", artist: "via Last.fm" }}
-        reading={{ title: "Loading...", author: "via Literal" }}
-        upcomingTalk={{ event: "Next speaking engagement", date: "TBD" }}
-      />
-    </Section>
-
+    <!-- Contact -->
     <section id="contact">
       <div class="container">
         <Contact
@@ -144,10 +164,84 @@ const socials = [
 </Base>
 
 <style>
-  .media-list {
+  /* Featured section */
+  .featured {
+    border-bottom: 1px solid var(--surface-3);
+  }
+
+  .featured__link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .featured__link h2 {
+    font-size: var(--font-size-3);
+    color: var(--text-1);
+    margin-bottom: var(--size-2);
+  }
+
+  .featured__link p {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    margin-bottom: var(--size-3);
+  }
+
+  .featured__cta {
+    font-size: var(--font-size-0);
+    color: var(--brand);
+    font-weight: var(--font-weight-5);
+  }
+
+  .featured__link:hover .featured__cta {
+    text-decoration: underline;
+  }
+
+  /* Section headings */
+  .section-heading {
+    font-size: var(--font-size-3);
+    margin-bottom: var(--size-4);
+  }
+
+  .section-intro {
+    color: var(--text-3);
+    margin-bottom: var(--size-5);
+    font-size: var(--font-size-1);
+  }
+
+  /* Work grid - 3 columns, denser */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--size-4);
+  }
+
+  @media (max-width: 900px) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Media grid */
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--size-3);
     max-width: var(--content-width-narrow);
   }
 
+  @media (max-width: 600px) {
+    .media-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Footer */
   .footer {
     padding-block: var(--size-5);
     border-top: 1px solid var(--surface-3);

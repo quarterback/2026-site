@@ -1,0 +1,54 @@
+---
+interface Props {
+  heading?: string;
+  items: string[];
+}
+
+const { heading = "What I'm looking for", items } = Astro.props;
+---
+
+<section class="seeking">
+  <div class="container">
+    <h2>{heading}</h2>
+    <ul class="seeking__list">
+      {items.map(item => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .seeking {
+    background: var(--surface-2);
+    border-block: 1px solid var(--surface-3);
+  }
+
+  .seeking h2 {
+    font-size: var(--font-size-2);
+    margin-bottom: var(--size-4);
+  }
+
+  .seeking__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--size-3);
+  }
+
+  .seeking__list li {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    padding-left: var(--size-5);
+    position: relative;
+  }
+
+  .seeking__list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+  }
+</style>
