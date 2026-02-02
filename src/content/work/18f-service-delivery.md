@@ -3,7 +3,7 @@
 title: "Service Delivery at Scale"
 summary: "Design leadership across federal programs serving millions."
 systemType: "Eligibility + intake systems"
-outcome: "Patterns adopted across multiple programs"
+outcome: 'Patterns adopted across multiple agencies on what "success" meant'
 order: 1
 featured: true
 tags: ["Service Delivery", "Decision Systems", "Federal"]
