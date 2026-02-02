@@ -3,17 +3,14 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import WorkCard from '../components/WorkCard.astro';
-import Seeking from '../components/Seeking.astro';
 import MediaItem from '../components/MediaItem.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 
-// Get work from content collection
 const allWork = await getCollection('work', ({ data }) => !data.draft);
 const work = allWork.sort((a, b) => a.data.order - b.data.order);
 const featuredWork = work.find(w => w.data.featured);
 
-// Media appearances - update with your actual content
 const media = [
   {
     title: "Consequence Design and Public Systems",
@@ -46,22 +43,6 @@ const socials = [
   { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
   { name: "GitHub", url: "https://github.com/ronbronson" },
 ];
-
-const proofPoints = [
-  "18F alum (10+ years in civic tech)",
-  "University faculty",
-  "Millions of users served",
-  "Speaker & workshop facilitator",
-  "State Capacity AI researcher",
-  "Based in Portland, OR",
-];
-
-const seekingItems = [
-  "Decision-heavy products (policy, rules, risk)",
-  "Services where failure has real consequences",
-  "AI introduced into real workflows, not demos",
-  "Teams building public infrastructure",
-];
 ---
 
 <Base title="Ron Bronson — Designer">
@@ -69,9 +50,7 @@ const seekingItems = [
     <Hero
       name="Ron Bronson"
       tagline="I design how public systems make decisions."
-      seeking="I'm exploring roles in service delivery, decision systems, and AI-enabled operations."
-      email="hello@ronbronson.dev"
-      proofPoints={proofPoints}
+      location="Portland, OR"
     />
 
     <!-- Featured case study -->
@@ -107,9 +86,6 @@ const seekingItems = [
       </div>
     </section>
 
-    <!-- What I'm looking for -->
-    <Seeking items={seekingItems} />
-
     <!-- Media -->
     <section id="media">
       <div class="container">
@@ -133,13 +109,11 @@ const seekingItems = [
       <div class="container">
         <h2 class="section-heading">About</h2>
         <About
-          bio="<strong>Designer, educator, and systems thinker</strong> focused on how public institutions serve people. I've spent my career at the intersection of design, policy, and technology—from federal agencies to universities. I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of the systems we create."
-          details={[
-            "Tea sommelier",
-            "High school tennis coach",
-            "Local radio host",
-            "Portland, OR"
-          ]}
+          content={`<p>I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
+
+          <p>I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of design decisions, especially in high-stakes systems where getting it wrong has real human impact.</p>
+
+          <p>Outside of work, I'm a tea sommelier, high school tennis coach, and host a local radio show. I believe the same systems thinking that helps design better public services also helps you steep a perfect cup of tea.</p>`}
         />
       </div>
     </section>
@@ -149,7 +123,6 @@ const seekingItems = [
       <div class="container">
         <Contact
           email="hello@ronbronson.dev"
-          cta="Let's talk about design, systems, or tea."
           socials={socials}
         />
       </div>

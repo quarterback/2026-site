@@ -1,6 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import MediaEmbed from '../../components/MediaEmbed.astro';
+import ArtifactCard from '../../components/ArtifactCard.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work', ({ data }) => !data.draft);
@@ -12,7 +14,20 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const { title, summary, systemType, outcome, tags } = entry.data;
+const {
+  title,
+  summary,
+  systemType,
+  outcome,
+  tags,
+  role,
+  timeline,
+  context,
+  media = [],
+  artifacts = [],
+  impact = [],
+  approach = []
+} = entry.data;
 ---
 
 <Base title={`${title} — Ron Bronson`}>
@@ -20,20 +35,59 @@ const { title, summary, systemType, outcome, tags } = entry.data;
     <header class="case-study__header">
       <div class="container">
         <a href="/#work" class="back-link">&larr; Back to work</a>
-        <p class="case-study__type">{systemType}</p>
+        <div class="case-study__meta">
+          <span class="case-study__type">{systemType}</span>
+          {role && <span class="case-study__role">{role}</span>}
+          {timeline && <span class="case-study__timeline">{timeline}</span>}
+        </div>
         <h1>{title}</h1>
         <p class="case-study__summary">{summary}</p>
-        {outcome && <p class="case-study__outcome">{outcome}</p>}
-        {tags.length > 0 && (
-          <div class="case-study__tags">
-            {tags.map(tag => <span class="tag">{tag}</span>)}
-          </div>
-        )}
+        {context && <p class="case-study__context">{context}</p>}
       </div>
     </header>
 
-    <div class="case-study__content container--narrow">
-      <Content />
+    <div class="case-study__body">
+      <div class="container container--narrow">
+        <Content />
+
+        {approach.length > 0 && (
+          <section class="case-study__section">
+            <h2>Approach</h2>
+            <ul class="case-study__list">
+              {approach.map(item => <li>{item}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {impact.length > 0 && (
+          <section class="case-study__section">
+            <h2>Impact</h2>
+            <ul class="case-study__list">
+              {impact.map(item => <li>{item}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {media.length > 0 && (
+          <section class="case-study__section">
+            <h2>Media</h2>
+            {media.map(item => (
+              <MediaEmbed {...item} />
+            ))}
+          </section>
+        )}
+
+        {artifacts.length > 0 && (
+          <section class="case-study__section">
+            <h2>Artifacts</h2>
+            <div class="artifacts-grid">
+              {artifacts.map(artifact => (
+                <ArtifactCard {...artifact} />
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
     </div>
 
     <footer class="case-study__footer container">
@@ -44,7 +98,7 @@ const { title, summary, systemType, outcome, tags } = entry.data;
 
 <style>
   .case-study__header {
-    padding-block: var(--size-8) var(--size-6);
+    padding-block: var(--size-8) var(--size-7);
     border-bottom: 1px solid var(--surface-3);
   }
 
@@ -54,93 +108,132 @@ const { title, summary, systemType, outcome, tags } = entry.data;
     color: var(--text-3);
     margin-bottom: var(--size-4);
   }
+
   .back-link:hover {
     color: var(--brand);
   }
 
-  .case-study__type {
+  .case-study__meta {
+    display: flex;
+    gap: var(--size-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--size-3);
     font-family: var(--font-mono);
-    font-size: var(--font-size-00);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: var(--font-size-0);
+  }
+
+  .case-study__type {
     color: var(--brand);
-    margin-bottom: var(--size-2);
+  }
+
+  .case-study__role,
+  .case-study__timeline {
+    color: var(--text-3);
   }
 
   .case-study__header h1 {
-    margin-bottom: var(--size-3);
+    margin-bottom: var(--size-4);
   }
 
   .case-study__summary {
     font-size: var(--font-size-2);
     color: var(--text-2);
     margin-bottom: var(--size-3);
+    max-width: 65ch;
   }
 
-  .case-study__outcome {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-0);
+  .case-study__context {
+    font-size: var(--font-size-1);
     color: var(--text-3);
-    margin-bottom: var(--size-4);
+    max-width: 65ch;
   }
 
-  .case-study__tags {
-    display: flex;
-    gap: var(--size-2);
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-size: var(--font-size-00);
-    font-family: var(--font-mono);
-    color: var(--text-3);
-    background: var(--surface-2);
-    padding: var(--size-1) var(--size-2);
-    border-radius: var(--radius-2);
-  }
-
-  .case-study__content {
+  .case-study__body {
     padding-block: var(--size-8);
-    max-width: var(--content-width-narrow);
-    margin-inline: auto;
-    padding-inline: var(--size-4);
   }
 
-  .case-study__content :global(h2) {
+  .case-study__section {
+    margin-top: var(--size-8);
+  }
+
+  .case-study__section:first-child {
+    margin-top: 0;
+  }
+
+  .case-study__section h2 {
+    font-size: var(--font-size-3);
+    margin-bottom: var(--size-4);
+    color: var(--text-1);
+  }
+
+  .case-study__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .case-study__list li {
+    padding-left: var(--size-5);
+    margin-bottom: var(--size-3);
+    position: relative;
+    color: var(--text-2);
+    line-height: var(--font-lineheight-3);
+  }
+
+  .case-study__list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+    font-weight: var(--font-weight-6);
+  }
+
+  .artifacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--size-4);
+  }
+
+  .case-study__body :global(h2) {
     font-size: var(--font-size-3);
     margin-top: var(--size-8);
     margin-bottom: var(--size-4);
     color: var(--text-1);
   }
 
-  .case-study__content :global(h2:first-child) {
-    margin-top: 0;
+  .case-study__body :global(h3) {
+    font-size: var(--font-size-2);
+    margin-top: var(--size-6);
+    margin-bottom: var(--size-3);
+    color: var(--text-1);
   }
 
-  .case-study__content :global(p) {
+  .case-study__body :global(p) {
     margin-bottom: var(--size-4);
     color: var(--text-2);
+    line-height: var(--font-lineheight-3);
   }
 
-  .case-study__content :global(ul),
-  .case-study__content :global(ol) {
+  .case-study__body :global(ul),
+  .case-study__body :global(ol) {
     margin-bottom: var(--size-4);
     padding-left: var(--size-5);
     color: var(--text-2);
   }
 
-  .case-study__content :global(li) {
+  .case-study__body :global(li) {
     margin-bottom: var(--size-2);
+    line-height: var(--font-lineheight-3);
   }
 
-  .case-study__content :global(img) {
+  .case-study__body :global(img) {
     max-width: 100%;
     border-radius: var(--radius-2);
-    margin-block: var(--size-4);
+    margin-block: var(--size-6);
   }
 
   .case-study__footer {
-    padding-block: var(--size-6);
+    padding-block: var(--size-5);
     border-top: 1px solid var(--surface-3);
   }
 </style>

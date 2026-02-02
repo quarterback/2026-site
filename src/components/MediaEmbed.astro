@@ -1,0 +1,175 @@
+---
+interface Props {
+  type: 'video' | 'podcast' | 'audio' | 'image' | 'article' | 'artifact';
+  url: string;
+  title?: string;
+  caption?: string;
+  embedCode?: string;
+}
+
+const { type, url, title, caption, embedCode } = Astro.props;
+
+function isYouTube(url: string) {
+  return url.includes('youtube.com') || url.includes('youtu.be');
+}
+
+function isVimeo(url: string) {
+  return url.includes('vimeo.com');
+}
+
+function isSpotify(url: string) {
+  return url.includes('spotify.com');
+}
+
+function getYouTubeId(url: string) {
+  const match = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+  return match ? match[1] : null;
+}
+
+function getVimeoId(url: string) {
+  const match = url.match(/vimeo\.com\/(\d+)/);
+  return match ? match[1] : null;
+}
+
+function getSpotifyEmbed(url: string) {
+  return url.replace('/episode/', '/embed/episode/').replace('/show/', '/embed/show/');
+}
+---
+
+<div class="media-embed">
+  {type === 'video' && (
+    <div class="media-embed__video">
+      {embedCode ? (
+        <div set:html={embedCode} />
+      ) : isYouTube(url) ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${getYouTubeId(url)}`}
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      ) : isVimeo(url) ? (
+        <iframe
+          src={`https://player.vimeo.com/video/${getVimeoId(url)}`}
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      ) : (
+        <video controls>
+          <source src={url} />
+        </video>
+      )}
+    </div>
+  )}
+
+  {(type === 'podcast' || type === 'audio') && (
+    <div class="media-embed__audio">
+      {embedCode ? (
+        <div set:html={embedCode} />
+      ) : isSpotify(url) ? (
+        <iframe
+          src={getSpotifyEmbed(url)}
+          width="100%"
+          height="232"
+          frameborder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+        ></iframe>
+      ) : (
+        <audio controls>
+          <source src={url} />
+        </audio>
+      )}
+    </div>
+  )}
+
+  {type === 'image' && (
+    <div class="media-embed__image">
+      <img src={url} alt={title || ''} />
+    </div>
+  )}
+
+  {type === 'article' && (
+    <div class="media-embed__article">
+      <a href={url} target="_blank" rel="noopener" class="article-link">
+        {title || url}
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  )}
+
+  {caption && <p class="media-embed__caption">{caption}</p>}
+</div>
+
+<style>
+  .media-embed {
+    margin-block: var(--size-6);
+  }
+
+  .media-embed__video,
+  .media-embed__audio {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-2);
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+
+  .media-embed__video iframe,
+  .media-embed__video video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+  }
+
+  .media-embed__audio iframe,
+  .media-embed__audio audio {
+    width: 100%;
+    display: block;
+  }
+
+  .media-embed__image {
+    border-radius: var(--radius-2);
+    overflow: hidden;
+  }
+
+  .media-embed__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .media-embed__article {
+    padding: var(--size-4);
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+  }
+
+  .article-link {
+    display: flex;
+    align-items: center;
+    gap: var(--size-2);
+    color: var(--text-1);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+  }
+
+  .article-link:hover {
+    color: var(--brand);
+  }
+
+  .article-link svg {
+    flex-shrink: 0;
+  }
+
+  .media-embed__caption {
+    margin-top: var(--size-3);
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    font-style: italic;
+  }
+</style>

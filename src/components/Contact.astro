@@ -1,15 +1,13 @@
 ---
 interface Props {
   email: string;
-  cta?: string;
   socials?: { name: string; url: string }[];
 }
 
-const { email, cta = "Let's work together", socials = [] } = Astro.props;
+const { email, socials = [] } = Astro.props;
 ---
 
 <div class="contact">
-  <p class="contact__cta">{cta}</p>
   <a href={`mailto:${email}`} class="contact__email">{email}</a>
   {socials.length > 0 && (
     <nav class="contact__socials">
@@ -22,42 +20,34 @@ const { email, cta = "Let's work together", socials = [] } = Astro.props;
 
 <style>
   .contact {
-    text-align: center;
-    padding-block: var(--size-fluid-5);
-  }
-
-  .contact__cta {
-    font-size: var(--font-size-fluid-2);
-    color: var(--text-2);
-    margin-block-end: var(--size-3);
+    display: flex;
+    align-items: center;
+    gap: var(--size-5);
+    flex-wrap: wrap;
   }
 
   .contact__email {
-    font-size: var(--font-size-fluid-2);
-    font-weight: var(--font-weight-6);
-    color: var(--brand-accent);
-    display: inline-block;
-    margin-block-end: var(--size-5);
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-5);
+    color: var(--text-1);
   }
 
   .contact__email:hover {
-    text-decoration: underline;
+    color: var(--brand);
   }
 
   .contact__socials {
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
     gap: var(--size-4);
+    flex-wrap: wrap;
   }
 
   .contact__socials a {
-    font-size: var(--font-size-0);
+    font-size: var(--font-size-1);
     color: var(--text-3);
-    transition: color var(--ease-2) 0.2s;
   }
 
   .contact__socials a:hover {
-    color: var(--text-1);
+    color: var(--brand);
   }
 </style>

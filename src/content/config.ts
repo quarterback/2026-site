@@ -1,27 +1,41 @@
 import { defineCollection, z } from 'astro:content';
 
+const mediaItem = z.object({
+  type: z.enum(['video', 'podcast', 'audio', 'image', 'article', 'artifact']),
+  url: z.string(),
+  title: z.string().optional(),
+  caption: z.string().optional(),
+  embedCode: z.string().optional(),
+});
+
 const work = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    // Short description for card display
     summary: z.string(),
-    // System type: what kind of problem this is (eligibility, appeals, intake, etc.)
     systemType: z.string(),
-    // One-line outcome for the card
     outcome: z.string().optional(),
-    // For ordering on homepage (lower = first)
     order: z.number().default(99),
-    // Is this a featured case study?
     featured: z.boolean().default(false),
-    // Tags for filtering/display
     tags: z.array(z.string()).default([]),
-    // External link if this goes somewhere else
     externalUrl: z.string().url().optional(),
-    // Cover image for the card
     cover: z.string().optional(),
-    // Draft status
     draft: z.boolean().default(false),
+
+    role: z.string().optional(),
+    timeline: z.string().optional(),
+    context: z.string().optional(),
+
+    media: z.array(mediaItem).optional(),
+    artifacts: z.array(z.object({
+      title: z.string(),
+      description: z.string().optional(),
+      image: z.string().optional(),
+      link: z.string().optional(),
+    })).optional(),
+
+    impact: z.array(z.string()).optional(),
+    approach: z.array(z.string()).optional(),
   }),
 });
 

@@ -3,40 +3,40 @@
 @import "open-props/normalize";
 
 :root {
-  /* Color: warm neutral with teal accent - not corporate, has presence */
-  --brand: var(--teal-6);
-  --brand-dim: var(--teal-8);
-  --brand-bright: var(--teal-4);
+  /* Color: warm amber/orange accent with earthy neutrals */
+  --brand: var(--orange-6);
+  --brand-dim: var(--orange-8);
+  --brand-bright: var(--orange-4);
 
-  /* Dark mode surfaces - warm stone, not cold gray */
-  --surface-1: var(--stone-9);
-  --surface-2: var(--stone-8);
-  --surface-3: var(--stone-7);
-  --surface-4: var(--stone-6);
+  /* Dark mode surfaces - warm sand/stone, not cold gray */
+  --surface-1: var(--sand-9);
+  --surface-2: var(--sand-8);
+  --surface-3: var(--sand-7);
+  --surface-4: var(--sand-6);
 
   /* Text */
-  --text-1: var(--stone-0);
-  --text-2: var(--stone-3);
-  --text-3: var(--stone-4);
+  --text-1: var(--sand-0);
+  --text-2: var(--sand-3);
+  --text-3: var(--sand-5);
 
   /* Layout */
   --content-width: 1100px;
   --content-width-narrow: 720px;
-  --section-gap: var(--size-9);
+  --section-gap: var(--size-8);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --surface-1: var(--stone-1);
-    --surface-2: var(--stone-2);
-    --surface-3: var(--stone-3);
-    --surface-4: var(--stone-4);
-    --text-1: var(--stone-9);
-    --text-2: var(--stone-7);
-    --text-3: var(--stone-5);
-    --brand: var(--teal-7);
-    --brand-dim: var(--teal-9);
-    --brand-bright: var(--teal-5);
+    --surface-1: #fafaf9;
+    --surface-2: #f5f5f4;
+    --surface-3: #e7e5e4;
+    --surface-4: #d6d3d1;
+    --text-1: #1c1917;
+    --text-2: #44403c;
+    --text-3: #78716c;
+    --brand: var(--orange-7);
+    --brand-dim: var(--orange-9);
+    --brand-bright: var(--orange-5);
   }
 }
 
