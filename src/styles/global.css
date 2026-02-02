@@ -36,16 +36,16 @@
   --brand-dim: #4d4dff;
   --brand-bright: #6b6bff;
 
-  /* Dark surfaces - cool gray */
-  --surface-1: #0a0a0a;
-  --surface-2: #171717;
-  --surface-3: #262626;
-  --surface-4: #404040;
+  /* Dark surfaces - warm brown */
+  --surface-1: #1a1512;
+  --surface-2: #2a241e;
+  --surface-3: #3a332a;
+  --surface-4: #4a4238;
 
   /* Text */
-  --text-1: #fafafa;
-  --text-2: #d4d4d4;
-  --text-3: #a3a3a3;
+  --text-1: #f5f1ed;
+  --text-2: #d4cfc8;
+  --text-3: #a39d95;
 }
 
 html { color-scheme: dark light; }
