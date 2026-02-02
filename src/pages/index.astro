@@ -1,121 +1,158 @@
 ---
-import { getCollection } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import Socials from "@/components/Socials.astro";
-import LinkButton from "@/components/LinkButton.astro";
-import Card from "@/components/Card.astro";
-import Hr from "@/components/Hr.astro";
-import getSortedPosts from "@/utils/getSortedPosts";
-import IconRss from "@/assets/icons/IconRss.svg";
-import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
-import { SITE } from "@/config";
-import { SOCIALS } from "@/constants";
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import MediaItem from '../components/MediaItem.astro';
+import NowSection from '../components/NowSection.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
 
-const posts = await getCollection("blog");
+// Sample data - replace with your actual content or data fetching
+const projects = [
+  {
+    title: "18F / Federal Government",
+    description: "Designing systems that help millions of people navigate government services.",
+    impact: "Served millions of users",
+    tags: ["Service Design", "Public Sector", "Systems Thinking"],
+  },
+  {
+    title: "State Capacity AI",
+    description: "Exploring how AI can strengthen public institutions and decision-making.",
+    tags: ["AI", "Policy", "Research"],
+  },
+  {
+    title: "Consequence Design",
+    description: "Framework for understanding how design decisions create downstream effects.",
+    tags: ["Framework", "Design Theory", "Speaking"],
+    link: "#", // Link to talk or article
+  },
+];
 
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const media = [
+  {
+    title: "Consequence Design and Public Systems",
+    source: "Design Matters Podcast",
+    type: "podcast" as const,
+    date: "2024",
+    link: "#",
+  },
+  {
+    title: "Building for the Public Good",
+    source: "A List Apart",
+    type: "feature" as const,
+    date: "2024",
+    link: "#",
+  },
+  {
+    title: "Designing Government Services",
+    source: "UX Conference",
+    type: "talk" as const,
+    date: "2024",
+    link: "#",
+  },
+  {
+    title: "The Future of Civic Tech",
+    source: "Tech & Society Interview",
+    type: "interview" as const,
+    date: "2023",
+    link: "#",
+  },
+];
+
+const socials = [
+  { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
+  { name: "GitHub", url: "https://github.com/ronbronson" },
+  { name: "Letterboxd", url: "#" },
+  { name: "Last.fm", url: "#" },
+];
 ---
 
-<Layout>
-  <Header />
-  <main id="main-content" data-layout="index">
-    <section id="hero" class="pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Mingalaba
-      </h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="inline-block"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
+<Base title="Ron Bronson — Designer">
+  <main>
+    <Hero
+      name="Ron Bronson"
+      tagline="I design how public systems make decisions."
+      impactStatement="18F alumni · Professor · Consequence Design"
+    />
+
+    <Section id="work" number="01" title="Work">
+      <div class="grid grid-2">
+        {projects.map(project => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            impact={project.impact}
+            tags={project.tags}
+            link={project.link}
+          />
+        ))}
+      </div>
+    </Section>
+
+    <Section id="media" number="02" title="Media">
+      <div class="media-list">
+        {media.map(item => (
+          <MediaItem
+            title={item.title}
+            source={item.source}
+            type={item.type}
+            date={item.date}
+            link={item.link}
+          />
+        ))}
+      </div>
+    </Section>
+
+    <Section id="about" number="03" title="About">
+      <About
+        bio="<strong>Designer, educator, and systems thinker</strong> focused on how public institutions serve people. I've spent my career at the intersection of design, policy, and technology — from federal agencies to universities. I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of the systems we create."
+        details={[
+          "Tea sommelier",
+          "High school tennis coach",
+          "Local radio host",
+          "Portland, OR"
+        ]}
+      />
+    </Section>
+
+    <Section id="now" number="04" title="Now">
+      <NowSection
+        listening={{ track: "Loading...", artist: "via Last.fm" }}
+        reading={{ title: "Loading...", author: "via Literal" }}
+        upcomingTalk={{ event: "Next speaking engagement", date: "TBD" }}
+      />
+    </Section>
+
+    <section id="contact">
+      <div class="container">
+        <Contact
+          email="hello@ronbronson.dev"
+          cta="Let's talk about design, systems, or tea."
+          socials={socials}
         />
-        <span class="sr-only">RSS Feed</span>
-      </a>
-
-      <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p class="mt-2">
-        Read the blog posts or check
-        <LinkButton
-          class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
-        >
-          README
-        </LinkButton> for more info.
-      </p>
-      {
-        // only display if at least one social link is enabled
-        SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
-            <Socials />
-          </div>
-        )
-      }
+      </div>
     </section>
-
-    <Hr />
-
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured" class="pt-12 pb-6">
-            <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
-            <ul>
-              {featuredPosts.map(data => (
-                <Card variant="h3" {...data} />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
-          <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} />
-            )}
-          </ul>
-        </section>
-      )
-    }
-
-    <div class="my-8 text-center">
-      <LinkButton href="/posts/">
-        All Posts
-        <IconArrowRight class="inline-block rtl:-rotate-180" />
-      </LinkButton>
-    </div>
   </main>
-  <Footer />
-</Layout>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset?.layout;
-    if (indexLayout) {
-      sessionStorage.setItem("backUrl", "/");
-    }
-  });
-</script>
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; {new Date().getFullYear()} Ron Bronson</p>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  .media-list {
+    max-width: var(--content-width-narrow);
+  }
+
+  .footer {
+    padding-block: var(--size-5);
+    border-top: 1px solid var(--surface-3);
+    text-align: center;
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+  }
+</style>

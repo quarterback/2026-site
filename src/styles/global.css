@@ -1,85 +1,119 @@
-@import "tailwindcss";
-@import "./typography.css";
+/* Open Props - import only what we need */
+@import "open-props/style";
+@import "open-props/normalize";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* Custom properties extending Open Props */
+:root {
+  /* Brand colors */
+  --brand-accent: var(--indigo-6);
+  --brand-accent-light: var(--indigo-4);
 
-:root,
-html[data-theme="light"] {
-  --background: #f8f5f0;
-  --foreground: #1f1a17;
-  --accent: #0a7cc4;
-  --muted: #e3ddd3;
-  --border: #d6cfc5;
+  /* Surface colors - dark mode first */
+  --surface-1: var(--gray-9);
+  --surface-2: var(--gray-8);
+  --surface-3: var(--gray-7);
+
+  /* Text colors */
+  --text-1: var(--gray-1);
+  --text-2: var(--gray-4);
+  --text-3: var(--gray-5);
+
+  /* Layout */
+  --content-width: 1200px;
+  --content-width-narrow: 800px;
+
+  /* Section spacing */
+  --section-spacing: var(--size-fluid-5);
 }
 
-html[data-theme="dark"] {
-  --background: #0e1218;
-  --foreground: #e9eef6;
-  --accent: #ff7a1a;
-  --muted: #2a3442;
-  --border: #3a4758;
-}
-
-html[data-theme="light-hc"] {
-  --background: #ffffff;
-  --foreground: #000000;
-  --accent: #005bbb;
-  --muted: #ededed;
-  --border: #b3b3b3;
-}
-
-html[data-theme="dark-hc"] {
-  --background: #000000;
-  --foreground: #ffffff;
-  --accent: #ffd300;
-  --muted: #333333;
-  --border: #666666;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-accent/75;
-    scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
-  }
-  html {
-    @apply overflow-y-scroll scroll-smooth;
-  }
-  body {
-    @apply flex min-h-svh flex-col bg-background font-mono text-foreground selection:bg-accent/75 selection:text-background;
-  }
-  a,
-  button {
-    @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
-  }
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
-  }
-  section,
-  footer {
-    @apply mx-auto max-w-app px-4;
+/* Light mode override */
+@media (prefers-color-scheme: light) {
+  :root {
+    --surface-1: var(--gray-1);
+    --surface-2: var(--gray-2);
+    --surface-3: var(--gray-3);
+    --text-1: var(--gray-9);
+    --text-2: var(--gray-7);
+    --text-3: var(--gray-6);
   }
 }
 
-@utility max-w-app {
-  @apply max-w-3xl;
+/* Base styles */
+html {
+  color-scheme: dark light;
 }
 
-.active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-4;
+body {
+  background: var(--surface-1);
+  color: var(--text-1);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-fluid-1);
+  line-height: var(--font-lineheight-3);
 }
 
-/* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
-/* Anything that has been anchored to should have extra scroll margin */
-:target {
-  scroll-margin-block: 1rem;
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-6);
+  line-height: var(--font-lineheight-1);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--font-size-fluid-3); }
+h2 { font-size: var(--font-size-fluid-2); }
+h3 { font-size: var(--font-size-fluid-1); }
+
+/* Links */
+a {
+  color: var(--brand-accent);
+  text-decoration: none;
+  transition: color var(--ease-2) 0.2s;
+}
+
+a:hover {
+  color: var(--brand-accent-light);
+}
+
+/* Section numbering pattern (from portfolio analysis) */
+.section-number {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-0);
+  color: var(--text-3);
+  letter-spacing: var(--font-letterspacing-3);
+}
+
+/* Utility classes */
+.container {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--size-fluid-3);
+}
+
+.container--narrow {
+  max-width: var(--content-width-narrow);
+}
+
+/* Card surface */
+.card {
+  background: var(--surface-2);
+  border-radius: var(--radius-3);
+  padding: var(--size-fluid-3);
+  transition: transform var(--ease-out-3) 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Grid utilities */
+.grid {
+  display: grid;
+  gap: var(--size-fluid-3);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
 }
