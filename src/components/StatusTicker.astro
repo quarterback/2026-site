@@ -1,0 +1,113 @@
+---
+interface StatusItem {
+  label: string;
+  value: string;
+  url?: string;
+}
+
+interface Props {
+  items: StatusItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="ticker">
+  <div class="ticker__track">
+    {items.map((item, i) => (
+      <>
+        {i > 0 && <span class="ticker__separator">·</span>}
+        <span class="ticker__item">
+          <span class="ticker__label">{item.label}</span>
+          {item.url ? (
+            <a href={item.url} class="ticker__value" target="_blank" rel="noopener">
+              {item.value}
+            </a>
+          ) : (
+            <span class="ticker__value">{item.value}</span>
+          )}
+        </span>
+      </>
+    ))}
+  </div>
+</div>
+
+<style>
+  .ticker {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--surface-1);
+    border-bottom: 1px solid var(--surface-3);
+    padding-block: var(--size-2);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    letter-spacing: 0.02em;
+    overflow: hidden;
+  }
+
+  .ticker__track {
+    display: flex;
+    align-items: center;
+    gap: var(--size-3);
+    padding-inline: var(--size-4);
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .ticker__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ticker__separator {
+    color: var(--brand);
+    font-weight: 700;
+  }
+
+  .ticker__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+  }
+
+  .ticker__label {
+    color: var(--text-3);
+    text-transform: uppercase;
+  }
+
+  .ticker__value {
+    color: var(--text-1);
+    font-weight: 500;
+  }
+
+  a.ticker__value {
+    color: var(--brand);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  a.ticker__value:hover {
+    color: var(--brand-bright);
+    text-decoration: underline;
+  }
+
+  /* Optional: animated entrance */
+  @media (prefers-reduced-motion: no-preference) {
+    .ticker {
+      animation: ticker-in 0.4s ease-out;
+    }
+
+    @keyframes ticker-in {
+      from {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+</style>
