@@ -26,7 +26,7 @@ const { name, tagline, location } = Astro.props;
   }
 
   .hero__tagline {
-    font-size: var(--font-size-3);
+    font-size: clamp(var(--font-size-1), 3vw, var(--font-size-3));
     color: var(--text-2);
     margin-bottom: var(--size-2);
     max-width: 60ch;
@@ -37,5 +37,15 @@ const { name, tagline, location } = Astro.props;
     font-size: var(--font-size-1);
     color: var(--text-3);
     font-family: var(--font-mono);
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding-block: var(--size-7) var(--size-6);
+    }
+
+    .hero__name {
+      margin-bottom: var(--size-2);
+    }
   }
 </style>

@@ -62,10 +62,27 @@ const {
     color: var(--text-2);
     text-decoration: none;
     transition: color 0.2s ease;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .footer__links a:hover {
     color: var(--brand);
+  }
+
+  @media (max-width: 600px) {
+    .footer__links {
+      gap: var(--size-4);
+    }
+
+    .footer__links a {
+      font-size: var(--font-size-0);
+    }
+
+    .colophon__text {
+      font-size: 0.7rem;
+    }
   }
 
   .footer__colophon {

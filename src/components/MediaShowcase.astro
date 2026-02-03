@@ -48,6 +48,7 @@ const finalUrl = embedUrl || url;
 
   .media-showcase__meta {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--size-3);
     margin-bottom: var(--size-2);
     font-size: var(--font-size-0);
@@ -87,9 +88,26 @@ const finalUrl = embedUrl || url;
     font-size: var(--font-size-1);
     color: var(--brand);
     font-weight: var(--font-weight-5);
+    min-height: 44px;
   }
 
   .media-showcase__link:hover {
     text-decoration: underline;
+  }
+
+  @media (max-width: 600px) {
+    .media-showcase {
+      margin-bottom: var(--size-6);
+    }
+
+    .media-showcase__meta {
+      gap: var(--size-2);
+      font-size: var(--font-size-00);
+    }
+
+    .media-showcase__date {
+      margin-left: 0;
+      flex-basis: 100%;
+    }
   }
 </style>

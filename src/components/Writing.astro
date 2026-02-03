@@ -110,6 +110,7 @@ function formatDate(date: Date | string) {
     background: var(--surface-2);
     text-decoration: none;
     transition: all 0.2s ease;
+    min-height: 44px;
   }
 
   .post__link:hover {
@@ -118,6 +119,25 @@ function formatDate(date: Date | string) {
 
   .post__link:hover .post__arrow {
     transform: translateX(4px);
+  }
+
+  @media (max-width: 600px) {
+    .post__link {
+      padding: var(--size-3);
+      gap: var(--size-3);
+    }
+
+    .writing__title {
+      font-size: var(--font-size-3);
+    }
+
+    .post__title {
+      font-size: var(--font-size-1);
+    }
+
+    .post__excerpt {
+      font-size: var(--font-size-0);
+    }
   }
 
   .post__content {

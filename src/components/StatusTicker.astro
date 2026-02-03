@@ -55,10 +55,22 @@ const { items } = Astro.props;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   .ticker__track::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (max-width: 600px) {
+    .ticker {
+      font-size: 0.7rem;
+    }
+
+    .ticker__track {
+      padding-inline: var(--size-3);
+      gap: var(--size-2);
+    }
   }
 
   .ticker__separator {

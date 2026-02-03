@@ -177,7 +177,7 @@ const fonts = [
   }
 
   .featured__link h2 {
-    font-size: var(--font-size-3);
+    font-size: clamp(var(--font-size-2), 3vw, var(--font-size-3));
     color: var(--text-1);
     margin-bottom: var(--size-2);
   }
@@ -200,7 +200,7 @@ const fonts = [
 
   /* Section headings */
   .section-heading {
-    font-size: var(--font-size-3);
+    font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
     margin-bottom: var(--size-4);
   }
 
@@ -208,6 +208,16 @@ const fonts = [
     color: var(--text-3);
     margin-bottom: var(--size-5);
     font-size: var(--font-size-1);
+  }
+
+  @media (max-width: 600px) {
+    .section-heading {
+      margin-bottom: var(--size-3);
+    }
+
+    .section-intro {
+      margin-bottom: var(--size-4);
+    }
   }
 
   /* Work grid - 3 columns, denser */
@@ -244,13 +254,20 @@ const fonts = [
     align-items: start;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1024px) {
     .about-grid {
       grid-template-columns: 1fr;
+      gap: var(--size-5);
     }
 
     .now-playing-sidebar {
       order: -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about-grid {
+      gap: var(--size-4);
     }
   }
 </style>
