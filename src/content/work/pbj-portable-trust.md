@@ -9,7 +9,7 @@ tags: ["ATProto", "Trust Systems", "Prototype", "SPA"]
 externalUrl: "https://heypbj.xyz"
 ---
 
-> **Part of the Glowrm ecosystem** — PBJ uses [Glowrm](/work/glowrm) for cross-platform trust and Strategic Point Allocation (SPA). Reputation earned here affects standing on Leafroll and Roomies.
+> **Part of the Glowrm ecosystem** — PBJ uses [Glowrm](/work/glowrm) for cross-platform trust and Stratified Preference Allocation (SPA). Reputation earned here affects standing on Leafroll and Roomies.
 
 ## The problem
 
@@ -33,16 +33,16 @@ Glowrm is a cross-platform trust clearinghouse. Instead of each app maintaining 
 
 This creates accountability without centralized control. Each app decides what trust score threshold matters for their context, but the underlying signal is shared.
 
-### Strategic Point Allocation (SPA)
+### Stratified Preference Allocation (SPA)
 
-The "jar" system replaces binary swiping with resource allocation:
+The "jar" system replaces unlimited swiping with constrained, tiered signaling:
 
-- **15 jars per week.** Scarcity creates intentionality.
-- **1-10 jars per person.** Variable investment signals interest level. Sending 8 jars says something different than sending 2.
-- **Bilateral exchange unlocks messaging.** Both people must invest before conversation opens. This isn't matching—it's mutual commitment.
-- **Jars are visible.** Recipients see exactly how much you invested. No hidden algorithms.
+- **Constrained selection.** Limited jars (k) vs. unlimited profiles (N). Scarcity forces meaningful prioritization instead of costless over-signaling.
+- **Priority tiers.** Allocations are stratified—sending 8 jars signals something different than sending 2. Tier placement communicates preference intensity.
+- **Quality-based capacity.** Your jar allocation scales with your Glowrm trust score. Better platform citizenship = more selection capacity.
+- **Bilateral exchange.** Both people must invest before conversation opens. This isn't matching—it's mutual commitment with visible stakes.
 
-The mechanic is simple but the behavior change is significant: when you only have 15 jars, you actually look at profiles. You make decisions instead of reflexively swiping.
+The mechanic forces truthful preference signaling. When you only have 15 jars, you actually look at profiles. You make decisions instead of reflexively swiping.
 
 ## Architecture
 

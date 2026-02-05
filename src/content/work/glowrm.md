@@ -5,7 +5,7 @@ systemType: "Infrastructure + API Platform"
 outcome: "3 apps connected, 1,500+ users"
 order: 5
 featured: true
-tags: ["Infrastructure", "API Design", "Trust Systems", "ATProto"]
+tags: ["Infrastructure", "API Design", "Trust Systems", "ATProto", "SPA"]
 ---
 
 ## The problem
@@ -40,8 +40,8 @@ Trust scores on a 20-80 scale that reflect behavior across all connected apps. T
 **2. Trust Event Logging**
 A unified API for apps to report user behavior—positive interactions boost reputation, reports and blocks decrease it, bans set it to minimum.
 
-**3. Strategic Profile Allocation (SPA)**
-Configurable resource limits that prevent spam and encourage intentional interaction. Each app defines its own unit mechanics while Glowrm handles the accounting.
+**3. Stratified Preference Allocation (SPA)**
+A framework replacing unlimited selection with constrained, tiered signaling. Limited selection slots (k << N), priority tiers communicating preference intensity, and quality-based capacity scaling. Each app defines its own unit semantics while Glowrm handles the allocation accounting.
 
 ## What shipped
 
