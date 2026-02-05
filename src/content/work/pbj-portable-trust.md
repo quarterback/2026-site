@@ -5,9 +5,11 @@ systemType: "Trust infrastructure + decision architecture"
 outcome: "Working prototype demonstrating portable identity and resource allocation"
 order: 4
 featured: false
-tags: ["ATProto", "Trust Systems", "Prototype", "Infrastructure"]
+tags: ["ATProto", "Trust Systems", "Prototype", "SPA"]
 externalUrl: "https://heypbj.xyz"
 ---
+
+> **Part of the Glowrm ecosystem** — PBJ uses [Glowrm](/work/glowrm) for cross-platform trust and Strategic Point Allocation (SPA). Reputation earned here affects standing on Leafroll and Roomies.
 
 ## The problem
 
