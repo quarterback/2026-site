@@ -1,7 +1,7 @@
 ---
 title: "Glowrm"
-summary: "Trust infrastructure for decentralized social apps—like a credit bureau for online reputation."
-systemType: "Infrastructure + API platform"
+summary: "Trust infrastructure for decentralized social apps—like a credit bureau for online reputation"
+systemType: "Infrastructure + API Platform"
 outcome: "3 apps connected, 1,500+ users"
 order: 5
 featured: true
@@ -13,7 +13,6 @@ tags: ["Infrastructure", "API Design", "Trust Systems", "ATProto"]
 Every social app reinvents the wheel on trust. Dating apps build their own reputation systems. Professional networks create their own verification flows. Roommate finders develop their own safety checks. None of them talk to each other.
 
 This creates two failures:
-
 1. **Bad actors hop between apps** — Get banned from one dating app? Just sign up for another. Your reputation doesn't follow you.
 2. **Good users start from zero everywhere** — Built years of positive reputation on one platform? It means nothing when you try a new app.
 
@@ -35,24 +34,14 @@ I designed Glowrm as infrastructure, not a feature. Think Experian for social ap
 
 Glowrm provides three core services:
 
-### 1. Cross-App Reputation
+**1. Cross-App Reputation**
 Trust scores on a 20-80 scale that reflect behavior across all connected apps. The score weights recent activity, considers event severity, and updates in real-time.
 
-### 2. Trust Event Logging
+**2. Trust Event Logging**
 A unified API for apps to report user behavior—positive interactions boost reputation, reports and blocks decrease it, bans set it to minimum.
 
-### 3. Strategic Point Allocation (SPA)
+**3. Strategic Profile Allocation (SPA)**
 Configurable resource limits that prevent spam and encourage intentional interaction. Each app defines its own unit mechanics while Glowrm handles the accounting.
-
-## Connected apps
-
-Glowrm currently powers trust and allocation for:
-
-- **[PBJ](/work/pbj-portable-trust)** — Dating app using "jars" for intentional matching
-- **Leafroll** — Professional networking using "credits" for connection requests
-- **Roomies** — Roommate finding using "waves" for outreach
-
-Each app maintains its own identity and UX while sharing the underlying trust layer.
 
 ## What shipped
 
@@ -67,7 +56,3 @@ Each app maintains its own identity and UX while sharing the underlying trust la
 Building infrastructure requires saying no to features. Apps wanted Glowrm to handle communities, groups, and segmentation. I kept pushing back: that's app logic, not trust infrastructure. The simpler the core, the more apps could plug in without friction.
 
 The hardest part wasn't the code—it was the positioning. "Reputation API" sounds boring. "Credit bureau for social apps" clicked immediately.
-
-## What this demonstrates
-
-I can design systems that serve multiple products without becoming bloated. Glowrm works because it does one thing well—trust scoring and resource allocation—and leaves everything else to the apps that integrate with it.
