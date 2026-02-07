@@ -2,7 +2,6 @@
 interface Album {
   title: string;
   artist: string;
-  cover: string;
   url?: string;
 }
 
@@ -14,79 +13,56 @@ interface Props {
 const { albums, title = 'Listening To' } = Astro.props;
 ---
 
-<div class="albums">
-  <h2 class="section-heading">{title}</h2>
-  <div class="albums__shelf">
+<div class="albums-list">
+  <h3 class="albums-list__title">{title}</h3>
+  <ul>
     {albums.map((album) => (
-      <a
-        href={album.url || '#'}
-        class="album-cover"
-        target="_blank"
-        rel="noopener"
-        title={`${album.title} by ${album.artist}`}
-      >
-        <img src={album.cover} alt={`${album.title} by ${album.artist}`} />
-      </a>
+      <li>
+        {album.url ? (
+          <a href={album.url} target="_blank" rel="noopener">
+            <strong>{album.title}</strong> by {album.artist}
+          </a>
+        ) : (
+          <span><strong>{album.title}</strong> by {album.artist}</span>
+        )}
+      </li>
     ))}
-  </div>
+  </ul>
 </div>
 
 <style>
-  .albums {
-    margin-block: var(--size-6);
+  .albums-list__title {
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    margin-bottom: var(--size-2);
+    color: var(--text-1);
   }
 
-  .section-heading {
-    font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
-    margin-bottom: var(--size-4);
-  }
-
-  .albums__shelf {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
+    flex-direction: column;
     gap: var(--size-2);
-    align-items: flex-end;
-    padding: var(--size-3);
-    background: var(--surface-2);
-    border-radius: var(--radius-2);
-    border-bottom: 3px solid var(--surface-4);
   }
 
-  .album-cover {
-    width: 140px;
-    height: 140px;
-    border-radius: var(--radius-1);
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease;
-    display: block;
+  li {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    line-height: 1.5;
   }
 
-  .album-cover:hover {
-    transform: translateY(-8px);
+  a {
+    color: var(--text-2);
+    text-decoration: none;
   }
 
-  .album-cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  a:hover {
+    color: var(--brand);
   }
 
-  @media (max-width: 768px) {
-    .album-cover {
-      width: 110px;
-      height: 110px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .album-cover {
-      width: 90px;
-      height: 90px;
-    }
-
-    .albums__shelf {
-      gap: var(--size-1);
-      padding: var(--size-2);
-    }
+  strong {
+    color: var(--text-1);
   }
 </style>

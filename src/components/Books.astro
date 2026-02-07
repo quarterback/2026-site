@@ -2,10 +2,7 @@
 interface Book {
   title: string;
   author: string;
-  cover?: string;
   url?: string;
-  status?: 'reading' | 'completed' | 'want-to-read';
-  year?: number;
 }
 
 interface Props {
@@ -16,104 +13,56 @@ interface Props {
 const { books, title = 'Currently Reading' } = Astro.props;
 ---
 
-<div class="bookshelf">
-  <h2 class="section-heading">{title}</h2>
-  <div class="bookshelf__shelf">
+<div class="books-list">
+  <h3 class="books-list__title">{title}</h3>
+  <ul>
     {books.map((book) => (
-      <div class="book-spine">
-        {book.cover ? (
-          <img src={book.cover} alt={book.title} />
+      <li>
+        {book.url ? (
+          <a href={book.url} target="_blank" rel="noopener">
+            <strong>{book.title}</strong> by {book.author}
+          </a>
         ) : (
-          <div class="book-spine__placeholder">
-            <span class="book-spine__title">{book.title}</span>
-            <span class="book-spine__author">{book.author}</span>
-          </div>
+          <span><strong>{book.title}</strong> by {book.author}</span>
         )}
-      </div>
+      </li>
     ))}
-  </div>
+  </ul>
 </div>
 
 <style>
-  .bookshelf {
-    margin-block: var(--size-6);
+  .books-list__title {
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    margin-bottom: var(--size-2);
+    color: var(--text-1);
   }
 
-  .section-heading {
-    font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
-    margin-bottom: var(--size-4);
-  }
-
-  .bookshelf__shelf {
-    display: flex;
-    gap: var(--size-2);
-    align-items: flex-end;
-    padding: var(--size-3);
-    background: var(--surface-2);
-    border-radius: var(--radius-2);
-    border-bottom: 3px solid var(--surface-4);
-  }
-
-  .book-spine {
-    width: 140px;
-    height: 200px;
-    border-radius: var(--radius-1);
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s ease;
-    cursor: pointer;
-  }
-
-  .book-spine:hover {
-    transform: translateY(-8px);
-  }
-
-  .book-spine img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .book-spine__placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--surface-3) 0%, var(--surface-4) 100%);
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: var(--size-3);
-    text-align: center;
+    gap: var(--size-2);
   }
 
-  .book-spine__title {
-    font-size: var(--font-size-0);
-    font-weight: var(--font-weight-6);
+  li {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  a {
+    color: var(--text-2);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--brand);
+  }
+
+  strong {
     color: var(--text-1);
-    margin-bottom: var(--size-2);
-  }
-
-  .book-spine__author {
-    font-size: var(--font-size-00);
-    color: var(--text-3);
-  }
-
-  @media (max-width: 768px) {
-    .book-spine {
-      width: 110px;
-      height: 160px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .book-spine {
-      width: 90px;
-      height: 130px;
-    }
-
-    .bookshelf__shelf {
-      gap: var(--size-1);
-      padding: var(--size-2);
-    }
   }
 </style>

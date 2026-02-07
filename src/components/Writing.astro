@@ -1,9 +1,10 @@
 ---
 interface Post {
   title: string;
-  url: string;
-  date: Date | string;
-  excerpt?: string;
+  url?: string;
+  link?: string;
+  date?: Date | string;
+  pubDate?: string;
 }
 
 interface Props {
@@ -18,169 +19,111 @@ function formatDate(date: Date | string) {
   const d = typeof date === 'string' ? new Date(date) : date;
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric'
   }).format(d);
 }
 ---
 
 <section class="writing">
-  <div class="writing__header">
-    <h2 class="writing__title">{title}</h2>
-    <a href={blogUrl} target="_blank" rel="noopener" class="writing__link">
-      View all posts
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div>
+  <h2 class="section-heading">{title}</h2>
 
   <ul class="writing__posts">
-    {posts.map((post) => (
-      <li class="post">
-        <a href={post.url} target="_blank" rel="noopener" class="post__link">
-          <div class="post__content">
-            <h3 class="post__title">{post.title}</h3>
-            {post.excerpt && <p class="post__excerpt">{post.excerpt}</p>}
-            <time class="post__date" datetime={typeof post.date === 'string' ? post.date : post.date.toISOString()}>
-              {formatDate(post.date)}
+    {posts.map((post) => {
+      const postUrl = post.url || post.link || '#';
+      const postDate = post.date || post.pubDate || new Date();
+
+      return (
+        <li class="post-item">
+          <a href={postUrl} target="_blank" rel="noopener" class="post-item__link">
+            <h3 class="post-item__title">{post.title}</h3>
+            <time class="post-item__date" datetime={typeof postDate === 'string' ? postDate : postDate.toISOString()}>
+              {formatDate(postDate)}
             </time>
-          </div>
-          <svg class="post__arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-      </li>
-    ))}
+          </a>
+        </li>
+      );
+    })}
   </ul>
+
+  {blogUrl && (
+    <a href={blogUrl} target="_blank" rel="noopener" class="writing__more">
+      View all posts →
+    </a>
+  )}
 </section>
 
 <style>
   .writing {
-    margin-block: var(--size-10);
+    margin-block: var(--size-6);
   }
 
-  .writing__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-block-end: var(--size-6);
-    flex-wrap: wrap;
-    gap: var(--size-4);
-  }
-
-  .writing__title {
-    font-size: var(--font-size-4);
-    font-weight: var(--font-weight-6);
-    margin: 0;
-  }
-
-  .writing__link {
-    display: flex;
-    align-items: center;
-    gap: var(--size-1);
-    color: var(--text-2);
-    font-size: var(--font-size-1);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-
-  .writing__link:hover {
-    color: var(--brand);
+  .section-heading {
+    font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
+    margin-bottom: var(--size-4);
   }
 
   .writing__posts {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: grid;
-    gap: var(--size-3);
-  }
-
-  .post {
-    border-radius: var(--radius-2);
-    overflow: hidden;
-  }
-
-  .post__link {
     display: flex;
-    align-items: center;
-    gap: var(--size-4);
-    padding: var(--size-4);
-    background: var(--surface-2);
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .post-item__link {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--size-3);
     text-decoration: none;
-    transition: all 0.2s ease;
-    min-height: 44px;
+    padding: var(--size-2);
+    border-radius: var(--radius-1);
+    transition: background-color 0.2s ease;
   }
 
-  .post__link:hover {
-    background: var(--surface-3);
+  .post-item__link:hover {
+    background: var(--surface-2);
   }
 
-  .post__link:hover .post__arrow {
-    transform: translateX(4px);
-  }
-
-  @media (max-width: 600px) {
-    .post__link {
-      padding: var(--size-3);
-      gap: var(--size-3);
-    }
-
-    .writing__title {
-      font-size: var(--font-size-3);
-    }
-
-    .post__title {
-      font-size: var(--font-size-1);
-    }
-
-    .post__excerpt {
-      font-size: var(--font-size-0);
-    }
-  }
-
-  .post__content {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .post__title {
-    font-size: var(--font-size-2);
+  .post-item__title {
+    font-size: var(--font-size-1);
     font-weight: var(--font-weight-5);
     color: var(--text-1);
-    margin: 0 0 var(--size-1) 0;
-    line-height: var(--font-lineheight-2);
+    margin: 0;
+    flex: 1;
   }
 
-  .post__excerpt {
-    font-size: var(--font-size-1);
-    color: var(--text-2);
-    margin: 0 0 var(--size-2) 0;
-    line-height: var(--font-lineheight-3);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .post-item__link:hover .post-item__title {
+    color: var(--brand);
   }
 
-  .post__date {
-    display: block;
+  .post-item__date {
     font-size: var(--font-size-0);
     color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    flex-shrink: 0;
   }
 
-  .post__arrow {
-    flex-shrink: 0;
-    color: var(--text-3);
-    transition: transform 0.2s ease;
+  .writing__more {
+    display: inline-flex;
+    align-items: center;
+    margin-top: var(--size-4);
+    font-size: var(--font-size-1);
+    color: var(--brand);
+    font-weight: var(--font-weight-5);
+    text-decoration: none;
+  }
+
+  .writing__more:hover {
+    text-decoration: underline;
   }
 
   @media (max-width: 640px) {
-    .post__arrow {
-      display: none;
+    .post-item__link {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--size-1);
     }
   }
 </style>

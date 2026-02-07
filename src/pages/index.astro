@@ -6,7 +6,6 @@ import WorkCard from '../components/WorkCard.astro';
 import Writing from '../components/Writing.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
-import Music from '../components/Music.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
@@ -139,28 +138,13 @@ const fonts = [
       </div>
     </section>
 
-    <!-- Currently Reading -->
-    <section id="books">
+    <!-- Media Section: Books & Albums side by side -->
+    <section id="media-consumption">
       <div class="container">
-        <Books books={currentBooks} />
-      </div>
-    </section>
-
-    <!-- Listening To -->
-    <section id="albums">
-      <div class="container">
-        <Albums albums={currentAlbums} />
-      </div>
-    </section>
-
-    <!-- Radio Show -->
-    <section id="radio">
-      <div class="container">
-        <Music
-          title="Radio Show"
-          embedUrl="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2F908RB%2F"
-          embedType="mixcloud"
-        />
+        <div class="media-grid">
+          <Books books={currentBooks} />
+          <Albums albums={currentAlbums} />
+        </div>
       </div>
     </section>
 
@@ -189,12 +173,7 @@ const fonts = [
     </section>
   </main>
 
-  <Footer
-    newsletterUrl="https://makingpublicwork.com"
-    techStack={techStack}
-    fonts={fonts}
-    socials={socials}
-  />
+  <Footer />
 </Base>
 
 <style>
@@ -309,5 +288,23 @@ const fonts = [
 
   .writing-fallback a:hover {
     text-decoration: underline;
+  }
+
+  /* Media section - Books & Albums side by side */
+  #media-consumption {
+    margin-bottom: var(--size-5);
+  }
+
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--size-6);
+  }
+
+  @media (max-width: 768px) {
+    .media-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-5);
+    }
   }
 </style>

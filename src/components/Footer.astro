@@ -1,97 +1,80 @@
 ---
-interface Props {
-  newsletterUrl?: string;
-  fonts?: string[];
-  techStack?: string[];
-  socials?: Array<{ name: string; url: string }>;
+interface Social {
+  platform: string;
+  url: string;
+  icon: string;
 }
 
-const {
-  newsletterUrl = 'https://makingpublicwork.com',
-  fonts = [],
-  techStack = [],
-  socials = []
-} = Astro.props;
+interface Props {
+  socials?: Social[];
+}
+
+const defaultSocials: Social[] = [
+  { platform: 'Last.fm', url: 'https://last.fm/user/ronbronson', icon: 'fa-lastfm' },
+  { platform: 'Bluesky', url: 'https://bsky.app/profile/ronbronson.com', icon: 'fa-cloud' },
+  { platform: 'LinkedIn', url: 'https://linkedin.com/in/ronbronson', icon: 'fa-linkedin' },
+  { platform: 'GitHub', url: 'https://github.com/ronbronson', icon: 'fa-github' },
+  { platform: 'Instagram', url: 'https://instagram.com/ronbronson', icon: 'fa-instagram' },
+  { platform: 'pi.fyi', url: 'https://pi.fyi/ronbronson', icon: 'fa-link' },
+  { platform: 'Record Club', url: 'https://record.club/ronbronson', icon: 'fa-record-vinyl' },
+  { platform: 'Letterboxd', url: 'https://letterboxd.com/ronbronson', icon: 'fa-film' },
+  { platform: 'Mastodon', url: 'https://mastodon.social/@ronbronson', icon: 'fa-mastodon' },
+  { platform: 'Literal', url: 'https://literal.club/ronbronson', icon: 'fa-book' },
+  { platform: 'Mixcloud', url: 'https://mixcloud.com/908RB', icon: 'fa-mixcloud' },
+];
+
+const { socials = defaultSocials } = Astro.props;
+const currentYear = new Date().getFullYear();
 ---
 
-<footer class="footer">
-  <div class="footer__content">
-    <nav class="footer__links">
-      {socials.map(social => (
-        <a href={social.url} target="_blank" rel="noopener">{social.name}</a>
+<footer>
+  <div class="container">
+    <div class="social-links">
+      {socials.map((social) => (
+        <a
+          href={social.url}
+          target="_blank"
+          rel="noopener"
+          title={social.platform}
+          class="social-link"
+        >
+          <i class={`fa-brands ${social.icon}`}></i>
+        </a>
       ))}
-      {newsletterUrl && (
-        <a href={newsletterUrl} target="_blank" rel="noopener">Newsletter</a>
-      )}
-    </nav>
-
-    <div class="footer__colophon">
-      <span class="colophon__text">
-        {techStack.length > 0 && `Built with ${techStack.join(', ')}`}
-        {techStack.length > 0 && fonts.length > 0 && ' · '}
-        {fonts.length > 0 && fonts.join(', ')}
-      </span>
     </div>
+    <p>&copy; {currentYear} Ron Bronson. All rights reserved.</p>
   </div>
 </footer>
 
 <style>
-  .footer {
-    margin-block-start: var(--size-8);
+  footer {
+    margin-top: var(--size-10);
     padding-block: var(--size-6);
-    border-block-start: 1px solid var(--surface-3);
+    border-top: 1px solid var(--surface-3);
   }
 
-  .footer__content {
-    max-width: 1200px;
-    margin-inline: auto;
-    padding-inline: var(--size-4);
+  .social-links {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     gap: var(--size-4);
-  }
-
-  .footer__links {
-    display: flex;
-    gap: var(--size-5);
+    margin-bottom: var(--size-4);
     flex-wrap: wrap;
   }
 
-  .footer__links a {
-    font-size: var(--font-size-1);
+  .social-link {
     color: var(--text-2);
-    text-decoration: none;
+    font-size: var(--font-size-3);
     transition: color 0.2s ease;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
   }
 
-  .footer__links a:hover {
+  .social-link:hover {
     color: var(--brand);
   }
 
-  @media (max-width: 600px) {
-    .footer__links {
-      gap: var(--size-4);
-    }
-
-    .footer__links a {
-      font-size: var(--font-size-0);
-    }
-
-    .colophon__text {
-      font-size: 0.7rem;
-    }
-  }
-
-  .footer__colophon {
-    display: flex;
-  }
-
-  .colophon__text {
-    font-size: var(--font-size-0);
+  p {
     color: var(--text-3);
+    font-size: var(--font-size-0);
+    text-align: center;
     margin: 0;
   }
 </style>
