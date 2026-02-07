@@ -8,6 +8,8 @@ interface Social {
 
 interface Props {
   socials?: Social[];
+  techStack?: string[];
+  fonts?: string[];
 }
 
 const defaultSocials: Social[] = [
@@ -24,8 +26,7 @@ const defaultSocials: Social[] = [
   { platform: 'Mixcloud', url: 'https://mixcloud.com/908RB', icon: 'fa-mixcloud' },
 ];
 
-const { socials = defaultSocials } = Astro.props;
-const currentYear = new Date().getFullYear();
+const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
 ---
 
 <footer>
@@ -43,7 +44,21 @@ const currentYear = new Date().getFullYear();
         </a>
       ))}
     </div>
-    <p>&copy; {currentYear} Ron Bronson. All rights reserved.</p>
+
+    {(techStack.length > 0 || fonts.length > 0) && (
+      <div class="colophon">
+        {techStack.length > 0 && (
+          <p class="colophon-item">
+            <span class="colophon-label">Built with</span> {techStack.join(', ')}
+          </p>
+        )}
+        {fonts.length > 0 && (
+          <p class="colophon-item">
+            <span class="colophon-label">Typefaces</span> {fonts.join(', ')}
+          </p>
+        )}
+      </div>
+    )}
   </div>
 </footer>
 
@@ -58,7 +73,7 @@ const currentYear = new Date().getFullYear();
     display: flex;
     justify-content: center;
     gap: var(--size-4);
-    margin-bottom: var(--size-4);
+    margin-bottom: var(--size-5);
     flex-wrap: wrap;
   }
 
@@ -72,10 +87,24 @@ const currentYear = new Date().getFullYear();
     color: var(--brand);
   }
 
-  p {
-    color: var(--text-3);
-    font-size: var(--font-size-0);
+  .colophon {
     text-align: center;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+  }
+
+  .colophon-item {
     margin: 0;
+    margin-bottom: var(--size-2);
+  }
+
+  .colophon-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .colophon-label {
+    color: var(--text-2);
+    font-weight: var(--font-weight-5);
   }
 </style>

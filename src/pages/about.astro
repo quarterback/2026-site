@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import NowPlaying from '../components/NowPlaying.astro';
 import Footer from '../components/Footer.astro';
 
 const socials = [
@@ -16,8 +15,8 @@ const techStack = [
 ];
 
 const fonts = [
-  "Urbanist",
-  "Halant"
+  "Inter",
+  "JetBrains Mono"
 ];
 ---
 
@@ -32,28 +31,20 @@ const fonts = [
     <section class="about-content">
       <div class="container">
         <div class="about-grid">
-          <div class="bio">
-            <div class="bio-photo">
-              <!-- Photo placeholder - replace with actual photo -->
-              <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ron Bronson" />
-            </div>
+          <div class="bio-text">
+            <p>I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
 
-            <div class="bio-text">
-              <p>I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
+            <p>I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of design decisions, especially in high-stakes systems where getting it wrong has real human impact.</p>
 
-              <p>I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of design decisions, especially in high-stakes systems where getting it wrong has real human impact.</p>
+            <p>Currently, I'm a service design consultant working with government agencies and public-sector organizations. I also teach in the Urban Technology program at the University of Michigan, where I help students understand how technology shapes cities and public life.</p>
 
-              <p>Currently, I'm a service design consultant working with government agencies and public-sector organizations. I also teach in the Urban Technology program at the University of Michigan, where I help students understand how technology shapes cities and public life.</p>
-
-              <p>Outside of work, I'm a tea sommelier, high school tennis coach, and host a local radio show. I believe the same systems thinking that helps design better public services also helps you steep a perfect cup of tea.</p>
-            </div>
+            <p>Outside of work, I'm a tea sommelier, high school tennis coach, and host a local radio show. I believe the same systems thinking that helps design better public services also helps you steep a perfect cup of tea.</p>
           </div>
 
           <aside class="sidebar">
-            <NowPlaying
-              service="lastfm"
-              username="ronbronson"
-            />
+            <div class="bio-photo">
+              <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ron Bronson" />
+            </div>
           </aside>
         </div>
       </div>
@@ -61,10 +52,8 @@ const fonts = [
   </main>
 
   <Footer
-    newsletterUrl="https://makingpublicwork.com"
     techStack={techStack}
     fonts={fonts}
-    socials={socials}
   />
 </Base>
 
@@ -76,6 +65,7 @@ const fonts = [
 
   .page-header h1 {
     font-size: clamp(var(--font-size-4), 6vw, var(--font-size-6));
+    font-family: var(--font-mono);
   }
 
   .about-content {
@@ -84,29 +74,13 @@ const fonts = [
 
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 400px;
+    grid-template-columns: 1fr 300px;
     gap: var(--size-8);
     align-items: start;
   }
 
-  .bio {
-    max-width: 70ch;
-  }
-
-  .bio-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: var(--radius-3);
-    overflow: hidden;
-    margin-bottom: var(--size-6);
-    border: 2px solid var(--surface-3);
-  }
-
-  .bio-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  .bio-text {
+    max-width: 65ch;
   }
 
   .bio-text p {
@@ -120,6 +94,26 @@ const fonts = [
     margin-bottom: 0;
   }
 
+  .sidebar {
+    position: sticky;
+    top: var(--size-10);
+  }
+
+  .bio-photo {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius-3);
+    overflow: hidden;
+    border: 3px solid var(--surface-3);
+  }
+
+  .bio-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   @media (max-width: 1024px) {
     .about-grid {
       grid-template-columns: 1fr;
@@ -128,6 +122,12 @@ const fonts = [
 
     .sidebar {
       order: -1;
+      position: static;
+    }
+
+    .bio-photo {
+      width: 250px;
+      margin: 0 auto;
     }
   }
 
@@ -142,9 +142,7 @@ const fonts = [
     }
 
     .bio-photo {
-      width: 150px;
-      height: 150px;
-      margin-bottom: var(--size-5);
+      width: 200px;
     }
 
     .bio-text p {

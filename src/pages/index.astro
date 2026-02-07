@@ -6,7 +6,7 @@ import WorkCard from '../components/WorkCard.astro';
 import Writing from '../components/Writing.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
-import MediaShowcase from '../components/MediaShowcase.astro';
+import MediaCard from '../components/MediaCard.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
@@ -102,8 +102,8 @@ const techStack = [
 ];
 
 const fonts = [
-  "Urbanist",
-  "Halant"
+  "Inter",
+  "JetBrains Mono"
 ];
 ---
 
@@ -156,9 +156,9 @@ const fonts = [
     <section id="media">
       <div class="container">
         <h2 class="section-heading">Featured Media</h2>
-        <div class="media-grid-featured">
+        <div class="media-list-featured">
           {recentMedia.map(item => (
-            <MediaShowcase {...item} />
+            <MediaCard {...item} />
           ))}
         </div>
         <a href="/media" class="section-link">View all media →</a>
@@ -200,7 +200,10 @@ const fonts = [
     </section>
   </main>
 
-  <Footer />
+  <Footer
+    techStack={techStack}
+    fonts={fonts}
+  />
 </Base>
 
 <style>
@@ -231,13 +234,15 @@ const fonts = [
   .section-heading {
     font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
     margin-bottom: var(--size-4);
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-6);
   }
 
-  /* Featured Media Grid */
-  .media-grid-featured {
+  /* Featured Media List */
+  .media-list-featured {
     display: flex;
     flex-direction: column;
-    gap: var(--size-8);
+    gap: var(--size-5);
     margin-bottom: var(--size-5);
   }
 

@@ -47,8 +47,8 @@ const techStack = [
 ];
 
 const fonts = [
-  "Urbanist",
-  "Halant"
+  "Inter",
+  "JetBrains Mono"
 ];
 ---
 
@@ -85,10 +85,8 @@ const fonts = [
   </main>
 
   <Footer
-    newsletterUrl="https://makingpublicwork.com"
     techStack={techStack}
     fonts={fonts}
-    socials={socials}
   />
 </Base>
 
@@ -101,6 +99,7 @@ const fonts = [
   .page-header h1 {
     font-size: clamp(var(--font-size-4), 6vw, var(--font-size-6));
     margin-bottom: var(--size-3);
+    font-family: var(--font-mono);
   }
 
   .lead {

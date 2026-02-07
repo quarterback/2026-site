@@ -1,0 +1,88 @@
+---
+interface Props {
+  title: string;
+  source: string;
+  mediaType: 'podcast' | 'video' | 'audio' | 'article' | 'talk' | 'interview' | 'feature';
+  url?: string;
+  embedUrl?: string;
+  date?: string;
+}
+
+const { title, source, mediaType, url, embedUrl, date } = Astro.props;
+const finalUrl = embedUrl || url || '#';
+---
+
+<article class="media-card">
+  <a href={finalUrl} target="_blank" rel="noopener" class="media-link">
+    <div class="media-header">
+      <span class="media-type">{mediaType}</span>
+      {date && <span class="media-date">{date}</span>}
+    </div>
+    <h3 class="media-title">{title}</h3>
+    <p class="media-source">{source}</p>
+  </a>
+</article>
+
+<style>
+  .media-card {
+    border-bottom: 1px solid var(--surface-3);
+    padding-bottom: var(--size-4);
+  }
+
+  .media-card:last-child {
+    border-bottom: none;
+  }
+
+  .media-link {
+    text-decoration: none;
+    display: block;
+  }
+
+  .media-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--size-2);
+    font-size: var(--font-size-0);
+    font-family: var(--font-mono);
+  }
+
+  .media-type {
+    color: var(--brand);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: var(--font-weight-6);
+  }
+
+  .media-date {
+    color: var(--text-3);
+  }
+
+  .media-title {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin-bottom: var(--size-2);
+    transition: color 0.2s;
+  }
+
+  .media-link:hover .media-title {
+    color: var(--brand);
+  }
+
+  .media-source {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .media-title {
+      font-size: var(--font-size-1);
+    }
+
+    .media-card {
+      padding-bottom: var(--size-3);
+    }
+  }
+</style>
