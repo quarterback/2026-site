@@ -15,8 +15,8 @@ const allWork = await getCollection('work', ({ data }) => !data.draft);
 const work = allWork.sort((a, b) => a.data.order - b.data.order);
 
 const rssFeeds = [
-  'https://makingpublicwork.com/rss',
-  'https://blog.ronbronson.com/rss',
+  'https://makingpublicwork.com/rss/',
+  'https://blog.ronbronson.com/feed.rss',
 ];
 
 let recentPosts: any[] = [];
@@ -83,7 +83,7 @@ const fonts = [
           <div class="music-item">
             <Music
               title="Radio Show"
-              embedUrl="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fronbronson%2F"
+              embedUrl="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2F908RB%2F"
               embedType="mixcloud"
             />
           </div>
