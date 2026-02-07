@@ -1,0 +1,228 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+
+const socials = [
+  { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
+  { name: "GitHub", url: "https://github.com/ronbronson" },
+];
+
+const techStack = [
+  "Astro",
+  "Open Props",
+  "TypeScript"
+];
+
+const fonts = [
+  "Urbanist",
+  "Halant"
+];
+---
+
+<Base title="Tennis Coaching — Ron Bronson">
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Tennis Coaching</h1>
+        <p class="lead">Building competitive teams through individual development</p>
+      </div>
+    </section>
+
+    <section class="coaching-content">
+      <div class="container">
+        <div class="content-grid">
+          <div class="main-content">
+            <div class="section">
+              <h2>Experience</h2>
+              <p>I serve as girls varsity head coach at Catlin Gabel School in Portland and have coached scholastic and collegiate tennis for 11 seasons across several states. My experience spans working with Division 1 recruits to developing emerging players.</p>
+
+              <p>I've directed tennis programs at summer camps in New England and built programs from the ground up. I played competitively in high school and college, and served in the U.S. Air Force before moving into coaching.</p>
+            </div>
+
+            <div class="section">
+              <h2>Coaching Philosophy</h2>
+              <p>Tennis is an individual sport, but I believe in the power of team development. The best tennis programs create an environment where players invest in their own growth while supporting their teammates' success.</p>
+
+              <p>My approach focuses on:</p>
+              <ul>
+                <li>Technical skill development appropriate to each player's level</li>
+                <li>Mental game and competitive strategy</li>
+                <li>Building team culture in an individual sport</li>
+                <li>Long-term player development over short-term wins</li>
+              </ul>
+            </div>
+
+            <div class="section">
+              <h2>Get in Touch</h2>
+              <p>Interested in coaching services or have questions? Reach out at <a href="mailto:hello@ronbronson.dev">hello@ronbronson.dev</a></p>
+            </div>
+          </div>
+
+          <aside class="sidebar">
+            <div class="callout">
+              <h3>Current Role</h3>
+              <p>Girls Varsity Head Coach<br>Catlin Gabel School<br>Portland, OR</p>
+            </div>
+
+            <div class="callout">
+              <h3>Experience</h3>
+              <p>11 seasons coaching scholastic and collegiate tennis</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    newsletterUrl="https://makingpublicwork.com"
+    techStack={techStack}
+    fonts={fonts}
+    socials={socials}
+  />
+</Base>
+
+<style>
+  .page-header {
+    padding-top: var(--size-10);
+    padding-bottom: var(--size-8);
+  }
+
+  .page-header h1 {
+    font-size: clamp(var(--font-size-4), 6vw, var(--font-size-6));
+    margin-bottom: var(--size-3);
+  }
+
+  .lead {
+    font-size: var(--font-size-2);
+    color: var(--text-2);
+  }
+
+  .coaching-content {
+    padding-bottom: var(--size-10);
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: var(--size-8);
+    align-items: start;
+  }
+
+  .main-content {
+    max-width: 70ch;
+  }
+
+  .section {
+    margin-bottom: var(--size-8);
+  }
+
+  .section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section h2 {
+    font-size: var(--font-size-3);
+    margin-bottom: var(--size-4);
+    color: var(--text-1);
+  }
+
+  .section p {
+    font-size: var(--font-size-1);
+    line-height: 1.6;
+    color: var(--text-2);
+    margin-bottom: var(--size-4);
+  }
+
+  .section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .section ul {
+    margin-top: var(--size-3);
+    margin-left: var(--size-5);
+  }
+
+  .section li {
+    font-size: var(--font-size-1);
+    line-height: 1.6;
+    color: var(--text-2);
+    margin-bottom: var(--size-2);
+  }
+
+  .section a {
+    color: var(--brand);
+    text-decoration: underline;
+  }
+
+  .callout {
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-5);
+    margin-bottom: var(--size-5);
+  }
+
+  .callout:last-child {
+    margin-bottom: 0;
+  }
+
+  .callout h3 {
+    font-size: var(--font-size-1);
+    margin-bottom: var(--size-3);
+    color: var(--text-1);
+  }
+
+  .callout p {
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-6);
+    }
+
+    .sidebar {
+      order: -1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--size-5);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .page-header {
+      padding-top: var(--size-8);
+      padding-bottom: var(--size-6);
+    }
+
+    .lead {
+      font-size: var(--font-size-1);
+    }
+
+    .coaching-content {
+      padding-bottom: var(--size-8);
+    }
+
+    .sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .section {
+      margin-bottom: var(--size-6);
+    }
+
+    .section h2 {
+      font-size: var(--font-size-2);
+    }
+
+    .section p,
+    .section li {
+      font-size: var(--font-size-0);
+    }
+  }
+</style>

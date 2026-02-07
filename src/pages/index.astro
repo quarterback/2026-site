@@ -3,40 +3,16 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import WorkCard from '../components/WorkCard.astro';
-import MediaShowcase from '../components/MediaShowcase.astro';
-import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
-import Writing from '../components/Writing.astro';
 import Footer from '../components/Footer.astro';
-import NowPlaying from '../components/NowPlaying.astro';
 
 const allWork = await getCollection('work', ({ data }) => !data.draft);
 const work = allWork.sort((a, b) => a.data.order - b.data.order);
-const featuredWork = work.find(w => w.data.featured);
-
-const media = [
-  {
-    title: "Beyond Civic Tech: Public Mechanics Starts at Home",
-    source: "Cascadia Open Source Fall Conference",
-    mediaType: "talk" as const,
-    embedUrl: "https://youtube.com/watch?v=hnAScuK-oMo",
-    date: "2024",
-  },
-];
 
 const socials = [
   { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
   { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
   { name: "GitHub", url: "https://github.com/ronbronson" },
-];
-
-const blogPosts = [
-  {
-    title: "Example Blog Post",
-    url: "https://blog.ronbronson.com/example-post",
-    date: new Date("2024-01-15"),
-    excerpt: "This is a placeholder for curated blog posts from your Blot blog."
-  },
 ];
 
 const techStack = [
@@ -56,22 +32,18 @@ const fonts = [
     <Hero
       name="Ron Bronson"
       tagline="I design how public systems make decisions."
-      location="Portland, OR"
     />
 
-    <!-- Featured case study -->
-    {featuredWork && (
-      <section class="featured">
-        <div class="container">
-          <p class="label">Featured</p>
-          <a href={featuredWork.data.externalUrl || `/work/${featuredWork.slug}`} class="featured__link">
-            <h2>{featuredWork.data.title}</h2>
-            <p>{featuredWork.data.summary}</p>
-            <span class="featured__cta">Read case study →</span>
-          </a>
+    <!-- Now section - flexible content -->
+    <section class="now-section">
+      <div class="container">
+        <p class="label">Currently</p>
+        <div class="now-content">
+          <h2>What I'm focused on right now</h2>
+          <p>Leading product at State Capacity AI, teaching Urban Technology at University of Michigan, and launching Years Ahead in Spring 2026.</p>
         </div>
-      </section>
-    )}
+      </div>
+    </section>
 
     <!-- Work grid -->
     <section id="work">
@@ -92,47 +64,21 @@ const fonts = [
       </div>
     </section>
 
-    <!-- Media -->
-    <section id="media">
-      <div class="container">
-        <h2 class="section-heading">Media</h2>
-        <p class="section-intro">Talks, podcasts, and writing about service design, public-sector delivery, and system consequences.</p>
-        <div class="media-showcase-list">
-          {media.map(item => (
-            <MediaShowcase {...item} />
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- About & Now Playing -->
-    <section id="about">
+    <!-- About preview -->
+    <section id="about-preview">
       <div class="container">
         <h2 class="section-heading">About</h2>
-        <div class="about-grid">
-          <div class="about-content">
-            <About
-              content={`<p>I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
-
-              <p>I teach, write, and speak about <strong>consequence design</strong>: understanding the downstream effects of design decisions, especially in high-stakes systems where getting it wrong has real human impact.</p>
-
-              <p>Outside of work, I'm a tea sommelier, high school tennis coach, and host a local radio show. I believe the same systems thinking that helps design better public services also helps you steep a perfect cup of tea.</p>`}
-            />
-          </div>
-          <div class="now-playing-sidebar">
-            <NowPlaying
-              service="lastfm"
-              username="ronbronson"
-            />
-          </div>
-        </div>
+        <p class="about-preview-text">I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
+        <a href="/about" class="section-link">More about me →</a>
       </div>
     </section>
 
-    <!-- Writing -->
-    <section id="writing">
+    <!-- Media preview -->
+    <section id="media-preview">
       <div class="container">
-        <Writing posts={blogPosts} />
+        <h2 class="section-heading">Recent Talks</h2>
+        <p class="media-preview-text">Speaking about service design, public-sector delivery, and system consequences.</p>
+        <a href="/media" class="section-link">View all media →</a>
       </div>
     </section>
 
@@ -156,32 +102,22 @@ const fonts = [
 </Base>
 
 <style>
-  /* Featured section */
-  .featured__link {
-    display: block;
-    text-decoration: none;
+  /* Now section */
+  .now-section {
+    margin-bottom: var(--size-8);
   }
 
-  .featured__link h2 {
+  .now-content h2 {
     font-size: clamp(var(--font-size-2), 3vw, var(--font-size-3));
     color: var(--text-1);
-    margin-bottom: var(--size-2);
-  }
-
-  .featured__link p {
-    font-size: var(--font-size-1);
-    color: var(--text-2);
     margin-bottom: var(--size-3);
   }
 
-  .featured__cta {
-    font-size: var(--font-size-0);
-    color: var(--brand);
-    font-weight: var(--font-weight-5);
-  }
-
-  .featured__link:hover .featured__cta {
-    text-decoration: underline;
+  .now-content p {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    max-width: 70ch;
+    line-height: 1.6;
   }
 
   /* Section headings */
@@ -225,35 +161,31 @@ const fonts = [
     }
   }
 
-  /* Media showcase */
-  .media-showcase-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-8);
+  /* Preview sections */
+  #about-preview,
+  #media-preview {
+    margin-bottom: var(--size-8);
   }
 
-  /* About grid with now playing */
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: var(--size-6);
-    align-items: start;
+  .about-preview-text,
+  .media-preview-text {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    max-width: 70ch;
+    line-height: 1.6;
+    margin-bottom: var(--size-4);
   }
 
-  @media (max-width: 1024px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: var(--size-5);
-    }
-
-    .now-playing-sidebar {
-      order: -1;
-    }
+  .section-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--font-size-1);
+    color: var(--brand);
+    font-weight: var(--font-weight-5);
+    text-decoration: none;
   }
 
-  @media (max-width: 600px) {
-    .about-grid {
-      gap: var(--size-4);
-    }
+  .section-link:hover {
+    text-decoration: underline;
   }
 </style>

@@ -1,0 +1,112 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { label: "Work", href: "/#work" },
+  { label: "About", href: "/about" },
+  { label: "Media", href: "/media" },
+  { label: "Coaching", href: "/coaching" },
+  { label: "Contact", href: "/#contact" },
+];
+---
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">Ron Bronson</a>
+
+      <ul class="nav__menu">
+        {navItems.map(item => (
+          <li>
+            <a
+              href={item.href}
+              class:list={["nav__link", { "nav__link--active": currentPath === item.href }]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    padding-block: var(--size-4);
+    border-bottom: 1px solid var(--surface-3);
+    background: var(--surface-1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav__logo {
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    text-decoration: none;
+  }
+
+  .nav__logo:hover {
+    color: var(--brand);
+  }
+
+  .nav__menu {
+    display: flex;
+    gap: var(--size-5);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav__link {
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    text-decoration: none;
+    font-weight: var(--font-weight-5);
+    transition: color 0.2s;
+  }
+
+  .nav__link:hover {
+    color: var(--text-1);
+  }
+
+  .nav__link--active {
+    color: var(--brand);
+  }
+
+  @media (max-width: 768px) {
+    .nav__menu {
+      gap: var(--size-3);
+    }
+
+    .nav__link {
+      font-size: var(--font-size-00);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .nav {
+      padding-block: var(--size-3);
+    }
+
+    .nav__inner {
+      flex-direction: column;
+      gap: var(--size-3);
+      align-items: flex-start;
+    }
+
+    .nav__menu {
+      width: 100%;
+      flex-wrap: wrap;
+      gap: var(--size-4);
+    }
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import MediaShowcase from '../components/MediaShowcase.astro';
+import Footer from '../components/Footer.astro';
+
+const media = [
+  {
+    title: "Beyond Civic Tech: Public Mechanics Starts at Home",
+    source: "Cascadia Open Source Fall Conference",
+    mediaType: "talk" as const,
+    embedUrl: "https://youtube.com/watch?v=hnAScuK-oMo",
+    date: "2025",
+    description: "Civic tech often overpromises and underdelivers, focusing on apps or dashboards instead of the systems that quietly keep public life running. Public mechanics is a framework for seeing the rules, workarounds, and repair practices that hold services together after the launch moment has passed. This keynote explores why the \"last mile\" of delivery is always political, how resilient processes safeguard against misuse, and why the unglamorous work of maintenance is what makes systems durable and worthy of public trust.",
+  },
+];
+
+const socials = [
+  { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
+  { name: "GitHub", url: "https://github.com/ronbronson" },
+];
+
+const techStack = [
+  "Astro",
+  "Open Props",
+  "TypeScript"
+];
+
+const fonts = [
+  "Urbanist",
+  "Halant"
+];
+---
+
+<Base title="Media — Ron Bronson">
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Media</h1>
+        <p class="lead">Talks, podcasts, and writing about service design, public-sector delivery, and system consequences.</p>
+      </div>
+    </section>
+
+    <section class="media-list">
+      <div class="container">
+        {media.map(item => (
+          <div class="media-item">
+            <MediaShowcase {...item} />
+            {item.description && (
+              <p class="media-description">{item.description}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    newsletterUrl="https://makingpublicwork.com"
+    techStack={techStack}
+    fonts={fonts}
+    socials={socials}
+  />
+</Base>
+
+<style>
+  .page-header {
+    padding-top: var(--size-10);
+    padding-bottom: var(--size-8);
+  }
+
+  .page-header h1 {
+    font-size: clamp(var(--font-size-4), 6vw, var(--font-size-6));
+    margin-bottom: var(--size-3);
+  }
+
+  .lead {
+    font-size: var(--font-size-2);
+    color: var(--text-2);
+    max-width: 60ch;
+  }
+
+  .media-list {
+    padding-bottom: var(--size-10);
+  }
+
+  .media-item {
+    margin-bottom: var(--size-10);
+    padding-bottom: var(--size-10);
+    border-bottom: 1px solid var(--surface-3);
+  }
+
+  .media-item:last-child {
+    border-bottom: none;
+  }
+
+  .media-description {
+    margin-top: var(--size-4);
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .page-header {
+      padding-top: var(--size-8);
+      padding-bottom: var(--size-6);
+    }
+
+    .lead {
+      font-size: var(--font-size-1);
+    }
+
+    .media-item {
+      margin-bottom: var(--size-8);
+      padding-bottom: var(--size-8);
+    }
+  }
+</style>

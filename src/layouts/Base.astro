@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro';
-import StatusTicker from '../components/StatusTicker.astro';
+import Nav from '../components/Nav.astro';
 
 interface Props {
   title: string;
@@ -30,12 +30,7 @@ const { title, description = "Designer focused on public systems and decision-ma
     </style>
   </head>
   <body>
-  <StatusTicker items={[
-    { label: "Role", value: "Fractional CPO" },
-    { label: "At", value: "State Capacity AI", url: "https://statecapacity.ai" },
-    { label: "Teaching", value: "University of Michigan" },
-    { label: "Launching", value: "Years Ahead Spring 2026" },
-  ]} />
+    <Nav />
     <ThemeToggle />
     <slot />
   </body>
