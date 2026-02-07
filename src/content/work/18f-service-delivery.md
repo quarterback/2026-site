@@ -1,6 +1,7 @@
 ---
 title: "Service Delivery at Scale"
 summary: "Design leadership across federal programs serving millions."
+itemType: "project"
 systemType: "Eligibility + intake systems"
 outcome: "Patterns adopted across multiple agencies"
 order: 1

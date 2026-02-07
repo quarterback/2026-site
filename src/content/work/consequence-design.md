@@ -1,6 +1,7 @@
 ---
 title: "Consequence Design"
 summary: "Framework for understanding downstream effects of design decisions."
+itemType: "project"
 systemType: "Design theory + practice"
 outcome: "Conference talks, workshops, ongoing research"
 order: 2

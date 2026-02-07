@@ -1,6 +1,7 @@
 ---
 title: "State Capacity AI"
 summary: "Exploring how AI can strengthen public institutions."
+itemType: "project"
 systemType: "AI + decision systems"
 outcome: "Ongoing research and prototyping"
 order: 3

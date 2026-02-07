@@ -13,6 +13,7 @@ const work = defineCollection({
   schema: z.object({
     title: z.string(),
     summary: z.string(),
+    itemType: z.enum(['project', 'event']).default('project'),
     systemType: z.string(),
     outcome: z.string().optional(),
     order: z.number().default(99),
@@ -25,6 +26,9 @@ const work = defineCollection({
     role: z.string().optional(),
     timeline: z.string().optional(),
     context: z.string().optional(),
+    venue: z.string().optional(),
+    date: z.string().optional(),
+    eventPhoto: z.string().optional(),
 
     media: z.array(mediaItem).optional(),
     artifacts: z.array(z.object({

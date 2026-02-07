@@ -17,12 +17,16 @@ const { Content } = await entry.render();
 const {
   title,
   summary,
+  itemType = 'project',
   systemType,
   outcome,
   tags,
   role,
   timeline,
   context,
+  venue,
+  date,
+  eventPhoto,
   media = [],
   artifacts = [],
   impact = [],
@@ -34,17 +38,25 @@ const {
   <article class="case-study">
     <header class="case-study__header">
       <div class="container">
-        <a href="/#work" class="back-link">&larr; Back to work</a>
+        <a href="/#work" class="back-link">&larr; Back to {itemType === 'event' ? 'events' : 'work'}</a>
         <div class="case-study__meta">
           <span class="case-study__type">{systemType}</span>
-          {role && <span class="case-study__role">{role}</span>}
-          {timeline && <span class="case-study__timeline">{timeline}</span>}
+          {itemType === 'event' && venue && <span class="case-study__venue">{venue}</span>}
+          {itemType === 'event' && date && <span class="case-study__date">{date}</span>}
+          {itemType === 'project' && role && <span class="case-study__role">{role}</span>}
+          {itemType === 'project' && timeline && <span class="case-study__timeline">{timeline}</span>}
         </div>
         <h1>{title}</h1>
         <p class="case-study__summary">{summary}</p>
         {context && <p class="case-study__context">{context}</p>}
       </div>
     </header>
+
+    {itemType === 'event' && eventPhoto && (
+      <div class="event-photo">
+        <img src={eventPhoto} alt={title} />
+      </div>
+    )}
 
     <div class="case-study__body">
       <div class="container container--narrow">
@@ -91,7 +103,7 @@ const {
     </div>
 
     <footer class="case-study__footer container">
-      <a href="/#work" class="back-link">&larr; Back to all work</a>
+      <a href="/#work" class="back-link">&larr; Back to all {itemType === 'event' ? 'events' : 'work'}</a>
     </footer>
   </article>
 </Base>
@@ -127,8 +139,26 @@ const {
   }
 
   .case-study__role,
-  .case-study__timeline {
+  .case-study__timeline,
+  .case-study__venue,
+  .case-study__date {
     color: var(--text-3);
+  }
+
+  .event-photo {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    background: var(--surface-1);
+  }
+
+  .event-photo img {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
   }
 
   .case-study__header h1 {
