@@ -3,11 +3,37 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import WorkCard from '../components/WorkCard.astro';
+import Writing from '../components/Writing.astro';
+import Books from '../components/Books.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { fetchMultipleRSS } from '../lib/rss';
 
 const allWork = await getCollection('work', ({ data }) => !data.draft);
 const work = allWork.sort((a, b) => a.data.order - b.data.order);
+
+const rssFeeds = [
+  'https://makingpublicwork.com/rss',
+  'https://blog.ronbronson.com/rss',
+];
+
+let recentPosts: any[] = [];
+try {
+  const allPosts = await fetchMultipleRSS(rssFeeds);
+  recentPosts = allPosts.slice(0, 5);
+} catch (error) {
+  console.error('Failed to fetch RSS feeds:', error);
+  recentPosts = [];
+}
+
+const currentBooks = [
+  {
+    title: "The Power Broker",
+    author: "Robert Caro",
+    cover: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=200",
+    status: "reading" as const,
+  },
+];
 
 const socials = [
   { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
@@ -61,6 +87,22 @@ const fonts = [
             />
           ))}
         </div>
+      </div>
+    </section>
+
+    <!-- Writing -->
+    {recentPosts.length > 0 && (
+      <section id="writing">
+        <div class="container">
+          <Writing posts={recentPosts} />
+        </div>
+      </section>
+    )}
+
+    <!-- Books -->
+    <section id="books">
+      <div class="container">
+        <Books books={currentBooks} title="Currently Reading" />
       </div>
     </section>
 
