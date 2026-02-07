@@ -8,6 +8,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
     "astro": "^5.0.0",
     "open-props": "^1.7.0"
   }

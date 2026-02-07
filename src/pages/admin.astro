@@ -1,0 +1,899 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Admin Dashboard">
+  <div class="admin-container">
+    <div id="login-screen" class="auth-screen">
+      <div class="auth-card">
+        <h1>Admin Login</h1>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required />
+          </div>
+          <button type="submit" class="btn-primary">Login</button>
+        </form>
+        <p class="auth-note">Don't have an account? <a href="#" id="show-signup">Sign up</a></p>
+        <div id="auth-error" class="error-message"></div>
+      </div>
+    </div>
+
+    <div id="signup-screen" class="auth-screen" style="display: none;">
+      <div class="auth-card">
+        <h1>Create Admin Account</h1>
+        <form id="signup-form">
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" required />
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" required minlength="6" />
+          </div>
+          <button type="submit" class="btn-primary">Create Account</button>
+        </form>
+        <p class="auth-note">Already have an account? <a href="#" id="show-login">Login</a></p>
+        <div id="signup-error" class="error-message"></div>
+      </div>
+    </div>
+
+    <div id="admin-dashboard" class="dashboard" style="display: none;">
+      <header class="dashboard-header">
+        <h1>Content Management</h1>
+        <button id="logout-btn" class="btn-secondary">Logout</button>
+      </header>
+
+      <div class="dashboard-content">
+        <div class="sidebar">
+          <nav>
+            <button class="nav-btn active" data-view="work">Case Studies</button>
+            <button class="nav-btn" data-view="media">Media</button>
+          </nav>
+        </div>
+
+        <div class="main-content">
+          <div id="work-view" class="content-view">
+            <div class="view-header">
+              <h2>Case Studies</h2>
+              <button id="add-work-btn" class="btn-primary">Add New</button>
+            </div>
+            <div id="work-list" class="items-list"></div>
+          </div>
+
+          <div id="media-view" class="content-view" style="display: none;">
+            <div class="view-header">
+              <h2>Media Items</h2>
+              <button id="add-media-btn" class="btn-primary">Add New</button>
+            </div>
+            <div id="media-list" class="items-list"></div>
+          </div>
+
+          <div id="edit-work-view" class="content-view" style="display: none;">
+            <div class="view-header">
+              <button id="back-to-work" class="btn-secondary">← Back</button>
+              <h2 id="work-form-title">Add Case Study</h2>
+            </div>
+            <form id="work-form" class="edit-form">
+              <input type="hidden" id="work-id" />
+
+              <div class="form-group">
+                <label for="work-title">Title *</label>
+                <input type="text" id="work-title" required />
+              </div>
+
+              <div class="form-group">
+                <label for="work-slug">URL Slug *</label>
+                <input type="text" id="work-slug" required />
+                <small>URL-friendly identifier (e.g., my-project-name)</small>
+              </div>
+
+              <div class="form-group">
+                <label for="work-description">Short Description *</label>
+                <textarea id="work-description" rows="3" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="work-content">Full Content *</label>
+                <textarea id="work-content" rows="15" required></textarea>
+                <small>Supports HTML and Markdown</small>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="work-client">Client</label>
+                  <input type="text" id="work-client" />
+                </div>
+
+                <div class="form-group">
+                  <label for="work-year">Year</label>
+                  <input type="number" id="work-year" min="1900" max="2100" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="work-tags">Tags</label>
+                <input type="text" id="work-tags" placeholder="civic-tech, design, strategy" />
+                <small>Comma-separated tags</small>
+              </div>
+
+              <div class="form-group">
+                <label for="work-hero-image">Hero Image URL</label>
+                <input type="url" id="work-hero-image" />
+                <div class="image-upload">
+                  <input type="file" id="work-image-upload" accept="image/*" />
+                  <button type="button" id="upload-work-image" class="btn-secondary">Upload Image</button>
+                </div>
+                <div id="work-image-preview" class="image-preview"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="work-order">Display Order</label>
+                <input type="number" id="work-order" value="0" />
+                <small>Lower numbers appear first</small>
+              </div>
+
+              <div class="form-group checkbox-group">
+                <label>
+                  <input type="checkbox" id="work-published" />
+                  Published (visible on site)
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Save</button>
+                <button type="button" id="cancel-work-edit" class="btn-secondary">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <div id="edit-media-view" class="content-view" style="display: none;">
+            <div class="view-header">
+              <button id="back-to-media" class="btn-secondary">← Back</button>
+              <h2 id="media-form-title">Add Media Item</h2>
+            </div>
+            <form id="media-form" class="edit-form">
+              <input type="hidden" id="media-id" />
+
+              <div class="form-group">
+                <label for="media-title">Title *</label>
+                <input type="text" id="media-title" required />
+              </div>
+
+              <div class="form-group">
+                <label for="media-type">Type *</label>
+                <select id="media-type" required>
+                  <option value="podcast">Podcast</option>
+                  <option value="video">Video</option>
+                  <option value="article">Article</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="media-description">Description</label>
+                <textarea id="media-description" rows="3"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="media-embed-url">Embed URL or Link *</label>
+                <input type="url" id="media-embed-url" required />
+                <small>YouTube, Spotify, or article URL</small>
+              </div>
+
+              <div class="form-group">
+                <label for="media-thumbnail">Thumbnail URL</label>
+                <input type="url" id="media-thumbnail" />
+              </div>
+
+              <div class="form-group">
+                <label for="media-published-at">Published Date</label>
+                <input type="date" id="media-published-at" />
+              </div>
+
+              <div class="form-group">
+                <label for="media-order">Display Order</label>
+                <input type="number" id="media-order" value="0" />
+              </div>
+
+              <div class="form-group checkbox-group">
+                <label>
+                  <input type="checkbox" id="media-published" />
+                  Published (visible on site)
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Save</button>
+                <button type="button" id="cancel-media-edit" class="btn-secondary">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .admin-container {
+    min-height: 100vh;
+    background: var(--surface-1);
+  }
+
+  .auth-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: var(--size-5);
+  }
+
+  .auth-card {
+    background: var(--surface-2);
+    padding: var(--size-8);
+    border-radius: var(--radius-3);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow-3);
+  }
+
+  .auth-card h1 {
+    margin-bottom: var(--size-6);
+    color: var(--text-1);
+  }
+
+  .form-group {
+    margin-bottom: var(--size-5);
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: var(--size-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-2);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: var(--size-3);
+    border: 1px solid var(--surface-4);
+    border-radius: var(--radius-2);
+    background: var(--surface-1);
+    color: var(--text-1);
+    font-size: var(--font-size-2);
+    font-family: inherit;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  .form-group small {
+    display: block;
+    margin-top: var(--size-1);
+    color: var(--text-3);
+    font-size: var(--font-size-0);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: var(--size-3) var(--size-6);
+    border: none;
+    border-radius: var(--radius-2);
+    font-weight: var(--font-weight-6);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--blue-6);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--blue-7);
+  }
+
+  .btn-secondary {
+    background: var(--surface-3);
+    color: var(--text-1);
+  }
+
+  .btn-secondary:hover {
+    background: var(--surface-4);
+  }
+
+  .auth-note {
+    margin-top: var(--size-5);
+    text-align: center;
+    color: var(--text-2);
+  }
+
+  .auth-note a {
+    color: var(--blue-6);
+    text-decoration: none;
+  }
+
+  .error-message {
+    margin-top: var(--size-4);
+    padding: var(--size-3);
+    background: var(--red-2);
+    color: var(--red-9);
+    border-radius: var(--radius-2);
+    display: none;
+  }
+
+  .error-message.show {
+    display: block;
+  }
+
+  .dashboard {
+    min-height: 100vh;
+  }
+
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--size-5);
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--surface-3);
+  }
+
+  .dashboard-header h1 {
+    color: var(--text-1);
+  }
+
+  .dashboard-content {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: calc(100vh - 80px);
+  }
+
+  .sidebar {
+    background: var(--surface-2);
+    border-right: 1px solid var(--surface-3);
+    padding: var(--size-5);
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .nav-btn {
+    padding: var(--size-3);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-2);
+    text-align: left;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .nav-btn:hover {
+    background: var(--surface-3);
+    color: var(--text-1);
+  }
+
+  .nav-btn.active {
+    background: var(--blue-6);
+    color: white;
+  }
+
+  .main-content {
+    padding: var(--size-5);
+  }
+
+  .view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--size-6);
+  }
+
+  .view-header h2 {
+    color: var(--text-1);
+  }
+
+  .items-list {
+    display: grid;
+    gap: var(--size-4);
+  }
+
+  .item-card {
+    background: var(--surface-2);
+    padding: var(--size-5);
+    border-radius: var(--radius-3);
+    border: 1px solid var(--surface-3);
+  }
+
+  .item-card h3 {
+    margin-bottom: var(--size-2);
+    color: var(--text-1);
+  }
+
+  .item-meta {
+    color: var(--text-3);
+    font-size: var(--font-size-0);
+    margin-bottom: var(--size-3);
+  }
+
+  .item-actions {
+    display: flex;
+    gap: var(--size-3);
+    margin-top: var(--size-4);
+  }
+
+  .edit-form {
+    background: var(--surface-2);
+    padding: var(--size-6);
+    border-radius: var(--radius-3);
+    max-width: 800px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--size-4);
+  }
+
+  .checkbox-group {
+    display: flex;
+    align-items: center;
+  }
+
+  .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: var(--size-2);
+  }
+
+  .form-actions {
+    display: flex;
+    gap: var(--size-3);
+    margin-top: var(--size-6);
+  }
+
+  .image-upload {
+    display: flex;
+    gap: var(--size-3);
+    margin-top: var(--size-2);
+  }
+
+  .image-preview {
+    margin-top: var(--size-3);
+  }
+
+  .image-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-2);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: var(--size-1) var(--size-2);
+    border-radius: var(--radius-2);
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-6);
+  }
+
+  .badge-published {
+    background: var(--green-2);
+    color: var(--green-9);
+  }
+
+  .badge-draft {
+    background: var(--orange-2);
+    color: var(--orange-9);
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-content {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      border-right: none;
+      border-bottom: 1px solid var(--surface-3);
+    }
+
+    .sidebar nav {
+      flex-direction: row;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import { supabase } from '../lib/supabase';
+
+  let currentUser = null;
+
+  const loginScreen = document.getElementById('login-screen');
+  const signupScreen = document.getElementById('signup-screen');
+  const dashboard = document.getElementById('admin-dashboard');
+
+  const showSignup = document.getElementById('show-signup');
+  const showLogin = document.getElementById('show-login');
+
+  showSignup?.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginScreen!.style.display = 'none';
+    signupScreen!.style.display = 'flex';
+  });
+
+  showLogin?.addEventListener('click', (e) => {
+    e.preventDefault();
+    signupScreen!.style.display = 'none';
+    loginScreen!.style.display = 'flex';
+  });
+
+  async function checkAuth() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      currentUser = user;
+      loginScreen!.style.display = 'none';
+      signupScreen!.style.display = 'none';
+      dashboard!.style.display = 'block';
+      loadWorkItems();
+    }
+  }
+
+  document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      const errorDiv = document.getElementById('auth-error')!;
+      errorDiv.textContent = error.message;
+      errorDiv.classList.add('show');
+    } else {
+      currentUser = data.user;
+      loginScreen!.style.display = 'none';
+      dashboard!.style.display = 'block';
+      loadWorkItems();
+    }
+  });
+
+  document.getElementById('signup-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('signup-email') as HTMLInputElement).value;
+    const password = (document.getElementById('signup-password') as HTMLInputElement).value;
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      const errorDiv = document.getElementById('signup-error')!;
+      errorDiv.textContent = error.message;
+      errorDiv.classList.add('show');
+    } else {
+      currentUser = data.user;
+      signupScreen!.style.display = 'none';
+      dashboard!.style.display = 'block';
+      loadWorkItems();
+    }
+  });
+
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    currentUser = null;
+    dashboard!.style.display = 'none';
+    loginScreen!.style.display = 'flex';
+  });
+
+  const navButtons = document.querySelectorAll('.nav-btn');
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      navButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const view = btn.getAttribute('data-view');
+      document.querySelectorAll('.content-view').forEach(v => {
+        (v as HTMLElement).style.display = 'none';
+      });
+
+      if (view === 'work') {
+        document.getElementById('work-view')!.style.display = 'block';
+        loadWorkItems();
+      } else if (view === 'media') {
+        document.getElementById('media-view')!.style.display = 'block';
+        loadMediaItems();
+      }
+    });
+  });
+
+  async function loadWorkItems() {
+    const { data, error } = await supabase
+      .from('work_items')
+      .select('*')
+      .order('display_order', { ascending: true });
+
+    if (data) {
+      const list = document.getElementById('work-list')!;
+      list.innerHTML = data.map(item => `
+        <div class="item-card">
+          <h3>${item.title}</h3>
+          <div class="item-meta">
+            ${item.year ? `${item.year} • ` : ''}${item.client || 'No client'}
+            <span class="badge ${item.published ? 'badge-published' : 'badge-draft'}">
+              ${item.published ? 'Published' : 'Draft'}
+            </span>
+          </div>
+          <p>${item.description}</p>
+          <div class="item-actions">
+            <button class="btn-primary" onclick="editWork('${item.id}')">Edit</button>
+            <button class="btn-secondary" onclick="deleteWork('${item.id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  async function loadMediaItems() {
+    const { data, error } = await supabase
+      .from('media_items')
+      .select('*')
+      .order('published_at', { ascending: false });
+
+    if (data) {
+      const list = document.getElementById('media-list')!;
+      list.innerHTML = data.map(item => `
+        <div class="item-card">
+          <h3>${item.title}</h3>
+          <div class="item-meta">
+            ${item.media_type} • ${new Date(item.published_at).toLocaleDateString()}
+            <span class="badge ${item.published ? 'badge-published' : 'badge-draft'}">
+              ${item.published ? 'Published' : 'Draft'}
+            </span>
+          </div>
+          <p>${item.description}</p>
+          <div class="item-actions">
+            <button class="btn-primary" onclick="editMedia('${item.id}')">Edit</button>
+            <button class="btn-secondary" onclick="deleteMedia('${item.id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+  }
+
+  document.getElementById('add-work-btn')?.addEventListener('click', () => {
+    document.getElementById('work-view')!.style.display = 'none';
+    document.getElementById('edit-work-view')!.style.display = 'block';
+    document.getElementById('work-form-title')!.textContent = 'Add Case Study';
+    (document.getElementById('work-form') as HTMLFormElement).reset();
+    (document.getElementById('work-id') as HTMLInputElement).value = '';
+  });
+
+  document.getElementById('back-to-work')?.addEventListener('click', () => {
+    document.getElementById('edit-work-view')!.style.display = 'none';
+    document.getElementById('work-view')!.style.display = 'block';
+  });
+
+  document.getElementById('cancel-work-edit')?.addEventListener('click', () => {
+    document.getElementById('edit-work-view')!.style.display = 'none';
+    document.getElementById('work-view')!.style.display = 'block';
+  });
+
+  document.getElementById('work-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const id = (document.getElementById('work-id') as HTMLInputElement).value;
+    const formData = {
+      title: (document.getElementById('work-title') as HTMLInputElement).value,
+      slug: (document.getElementById('work-slug') as HTMLInputElement).value,
+      description: (document.getElementById('work-description') as HTMLTextAreaElement).value,
+      content: (document.getElementById('work-content') as HTMLTextAreaElement).value,
+      client: (document.getElementById('work-client') as HTMLInputElement).value,
+      year: parseInt((document.getElementById('work-year') as HTMLInputElement).value) || null,
+      tags: (document.getElementById('work-tags') as HTMLInputElement).value
+        .split(',')
+        .map(t => t.trim())
+        .filter(Boolean),
+      hero_image: (document.getElementById('work-hero-image') as HTMLInputElement).value,
+      display_order: parseInt((document.getElementById('work-order') as HTMLInputElement).value) || 0,
+      published: (document.getElementById('work-published') as HTMLInputElement).checked,
+    };
+
+    let result;
+    if (id) {
+      result = await supabase
+        .from('work_items')
+        .update(formData)
+        .eq('id', id);
+    } else {
+      result = await supabase
+        .from('work_items')
+        .insert([formData]);
+    }
+
+    if (!result.error) {
+      document.getElementById('edit-work-view')!.style.display = 'none';
+      document.getElementById('work-view')!.style.display = 'block';
+      loadWorkItems();
+    }
+  });
+
+  document.getElementById('upload-work-image')?.addEventListener('click', async () => {
+    const fileInput = document.getElementById('work-image-upload') as HTMLInputElement;
+    const file = fileInput.files?.[0];
+
+    if (!file) {
+      alert('Please select an image first');
+      return;
+    }
+
+    const fileName = `${Date.now()}-${file.name}`;
+    const { data, error } = await supabase.storage
+      .from('content-images')
+      .upload(fileName, file);
+
+    if (data) {
+      const { data: { publicUrl } } = supabase.storage
+        .from('content-images')
+        .getPublicUrl(fileName);
+
+      (document.getElementById('work-hero-image') as HTMLInputElement).value = publicUrl;
+      const preview = document.getElementById('work-image-preview')!;
+      preview.innerHTML = `<img src="${publicUrl}" alt="Preview" />`;
+    } else {
+      alert('Upload failed: ' + error?.message);
+    }
+  });
+
+  (window as any).editWork = async (id: string) => {
+    const { data } = await supabase
+      .from('work_items')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (data) {
+      (document.getElementById('work-id') as HTMLInputElement).value = data.id;
+      (document.getElementById('work-title') as HTMLInputElement).value = data.title;
+      (document.getElementById('work-slug') as HTMLInputElement).value = data.slug;
+      (document.getElementById('work-description') as HTMLTextAreaElement).value = data.description;
+      (document.getElementById('work-content') as HTMLTextAreaElement).value = data.content;
+      (document.getElementById('work-client') as HTMLInputElement).value = data.client;
+      (document.getElementById('work-year') as HTMLInputElement).value = data.year || '';
+      (document.getElementById('work-tags') as HTMLInputElement).value = data.tags.join(', ');
+      (document.getElementById('work-hero-image') as HTMLInputElement).value = data.hero_image;
+      (document.getElementById('work-order') as HTMLInputElement).value = data.display_order;
+      (document.getElementById('work-published') as HTMLInputElement).checked = data.published;
+
+      document.getElementById('work-form-title')!.textContent = 'Edit Case Study';
+      document.getElementById('work-view')!.style.display = 'none';
+      document.getElementById('edit-work-view')!.style.display = 'block';
+
+      if (data.hero_image) {
+        document.getElementById('work-image-preview')!.innerHTML =
+          `<img src="${data.hero_image}" alt="Preview" />`;
+      }
+    }
+  };
+
+  (window as any).deleteWork = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this case study?')) return;
+
+    const { error } = await supabase
+      .from('work_items')
+      .delete()
+      .eq('id', id);
+
+    if (!error) {
+      loadWorkItems();
+    }
+  };
+
+  document.getElementById('add-media-btn')?.addEventListener('click', () => {
+    document.getElementById('media-view')!.style.display = 'none';
+    document.getElementById('edit-media-view')!.style.display = 'block';
+    document.getElementById('media-form-title')!.textContent = 'Add Media Item';
+    (document.getElementById('media-form') as HTMLFormElement).reset();
+    (document.getElementById('media-id') as HTMLInputElement).value = '';
+  });
+
+  document.getElementById('back-to-media')?.addEventListener('click', () => {
+    document.getElementById('edit-media-view')!.style.display = 'none';
+    document.getElementById('media-view')!.style.display = 'block';
+  });
+
+  document.getElementById('cancel-media-edit')?.addEventListener('click', () => {
+    document.getElementById('edit-media-view')!.style.display = 'none';
+    document.getElementById('media-view')!.style.display = 'block';
+  });
+
+  document.getElementById('media-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const id = (document.getElementById('media-id') as HTMLInputElement).value;
+    const formData = {
+      title: (document.getElementById('media-title') as HTMLInputElement).value,
+      media_type: (document.getElementById('media-type') as HTMLSelectElement).value,
+      description: (document.getElementById('media-description') as HTMLTextAreaElement).value,
+      embed_url: (document.getElementById('media-embed-url') as HTMLInputElement).value,
+      thumbnail_url: (document.getElementById('media-thumbnail') as HTMLInputElement).value,
+      published_at: (document.getElementById('media-published-at') as HTMLInputElement).value || new Date().toISOString().split('T')[0],
+      display_order: parseInt((document.getElementById('media-order') as HTMLInputElement).value) || 0,
+      published: (document.getElementById('media-published') as HTMLInputElement).checked,
+    };
+
+    let result;
+    if (id) {
+      result = await supabase
+        .from('media_items')
+        .update(formData)
+        .eq('id', id);
+    } else {
+      result = await supabase
+        .from('media_items')
+        .insert([formData]);
+    }
+
+    if (!result.error) {
+      document.getElementById('edit-media-view')!.style.display = 'none';
+      document.getElementById('media-view')!.style.display = 'block';
+      loadMediaItems();
+    }
+  });
+
+  (window as any).editMedia = async (id: string) => {
+    const { data } = await supabase
+      .from('media_items')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (data) {
+      (document.getElementById('media-id') as HTMLInputElement).value = data.id;
+      (document.getElementById('media-title') as HTMLInputElement).value = data.title;
+      (document.getElementById('media-type') as HTMLSelectElement).value = data.media_type;
+      (document.getElementById('media-description') as HTMLTextAreaElement).value = data.description;
+      (document.getElementById('media-embed-url') as HTMLInputElement).value = data.embed_url;
+      (document.getElementById('media-thumbnail') as HTMLInputElement).value = data.thumbnail_url;
+      (document.getElementById('media-published-at') as HTMLInputElement).value = data.published_at;
+      (document.getElementById('media-order') as HTMLInputElement).value = data.display_order;
+      (document.getElementById('media-published') as HTMLInputElement).checked = data.published;
+
+      document.getElementById('media-form-title')!.textContent = 'Edit Media Item';
+      document.getElementById('media-view')!.style.display = 'none';
+      document.getElementById('edit-media-view')!.style.display = 'block';
+    }
+  };
+
+  (window as any).deleteMedia = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this media item?')) return;
+
+    const { error } = await supabase
+      .from('media_items')
+      .delete()
+      .eq('id', id);
+
+    if (!error) {
+      loadMediaItems();
+    }
+  };
+
+  checkAuth();
+</script>
