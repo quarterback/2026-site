@@ -8,7 +8,18 @@ interface RSSItem {
 function extractTextBetweenTags(xml: string, tag: string): string {
   const regex = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\/${tag}>`, 'i');
   const match = xml.match(regex);
-  return match ? match[1].trim() : '';
+  if (!match) return '';
+
+  let content = match[1].trim();
+
+  // Handle CDATA sections
+  const cdataRegex = /<!\[CDATA\[([\s\S]*?)\]\]>/;
+  const cdataMatch = content.match(cdataRegex);
+  if (cdataMatch) {
+    content = cdataMatch[1].trim();
+  }
+
+  return content;
 }
 
 function stripHtml(html: string): string {
@@ -17,9 +28,14 @@ function stripHtml(html: string): string {
 
 export async function fetchRSS(feedUrl: string): Promise<RSSItem[]> {
   try {
-    const response = await fetch(feedUrl);
+    const response = await fetch(feedUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; RSSReader/1.0)'
+      }
+    });
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      console.error(`Failed to fetch ${feedUrl}: HTTP ${response.status}`);
+      return [];
     }
     const text = await response.text();
 
@@ -40,7 +56,7 @@ export async function fetchRSS(feedUrl: string): Promise<RSSItem[]> {
 
       return {
         title: stripHtml(title),
-        url: link,
+        url: link.trim(),
         date: pubDate ? new Date(pubDate) : new Date(),
         excerpt: excerpt || undefined,
       };

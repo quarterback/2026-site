@@ -73,24 +73,6 @@ const fonts = [
       </div>
     </section>
 
-    <!-- Music & Media -->
-    <section id="music">
-      <div class="container">
-        <div class="music-grid">
-          <div class="music-item">
-            <NowPlaying service="lastfm" username="ronbronson" />
-          </div>
-          <div class="music-item">
-            <Music
-              title="Radio Show"
-              embedUrl="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2F908RB%2F"
-              embedType="mixcloud"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Work grid -->
     <section id="work">
       <div class="container">
@@ -111,13 +93,18 @@ const fonts = [
     </section>
 
     <!-- Writing -->
-    {recentPosts.length > 0 && (
-      <section id="writing">
-        <div class="container">
+    <section id="writing">
+      <div class="container">
+        {recentPosts.length > 0 ? (
           <Writing posts={recentPosts} blogUrl="https://makingpublicwork.com" />
-        </div>
-      </section>
-    )}
+        ) : (
+          <div class="writing-fallback">
+            <h2 class="section-heading">Writing</h2>
+            <p>Read my essays and newsletters at <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> and <a href="https://blog.ronbronson.com" target="_blank" rel="noopener">my blog</a>.</p>
+          </div>
+        )}
+      </div>
+    </section>
 
     <!-- Books -->
     <section id="books">
@@ -153,6 +140,24 @@ const fonts = [
         />
       </div>
     </section>
+
+    <!-- Music & Media - moved to bottom -->
+    <section id="music">
+      <div class="container">
+        <div class="music-grid">
+          <div class="music-item">
+            <NowPlaying service="lastfm" username="ronbronson" />
+          </div>
+          <div class="music-item">
+            <Music
+              title="Radio Show"
+              embedUrl="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2F908RB%2F"
+              embedType="mixcloud"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <Footer
@@ -166,7 +171,7 @@ const fonts = [
 <style>
   /* Now section */
   .now-section {
-    margin-bottom: var(--size-8);
+    margin-bottom: var(--size-5);
   }
 
   .now-content h2 {
@@ -182,15 +187,16 @@ const fonts = [
     line-height: 1.6;
   }
 
-  /* Music section */
+  /* Music section - at bottom, reduced spacing */
   #music {
-    margin-bottom: var(--size-8);
+    margin-top: var(--size-5);
+    margin-bottom: var(--size-3);
   }
 
   .music-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--size-5);
+    gap: var(--size-4);
   }
 
   @media (max-width: 768px) {
@@ -207,7 +213,7 @@ const fonts = [
 
   .section-intro {
     color: var(--text-3);
-    margin-bottom: var(--size-5);
+    margin-bottom: var(--size-4);
     font-size: var(--font-size-1);
   }
 
@@ -217,7 +223,7 @@ const fonts = [
     }
 
     .section-intro {
-      margin-bottom: var(--size-4);
+      margin-bottom: var(--size-3);
     }
   }
 
@@ -240,10 +246,10 @@ const fonts = [
     }
   }
 
-  /* Preview sections */
+  /* Preview sections - reduced spacing */
   #about-preview,
   #media-preview {
-    margin-bottom: var(--size-8);
+    margin-bottom: var(--size-5);
   }
 
   .about-preview-text,
@@ -252,7 +258,7 @@ const fonts = [
     color: var(--text-2);
     max-width: 70ch;
     line-height: 1.6;
-    margin-bottom: var(--size-4);
+    margin-bottom: var(--size-3);
   }
 
   .section-link {
@@ -265,6 +271,27 @@ const fonts = [
   }
 
   .section-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Writing fallback */
+  .writing-fallback {
+    margin-block: var(--size-6);
+  }
+
+  .writing-fallback p {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    max-width: 70ch;
+    line-height: 1.6;
+  }
+
+  .writing-fallback a {
+    color: var(--brand);
+    text-decoration: none;
+  }
+
+  .writing-fallback a:hover {
     text-decoration: underline;
   }
 </style>
