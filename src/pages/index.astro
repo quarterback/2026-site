@@ -5,7 +5,7 @@ import Hero from '../components/Hero.astro';
 import WorkCard from '../components/WorkCard.astro';
 import Writing from '../components/Writing.astro';
 import Books from '../components/Books.astro';
-import NowPlaying from '../components/NowPlaying.astro';
+import Albums from '../components/Albums.astro';
 import Music from '../components/Music.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
@@ -35,6 +35,36 @@ const currentBooks = [
     cover: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=200",
     status: "reading" as const,
   },
+  {
+    title: "Seeing Like a State",
+    author: "James C. Scott",
+    cover: "https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg?auto=compress&cs=tinysrgb&w=200",
+    status: "reading" as const,
+  },
+  {
+    title: "The Design of Everyday Things",
+    author: "Don Norman",
+    cover: "https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg?auto=compress&cs=tinysrgb&w=200",
+    status: "reading" as const,
+  },
+];
+
+const currentAlbums = [
+  {
+    title: "Random Access Memories",
+    artist: "Daft Punk",
+    cover: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=200",
+  },
+  {
+    title: "After Hours",
+    artist: "The Weeknd",
+    cover: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=200",
+  },
+  {
+    title: "Good Kid, M.A.A.D City",
+    artist: "Kendrick Lamar",
+    cover: "https://images.pexels.com/photos/210764/pexels-photo-210764.jpeg?auto=compress&cs=tinysrgb&w=200",
+  },
 ];
 
 const socials = [
@@ -62,18 +92,26 @@ const fonts = [
       tagline="I design how public systems make decisions."
     />
 
-    <!-- Now section - flexible content -->
-    <section class="now-section">
+    <!-- About -->
+    <section id="about-preview">
       <div class="container">
-        <p class="label">Currently</p>
-        <div class="now-content">
-          <h2>What I'm focused on right now</h2>
-          <p>Leading product at State Capacity AI, teaching Urban Technology at University of Michigan, and launching Years Ahead in Spring 2026.</p>
+        <h2 class="section-heading">About</h2>
+        <p class="about-preview-text">I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
+        <a href="/about" class="section-link">More about me →</a>
+      </div>
+    </section>
+
+    <!-- Currently - AIM style status -->
+    <section class="currently-section">
+      <div class="container">
+        <div class="currently-content">
+          <p class="label">Currently</p>
+          <p class="currently-status">Leading product at State Capacity AI, teaching Urban Technology at University of Michigan, and launching Years Ahead in Spring 2026.</p>
         </div>
       </div>
     </section>
 
-    <!-- Work grid -->
+    <!-- Selected Work -->
     <section id="work">
       <div class="container">
         <h2 class="section-heading">Selected Work</h2>
@@ -92,6 +130,40 @@ const fonts = [
       </div>
     </section>
 
+    <!-- Recent Talks -->
+    <section id="media-preview">
+      <div class="container">
+        <h2 class="section-heading">Recent Talks</h2>
+        <p class="media-preview-text">Speaking about service design, public-sector delivery, and system consequences.</p>
+        <a href="/media" class="section-link">View all media →</a>
+      </div>
+    </section>
+
+    <!-- Currently Reading -->
+    <section id="books">
+      <div class="container">
+        <Books books={currentBooks} />
+      </div>
+    </section>
+
+    <!-- Listening To -->
+    <section id="albums">
+      <div class="container">
+        <Albums albums={currentAlbums} />
+      </div>
+    </section>
+
+    <!-- Radio Show -->
+    <section id="radio">
+      <div class="container">
+        <Music
+          title="Radio Show"
+          embedUrl="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2F908RB%2F"
+          embedType="mixcloud"
+        />
+      </div>
+    </section>
+
     <!-- Writing -->
     <section id="writing">
       <div class="container">
@@ -106,31 +178,6 @@ const fonts = [
       </div>
     </section>
 
-    <!-- Books -->
-    <section id="books">
-      <div class="container">
-        <Books books={currentBooks} title="Currently Reading" />
-      </div>
-    </section>
-
-    <!-- About preview -->
-    <section id="about-preview">
-      <div class="container">
-        <h2 class="section-heading">About</h2>
-        <p class="about-preview-text">I've spent my career at the intersection of design, policy, and technology—from federal agencies like 18F to universities to civic tech organizations. My work focuses on how public institutions make decisions and serve people at scale.</p>
-        <a href="/about" class="section-link">More about me →</a>
-      </div>
-    </section>
-
-    <!-- Media preview -->
-    <section id="media-preview">
-      <div class="container">
-        <h2 class="section-heading">Recent Talks</h2>
-        <p class="media-preview-text">Speaking about service design, public-sector delivery, and system consequences.</p>
-        <a href="/media" class="section-link">View all media →</a>
-      </div>
-    </section>
-
     <!-- Contact -->
     <section id="contact">
       <div class="container">
@@ -138,24 +185,6 @@ const fonts = [
           email="hello@ronbronson.dev"
           socials={socials}
         />
-      </div>
-    </section>
-
-    <!-- Music & Media - moved to bottom -->
-    <section id="music">
-      <div class="container">
-        <div class="music-grid">
-          <div class="music-item">
-            <NowPlaying service="lastfm" username="ronbronson" />
-          </div>
-          <div class="music-item">
-            <Music
-              title="Radio Show"
-              embedUrl="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2F908RB%2F"
-              embedType="mixcloud"
-            />
-          </div>
-        </div>
       </div>
     </section>
   </main>
@@ -169,40 +198,27 @@ const fonts = [
 </Base>
 
 <style>
-  /* Now section */
-  .now-section {
+  /* Currently section - AIM style with distinct background */
+  .currently-section {
+    background: var(--surface-2);
+    border-left: 4px solid var(--brand);
     margin-bottom: var(--size-5);
   }
 
-  .now-content h2 {
-    font-size: clamp(var(--font-size-2), 3vw, var(--font-size-3));
-    color: var(--text-1);
-    margin-bottom: var(--size-3);
+  .currently-content {
+    padding: var(--size-4);
   }
 
-  .now-content p {
+  .currently-content .label {
+    margin-bottom: var(--size-2);
+  }
+
+  .currently-status {
     font-size: var(--font-size-1);
-    color: var(--text-2);
+    color: var(--text-1);
     max-width: 70ch;
     line-height: 1.6;
-  }
-
-  /* Music section - at bottom, reduced spacing */
-  #music {
-    margin-top: var(--size-5);
-    margin-bottom: var(--size-3);
-  }
-
-  .music-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--size-4);
-  }
-
-  @media (max-width: 768px) {
-    .music-grid {
-      grid-template-columns: 1fr;
-    }
+    margin: 0;
   }
 
   /* Section headings */
@@ -246,7 +262,7 @@ const fonts = [
     }
   }
 
-  /* Preview sections - reduced spacing */
+  /* Preview sections */
   #about-preview,
   #media-preview {
     margin-bottom: var(--size-5);

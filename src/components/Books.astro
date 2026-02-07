@@ -13,141 +13,107 @@ interface Props {
   title?: string;
 }
 
-const { books, title = 'Reading' } = Astro.props;
+const { books, title = 'Currently Reading' } = Astro.props;
 ---
 
-<section class="books">
-  <h2 class="books__title">{title}</h2>
-
-  <ul class="books__list">
+<div class="bookshelf">
+  <h2 class="section-heading">{title}</h2>
+  <div class="bookshelf__shelf">
     {books.map((book) => (
-      <li class="book">
-        {book.cover && (
-          <div class="book__cover">
-            <img src={book.cover} alt={`${book.title} cover`} />
+      <div class="book-spine">
+        {book.cover ? (
+          <img src={book.cover} alt={book.title} />
+        ) : (
+          <div class="book-spine__placeholder">
+            <span class="book-spine__title">{book.title}</span>
+            <span class="book-spine__author">{book.author}</span>
           </div>
         )}
-        <div class="book__info">
-          {book.url ? (
-            <a href={book.url} target="_blank" rel="noopener" class="book__title">
-              {book.title}
-            </a>
-          ) : (
-            <h3 class="book__title">{book.title}</h3>
-          )}
-          <p class="book__author">{book.author}</p>
-          {book.status && (
-            <span class="book__status" data-status={book.status}>
-              {book.status === 'reading' && 'Currently Reading'}
-              {book.status === 'completed' && book.year ? `Read ${book.year}` : book.status === 'completed' && 'Completed'}
-              {book.status === 'want-to-read' && 'Want to Read'}
-            </span>
-          )}
-        </div>
-      </li>
+      </div>
     ))}
-  </ul>
-</section>
+  </div>
+</div>
 
 <style>
-  .books {
-    margin-block: var(--size-10);
+  .bookshelf {
+    margin-block: var(--size-6);
   }
 
-  .books__title {
-    font-size: var(--font-size-4);
-    font-weight: var(--font-weight-6);
-    margin-block-end: var(--size-6);
+  .section-heading {
+    font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
+    margin-bottom: var(--size-4);
   }
 
-  .books__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: var(--size-4);
-  }
-
-  .book {
+  .bookshelf__shelf {
     display: flex;
-    gap: var(--size-4);
-    padding: var(--size-4);
+    gap: var(--size-2);
+    align-items: flex-end;
+    padding: var(--size-3);
     background: var(--surface-2);
     border-radius: var(--radius-2);
-    transition: background-color 0.2s ease;
+    border-bottom: 3px solid var(--surface-4);
   }
 
-  .book:hover {
-    background: var(--surface-3);
-  }
-
-  .book__cover {
-    flex-shrink: 0;
-    width: 80px;
-    height: 120px;
+  .book-spine {
+    width: 140px;
+    height: 200px;
     border-radius: var(--radius-1);
     overflow: hidden;
-    background: var(--surface-3);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+    cursor: pointer;
   }
 
-  .book__cover img {
+  .book-spine:hover {
+    transform: translateY(-8px);
+  }
+
+  .book-spine img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .book__info {
-    flex: 1;
-    min-width: 0;
+  .book-spine__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--surface-3) 0%, var(--surface-4) 100%);
     display: flex;
     flex-direction: column;
-    gap: var(--size-1);
+    justify-content: center;
+    align-items: center;
+    padding: var(--size-3);
+    text-align: center;
   }
 
-  .book__title {
-    font-size: var(--font-size-2);
+  .book-spine__title {
+    font-size: var(--font-size-0);
     font-weight: var(--font-weight-6);
     color: var(--text-1);
-    margin: 0;
-    line-height: var(--font-lineheight-2);
+    margin-bottom: var(--size-2);
   }
 
-  a.book__title {
-    text-decoration: none;
-  }
-
-  a.book__title:hover {
-    color: var(--brand);
-    text-decoration: underline;
-  }
-
-  .book__author {
-    font-size: var(--font-size-1);
-    color: var(--text-2);
-    margin: 0;
-  }
-
-  .book__status {
-    font-size: var(--font-size-0);
+  .book-spine__author {
+    font-size: var(--font-size-00);
     color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-top: auto;
   }
 
-  .book__status[data-status="reading"] {
-    color: var(--blue-6);
+  @media (max-width: 768px) {
+    .book-spine {
+      width: 110px;
+      height: 160px;
+    }
   }
 
-  .book__status[data-status="completed"] {
-    color: var(--green-6);
-  }
+  @media (max-width: 600px) {
+    .book-spine {
+      width: 90px;
+      height: 130px;
+    }
 
-  @media (max-width: 640px) {
-    .book__cover {
-      width: 60px;
-      height: 90px;
+    .bookshelf__shelf {
+      gap: var(--size-1);
+      padding: var(--size-2);
     }
   }
 </style>

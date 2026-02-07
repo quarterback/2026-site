@@ -1,0 +1,92 @@
+---
+interface Album {
+  title: string;
+  artist: string;
+  cover: string;
+  url?: string;
+}
+
+interface Props {
+  albums: Album[];
+  title?: string;
+}
+
+const { albums, title = 'Listening To' } = Astro.props;
+---
+
+<div class="albums">
+  <h2 class="section-heading">{title}</h2>
+  <div class="albums__shelf">
+    {albums.map((album) => (
+      <a
+        href={album.url || '#'}
+        class="album-cover"
+        target="_blank"
+        rel="noopener"
+        title={`${album.title} by ${album.artist}`}
+      >
+        <img src={album.cover} alt={`${album.title} by ${album.artist}`} />
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .albums {
+    margin-block: var(--size-6);
+  }
+
+  .section-heading {
+    font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
+    margin-bottom: var(--size-4);
+  }
+
+  .albums__shelf {
+    display: flex;
+    gap: var(--size-2);
+    align-items: flex-end;
+    padding: var(--size-3);
+    background: var(--surface-2);
+    border-radius: var(--radius-2);
+    border-bottom: 3px solid var(--surface-4);
+  }
+
+  .album-cover {
+    width: 140px;
+    height: 140px;
+    border-radius: var(--radius-1);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+    display: block;
+  }
+
+  .album-cover:hover {
+    transform: translateY(-8px);
+  }
+
+  .album-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .album-cover {
+      width: 110px;
+      height: 110px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .album-cover {
+      width: 90px;
+      height: 90px;
+    }
+
+    .albums__shelf {
+      gap: var(--size-1);
+      padding: var(--size-2);
+    }
+  }
+</style>
