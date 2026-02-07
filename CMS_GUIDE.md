@@ -1,96 +1,149 @@
-# Visual CMS Guide
+# Content Workflow Guide
 
-Your site now has a visual content management system! You can edit case studies and media items without touching code.
+This guide shows you how to quickly create case studies and content for your site using Notion's visual editor and export to markdown.
 
-## Getting Started
+## Why Notion + Markdown?
 
-### 1. Access the Admin Panel
+- Write in a visual editor with formatting, images, and structure
+- Export to markdown with one click
+- Keep your sophisticated markdown-based workflow
+- No database complexity, pure static files
 
-Visit `/admin` on your site to access the CMS dashboard.
+## Quick Start Workflow
 
-### 2. Create Your Admin Account
+### 1. Write in Notion
 
-The first time you visit, click "Sign up" to create your admin account. Use any email and password you'll remember.
+1. Create a new page in Notion for your case study
+2. Use Notion's rich text editor:
+   - Add headings, paragraphs, lists
+   - Drag & drop images
+   - Create callout boxes
+   - Format text with bold, italic, etc.
 
-### 3. Manage Content
+### 2. Export to Markdown
 
-Once logged in, you'll see two sections:
+1. Click the `...` menu in Notion (top right)
+2. Select `Export`
+3. Choose `Markdown & CSV`
+4. Click `Export`
+5. Unzip the downloaded file
 
-#### Case Studies
-- Click "Add New" to create a case study
-- Fill in the title, description, and full content
-- Upload images directly or paste image URLs
-- Use the "Published" checkbox to make it live on your site
-- Save and your changes appear immediately
+### 3. Add to Your Site
 
-#### Media Items
-- Add podcasts, videos, or articles
-- Paste embed URLs from YouTube, Spotify, etc.
-- Set publish dates and descriptions
-- Toggle published status to show/hide
+1. Copy the `.md` file to `src/content/work/`
+2. Rename it to match your URL slug (e.g., `my-project.md`)
+3. Add frontmatter at the top:
 
-## Image Upload
+```markdown
+---
+title: "Your Project Title"
+summary: "Brief one-sentence description"
+systemType: "Civic Tech"
+outcome: "Impact statement"
+tags: ["design", "research", "policy"]
+order: 1
+featured: true
+draft: false
+---
 
-You can upload images in two ways:
+[Your Notion content appears here]
+```
 
-1. **Direct Upload**: Click "Upload Image" and select a file from your computer
-2. **URL**: Paste any image URL in the "Hero Image URL" field
+### 4. Handle Images
 
-Uploaded images are stored in Supabase Storage and automatically get a public URL.
+**Option A: Use the Image Upload Tool**
 
-## Content Formatting
+Visit `/upload` on your local site:
+1. Login/create account
+2. Drag & drop all your images
+3. Copy the markdown snippets
+4. Replace Notion image paths in your markdown
 
-The content field supports both HTML and Markdown:
+**Option B: Use Image URLs**
 
-- Use `<h2>` or `##` for headings
-- Use `<p>` or plain text for paragraphs
-- Use `<ul><li>` or `-` for lists
-- Paste image URLs as `<img src="url">` or `![](url)`
+If your images are already hosted somewhere, just use those URLs in your markdown.
 
-## Free Hosting Options
+## Image Upload Tool (`/upload`)
 
-Deploy your site for free to:
+A simple page where you can:
+- Drag & drop multiple images
+- Get instant markdown code for each image
+- Copy URLs for use in markdown files
+- All images stored in Supabase Storage
 
-### Netlify (Recommended)
-1. Push your code to GitHub
-2. Connect your repo to Netlify
-3. Set build command: `npm run build`
-4. Set publish directory: `dist`
-5. Add environment variables from your `.env` file
+**Access:** Visit `/upload` (requires creating an account)
 
-### Vercel
-1. Push code to GitHub
-2. Import project in Vercel
-3. Add environment variables
-4. Deploy
+## File Structure
 
-### Cloudflare Pages
-1. Push code to GitHub
-2. Create new Pages project
-3. Set build command and output directory
-4. Add environment variables
+```
+src/content/work/
+├── 18f-service-delivery.md
+├── consequence-design.md
+└── your-new-project.md
+```
 
-## Environment Variables
+Each markdown file becomes a case study page at `/work/your-file-name`
 
-Your hosting provider needs these variables (from `.env`):
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_ANON_KEY`
+## Frontmatter Fields
+
+Required fields:
+- `title` - Case study title
+- `summary` - Short description
+- `systemType` - Type of system or project category
+- `order` - Display order (lower numbers first)
+
+Optional fields:
+- `outcome` - Impact or result statement
+- `tags` - Array of tag strings
+- `role` - Your role on the project
+- `timeline` - Project timeline
+- `context` - Additional context paragraph
+- `featured` - Set to `true` to feature on homepage
+- `draft` - Set to `true` to hide from site
+- `externalUrl` - Link to external case study instead
+- `approach` - Array of approach points
+- `impact` - Array of impact points
 
 ## Tips
 
-- Use the "Display Order" field to control the order items appear (lower numbers first)
-- Keep case study descriptions short (1-2 sentences) for best display
-- Tags are comma-separated: `civic-tech, design, strategy`
-- The first published case study shows as "Featured" on your homepage
-- Changes to published items require rebuilding the site (Netlify/Vercel do this automatically)
+1. **Write freely in Notion** - Don't worry about markdown syntax, just write
+2. **Export often** - Notion exports are fast, export drafts to preview
+3. **Images first** - Upload all images at once using `/upload`, then add them to your markdown
+4. **Use templates** - Copy an existing `.md` file as a starting point
+5. **Preview locally** - Run `npm run dev` to see changes immediately
 
-## Automatic Deployments
+## Advanced: Notion Template
 
-Set up automatic deployments so when you update content in the CMS, your site rebuilds:
+Create a Notion template with this structure:
 
-1. In Netlify/Vercel, add a Build Hook URL
-2. In Supabase Dashboard, create a Database Webhook
-3. Trigger on `work_items` and `media_items` INSERT/UPDATE
-4. Point to your Build Hook URL
+```
+# [Project Title]
 
-Now when you save changes in the CMS, your site automatically rebuilds!
+## Context
+[Background information]
+
+## Approach
+- Key point 1
+- Key point 2
+- Key point 3
+
+## Impact
+- Result 1
+- Result 2
+- Result 3
+
+## Images
+[Add all images here]
+```
+
+This maps nicely to your site's case study layout.
+
+## Deploy Your Site
+
+Once you've added your content:
+
+1. **Push to GitHub**
+2. **Deploy to Netlify/Vercel/Cloudflare**
+3. **Your site builds automatically from markdown files**
+
+No database, no complex CMS, just markdown files that build into a fast static site.

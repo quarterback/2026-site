@@ -1,0 +1,479 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Image Upload — Ron Bronson">
+  <div class="upload-container">
+    <div class="upload-card">
+      <h1>Image Upload Tool</h1>
+      <p class="upload-intro">Upload images to get URLs for your markdown files</p>
+
+      <div id="auth-section">
+        <div id="login-form" class="auth-form">
+          <h2>Login</h2>
+          <input type="email" id="email" placeholder="Email" />
+          <input type="password" id="password" placeholder="Password" />
+          <button id="login-btn" class="btn-primary">Login</button>
+          <p class="auth-toggle">
+            <a href="#" id="show-signup">Create account</a>
+          </p>
+        </div>
+
+        <div id="signup-form" class="auth-form" style="display: none;">
+          <h2>Create Account</h2>
+          <input type="email" id="signup-email" placeholder="Email" />
+          <input type="password" id="signup-password" placeholder="Password" />
+          <button id="signup-btn" class="btn-primary">Sign Up</button>
+          <p class="auth-toggle">
+            <a href="#" id="show-login">Back to login</a>
+          </p>
+        </div>
+
+        <div id="auth-error" class="error-message"></div>
+      </div>
+
+      <div id="upload-section" style="display: none;">
+        <div class="upload-area" id="upload-area">
+          <input type="file" id="file-input" accept="image/*" multiple />
+          <div class="upload-prompt">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <p>Drag & drop images or click to browse</p>
+            <small>Supports JPG, PNG, GIF, WebP</small>
+          </div>
+        </div>
+
+        <div id="upload-progress" class="upload-progress" style="display: none;">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <p id="progress-text">Uploading...</p>
+        </div>
+
+        <div id="uploaded-images" class="uploaded-images"></div>
+
+        <button id="logout-btn" class="btn-secondary">Logout</button>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .upload-container {
+    min-height: 100vh;
+    padding: var(--size-8) var(--size-5);
+    background: var(--surface-1);
+  }
+
+  .upload-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--surface-2);
+    padding: var(--size-8);
+    border-radius: var(--radius-3);
+    box-shadow: var(--shadow-3);
+  }
+
+  .upload-card h1 {
+    margin-bottom: var(--size-2);
+    color: var(--text-1);
+  }
+
+  .upload-intro {
+    color: var(--text-3);
+    margin-bottom: var(--size-6);
+  }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .auth-form h2 {
+    color: var(--text-1);
+    margin-bottom: var(--size-2);
+  }
+
+  .auth-form input {
+    padding: var(--size-3);
+    border: 1px solid var(--surface-4);
+    border-radius: var(--radius-2);
+    background: var(--surface-1);
+    color: var(--text-1);
+    font-size: var(--font-size-1);
+  }
+
+  .auth-toggle {
+    text-align: center;
+    margin-top: var(--size-2);
+  }
+
+  .auth-toggle a {
+    color: var(--blue-6);
+    text-decoration: none;
+  }
+
+  .error-message {
+    padding: var(--size-3);
+    background: var(--red-2);
+    color: var(--red-9);
+    border-radius: var(--radius-2);
+    margin-top: var(--size-4);
+    display: none;
+  }
+
+  .error-message.show {
+    display: block;
+  }
+
+  .upload-area {
+    border: 2px dashed var(--surface-4);
+    border-radius: var(--radius-2);
+    padding: var(--size-8);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: var(--size-5);
+  }
+
+  .upload-area:hover {
+    border-color: var(--blue-6);
+    background: var(--surface-3);
+  }
+
+  .upload-area.dragover {
+    border-color: var(--blue-6);
+    background: var(--blue-2);
+  }
+
+  #file-input {
+    display: none;
+  }
+
+  .upload-prompt {
+    pointer-events: none;
+  }
+
+  .upload-prompt svg {
+    color: var(--text-3);
+    margin-bottom: var(--size-3);
+  }
+
+  .upload-prompt p {
+    color: var(--text-2);
+    font-size: var(--font-size-1);
+    margin-bottom: var(--size-2);
+  }
+
+  .upload-prompt small {
+    color: var(--text-3);
+    font-size: var(--font-size-0);
+  }
+
+  .upload-progress {
+    margin-bottom: var(--size-5);
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--surface-3);
+    border-radius: var(--radius-2);
+    overflow: hidden;
+    margin-bottom: var(--size-2);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--blue-6);
+    transition: width 0.3s;
+    width: 0%;
+  }
+
+  #progress-text {
+    color: var(--text-3);
+    font-size: var(--font-size-0);
+  }
+
+  .uploaded-images {
+    display: grid;
+    gap: var(--size-4);
+  }
+
+  .image-result {
+    background: var(--surface-3);
+    padding: var(--size-4);
+    border-radius: var(--radius-2);
+    border: 1px solid var(--surface-4);
+  }
+
+  .image-preview {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: var(--radius-2);
+    margin-bottom: var(--size-3);
+  }
+
+  .image-url {
+    display: flex;
+    gap: var(--size-2);
+    margin-bottom: var(--size-2);
+  }
+
+  .image-url input {
+    flex: 1;
+    padding: var(--size-2);
+    border: 1px solid var(--surface-4);
+    border-radius: var(--radius-2);
+    background: var(--surface-1);
+    color: var(--text-1);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+  }
+
+  .markdown-code {
+    padding: var(--size-3);
+    background: var(--surface-1);
+    border-radius: var(--radius-2);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    word-break: break-all;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: var(--size-3) var(--size-6);
+    border: none;
+    border-radius: var(--radius-2);
+    font-weight: var(--font-weight-6);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: var(--font-size-1);
+  }
+
+  .btn-primary {
+    background: var(--blue-6);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: var(--blue-7);
+  }
+
+  .btn-secondary {
+    background: var(--surface-3);
+    color: var(--text-1);
+    margin-top: var(--size-5);
+  }
+
+  .btn-secondary:hover {
+    background: var(--surface-4);
+  }
+
+  .copy-btn {
+    padding: var(--size-2) var(--size-3);
+    background: var(--blue-6);
+    color: white;
+    border: none;
+    border-radius: var(--radius-2);
+    cursor: pointer;
+    font-size: var(--font-size-0);
+  }
+
+  .copy-btn:hover {
+    background: var(--blue-7);
+  }
+
+  .copy-btn.copied {
+    background: var(--green-6);
+  }
+</style>
+
+<script>
+  import { supabase } from '../lib/supabase';
+
+  let currentUser = null;
+
+  const authSection = document.getElementById('auth-section');
+  const uploadSection = document.getElementById('upload-section');
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
+  const authError = document.getElementById('auth-error');
+
+  document.getElementById('show-signup')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    loginForm!.style.display = 'none';
+    signupForm!.style.display = 'flex';
+  });
+
+  document.getElementById('show-login')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    signupForm!.style.display = 'none';
+    loginForm!.style.display = 'flex';
+  });
+
+  async function checkAuth() {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      currentUser = user;
+      authSection!.style.display = 'none';
+      uploadSection!.style.display = 'block';
+    }
+  }
+
+  document.getElementById('login-btn')?.addEventListener('click', async () => {
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      authError!.textContent = error.message;
+      authError!.classList.add('show');
+    } else {
+      currentUser = data.user;
+      authSection!.style.display = 'none';
+      uploadSection!.style.display = 'block';
+    }
+  });
+
+  document.getElementById('signup-btn')?.addEventListener('click', async () => {
+    const email = (document.getElementById('signup-email') as HTMLInputElement).value;
+    const password = (document.getElementById('signup-password') as HTMLInputElement).value;
+
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      authError!.textContent = error.message;
+      authError!.classList.add('show');
+    } else {
+      currentUser = data.user;
+      authSection!.style.display = 'none';
+      uploadSection!.style.display = 'block';
+    }
+  });
+
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    currentUser = null;
+    uploadSection!.style.display = 'none';
+    authSection!.style.display = 'block';
+  });
+
+  const uploadArea = document.getElementById('upload-area');
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const uploadProgress = document.getElementById('upload-progress');
+  const progressFill = document.getElementById('progress-fill');
+  const progressText = document.getElementById('progress-text');
+  const uploadedImages = document.getElementById('uploaded-images');
+
+  uploadArea?.addEventListener('click', () => {
+    fileInput?.click();
+  });
+
+  uploadArea?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadArea.classList.add('dragover');
+  });
+
+  uploadArea?.addEventListener('dragleave', () => {
+    uploadArea.classList.remove('dragover');
+  });
+
+  uploadArea?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadArea.classList.remove('dragover');
+    const files = e.dataTransfer?.files;
+    if (files) {
+      handleFiles(files);
+    }
+  });
+
+  fileInput?.addEventListener('change', (e) => {
+    const files = (e.target as HTMLInputElement).files;
+    if (files) {
+      handleFiles(files);
+    }
+  });
+
+  async function handleFiles(files: FileList) {
+    const fileArray = Array.from(files);
+    uploadProgress!.style.display = 'block';
+
+    for (let i = 0; i < fileArray.length; i++) {
+      const file = fileArray[i];
+      const progress = ((i + 1) / fileArray.length) * 100;
+
+      progressFill!.style.width = `${progress}%`;
+      progressText!.textContent = `Uploading ${i + 1} of ${fileArray.length}...`;
+
+      await uploadFile(file);
+    }
+
+    uploadProgress!.style.display = 'none';
+    progressFill!.style.width = '0%';
+    fileInput.value = '';
+  }
+
+  async function uploadFile(file: File) {
+    const fileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
+
+    const { data, error } = await supabase.storage
+      .from('content-images')
+      .upload(fileName, file);
+
+    if (error) {
+      alert(`Failed to upload ${file.name}: ${error.message}`);
+      return;
+    }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('content-images')
+      .getPublicUrl(fileName);
+
+    addImageResult(publicUrl, file.name);
+  }
+
+  function addImageResult(url: string, filename: string) {
+    const markdown = `![${filename}](${url})`;
+
+    const resultDiv = document.createElement('div');
+    resultDiv.className = 'image-result';
+    resultDiv.innerHTML = `
+      <img src="${url}" alt="${filename}" class="image-preview" />
+      <div class="image-url">
+        <input type="text" value="${url}" readonly />
+        <button class="copy-btn" onclick="copyToClipboard('${url}', this)">Copy URL</button>
+      </div>
+      <div class="markdown-code">${markdown}</div>
+    `;
+
+    uploadedImages!.insertBefore(resultDiv, uploadedImages!.firstChild);
+  }
+
+  (window as any).copyToClipboard = async (text: string, btn: HTMLButtonElement) => {
+    await navigator.clipboard.writeText(text);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy URL';
+      btn.classList.remove('copied');
+    }, 2000);
+  };
+
+  checkAuth();
+</script>

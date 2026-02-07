@@ -1,29 +1,33 @@
 ---
-import { supabase } from '../../lib/supabase';
+import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import MediaEmbed from '../../components/MediaEmbed.astro';
+import ArtifactCard from '../../components/ArtifactCard.astro';
 
 export async function getStaticPaths() {
-  const { data: work } = await supabase
-    .from('work_items')
-    .select('*')
-    .eq('published', true);
-
-  return (work || []).map(item => ({
-    params: { slug: item.slug },
-    props: { item },
+  const work = await getCollection('work', ({ data }) => !data.draft);
+  return work.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
   }));
 }
 
-const { item } = Astro.props;
+const { entry } = Astro.props;
+const { Content } = await entry.render();
 const {
   title,
-  description,
-  content,
-  client,
-  year,
+  summary,
+  systemType,
+  outcome,
   tags,
-  hero_image
-} = item;
+  role,
+  timeline,
+  context,
+  media = [],
+  artifacts = [],
+  impact = [],
+  approach = []
+} = entry.data;
 ---
 
 <Base title={`${title} — Ron Bronson`}>
@@ -32,30 +36,57 @@ const {
       <div class="container">
         <a href="/#work" class="back-link">&larr; Back to work</a>
         <div class="case-study__meta">
-          {client && <span class="case-study__type">{client}</span>}
-          {year && <span class="case-study__timeline">{year}</span>}
+          <span class="case-study__type">{systemType}</span>
+          {role && <span class="case-study__role">{role}</span>}
+          {timeline && <span class="case-study__timeline">{timeline}</span>}
         </div>
         <h1>{title}</h1>
-        <p class="case-study__summary">{description}</p>
-        {tags && tags.length > 0 && (
-          <div class="case-study__tags">
-            {tags.map(tag => <span class="tag">{tag}</span>)}
-          </div>
-        )}
+        <p class="case-study__summary">{summary}</p>
+        {context && <p class="case-study__context">{context}</p>}
       </div>
     </header>
 
-    {hero_image && (
-      <div class="case-study__hero">
-        <div class="container">
-          <img src={hero_image} alt={title} />
-        </div>
-      </div>
-    )}
-
     <div class="case-study__body">
       <div class="container container--narrow">
-        <div set:html={content} />
+        <Content />
+
+        {approach.length > 0 && (
+          <section class="case-study__section">
+            <h2>Approach</h2>
+            <ul class="case-study__list">
+              {approach.map(item => <li>{item}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {impact.length > 0 && (
+          <section class="case-study__section">
+            <h2>Impact</h2>
+            <ul class="case-study__list">
+              {impact.map(item => <li>{item}</li>)}
+            </ul>
+          </section>
+        )}
+
+        {media.length > 0 && (
+          <section class="case-study__section">
+            <h2>Media</h2>
+            {media.map(item => (
+              <MediaEmbed {...item} />
+            ))}
+          </section>
+        )}
+
+        {artifacts.length > 0 && (
+          <section class="case-study__section">
+            <h2>Artifacts</h2>
+            <div class="artifacts-grid">
+              {artifacts.map(artifact => (
+                <ArtifactCard {...artifact} />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
 
@@ -115,35 +146,6 @@ const {
     font-size: var(--font-size-1);
     color: var(--text-3);
     max-width: 65ch;
-  }
-
-  .case-study__tags {
-    display: flex;
-    gap: var(--size-2);
-    flex-wrap: wrap;
-    margin-top: var(--size-3);
-  }
-
-  .tag {
-    display: inline-block;
-    padding: var(--size-1) var(--size-3);
-    background: var(--surface-3);
-    color: var(--text-2);
-    border-radius: var(--radius-2);
-    font-size: var(--font-size-0);
-  }
-
-  .case-study__hero {
-    padding-block: var(--size-6);
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--surface-3);
-  }
-
-  .case-study__hero img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-2);
-    border: 1px solid var(--surface-3);
   }
 
   .case-study__body {

@@ -1,5 +1,5 @@
 ---
-import { supabase } from '../lib/supabase';
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import WorkCard from '../components/WorkCard.astro';
@@ -10,29 +10,33 @@ import Writing from '../components/Writing.astro';
 import Footer from '../components/Footer.astro';
 import NowPlaying from '../components/NowPlaying.astro';
 
-const { data: workData } = await supabase
-  .from('work_items')
-  .select('*')
-  .eq('published', true)
-  .order('display_order', { ascending: true });
+const allWork = await getCollection('work', ({ data }) => !data.draft);
+const work = allWork.sort((a, b) => a.data.order - b.data.order);
+const featuredWork = work.find(w => w.data.featured);
 
-const work = workData || [];
-const featuredWork = work[0];
-
-const { data: mediaData } = await supabase
-  .from('media_items')
-  .select('*')
-  .eq('published', true)
-  .order('published_at', { ascending: false });
-
-const media = (mediaData || []).map(item => ({
-  title: item.title,
-  source: item.description,
-  mediaType: item.media_type as 'podcast' | 'talk' | 'article',
-  embedUrl: item.embed_url,
-  url: item.embed_url,
-  date: new Date(item.published_at).getFullYear().toString(),
-}));
+const media = [
+  {
+    title: "Consequence Design and Public Systems",
+    source: "Design Matters Podcast",
+    mediaType: "podcast" as const,
+    embedUrl: "https://open.spotify.com/episode/YOUR_EPISODE_ID",
+    date: "2024",
+  },
+  {
+    title: "Designing Government Services at Scale",
+    source: "UXDX Conference",
+    mediaType: "talk" as const,
+    embedUrl: "https://youtube.com/watch?v=YOUR_VIDEO_ID",
+    date: "2023",
+  },
+  {
+    title: "Building for the Public Good",
+    source: "A List Apart",
+    mediaType: "article" as const,
+    url: "https://alistapart.com/article/building-public-good",
+    date: "2023",
+  },
+];
 
 const socials = [
   { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
@@ -74,9 +78,9 @@ const fonts = [
       <section class="featured">
         <div class="container">
           <p class="label">Featured</p>
-          <a href={`/work/${featuredWork.slug}`} class="featured__link">
-            <h2>{featuredWork.title}</h2>
-            <p>{featuredWork.description}</p>
+          <a href={featuredWork.data.externalUrl || `/work/${featuredWork.slug}`} class="featured__link">
+            <h2>{featuredWork.data.title}</h2>
+            <p>{featuredWork.data.summary}</p>
             <span class="featured__cta">Read case study →</span>
           </a>
         </div>
@@ -90,12 +94,12 @@ const fonts = [
         <div class="work-grid">
           {work.map(item => (
             <WorkCard
-              title={item.title}
-              summary={item.description}
-              systemType={item.client || 'Project'}
-              outcome={item.year ? `${item.year}` : undefined}
-              href={`/work/${item.slug}`}
-              tags={item.tags}
+              title={item.data.title}
+              summary={item.data.summary}
+              systemType={item.data.systemType}
+              outcome={item.data.outcome}
+              href={item.data.externalUrl || `/work/${item.slug}`}
+              tags={item.data.tags}
             />
           ))}
         </div>
