@@ -49,7 +49,7 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
       <div class="colophon">
         {techStack.length > 0 && (
           <p class="colophon-item">
-            <span class="colophon-label">Built with</span> {techStack.join(', ')}
+            {techStack.join(', ')}
           </p>
         )}
         {fonts.length > 0 && (
@@ -90,13 +90,16 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
   .colophon {
     text-align: left;
     font-family: var(--font-mono);
-    font-size: var(--font-size-00);
+    font-size: 0.75rem !important;
+    line-height: 1.4;
     color: var(--text-3);
   }
 
   .colophon-item {
     margin: 0;
     margin-bottom: var(--size-2);
+    font-size: 0.75rem !important;
+    line-height: 1.4;
   }
 
   .colophon-item:last-child {
