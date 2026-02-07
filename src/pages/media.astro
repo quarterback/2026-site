@@ -309,19 +309,20 @@ const fonts = [
     align-items: center;
     gap: var(--size-2);
     padding: var(--size-2) var(--size-4);
-    background: var(--brand);
-    color: var(--gray-9);
+    background: var(--gray-8);
+    color: var(--gray-0);
     font-weight: var(--font-weight-6);
     border-radius: var(--radius-2);
     text-decoration: none;
     font-size: var(--font-size-1);
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
     align-self: flex-start;
     margin-top: auto;
   }
 
   .media-button:hover {
-    background: var(--brand-bright);
+    background: var(--gray-9);
+    transform: translateX(2px);
   }
 
   .media-button svg {
