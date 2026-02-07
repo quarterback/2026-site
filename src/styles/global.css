@@ -88,7 +88,7 @@ a:hover { color: var(--brand-bright); }
 .container {
   max-width: var(--content-width);
   margin-inline: auto;
-  padding-inline: var(--size-4);
+  padding-inline: var(--size-fluid-3);
 }
 
 .container--narrow {
@@ -100,10 +100,6 @@ section { padding-block: var(--section-gap); }
 
 /* Mobile adjustments */
 @media (max-width: 600px) {
-  .container {
-    padding-inline: var(--size-3);
-  }
-
   section {
     padding-block: var(--size-3);
   }
