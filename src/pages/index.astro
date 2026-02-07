@@ -5,6 +5,8 @@ import Hero from '../components/Hero.astro';
 import WorkCard from '../components/WorkCard.astro';
 import Writing from '../components/Writing.astro';
 import Books from '../components/Books.astro';
+import NowPlaying from '../components/NowPlaying.astro';
+import Music from '../components/Music.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
@@ -71,6 +73,24 @@ const fonts = [
       </div>
     </section>
 
+    <!-- Music & Media -->
+    <section id="music">
+      <div class="container">
+        <div class="music-grid">
+          <div class="music-item">
+            <NowPlaying service="lastfm" username="ronbronson" />
+          </div>
+          <div class="music-item">
+            <Music
+              title="Radio Show"
+              embedUrl="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fronbronson%2F"
+              embedType="mixcloud"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Work grid -->
     <section id="work">
       <div class="container">
@@ -94,7 +114,7 @@ const fonts = [
     {recentPosts.length > 0 && (
       <section id="writing">
         <div class="container">
-          <Writing posts={recentPosts} />
+          <Writing posts={recentPosts} blogUrl="https://makingpublicwork.com" />
         </div>
       </section>
     )}
@@ -160,6 +180,23 @@ const fonts = [
     color: var(--text-2);
     max-width: 70ch;
     line-height: 1.6;
+  }
+
+  /* Music section */
+  #music {
+    margin-bottom: var(--size-8);
+  }
+
+  .music-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--size-5);
+  }
+
+  @media (max-width: 768px) {
+    .music-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   /* Section headings */
