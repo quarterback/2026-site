@@ -41,7 +41,26 @@ const fonts = [
       </div>
     </section>
 
-    <section class="media-list">
+    <section class="talks-list">
+      <div class="container">
+        <h2 class="section-heading">Talks</h2>
+        <ul class="talks">
+          {media.map(item => (
+            <li class="talk-item">
+              <a href={item.embedUrl} target="_blank" rel="noopener" class="talk-link">
+                <h3 class="talk-title">{item.title}</h3>
+                <div class="talk-meta">
+                  <span class="talk-source">{item.source}</span>
+                  {item.date && <span class="talk-date">{item.date}</span>}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="media-embeds">
       <div class="container">
         {media.map(item => (
           <div class="media-item">
@@ -80,7 +99,60 @@ const fonts = [
     max-width: 60ch;
   }
 
-  .media-list {
+  .section-heading {
+    font-size: var(--font-size-3);
+    margin-bottom: var(--size-5);
+    color: var(--text-1);
+  }
+
+  .talks-list {
+    padding-bottom: var(--size-8);
+  }
+
+  .talks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+  }
+
+  .talk-item {
+    border-bottom: 1px solid var(--surface-3);
+    padding-bottom: var(--size-4);
+  }
+
+  .talk-item:last-child {
+    border-bottom: none;
+  }
+
+  .talk-link {
+    text-decoration: none;
+    display: block;
+  }
+
+  .talk-title {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin-bottom: var(--size-2);
+    transition: color 0.2s;
+  }
+
+  .talk-link:hover .talk-title {
+    color: var(--brand);
+  }
+
+  .talk-meta {
+    display: flex;
+    gap: var(--size-3);
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    font-family: var(--font-mono);
+  }
+
+  .media-embeds {
     padding-bottom: var(--size-10);
   }
 
@@ -108,6 +180,10 @@ const fonts = [
     }
 
     .lead {
+      font-size: var(--font-size-1);
+    }
+
+    .talk-title {
       font-size: var(--font-size-1);
     }
 

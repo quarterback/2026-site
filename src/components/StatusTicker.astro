@@ -1,8 +1,7 @@
 ---
 interface StatusItem {
   label: string;
-  value: string;
-  url?: string;
+  url: string;
 }
 
 interface Props {
@@ -17,16 +16,9 @@ const { items } = Astro.props;
     {items.map((item, i) => (
       <>
         {i > 0 && <span class="ticker__separator">·</span>}
-        <span class="ticker__item">
-          <span class="ticker__label">{item.label}</span>
-          {item.url ? (
-            <a href={item.url} class="ticker__value" target="_blank" rel="noopener">
-              {item.value}
-            </a>
-          ) : (
-            <span class="ticker__value">{item.value}</span>
-          )}
-        </span>
+        <a href={item.url} class="ticker__link">
+          {item.label}
+        </a>
       </>
     ))}
   </div>
@@ -74,35 +66,19 @@ const { items } = Astro.props;
   }
 
   .ticker__separator {
-    color: var(--brand);
-    font-weight: 700;
-  }
-
-  .ticker__item {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--size-2);
-  }
-
-  .ticker__label {
     color: var(--text-3);
+    font-weight: 400;
+  }
+
+  .ticker__link {
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color 0.15s ease;
     text-transform: uppercase;
   }
 
-  .ticker__value {
+  .ticker__link:hover {
     color: var(--text-1);
-    font-weight: 500;
-  }
-
-  a.ticker__value {
-    color: var(--brand);
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  a.ticker__value:hover {
-    color: var(--brand-bright);
-    text-decoration: underline;
   }
 
   /* Optional: animated entrance */

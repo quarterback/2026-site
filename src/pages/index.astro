@@ -6,6 +6,7 @@ import WorkCard from '../components/WorkCard.astro';
 import Writing from '../components/Writing.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
+import MediaShowcase from '../components/MediaShowcase.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
@@ -31,20 +32,14 @@ const currentBooks = [
   {
     title: "The Power Broker",
     author: "Robert Caro",
-    cover: "https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=200",
-    status: "reading" as const,
   },
   {
     title: "Seeing Like a State",
     author: "James C. Scott",
-    cover: "https://images.pexels.com/photos/1130980/pexels-photo-1130980.jpeg?auto=compress&cs=tinysrgb&w=200",
-    status: "reading" as const,
   },
   {
     title: "The Design of Everyday Things",
     author: "Don Norman",
-    cover: "https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg?auto=compress&cs=tinysrgb&w=200",
-    status: "reading" as const,
   },
 ];
 
@@ -52,17 +47,24 @@ const currentAlbums = [
   {
     title: "Random Access Memories",
     artist: "Daft Punk",
-    cover: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=200",
   },
   {
     title: "After Hours",
     artist: "The Weeknd",
-    cover: "https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=200",
   },
   {
     title: "Good Kid, M.A.A.D City",
     artist: "Kendrick Lamar",
-    cover: "https://images.pexels.com/photos/210764/pexels-photo-210764.jpeg?auto=compress&cs=tinysrgb&w=200",
+  },
+];
+
+const recentMedia = [
+  {
+    title: "Beyond Civic Tech: Public Mechanics Starts at Home",
+    source: "Cascadia Open Source Fall Conference",
+    mediaType: "talk" as const,
+    embedUrl: "https://youtube.com/watch?v=hnAScuK-oMo",
+    date: "2025",
   },
 ];
 
@@ -129,11 +131,13 @@ const fonts = [
       </div>
     </section>
 
-    <!-- Recent Talks -->
-    <section id="media-preview">
+    <!-- Recent Media -->
+    <section id="media">
       <div class="container">
-        <h2 class="section-heading">Recent Talks</h2>
-        <p class="media-preview-text">Speaking about service design, public-sector delivery, and system consequences.</p>
+        <h2 class="section-heading">Recent Media</h2>
+        {recentMedia.map(item => (
+          <MediaShowcase {...item} />
+        ))}
         <a href="/media" class="section-link">View all media →</a>
       </div>
     </section>
