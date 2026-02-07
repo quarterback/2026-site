@@ -2,43 +2,90 @@
 import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
 
-const media = [
-  {
-    title: "Some advice on managing your design career upwards",
-    source: "Piccalil.li",
-    mediaType: "article" as const,
-    url: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
-    date: "January 2026",
-  },
+type MediaCategory = 'Podcasts' | 'Talks' | 'Articles' | 'Interviews';
+type MediaFormat = 'embed' | 'link' | 'hidden';
+
+interface MediaItem {
+  title: string;
+  source: string;
+  category: MediaCategory;
+  format: MediaFormat;
+  featured: boolean;
+  url?: string;
+  embedUrl?: string;
+  date?: string;
+  description?: string;
+}
+
+const media: MediaItem[] = [
   {
     title: "Beyond Civic Tech: Public Mechanics Starts at Home",
     source: "Cascadia Open Source Fall Conference",
-    mediaType: "talk" as const,
+    category: "Talks",
+    format: "embed",
+    featured: true,
     url: "https://youtube.com/watch?v=hnAScuK-oMo",
+    embedUrl: "https://www.youtube.com/embed/hnAScuK-oMo",
     date: "2025",
     description: "Civic tech often overpromises and underdelivers, focusing on apps or dashboards instead of the systems that quietly keep public life running. Public mechanics is a framework for seeing the rules, workarounds, and repair practices that hold services together after the launch moment has passed.",
   },
   {
+    title: "Designing with Consequence",
+    source: "Technically Optimistic",
+    category: "Podcasts",
+    format: "embed",
+    featured: true,
+    url: "https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7",
+    embedUrl: "https://open.spotify.com/embed/episode/2lC2xrhf4PIasyzJW4faP7",
+    date: "2025",
+  },
+  {
+    title: "Some advice on managing your design career upwards",
+    source: "Piccalil.li",
+    category: "Articles",
+    format: "link",
+    featured: true,
+    url: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
+    date: "January 2026",
+  },
+  {
     title: "What Huh Me Huh What?",
     source: "The Content Design Podcast",
-    mediaType: "podcast" as const,
+    category: "Podcasts",
+    format: "link",
+    featured: true,
     url: "https://schumacher.substack.com/p/ron-bronson-what-huh-me-huh-what",
     date: "October 2025",
   },
   {
-    title: "Designing with Consequence",
-    source: "Technically Optimistic",
-    mediaType: "podcast" as const,
-    url: "https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7",
-    date: "2025",
+    title: "Service Design Interview",
+    source: "Design Matters",
+    category: "Interviews",
+    format: "hidden",
+    featured: false,
+    url: "#",
+    date: "2024",
+  },
+  {
+    title: "Public Service Design Panel",
+    source: "UX Conference",
+    category: "Talks",
+    format: "hidden",
+    featured: false,
+    url: "#",
+    date: "2024",
   },
 ];
 
-const socials = [
-  { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
-  { name: "GitHub", url: "https://github.com/ronbronson" },
-];
+const categoryColors = {
+  'Podcasts': 'var(--lime-5)',
+  'Talks': 'var(--blue-5)',
+  'Articles': 'var(--orange-5)',
+  'Interviews': 'var(--purple-5)',
+};
+
+const featuredMedia = media.filter(item => item.featured && item.format !== 'hidden');
+const recentAppearances = media.filter(item => !item.featured || item.format === 'hidden');
 
 const techStack = [
   "Astro",
@@ -61,25 +108,77 @@ const fonts = [
       </div>
     </section>
 
-    <section class="media-list">
+    <section class="media-grid">
       <div class="container">
-        <ul class="media-items">
-          {media.map(item => (
-            <li class="media-card">
-              <a href={item.url} target="_blank" rel="noopener" class="media-link">
-                <div class="media-card-header">
-                  <span class="media-type">{item.mediaType}</span>
-                  <span class="media-date">{item.date}</span>
+        <div class="featured-items">
+          {featuredMedia.map(item => (
+            <article class="media-item">
+              <div class="media-header">
+                <span class="category-badge" style={`background-color: ${categoryColors[item.category]}`}>
+                  {item.category}
+                </span>
+                {item.date && <span class="media-date">{item.date}</span>}
+              </div>
+
+              {item.format === 'embed' && item.embedUrl && (
+                <div class="media-embed-wrapper">
+                  {item.category === 'Talks' && item.embedUrl.includes('youtube') ? (
+                    <iframe
+                      src={item.embedUrl}
+                      title={item.title}
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  ) : item.category === 'Podcasts' && item.embedUrl.includes('spotify') ? (
+                    <iframe
+                      src={item.embedUrl}
+                      title={item.title}
+                      width="100%"
+                      height="232"
+                      frameborder="0"
+                      allowtransparency="true"
+                      allow="encrypted-media"
+                    ></iframe>
+                  ) : null}
                 </div>
+              )}
+
+              <div class="media-content">
                 <h3 class="media-title">{item.title}</h3>
                 <p class="media-source">{item.source}</p>
                 {item.description && (
                   <p class="media-description">{item.description}</p>
                 )}
-              </a>
-            </li>
+
+                {item.format === 'link' && item.url && (
+                  <a href={item.url} target="_blank" rel="noopener" class="media-button">
+                    {item.category === 'Articles' ? 'Read' : item.category === 'Podcasts' ? 'Listen' : 'Watch'}
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </article>
           ))}
-        </ul>
+        </div>
+
+        {recentAppearances.length > 0 && (
+          <aside class="recent-appearances">
+            <h2>Recent Appearances</h2>
+            <ul>
+              {recentAppearances.map(item => (
+                <li>
+                  <a href={item.url} target="_blank" rel="noopener">
+                    {item.title}
+                  </a>
+                  <span class="appearance-meta">{item.source}{item.date ? ` • ${item.date}` : ''}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
       </div>
     </section>
   </main>
@@ -92,8 +191,8 @@ const fonts = [
 
 <style>
   .page-header {
-    padding-top: var(--size-10);
-    padding-bottom: var(--size-8);
+    padding-top: var(--size-fluid-5);
+    padding-bottom: var(--size-fluid-4);
   }
 
   .page-header h1 {
@@ -103,58 +202,84 @@ const fonts = [
   }
 
   .lead {
-    font-size: var(--font-size-2);
+    font-size: clamp(var(--font-size-1), 2.5vw, var(--font-size-2));
     color: var(--text-2);
     max-width: 60ch;
   }
 
-  .media-list {
-    padding-bottom: var(--size-10);
+  .media-grid {
+    padding-bottom: var(--size-fluid-5);
   }
 
-  .media-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .featured-items {
     display: grid;
-    gap: var(--size-5);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-auto-rows: min-content;
+    gap: var(--size-6);
+    margin-bottom: var(--size-8);
   }
 
-  .media-card {
+  .media-item {
     border: 1px solid var(--surface-3);
     border-radius: var(--radius-2);
+    overflow: hidden;
+    background: var(--surface-2);
     transition: border-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
   }
 
-  .media-card:hover {
+  .media-item:hover {
     border-color: var(--brand);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
-  .media-link {
-    text-decoration: none;
-    display: block;
-    padding: var(--size-5);
-  }
-
-  .media-card-header {
+  .media-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--size-3);
+    padding: var(--size-3) var(--size-4);
     font-size: var(--font-size-0);
     font-family: var(--font-mono);
   }
 
-  .media-type {
-    color: var(--brand);
+  .category-badge {
+    padding: var(--size-1) var(--size-3);
+    border-radius: var(--radius-1);
+    color: var(--gray-9);
+    font-weight: var(--font-weight-6);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    font-weight: var(--font-weight-6);
+    font-size: var(--font-size-00);
   }
 
   .media-date {
     color: var(--text-3);
+  }
+
+  .media-embed-wrapper {
+    position: relative;
+    width: 100%;
+    background: var(--surface-1);
+  }
+
+  .media-embed-wrapper iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    display: block;
+  }
+
+  .media-embed-wrapper iframe[height="232"] {
+    aspect-ratio: auto;
+    height: 232px;
+  }
+
+  .media-content {
+    padding: var(--size-4);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .media-title {
@@ -162,11 +287,7 @@ const fonts = [
     font-weight: var(--font-weight-6);
     color: var(--text-1);
     margin-bottom: var(--size-2);
-    transition: color 0.2s;
-  }
-
-  .media-link:hover .media-title {
-    color: var(--brand);
+    line-height: 1.3;
   }
 
   .media-source {
@@ -179,7 +300,83 @@ const fonts = [
     font-size: var(--font-size-1);
     color: var(--text-3);
     line-height: 1.6;
-    margin-top: var(--size-3);
+    margin-bottom: var(--size-3);
+    flex-grow: 1;
+  }
+
+  .media-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    padding: var(--size-2) var(--size-4);
+    background: var(--brand);
+    color: var(--gray-9);
+    font-weight: var(--font-weight-6);
+    border-radius: var(--radius-2);
+    text-decoration: none;
+    font-size: var(--font-size-1);
+    transition: background 0.2s;
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  .media-button:hover {
+    background: var(--brand-bright);
+  }
+
+  .media-button svg {
+    flex-shrink: 0;
+  }
+
+  .recent-appearances {
+    margin-top: var(--size-8);
+    padding-top: var(--size-6);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .recent-appearances h2 {
+    font-size: var(--font-size-3);
+    font-family: var(--font-mono);
+    margin-bottom: var(--size-4);
+    color: var(--text-1);
+  }
+
+  .recent-appearances ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .recent-appearances li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  .recent-appearances a {
+    color: var(--text-1);
+    text-decoration: none;
+    font-weight: var(--font-weight-5);
+    transition: color 0.2s;
+  }
+
+  .recent-appearances a:hover {
+    color: var(--brand);
+  }
+
+  .appearance-meta {
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 768px) {
+    .featured-items {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 600px) {
@@ -188,16 +385,16 @@ const fonts = [
       padding-bottom: var(--size-6);
     }
 
-    .lead {
-      font-size: var(--font-size-1);
-    }
-
-    .media-link {
-      padding: var(--size-4);
+    .media-content {
+      padding: var(--size-3);
     }
 
     .media-title {
       font-size: var(--font-size-1);
+    }
+
+    .recent-appearances h2 {
+      font-size: var(--font-size-2);
     }
   }
 </style>

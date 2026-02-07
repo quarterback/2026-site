@@ -79,7 +79,7 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
 
   .social-link {
     color: var(--text-2);
-    font-size: var(--font-size-3);
+    font-size: var(--font-size-2);
     transition: color 0.2s ease;
   }
 
@@ -90,7 +90,7 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
   .colophon {
     text-align: left;
     font-family: var(--font-mono);
-    font-size: 0.75rem !important;
+    font-size: var(--font-size-00) !important;
     line-height: 1.4;
     color: var(--text-3);
   }
@@ -98,7 +98,7 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
   .colophon-item {
     margin: 0;
     margin-bottom: var(--size-2);
-    font-size: 0.75rem !important;
+    font-size: var(--font-size-00) !important;
     line-height: 1.4;
   }
 
@@ -109,5 +109,12 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
   .colophon-label {
     color: var(--text-2);
     font-weight: var(--font-weight-5);
+    font-size: var(--font-size-00) !important;
+  }
+
+  @media (max-width: 600px) {
+    .social-link {
+      font-size: var(--font-size-1);
+    }
   }
 </style>
