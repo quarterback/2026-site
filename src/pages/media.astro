@@ -1,16 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
-import MediaShowcase from '../components/MediaShowcase.astro';
 import Footer from '../components/Footer.astro';
 
 const media = [
   {
+    title: "Some advice on managing your design career upwards",
+    source: "Piccalil.li",
+    mediaType: "article" as const,
+    url: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
+    date: "January 2026",
+  },
+  {
     title: "Beyond Civic Tech: Public Mechanics Starts at Home",
     source: "Cascadia Open Source Fall Conference",
     mediaType: "talk" as const,
-    embedUrl: "https://youtube.com/watch?v=hnAScuK-oMo",
+    url: "https://youtube.com/watch?v=hnAScuK-oMo",
     date: "2025",
-    description: "Civic tech often overpromises and underdelivers, focusing on apps or dashboards instead of the systems that quietly keep public life running. Public mechanics is a framework for seeing the rules, workarounds, and repair practices that hold services together after the launch moment has passed. This keynote explores why the \"last mile\" of delivery is always political, how resilient processes safeguard against misuse, and why the unglamorous work of maintenance is what makes systems durable and worthy of public trust.",
+    description: "Civic tech often overpromises and underdelivers, focusing on apps or dashboards instead of the systems that quietly keep public life running. Public mechanics is a framework for seeing the rules, workarounds, and repair practices that hold services together after the launch moment has passed.",
+  },
+  {
+    title: "What Huh Me Huh What?",
+    source: "The Content Design Podcast",
+    mediaType: "podcast" as const,
+    url: "https://schumacher.substack.com/p/ron-bronson-what-huh-me-huh-what",
+    date: "October 2025",
+  },
+  {
+    title: "Designing with Consequence",
+    source: "Technically Optimistic",
+    mediaType: "podcast" as const,
+    url: "https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7",
+    date: "2025",
   },
 ];
 
@@ -37,39 +57,29 @@ const fonts = [
     <section class="page-header">
       <div class="container">
         <h1>Media</h1>
-        <p class="lead">Talks, podcasts, and writing about service design, public-sector delivery, and system consequences.</p>
+        <p class="lead">Talks, podcasts, and articles about service design, public-sector delivery, and system consequences.</p>
       </div>
     </section>
 
-    <section class="talks-list">
+    <section class="media-list">
       <div class="container">
-        <h2 class="section-heading">Talks</h2>
-        <ul class="talks">
+        <ul class="media-items">
           {media.map(item => (
-            <li class="talk-item">
-              <a href={item.embedUrl} target="_blank" rel="noopener" class="talk-link">
-                <h3 class="talk-title">{item.title}</h3>
-                <div class="talk-meta">
-                  <span class="talk-source">{item.source}</span>
-                  {item.date && <span class="talk-date">{item.date}</span>}
+            <li class="media-card">
+              <a href={item.url} target="_blank" rel="noopener" class="media-link">
+                <div class="media-card-header">
+                  <span class="media-type">{item.mediaType}</span>
+                  <span class="media-date">{item.date}</span>
                 </div>
+                <h3 class="media-title">{item.title}</h3>
+                <p class="media-source">{item.source}</p>
+                {item.description && (
+                  <p class="media-description">{item.description}</p>
+                )}
               </a>
             </li>
           ))}
         </ul>
-      </div>
-    </section>
-
-    <section class="media-embeds">
-      <div class="container">
-        {media.map(item => (
-          <div class="media-item">
-            <MediaShowcase {...item} />
-            {item.description && (
-              <p class="media-description">{item.description}</p>
-            )}
-          </div>
-        ))}
       </div>
     </section>
   </main>
@@ -99,40 +109,56 @@ const fonts = [
     max-width: 60ch;
   }
 
-  .section-heading {
-    font-size: var(--font-size-3);
-    margin-bottom: var(--size-5);
-    color: var(--text-1);
+  .media-list {
+    padding-bottom: var(--size-10);
   }
 
-  .talks-list {
-    padding-bottom: var(--size-8);
-  }
-
-  .talks {
+  .media-items {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-4);
+    display: grid;
+    gap: var(--size-5);
   }
 
-  .talk-item {
-    border-bottom: 1px solid var(--surface-3);
-    padding-bottom: var(--size-4);
+  .media-card {
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
 
-  .talk-item:last-child {
-    border-bottom: none;
+  .media-card:hover {
+    border-color: var(--brand);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .talk-link {
+  .media-link {
     text-decoration: none;
     display: block;
+    padding: var(--size-5);
   }
 
-  .talk-title {
+  .media-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--size-3);
+    font-size: var(--font-size-0);
+    font-family: var(--font-mono);
+  }
+
+  .media-type {
+    color: var(--brand);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: var(--font-weight-6);
+  }
+
+  .media-date {
+    color: var(--text-3);
+  }
+
+  .media-title {
     font-size: var(--font-size-2);
     font-weight: var(--font-weight-6);
     color: var(--text-1);
@@ -140,37 +166,21 @@ const fonts = [
     transition: color 0.2s;
   }
 
-  .talk-link:hover .talk-title {
+  .media-link:hover .media-title {
     color: var(--brand);
   }
 
-  .talk-meta {
-    display: flex;
-    gap: var(--size-3);
-    font-size: var(--font-size-0);
-    color: var(--text-3);
-    font-family: var(--font-mono);
-  }
-
-  .media-embeds {
-    padding-bottom: var(--size-10);
-  }
-
-  .media-item {
-    margin-bottom: var(--size-10);
-    padding-bottom: var(--size-10);
-    border-bottom: 1px solid var(--surface-3);
-  }
-
-  .media-item:last-child {
-    border-bottom: none;
+  .media-source {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    margin-bottom: var(--size-2);
   }
 
   .media-description {
-    margin-top: var(--size-4);
     font-size: var(--font-size-1);
-    color: var(--text-2);
+    color: var(--text-3);
     line-height: 1.6;
+    margin-top: var(--size-3);
   }
 
   @media (max-width: 600px) {
@@ -183,13 +193,12 @@ const fonts = [
       font-size: var(--font-size-1);
     }
 
-    .talk-title {
-      font-size: var(--font-size-1);
+    .media-link {
+      padding: var(--size-4);
     }
 
-    .media-item {
-      margin-bottom: var(--size-8);
-      padding-bottom: var(--size-8);
+    .media-title {
+      font-size: var(--font-size-1);
     }
   }
 </style>

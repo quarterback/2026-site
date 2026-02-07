@@ -60,6 +60,27 @@ const currentAlbums = [
 
 const recentMedia = [
   {
+    title: "Some advice on managing your design career upwards",
+    source: "Piccalil.li",
+    mediaType: "article" as const,
+    url: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
+    date: "January 2026",
+  },
+  {
+    title: "What Huh Me Huh What?",
+    source: "The Content Design Podcast",
+    mediaType: "podcast" as const,
+    embedUrl: "https://schumacher.substack.com/p/ron-bronson-what-huh-me-huh-what",
+    date: "October 2025",
+  },
+  {
+    title: "Designing with Consequence",
+    source: "Technically Optimistic",
+    mediaType: "podcast" as const,
+    embedUrl: "https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7",
+    date: "2025",
+  },
+  {
     title: "Beyond Civic Tech: Public Mechanics Starts at Home",
     source: "Cascadia Open Source Fall Conference",
     mediaType: "talk" as const,
@@ -131,13 +152,15 @@ const fonts = [
       </div>
     </section>
 
-    <!-- Recent Media -->
+    <!-- Featured Media -->
     <section id="media">
       <div class="container">
-        <h2 class="section-heading">Recent Media</h2>
-        {recentMedia.map(item => (
-          <MediaShowcase {...item} />
-        ))}
+        <h2 class="section-heading">Featured Media</h2>
+        <div class="media-grid-featured">
+          {recentMedia.map(item => (
+            <MediaShowcase {...item} />
+          ))}
+        </div>
         <a href="/media" class="section-link">View all media →</a>
       </div>
     </section>
@@ -208,6 +231,14 @@ const fonts = [
   .section-heading {
     font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
     margin-bottom: var(--size-4);
+  }
+
+  /* Featured Media Grid */
+  .media-grid-featured {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-8);
+    margin-bottom: var(--size-5);
   }
 
   .section-intro {
