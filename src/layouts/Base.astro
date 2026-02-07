@@ -1,6 +1,6 @@
 ---
 import ThemeToggle from '../components/ThemeToggle.astro';
-import Nav from '../components/Nav.astro';
+import StatusTicker from '../components/StatusTicker.astro';
 
 interface Props {
   title: string;
@@ -8,6 +8,15 @@ interface Props {
 }
 
 const { title, description = "Designer focused on public systems and decision-making" } = Astro.props;
+
+const tickerItems = [
+  { label: "Name", value: "Ron Bronson" },
+  { label: "Work", value: "View", url: "/#work" },
+  { label: "About", value: "Read", url: "/about" },
+  { label: "Media", value: "Watch", url: "/media" },
+  { label: "Coaching", value: "Learn", url: "/coaching" },
+  { label: "Contact", value: "Connect", url: "/#contact" },
+];
 ---
 
 <!DOCTYPE html>
@@ -30,7 +39,7 @@ const { title, description = "Designer focused on public systems and decision-ma
     </style>
   </head>
   <body>
-    <Nav />
+    <StatusTicker items={tickerItems} />
     <ThemeToggle />
     <slot />
   </body>
