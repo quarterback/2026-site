@@ -12,7 +12,8 @@ import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
 
 const allWork = await getCollection('work', ({ data }) => !data.draft);
-const work = allWork.sort((a, b) => a.data.order - b.data.order);
+const featuredWork = allWork.filter(({ data }) => data.featured);
+const work = featuredWork.sort((a, b) => a.data.order - b.data.order);
 
 const rssFeeds = [
   'https://makingpublicwork.com/rss/',
@@ -144,6 +145,7 @@ const fonts: string[] = [];
             />
           ))}
         </div>
+        <a href="/work" class="section-link">View all work →</a>
       </div>
     </section>
 
