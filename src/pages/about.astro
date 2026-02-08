@@ -2,6 +2,45 @@
 import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
 
+interface Favorite {
+  category: string;
+  labelColor: string;
+  items: string[];
+}
+
+const favorites: Favorite[] = [
+  {
+    category: 'TEAS',
+    labelColor: 'var(--green-6)',
+    items: ['Jin Xuan Oolong', 'Silver Needle', 'Genmaicha'],
+  },
+  {
+    category: 'ALBUMS',
+    labelColor: 'var(--purple-6)',
+    items: ['Midnights - Taylor Swift', 'Renaissance - Beyoncé', 'Harry\'s House - Harry Styles'],
+  },
+  {
+    category: 'FILMS',
+    labelColor: 'var(--orange-6)',
+    items: ['Arrival', 'The Social Network', 'Everything Everywhere All at Once'],
+  },
+  {
+    category: 'FRAGRANCES',
+    labelColor: 'var(--pink-6)',
+    items: ['Santal 33 - Le Labo', 'Neroli Portofino - Tom Ford'],
+  },
+  {
+    category: 'BOOKS',
+    labelColor: 'var(--blue-6)',
+    items: ['Seeing Like a State - James C. Scott', 'The Design of Everyday Things - Don Norman'],
+  },
+  {
+    category: 'TOOLS',
+    labelColor: 'var(--cyan-6)',
+    items: ['Obsidian', 'Raycast', 'Linear'],
+  },
+];
+
 const socials = [
   { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
   { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
@@ -46,6 +85,26 @@ const fonts = [
               <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ron Bronson" />
             </div>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="favorites-section">
+      <div class="container">
+        <h2 class="favorites-heading">Current Favorites</h2>
+        <div class="favorites-grid">
+          {favorites.map(favorite => (
+            <article class="favorite-card">
+              <span class="favorite-badge" style={`background-color: ${favorite.labelColor}`}>
+                {favorite.category}
+              </span>
+              <ul class="favorite-items">
+                {favorite.items.map(item => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -113,6 +172,80 @@ const fonts = [
     display: block;
   }
 
+  .favorites-section {
+    padding-top: var(--size-10);
+    padding-bottom: var(--size-fluid-5);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .favorites-heading {
+    font-size: clamp(var(--font-size-3), 4vw, var(--font-size-4));
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-7);
+    margin-bottom: var(--size-6);
+    color: var(--text-1);
+  }
+
+  .favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--size-3);
+  }
+
+  .favorite-card {
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-4);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .favorite-card:hover {
+    border-color: var(--gray-6);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .favorite-badge {
+    display: inline-block;
+    padding: var(--size-1) var(--size-3);
+    border-radius: var(--radius-1);
+    color: var(--gray-9);
+    font-weight: var(--font-weight-6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: var(--font-size-00);
+    font-family: var(--font-mono);
+    align-self: flex-start;
+  }
+
+  .favorite-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .favorite-items li {
+    font-size: var(--font-size-1);
+    line-height: 1.5;
+    color: var(--text-2);
+    font-family: var(--font-mono);
+    padding-left: var(--size-3);
+    position: relative;
+  }
+
+  .favorite-items li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--text-3);
+  }
+
   @media (max-width: 768px) {
     .about-grid {
       grid-template-columns: 1fr;
@@ -147,6 +280,25 @@ const fonts = [
 
     .bio-photo {
       max-width: 100%;
+    }
+
+    .favorites-section {
+      padding-top: var(--size-8);
+      padding-bottom: var(--size-8);
+    }
+
+    .favorites-heading {
+      font-size: var(--font-size-2);
+      margin-bottom: var(--size-4);
+    }
+
+    .favorites-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-3);
+    }
+
+    .favorite-items li {
+      font-size: var(--font-size-0);
     }
   }
 </style>
