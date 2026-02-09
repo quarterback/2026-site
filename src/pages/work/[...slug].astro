@@ -105,6 +105,9 @@ const components = {
 
           {/* Title + Lede + Image (Right) */}
           <div class="hero-content">
+            {type && (
+              <span class="type-badge">{type}</span>
+            )}
             <h1 class="case-study__title">{title}</h1>
             <p class="case-study__lede">{lede}</p>
 
@@ -410,6 +413,22 @@ const components = {
   .hero-content {
     display: flex;
     flex-direction: column;
+  }
+
+  /* Type Badge */
+  .type-badge {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brand);
+    background: color-mix(in srgb, var(--brand) 10%, var(--surface-1));
+    border: 1px solid color-mix(in srgb, var(--brand) 20%, var(--surface-3));
+    border-radius: 999px;
+    margin-bottom: var(--space-4);
+    width: fit-content;
   }
 
   .case-study__title {
