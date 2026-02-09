@@ -12,9 +12,12 @@ title: string
 type: "event" | "program" | "delivery" | "concept" | "leadership"
 lede: string (1-3 sentences, the hook)
 metadata:
+  role: string (optional) - Displays in metadata grid
+  duration: string (optional) - Displays in metadata grid
+  team: string (optional) - Displays in metadata grid
+  skills: string (optional) - Displays in metadata grid
   dates: string (optional, e.g. "2019-2023" or "March 2024")
   location: string (optional)
-  role: string (optional)
   scale: string (optional, e.g. "400 attendees" or "12 agencies")
   status: string (optional, e.g. "Ongoing" or "Handed off")
 links:
@@ -35,14 +38,23 @@ draft: boolean (optional, default: false)
 - `lede`: A 1-3 sentence hook that appears prominently on the page and in featured cards
 
 **Optional fields:**
-- `metadata`: Object containing any combination of: dates, location, role, scale, status
+- `metadata`: Object containing metadata fields (see below)
 - `links`: Array of related links with label and URL
 - `tags`: Array of topic tags
 - `featured`: If true, displays a larger card on the index with the full lede
 - `order`: Controls sort order on the index page (lower numbers appear first)
 - `draft`: If true, the case study won't be published
 
-**All metadata fields are optional.** Only render the ones that have values.
+**Metadata fields for 4-column grid:**
+- `role`: Your role in the project (displays in metadata grid)
+- `duration`: Project duration (displays in metadata grid)
+- `team`: Team size/composition (displays in metadata grid)
+- `skills`: Key skills used (displays in metadata grid)
+
+**Additional metadata fields:**
+- `dates`, `location`, `scale`, `status` - Used for inline metadata display
+
+**All metadata fields are optional.** Only those with values will render. The 4-column grid appears on case study detail pages when `role`, `duration`, `team`, or `skills` are provided.
 
 ## Content Body
 
@@ -56,9 +68,24 @@ The body is **freeform markdown/MDX**. No prescribed sections. The author writes
 
 ## Image Handling
 
-Three layout modes are supported via custom components:
+Four layout modes are supported via custom components:
 
-### 1. Inline Image
+### 1. Hero Image (NEW)
+
+Large, impactful images (60-85vh height) with parallax scrolling. Perfect for portfolio-style presentations:
+
+```
+::image{src="/images/example.png" layout="hero" height="70vh" caption="Optional caption"}
+```
+
+**Features:**
+- Configurable height (60vh, 70vh, 85vh, etc.)
+- Rounded corners on desktop (rounded-3xl)
+- Full-bleed on mobile
+- Subtle parallax scrolling effect
+- Object-fit cover for consistent presentation
+
+### 2. Inline Image
 
 Stays within the text column (default):
 
@@ -66,7 +93,7 @@ Stays within the text column (default):
 ::image{src="/images/example.png" layout="inline" caption="Optional caption"}
 ```
 
-### 2. Full-Bleed Image
+### 3. Full-Bleed Image
 
 Breaks out to full viewport width:
 
@@ -74,7 +101,7 @@ Breaks out to full viewport width:
 ::image{src="/images/example.png" layout="full-bleed" caption="Optional caption"}
 ```
 
-### 3. Image Pair
+### 4. Image Pair
 
 Two images side by side (stacks on mobile):
 
@@ -92,12 +119,22 @@ Two images side by side (stacks on mobile):
 
 The template automatically renders:
 
-1. **Type badge** (uppercase, monospace)
-2. **Title** (large heading)
-3. **Lede** (emphasized text)
-4. **Metadata line** (inline, only populated fields, separated by pipes)
-5. **Body content** (your freeform markdown)
-6. **Links section** (if any links defined)
+1. **Hero section** (full viewport height minus header)
+   - Back link
+   - Type badge (uppercase, monospace)
+   - Large multi-line headline (4.5rem on desktop)
+   - Lede (1.5rem supporting paragraph)
+   - 4-column metadata grid (if role, duration, team, or skills are provided)
+2. **Body content** (your freeform markdown with parallax image support)
+3. **Links section** (if any links defined)
+4. **Footer** with back link
+
+### Spacing & Layout
+
+- Portfolio container: Max-width 1200px with 24px (mobile) / 48px (desktop) padding
+- Hero section: Min-height calc(100vh - 73px)
+- Section spacing: 3rem (mobile) / 5rem (desktop) between sections
+- Hero images: 60-85vh with rounded corners and parallax scrolling
 
 ## Index Card Behavior
 

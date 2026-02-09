@@ -16,9 +16,12 @@ const work = defineCollection({
     lede: z.string(),
     metadata: z.object({
       dates: z.string().optional(),
+      duration: z.string().optional(),
       location: z.string().optional(),
       role: z.string().optional(),
+      team: z.string().optional(),
       scale: z.string().optional(),
+      skills: z.string().optional(),
       status: z.string().optional(),
     }).optional(),
     links: z.array(z.object({

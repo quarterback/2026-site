@@ -1,29 +1,37 @@
 ---
 interface Props {
   src: string;
-  layout?: 'full-bleed' | 'inline' | 'pair';
+  layout?: 'hero' | 'full-bleed' | 'inline';
   caption?: string;
   alt?: string;
+  height?: string;
 }
 
-const { src, layout = 'inline', caption, alt = '' } = Astro.props;
+const { src, layout = 'inline', caption, alt = '', height = '70vh' } = Astro.props;
 ---
 
-<figure class={`case-study-image case-study-image--${layout}`}>
-  <img src={src} alt={alt} loading="lazy" />
+<figure class={`case-study-image case-study-image--${layout}`} data-parallax>
+  <div class="image-wrapper">
+    <img src={src} alt={alt} loading="lazy" style={layout === 'hero' ? `height: ${height}` : ''} />
+  </div>
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
 
 <style>
   .case-study-image {
-    margin: var(--size-8) 0;
+    margin: var(--size-10) 0;
+  }
+
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
   }
 
   .case-study-image img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: var(--radius-2);
+    border-radius: var(--radius-3);
   }
 
   .case-study-image figcaption {
@@ -34,29 +42,74 @@ const { src, layout = 'inline', caption, alt = '' } = Astro.props;
     text-align: center;
   }
 
+  /* Hero layout - large images (60-85vh) */
+  .case-study-image--hero {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-block: var(--size-12);
+  }
+
+  .case-study-image--hero .image-wrapper {
+    max-width: 100vw;
+    border-radius: 0;
+  }
+
+  .case-study-image--hero img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  @media (min-width: 768px) {
+    .case-study-image--hero {
+      margin-left: calc(-48px);
+      width: calc(100% + 96px);
+      max-width: calc(100% + 96px);
+    }
+
+    .case-study-image--hero .image-wrapper {
+      border-radius: 24px;
+    }
+
+    .case-study-image--hero img {
+      border-radius: 24px;
+    }
+  }
+
   /* Inline layout - stays within text column (default) */
   .case-study-image--inline {
     max-width: 100%;
+  }
+
+  .case-study-image--inline img {
+    max-height: 600px;
+    object-fit: cover;
   }
 
   /* Full-bleed layout - breaks out to full viewport width */
   .case-study-image--full-bleed {
     width: 100vw;
     max-width: 100vw;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin-left: calc(-50vw + 50%);
     position: relative;
   }
 
   .case-study-image--full-bleed img {
     border-radius: 0;
+    max-height: 85vh;
+    object-fit: cover;
   }
 
   @media (max-width: 768px) {
+    .case-study-image--hero,
     .case-study-image--full-bleed {
-      margin-left: 0;
-      transform: none;
-      width: 100%;
+      margin-left: -24px;
+      width: calc(100% + 48px);
+    }
+
+    .case-study-image--hero img {
+      height: 50vh !important;
     }
   }
 </style>

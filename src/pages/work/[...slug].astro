@@ -23,7 +23,15 @@ const {
   tags = [],
 } = entry.data;
 
-// Build metadata line from available fields
+// Build metadata grid items
+const metadataGrid = [
+  { label: 'Role', value: metadata.role },
+  { label: 'Duration', value: metadata.duration || metadata.dates },
+  { label: 'Team', value: metadata.team || metadata.scale },
+  { label: 'Skills', value: metadata.skills },
+].filter(item => item.value);
+
+// Build inline metadata for contexts where we don't show the grid
 const metadataItems = [
   metadata.dates,
   metadata.location,
@@ -35,33 +43,35 @@ const metadataItems = [
 
 <Base title={`${title} — Ron Bronson`}>
   <article class="case-study">
-    <header class="case-study__header">
-      <div class="container">
-        <a href="/#work" class="back-link">&larr; Back to work</a>
+    <!-- Hero Section -->
+    <header class="case-study__hero">
+      <div class="portfolio-container">
+        <a href="/#work" class="back-link">&larr; Back to all work</a>
 
         <div class="case-study__type-badge">
           {type}
         </div>
 
-        <h1>{title}</h1>
+        <h1 class="case-study__headline">{title}</h1>
 
         <p class="case-study__lede">{lede}</p>
 
-        {metadataItems.length > 0 && (
-          <div class="case-study__metadata">
-            {metadataItems.map((item, index) => (
-              <>
-                <span>{item}</span>
-                {index < metadataItems.length - 1 && <span class="separator">|</span>}
-              </>
+        {metadataGrid.length > 0 && (
+          <div class="metadata-grid">
+            {metadataGrid.map(item => (
+              <div class="metadata-item">
+                <div class="metadata-label">{item.label}</div>
+                <div class="metadata-value">{item.value}</div>
+              </div>
             ))}
           </div>
         )}
       </div>
     </header>
 
+    <!-- Content Body -->
     <div class="case-study__body">
-      <div class="container container--narrow">
+      <div class="portfolio-container">
         <Content components={{ 'astro-image': CaseStudyImage, 'astro-image-pair': CaseStudyImagePair }} />
       </div>
     </div>
@@ -84,23 +94,98 @@ const metadataItems = [
       </section>
     )}
 
-    <footer class="case-study__footer container">
+    <footer class="case-study__footer portfolio-container">
       <a href="/#work" class="back-link">&larr; Back to all work</a>
     </footer>
   </article>
+
+  <!-- Parallax scrolling effect -->
+  <script>
+    function initParallax() {
+      const parallaxElements = document.querySelectorAll('[data-parallax]');
+
+      if (parallaxElements.length === 0) return;
+
+      function updateParallax() {
+        parallaxElements.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+
+          // Only apply parallax when element is in viewport
+          if (rect.top < windowHeight && rect.bottom > 0) {
+            const scrolled = window.pageYOffset || window.scrollY;
+            const elementTop = rect.top + scrolled;
+            const parallaxValue = (scrolled - elementTop) * 0.3;
+
+            const img = element.querySelector('img');
+            if (img) {
+              img.style.transform = `translateY(${parallaxValue}px)`;
+            }
+          }
+        });
+      }
+
+      // Throttle scroll events for performance
+      let ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateParallax();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      updateParallax(); // Initial call
+    }
+
+    // Initialize on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initParallax);
+    } else {
+      initParallax();
+    }
+  </script>
 </Base>
 
 <style>
-  .case-study__header {
-    padding-block: var(--size-8) var(--size-7);
-    border-bottom: 1px solid var(--surface-3);
+  /* Portfolio container with responsive padding */
+  .portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    .portfolio-container {
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+
+  /* Hero section */
+  .case-study__hero {
+    min-height: calc(100vh - 73px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .case-study__hero {
+      padding-block: 5rem;
+    }
   }
 
   .back-link {
     display: inline-block;
     font-size: var(--font-size-0);
     color: var(--text-3);
-    margin-bottom: var(--size-4);
+    margin-bottom: var(--size-5);
     text-decoration: none;
   }
 
@@ -112,42 +197,81 @@ const metadataItems = [
     display: inline-block;
     font-family: var(--font-mono);
     font-size: var(--font-size-0);
-    color: var(--brand);
+    color: var(--text-3);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: var(--size-3);
-  }
-
-  .case-study__header h1 {
+    letter-spacing: 0.08em;
     margin-bottom: var(--size-4);
-    font-size: var(--font-size-6);
-    line-height: var(--font-lineheight-1);
   }
 
+  /* Large multi-line headline */
+  .case-study__headline {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: var(--font-weight-7);
+    margin-bottom: var(--size-6);
+    max-width: 20ch;
+  }
+
+  /* Supporting paragraph */
   .case-study__lede {
-    font-size: var(--font-size-3);
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
     color: var(--text-2);
-    margin-bottom: var(--size-4);
+    margin-bottom: var(--size-8);
     max-width: 65ch;
-    line-height: var(--font-lineheight-3);
-    font-weight: var(--font-weight-5);
+    line-height: 1.6;
   }
 
-  .case-study__metadata {
+  /* 4-column metadata grid */
+  .metadata-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--size-6);
+    margin-top: var(--size-8);
+    padding-top: var(--size-6);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  @media (min-width: 768px) {
+    .metadata-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .metadata-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .metadata-item {
     display: flex;
-    gap: var(--size-3);
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .metadata-label {
     font-family: var(--font-mono);
-    font-size: var(--font-size-0);
+    font-size: var(--font-size-00);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--text-3);
   }
 
-  .case-study__metadata .separator {
-    color: var(--surface-3);
+  .metadata-value {
+    font-size: var(--font-size-1);
+    color: var(--text-1);
+    line-height: 1.5;
   }
 
+  /* Content body */
   .case-study__body {
-    padding-block: var(--size-8);
+    padding-block: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .case-study__body {
+      padding-block: 5rem;
+    }
   }
 
   .case-study__body :global(h2) {
@@ -261,8 +385,59 @@ const metadataItems = [
     font-size: var(--font-size-0);
   }
 
-  .case-study__footer {
-    padding-block: var(--size-6);
+  .case-study__links {
+    padding-block: 3rem;
+    background: var(--surface-1);
     border-top: 1px solid var(--surface-3);
+  }
+
+  @media (min-width: 1024px) {
+    .case-study__links {
+      padding-block: 5rem;
+    }
+  }
+
+  .case-study__links h2 {
+    font-size: var(--font-size-3);
+    margin-bottom: var(--size-6);
+    color: var(--text-1);
+  }
+
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+  }
+
+  .links-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    color: var(--brand);
+    text-decoration: none;
+    font-weight: var(--font-weight-5);
+    transition: transform 0.2s ease;
+  }
+
+  .links-list a:hover {
+    transform: translateX(4px);
+  }
+
+  .links-list a i {
+    font-size: var(--font-size-0);
+  }
+
+  .case-study__footer {
+    padding-block: 3rem;
+    border-top: 1px solid var(--surface-3);
+  }
+
+  @media (min-width: 1024px) {
+    .case-study__footer {
+      padding-block: 5rem;
+    }
   }
 </style>
