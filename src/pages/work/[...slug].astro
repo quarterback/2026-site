@@ -135,8 +135,8 @@ const components = {
 
     {links.length > 0 && (
       <section class="case-study__links">
-        <div class="container container--narrow">
-          <h2>Links</h2>
+        <div class="portfolio-container">
+          <h3 class="links-heading">Related Links</h3>
           <ul class="links-list">
             {links.map(link => (
               <li>
@@ -538,16 +538,20 @@ const components = {
     padding: 0;
   }
 
+  /* Links Section */
   .case-study__links {
-    padding-block: var(--size-8);
-    background: var(--surface-1);
-    border-top: 1px solid var(--surface-3);
+    margin-top: var(--space-12);
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-8);
+    border-top: var(--divider-height) solid var(--divider-color);
   }
 
-  .case-study__links h2 {
-    font-size: var(--font-size-3);
-    margin-bottom: var(--size-4);
+  .links-heading {
+    font-family: var(--font-grotesk);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
     color: var(--text-1);
+    margin-bottom: var(--space-6);
   }
 
   .links-list {
@@ -556,70 +560,44 @@ const components = {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--size-3);
+    gap: var(--space-4);
   }
 
   .links-list a {
     display: inline-flex;
     align-items: center;
-    gap: var(--size-2);
+    gap: var(--space-3);
     color: var(--brand);
     text-decoration: none;
-    font-weight: var(--font-weight-5);
-    transition: transform 0.2s ease;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-medium);
+    transition: all 0.2s ease;
   }
 
   .links-list a:hover {
     transform: translateX(4px);
+    color: var(--text-1);
   }
 
   .links-list a i {
-    font-size: var(--font-size-0);
+    font-size: var(--font-size-small);
+    opacity: 0.7;
   }
 
-  .case-study__links {
-    padding-block: 3rem;
-    background: var(--surface-1);
-    border-top: 1px solid var(--surface-3);
-  }
-
-  @media (min-width: 1024px) {
+  @media (max-width: 768px) {
     .case-study__links {
-      padding-block: 5rem;
+      margin-top: var(--space-10);
+      padding-top: var(--space-10);
+      padding-bottom: var(--space-6);
     }
-  }
 
-  .case-study__links h2 {
-    font-size: var(--font-size-3);
-    margin-bottom: var(--size-6);
-    color: var(--text-1);
-  }
+    .links-heading {
+      margin-bottom: var(--space-4);
+    }
 
-  .links-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-4);
-  }
-
-  .links-list a {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--size-2);
-    color: var(--brand);
-    text-decoration: none;
-    font-weight: var(--font-weight-5);
-    transition: transform 0.2s ease;
-  }
-
-  .links-list a:hover {
-    transform: translateX(4px);
-  }
-
-  .links-list a i {
-    font-size: var(--font-size-0);
+    .links-list {
+      gap: var(--space-3);
+    }
   }
 
   .case-study__footer {
