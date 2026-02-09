@@ -82,11 +82,13 @@ const { attribution, image } = Astro.props;
   }
 
   .quote-card__attribution {
-    margin-top: var(--size-3);
-    font-size: var(--font-size-0);
-    color: var(--text-3);
+    margin-top: var(--size-4);
+    padding-top: var(--size-3);
+    border-top: 1px solid var(--surface-3);
+    font-size: var(--font-size-1);
+    color: var(--text-2);
     font-weight: var(--font-weight-5);
-    margin-left: calc(60px + var(--size-4));
+    font-style: normal;
   }
 
   @media (max-width: 600px) {
@@ -104,8 +106,12 @@ const { attribution, image } = Astro.props;
       height: 48px;
     }
 
+    .quote-card__text {
+      font-size: var(--font-size-0);
+    }
+
     .quote-card__attribution {
-      margin-left: 0;
+      font-size: var(--font-size-0);
     }
   }
 </style>

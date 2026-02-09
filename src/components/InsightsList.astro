@@ -15,11 +15,6 @@ const insights = typeof insightsRaw === 'string' ? JSON.parse(insightsRaw) : ins
 <ul class="insights-list">
   {insights.map(insight => (
     <li class="insight-item">
-      {insight.icon && (
-        <div class="insight-icon">
-          <i class={`fas fa-${insight.icon}`}></i>
-        </div>
-      )}
       <p class="insight-text">{insight.text}</p>
     </li>
   ))}
@@ -36,46 +31,22 @@ const insights = typeof insightsRaw === 'string' ? JSON.parse(insightsRaw) : ins
   }
 
   .insight-item {
-    display: flex;
-    gap: var(--size-3);
-    align-items: start;
     background: var(--surface-2);
-    padding: var(--size-4);
+    padding: var(--size-4) var(--size-5);
     border-radius: var(--radius-2);
-    border-left: 3px solid var(--brand);
-  }
-
-  .insight-icon {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: color-mix(in srgb, var(--brand) 15%, var(--surface-1));
-    border-radius: var(--radius-2);
-    color: var(--brand);
-    font-size: var(--font-size-2);
+    border-left: 4px solid var(--brand);
   }
 
   .insight-text {
     margin: 0;
     font-size: var(--font-size-1);
-    line-height: 1.5;
+    line-height: 1.6;
     color: var(--text-2);
-    padding-top: var(--size-2);
   }
 
   @media (max-width: 600px) {
     .insight-item {
-      padding: var(--size-3);
-      gap: var(--size-2);
-    }
-
-    .insight-icon {
-      width: 32px;
-      height: 32px;
-      font-size: var(--font-size-1);
+      padding: var(--size-3) var(--size-4);
     }
 
     .insight-text {

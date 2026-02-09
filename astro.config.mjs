@@ -15,6 +15,7 @@ function remarkCustomDirectives() {
       ) {
         const data = node.data || (node.data = {});
         const attributes = node.attributes || {};
+        const hast = h(node.name, attributes);
 
         // Image directives
         if (node.name === 'image') {
@@ -41,18 +42,19 @@ function remarkCustomDirectives() {
           data.hProperties = {
             before: attributes.before,
             after: attributes.after,
-            beforeLabel: attributes.beforeLabel,
-            afterLabel: attributes.afterLabel,
+            beforeLabel: attributes.beforeLabel || 'Before',
+            afterLabel: attributes.afterLabel || 'After',
             caption: attributes.caption,
           };
         }
 
-        // Callout directive
+        // Callout directive - container with children
         if (node.name === 'callout') {
           data.hName = 'astro-callout';
+          data.hProperties = {};
         }
 
-        // Quote directive
+        // Quote directive - container with children
         if (node.name === 'quote') {
           data.hName = 'astro-quote';
           data.hProperties = {
@@ -98,6 +100,7 @@ function remarkCustomDirectives() {
         // Divider directive
         if (node.name === 'divider') {
           data.hName = 'astro-divider';
+          data.hProperties = {};
         }
       }
     });
