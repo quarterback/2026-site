@@ -1,13 +1,22 @@
 ---
 title: "Consequence Design"
-summary: "Framework for understanding downstream effects of design decisions."
-itemType: "project"
-systemType: "Design theory + practice"
-outcome: "Conference talks, workshops, ongoing research"
+type: "concept"
+lede: "Framework for understanding downstream effects of design decisions. Helping teams identify harm at scale, over time, and in edge cases before they ship."
+metadata:
+  - label: "Timeline"
+    value: "2020-Present"
+  - label: "Role"
+    value: "Framework Author"
+  - label: "Scope"
+    value: "Public talks, workshops, writing"
+  - label: "Status"
+    value: "Ongoing"
+links:
+  - label: "Consequence Design Website"
+    url: "https://consequencedesign.org"
+tags: ["Framework", "Speaking", "Research"]
 order: 2
 featured: false
-tags: ["Framework", "Speaking", "Research"]
-externalUrl: "https://consequencedesign.org"
 ---
 
 ## The problem

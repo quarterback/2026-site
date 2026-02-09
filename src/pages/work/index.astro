@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import Footer from '../../components/Footer.astro';
+
+const allWork = await getCollection('work', ({ data }) => !data.draft);
+const work = allWork.sort((a, b) => a.data.order - b.data.order);
+
+const techStack = [
+  "built hastily using Astro, Open Props, FontAwesome, TypeScript, Inter, JetBrains Mono, Netlify & GitHub"
+];
+---
+
+<Base title="All Work — Ron Bronson">
+  <main>
+    <section>
+      <div class="container">
+        <h1 class="page-heading">All Work</h1>
+        <p class="page-intro">A complete archive of projects, prototypes, and community initiatives spanning federal programs, civic technology, municipal services, and public sector innovation.</p>
+
+        <div class="work-grid">
+          {work.map(item => (
+            <WorkCard
+              title={item.data.title}
+              summary={item.data.summary}
+              systemType={item.data.systemType}
+              outcome={item.data.outcome}
+              href={item.data.externalUrl || `/work/${item.slug}`}
+              tags={item.data.tags}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    techStack={techStack}
+    fonts={[]}
+  />
+</Base>
+
+<style>
+  .page-heading {
+    font-size: clamp(var(--font-size-4), 6vw, var(--font-size-6));
+    margin-bottom: var(--size-3);
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-7);
+  }
+
+  .page-intro {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    max-width: 70ch;
+    line-height: 1.6;
+    margin-bottom: var(--size-6);
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--size-4);
+  }
+
+  @media (max-width: 900px) {
+    .work-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -28,12 +28,13 @@ const tickerItems = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Using Inter as a clean, professional option - swap for preferred font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <!-- Space Grotesk for headers/callouts, Inter for body, JetBrains Mono for code/metrics -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <style>
       :root {
+        --font-grotesk: 'Space Grotesk', system-ui, sans-serif;
         --font-sans: 'Inter', system-ui, sans-serif;
         --font-mono: 'JetBrains Mono', monospace;
       }
@@ -47,5 +48,6 @@ const tickerItems = [
 </html>
 
 <style is:global>
+  @import "../styles/design-tokens.css";
   @import "../styles/global.css";
 </style>

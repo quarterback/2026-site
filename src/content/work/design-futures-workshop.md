@@ -1,15 +1,19 @@
 ---
 title: "Consequence Mapping Workshop"
-summary: "Interactive workshop teaching teams to identify downstream effects of design decisions."
-itemType: "event"
-systemType: "Workshop"
-outcome: "80+ participants across 6 sessions"
+type: "event"
+lede: "Interactive workshop teaching teams to identify downstream effects of design decisions. Hands-on exercises for mapping potential harms, edge cases, and system-level effects before shipping."
+metadata:
+  - label: "Date"
+    value: "March 2025"
+  - label: "Location"
+    value: "Design Futures Conference"
+  - label: "Scale"
+    value: "80+ participants across 6 sessions"
+  - label: "Role"
+    value: "Workshop Facilitator"
+tags: ["Workshop", "Consequence Design", "Training"]
 order: 5
 featured: false
-tags: ["Workshop", "Consequence Design", "Training"]
-venue: "Design Futures Conference"
-date: "March 2025"
-eventPhoto: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
 ---
 
 ## Workshop format

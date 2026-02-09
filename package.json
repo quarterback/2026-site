@@ -8,8 +8,12 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.3.13",
     "@supabase/supabase-js": "^2.95.3",
     "astro": "^5.0.0",
-    "open-props": "^1.7.0"
+    "hastscript": "^9.0.1",
+    "open-props": "^1.7.0",
+    "remark-directive": "^4.0.0",
+    "unist-util-visit": "^5.1.0"
   }
 }

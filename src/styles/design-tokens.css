@@ -1,0 +1,87 @@
+/* Design Tokens: Spacing, Typography, Grid */
+
+:root {
+  /* ===== SPACING SCALE ===== */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-14: 3.5rem;   /* 56px */
+  --space-16: 4rem;     /* 64px */
+
+  /* Section spacing */
+  --section-padding-y: var(--space-10);
+  --section-major-break: var(--space-12);
+
+  /* Element grouping */
+  --heading-to-subheading: var(--space-3);
+  --subheading-to-body: var(--space-4);
+  --body-to-callout: var(--space-6);
+  --paragraph-spacing: var(--space-3);
+
+  /* ===== TYPOGRAPHY SCALE ===== */
+  /* Font sizes */
+  --font-size-h1: 2.25rem;      /* 36px */
+  --font-size-h2: 1.75rem;      /* 28px */
+  --font-size-h3: 1.375rem;     /* 22px */
+  --font-size-body: 1rem;       /* 16px */
+  --font-size-small: 0.875rem;  /* 14px */
+  --font-size-standfirst: 1.125rem; /* 18px */
+
+  /* Line heights */
+  --line-height-h1: 1.15;
+  --line-height-h2: 1.2;
+  --line-height-h3: 1.25;
+  --line-height-body: 1.5;
+  --line-height-tight: 1.1;
+
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Max widths */
+  --body-max-width: 65ch;
+
+  /* ===== GRID SYSTEM ===== */
+  --content-max-width: 960px;
+  --content-max-width-wide: 1400px;
+  --grid-gutter: 1.5rem;
+  --grid-columns: 12;
+  --grid-column: calc((100% - (11 * var(--grid-gutter))) / var(--grid-columns));
+
+  /* Content padding */
+  --content-padding-x: 1.5rem;
+  --content-padding-x-tablet: 2rem;
+  --content-padding-x-desktop: 3rem;
+
+  /* ===== DIVIDERS ===== */
+  --divider-height: 1px;
+  --divider-color: #e0e0e0;
+  --divider-margin-y: var(--space-12);
+
+  /* ===== CALLOUT STYLES ===== */
+  --callout-padding: var(--space-6);
+  --callout-margin-y: var(--space-8);
+  --callout-font-size: var(--font-size-h3);
+  --callout-line-height: var(--line-height-h3);
+  --callout-font-weight: var(--font-weight-semibold);
+  --callout-border-radius: 4px;
+
+  /* ===== METRICS / CARDS ===== */
+  --metric-number-size: 2rem;
+  --metric-number-weight: var(--font-weight-bold);
+  --metric-label-size: var(--font-size-small);
+  --metric-label-weight: var(--font-weight-medium);
+  --metric-card-padding: var(--space-6);
+  --metric-card-gap: var(--grid-gutter);
+
+  /* ===== RESPONSIVE BREAKPOINTS ===== */
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+}

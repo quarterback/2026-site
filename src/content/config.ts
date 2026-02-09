@@ -12,34 +12,39 @@ const work = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    summary: z.string(),
-    itemType: z.enum(['project', 'event']).default('project'),
-    systemType: z.string(),
-    outcome: z.string().optional(),
-    order: z.number().default(99),
-    featured: z.boolean().default(false),
-    tags: z.array(z.string()).default([]),
-    externalUrl: z.string().url().optional(),
-    cover: z.string().optional(),
-    draft: z.boolean().default(false),
-
-    role: z.string().optional(),
-    timeline: z.string().optional(),
-    context: z.string().optional(),
-    venue: z.string().optional(),
-    date: z.string().optional(),
-    eventPhoto: z.string().optional(),
-
-    media: z.array(mediaItem).optional(),
-    artifacts: z.array(z.object({
-      title: z.string(),
-      description: z.string().optional(),
+    type: z.enum(['event', 'program', 'delivery', 'concept', 'leadership']),
+    lede: z.string(),
+    hero: z.object({
       image: z.string().optional(),
-      link: z.string().optional(),
-    })).optional(),
-
-    impact: z.array(z.string()).optional(),
-    approach: z.array(z.string()).optional(),
+      layout: z.enum(['full-bleed', 'contained', 'devices']).default('contained'),
+    }).optional(),
+    metadata: z.union([
+      // New flexible array format
+      z.array(z.object({
+        label: z.string(),
+        value: z.string(),
+      })),
+      // Old object format for backwards compatibility
+      z.object({
+        dates: z.string().optional(),
+        duration: z.string().optional(),
+        location: z.string().optional(),
+        role: z.string().optional(),
+        team: z.string().optional(),
+        scale: z.string().optional(),
+        skills: z.string().optional(),
+        status: z.string().optional(),
+      }),
+    ]).optional(),
+    links: z.array(z.object({
+      label: z.string(),
+      url: z.string().url(),
+    })).default([]),
+    tags: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
+    order: z.number().default(99),
+    toc: z.boolean().default(false),
+    draft: z.boolean().default(false),
   }),
 });
 
