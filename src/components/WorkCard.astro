@@ -27,6 +27,16 @@ const {
   coverImage
 } = Astro.props;
 
+// Map project types to descriptive category labels
+const categoryLabels: Record<string, string> = {
+  delivery: 'Cross-functional service delivery',
+  program: 'Program strategy & design',
+  event: 'Community engagement & events',
+  concept: 'Conceptual framework & research',
+  leadership: 'Organizational leadership',
+};
+const categoryLabel = categoryLabels[type] || type;
+
 // Build metadata line from available fields
 const metadataItems = [
   metadata.dates,
@@ -54,6 +64,7 @@ const metadataLine = metadataItems.length > 0 ? metadataItems[0] : '';
         <span class="work-card__type">{type}</span>
         <h3 class="work-card__title">{title}</h3>
         <p class="work-card__lede">{lede}</p>
+        <span class="work-card__category">{categoryLabel}</span>
         {metadataItems.length > 0 && (
           <div class="work-card__metadata">
             {metadataItems.map((item, index) => (
@@ -72,6 +83,7 @@ const metadataLine = metadataItems.length > 0 ? metadataItems[0] : '';
       <span class="work-card__type">{type}</span>
       <h3 class="work-card__title">{title}</h3>
       {metadataLine && <p class="work-card__metadata-single">{metadataLine}</p>}
+      <span class="work-card__category">{categoryLabel}</span>
       <span class="work-card__link">Read more →</span>
     </div>
   )}
@@ -190,6 +202,17 @@ const metadataLine = metadataItems.length > 0 ? metadataItems[0] : '';
     font-size: var(--font-size-00);
     color: var(--text-3);
     margin-bottom: var(--size-3);
+  }
+
+  .work-card__category {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    font-variant: all-small-caps;
+    letter-spacing: 0.06em;
+    color: var(--text-3);
+    margin-bottom: var(--size-3);
+    line-height: 1.4;
   }
 
   .work-card__link {

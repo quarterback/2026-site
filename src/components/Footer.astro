@@ -45,6 +45,12 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
       ))}
     </div>
 
+    <div class="license-badge">
+      <a href="/privacy" title="Parachute Commons License">
+        <img src="/badges/parachute-commons.svg" alt="license: Parachute Commons" height="20" />
+      </a>
+    </div>
+
     {(techStack.length > 0 || fonts.length > 0) && (
       <div class="colophon">
         {techStack.length > 0 && (
@@ -85,6 +91,22 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
 
   .social-link:hover {
     color: var(--brand);
+  }
+
+  .license-badge {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--size-4);
+  }
+
+  .license-badge a {
+    display: inline-block;
+    line-height: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .license-badge a:hover {
+    opacity: 0.8;
   }
 
   .colophon {
