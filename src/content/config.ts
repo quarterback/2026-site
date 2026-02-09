@@ -14,16 +14,28 @@ const work = defineCollection({
     title: z.string(),
     type: z.enum(['event', 'program', 'delivery', 'concept', 'leadership']),
     lede: z.string(),
-    metadata: z.object({
-      dates: z.string().optional(),
-      duration: z.string().optional(),
-      location: z.string().optional(),
-      role: z.string().optional(),
-      team: z.string().optional(),
-      scale: z.string().optional(),
-      skills: z.string().optional(),
-      status: z.string().optional(),
+    hero: z.object({
+      image: z.string().optional(),
+      layout: z.enum(['full-bleed', 'contained', 'devices']).default('contained'),
     }).optional(),
+    metadata: z.union([
+      // New flexible array format
+      z.array(z.object({
+        label: z.string(),
+        value: z.string(),
+      })),
+      // Old object format for backwards compatibility
+      z.object({
+        dates: z.string().optional(),
+        duration: z.string().optional(),
+        location: z.string().optional(),
+        role: z.string().optional(),
+        team: z.string().optional(),
+        scale: z.string().optional(),
+        skills: z.string().optional(),
+        status: z.string().optional(),
+      }),
+    ]).optional(),
     links: z.array(z.object({
       label: z.string(),
       url: z.string().url(),
@@ -31,6 +43,7 @@ const work = defineCollection({
     tags: z.array(z.string()).default([]),
     featured: z.boolean().default(false),
     order: z.number().default(99),
+    toc: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
 });
