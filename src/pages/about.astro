@@ -78,6 +78,17 @@ const fonts = [
             <p>Currently, I'm a service design consultant working with government agencies and public-sector organizations. I also teach in the Urban Technology program at the University of Michigan, where I help students understand how technology shapes cities and public life.</p>
 
             <p>Outside of work, I'm a tea sommelier, high school tennis coach, and host a local radio show. I believe the same systems thinking that helps design better public services also helps you steep a perfect cup of tea.</p>
+
+            <div class="contact-ctas">
+              <a href="mailto:hello@ronbronson.dev" class="cta-button cta-button--primary">
+                Email me
+                <i class="fas fa-envelope"></i>
+              </a>
+              <a href="https://linkedin.com/in/ronbronson" class="cta-button cta-button--secondary" target="_blank" rel="noopener noreferrer">
+                Let's connect
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </div>
           </div>
 
           <aside class="sidebar">
@@ -151,6 +162,55 @@ const fonts = [
 
   .bio-text p:last-child {
     margin-bottom: 0;
+  }
+
+  /* Contact CTAs */
+  .contact-ctas {
+    display: flex;
+    gap: var(--size-4);
+    flex-wrap: wrap;
+    margin-top: var(--size-6);
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    padding: var(--size-3) var(--size-6);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+    text-decoration: none;
+    border-radius: var(--radius-2);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .cta-button--primary {
+    background: var(--text-1);
+    color: var(--surface-1);
+    border: 2px solid var(--text-1);
+  }
+
+  .cta-button--primary:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .cta-button--secondary {
+    background: transparent;
+    color: var(--text-1);
+    border: 2px solid var(--surface-3);
+  }
+
+  .cta-button--secondary:hover {
+    border-color: var(--text-1);
+    transform: translateY(-2px);
+  }
+
+  .cta-button i {
+    font-size: var(--font-size-1);
   }
 
   .sidebar {
