@@ -116,15 +116,6 @@ const components = {
             </div>
           )}
 
-          {/* Tags */}
-          {tags.length > 0 && (
-            <div class="hero-tags">
-              {tags.map(tag => (
-                <span class="tag-badge">{tag}</span>
-              ))}
-            </div>
-          )}
-
           {/* Hero Image */}
           {hero?.image && (
             <div class={`hero-image hero-image--${hero.layout || 'contained'}`}>
@@ -412,9 +403,9 @@ const components = {
     align-items: center;
     gap: var(--space-3);
     font-family: var(--font-mono);
-    font-size: var(--font-size-00);
+    font-size: var(--font-size-0);
     color: var(--text-3);
-    margin-bottom: var(--space-3);
+    margin-bottom: var(--space-6);
   }
 
   .metadata-item-inline {
@@ -431,24 +422,6 @@ const components = {
   .metadata-separator {
     color: var(--text-3);
     opacity: 0.5;
-  }
-
-  /* Tags */
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-bottom: var(--space-6);
-  }
-
-  .tag-badge {
-    display: inline-block;
-    padding: var(--space-1) var(--space-3);
-    font-size: var(--font-size-00);
-    font-weight: var(--font-weight-medium);
-    color: var(--text-3);
-    background: var(--surface-2);
-    border-radius: var(--radius-1);
   }
 
   /* Hero Image */
