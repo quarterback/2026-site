@@ -90,33 +90,47 @@ const components = {
       <div class="portfolio-container">
         <a href="/#work" class="back-link">&larr; Back to all work</a>
 
-        <div class={`hero-layout ${hero?.image ? 'hero-layout--with-image' : 'hero-layout--simple'}`}>
-          {/* Metadata Column (Left) */}
-          {metadataList.length > 0 && (
-            <aside class="hero-metadata">
-              {metadataList.map(item => (
-                <div class="metadata-item">
-                  <div class="metadata-label">{item.label}</div>
-                  <div class="metadata-value">{item.value}</div>
-                </div>
-              ))}
-            </aside>
+        <div class="hero-layout-stacked">
+          {/* Type Badge */}
+          {type && (
+            <span class="type-badge">{type}</span>
           )}
 
-          {/* Title + Lede + Image (Right) */}
-          <div class="hero-content">
-            {type && (
-              <span class="type-badge">{type}</span>
-            )}
-            <h1 class="case-study__title">{title}</h1>
-            <p class="case-study__lede">{lede}</p>
+          {/* Title */}
+          <h1 class="case-study__title">{title}</h1>
 
-            {hero?.image && (
-              <div class={`hero-image hero-image--${hero.layout || 'contained'}`}>
-                <img src={hero.image} alt={title} loading="eager" />
-              </div>
-            )}
-          </div>
+          {/* Lede */}
+          <p class="case-study__lede">{lede}</p>
+
+          {/* Metadata inline */}
+          {metadataList.length > 0 && (
+            <div class="hero-metadata-inline">
+              {metadataList.map((item, index) => (
+                <>
+                  <span class="metadata-item-inline">
+                    <span class="metadata-label-inline">{item.label}:</span> {item.value}
+                  </span>
+                  {index < metadataList.length - 1 && <span class="metadata-separator">·</span>}
+                </>
+              ))}
+            </div>
+          )}
+
+          {/* Tags */}
+          {tags.length > 0 && (
+            <div class="hero-tags">
+              {tags.map(tag => (
+                <span class="tag-badge">{tag}</span>
+              ))}
+            </div>
+          )}
+
+          {/* Hero Image */}
+          {hero?.image && (
+            <div class={`hero-image hero-image--${hero.layout || 'contained'}`}>
+              <img src={hero.image} alt={title} loading="eager" />
+            </div>
+          )}
         </div>
       </div>
     </header>
@@ -349,86 +363,26 @@ const components = {
     color: var(--brand);
   }
 
-  /* Hero Layout: Metadata left, Content right */
-  .hero-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--size-8);
-  }
-
-  .hero-layout--with-image {
-    grid-template-columns: 1fr 2fr;
-    gap: var(--size-10);
-  }
-
-  @media (min-width: 900px) {
-    .hero-layout--simple {
-      grid-template-columns: 250px 1fr;
-      gap: var(--size-10);
-    }
-  }
-
-  @media (max-width: 900px) {
-    .hero-layout {
-      grid-template-columns: 1fr !important;
-      gap: var(--size-6);
-    }
-
-    .hero-metadata {
-      order: 2;
-    }
-
-    .hero-content {
-      order: 1;
-    }
-  }
-
-  /* Metadata Column (Left) */
-  .hero-metadata {
+  /* Hero Layout: Stacked vertical */
+  .hero-layout-stacked {
     display: flex;
     flex-direction: column;
-    gap: var(--size-5);
-  }
-
-  .metadata-item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-1);
-  }
-
-  .metadata-label {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-00);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-3);
-  }
-
-  .metadata-value {
-    font-size: var(--font-size-1);
-    color: var(--text-1);
-    line-height: 1.4;
-  }
-
-  /* Title + Lede (Right) */
-  .hero-content {
-    display: flex;
-    flex-direction: column;
+    gap: var(--space-4);
   }
 
   /* Type Badge */
   .type-badge {
     display: inline-block;
     padding: var(--space-2) var(--space-4);
-    font-size: var(--font-size-small);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.10em;
     color: var(--brand);
-    background: color-mix(in srgb, var(--brand) 10%, var(--surface-1));
-    border: 1px solid color-mix(in srgb, var(--brand) 20%, var(--surface-3));
-    border-radius: 999px;
-    margin-bottom: var(--space-4);
+    background: transparent;
+    border: none;
+    margin-bottom: var(--space-2);
     width: fit-content;
   }
 
@@ -446,9 +400,55 @@ const components = {
   .case-study__lede {
     font-size: clamp(1.125rem, 2.5vw, 1.375rem);
     color: var(--text-2);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-4);
     max-width: 75ch;
     line-height: 1.6;
+  }
+
+  /* Metadata Inline */
+  .hero-metadata-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    color: var(--text-3);
+    margin-bottom: var(--space-3);
+  }
+
+  .metadata-item-inline {
+    display: inline-flex;
+    gap: var(--space-2);
+  }
+
+  .metadata-label-inline {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-3);
+  }
+
+  .metadata-separator {
+    color: var(--text-3);
+    opacity: 0.5;
+  }
+
+  /* Tags */
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .tag-badge {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--font-size-00);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-3);
+    background: var(--surface-2);
+    border-radius: var(--radius-1);
   }
 
   /* Hero Image */
