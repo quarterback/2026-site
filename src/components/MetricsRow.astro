@@ -23,46 +23,45 @@ const metrics = typeof metricsRaw === 'string' ? JSON.parse(metricsRaw) : metric
 
 <style>
   .metrics-row {
-    display: flex;
-    gap: var(--size-6);
-    flex-wrap: wrap;
-    margin-block: var(--size-6);
-    padding: var(--size-5);
-    background: var(--surface-2);
-    border-radius: var(--radius-2);
-    border: 1px solid var(--surface-3);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--metric-card-gap);
+    margin-block: var(--space-8);
   }
 
   .metric-item {
     display: flex;
     flex-direction: column;
-    gap: var(--size-1);
+    gap: var(--space-2);
+    padding: var(--metric-card-padding);
+    background: var(--surface-2);
+    border-radius: var(--callout-border-radius);
+    border: 1px solid var(--surface-3);
   }
 
   .metric-value {
-    font-size: var(--font-size-4);
-    font-weight: var(--font-weight-7);
+    font-size: var(--metric-number-size);
+    font-weight: var(--metric-number-weight);
+    line-height: var(--line-height-tight);
     color: var(--brand);
-    line-height: 1;
-    font-family: var(--font-mono);
   }
 
   .metric-label {
-    font-size: var(--font-size-0);
+    font-size: var(--metric-label-size);
+    font-weight: var(--metric-label-weight);
     color: var(--text-3);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    font-family: var(--font-mono);
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .metrics-row {
-      padding: var(--size-4);
-      gap: var(--size-4);
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
     }
 
-    .metric-value {
-      font-size: var(--font-size-3);
+    .metric-item {
+      padding: var(--space-4);
     }
   }
 </style>

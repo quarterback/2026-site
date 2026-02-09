@@ -230,16 +230,23 @@ const components = {
 <style>
   /* Portfolio container */
   .portfolio-container {
-    max-width: 1400px;
+    max-width: var(--content-max-width);
     margin: 0 auto;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: var(--content-padding-x);
+    padding-right: var(--content-padding-x);
+  }
+
+  @media (min-width: 768px) {
+    .portfolio-container {
+      padding-left: var(--content-padding-x-tablet);
+      padding-right: var(--content-padding-x-tablet);
+    }
   }
 
   @media (min-width: 1024px) {
     .portfolio-container {
-      padding-left: 64px;
-      padding-right: 64px;
+      padding-left: var(--content-padding-x-desktop);
+      padding-right: var(--content-padding-x-desktop);
     }
   }
 
@@ -323,7 +330,7 @@ const components = {
 
   /* Hero Block Layout */
   .case-study__hero {
-    padding-block: clamp(3rem, 8vh, 6rem);
+    padding-block: var(--section-padding-y);
   }
 
   .back-link {
@@ -453,61 +460,63 @@ const components = {
 
   /* Content body */
   .case-study__body {
-    padding-block: clamp(3rem, 8vh, 6rem);
+    padding-block: var(--section-padding-y);
   }
 
   .case-study__body :global(h2) {
-    font-size: clamp(1.75rem, 3vw, 2.25rem);
-    margin-top: var(--size-9);
-    margin-bottom: var(--size-5);
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
+    font-weight: var(--font-weight-bold);
+    margin-top: var(--section-major-break);
+    margin-bottom: var(--subheading-to-body);
     color: var(--text-1);
-    line-height: 1.3;
-    font-weight: var(--font-weight-7);
+  }
+
+  .case-study__body :global(h2:first-child) {
+    margin-top: 0;
   }
 
   .case-study__body :global(h3) {
-    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
-    margin-top: var(--size-7);
-    margin-bottom: var(--size-4);
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    font-weight: var(--font-weight-semibold);
+    margin-top: var(--space-8);
+    margin-bottom: var(--heading-to-subheading);
     color: var(--text-1);
-    line-height: 1.4;
-    font-weight: var(--font-weight-6);
-  }
-
-  .case-study__body :global(h4) {
-    font-size: var(--font-size-2);
-    margin-top: var(--size-5);
-    margin-bottom: var(--size-3);
-    color: var(--text-2);
-    line-height: var(--font-lineheight-2);
   }
 
   .case-study__body :global(p) {
-    margin-bottom: var(--size-5);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    margin-bottom: var(--paragraph-spacing);
     color: var(--text-2);
-    line-height: 1.7;
-    max-width: 85ch;
-    font-size: var(--font-size-1);
+    max-width: var(--body-max-width);
+  }
+
+  .case-study__body :global(p + p) {
+    margin-top: var(--paragraph-spacing);
   }
 
   .case-study__body :global(ul),
   .case-study__body :global(ol) {
-    margin-bottom: var(--size-4);
-    padding-left: var(--size-5);
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-6);
     color: var(--text-2);
+    max-width: var(--body-max-width);
   }
 
   .case-study__body :global(li) {
-    margin-bottom: var(--size-2);
-    line-height: var(--font-lineheight-4);
+    margin-bottom: var(--space-2);
+    line-height: var(--line-height-body);
   }
 
   .case-study__body :global(blockquote) {
     border-left: 3px solid var(--brand);
-    padding-left: var(--size-5);
-    margin-block: var(--size-6);
+    padding-left: var(--space-6);
+    margin-block: var(--space-6);
     font-style: italic;
     color: var(--text-2);
+    max-width: var(--body-max-width);
   }
 
   .case-study__body :global(code) {

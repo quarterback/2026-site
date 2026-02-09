@@ -7,16 +7,15 @@
 <style>
   .section-divider {
     border: none;
-    height: 1px;
-    background: var(--surface-3);
-    margin-block: var(--size-10);
-    max-width: 200px;
-    margin-inline: auto;
+    height: var(--divider-height);
+    background: var(--divider-color);
+    margin-block: var(--divider-margin-y);
+    max-width: 100%;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .section-divider {
-      margin-block: var(--size-8);
+      margin-block: var(--space-8);
     }
   }
 </style>
