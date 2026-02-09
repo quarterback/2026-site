@@ -6,21 +6,25 @@ interface StatusItem {
 
 interface Props {
   items: StatusItem[];
+  name?: string;
 }
 
-const { items } = Astro.props;
+const { items, name = "Ron Bronson" } = Astro.props;
 ---
 
 <div class="ticker">
-  <div class="ticker__track">
-    {items.map((item, i) => (
-      <>
-        {i > 0 && <span class="ticker__separator">·</span>}
-        <a href={item.url} class="ticker__link">
-          {item.label}
-        </a>
-      </>
-    ))}
+  <div class="ticker__container">
+    <a href="/" class="ticker__name">{name}</a>
+    <div class="ticker__track">
+      {items.map((item, i) => (
+        <>
+          {i > 0 && <span class="ticker__separator">·</span>}
+          <a href={item.url} class="ticker__link">
+            {item.label}
+          </a>
+        </>
+      ))}
+    </div>
   </div>
 </div>
 
@@ -31,18 +35,39 @@ const { items } = Astro.props;
     z-index: 50;
     background: var(--surface-1);
     border-bottom: 1px solid var(--surface-3);
-    padding-block: var(--size-2);
+    padding-block: var(--size-3);
     font-family: var(--font-mono);
     font-size: var(--font-size-00);
     letter-spacing: 0.02em;
-    overflow: hidden;
+  }
+
+  .ticker__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--size-4);
+    padding-inline: var(--size-5);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .ticker__name {
+    font-weight: var(--font-weight-7);
+    font-size: var(--font-size-1);
+    color: var(--text-1);
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: var(--font-sans);
+  }
+
+  .ticker__name:hover {
+    color: var(--brand);
   }
 
   .ticker__track {
     display: flex;
     align-items: center;
     gap: var(--size-3);
-    padding-inline: var(--size-4);
     white-space: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
@@ -54,13 +79,22 @@ const { items } = Astro.props;
     display: none;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .ticker {
       font-size: 0.7rem;
+      padding-block: var(--size-2);
+    }
+
+    .ticker__container {
+      padding-inline: var(--size-3);
+      gap: var(--size-3);
+    }
+
+    .ticker__name {
+      font-size: var(--font-size-0);
     }
 
     .ticker__track {
-      padding-inline: var(--size-3);
       gap: var(--size-2);
     }
   }
