@@ -90,33 +90,38 @@ const components = {
       <div class="portfolio-container">
         <a href="/#work" class="back-link">&larr; Back to all work</a>
 
-        <div class={`hero-layout ${hero?.image ? 'hero-layout--with-image' : 'hero-layout--simple'}`}>
-          {/* Metadata Column (Left) */}
-          {metadataList.length > 0 && (
-            <aside class="hero-metadata">
-              {metadataList.map(item => (
-                <div class="metadata-item">
-                  <div class="metadata-label">{item.label}</div>
-                  <div class="metadata-value">{item.value}</div>
-                </div>
-              ))}
-            </aside>
+        <div class="hero-layout-stacked">
+          {/* Type Badge */}
+          {type && (
+            <span class="type-badge">{type}</span>
           )}
 
-          {/* Title + Lede + Image (Right) */}
-          <div class="hero-content">
-            {type && (
-              <span class="type-badge">{type}</span>
-            )}
-            <h1 class="case-study__title">{title}</h1>
-            <p class="case-study__lede">{lede}</p>
+          {/* Title */}
+          <h1 class="case-study__title">{title}</h1>
 
-            {hero?.image && (
-              <div class={`hero-image hero-image--${hero.layout || 'contained'}`}>
-                <img src={hero.image} alt={title} loading="eager" />
-              </div>
-            )}
-          </div>
+          {/* Lede */}
+          <p class="case-study__lede">{lede}</p>
+
+          {/* Metadata inline */}
+          {metadataList.length > 0 && (
+            <div class="hero-metadata-inline">
+              {metadataList.map((item, index) => (
+                <>
+                  <span class="metadata-item-inline">
+                    <span class="metadata-label-inline">{item.label}:</span> {item.value}
+                  </span>
+                  {index < metadataList.length - 1 && <span class="metadata-separator">·</span>}
+                </>
+              ))}
+            </div>
+          )}
+
+          {/* Hero Image */}
+          {hero?.image && (
+            <div class={`hero-image hero-image--${hero.layout || 'contained'}`}>
+              <img src={hero.image} alt={title} loading="eager" />
+            </div>
+          )}
         </div>
       </div>
     </header>
@@ -130,8 +135,8 @@ const components = {
 
     {links.length > 0 && (
       <section class="case-study__links">
-        <div class="container container--narrow">
-          <h2>Links</h2>
+        <div class="portfolio-container">
+          <h3 class="links-heading">Related Links</h3>
           <ul class="links-list">
             {links.map(link => (
               <li>
@@ -333,7 +338,8 @@ const components = {
 
   /* Hero Block Layout */
   .case-study__hero {
-    padding-block: var(--section-padding-y);
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-14);
   }
 
   .back-link {
@@ -348,103 +354,74 @@ const components = {
     color: var(--brand);
   }
 
-  /* Hero Layout: Metadata left, Content right */
-  .hero-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--size-8);
-  }
-
-  .hero-layout--with-image {
-    grid-template-columns: 1fr 2fr;
-    gap: var(--size-10);
-  }
-
-  @media (min-width: 900px) {
-    .hero-layout--simple {
-      grid-template-columns: 250px 1fr;
-      gap: var(--size-10);
-    }
-  }
-
-  @media (max-width: 900px) {
-    .hero-layout {
-      grid-template-columns: 1fr !important;
-      gap: var(--size-6);
-    }
-
-    .hero-metadata {
-      order: 2;
-    }
-
-    .hero-content {
-      order: 1;
-    }
-  }
-
-  /* Metadata Column (Left) */
-  .hero-metadata {
+  /* Hero Layout: Stacked vertical */
+  .hero-layout-stacked {
     display: flex;
     flex-direction: column;
-    gap: var(--size-5);
-  }
-
-  .metadata-item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-1);
-  }
-
-  .metadata-label {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-00);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-3);
-  }
-
-  .metadata-value {
-    font-size: var(--font-size-1);
-    color: var(--text-1);
-    line-height: 1.4;
-  }
-
-  /* Title + Lede (Right) */
-  .hero-content {
-    display: flex;
-    flex-direction: column;
+    gap: var(--space-4);
   }
 
   /* Type Badge */
   .type-badge {
     display: inline-block;
     padding: var(--space-2) var(--space-4);
-    font-size: var(--font-size-small);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.10em;
     color: var(--brand);
-    background: color-mix(in srgb, var(--brand) 10%, var(--surface-1));
-    border: 1px solid color-mix(in srgb, var(--brand) 20%, var(--surface-3));
-    border-radius: 999px;
-    margin-bottom: var(--space-4);
+    background: transparent;
+    border: none;
+    margin-bottom: var(--space-2);
     width: fit-content;
   }
 
   .case-study__title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 1.1;
+    font-family: var(--font-grotesk);
+    font-size: clamp(2.5rem, 5.5vw, 2.75rem);
+    line-height: 1.15;
     font-weight: var(--font-weight-7);
-    margin-bottom: var(--size-5);
+    margin-bottom: var(--space-6);
     color: var(--text-1);
+    letter-spacing: -0.02em;
+    /* NO max-width - allows wide, dramatic titles */
   }
 
   .case-study__lede {
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(1.125rem, 2.5vw, 1.375rem);
     color: var(--text-2);
-    margin-bottom: var(--size-6);
-    max-width: 65ch;
+    margin-bottom: var(--space-4);
+    max-width: 75ch;
     line-height: 1.6;
+  }
+
+  /* Metadata Inline */
+  .hero-metadata-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .metadata-item-inline {
+    display: inline-flex;
+    gap: var(--space-2);
+  }
+
+  .metadata-label-inline {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-3);
+  }
+
+  .metadata-separator {
+    color: var(--text-3);
+    opacity: 0.5;
   }
 
   /* Hero Image */
@@ -483,6 +460,7 @@ const components = {
   }
 
   .case-study__body :global(h2) {
+    font-family: var(--font-grotesk);
     font-size: var(--font-size-h2);
     line-height: var(--line-height-h2);
     font-weight: var(--font-weight-bold);
@@ -496,6 +474,7 @@ const components = {
   }
 
   .case-study__body :global(h3) {
+    font-family: var(--font-grotesk);
     font-size: var(--font-size-h3);
     line-height: var(--line-height-h3);
     font-weight: var(--font-weight-semibold);
@@ -559,16 +538,20 @@ const components = {
     padding: 0;
   }
 
+  /* Links Section */
   .case-study__links {
-    padding-block: var(--size-8);
-    background: var(--surface-1);
-    border-top: 1px solid var(--surface-3);
+    margin-top: var(--space-12);
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-8);
+    border-top: var(--divider-height) solid var(--divider-color);
   }
 
-  .case-study__links h2 {
-    font-size: var(--font-size-3);
-    margin-bottom: var(--size-4);
+  .links-heading {
+    font-family: var(--font-grotesk);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
     color: var(--text-1);
+    margin-bottom: var(--space-6);
   }
 
   .links-list {
@@ -577,70 +560,44 @@ const components = {
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--size-3);
+    gap: var(--space-4);
   }
 
   .links-list a {
     display: inline-flex;
     align-items: center;
-    gap: var(--size-2);
+    gap: var(--space-3);
     color: var(--brand);
     text-decoration: none;
-    font-weight: var(--font-weight-5);
-    transition: transform 0.2s ease;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-medium);
+    transition: all 0.2s ease;
   }
 
   .links-list a:hover {
     transform: translateX(4px);
+    color: var(--text-1);
   }
 
   .links-list a i {
-    font-size: var(--font-size-0);
+    font-size: var(--font-size-small);
+    opacity: 0.7;
   }
 
-  .case-study__links {
-    padding-block: 3rem;
-    background: var(--surface-1);
-    border-top: 1px solid var(--surface-3);
-  }
-
-  @media (min-width: 1024px) {
+  @media (max-width: 768px) {
     .case-study__links {
-      padding-block: 5rem;
+      margin-top: var(--space-10);
+      padding-top: var(--space-10);
+      padding-bottom: var(--space-6);
     }
-  }
 
-  .case-study__links h2 {
-    font-size: var(--font-size-3);
-    margin-bottom: var(--size-6);
-    color: var(--text-1);
-  }
+    .links-heading {
+      margin-bottom: var(--space-4);
+    }
 
-  .links-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-4);
-  }
-
-  .links-list a {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--size-2);
-    color: var(--brand);
-    text-decoration: none;
-    font-weight: var(--font-weight-5);
-    transition: transform 0.2s ease;
-  }
-
-  .links-list a:hover {
-    transform: translateX(4px);
-  }
-
-  .links-list a i {
-    font-size: var(--font-size-0);
+    .links-list {
+      gap: var(--space-3);
+    }
   }
 
   .case-study__footer {
