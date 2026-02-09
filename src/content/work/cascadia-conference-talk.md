@@ -1,15 +1,17 @@
 ---
 title: "Beyond Civic Tech: Public Mechanics Starts at Home"
-summary: "Conference talk about the systems that keep public services running after launch day."
-itemType: "event"
-systemType: "Conference Talk"
-outcome: "Presented to 300+ attendees"
+type: "event"
+lede: "Conference talk about the systems that keep public services running after launch day—the invisible maintenance work, workarounds, and repair practices that hold services together."
+metadata:
+  dates: "October 2025"
+  location: "Cascadia Open Source Conference"
+  scale: "300+ attendees"
+links:
+  - label: "Watch on YouTube"
+    url: "https://youtube.com/watch?v=hnAScuK-oMo"
+tags: ["Speaking", "Public Service", "Systems"]
 order: 4
 featured: true
-tags: ["Speaking", "Public Service", "Systems"]
-venue: "Cascadia Open Source Conference"
-date: "October 2025"
-eventPhoto: "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
 ---
 
 ## Overview

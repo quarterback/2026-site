@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import MediaEmbed from '../../components/MediaEmbed.astro';
-import ArtifactCard from '../../components/ArtifactCard.astro';
+import CaseStudyImage from '../../components/CaseStudyImage.astro';
+import CaseStudyImagePair from '../../components/CaseStudyImagePair.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work', ({ data }) => !data.draft);
@@ -13,235 +13,296 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 const {
   title,
-  summary,
-  itemType = 'project',
-  systemType,
-  outcome,
-  tags,
-  role,
-  timeline,
-  context,
-  venue,
-  date,
-  eventPhoto,
-  media = [],
-  artifacts = [],
-  impact = [],
-  approach = []
+  type,
+  lede,
+  metadata = {},
+  links = [],
+  tags = [],
 } = entry.data;
+
+// Build metadata grid items
+const metadataGrid = [
+  { label: 'Role', value: metadata.role },
+  { label: 'Duration', value: metadata.duration || metadata.dates },
+  { label: 'Team', value: metadata.team || metadata.scale },
+  { label: 'Skills', value: metadata.skills },
+].filter(item => item.value);
+
+// Build inline metadata for contexts where we don't show the grid
+const metadataItems = [
+  metadata.dates,
+  metadata.location,
+  metadata.role,
+  metadata.scale,
+  metadata.status,
+].filter(Boolean);
 ---
 
 <Base title={`${title} — Ron Bronson`}>
   <article class="case-study">
-    <header class="case-study__header">
-      <div class="container">
-        <a href="/#work" class="back-link">&larr; Back to {itemType === 'event' ? 'events' : 'work'}</a>
-        <div class="case-study__meta">
-          <span class="case-study__type">{systemType}</span>
-          {itemType === 'event' && venue && <span class="case-study__venue">{venue}</span>}
-          {itemType === 'event' && date && <span class="case-study__date">{date}</span>}
-          {itemType === 'project' && role && <span class="case-study__role">{role}</span>}
-          {itemType === 'project' && timeline && <span class="case-study__timeline">{timeline}</span>}
+    <!-- Hero Section -->
+    <header class="case-study__hero">
+      <div class="portfolio-container">
+        <a href="/#work" class="back-link">&larr; Back to all work</a>
+
+        <div class="case-study__type-badge">
+          {type}
         </div>
-        <h1>{title}</h1>
-        <p class="case-study__summary">{summary}</p>
-        {context && <p class="case-study__context">{context}</p>}
+
+        <h1 class="case-study__headline">{title}</h1>
+
+        <p class="case-study__lede">{lede}</p>
+
+        {metadataGrid.length > 0 && (
+          <div class="metadata-grid">
+            {metadataGrid.map(item => (
+              <div class="metadata-item">
+                <div class="metadata-label">{item.label}</div>
+                <div class="metadata-value">{item.value}</div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </header>
 
-    {itemType === 'event' && eventPhoto && (
-      <div class="event-photo">
-        <img src={eventPhoto} alt={title} />
-      </div>
-    )}
-
+    <!-- Content Body -->
     <div class="case-study__body">
-      <div class="container container--narrow">
-        <Content />
-
-        {approach.length > 0 && (
-          <section class="case-study__section">
-            <h2>Approach</h2>
-            <ul class="case-study__list">
-              {approach.map(item => <li>{item}</li>)}
-            </ul>
-          </section>
-        )}
-
-        {impact.length > 0 && (
-          <section class="case-study__section">
-            <h2>Impact</h2>
-            <ul class="case-study__list">
-              {impact.map(item => <li>{item}</li>)}
-            </ul>
-          </section>
-        )}
-
-        {media.length > 0 && (
-          <section class="case-study__section">
-            <h2>Media</h2>
-            {media.map(item => (
-              <MediaEmbed {...item} />
-            ))}
-          </section>
-        )}
-
-        {artifacts.length > 0 && (
-          <section class="case-study__section">
-            <h2>Artifacts</h2>
-            <div class="artifacts-grid">
-              {artifacts.map(artifact => (
-                <ArtifactCard {...artifact} />
-              ))}
-            </div>
-          </section>
-        )}
+      <div class="portfolio-container">
+        <Content components={{ 'astro-image': CaseStudyImage, 'astro-image-pair': CaseStudyImagePair }} />
       </div>
     </div>
 
-    <footer class="case-study__footer container">
-      <a href="/#work" class="back-link">&larr; Back to all {itemType === 'event' ? 'events' : 'work'}</a>
+    {links.length > 0 && (
+      <section class="case-study__links">
+        <div class="container container--narrow">
+          <h2>Links</h2>
+          <ul class="links-list">
+            {links.map(link => (
+              <li>
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                  <i class="fas fa-external-link-alt"></i>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )}
+
+    <footer class="case-study__footer portfolio-container">
+      <a href="/#work" class="back-link">&larr; Back to all work</a>
     </footer>
   </article>
+
+  <!-- Parallax scrolling effect -->
+  <script>
+    function initParallax() {
+      const parallaxElements = document.querySelectorAll('[data-parallax]');
+
+      if (parallaxElements.length === 0) return;
+
+      function updateParallax() {
+        parallaxElements.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+
+          // Only apply parallax when element is in viewport
+          if (rect.top < windowHeight && rect.bottom > 0) {
+            const scrolled = window.pageYOffset || window.scrollY;
+            const elementTop = rect.top + scrolled;
+            const parallaxValue = (scrolled - elementTop) * 0.3;
+
+            const img = element.querySelector('img');
+            if (img) {
+              img.style.transform = `translateY(${parallaxValue}px)`;
+            }
+          }
+        });
+      }
+
+      // Throttle scroll events for performance
+      let ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateParallax();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      updateParallax(); // Initial call
+    }
+
+    // Initialize on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initParallax);
+    } else {
+      initParallax();
+    }
+  </script>
 </Base>
 
 <style>
-  .case-study__header {
-    padding-block: var(--size-8) var(--size-7);
-    border-bottom: 1px solid var(--surface-3);
+  /* Portfolio container with responsive padding */
+  .portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    .portfolio-container {
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+
+  /* Hero section */
+  .case-study__hero {
+    min-height: calc(100vh - 73px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .case-study__hero {
+      padding-block: 5rem;
+    }
   }
 
   .back-link {
     display: inline-block;
     font-size: var(--font-size-0);
     color: var(--text-3);
-    margin-bottom: var(--size-4);
+    margin-bottom: var(--size-5);
+    text-decoration: none;
   }
 
   .back-link:hover {
     color: var(--brand);
   }
 
-  .case-study__meta {
-    display: flex;
-    gap: var(--size-3);
-    flex-wrap: wrap;
-    margin-bottom: var(--size-3);
+  .case-study__type-badge {
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: var(--font-size-0);
-  }
-
-  .case-study__type {
-    color: var(--brand);
-  }
-
-  .case-study__role,
-  .case-study__timeline,
-  .case-study__venue,
-  .case-study__date {
     color: var(--text-3);
-  }
-
-  .event-photo {
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    background: var(--surface-1);
-  }
-
-  .event-photo img {
-    width: 100%;
-    height: auto;
-    max-height: 600px;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-  }
-
-  .case-study__header h1 {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     margin-bottom: var(--size-4);
   }
 
-  .case-study__summary {
-    font-size: var(--font-size-2);
+  /* Large multi-line headline */
+  .case-study__headline {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    font-weight: var(--font-weight-7);
+    margin-bottom: var(--size-6);
+    max-width: 20ch;
+  }
+
+  /* Supporting paragraph */
+  .case-study__lede {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
     color: var(--text-2);
-    margin-bottom: var(--size-3);
+    margin-bottom: var(--size-8);
     max-width: 65ch;
+    line-height: 1.6;
   }
 
-  .case-study__context {
-    font-size: var(--font-size-1);
-    color: var(--text-3);
-    max-width: 65ch;
-  }
-
-  .case-study__body {
-    padding-block: var(--size-8);
-  }
-
-  .case-study__section {
-    margin-top: var(--size-8);
-  }
-
-  .case-study__section:first-child {
-    margin-top: 0;
-  }
-
-  .case-study__section h2 {
-    font-size: var(--font-size-3);
-    margin-bottom: var(--size-4);
-    color: var(--text-1);
-  }
-
-  .case-study__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .case-study__list li {
-    padding-left: var(--size-5);
-    margin-bottom: var(--size-3);
-    position: relative;
-    color: var(--text-2);
-    line-height: var(--font-lineheight-3);
-  }
-
-  .case-study__list li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: var(--brand);
-    font-weight: var(--font-weight-6);
-  }
-
-  .artifacts-grid {
+  /* 4-column metadata grid */
+  .metadata-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--size-4);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--size-6);
+    margin-top: var(--size-8);
+    padding-top: var(--size-6);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  @media (min-width: 768px) {
+    .metadata-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .metadata-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .metadata-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .metadata-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+  }
+
+  .metadata-value {
+    font-size: var(--font-size-1);
+    color: var(--text-1);
+    line-height: 1.5;
+  }
+
+  /* Content body */
+  .case-study__body {
+    padding-block: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .case-study__body {
+      padding-block: 5rem;
+    }
   }
 
   .case-study__body :global(h2) {
-    font-size: var(--font-size-3);
+    font-size: var(--font-size-4);
     margin-top: var(--size-8);
     margin-bottom: var(--size-4);
     color: var(--text-1);
+    line-height: var(--font-lineheight-2);
   }
 
   .case-study__body :global(h3) {
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-3);
     margin-top: var(--size-6);
     margin-bottom: var(--size-3);
     color: var(--text-1);
+    line-height: var(--font-lineheight-2);
+  }
+
+  .case-study__body :global(h4) {
+    font-size: var(--font-size-2);
+    margin-top: var(--size-5);
+    margin-bottom: var(--size-3);
+    color: var(--text-2);
+    line-height: var(--font-lineheight-2);
   }
 
   .case-study__body :global(p) {
     margin-bottom: var(--size-4);
     color: var(--text-2);
-    line-height: var(--font-lineheight-3);
+    line-height: var(--font-lineheight-4);
+    max-width: 70ch;
   }
 
   .case-study__body :global(ul),
@@ -253,21 +314,130 @@ const {
 
   .case-study__body :global(li) {
     margin-bottom: var(--size-2);
-    line-height: var(--font-lineheight-3);
+    line-height: var(--font-lineheight-4);
   }
 
-  .case-study__body :global(img) {
-    max-width: 100%;
-    border-radius: var(--radius-2);
+  .case-study__body :global(blockquote) {
+    border-left: 3px solid var(--brand);
+    padding-left: var(--size-5);
     margin-block: var(--size-6);
-    border: 1px solid var(--surface-3);
-    padding: var(--size-2);
+    font-style: italic;
+    color: var(--text-2);
+  }
+
+  .case-study__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    background: var(--surface-2);
+    padding: var(--size-1) var(--size-2);
+    border-radius: var(--radius-1);
+  }
+
+  .case-study__body :global(pre) {
+    background: var(--surface-2);
+    padding: var(--size-4);
+    border-radius: var(--radius-2);
+    overflow-x: auto;
+    margin-block: var(--size-6);
+  }
+
+  .case-study__body :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+
+  .case-study__links {
+    padding-block: var(--size-8);
     background: var(--surface-1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .case-study__links h2 {
+    font-size: var(--font-size-3);
+    margin-bottom: var(--size-4);
+    color: var(--text-1);
+  }
+
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .links-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    color: var(--brand);
+    text-decoration: none;
+    font-weight: var(--font-weight-5);
+    transition: transform 0.2s ease;
+  }
+
+  .links-list a:hover {
+    transform: translateX(4px);
+  }
+
+  .links-list a i {
+    font-size: var(--font-size-0);
+  }
+
+  .case-study__links {
+    padding-block: 3rem;
+    background: var(--surface-1);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  @media (min-width: 1024px) {
+    .case-study__links {
+      padding-block: 5rem;
+    }
+  }
+
+  .case-study__links h2 {
+    font-size: var(--font-size-3);
+    margin-bottom: var(--size-6);
+    color: var(--text-1);
+  }
+
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+  }
+
+  .links-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    color: var(--brand);
+    text-decoration: none;
+    font-weight: var(--font-weight-5);
+    transition: transform 0.2s ease;
+  }
+
+  .links-list a:hover {
+    transform: translateX(4px);
+  }
+
+  .links-list a i {
+    font-size: var(--font-size-0);
   }
 
   .case-study__footer {
-    padding-block: var(--size-5);
+    padding-block: 3rem;
     border-top: 1px solid var(--surface-3);
+  }
+
+  @media (min-width: 1024px) {
+    .case-study__footer {
+      padding-block: 5rem;
+    }
   }
 </style>

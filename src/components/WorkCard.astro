@@ -1,25 +1,80 @@
 ---
-interface Props {
-  title: string;
-  summary: string;
-  systemType: string;
-  outcome?: string;
-  href: string;
-  tags?: string[];
+interface Metadata {
+  dates?: string;
+  location?: string;
+  role?: string;
+  scale?: string;
+  status?: string;
 }
 
-const { title, summary, systemType, outcome, href, tags = [] } = Astro.props;
-const isExternal = href.startsWith('http');
+interface Props {
+  title: string;
+  type: string;
+  lede: string;
+  metadata?: Metadata;
+  href: string;
+  featured?: boolean;
+  coverImage?: string;
+}
+
+const {
+  title,
+  type,
+  lede,
+  metadata = {},
+  href,
+  featured = false,
+  coverImage
+} = Astro.props;
+
+// Build metadata line from available fields
+const metadataItems = [
+  metadata.dates,
+  metadata.location,
+  metadata.role,
+  metadata.scale,
+  metadata.status,
+].filter(Boolean);
+
+const metadataLine = metadataItems.length > 0 ? metadataItems[0] : '';
 ---
 
-<a href={href} class="work-card" target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener" : undefined}>
-  <p class="work-card__type">{systemType}</p>
-  <h3 class="work-card__title">{title}</h3>
-  <p class="work-card__summary">{summary}</p>
-  {outcome && <p class="work-card__outcome">{outcome}</p>}
-  <span class="work-card__link">
-    {isExternal ? "View project →" : "Read case study →"}
-  </span>
+<a
+  href={href}
+  class={`work-card ${featured ? 'work-card--featured' : 'work-card--compact'}`}
+>
+  {featured ? (
+    <>
+      {coverImage && (
+        <div class="work-card__image">
+          <img src={coverImage} alt={title} loading="lazy" />
+        </div>
+      )}
+      <div class="work-card__content">
+        <span class="work-card__type">{type}</span>
+        <h3 class="work-card__title">{title}</h3>
+        <p class="work-card__lede">{lede}</p>
+        {metadataItems.length > 0 && (
+          <div class="work-card__metadata">
+            {metadataItems.map((item, index) => (
+              <>
+                <span>{item}</span>
+                {index < metadataItems.length - 1 && <span class="separator">·</span>}
+              </>
+            ))}
+          </div>
+        )}
+        <span class="work-card__link">Read more →</span>
+      </div>
+    </>
+  ) : (
+    <div class="work-card__content">
+      <span class="work-card__type">{type}</span>
+      <h3 class="work-card__title">{title}</h3>
+      {metadataLine && <p class="work-card__metadata-single">{metadataLine}</p>}
+      <span class="work-card__link">Read more →</span>
+    </div>
+  )}
 </a>
 
 <style>
@@ -28,24 +83,62 @@ const isExternal = href.startsWith('http');
     background: var(--surface-2);
     border: 1px solid var(--surface-3);
     border-radius: var(--radius-2);
-    padding: var(--size-4);
     text-decoration: none;
-    transition: border-color 0.15s ease, background 0.15s ease;
-    min-height: 44px;
+    transition: all 0.2s ease;
+    overflow: hidden;
   }
 
   .work-card:hover {
     border-color: var(--brand);
-    background: var(--surface-2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Featured card layout */
+  .work-card--featured {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .work-card--featured .work-card__content {
+    padding: var(--size-5);
+  }
+
+  .work-card__image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: var(--surface-1);
+  }
+
+  .work-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .work-card:hover .work-card__image img {
+    transform: scale(1.05);
+  }
+
+  /* Compact card layout */
+  .work-card--compact .work-card__content {
+    padding: var(--size-4);
   }
 
   @media (max-width: 600px) {
-    .work-card {
+    .work-card__content {
       padding: var(--size-3);
+    }
+
+    .work-card__image {
+      height: 160px;
     }
   }
 
   .work-card__type {
+    display: inline-block;
     font-family: var(--font-mono);
     font-size: var(--font-size-00);
     text-transform: uppercase;
@@ -55,21 +148,44 @@ const isExternal = href.startsWith('http');
   }
 
   .work-card__title {
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-3);
     font-weight: var(--font-weight-6);
     color: var(--text-1);
     margin-bottom: var(--size-2);
     line-height: var(--font-lineheight-2);
   }
 
-  .work-card__summary {
-    font-size: var(--font-size-0);
-    color: var(--text-2);
+  .work-card--compact .work-card__title {
+    font-size: var(--font-size-2);
     margin-bottom: var(--size-2);
-    line-height: var(--font-lineheight-3);
   }
 
-  .work-card__outcome {
+  .work-card__lede {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    margin-bottom: var(--size-3);
+    line-height: var(--font-lineheight-3);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .work-card__metadata {
+    display: flex;
+    gap: var(--size-2);
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    color: var(--text-3);
+    margin-bottom: var(--size-3);
+  }
+
+  .work-card__metadata .separator {
+    color: var(--surface-4);
+  }
+
+  .work-card__metadata-single {
     font-family: var(--font-mono);
     font-size: var(--font-size-00);
     color: var(--text-3);
@@ -80,6 +196,7 @@ const isExternal = href.startsWith('http');
     font-size: var(--font-size-0);
     color: var(--brand);
     font-weight: var(--font-weight-5);
+    display: inline-block;
   }
 
   .work-card:hover .work-card__link {

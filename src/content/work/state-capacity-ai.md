@@ -1,12 +1,13 @@
 ---
 title: "State Capacity AI"
-summary: "Exploring how AI can strengthen public institutions."
-itemType: "project"
-systemType: "AI + decision systems"
-outcome: "Ongoing research and prototyping"
+type: "program"
+lede: "Exploring how AI can strengthen public institutions. Focusing on decision support systems that augment caseworkers, not replace them—maintaining human agency while improving accuracy."
+metadata:
+  status: "Ongoing"
+  role: "Lead Product"
+tags: ["AI", "Policy", "Research"]
 order: 3
 featured: false
-tags: ["AI", "Policy", "Research"]
 ---
 
 ## The problem
