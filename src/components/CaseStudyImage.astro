@@ -1,0 +1,62 @@
+---
+interface Props {
+  src: string;
+  layout?: 'full-bleed' | 'inline' | 'pair';
+  caption?: string;
+  alt?: string;
+}
+
+const { src, layout = 'inline', caption, alt = '' } = Astro.props;
+---
+
+<figure class={`case-study-image case-study-image--${layout}`}>
+  <img src={src} alt={alt} loading="lazy" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .case-study-image {
+    margin: var(--size-8) 0;
+  }
+
+  .case-study-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-2);
+  }
+
+  .case-study-image figcaption {
+    margin-top: var(--size-3);
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    font-style: italic;
+    text-align: center;
+  }
+
+  /* Inline layout - stays within text column (default) */
+  .case-study-image--inline {
+    max-width: 100%;
+  }
+
+  /* Full-bleed layout - breaks out to full viewport width */
+  .case-study-image--full-bleed {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+  }
+
+  .case-study-image--full-bleed img {
+    border-radius: 0;
+  }
+
+  @media (max-width: 768px) {
+    .case-study-image--full-bleed {
+      margin-left: 0;
+      transform: none;
+      width: 100%;
+    }
+  }
+</style>

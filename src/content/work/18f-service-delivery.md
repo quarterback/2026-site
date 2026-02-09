@@ -1,12 +1,18 @@
 ---
 title: "Service Delivery at Scale"
-summary: "Design leadership across federal programs serving millions."
-itemType: "project"
-systemType: "Eligibility + intake systems"
-outcome: "Patterns adopted across multiple agencies"
+type: "delivery"
+lede: "Design leadership across federal programs serving millions. Working at the intersection of policy intent and delivery reality to improve how eligibility systems, intake processes, and service recovery work in practice."
+metadata:
+  dates: "2019-2023"
+  role: "Design Lead"
+  scale: "4+ federal programs"
+  status: "Patterns adopted"
+links:
+  - label: "18F Portfolio"
+    url: "https://18f.gsa.gov"
+tags: ["Service Design", "Federal", "Systems"]
 order: 1
 featured: true
-tags: ["Service Design", "Federal", "Systems"]
 ---
 
 ## Snapshot
