@@ -3,6 +3,12 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import CaseStudyImage from '../../components/CaseStudyImage.astro';
 import CaseStudyImagePair from '../../components/CaseStudyImagePair.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import Callout from '../../components/Callout.astro';
+import QuoteCard from '../../components/QuoteCard.astro';
+import InsightsList from '../../components/InsightsList.astro';
+import MetricsRow from '../../components/MetricsRow.astro';
+import SectionDivider from '../../components/SectionDivider.astro';
 
 export async function getStaticPaths() {
   const work = await getCollection('work', ({ data }) => !data.draft);
@@ -18,61 +24,104 @@ const {
   title,
   type,
   lede,
-  metadata = {},
+  hero,
+  metadata,
   links = [],
   tags = [],
+  toc = false,
 } = entry.data;
 
-// Build metadata grid items
-const metadataGrid = [
-  { label: 'Role', value: metadata.role },
-  { label: 'Duration', value: metadata.duration || metadata.dates },
-  { label: 'Team', value: metadata.team || metadata.scale },
-  { label: 'Skills', value: metadata.skills },
-].filter(item => item.value);
+// Parse metadata - support both array and object formats
+let metadataList = [];
+if (Array.isArray(metadata)) {
+  metadataList = metadata;
+} else if (metadata && typeof metadata === 'object') {
+  // Convert old object format to array
+  const fields = [
+    { label: 'Type', value: type },
+    { label: 'Role', value: metadata.role },
+    { label: 'Duration', value: metadata.duration || metadata.dates },
+    { label: 'Location', value: metadata.location },
+    { label: 'Team', value: metadata.team },
+    { label: 'Scale', value: metadata.scale },
+    { label: 'Skills', value: metadata.skills },
+    { label: 'Status', value: metadata.status },
+  ];
+  metadataList = fields.filter(item => item.value);
+}
 
-// Build inline metadata for contexts where we don't show the grid
-const metadataItems = [
-  metadata.dates,
-  metadata.location,
-  metadata.role,
-  metadata.scale,
-  metadata.status,
-].filter(Boolean);
+// Generate TOC from H2 headings
+const tocItems = toc ? headings.filter(h => h.depth === 2) : [];
+
+// All components for MDX
+const components = {
+  'astro-image': CaseStudyImage,
+  'astro-image-pair': CaseStudyImagePair,
+  'astro-before-after': BeforeAfter,
+  'astro-callout': Callout,
+  'astro-quote': QuoteCard,
+  'astro-insights': InsightsList,
+  'astro-metrics': MetricsRow,
+  'astro-divider': SectionDivider,
+};
 ---
 
 <Base title={`${title} — Ron Bronson`}>
   <article class="case-study">
-    <!-- Hero Section -->
+    <!-- TOC Navigation (if enabled) -->
+    {toc && tocItems.length > 0 && (
+      <nav class="toc-nav" id="toc-nav">
+        <button class="toc-toggle" id="toc-toggle">
+          <i class="fas fa-bars"></i> Skip to
+        </button>
+        <div class="toc-menu" id="toc-menu">
+          <div class="toc-header">Jump to section</div>
+          {tocItems.map(item => (
+            <a href={`#${item.slug}`} class="toc-link">
+              {item.text}
+            </a>
+          ))}
+        </div>
+      </nav>
+    )}
+
+    <!-- Hero Block -->
     <header class="case-study__hero">
       <div class="portfolio-container">
         <a href="/#work" class="back-link">&larr; Back to all work</a>
 
-        <div class="case-study__type-badge">
-          {type}
-        </div>
+        <div class={`hero-layout ${hero?.image ? 'hero-layout--with-image' : 'hero-layout--simple'}`}>
+          {/* Metadata Column (Left) */}
+          {metadataList.length > 0 && (
+            <aside class="hero-metadata">
+              {metadataList.map(item => (
+                <div class="metadata-item">
+                  <div class="metadata-label">{item.label}</div>
+                  <div class="metadata-value">{item.value}</div>
+                </div>
+              ))}
+            </aside>
+          )}
 
-        <h1 class="case-study__headline">{title}</h1>
+          {/* Title + Lede + Image (Right) */}
+          <div class="hero-content">
+            <h1 class="case-study__title">{title}</h1>
+            <p class="case-study__lede">{lede}</p>
 
-        <p class="case-study__lede">{lede}</p>
-
-        {metadataGrid.length > 0 && (
-          <div class="metadata-grid">
-            {metadataGrid.map(item => (
-              <div class="metadata-item">
-                <div class="metadata-label">{item.label}</div>
-                <div class="metadata-value">{item.value}</div>
+            {hero?.image && (
+              <div class={`hero-image hero-image--${hero.layout || 'contained'}`}>
+                <img src={hero.image} alt={title} loading="eager" />
               </div>
-            ))}
+            )}
           </div>
-        )}
+        </div>
       </div>
     </header>
 
     <!-- Content Body -->
     <div class="case-study__body">
       <div class="portfolio-container">
-        <Content components={{ 'astro-image': CaseStudyImage, 'astro-image-pair': CaseStudyImagePair }} />
+        <Content {components} />
       </div>
     </div>
 
@@ -98,6 +147,34 @@ const metadataItems = [
       <a href="/#work" class="back-link">&larr; Back to all work</a>
     </footer>
   </article>
+
+  <!-- TOC Toggle Script -->
+  <script>
+    function initTOC() {
+      const toggle = document.getElementById('toc-toggle');
+      const menu = document.getElementById('toc-menu');
+
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => {
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!toggle.contains(e.target) && !menu.contains(e.target)) {
+          menu.style.display = 'none';
+        }
+      });
+    }
+
+    // Initialize on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTOC);
+    } else {
+      initTOC();
+    }
+  </script>
 
   <!-- Parallax scrolling effect -->
   <script>
@@ -151,7 +228,7 @@ const metadataItems = [
 </Base>
 
 <style>
-  /* Portfolio container with responsive padding */
+  /* Portfolio container */
   .portfolio-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -166,26 +243,94 @@ const metadataItems = [
     }
   }
 
-  /* Hero section */
-  .case-study__hero {
-    min-height: calc(100vh - 73px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-block: 3rem;
+  /* TOC Navigation */
+  .toc-nav {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 100;
   }
 
-  @media (min-width: 1024px) {
-    .case-study__hero {
-      padding-block: 5rem;
+  .toc-toggle {
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    padding: var(--size-2) var(--size-4);
+    border-radius: var(--radius-2);
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--size-2);
+    font-family: var(--font-mono);
+  }
+
+  .toc-toggle:hover {
+    border-color: var(--brand);
+    color: var(--text-1);
+  }
+
+  .toc-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: var(--size-2);
+    background: var(--surface-1);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-3);
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+
+  .toc-toggle:focus + .toc-menu,
+  .toc-toggle:hover + .toc-menu,
+  .toc-menu:hover {
+    display: block;
+  }
+
+  .toc-header {
+    font-size: var(--font-size-00);
+    font-weight: var(--font-weight-6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-3);
+    margin-bottom: var(--size-2);
+    padding-bottom: var(--size-2);
+    border-bottom: 1px solid var(--surface-3);
+  }
+
+  .toc-link {
+    display: block;
+    padding: var(--size-2);
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    text-decoration: none;
+    border-radius: var(--radius-1);
+  }
+
+  .toc-link:hover {
+    background: var(--surface-2);
+    color: var(--text-1);
+  }
+
+  @media (max-width: 900px) {
+    .toc-nav {
+      display: none;
     }
+  }
+
+  /* Hero Block Layout */
+  .case-study__hero {
+    padding-block: clamp(3rem, 8vh, 6rem);
   }
 
   .back-link {
     display: inline-block;
     font-size: var(--font-size-0);
     color: var(--text-3);
-    margin-bottom: var(--size-5);
+    margin-bottom: var(--size-6);
     text-decoration: none;
   }
 
@@ -193,60 +338,51 @@ const metadataItems = [
     color: var(--brand);
   }
 
-  .case-study__type-badge {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: var(--font-size-0);
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: var(--size-4);
-  }
-
-  /* Large multi-line headline */
-  .case-study__headline {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    line-height: 1.1;
-    font-weight: var(--font-weight-7);
-    margin-bottom: var(--size-6);
-    max-width: 20ch;
-  }
-
-  /* Supporting paragraph */
-  .case-study__lede {
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
-    color: var(--text-2);
-    margin-bottom: var(--size-8);
-    max-width: 65ch;
-    line-height: 1.6;
-  }
-
-  /* 4-column metadata grid */
-  .metadata-grid {
+  /* Hero Layout: Metadata left, Content right */
+  .hero-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--size-6);
-    margin-top: var(--size-8);
-    padding-top: var(--size-6);
-    border-top: 1px solid var(--surface-3);
+    grid-template-columns: 1fr;
+    gap: var(--size-8);
   }
 
-  @media (min-width: 768px) {
-    .metadata-grid {
-      grid-template-columns: repeat(2, 1fr);
+  .hero-layout--with-image {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--size-10);
+  }
+
+  @media (min-width: 900px) {
+    .hero-layout--simple {
+      grid-template-columns: 250px 1fr;
+      gap: var(--size-10);
     }
   }
 
-  @media (min-width: 1024px) {
-    .metadata-grid {
-      grid-template-columns: repeat(4, 1fr);
+  @media (max-width: 900px) {
+    .hero-layout {
+      grid-template-columns: 1fr !important;
+      gap: var(--size-6);
     }
+
+    .hero-metadata {
+      order: 2;
+    }
+
+    .hero-content {
+      order: 1;
+    }
+  }
+
+  /* Metadata Column (Left) */
+  .hero-metadata {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-5);
   }
 
   .metadata-item {
     display: flex;
     flex-direction: column;
-    gap: var(--size-2);
+    gap: var(--size-1);
   }
 
   .metadata-label {
@@ -260,18 +396,64 @@ const metadataItems = [
   .metadata-value {
     font-size: var(--font-size-1);
     color: var(--text-1);
-    line-height: 1.5;
+    line-height: 1.4;
+  }
+
+  /* Title + Lede (Right) */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .case-study__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    font-weight: var(--font-weight-7);
+    margin-bottom: var(--size-5);
+    color: var(--text-1);
+  }
+
+  .case-study__lede {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-2);
+    margin-bottom: var(--size-6);
+    max-width: 65ch;
+    line-height: 1.6;
+  }
+
+  /* Hero Image */
+  .hero-image {
+    margin-top: var(--size-6);
+    border-radius: var(--radius-3);
+    overflow: hidden;
+  }
+
+  .hero-image--contained {
+    max-width: 100%;
+  }
+
+  .hero-image--full-bleed {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    border-radius: 0;
+  }
+
+  .hero-image--devices {
+    display: flex;
+    gap: var(--size-4);
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   /* Content body */
   .case-study__body {
-    padding-block: 3rem;
-  }
-
-  @media (min-width: 1024px) {
-    .case-study__body {
-      padding-block: 5rem;
-    }
+    padding-block: clamp(3rem, 8vh, 6rem);
   }
 
   .case-study__body :global(h2) {
