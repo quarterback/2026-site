@@ -3,8 +3,14 @@ title: "State Capacity AI"
 type: "program"
 lede: "Exploring how AI can strengthen public institutions. Focusing on decision support systems that augment caseworkers, not replace them—maintaining human agency while improving accuracy."
 metadata:
-  status: "Ongoing"
-  role: "Lead Product"
+  - label: "Timeline"
+    value: "2024-Present"
+  - label: "Role"
+    value: "Lead Product"
+  - label: "Focus"
+    value: "Decision support systems"
+  - label: "Status"
+    value: "Ongoing research"
 tags: ["AI", "Policy", "Research"]
 order: 3
 featured: false

@@ -1,0 +1,68 @@
+---
+interface Metric {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  metrics: Metric[] | string;
+}
+
+const { metrics: metricsRaw } = Astro.props;
+const metrics = typeof metricsRaw === 'string' ? JSON.parse(metricsRaw) : metricsRaw;
+---
+
+<div class="metrics-row">
+  {metrics.map(metric => (
+    <div class="metric-item">
+      <div class="metric-value">{metric.value}</div>
+      <div class="metric-label">{metric.label}</div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .metrics-row {
+    display: flex;
+    gap: var(--size-6);
+    flex-wrap: wrap;
+    margin-block: var(--size-6);
+    padding: var(--size-5);
+    background: var(--surface-2);
+    border-radius: var(--radius-2);
+    border: 1px solid var(--surface-3);
+  }
+
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  .metric-value {
+    font-size: var(--font-size-4);
+    font-weight: var(--font-weight-7);
+    color: var(--brand);
+    line-height: 1;
+    font-family: var(--font-mono);
+  }
+
+  .metric-label {
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 600px) {
+    .metrics-row {
+      padding: var(--size-4);
+      gap: var(--size-4);
+    }
+
+    .metric-value {
+      font-size: var(--font-size-3);
+    }
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+interface Props {
+  before: string;
+  after: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  caption?: string;
+}
+
+const {
+  before,
+  after,
+  beforeLabel = 'Before',
+  afterLabel = 'After',
+  caption
+} = Astro.props;
+---
+
+<figure class="before-after">
+  <div class="before-after__grid">
+    <div class="before-after__item">
+      <span class="before-after__label">{beforeLabel}</span>
+      <img src={before} alt={beforeLabel} loading="lazy" />
+    </div>
+    <div class="before-after__item">
+      <span class="before-after__label">{afterLabel}</span>
+      <img src={after} alt={afterLabel} loading="lazy" />
+    </div>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .before-after {
+    margin-block: var(--size-8);
+  }
+
+  .before-after__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--size-4);
+  }
+
+  .before-after__item {
+    position: relative;
+    border-radius: var(--radius-2);
+    overflow: hidden;
+    border: 1px solid var(--surface-3);
+  }
+
+  .before-after__label {
+    position: absolute;
+    top: var(--size-3);
+    left: var(--size-3);
+    background: var(--surface-1);
+    color: var(--text-1);
+    padding: var(--size-1) var(--size-3);
+    border-radius: var(--radius-1);
+    font-size: var(--font-size-00);
+    font-weight: var(--font-weight-6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: var(--font-mono);
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .before-after__item img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .before-after figcaption {
+    margin-top: var(--size-3);
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    font-style: italic;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .before-after__grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-3);
+    }
+  }
+</style>

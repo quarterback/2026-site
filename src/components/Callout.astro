@@ -1,0 +1,42 @@
+---
+interface Props {
+  children?: any;
+}
+
+const { children } = Astro.props;
+---
+
+<div class="callout">
+  <slot />
+</div>
+
+<style>
+  .callout {
+    background: color-mix(in srgb, var(--brand) 8%, var(--surface-1));
+    border-left: 4px solid var(--brand);
+    padding: var(--callout-padding);
+    margin-block: var(--callout-margin-y);
+    border-radius: var(--callout-border-radius);
+    max-width: var(--body-max-width);
+  }
+
+  .callout :global(p) {
+    font-size: var(--callout-font-size);
+    line-height: var(--callout-line-height);
+    font-weight: var(--callout-font-weight);
+    color: var(--text-1);
+    margin: 0;
+    font-style: normal;
+  }
+
+  .callout :global(strong) {
+    font-weight: var(--font-weight-bold);
+  }
+
+  @media (max-width: 768px) {
+    .callout {
+      padding: var(--space-4);
+      margin-block: var(--space-6);
+    }
+  }
+</style>

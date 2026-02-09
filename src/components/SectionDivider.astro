@@ -1,0 +1,21 @@
+---
+// Simple section divider component
+---
+
+<hr class="section-divider" />
+
+<style>
+  .section-divider {
+    border: none;
+    height: var(--divider-height);
+    background: var(--divider-color);
+    margin-block: var(--divider-margin-y);
+    max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .section-divider {
+      margin-block: var(--space-8);
+    }
+  }
+</style>
