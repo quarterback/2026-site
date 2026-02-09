@@ -64,19 +64,16 @@ function remarkCustomDirectives() {
         // Insights directive
         if (node.name === 'insights') {
           data.hName = 'astro-insights';
-          // Parse children as YAML-like structure
-          const insights = [];
-          if (node.children) {
-            node.children.forEach(child => {
-              if (child.type === 'listItem' || child.type === 'paragraph') {
-                // Extract icon and text from markdown list items
-                // This is a simplified parser - adjust as needed
-                insights.push({
-                  icon: child.data?.icon || '',
-                  text: child.children?.[0]?.value || ''
-                });
-              }
-            });
+          // Parse insights from attributes
+          let insights = [];
+          if (attributes.insights) {
+            try {
+              insights = typeof attributes.insights === 'string'
+                ? JSON.parse(attributes.insights)
+                : attributes.insights;
+            } catch (e) {
+              console.error('Failed to parse insights:', e);
+            }
           }
           data.hProperties = { insights: JSON.stringify(insights) };
         }
@@ -84,7 +81,18 @@ function remarkCustomDirectives() {
         // Metrics directive
         if (node.name === 'metrics') {
           data.hName = 'astro-metrics';
-          // Similar parsing for metrics
+          // Parse metrics from attributes
+          let metrics = [];
+          if (attributes.metrics) {
+            try {
+              metrics = typeof attributes.metrics === 'string'
+                ? JSON.parse(attributes.metrics)
+                : attributes.metrics;
+            } catch (e) {
+              console.error('Failed to parse metrics:', e);
+            }
+          }
+          data.hProperties = { metrics: JSON.stringify(metrics) };
         }
 
         // Divider directive

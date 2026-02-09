@@ -5,10 +5,11 @@ interface Insight {
 }
 
 interface Props {
-  insights: Insight[];
+  insights: Insight[] | string;
 }
 
-const { insights } = Astro.props;
+const { insights: insightsRaw } = Astro.props;
+const insights = typeof insightsRaw === 'string' ? JSON.parse(insightsRaw) : insightsRaw;
 ---
 
 <ul class="insights-list">

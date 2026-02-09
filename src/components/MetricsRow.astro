@@ -5,10 +5,11 @@ interface Metric {
 }
 
 interface Props {
-  metrics: Metric[];
+  metrics: Metric[] | string;
 }
 
-const { metrics } = Astro.props;
+const { metrics: metricsRaw } = Astro.props;
+const metrics = typeof metricsRaw === 'string' ? JSON.parse(metricsRaw) : metricsRaw;
 ---
 
 <div class="metrics-row">
