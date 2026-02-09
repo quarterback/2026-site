@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="Privacy & License — Ron Bronson">
+  <main>
+    <section>
+      <div class="container container--narrow">
+        <a href="/" class="back-link">← Back</a>
+
+        <h1>Privacy & License</h1>
+
+        <div class="badge-display">
+          <img src="/badges/parachute-commons.svg" alt="license: Parachute Commons" height="20" />
+        </div>
+
+        <h2>Privacy</h2>
+        <p>This site does not track you. There are no analytics, no cookies for tracking purposes, no fingerprinting, and no third-party scripts collecting your data. You are simply reading a website.</p>
+
+        <h2>License</h2>
+        <p>Original content on this site is protected under the <strong>Parachute Commons License (PCL) v1.0</strong>.</p>
+
+        <h3>What you can do</h3>
+        <ul>
+          <li>Use this work for personal, educational, and research purposes</li>
+          <li>Modify and adapt with proper attribution</li>
+          <li>Distribute with attribution and a link to the original</li>
+        </ul>
+
+        <h3>What requires permission</h3>
+        <ul>
+          <li>Commercial use beyond personal or educational scope</li>
+          <li>Use in automated systems or training datasets</li>
+          <li>Bulk or systematic extraction</li>
+          <li>Use by organizations with 50+ employees</li>
+        </ul>
+
+        <h3>What is not allowed</h3>
+        <ul>
+          <li>Surveillance, deception, or disinformation applications</li>
+          <li>Automated impersonation of the original author</li>
+          <li>Deliberate removal or misrepresentation of attribution</li>
+          <li>Any use that causes demonstrated public harm</li>
+        </ul>
+
+        <h3>Attribution</h3>
+        <p>When using content from this site, include:</p>
+        <blockquote>Protected under Parachute Commons License</blockquote>
+
+        <p class="license-link">Read the full license text at <a href="https://statecapacity.ai/guides/commons-license/full-text/" target="_blank" rel="noopener">statecapacity.ai/guides/commons-license/full-text</a></p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    text-decoration: none;
+    margin-bottom: var(--size-4);
+  }
+
+  .back-link:hover {
+    color: var(--brand);
+  }
+
+  h1 {
+    margin-bottom: var(--size-5);
+  }
+
+  .badge-display {
+    margin-bottom: var(--size-5);
+  }
+
+  h2 {
+    margin-top: var(--size-6);
+    margin-bottom: var(--size-3);
+  }
+
+  h3 {
+    margin-top: var(--size-4);
+    margin-bottom: var(--size-2);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-1);
+  }
+
+  p {
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: var(--size-3);
+  }
+
+  ul {
+    color: var(--text-2);
+    padding-left: var(--size-4);
+    margin-bottom: var(--size-3);
+    line-height: 1.7;
+  }
+
+  li {
+    margin-bottom: var(--size-1);
+  }
+
+  blockquote {
+    border-left: 3px solid var(--brand);
+    padding-left: var(--size-3);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    margin-block: var(--size-3);
+  }
+
+  .license-link {
+    margin-top: var(--size-5);
+    font-size: var(--font-size-0);
+  }
+</style>
