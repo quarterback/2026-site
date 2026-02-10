@@ -1,5 +1,7 @@
 ---
 title: "Benefits Determination & Appeals System"
+type: "concept"
+lede: "Full-stack prototype modeling government benefits review and appeals processes."
 summary: "Full-stack prototype modeling government benefits review and appeals processes."
 itemType: "project"
 systemType: "Benefits + eligibility systems"

@@ -1,5 +1,7 @@
 ---
 title: "TACLOG - Field Delivery Supply App"
+type: "concept"
+lede: "Mobile-first supply requisition prototype for offline field logistics operations."
 summary: "Mobile-first supply requisition prototype for offline field logistics operations."
 itemType: "project"
 systemType: "Field operations + logistics"

@@ -1,5 +1,7 @@
 ---
 title: "18F Website Redesign"
+type: "leadership"
+lede: "Content-first website refresh clarifying 18F's capacity-building role."
 summary: "Content-first website refresh clarifying 18F's capacity-building role."
 itemType: "project"
 systemType: "Federal websites + content strategy"
