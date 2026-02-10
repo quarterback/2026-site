@@ -1,5 +1,7 @@
 ---
 title: "Nautilus Staffing Prototype"
+type: "concept"
+lede: "Staffing decision tool consolidating crew management and role requirements."
 summary: "Staffing decision tool consolidating crew management and role requirements."
 itemType: "project"
 systemType: "Team operations + workforce management"

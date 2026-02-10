@@ -1,5 +1,7 @@
 ---
 title: "City of Bloomington Website Redesign"
+type: "delivery"
+lede: "Full-site redesign reorganizing municipal content around resident tasks."
 summary: "Full-site redesign reorganizing municipal content around resident tasks."
 itemType: "project"
 systemType: "Municipal websites + service delivery"

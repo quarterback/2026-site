@@ -1,5 +1,7 @@
 ---
 title: "Portland Digital Corps"
+type: "program"
+lede: "Volunteer effort bringing together 50+ practitioners to rebuild six nonprofit websites."
 summary: "Volunteer effort bringing together 50+ practitioners to rebuild six nonprofit websites."
 itemType: "project"
 systemType: "Community organizing + civic tech"

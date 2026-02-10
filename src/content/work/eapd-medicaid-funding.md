@@ -1,5 +1,7 @@
 ---
 title: "eAPD (Electronic Advanced Planning Document)"
+type: "delivery"
+lede: "Federal web application modernizing Medicaid funding requests for states."
 summary: "Federal web application modernizing Medicaid funding requests for states."
 itemType: "project"
 systemType: "Federal procurement + funding"

@@ -1,5 +1,7 @@
 ---
 title: "AI Decision Transparency Dashboard"
+type: "concept"
+lede: "Frontend prototype exploring how automated benefits decisions can be reviewed and challenged."
 summary: "Frontend prototype exploring how automated benefits decisions can be reviewed and challenged."
 itemType: "project"
 systemType: "AI + decision systems"

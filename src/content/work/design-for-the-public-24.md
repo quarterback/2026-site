@@ -1,5 +1,7 @@
 ---
 title: "Design For The Public 24"
+type: "event"
+lede: "Two-day unconference bringing together 80+ civic technologists and designers."
 summary: "Two-day unconference bringing together 80+ civic technologists and designers."
 itemType: "event"
 systemType: "Conferences + community building"
