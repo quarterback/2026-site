@@ -77,6 +77,90 @@ const media: MediaItem[] = [
   },
 ];
 
+interface Talk {
+  date: string;
+  title: string;
+  venue?: string;
+}
+
+const talks: Talk[] = [
+  { date: "Jul. '25", title: "US Forest Service ACIO Trailhead Summit - Keynote on Service Delivery & Innovation" },
+  { date: "Jun. '25", title: "AI Agents and the Web: How Developers Can Build Smarter with Agent Experience", venue: "webinar" },
+  { date: "Apr. '25", title: "Leading From Where You Are", venue: "Bloomberg Industry Summit" },
+  { date: "Apr. '24", title: "Sprinkle Some AI On It: Service Design, Consequences & How Tech Disrupts Everyday Life", venue: "University of Michigan College of Architecture & Urban Planning" },
+  { date: "Feb. '24", title: "Portland State University Graphic Design" },
+  { date: "Nov. '23", title: "George Fox University - Art Talk on Service Design" },
+  { date: "May. '23", title: "ConveyUX Conference / The Designer's Share of the Problem" },
+  { date: "Feb. '23", title: "Outcome Conference, Chandigarh, India 🇮🇳 / The Designer's Share of the Problem" },
+  { date: "Nov. '22", title: "Rosenfeld Media Civic Design Conference / The Designer's Share of the Problem" },
+  { date: "Oct. '22", title: "Federal CX Leadership Symposium" },
+  { date: "Aug. '22", title: "Cloudflare Design Growth Week / Service Design" },
+  { date: "Aug. '22", title: "Federation of Tax Associates Tech Conference / Service Design" },
+  { date: "Nov. '21", title: "IXDA OSLO / The Designer's Share of the Problem 🇳🇴" },
+  { date: "Oct '21", title: "Design Week Colorado Springs / Consequence Design" },
+  { date: "Oct. '20", title: "SDN Global Conference / The consequences in service design 🇪🇺" },
+  { date: "Oct. '20", title: "Digital.gov Monthly / Avoiding deception design patterns" },
+  { date: "July '20", title: "An Event Apart HCD / The Researcher's Role in Reducing Consequence Design" },
+  { date: "Mar. '20", title: "UX Australia Design Research / The Researcher's Role in Reducing Hostile Design 🇦🇺" },
+  { date: "Oct. '19", title: "ACM SIGDOC (Portland) / Hostile Design of Digital Experiences" },
+  { date: "June '19", title: "UXR Conference Toronto / Involving Stakeholders in Design Research 🇨🇦" },
+  { date: "May '19", title: "Code For America Summit (panel)" },
+  { date: "Apr. '19", title: "Portland Design Week (panel)" },
+  { date: "Feb. '19", title: "Donut.js Portland / Defense Against Dark Patterns" },
+  { date: "Oct. '18", title: "Indy Design Week / Improving the Product Toolbox" },
+  { date: "Apr. '18", title: "Drupalcon Nashville / Migrating a Small City to Drupal (with Charles Brandt)" },
+  { date: "Jan. '18", title: "Carnegie Conference (Orlando) / Service Design in Higher Education" },
+  { date: "Nov. '17", title: "Confab Higher Ed / Tackling Content Migration & Maintenance" },
+  { date: "Sep. '17", title: "Content Migration / Confab Intensive" },
+  { date: "July '17", title: "Design & Content Vancouver / Discovery & Microinteractions: Improving the Product Toolbox 🇨🇦" },
+  { date: "May '17", title: "Pixel Up! Cape Town 🇿🇦" },
+  { date: "Apr. '17", title: "Tackling Content Migration & Maintenance", venue: "University of Illinois Web Conference" },
+  { date: "Jun. 2015", title: "What's Your Superhero Strategy: How Web Governance Can Save Your World", venue: "Web Conference at Penn State" },
+  { date: "May 2015", title: "A Clown Car of Nonsense: Choosing a better vehicle to steer content governance", venue: "Confab Central" },
+  { date: "Apr. 2015", title: "The Kids Are Alright: Millennials in the workplace", venue: "Wayne State University Regional Webconference" },
+  { date: "Nov. 2014", title: "Integrating a web team to your marketing department", venue: "American Marketing Association Symposium for the Marketing of Higher Education" },
+  { date: "Sep. 2014", title: "Conference Director, Aggregate Conference Louisville" },
+  { date: "Jun. 2014", title: "The College Website Is A Potluck", venue: "Hannon Hill Webinar Series" },
+  { date: "Jun. 2014", title: "The Lone Ranger: Managing the Ups and Downs of One-Person Offices and Small Teams", venue: "Confab for Nonprofits" },
+  { date: "Jun. 2014", title: "Saving the world one Tumblr at a time", venue: "Web Conference at Penn State" },
+  { date: "Jun. 2014", title: "Sunnier days ahead: Storytelling & social media across silos", venue: "SUNYCUAD Conference" },
+  { date: "May 2014", title: "Who owns the website? Making the case for digital leadership", venue: "University of Michigan Regional Web Conference" },
+  { date: "Apr. 2014", title: "Death to Governance… Embrace the Chaos (with Tonya Oaks Smith)", venue: "High Ed Web Pittsburgh Regional Conference" },
+  { date: "Nov. 2013", title: "Armies of One: Managing the Ups and Downs of One-Person Offices and Small Teams", venue: "Confab Higher Ed" },
+  { date: "Nov. 2013", title: "Sharing The Sandbox :: IT & Marketing (with Alaina Wiens)", venue: "Udacity Webinar Series" },
+  { date: "Jun. 2013", title: "Unboxing Yourself: Reaching out for professional growth", venue: "High Ed Web Michigan Regional Conference" },
+  { date: "Sep. 2008", title: "Future Web Trends Panel", venue: "National Association of Government Webmasters Conference" },
+];
+
+interface Interview {
+  title: string;
+  source: string;
+  url?: string;
+}
+
+const interviews: Interview[] = [
+  { title: "Leading the Field: Ron Bronson", source: "Code for America", url: "https://codeforamerica.org/news/leading-the-field-ron-bronson/" },
+  { title: "The Designer's Share of the Problem", source: "IXDA Oslo (2021)", url: "https://www.ixda.no/talks/the-designers-share-of-the-problem" },
+  { title: "Technically Speaking podcast", source: "(2020)", url: "https://www.youtube.com/watch?v=L9hbuPpEFb4" },
+  { title: "Surfacing with Lisa Welchman & Andy Vitale", source: "(2021)", url: "https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7" },
+  { title: "The Buzz with ACT-IAC", source: "Podcast", url: "https://open.spotify.com/episode/3Xd9MZ9HdByErb41jb7vUX" },
+  { title: "Responsive Web Design podcast", source: "(2017)", url: "https://responsivewebdesign.com/podcast/ron-bronson/" },
+  { title: "Building Better User-Centered Products", source: "Pixel Pioneers (2020)", url: "https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson" },
+];
+
+interface Exhibition {
+  title: string;
+  date: string;
+  location: string;
+}
+
+const exhibitions: Exhibition[] = [
+  { title: "Design For The Public Conference", date: "Oct. '24", location: "Wacom Experience Center/Revolution Hall, Portland" },
+  { title: "A Parliament of Neighbors", date: "May. '23", location: "Lloyd Center Mall, Portland" },
+  { title: "Designer's Share of the Problem", date: "Oct. '22", location: "Portland Design Festival" },
+  { title: "The Hidden Cost of Everything: Decentering the user experience", date: "Oct. '21", location: "zine" },
+];
+
 const categoryColors = {
   'Podcasts': 'var(--lime-5)',
   'Talks': 'var(--blue-5)',
@@ -93,17 +177,20 @@ const techStack = [
 const fonts: string[] = [];
 ---
 
-<Base title="Media — Ron Bronson">
+<Base title="Speaking — Ron Bronson">
   <main>
     <section class="page-header">
       <div class="container">
-        <h1>Media</h1>
-        <p class="lead">Talks, podcasts, and articles about service design, public-sector delivery, and system consequences.</p>
+        <h1>Speaking & Media</h1>
+        <p class="lead">I speak around the world on a wide range of topics that operate somewhere between digital transformation, Agile delivery, systems thinking & service design. These events range from tech & design conferences, to more non-traditional settings where public servants proliferate like leadership and industry events; wanting to learn more about what it takes to move big (and small) projects forward.</p>
+        <p class="lead">In 2025, I've been talking more about the ways platform economics distort how we engage and interact with each other and why technology needs to be understood better by the policymakers and administrators charged with deployment and implementation.</p>
+        <p class="lead">My talks are generally energetic, even when the subject matter is a bit in the weeds. I grew up in a "call and response" tradition, so the old habits die hard.</p>
       </div>
     </section>
 
     <section class="media-grid">
       <div class="container">
+        <h2>Featured</h2>
         <div class="featured-items">
           {featuredMedia.map(item => (
             <article class="media-item">
@@ -159,6 +246,69 @@ const fonts: string[] = [];
         </div>
       </div>
     </section>
+
+    <section class="topics-section">
+      <div class="container">
+        <h2>Topics</h2>
+        <ul class="topics-list">
+          <li><strong>Public Mechanics:</strong> How services actually get delivered, past the journey maps and transformation theater</li>
+          <li><strong>The Designer's Share of the Problem:</strong> Consequences, hostile design, and accountability in public systems</li>
+          <li><strong>Delivery Leadership:</strong> Leading from where you are, building trust across silos, unblocking stalled programs</li>
+          <li><strong>AI and Public Infrastructure:</strong> What happens when automation meets civic life</li>
+          <li><strong>Why Systems Stall:</strong> How authority, procurement, and operational reality collide</li>
+        </ul>
+        <p class="contact-info">For speaking inquiries, contact <a href="mailto:speakers@neptunevelocity.com">Aiden Christmas</a>.</p>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="container">
+        <h2>Talks</h2>
+        <div class="talks-list">
+          {talks.map(talk => (
+            <div class="talk-item">
+              <span class="talk-date">{talk.date}</span>
+              <div class="talk-details">
+                <span class="talk-title">{talk.title}</span>
+                {talk.venue && <span class="talk-venue">{talk.venue}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="container">
+        <h2>Interviews</h2>
+        <div class="simple-list">
+          {interviews.map(interview => (
+            <div class="simple-item">
+              {interview.url ? (
+                <a href={interview.url} target="_blank" rel="noopener">{interview.title}</a>
+              ) : (
+                <span class="item-title">{interview.title}</span>
+              )}
+              <span class="item-source">{interview.source}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="list-section">
+      <div class="container">
+        <h2>Exhibitions / Projects</h2>
+        <div class="simple-list">
+          {exhibitions.map(exhibition => (
+            <div class="simple-item">
+              <span class="item-title">{exhibition.title}</span>
+              <span class="item-source">{exhibition.date} — {exhibition.location}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   </main>
 
   <Footer
@@ -186,7 +336,15 @@ const fonts: string[] = [];
   }
 
   .media-grid {
-    padding-bottom: var(--size-fluid-5);
+    padding-bottom: var(--size-8);
+  }
+
+  .media-grid h2 {
+    font-size: clamp(var(--font-size-3), 4vw, var(--font-size-4));
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-7);
+    margin-bottom: var(--size-5);
+    color: var(--text-1);
   }
 
   .featured-items {
@@ -194,7 +352,6 @@ const fonts: string[] = [];
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     grid-auto-rows: min-content;
     gap: var(--size-6);
-    margin-bottom: var(--size-8);
   }
 
   .media-item {
@@ -307,9 +464,186 @@ const fonts: string[] = [];
     flex-shrink: 0;
   }
 
+  /* Topics Section */
+  .topics-section {
+    padding: var(--size-10) 0;
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .topics-section h2 {
+    font-size: clamp(var(--font-size-3), 4vw, var(--font-size-4));
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-7);
+    margin-bottom: var(--size-5);
+    color: var(--text-1);
+  }
+
+  .topics-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--size-6) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+  }
+
+  .topics-list li {
+    font-size: clamp(var(--font-size-1), 2.5vw, var(--font-size-2));
+    line-height: 1.6;
+    color: var(--text-2);
+    padding-left: var(--size-4);
+    position: relative;
+  }
+
+  .topics-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+    font-weight: var(--font-weight-7);
+  }
+
+  .topics-list strong {
+    color: var(--text-1);
+  }
+
+  .contact-info {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    margin-top: var(--size-5);
+    padding-top: var(--size-5);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .contact-info a {
+    color: var(--brand);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .contact-info a:hover {
+    border-bottom-color: var(--brand);
+  }
+
+  /* List Sections */
+  .list-section {
+    padding: var(--size-10) 0;
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .list-section h2 {
+    font-size: clamp(var(--font-size-3), 4vw, var(--font-size-4));
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-7);
+    margin-bottom: var(--size-6);
+    color: var(--text-1);
+  }
+
+  /* Talks List */
+  .talks-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .talk-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--size-4);
+    padding: var(--size-3);
+    border-radius: var(--radius-2);
+    transition: background 0.2s;
+  }
+
+  .talk-item:hover {
+    background: var(--surface-2);
+  }
+
+  .talk-date {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    font-weight: var(--font-weight-6);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .talk-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+  }
+
+  .talk-title {
+    font-size: var(--font-size-1);
+    color: var(--text-1);
+    line-height: 1.5;
+  }
+
+  .talk-venue {
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+    font-style: italic;
+  }
+
+  /* Simple List (Interviews & Exhibitions) */
+  .simple-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .simple-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-1);
+    padding: var(--size-3);
+    border-radius: var(--radius-2);
+    transition: background 0.2s;
+  }
+
+  .simple-item:hover {
+    background: var(--surface-2);
+  }
+
+  .simple-item a {
+    font-size: var(--font-size-1);
+    color: var(--text-1);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+    width: fit-content;
+  }
+
+  .simple-item a:hover {
+    color: var(--brand);
+    border-bottom-color: var(--brand);
+  }
+
+  .item-title {
+    font-size: var(--font-size-1);
+    color: var(--text-1);
+    font-weight: var(--font-weight-5);
+  }
+
+  .item-source {
+    font-size: var(--font-size-0);
+    color: var(--text-3);
+  }
+
   @media (max-width: 768px) {
     .featured-items {
       grid-template-columns: 1fr;
+    }
+
+    .talk-item {
+      grid-template-columns: 1fr;
+      gap: var(--size-2);
+    }
+
+    .talk-date {
+      white-space: normal;
     }
   }
 
@@ -325,6 +659,18 @@ const fonts: string[] = [];
 
     .media-title {
       font-size: var(--font-size-1);
+    }
+
+    .topics-section,
+    .list-section {
+      padding: var(--size-8) 0;
+    }
+
+    .topics-section h2,
+    .list-section h2,
+    .media-grid h2 {
+      font-size: var(--font-size-2);
+      margin-bottom: var(--size-4);
     }
   }
 </style>
