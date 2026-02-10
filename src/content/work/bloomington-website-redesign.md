@@ -1,51 +1,42 @@
 ---
 title: "City of Bloomington Website Redesign"
 type: "delivery"
-lede: "Full-site redesign reorganizing municipal content around resident tasks."
-summary: "Full-site redesign reorganizing municipal content around resident tasks."
-itemType: "project"
-systemType: "Municipal websites + service delivery"
-outcome: "11% decrease in exit rates, 93% bounce rate reduction"
-order: 108
+lede: "Full-site redesign reorganizing municipal content around resident tasks, not departmental ownership."
+metadata:
+  dates: "2017-2018"
+  role: "Principal Designer"
+  scale: "Three-person core team"
+  status: "Launched, still live"
+links:
+  - label: "DrupalCon Nashville Talk"
+    url: "https://youtu.be/REUJCWpFOcI?si=aTHrZO-fP_yCmulN"
+tags: ["Municipal", "Service Design", "Content Strategy"]
 featured: false
-tags: ["Municipal", "Website", "Content Strategy", "Drupal"]
-role: "Principal Designer"
-timeline: "2017-2018"
-context: "Three-person core team (designer, developer, project manager)"
+order: 6
 ---
 
 ## The problem
 
-The City of Bloomington operated an outdated in-house content management system that had served for a decade. Key problems included:
+Bloomington's website ran on a decade-old in-house CMS. Departments duplicated pages to stay visible in their sections. Content was managed by single designees in each office—if that person left, everything broke. The city needed a resilient stack that integrated with their open-source municipal tools, but had no real budget and a small IT team already stretched thin.
 
-- Departments duplicating pages to maintain visibility within their sections
-- Centralized content management by single designees in each office, creating dependency risks
-- Need for better integration with open-source municipal tools
-- Limited budget and resources within the IT department
+## What I did
 
-## Design approach
+I owned design and service outcomes end-to-end: research, information architecture, interface system, and content restructuring.
 
-### Research & validation
+**Research in the open.** We ran alpha testing through public pilots. To reach residents who wouldn't attend public meetings, we printed site sections and ran voting exercises in a local supermarket—testing comprehension, navigation, and language with people doing their grocery shopping.
 
-The team conducted open research including resident interviews, staff consultations, and service mapping across departments. Notably, we printed site sections and **facilitated in-person voting exercises in a local supermarket** to test comprehension, navigation, and language with actual residents.
+**Reorganized around tasks, not departments.** I redesigned the IA from the ground up, structuring content around what residents needed to do rather than which office handled it. This simplified content, eliminated duplication, and created governance that city staff could maintain without reintroducing fragmentation.
 
-### Information architecture
-
-I reorganized the site structure **around resident tasks rather than departmental divisions**. This allowed us to simplify content and establish more sustainable governance—residents don't care which department handles their request, they care about getting their question answered or task completed.
-
-### Implementation
-
-Close coordination between design and development ensured accessibility and durability while supporting long-term maintenance by city staff with limited technical resources.
+**Coordinated tightly with implementation.** Design decisions were made alongside development to ensure accessibility, clarity, and durability with limited resources.
 
 ## Outcomes
 
-Post-launch metrics demonstrated significant improvement:
-- **Exit rates decreased 11%**
-- **Bounce rate decreased 93%**
-- **Mobile usage exceeded 50%** of total traffic
-
-The project earned the **2018 Best of Indiana Award** and was featured at **DrupalCon Nashville 2018**.
+- Exit rates decreased 11%
+- Bounce rate decreased 93%
+- Mobile usage exceeded 50% of traffic
+- 2018 Best of Indiana Award for Best Application Serving the Public
+- Featured at DrupalCon Nashville 2018
 
 ## What this demonstrates
 
-I can lead municipal digital transformation with constrained resources. I understand that successful government websites require not just good design, but information architecture that reflects how residents actually think about services—and governance structures that city staff can sustain long-term.
+I can lead municipal digital transformation with constrained resources. Successful government websites require information architecture that reflects how residents think—and governance structures staff can sustain.
