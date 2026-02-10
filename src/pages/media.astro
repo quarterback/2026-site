@@ -85,18 +85,12 @@ const categoryColors = {
 };
 
 const featuredMedia = media.filter(item => item.featured && item.format !== 'hidden');
-const recentAppearances = media.filter(item => !item.featured || item.format === 'hidden');
 
 const techStack = [
-  "Astro",
-  "Open Props",
-  "TypeScript"
+  "built hastily in html & css"
 ];
 
-const fonts = [
-  "Inter",
-  "JetBrains Mono"
-];
+const fonts: string[] = [];
 ---
 
 <Base title="Media — Ron Bronson">
@@ -163,22 +157,6 @@ const fonts = [
             </article>
           ))}
         </div>
-
-        {recentAppearances.length > 0 && (
-          <aside class="recent-appearances">
-            <h2>Recent Appearances</h2>
-            <ul>
-              {recentAppearances.map(item => (
-                <li>
-                  <a href={item.url} target="_blank" rel="noopener">
-                    {item.title}
-                  </a>
-                  <span class="appearance-meta">{item.source}{item.date ? ` • ${item.date}` : ''}</span>
-                </li>
-              ))}
-            </ul>
-          </aside>
-        )}
       </div>
     </section>
   </main>
@@ -329,51 +307,6 @@ const fonts = [
     flex-shrink: 0;
   }
 
-  .recent-appearances {
-    margin-top: var(--size-8);
-    padding-top: var(--size-6);
-    border-top: 1px solid var(--surface-3);
-  }
-
-  .recent-appearances h2 {
-    font-size: var(--font-size-3);
-    font-family: var(--font-mono);
-    margin-bottom: var(--size-4);
-    color: var(--text-1);
-  }
-
-  .recent-appearances ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-3);
-  }
-
-  .recent-appearances li {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-1);
-  }
-
-  .recent-appearances a {
-    color: var(--text-1);
-    text-decoration: none;
-    font-weight: var(--font-weight-5);
-    transition: color 0.2s;
-  }
-
-  .recent-appearances a:hover {
-    color: var(--brand);
-  }
-
-  .appearance-meta {
-    font-size: var(--font-size-0);
-    color: var(--text-3);
-    font-family: var(--font-mono);
-  }
-
   @media (max-width: 768px) {
     .featured-items {
       grid-template-columns: 1fr;
@@ -392,10 +325,6 @@ const fonts = [
 
     .media-title {
       font-size: var(--font-size-1);
-    }
-
-    .recent-appearances h2 {
-      font-size: var(--font-size-2);
     }
   }
 </style>

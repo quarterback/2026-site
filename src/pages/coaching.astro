@@ -3,79 +3,40 @@ import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
 
 const techStack = [
-  "Astro",
-  "Open Props",
-  "TypeScript"
+  "built hastily in html & css"
 ];
 
-const fonts = [
-  "Inter",
-  "JetBrains Mono"
-];
+const fonts: string[] = [];
 ---
 
 <Base title="Tennis Coaching — Ron Bronson">
   <main>
     <section class="page-header">
       <div class="container">
-        <h1>Tennis Coaching</h1>
-        <p class="lead">Building competitive teams through individual development</p>
+        <h1>Coaching</h1>
       </div>
     </section>
 
     <section class="coaching-content">
       <div class="container">
-        <div class="intro-grid">
-          <div class="callout-group">
-            <div class="callout">
-              <h3>Current Role</h3>
-              <p>Girls Varsity Head Coach<br>Catlin Gabel School<br>Portland, OR</p>
-            </div>
+        <div class="text-content">
+          <h2>Experience</h2>
+          <p>Since 2020, I've been girls varsity head coach at Catlin Gabel School in Portland. Altogether, I've coached scholastic and collegiate tennis for 11 seasons across several states. I started my career directing tennis programs at summer camps throughout New England. At Catlin Gabel, we've had players across the gamut from D1 recruits to JV players who become varsity starters and state qualifiers. I've also coached developing programs, the fun of taking an indivdual sport like tennis and turning it into a team sport is getting kids to buy into investing in themselves but also into wanting their teammates to be great, too.</p>
 
-            <div class="callout">
-              <h3>Experience</h3>
-              <p>11 seasons coaching scholastic and collegiate tennis</p>
-            </div>
-          </div>
+          <p>I played four years of varsity tennis at Plainfield (NJ) High School under Donald Van Blake, then continued played collegiately after serving in the U.S. Air Force post-high school.</p>
         </div>
 
-        <div class="experience-section">
-          <div class="text-content">
-            <h2>Experience</h2>
-            <p>I serve as girls varsity head coach at Catlin Gabel School in Portland and have coached scholastic and collegiate tennis for 11 seasons across several states. My experience spans working with Division 1 recruits to developing emerging players.</p>
+        <div class="text-content">
+          <h2>Coaching Philosophy</h2>
+          <p>I use a constraint-led approach that develops players as problem-solvers on the court. Early in my coaching career, I noticed players consistently looking back for validation. While coaching has its place, I wanted to build their confidence to problem-solve in real-time, understanding that not every situation will be ideal, but what's important is learning lessons of resilience and trusting yourself. Few things are more satisfying than a kid explaining what they did in a loss, and months later recalling how they learned from it in a crucial match.</p>
 
-            <p>I've directed tennis programs at summer camps in New England and built programs from the ground up. I played competitively in high school and college, and served in the U.S. Air Force before moving into coaching.</p>
-          </div>
-
-          <div class="image-wrapper">
-            <img src="https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Tennis court from above" loading="lazy">
-          </div>
-        </div>
-
-        <div class="philosophy-section">
-          <div class="image-wrapper">
-            <img src="https://images.pexels.com/photos/1405355/pexels-photo-1405355.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Tennis player on court" loading="lazy">
-          </div>
-
-          <div class="text-content">
-            <h2>Coaching Philosophy</h2>
-            <p>Tennis is an individual sport, but I believe in the power of team development. The best tennis programs create an environment where players invest in their own growth while supporting their teammates' success.</p>
-
-            <p>My approach focuses on:</p>
-            <ul>
-              <li>Technical skill development appropriate to each player's level</li>
-              <li>Mental game and competitive strategy</li>
-              <li>Building team culture in an individual sport</li>
-              <li>Long-term player development over short-term wins</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="contact-section">
-          <div class="contact-content">
-            <h2>Get in Touch</h2>
-            <p>Interested in coaching services or have questions? Reach out at <a href="mailto:hello@ronbronson.dev" class="contact-link">hello@ronbronson.dev</a></p>
-          </div>
+          <p>My coaching centers on:</p>
+          <ul>
+            <li><strong>Trust & Autonomy:</strong> Players learn to trust their instincts and make independent decisions</li>
+            <li><strong>Game-Based Learning:</strong> Practices built around tactical problems, not just technical repetition</li>
+            <li><strong>Resilience Development:</strong> Preparing athletes for the mental challenges of competition</li>
+            <li><strong>Analytics-Informed Insight:</strong> Using data to identify patterns and opportunities for growth</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -99,61 +60,13 @@ const fonts = [
     font-family: var(--font-mono);
   }
 
-  .lead {
-    font-size: clamp(var(--font-size-1), 2.5vw, var(--font-size-2));
-    color: var(--text-2);
-  }
-
   .coaching-content {
     padding-bottom: var(--size-fluid-5);
   }
 
-  .intro-grid {
-    margin-bottom: var(--size-8);
-  }
-
-  .callout-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--size-5);
-  }
-
-  .callout {
-    background: var(--surface-2);
-    border: 1px solid var(--surface-3);
-    border-radius: var(--radius-2);
-    padding: var(--size-5);
-  }
-
-  .callout h3 {
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-6);
-    margin-bottom: var(--size-3);
-    color: var(--text-1);
-    font-family: var(--font-mono);
-  }
-
-  .callout p {
-    font-size: var(--font-size-0);
-    color: var(--text-2);
-    line-height: 1.5;
-  }
-
-  .experience-section,
-  .philosophy-section {
-    display: grid;
-    grid-template-columns: 60% 40%;
-    gap: var(--size-8);
-    align-items: center;
-    margin-bottom: var(--size-10);
-  }
-
-  .philosophy-section {
-    grid-template-columns: 40% 60%;
-  }
-
   .text-content {
-    max-width: 65ch;
+    max-width: 70ch;
+    margin-bottom: var(--size-8);
   }
 
   .text-content h2 {
@@ -170,7 +83,7 @@ const fonts = [
     margin-bottom: var(--size-4);
   }
 
-  .text-content p:last-child {
+  .text-content p:last-of-type {
     margin-bottom: 0;
   }
 
@@ -178,107 +91,29 @@ const fonts = [
     margin-top: var(--size-3);
     margin-left: var(--size-5);
     margin-bottom: 0;
+    list-style: none;
+    padding-left: 0;
   }
 
   .text-content li {
     font-size: var(--font-size-1);
     line-height: 1.6;
     color: var(--text-2);
-    margin-bottom: var(--size-2);
+    margin-bottom: var(--size-3);
+    padding-left: var(--size-5);
+    position: relative;
+  }
+
+  .text-content li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+    font-weight: var(--font-weight-7);
   }
 
   .text-content li:last-child {
     margin-bottom: 0;
-  }
-
-  .image-wrapper {
-    width: 100%;
-    height: 100%;
-    min-height: 400px;
-    overflow: hidden;
-    border-radius: var(--radius-3);
-    border: 1px solid var(--surface-3);
-  }
-
-  .image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .experience-section:hover .image-wrapper img,
-  .philosophy-section:hover .image-wrapper img {
-    transform: scale(1.02);
-  }
-
-  .contact-section {
-    margin-top: var(--size-10);
-    padding-top: var(--size-8);
-    border-top: 1px solid var(--surface-3);
-  }
-
-  .contact-content {
-    max-width: 65ch;
-  }
-
-  .contact-content h2 {
-    font-size: clamp(var(--font-size-3), 4vw, var(--font-size-4));
-    font-weight: var(--font-weight-7);
-    margin-bottom: var(--size-4);
-    color: var(--text-1);
-  }
-
-  .contact-content p {
-    font-size: var(--font-size-1);
-    line-height: 1.6;
-    color: var(--text-2);
-  }
-
-  .contact-link {
-    color: var(--text-1);
-    font-weight: var(--font-weight-6);
-    text-decoration: none;
-    background: linear-gradient(to right, var(--gray-7), var(--gray-7));
-    background-size: 0% 2px;
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    transition: background-size 0.3s ease;
-    padding-bottom: 2px;
-  }
-
-  .contact-link:hover {
-    background-size: 100% 2px;
-  }
-
-  @media (max-width: 768px) {
-    .experience-section,
-    .philosophy-section {
-      grid-template-columns: 1fr;
-      gap: var(--size-6);
-      margin-bottom: var(--size-8);
-    }
-
-    .philosophy-section {
-      grid-template-columns: 1fr;
-    }
-
-    .philosophy-section .image-wrapper {
-      order: 1;
-    }
-
-    .philosophy-section .text-content {
-      order: 2;
-    }
-
-    .image-wrapper {
-      min-height: 300px;
-    }
-
-    .callout-group {
-      grid-template-columns: 1fr;
-    }
   }
 
   @media (max-width: 600px) {
@@ -291,24 +126,17 @@ const fonts = [
       padding-bottom: var(--size-8);
     }
 
-    .text-content h2,
-    .contact-content h2 {
+    .text-content h2 {
       font-size: var(--font-size-2);
     }
 
     .text-content p,
-    .text-content li,
-    .contact-content p {
+    .text-content li {
       font-size: var(--font-size-0);
     }
 
-    .image-wrapper {
-      min-height: 250px;
-    }
-
-    .contact-section {
-      margin-top: var(--size-8);
-      padding-top: var(--size-6);
+    .text-content {
+      margin-bottom: var(--size-6);
     }
   }
 </style>
