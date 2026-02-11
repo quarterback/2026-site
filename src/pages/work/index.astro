@@ -23,11 +23,11 @@ const techStack = [
           {work.map(item => (
             <WorkCard
               title={item.data.title}
-              summary={item.data.summary}
-              systemType={item.data.systemType}
-              outcome={item.data.outcome}
-              href={item.data.externalUrl || `/work/${item.slug}`}
-              tags={item.data.tags}
+              type={item.data.type}
+              lede={item.data.lede}
+              metadata={item.data.metadata}
+              href={`/work/${item.slug}`}
+              featured={false}
             />
           ))}
         </div>
