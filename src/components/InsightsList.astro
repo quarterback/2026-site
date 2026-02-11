@@ -1,27 +1,13 @@
 ---
-interface Insight {
-  icon?: string;
-  text: string;
-}
-
-interface Props {
-  insights: Insight[] | string;
-}
-
-const { insights: insightsRaw } = Astro.props;
-const insights = typeof insightsRaw === 'string' ? JSON.parse(insightsRaw) : insightsRaw;
+// Now accepts markdown children via slot
 ---
 
-<ul class="insights-list">
-  {insights.map(insight => (
-    <li class="insight-item">
-      <p class="insight-text">{insight.text}</p>
-    </li>
-  ))}
-</ul>
+<div class="insights-wrapper">
+  <slot />
+</div>
 
 <style>
-  .insights-list {
+  .insights-wrapper :global(ul) {
     list-style: none;
     padding: 0;
     margin: var(--size-6) 0;
@@ -30,30 +16,32 @@ const insights = typeof insightsRaw === 'string' ? JSON.parse(insightsRaw) : ins
     gap: var(--size-4);
   }
 
-  .insight-item {
+  .insights-wrapper :global(li) {
     background: var(--surface-2);
     padding: var(--size-4) var(--size-5);
     border-radius: var(--radius-2);
     border-left: 4px solid var(--brand);
-  }
-
-  .insight-text {
-    margin: 0;
     font-size: var(--font-size-1);
     line-height: 1.6;
     color: var(--text-2);
   }
 
+  .insights-wrapper :global(li p) {
+    margin: 0;
+  }
+
+  .insights-wrapper :global(li strong) {
+    color: var(--text-1);
+    font-weight: var(--font-weight-6);
+  }
+
   @media (max-width: 768px) {
-    .insights-list {
+    .insights-wrapper :global(ul) {
       grid-template-columns: 1fr;
     }
 
-    .insight-item {
+    .insights-wrapper :global(li) {
       padding: var(--size-3) var(--size-4);
-    }
-
-    .insight-text {
       font-size: var(--font-size-0);
     }
   }

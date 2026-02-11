@@ -25,6 +25,7 @@ toc: true
 ---
 
 import Callout from '../../components/Callout.astro';
+import InsightsList from '../../components/InsightsList.astro';
 
 ## The Problem Space
 
@@ -32,10 +33,12 @@ Oregon high school tennis faces a challenge common to many sports: **how do you 
 
 The existing system relies heavily on win-loss records and subjective committee decisions. This creates several issues:
 
+<InsightsList>
 - **Schedule strength is invisible.** A team going 10-2 against strong Portland-area competition looks worse on paper than a team going 14-0 in a weak rural league.
 - **Roster depth doesn't factor in.** Tennis is unique—a team fields 7-8 positions (4 singles, 4 doubles). A team winning 6-1 every match demonstrates more depth than one scraping by 4-3, but both count as wins.
 - **Playoff seeding is contentious.** Without objective metrics, bracket placement involves guesswork and politics.
 - **Travel logistics are ignored.** A 16-team bracket using pure seeding might send a Pendleton team to Brookings (400+ miles) in round one when reasonable alternatives exist.
+</InsightsList>
 
 ---
 
@@ -135,10 +138,12 @@ Distance calculations use real coordinates via OpenStreetMap geocoding, not esti
 
 ### Why Static Site Generation?
 
+<InsightsList>
 - **Zero infrastructure cost.** Hosts on GitHub Pages, Netlify, or any static host.
 - **No security surface.** No database, no auth, no API to protect.
 - **Offline-capable.** Coaches can save the page and use it without connectivity.
 - **Fast.** All interactivity happens client-side with pre-processed data.
+</InsightsList>
 
 ### Why Embedded JSON Instead of API Calls?
 
@@ -183,9 +188,11 @@ High school sports have unique constraints:
 
 ## What This Project Demonstrates
 
+<InsightsList>
 - **Domain Modeling:** Translating messy real-world rules (tennis scoring, OSAA classifications, tiebreaker hierarchies) into clean data structures.
 - **Algorithm Design:** Building ranking systems that balance multiple factors fairly, handle edge cases, and produce defensible results.
 - **Systems Thinking:** Understanding how components interact—data quality affects rankings, rankings affect tiebreakers, tiebreakers affect user trust.
 - **User Empathy:** Building for non-technical users without dumbing down the capability.
 - **Pragmatic Engineering:** Choosing boring technology (static HTML, embedded JSON) when it's the right fit, rather than over-engineering.
 - **Data Pipeline Design:** Handling the full lifecycle from external API to processed output, with appropriate caching and error handling.
+</InsightsList>
