@@ -24,6 +24,8 @@ order: 7
 toc: true
 ---
 
+import Callout from '../../components/Callout.astro';
+
 ## The Problem Space
 
 Oregon high school tennis faces a challenge common to many sports: **how do you fairly rank teams that play in different leagues, different regions, and face vastly different competition?**
@@ -83,7 +85,9 @@ OSAA API → Raw JSON → Normalization → Statistical Processing → Static Si
 
 **Output:** Generates a static HTML dashboard with embedded JSON data. No server required—hosts anywhere.
 
-> **Key Design Principle:** The system balances computational complexity with accessibility: sophisticated algorithms running behind simple, usable interfaces.
+<Callout>
+**Key Design Principle:** The system balances computational complexity with accessibility: sophisticated algorithms running behind simple, usable interfaces.
+</Callout>
 
 ### The Ranking Algorithm
 
