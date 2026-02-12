@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import rontennisImg from '../../public/img/rontennis.jpg';
 
 const techStack = [
   "built hastily in html & css"
@@ -19,11 +21,65 @@ const fonts: string[] = [];
 
     <section class="coaching-content">
       <div class="container">
-        <div class="text-content">
-          <h2>Experience</h2>
-          <p>Since 2020, I've been girls varsity head coach at Catlin Gabel School in Portland. Altogether, I've coached scholastic and collegiate tennis for 11 seasons across several states. I started my career directing tennis programs at summer camps throughout New England. At Catlin Gabel, we've had players across the gamut from D1 recruits to JV players who become varsity starters and state qualifiers. I've also coached developing programs, the fun of taking an indivdual sport like tennis and turning it into a team sport is getting kids to buy into investing in themselves but also into wanting their teammates to be great, too.</p>
+        <div class="intro-grid">
+          <div class="text-content">
+            <h2>Experience</h2>
+            <p>Since 2020, I've been girls varsity head coach at Catlin Gabel School in Portland. I'm currently in my 9th straight high school season, with a career varsity record of 77-30-3. I started coaching in 1997, directing tennis programs at summer camps throughout New England and coaching scholastically and collegiately across several states.</p>
 
-          <p>I played four years of varsity tennis at Plainfield (NJ) High School under Donald Van Blake, then continued played collegiately after serving in the U.S. Air Force post-high school.</p>
+            <p>At Catlin Gabel, we've had players across the gamut from D1 recruits to JV players who become varsity starters and state qualifiers. I've also coached developing programs—the fun of taking an individual sport like tennis and turning it into a team sport is getting kids to buy into investing in themselves but also into wanting their teammates to be great, too.</p>
+
+            <p>I played four years of varsity tennis at Plainfield (NJ) High School under Donald Van Blake, then continued playing collegiately after serving in the U.S. Air Force post-high school.</p>
+          </div>
+          <div class="image-content">
+            <Image
+              src={rontennisImg}
+              alt="Ron Bronson coaching tennis"
+              width={300}
+              quality={80}
+              format="webp"
+            />
+          </div>
+        </div>
+
+        <div class="text-content">
+          <h2>Coaching History</h2>
+
+          <h3>Catlin Gabel School (Portland, OR) — 2020-present</h3>
+          <p><strong>Head Girls Varsity Coach</strong> • Record: 56-13-2</p>
+          <ul class="achievements">
+            <li>2023 OSAA 4A/3A/2A/1A Girls Team State Champions</li>
+            <li>2021 Oregon 3A Champions</li>
+            <li>2023 OACA 4A/3A/2A/1A Girls Tennis State Coach of the Year</li>
+            <li>2022 District Girls Tennis Coach of the Year</li>
+            <li>Individual State Champions: 2025 & 2023 OSAA Girls 4A/3A/2A/1A State Doubles Champions</li>
+            <li>State Finalist: 2022 OSAA Girls 4A/3A/2A/1A State Singles Finalist</li>
+            <li>District Titles: 2021, 2022</li>
+            <li>League Titles: 2021, 2022, 2023, 2025</li>
+            <li>14 All-State Selections since 2022</li>
+            <li>Several former players competing at collegiate level including Division 1</li>
+          </ul>
+
+          <h3>Cheyenne Central High School (Cheyenne, WY) — 2022</h3>
+          <p><strong>Head Boys & Girls Tennis Coach</strong> • Record: 17-7</p>
+          <ul class="achievements">
+            <li>Girls 3rd place at State</li>
+            <li>Boys 3rd place South Region</li>
+            <li>Girls South Regional & Conference Champions</li>
+            <li>1 Individual State Champion (Girls 2nd Singles)</li>
+            <li>2 All-State Selections</li>
+          </ul>
+
+          <h3>Oregon City High School (Oregon City, OR) — 2019</h3>
+          <p><strong>Head Boys Varsity Coach</strong> • Record: 4-10-1</p>
+
+          <h3>Denver North High School (Denver, CO) — 2011</h3>
+          <p><strong>Head Girls Varsity Coach</strong></p>
+
+          <h3>Colorado Academy (Denver, CO) — 2009-10</h3>
+          <p><strong>Head Boys & Girls JV Coach</strong></p>
+
+          <h3>Aurora University (Aurora, IL) — 2009</h3>
+          <p><strong>Assistant Men's Coach</strong></p>
         </div>
 
         <div class="text-content">
@@ -64,9 +120,45 @@ const fonts: string[] = [];
     padding-bottom: var(--size-fluid-5);
   }
 
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--size-8);
+    margin-bottom: var(--size-8);
+    align-items: start;
+  }
+
+  .image-content {
+    position: sticky;
+    top: calc(var(--size-8) + 60px);
+  }
+
+  .image-content img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-2);
+    box-shadow: var(--shadow-3);
+  }
+
   .text-content {
     max-width: 70ch;
     margin-bottom: var(--size-8);
+  }
+
+  .text-content h3 {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    margin-top: var(--size-6);
+    margin-bottom: var(--size-2);
+    color: var(--text-1);
+  }
+
+  .text-content h3:first-of-type {
+    margin-top: var(--size-4);
+  }
+
+  .achievements {
+    margin-left: 0 !important;
   }
 
   .text-content h2 {
@@ -116,6 +208,20 @@ const fonts: string[] = [];
     margin-bottom: 0;
   }
 
+  @media (max-width: 900px) {
+    .intro-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-6);
+    }
+
+    .image-content {
+      position: relative;
+      top: auto;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
   @media (max-width: 600px) {
     .page-header {
       padding-top: var(--size-8);
@@ -126,8 +232,20 @@ const fonts: string[] = [];
       padding-bottom: var(--size-8);
     }
 
+    .intro-grid {
+      gap: var(--size-4);
+    }
+
+    .image-content {
+      max-width: 100%;
+    }
+
     .text-content h2 {
       font-size: var(--font-size-2);
+    }
+
+    .text-content h3 {
+      font-size: var(--font-size-1);
     }
 
     .text-content p,
