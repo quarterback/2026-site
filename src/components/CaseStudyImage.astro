@@ -1,7 +1,7 @@
 ---
 interface Props {
   src: string;
-  layout?: 'hero' | 'full-bleed' | 'inline';
+  layout?: 'hero' | 'full-bleed' | 'inline' | 'bordered' | 'screenshot';
   caption?: string;
   alt?: string;
   height?: string;
@@ -101,6 +101,33 @@ const { src, layout = 'inline', caption, alt = '', height = '70vh' } = Astro.pro
     object-fit: cover;
   }
 
+  /* Bordered layout - image with visible border and shadow */
+  .case-study-image--bordered {
+    max-width: 100%;
+  }
+
+  .case-study-image--bordered img {
+    border: 1px solid var(--surface-3);
+    box-shadow: var(--shadow-3);
+    padding: var(--size-2);
+    background: var(--surface-1);
+  }
+
+  /* Screenshot layout - larger bordered images for screenshots */
+  .case-study-image--screenshot {
+    max-width: 100%;
+    margin: var(--size-8) 0;
+  }
+
+  .case-study-image--screenshot img {
+    border: 1px solid var(--surface-3);
+    box-shadow: var(--shadow-4);
+    padding: var(--size-3);
+    background: var(--surface-1);
+    max-height: 800px;
+    object-fit: contain;
+  }
+
   @media (max-width: 768px) {
     .case-study-image--hero,
     .case-study-image--full-bleed {
@@ -110,6 +137,11 @@ const { src, layout = 'inline', caption, alt = '', height = '70vh' } = Astro.pro
 
     .case-study-image--hero img {
       height: 50vh !important;
+    }
+
+    .case-study-image--screenshot img,
+    .case-study-image--bordered img {
+      padding: var(--size-1);
     }
   }
 </style>

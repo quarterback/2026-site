@@ -1,0 +1,106 @@
+---
+title: AI Economic Activity Index
+type: "concept"
+lede: A global index tracking AI compute activity in real-time, measuring token volumes, spend, and energy consumption across major providers—modeled on how the IMF tracks currency reserves.
+metadata:
+  role: Creator
+  dates: "2025–present"
+  status: Live
+  scale: "64 models tracked daily"
+links:
+  - label: Live Dashboard
+    url: https://occupant.ee/aeai.html
+  - label: API Data
+    url: https://occupant.ee/data/aeai/latest.json
+tags:
+  - economics
+  - infrastructure
+  - measurement
+featured: true
+order: 1
+---
+
+There's no reliable way to measure how much AI activity is happening globally. Hyperscalers don't disclose token volumes. Energy consumption gets lumped into "datacenter" categories. Investment analysts are guessing.
+
+So I built one.
+
+## The AIU
+
+The AI Economic Activity Index tracks global AI economic activity through a synthetic unit called the **AIU** (AI Unit). The concept borrows from the IMF's Special Drawing Rights—a synthetic currency basket that combines USD, EUR, GBP, JPY, and CNY to measure something more stable than any single currency.
+
+The AIU works the same way, but for AI compute:
+
+| Component | Weight | What it measures |
+|-----------|--------|------------------|
+| Token Volumes | 60% | Weekly tokens processed across 64+ models |
+| Inferred Spend | 30% | Calculated from volumes × blended pricing |
+| Energy Proxy | 10% | Estimated from volumes and model efficiency tiers |
+
+The baseline is February 2025 = 100. As activity grows or shrinks, the index moves.
+
+## Why this matters
+
+The AEAI is a **volume index**, not a price index. It answers: "How much AI work is happening?" not "What does AI cost?"
+
+This makes it complementary to the Compute CPI (which tracks price deflation). Together they tell you:
+
+- **Compute CPI falling** = AI getting cheaper per unit
+- **AEAI rising** = More AI work being done
+- **Both together** = Total spend = AIU × CPI
+
+If AIU grows 50% and CPI falls 20%, total spending grows ~20%. That's the kind of analysis that wasn't possible before.
+
+## The data pipeline
+
+Everything runs automatically via GitHub Actions:
+
+1. **Rankings data** pulls from OpenRouter's public API (64+ models, updated daily)
+2. **Pricing data** aggregates from OpenRouter, LiteLLM, llm-prices.com, and pricepertoken.com
+3. **Energy factors** apply tier-based estimates (Budget → Frontier → Reasoning)
+4. **Calculator** runs daily at 6 AM UTC, commits results to the data directory
+
+The output is a JSON snapshot with full methodology transparency:
+
+```json
+{
+  "aiu_index": 100.0,
+  "components": {
+    "token_index": 100.0,
+    "spend_index": 100.0,
+    "energy_index": 100.0
+  },
+  "activity": {
+    "tokens_weekly": 13909678380565,
+    "spend_usd_weekly": 46629717.81,
+    "energy_gwh_weekly": 0.000591
+  }
+}
+```
+
+## What I'm measuring (and what I'm not)
+
+Current coverage captures activity visible through OpenRouter—roughly 5-10% of estimated global AI inference. That's a significant sample but not comprehensive.
+
+**Not captured:**
+- Direct API usage (OpenAI, Anthropic, Google direct customers)
+- Enterprise deployments and private instances
+- Regional providers not routed through OpenRouter
+
+This is by design. The goal isn't perfect measurement—it's creating a consistent, automated baseline that can track *changes* over time. When activity doubles, the AEAI will show it, even if the absolute number is an undercount.
+
+## Planned extensions
+
+**Geographic attribution**: Track AIU by region (US, EU, APAC) to see where AI activity is concentrating.
+
+**Subindices**: $ACTIVITY-CODE for coding workloads (Copilot, Cursor), $ACTIVITY-CHAT for conversational AI, $ACTIVITY-AGENT for agentic workloads.
+
+**Better energy data**: Integrate IEA datacenter baselines and hyperscaler sustainability reports as they become available.
+
+## Use cases
+
+- **Investment analysis**: Gauge AI infrastructure demand independent of stock prices
+- **Policy planning**: Understand AI's economic footprint for energy and compute policy
+- **Market sizing**: Track AI compute market growth with real data
+- **Trend analysis**: Identify acceleration or deceleration in AI adoption
+
+The full methodology, source code, and historical data are public. Fork it, modify the weights, plug in your own data sources.

@@ -51,7 +51,7 @@ import Base from '../layouts/Base.astro';
       <div class="dashboard-content">
         <div class="sidebar">
           <nav>
-            <button class="nav-btn active" data-view="work">Case Studies</button>
+            <button class="nav-btn active" data-view="work">Projects</button>
             <button class="nav-btn" data-view="media">Media</button>
           </nav>
         </div>
@@ -59,7 +59,7 @@ import Base from '../layouts/Base.astro';
         <div class="main-content">
           <div id="work-view" class="content-view">
             <div class="view-header">
-              <h2>Case Studies</h2>
+              <h2>Projects</h2>
               <button id="add-work-btn" class="btn-primary">Add New</button>
             </div>
             <div id="work-list" class="items-list"></div>
@@ -76,7 +76,7 @@ import Base from '../layouts/Base.astro';
           <div id="edit-work-view" class="content-view" style="display: none;">
             <div class="view-header">
               <button id="back-to-work" class="btn-secondary">← Back</button>
-              <h2 id="work-form-title">Add Case Study</h2>
+              <h2 id="work-form-title">Add Project</h2>
             </div>
             <form id="work-form" class="edit-form">
               <input type="hidden" id="work-id" />
@@ -681,7 +681,7 @@ import Base from '../layouts/Base.astro';
   document.getElementById('add-work-btn')?.addEventListener('click', () => {
     document.getElementById('work-view')!.style.display = 'none';
     document.getElementById('edit-work-view')!.style.display = 'block';
-    document.getElementById('work-form-title')!.textContent = 'Add Case Study';
+    document.getElementById('work-form-title')!.textContent = 'Add Project';
     (document.getElementById('work-form') as HTMLFormElement).reset();
     (document.getElementById('work-id') as HTMLInputElement).value = '';
   });
@@ -782,7 +782,7 @@ import Base from '../layouts/Base.astro';
       (document.getElementById('work-order') as HTMLInputElement).value = data.display_order;
       (document.getElementById('work-published') as HTMLInputElement).checked = data.published;
 
-      document.getElementById('work-form-title')!.textContent = 'Edit Case Study';
+      document.getElementById('work-form-title')!.textContent = 'Edit Project';
       document.getElementById('work-view')!.style.display = 'none';
       document.getElementById('edit-work-view')!.style.display = 'block';
 
@@ -794,7 +794,7 @@ import Base from '../layouts/Base.astro';
   };
 
   (window as any).deleteWork = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this case study?')) return;
+    if (!confirm('Are you sure you want to delete this project?')) return;
 
     const { error } = await supabase
       .from('work_items')

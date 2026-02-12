@@ -7,7 +7,7 @@ itemType: "project"
 systemType: "Community organizing + civic tech"
 outcome: "Six nonprofit sites rebuilt, model replicated nationwide"
 order: 105
-featured: false
+featured: true
 tags: ["Community", "Nonprofit", "Organizing", "Portland"]
 role: "Founder & Organizer"
 timeline: "March–July 2025"
