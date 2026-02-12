@@ -6,9 +6,9 @@ import Base from '../layouts/Base.astro';
   <div class="error-container">
     <h1 class="error-message">are you lost? I'm sorry, but it's not here</h1>
 
-    <div class="lastfm-embed">
+    <div class="mixcloud-embed">
       <iframe
-        src="https://www.last.fm/user/statechampion"
+        src="https://www.mixcloud.com/widget/follow/?u=%2F908RB%2F"
         frameborder="0"
         loading="lazy"
       ></iframe>
@@ -55,7 +55,7 @@ import Base from '../layouts/Base.astro';
     line-height: var(--font-lineheight-2);
   }
 
-  .lastfm-embed {
+  .mixcloud-embed {
     width: 100%;
     max-width: 900px;
     height: 600px;
@@ -65,7 +65,7 @@ import Base from '../layouts/Base.astro';
     box-shadow: var(--shadow-4);
   }
 
-  .lastfm-embed iframe {
+  .mixcloud-embed iframe {
     width: 100%;
     height: 100%;
     border: none;
@@ -83,7 +83,7 @@ import Base from '../layouts/Base.astro';
   }
 
   @media (max-width: 768px) {
-    .lastfm-embed {
+    .mixcloud-embed {
       height: 500px;
     }
 
