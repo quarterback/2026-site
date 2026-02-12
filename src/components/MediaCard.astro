@@ -2,13 +2,14 @@
 interface Props {
   title: string;
   source: string;
+  description?: string;
   mediaType: 'podcast' | 'video' | 'audio' | 'article' | 'talk' | 'interview' | 'feature';
   url?: string;
   embedUrl?: string;
   date?: string;
 }
 
-const { title, source, mediaType, url, embedUrl, date } = Astro.props;
+const { title, source, description, mediaType, url, embedUrl, date } = Astro.props;
 const shouldEmbed = embedUrl && ['podcast', 'video', 'talk'].includes(mediaType);
 const linkUrl = url || embedUrl || '#';
 
@@ -35,6 +36,7 @@ const finalEmbedUrl = embedUrl ? getEmbedUrl(embedUrl) : '';
   </div>
   <h3 class="media-title">{title}</h3>
   <p class="media-source">{source}</p>
+  {description && <p class="media-description">{description}</p>}
 
   {shouldEmbed ? (
     <div class="media-embed">
@@ -94,7 +96,14 @@ const finalEmbedUrl = embedUrl ? getEmbedUrl(embedUrl) : '';
   .media-source {
     font-size: var(--font-size-1);
     color: var(--text-2);
-    margin: 0 0 var(--size-4);
+    margin: 0;
+  }
+
+  .media-description {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    line-height: 1.6;
+    margin: var(--size-3) 0 var(--size-4);
   }
 
   .media-embed {
