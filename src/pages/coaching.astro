@@ -24,11 +24,15 @@ const fonts: string[] = [];
         <div class="intro-grid">
           <div class="text-content">
             <h2>Experience</h2>
-            <p>Since 2020, I've been girls varsity head coach at Catlin Gabel School in Portland. I'm currently in my 9th straight high school season, with a career varsity record of 77-30-3. I started coaching in 1997, directing tennis programs at summer camps throughout New England and coaching scholastically and collegiately across several states.</p>
+            <p>Ron Bronson has coached summer camp, scholastic, and collegiate tennis programs across the country over the past two decades. He returned to high school coaching in 2019 as Head Boys Varsity Tennis Coach at Oregon City High School. In 2020, he was named Head Girls Varsity Tennis Coach at Catlin Gabel School in Portland.</p>
 
-            <p>At Catlin Gabel, we've had players across the gamut from D1 recruits to JV players who become varsity starters and state qualifiers. I've also coached developing programs—the fun of taking an individual sport like tennis and turning it into a team sport is getting kids to buy into investing in themselves but also into wanting their teammates to be great, too.</p>
+            <p>At Catlin Gabel, his teams have compiled a 56-13-2 record, won the 2022 OSAA 4A/3A/2A/1A Girls Team State Championship and the 2021 Oregon 3A State Championship, and produced individual state champions in doubles (2023, 2025) and a state singles finalist (2022). During his tenure, the program has won two District titles (2021, 2022) and a share of four conference titles (2021, 2022, 2023, 2025), with 14 All-State selections since 2022 and several players continuing on to collegiate tennis, including Division I. He was named OACA State Coach of the Year in 2023 and District Coach of the Year in 2022.</p>
 
-            <p>I played four years of varsity tennis at Plainfield (NJ) High School under Donald Van Blake, then continued playing collegiately after serving in the U.S. Air Force post-high school.</p>
+            <p>Since 2022 he has served as OACA State Tennis Co-Chair, has served on the state tournament seeding committee, and is helping lead an effort to establish a statewide team dual-match championship structure in Oregon.</p>
+
+            <p>Prior to moving to Oregon, he coached state individual champions and conference-winning teams in other states. Overall, his career varsity record stands at 77-30-3.</p>
+
+            <p>He played four years of varsity tennis at Plainfield (NJ) High School under Donald Van Blake, then continued playing collegiately after serving in the U.S. Air Force post-high school.</p>
           </div>
           <div class="image-content">
             <Image
@@ -93,6 +97,24 @@ const fonts: string[] = [];
             <li><strong>Resilience Development:</strong> Preparing athletes for the mental challenges of competition</li>
             <li><strong>Analytics-Informed Insight:</strong> Using data to identify patterns and opportunities for growth</li>
           </ul>
+        </div>
+
+        <div class="text-content testimonials">
+          <h2>What Players & Families Say</h2>
+
+          <div class="quotes-section">
+            <h3>Players</h3>
+            <blockquote>"You believed in me early and let me grow into my role on the team."</blockquote>
+            <blockquote>"I learned how to think for myself during matches this season."</blockquote>
+            <blockquote>"You pushed us to compete and kept things steady at the same time."</blockquote>
+          </div>
+
+          <div class="quotes-section">
+            <h3>Parents & Families</h3>
+            <blockquote>"Your leadership and support went well beyond the team's success."</blockquote>
+            <blockquote>"The culture you built made a huge difference in our child's entire experience."</blockquote>
+            <blockquote>"Supportive regardless of the score. That meant everything to the players."</blockquote>
+          </div>
         </div>
       </div>
     </section>
@@ -205,6 +227,39 @@ const fonts: string[] = [];
   }
 
   .text-content li:last-child {
+    margin-bottom: 0;
+  }
+
+  .testimonials {
+    margin-top: var(--size-8);
+    padding-top: var(--size-8);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .quotes-section {
+    margin-top: var(--size-6);
+  }
+
+  .quotes-section h3 {
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--size-4);
+  }
+
+  blockquote {
+    font-size: var(--font-size-1);
+    line-height: 1.6;
+    color: var(--text-2);
+    font-style: italic;
+    margin: 0 0 var(--size-4) 0;
+    padding-left: var(--size-5);
+    border-left: 3px solid var(--brand);
+  }
+
+  blockquote:last-of-type {
     margin-bottom: 0;
   }
 
