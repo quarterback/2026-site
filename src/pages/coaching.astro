@@ -75,6 +75,16 @@ const fonts: string[] = [];
             <blockquote>"Supportive regardless of the score. That meant everything to the players."</blockquote>
           </div>
         </div>
+
+        <div class="text-content writing-section">
+          <h2>Writing on Coaching</h2>
+          <ul class="writing-links">
+            <li><a href="https://blog.ronbronson.com/on-adapting-my-coaching-philosophy" target="_blank" rel="noopener noreferrer">On adapting my coaching philosophy</a></li>
+            <li><a href="https://blog.ronbronson.com/on-lineups-ladders-high-school-tennis" target="_blank" rel="noopener noreferrer">On lineups & ladders in high school tennis</a></li>
+            <li><a href="https://blog.ronbronson.com/naming-the-courts" target="_blank" rel="noopener noreferrer">Naming the courts</a></li>
+            <li><a href="https://blog.ronbronson.com/motivating-or-setting-realistic-goals-when-your-team-loses-a-lot" target="_blank" rel="noopener noreferrer">Motivating or setting realistic goals when your team loses a lot</a></li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>
@@ -216,6 +226,33 @@ const fonts: string[] = [];
 
   blockquote:last-of-type {
     margin-bottom: 0;
+  }
+
+  .writing-section {
+    margin-top: var(--size-8);
+    padding-top: var(--size-8);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .writing-links {
+    margin-left: 0 !important;
+  }
+
+  .writing-links li {
+    margin-bottom: var(--size-4);
+  }
+
+  .writing-links a {
+    color: var(--text-1);
+    text-decoration: none;
+    border-bottom: 2px solid var(--brand);
+    transition: color 0.2s ease, border-color 0.2s ease;
+    padding-bottom: 2px;
+  }
+
+  .writing-links a:hover {
+    color: var(--brand);
+    border-color: transparent;
   }
 
   @media (max-width: 900px) {
