@@ -1,6 +1,6 @@
 ---
 title: "Leafroll — Professional Identity Layer"
-type: "project"
+type: "delivery"
 lede: "Dynamic, modular professional profiles that travel across networks—rethinking how people present work, skills, and trajectory."
 summary: "A lightweight professional-identity prototype treating profiles as living documents composed of signals, artifacts, and endorsements that can be rearranged depending on context—collaboration, hiring, or discovery."
 itemType: "project"

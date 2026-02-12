@@ -1,6 +1,6 @@
 ---
 title: "HeyPBJ — Structured Matching Platform"
-type: "project"
+type: "delivery"
 lede: "Dating and social discovery as a routing problem—using cohorts, compatibility metrics, and guided prompts instead of endless feeds."
 summary: "A structured-matching platform that treats social discovery as infrastructure rather than a feed, assembling compatible small groups ('rundles') based on declared preferences and weighted signals."
 itemType: "project"

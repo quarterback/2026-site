@@ -1,6 +1,6 @@
 ---
 title: "Occupant — AI Compute Benchmarks"
-type: "project"
+type: "delivery"
 lede: "Public data infrastructure for AI model pricing, compute deflation tracking, and market intelligence."
 summary: "Static benchmark dashboard publishing daily-updated indices for AI compute pricing (CPI), economic activity (AEAI), and market intelligence—built to support procurement and strategic planning."
 itemType: "project"

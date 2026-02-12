@@ -1,6 +1,6 @@
 ---
 title: "AT Protocol Projects"
-type: "project"
+type: "delivery"
 lede: "Interconnected suite of decentralized data infrastructure and public goods experiments."
 summary: "A collection of projects exploring AT Protocol, decentralized data, and public infrastructure—including AI benchmarks, data tools, and experimental interfaces."
 itemType: "project"

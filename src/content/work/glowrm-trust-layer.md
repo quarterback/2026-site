@@ -1,6 +1,6 @@
 ---
 title: "Glowrm — Trust & Relationship Layer"
-type: "project"
+type: "delivery"
 lede: "Portable trust primitives for decentralized social environments—how identity, reputation, and consent travel across networks."
 summary: "A trust and relationship-layer prototype for AT Protocol environments, providing lightweight infrastructure for signaling credibility, tracking interaction history, and routing trust between participants and communities."
 itemType: "project"
