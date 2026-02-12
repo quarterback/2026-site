@@ -7,9 +7,10 @@ interface Props {
   url?: string;
   embedUrl?: string;
   date?: string;
+  image?: string;
 }
 
-const { title, source, description, mediaType, url, embedUrl, date } = Astro.props;
+const { title, source, description, mediaType, url, embedUrl, date, image } = Astro.props;
 const shouldEmbed = embedUrl && ['podcast', 'video', 'talk'].includes(mediaType);
 const linkUrl = url || embedUrl || '#';
 
@@ -37,6 +38,12 @@ const finalEmbedUrl = embedUrl ? getEmbedUrl(embedUrl) : '';
   <h3 class="media-title">{title}</h3>
   <p class="media-source">{source}</p>
   {description && <p class="media-description">{description}</p>}
+
+  {image && (
+    <a href={linkUrl} target="_blank" rel="noopener" class="media-image-link">
+      <img src={image} alt={title} class="media-image" />
+    </a>
+  )}
 
   {shouldEmbed ? (
     <div class="media-embed">
@@ -104,6 +111,25 @@ const finalEmbedUrl = embedUrl ? getEmbedUrl(embedUrl) : '';
     color: var(--text-2);
     line-height: 1.6;
     margin: var(--size-3) 0 var(--size-4);
+  }
+
+  .media-image-link {
+    display: block;
+    margin: var(--size-3) 0;
+    border-radius: var(--radius-2);
+    overflow: hidden;
+  }
+
+  .media-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-2);
+    transition: transform 0.2s;
+  }
+
+  .media-image-link:hover .media-image {
+    transform: scale(1.02);
   }
 
   .media-embed {

@@ -8,6 +8,8 @@ systemType: "Community organizing + civic tech"
 outcome: "Six nonprofit sites rebuilt, model replicated nationwide"
 order: 105
 featured: true
+hero:
+  image: "/img/digitalcorpspdx.org.png"
 tags: ["Community", "Nonprofit", "Organizing", "Portland"]
 role: "Founder & Organizer"
 timeline: "March–July 2025"
@@ -17,6 +19,8 @@ externalUrl: "https://digitalcorpspdx.org"
 ## The catalyst
 
 Following the closure of 18F, I wanted to establish a community-focused alternative for digital service work. I launched Portland Digital Corps expecting modest participation—but over 100 people signed up, with 50+ volunteers actively contributing.
+
+![Portland Digital Corps website](/img/digitalcorpspdx.org.png)
 
 ## What we did
 
