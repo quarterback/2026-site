@@ -44,11 +44,6 @@ Lightweight professional-identity and portfolio system that rethinks how people 
 
 **Live at:** [leafroll.fun](https://leafroll.fun)
 
-### [Occupant — AI Compute Benchmarks](/work/occupant-ai-benchmarks)
-Public data infrastructure for AI model pricing, compute deflation tracking (CPI), economic activity indices (AEAI), and market intelligence. Daily-updated benchmarks tracking 2,300+ AI models across providers for procurement and strategic planning. Static site with scheduled data regeneration via GitHub Actions—no database, no tracking, just public benchmarks.
-
-**Live at:** [occupant.ee](https://occupant.ee)
-
 ---
 
 ## Shared Architecture Patterns
@@ -60,7 +55,6 @@ Public data infrastructure for AI model pricing, compute deflation tracking (CPI
 - Portable credentials and reputation
 
 **Multiple Deployment Strategies:**
-- **Static + regeneration** (Occupant): Scheduled pipelines, no runtime server
 - **Progressive web apps** (HeyPBJ, Leafroll): Client-side rendering with offline support
 - **Infrastructure services** (Glowrm): Trust/verification APIs for other platforms
 - All prioritize **user control** and **data portability**
@@ -90,7 +84,6 @@ These projects explore how to build public goods on decentralized foundations—
 - **Decentralized architecture**: Building connected services without centralized control or platform lock-in
 - **Composable infrastructure**: Services that reference and build on each other (HeyPBJ uses Glowrm, Leafroll integrates with both)
 - **Portable identity & reputation**: Credentials, trust, and professional history that travel across networks
-- **Public data infrastructure**: Creating credible benchmarks and tools as public goods (Occupant)
 - **Constraint-based design**: How limits and structure can produce better outcomes than infinite choice (HeyPBJ)
 - **Trust primitives**: Building verification, vouching, and consent infrastructure for decentralized spaces (Glowrm)
 - **Privacy-first design**: Proving you can build useful services without surveillance or tracking

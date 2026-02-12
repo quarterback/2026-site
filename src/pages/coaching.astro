@@ -122,13 +122,15 @@ const fonts: string[] = [];
   .image-content {
     position: sticky;
     top: calc(var(--size-8) + 60px);
+    border-radius: var(--radius-3);
+    overflow: hidden;
+    border: 3px solid var(--surface-3);
   }
 
   .image-content img {
     width: 100%;
     height: auto;
-    border-radius: var(--radius-2);
-    box-shadow: var(--shadow-3);
+    display: block;
   }
 
   .text-content {
