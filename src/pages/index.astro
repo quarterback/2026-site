@@ -50,14 +50,16 @@ const currentBooks = [
 
 const currentAlbums = [
   {
-    title: "The Jungle",
-    artist: "Wynton Marsalis",
+    title: "Sunshine and Balance Beams",
+    artist: "Pile",
   },
   {
-    title: "Italo disco",
+    title: "Ripped and Torn",
+    artist: "Lifeguard Radio",
   },
   {
-    title: "KCRW, NTS & The Lot Radio",
+    title: "DDR",
+    artist: "Sharp Pins",
   },
 ];
 
@@ -65,6 +67,7 @@ const recentMedia = [
   {
     title: "Some advice on managing your design career upwards",
     source: "Piccalil.li",
+    description: "Navigating design leadership, building influence across organizations, and positioning yourself for strategic impact.",
     mediaType: "article" as const,
     url: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
     date: "January 2026",
@@ -72,6 +75,7 @@ const recentMedia = [
   {
     title: "Interview w/Ron Bronson",
     source: "Did I Do That Podcast",
+    description: "Discussion on service design, public sector innovation, and building decision systems that work at scale.",
     mediaType: "podcast" as const,
     embedUrl: "https://schumacher.substack.com/p/ron-bronson-what-huh-me-huh-what",
     date: "October 2025",
@@ -79,6 +83,7 @@ const recentMedia = [
   {
     title: "On Servive Design",
     source: "Surfacing Podcast",
+    description: "Deep dive into service design methodology, systems thinking, and how design shapes public services.",
     mediaType: "podcast" as const,
     embedUrl: "https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7",
     date: "2021",
@@ -86,6 +91,7 @@ const recentMedia = [
   {
     title: "Beyond Civic Tech: Public Mechanics Starts at Home",
     source: "Cascadia Open Source Fall Conference",
+    description: "Why civic tech fails when it ignores maintenance, repair, and the invisible work that keeps public services running.",
     mediaType: "talk" as const,
     embedUrl: "https://youtube.com/watch?v=hnAScuK-oMo",
     date: "2025",
@@ -124,11 +130,10 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Selected Work -->
+    <!-- Projects -->
     <section id="work">
       <div class="container">
-        <h2 class="section-heading">Selected Work</h2>
-        <p class="section-intro">Case studies exploring service design, civic technology, decision systems, and product strategy. <a href="/work" class="section-link">View all work →</a></p>
+        <h2 class="section-heading">Projects</h2>
         <div class="work-grid">
           {work.map(item => (
             <WorkCard

@@ -7,7 +7,7 @@ itemType: "event"
 systemType: "Conferences + community building"
 outcome: "80+ participants across two days, national attendance"
 order: 106
-featured: false
+featured: true
 tags: ["Conference", "Portland", "Community", "Organizing"]
 role: "Organizer, Keynote Speaker"
 timeline: "October 16-17, 2024"

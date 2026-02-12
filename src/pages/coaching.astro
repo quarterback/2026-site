@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import rontennisImg from '../../public/img/rontennis.jpg';
 
 const techStack = [
   "built hastily in html & css"
@@ -19,11 +21,28 @@ const fonts: string[] = [];
 
     <section class="coaching-content">
       <div class="container">
-        <div class="text-content">
-          <h2>Experience</h2>
-          <p>Since 2020, I've been girls varsity head coach at Catlin Gabel School in Portland. Altogether, I've coached scholastic and collegiate tennis for 11 seasons across several states. I started my career directing tennis programs at summer camps throughout New England. At Catlin Gabel, we've had players across the gamut from D1 recruits to JV players who become varsity starters and state qualifiers. I've also coached developing programs, the fun of taking an indivdual sport like tennis and turning it into a team sport is getting kids to buy into investing in themselves but also into wanting their teammates to be great, too.</p>
+        <div class="intro-grid">
+          <div class="text-content">
+            <h2>Experience</h2>
+            <p>Ron Bronson has coached summer camp, scholastic, and collegiate tennis programs across the country over the past two decades. He returned to high school coaching in 2019 as Head Boys Varsity Tennis Coach at Oregon City High School. In 2020, he was named Head Girls Varsity Tennis Coach at Catlin Gabel School in Portland.</p>
 
-          <p>I played four years of varsity tennis at Plainfield (NJ) High School under Donald Van Blake, then continued played collegiately after serving in the U.S. Air Force post-high school.</p>
+            <p>At Catlin Gabel, his teams have compiled a 56-13-2 record, won the 2022 OSAA 4A/3A/2A/1A Girls Team State Championship and the 2021 Oregon 3A State Championship, and produced individual state champions in doubles (2023, 2025) and a state singles finalist (2022). During his tenure, the program has won two District titles (2021, 2022) and a share of four conference titles (2021, 2022, 2023, 2025), with 14 All-State selections since 2022 and several players continuing on to collegiate tennis, including Division I. He was named OACA State Coach of the Year in 2023 and District Coach of the Year in 2022.</p>
+
+            <p>Since 2022 he has served as OACA State Tennis Co-Chair, has served on the state tournament seeding committee, and is helping lead an effort to establish a statewide team dual-match championship structure in Oregon.</p>
+
+            <p>Prior to moving to Oregon, he coached state individual champions and conference-winning teams in other states. Overall, his career varsity record stands at 77-30-3.</p>
+
+            <p>He played four years of varsity tennis at Plainfield (NJ) High School under Donald Van Blake, then continued playing collegiately after serving in the U.S. Air Force post-high school.</p>
+          </div>
+          <div class="image-content">
+            <Image
+              src={rontennisImg}
+              alt="Ron Bronson coaching tennis"
+              width={300}
+              quality={80}
+              format="webp"
+            />
+          </div>
         </div>
 
         <div class="text-content">
@@ -32,10 +51,38 @@ const fonts: string[] = [];
 
           <p>My coaching centers on:</p>
           <ul>
-            <li><strong>Trust & Autonomy:</strong> Players learn to trust their instincts and make independent decisions</li>
-            <li><strong>Game-Based Learning:</strong> Practices built around tactical problems, not just technical repetition</li>
-            <li><strong>Resilience Development:</strong> Preparing athletes for the mental challenges of competition</li>
-            <li><strong>Analytics-Informed Insight:</strong> Using data to identify patterns and opportunities for growth</li>
+            <li><strong>Trust Yourself:</strong> Players learn to trust their instincts and make independent decisions</li>
+            <li><strong>Mental Toughness:</strong> Preparing athletes for the mental challenges of competition</li>
+            <li><strong>Constraints-Led Approach:</strong> Practices built around tactical problems, not just technical repetition</li>
+            <li><strong>Data-Informed Analytics:</strong> Using data to identify patterns and opportunities for growth</li>
+          </ul>
+        </div>
+
+        <div class="text-content testimonials">
+          <h2>What Players & Families Say</h2>
+
+          <div class="quotes-section">
+            <h3>Players</h3>
+            <blockquote>"You believed in me early and let me grow into my role on the team."</blockquote>
+            <blockquote>"I learned how to think for myself during matches this season."</blockquote>
+            <blockquote>"You pushed us to compete and kept things steady at the same time."</blockquote>
+          </div>
+
+          <div class="quotes-section">
+            <h3>Parents & Families</h3>
+            <blockquote>"Your leadership and support went well beyond the team's success."</blockquote>
+            <blockquote>"The culture you built made a huge difference in our child's entire experience."</blockquote>
+            <blockquote>"Supportive regardless of the score. That meant everything to the players."</blockquote>
+          </div>
+        </div>
+
+        <div class="text-content writing-section">
+          <h2>Writing on Coaching</h2>
+          <ul class="writing-links">
+            <li><a href="https://blog.ronbronson.com/on-adapting-my-coaching-philosophy" target="_blank" rel="noopener noreferrer">On adapting my coaching philosophy</a></li>
+            <li><a href="https://blog.ronbronson.com/on-lineups-ladders-high-school-tennis" target="_blank" rel="noopener noreferrer">On lineups & ladders in high school tennis</a></li>
+            <li><a href="https://blog.ronbronson.com/naming-the-courts" target="_blank" rel="noopener noreferrer">Naming the courts</a></li>
+            <li><a href="https://blog.ronbronson.com/motivating-or-setting-realistic-goals-when-your-team-loses-a-lot" target="_blank" rel="noopener noreferrer">Motivating or setting realistic goals when your team loses a lot</a></li>
           </ul>
         </div>
       </div>
@@ -64,9 +111,41 @@ const fonts: string[] = [];
     padding-bottom: var(--size-fluid-5);
   }
 
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--size-8);
+    margin-bottom: var(--size-8);
+    align-items: start;
+  }
+
+  .image-content {
+    position: sticky;
+    top: calc(var(--size-8) + 60px);
+  }
+
+  .image-content img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-2);
+    box-shadow: var(--shadow-3);
+  }
+
   .text-content {
     max-width: 70ch;
     margin-bottom: var(--size-8);
+  }
+
+  .text-content h3 {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    margin-top: var(--size-6);
+    margin-bottom: var(--size-2);
+    color: var(--text-1);
+  }
+
+  .text-content h3:first-of-type {
+    margin-top: var(--size-4);
   }
 
   .text-content h2 {
@@ -116,6 +195,80 @@ const fonts: string[] = [];
     margin-bottom: 0;
   }
 
+  .testimonials {
+    margin-top: var(--size-8);
+    padding-top: var(--size-8);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .quotes-section {
+    margin-top: var(--size-6);
+  }
+
+  .quotes-section h3 {
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--size-4);
+  }
+
+  blockquote {
+    font-size: var(--font-size-1);
+    line-height: 1.6;
+    color: var(--text-2);
+    font-style: italic;
+    margin: 0 0 var(--size-4) 0;
+    padding-left: var(--size-5);
+    border-left: 3px solid var(--brand);
+  }
+
+  blockquote:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .writing-section {
+    margin-top: var(--size-8);
+    padding-top: var(--size-8);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .writing-links {
+    margin-left: 0 !important;
+  }
+
+  .writing-links li {
+    margin-bottom: var(--size-4);
+  }
+
+  .writing-links a {
+    color: var(--text-1);
+    text-decoration: none;
+    border-bottom: 2px solid var(--brand);
+    transition: color 0.2s ease, border-color 0.2s ease;
+    padding-bottom: 2px;
+  }
+
+  .writing-links a:hover {
+    color: var(--brand);
+    border-color: transparent;
+  }
+
+  @media (max-width: 900px) {
+    .intro-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-6);
+    }
+
+    .image-content {
+      position: relative;
+      top: auto;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
   @media (max-width: 600px) {
     .page-header {
       padding-top: var(--size-8);
@@ -126,8 +279,20 @@ const fonts: string[] = [];
       padding-bottom: var(--size-8);
     }
 
+    .intro-grid {
+      gap: var(--size-4);
+    }
+
+    .image-content {
+      max-width: 100%;
+    }
+
     .text-content h2 {
       font-size: var(--font-size-2);
+    }
+
+    .text-content h3 {
+      font-size: var(--font-size-1);
     }
 
     .text-content p,

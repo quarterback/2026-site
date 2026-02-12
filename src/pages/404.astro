@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="404 - Page Not Found">
+  <div class="error-container">
+    <h1 class="error-message">are you lost? I'm sorry, but it's not here</h1>
+
+    <div class="mixcloud-embed">
+      <iframe
+        src="https://www.mixcloud.com/widget/follow/?u=%2F908RB%2F"
+        frameborder="0"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <p class="redirect-notice">Redirecting you back home in <span id="countdown">5</span> seconds...</p>
+  </div>
+</Base>
+
+<script>
+  let seconds = 5;
+  const countdownEl = document.getElementById('countdown');
+
+  const interval = setInterval(() => {
+    seconds--;
+    if (countdownEl) {
+      countdownEl.textContent = seconds.toString();
+    }
+
+    if (seconds <= 0) {
+      clearInterval(interval);
+      window.location.href = '/';
+    }
+  }, 1000);
+</script>
+
+<style>
+  .error-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--size-8) var(--size-4);
+    text-align: center;
+  }
+
+  .error-message {
+    font-size: clamp(var(--font-size-4), 5vw, var(--font-size-6));
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin-bottom: var(--size-8);
+    max-width: 800px;
+    line-height: var(--font-lineheight-2);
+  }
+
+  .mixcloud-embed {
+    width: 100%;
+    max-width: 900px;
+    height: 600px;
+    margin-bottom: var(--size-6);
+    border-radius: var(--radius-3);
+    overflow: hidden;
+    box-shadow: var(--shadow-4);
+  }
+
+  .mixcloud-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .redirect-notice {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    font-family: var(--font-mono);
+  }
+
+  #countdown {
+    font-weight: var(--font-weight-6);
+    color: var(--brand);
+  }
+
+  @media (max-width: 768px) {
+    .mixcloud-embed {
+      height: 500px;
+    }
+
+    .error-message {
+      font-size: var(--font-size-3);
+    }
+  }
+</style>
