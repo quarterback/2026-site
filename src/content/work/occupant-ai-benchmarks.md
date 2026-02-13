@@ -8,11 +8,10 @@ systemType: "Data infrastructure + public goods"
 outcome: "Daily-updated public benchmarks tracking 2,300+ AI models across providers"
 order: 107
 featured: true
-tags: ["AT Protocol", "Data Infrastructure", "Open Data", "AI Economics"]
+tags: ["Data Infrastructure", "Open Data", "AI Economics"]
 role: "Designer, Developer"
 timeline: "2024 - Present"
 externalUrl: "https://occupant.ee"
-parent: "atproto-projects"
 hero:
   image: "/img/occupant.png"
 ---
@@ -152,15 +151,6 @@ All datasets published as JSON under `/data/` for programmatic access.
    - No tracking or paywalls
    - Transparent methodology
    - Downloadable datasets
-
----
-
-## Part of the AT Protocol Suite
-
-Occupant is one of several interconnected projects exploring decentralized data infrastructure and public goods. See also:
-- [AT Protocol Projects](/work/atproto-projects) (Parent project)
-- [Glowrm](/work/glowrm) (Related)
-- [Leafroll](/work/leafroll) (Related)
 
 ---
 
