@@ -1,29 +1,33 @@
 ---
 title: "AT Protocol Projects"
-type: "delivery"
-lede: "Interconnected suite of decentralized data infrastructure and public goods experiments."
-summary: "A collection of projects exploring AT Protocol, decentralized data, and public infrastructure—including AI benchmarks, data tools, and experimental interfaces."
+type: "concept"
+lede: "Demonstrations of decision systems, authority models, and trust scaffolding operating in public environments where governance must be visible and contestable."
+summary: "Applied institutional design exploring how decision-layer architecture, trust infrastructure, and accountability mechanisms function in decentralized public contexts—showing governance primitives under operational load."
 itemType: "project"
-systemType: "Decentralized infrastructure + experimental platforms"
-outcome: "Multiple production services serving public data and experimental tooling"
+systemType: "Institutional design + public mechanics"
+outcome: "Production systems demonstrating trust infrastructure, authority models, and decision architecture in decentralized environments"
 order: 105
 featured: true
-tags: ["AT Protocol", "Decentralized", "Open Source", "Public Goods"]
-role: "Designer, Developer, Architect"
+tags: ["Institutional Design", "Trust Infrastructure", "Public Mechanics", "Authority Models", "AT Protocol"]
+role: "Founder, Architect"
 timeline: "2024 - Present"
 externalUrl: "https://heypbj.xyz"
 hero:
   image: "/img/heypbj.xyz.png"
 ---
 
-## Overview
+## Institutional Design in Public Environments
 
-This is a suite of interconnected projects exploring decentralized protocols, public data infrastructure, and experimental interfaces. All projects share common principles:
+This suite of projects demonstrates how decision systems, authority models, and trust infrastructure operate when they must be publicly visible, auditable, and contestable. Built on AT Protocol's decentralized foundation, these systems show governance architecture in environments where accountability is designed into the system itself.
 
-- **Public by default**: Open data, transparent methods
-- **Decentralized where possible**: Using AT Protocol and distributed architectures
-- **Experimental posture**: Rapid iteration, learning in public
-- **No tracking**: Privacy-first, minimal data collection
+The work explores building governable systems in public contexts—the trust scaffolding and decision-layer architecture that makes public systems legible, accountable, and safe to operate.
+
+Shared governance principles across all projects:
+
+- **Transparency as infrastructure**: Decision logic, data sources, and authority models must be publicly auditable
+- **Decentralized accountability**: Trust and governance mechanisms that function without centralized control
+- **Contestability by design**: Users can challenge, verify, and audit system behavior
+- **No surveillance**: Privacy-preserving architecture that doesn't require data extraction to function
 
 ---
 
@@ -35,7 +39,7 @@ A structured-matching platform that treats dating and social discovery as a rout
 **Live at:** [heypbj.xyz](https://heypbj.xyz)
 
 ### [Glowrm — Trust & Relationship Layer](/work/glowrm-trust-layer)
-Trust and relationship-layer prototype for AT Protocol environments. Provides lightweight infrastructure for signaling credibility, tracking interaction history, and routing trust between participants and communities. Focuses on how identity, reputation, and consent travel across networks without collapsing into a single platform's control. Experiments with portable trust primitives—verification, vouching, and context establishment when moving between spaces.
+Trust infrastructure demonstrating how governance primitives—verification, credentialing, accountability—function in decentralized environments where no platform controls authority. Shows how trust routing, reputation portability, and consent enforcement operate as decision-layer architecture rather than centralized platform features. Establishes the governance models needed when authority must be distributed but accountability still matters.
 
 **Live at:** [glowrm.tech](https://glowrm.tech)
 
@@ -81,11 +85,9 @@ These projects explore how to build public goods on decentralized foundations—
 
 ## What This Demonstrates
 
-- **Decentralized architecture**: Building connected services without centralized control or platform lock-in
-- **Composable infrastructure**: Services that reference and build on each other (HeyPBJ uses Glowrm, Leafroll integrates with both)
-- **Portable identity & reputation**: Credentials, trust, and professional history that travel across networks
-- **Constraint-based design**: How limits and structure can produce better outcomes than infinite choice (HeyPBJ)
-- **Trust primitives**: Building verification, vouching, and consent infrastructure for decentralized spaces (Glowrm)
-- **Privacy-first design**: Proving you can build useful services without surveillance or tracking
-- **Protocol thinking**: Designing for interoperability and composability from the start
-- **Experimental development**: Rapid iteration with transparent methodology, learning in public
+- **Institutional design for public contexts**: Decision systems, authority models, and trust scaffolding where governance is publicly visible and contestable
+- **Public mechanics at scale**: Choreography between technical architecture, authority delegation, and accountability in distributed environments
+- **Trust infrastructure as governance**: Primitives—verification, reputation routing, consent enforcement—that enable decentralized systems to operate with institutional accountability
+- **Authority models in distributed systems**: Credibility, oversight, and enforcement distributed across network participants
+- **Decision-layer architecture**: Judgment routing, consequence design, and override mechanisms in public environments where decisions must be auditable
+- **Composable governance primitives**: Infrastructure that services build on (HeyPBJ uses Glowrm, Leafroll integrates trust routing)

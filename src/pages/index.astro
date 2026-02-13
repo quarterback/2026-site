@@ -67,7 +67,7 @@ const recentMedia = [
   {
     title: "Future Perfect Book Club",
     source: "futureperfectbook.club",
-    description: "Co-hosted with Joel Goodman, exploring the intersection of design, technology, and the future of institutions.",
+    description: "Co-hosted with Joel Goodman, exploring governance, decision infrastructure, and the institutional architecture of AI-mediated systems.",
     mediaType: "podcast" as const,
     url: "https://futureperfectbook.club",
     date: "2025",
@@ -75,7 +75,7 @@ const recentMedia = [
   {
     title: "Some advice on managing your design career upwards",
     source: "Piccalil.li",
-    description: "Navigating design leadership, building influence across organizations, and positioning yourself for strategic impact.",
+    description: "Navigating organizational influence, operating at the decision layer, and positioning yourself to shape institutional outcomes.",
     mediaType: "article" as const,
     url: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
     image: "/img/piccalil.li.png",
@@ -84,7 +84,7 @@ const recentMedia = [
   {
     title: "Beyond Civic Tech: Public Mechanics Starts at Home",
     source: "Cascadia Open Source Fall Conference",
-    description: "Why civic tech fails when it ignores maintenance, repair, and the invisible work that keeps public services running.",
+    description: "How public systems require maintenance infrastructure—the invisible governance work that keeps institutions accountable and operational.",
     mediaType: "talk" as const,
     embedUrl: "https://youtube.com/watch?v=hnAScuK-oMo",
     date: "November 2025",
@@ -92,7 +92,7 @@ const recentMedia = [
   {
     title: "Repairing Service Design for the Age of AI",
     source: "Service Design Show Podcast",
-    description: "Exploring how service design must evolve to address the challenges and opportunities of AI-driven systems.",
+    description: "Decision-layer architecture for AI-mediated systems—how institutions must evolve to govern automated decisions accountably.",
     mediaType: "podcast" as const,
     url: "https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505",
     date: "September 2025",
@@ -100,7 +100,7 @@ const recentMedia = [
   {
     title: "Design Systems and Public Services",
     source: "YouTube",
-    description: "Discussion on service design, public sector innovation, and building decision systems that work at scale.",
+    description: "Building decision infrastructure for public institutions—governance frameworks, accountability mechanisms, and trust architecture at scale.",
     mediaType: "video" as const,
     embedUrl: "https://www.youtube.com/watch?v=kL0gYtoUtvI",
     date: "October 2025",
@@ -123,8 +123,8 @@ const fonts: string[] = [];
 <Base title="Ron Bronson">
   <main>
     <Hero
-      headline="I build software for automated decisions"
-      subheadline="My work connects design, software engineering, and policy to improve public services in an AI-driven world. Assistant Professor of Practice in Urban Technology, University of Michigan. Created statecapacity.ai. Former Head of Design at 18F.gov & PDX Digital Corps founder."
+      headline="I build trust infrastructure for AI-mediated institutions"
+      subheadline="My practice focuses on the decision layer where authority, discretion, and oversight are encoded—designing governance primitives, trust instrumentation, and judgment routing systems that make automated institutions legible, accountable, and contestable. Founder of State Capacity AI and Occupant. Assistant Professor of Practice in Urban Technology, University of Michigan. Former Head of Design at 18F.gov."
       primaryCTA={{ label: "About me", url: "/about", icon: "fa-user" }}
       secondaryCTA={{ label: "Let's connect", url: "https://linkedin.com/in/ronbronson", icon: "fa-linkedin" }}
     />
@@ -134,7 +134,7 @@ const fonts: string[] = [];
       <div class="container">
         <div class="currently-content">
           <p class="label">Currently</p>
-          <p class="currently-status">Building a consumer price index to measure AI spend via Occupant.ee. Still thinking about Andor. ICYMI: My <a href="/year-in-review">2025 year in review</a> is here.</p>
+          <p class="currently-status">Developing compute intelligence infrastructure via Occupant.ee—decision-layer instrumentation for AI procurement and market dynamics. ICYMI: My <a href="/year-in-review">2025 year in review</a> is here.</p>
         </div>
       </div>
     </section>
@@ -143,6 +143,9 @@ const fonts: string[] = [];
     <section id="work">
       <div class="container">
         <h2 class="section-heading">Projects</h2>
+        <p class="section-intro">
+          A coherent practice across three domains: <strong>Occupant</strong> demonstrates applied decision-layer infrastructure and compute intelligence in production. <strong>State Capacity AI</strong> develops the conceptual frameworks, governance primitives, and guides that inform the applied work. <strong>AT Protocol projects, public mechanics, and institutional design</strong> show how decision systems, authority models, and trust scaffolding operate in public environments—where governance must be visible, contestable, and accountable.
+        </p>
         <div class="work-grid">
           {work.map(item => (
             <WorkCard
