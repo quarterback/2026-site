@@ -1,15 +1,15 @@
 ---
 title: "HeyPBJ — Structured Matching Platform"
-type: "delivery"
-lede: "Dating and social discovery as a routing problem—using cohorts, compatibility metrics, and guided prompts instead of endless feeds."
-summary: "A structured-matching platform that treats social discovery as infrastructure rather than a feed, assembling compatible small groups ('rundles') based on declared preferences and weighted signals."
+type: "concept"
+lede: "Social discovery as decision-layer architecture—demonstrating how routing systems, judgment frameworks, and constraint-based matching operate in public environments."
+summary: "Decision infrastructure for social routing—showing how compatibility metrics, cohort formation algorithms, and guided judgment mechanics function as governable systems rather than opaque feeds."
 itemType: "project"
-systemType: "Matching infrastructure + social discovery"
-outcome: "Production platform exploring constraint-based matching and small-group dynamics"
+systemType: "Decision architecture + routing infrastructure"
+outcome: "Operational system demonstrating transparent matching, constraint-based decision frameworks, and accountable routing mechanics"
 order: 108
 featured: true
-tags: ["AT Protocol", "Matching", "Social Discovery", "Routing"]
-role: "Designer, Developer, Architect"
+tags: ["Decision Systems", "Routing Architecture", "Judgment Mechanics", "Constraint-Based Design", "AT Protocol"]
+role: "Founder, Architect"
 timeline: "2024 - Present"
 externalUrl: "https://heypbj.xyz"
 parent: "atproto-projects"
@@ -177,9 +177,8 @@ HeyPBJ is one of several interconnected projects exploring decentralized infrast
 
 ## What This Demonstrates
 
-- **Routing infrastructure as social product**: Treating discovery as a systems problem rather than a content problem
-- **Constraint-based design**: How limits and structure can produce more humane outcomes than infinite choice
-- **Transparent algorithms**: Showing users why decisions were made builds trust and improves outcomes
-- **Decentralized matching**: Proving you can build discovery infrastructure without platform lock-in
-- **Small-group dynamics**: Using cohorts to provide context before one-on-one connection
-- **Intentionality-first UX**: Designing for successful connection rather than engagement metrics
+- **Decision-layer architecture in public contexts**: How routing systems, judgment frameworks, and compatibility mechanics function when they must be transparent, auditable, and contestable
+- **Constraint-based decision infrastructure**: Demonstrating how limits and structure create governable systems—cohort formation, weighted signals, guided prompts—rather than opaque algorithmic feeds
+- **Transparent routing mechanics**: Showing users why decisions were made (compatibility scores, matching rationale) establishes accountability and trust in automated systems
+- **Judgment routing at human scale**: Using small-group dynamics to provide context before binary decisions—a pattern applicable to case management, triage, and escalation systems
+- **Governable automation**: Building systems that optimize for legible outcomes rather than engagement metrics—proving decision infrastructure can serve human goals when properly instrumented

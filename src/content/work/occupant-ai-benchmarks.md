@@ -1,15 +1,15 @@
 ---
 title: "Occupant — AI Compute Benchmarks"
-type: "delivery"
-lede: "Public data infrastructure for AI model pricing, compute deflation tracking, and market intelligence."
-summary: "Static benchmark dashboard publishing daily-updated indices for AI compute pricing (CPI), economic activity (AEAI), and market intelligence—built to support procurement and strategic planning."
+type: "concept"
+lede: "Compute intelligence infrastructure for AI procurement—decision-layer instrumentation that makes market dynamics visible and governable."
+summary: "Applied decision-layer infrastructure providing compute intelligence for organizations operating AI-dependent systems. Publishes daily-updated benchmarks, procurement frameworks, and market intelligence that instrument the economic layer of AI governance."
 itemType: "project"
-systemType: "Data infrastructure + public goods"
-outcome: "Daily-updated public benchmarks tracking 2,300+ AI models across providers"
+systemType: "Decision-layer infrastructure + compute intelligence"
+outcome: "Production infrastructure tracking 2,300+ AI models—operational compute intelligence for strategic planning and procurement oversight"
 order: 107
 featured: true
-tags: ["Data Infrastructure", "Open Data", "AI Economics"]
-role: "Designer, Developer"
+tags: ["Decision Infrastructure", "Compute Intelligence", "AI Governance", "Trust Instrumentation"]
+role: "Founder, Architect"
 timeline: "2024 - Present"
 externalUrl: "https://occupant.ee"
 hero:
@@ -41,19 +41,19 @@ Interactive estimator for budgeting AI spend based on usage patterns and provide
 
 ---
 
-## The Problem
+## The Governance Problem
 
-AI model pricing is volatile and fragmented across providers, resellers, and model routers. Buyers can't easily answer:
-- What's the fair market price per token for a given capability?
-- Is our vendor giving us a competitive rate?
-- Should we budget for continued deflation or stabilization?
-- What procurement questions should we ask?
+Organizations deploying AI-dependent systems lack visibility into the economic layer of their decision infrastructure. Procurement happens without instruments to assess fair value, track cost dynamics, or evaluate vendor positioning. This opacity creates governance risk: institutions can't determine whether their AI spending is rational, sustainable, or strategically sound.
+
+The underlying issue is a missing instrumentation layer—no public benchmarks exist to make compute economics visible, contestable, or governable.
 
 ---
 
-## The Solution: Public Data Infrastructure
+## Decision-Layer Infrastructure
 
-A static website that aggregates pricing from multiple sources (OpenRouter, LiteLLM, Chatbot Arena, etc.), computes indices daily via GitHub Actions, and publishes JSON datasets + interactive dashboards.
+Occupant builds the instrumentation that makes AI compute economics legible to institutions. It's not a procurement tool—it's the trust infrastructure that allows organizations to operate confidently in AI-dependent environments by making market dynamics visible and auditable.
+
+The system aggregates pricing from multiple sources (OpenRouter, LiteLLM, Chatbot Arena), computes indices daily via automated infrastructure, and publishes benchmarks as public goods—creating the transparency layer needed for accountable AI procurement.
 
 **Key design decisions:**
 
@@ -156,8 +156,8 @@ All datasets published as JSON under `/data/` for programmatic access.
 
 ## What This Demonstrates
 
-- **Public data infrastructure design**: Building credible benchmarks that serve procurement, research, and strategic planning
-- **Static architecture patterns**: Proving you don't need a database/server for daily-updated data products
-- **Transparency posture**: Publishing methodology, sources, and AI usage disclosure
-- **Progressive enhancement**: PWA features for offline access without JavaScript requirements
-- **Government-focused UX**: Procurement worksheet and "fair deal" benchmarks tailored to public sector needs
+- **Decision-layer instrumentation**: Building the infrastructure that makes automated systems' economic foundations visible and governable
+- **Compute intelligence**: Creating benchmarks and frameworks that let organizations assess strategic positioning in AI-dependent environments
+- **Trust infrastructure as public goods**: Establishing transparency layers that enable accountable procurement and oversight
+- **Governance primitives in production**: Demonstrating how institutions can operate confidently when they have visibility into the systems they depend on
+- **Applied architecture at scale**: Operational infrastructure serving strategic planning, procurement oversight, and market intelligence across institutional contexts

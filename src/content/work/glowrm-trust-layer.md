@@ -1,35 +1,31 @@
 ---
 title: "Glowrm — Trust & Relationship Layer"
-type: "delivery"
-lede: "Portable trust primitives for decentralized social environments—how identity, reputation, and consent travel across networks."
-summary: "A trust and relationship-layer prototype for AT Protocol environments, providing lightweight infrastructure for signaling credibility, tracking interaction history, and routing trust between participants and communities."
+type: "concept"
+lede: "Trust infrastructure for decentralized environments—governance primitives for authority, credentialing, and accountability when platforms can't be the arbiter."
+summary: "Decision-layer infrastructure for distributed social systems. Provides the trust primitives—verification, reputation routing, consent enforcement—that let decentralized environments operate with accountability when no central authority can govern behavior."
 itemType: "project"
-systemType: "Trust infrastructure + decentralized moderation"
-outcome: "Working prototype exploring portable trust, reputation, and consent mechanisms"
+systemType: "Trust infrastructure + governance primitives"
+outcome: "Operational trust architecture demonstrating how authority and accountability function in decentralized contexts"
 order: 109
 featured: true
-tags: ["AT Protocol", "Trust", "Reputation", "Decentralized Identity", "Moderation"]
-role: "Designer, Developer, Architect"
+tags: ["Trust Infrastructure", "Governance Primitives", "Decentralized Systems", "Authority Models", "AT Protocol"]
+role: "Founder, Architect"
 timeline: "2024 - Present"
 externalUrl: "https://glowrm.tech"
 parent: "atproto-projects"
 ---
 
-## The Core Problem
+## The Governance Challenge
 
-Social platforms collapse trust, identity, and moderation into a single service's control. When you move to a new platform, you start from zero:
-- No reputation history
-- No verification credentials
-- No interaction context
-- No trust signals from previous communities
+Decentralized systems promise user sovereignty but lack governance infrastructure. When authority can't be centralized, how do communities establish credibility, enforce accountability, or route trust across network boundaries? Platforms solve this by controlling identity, moderation, and reputation—but that control is exactly what decentralization seeks to escape.
 
-Worse, there's no way to **route trust** between spaces. A community vouching for you in one place doesn't travel. References and reputation are trapped in silos.
+The core problem: **governance primitives don't exist for environments where no single entity can be the arbiter**. Without trust infrastructure, decentralized spaces either collapse into chaos or recreate centralized control structures.
 
 ---
 
-## What Glowrm Does
+## Trust Infrastructure for Decentralized Governance
 
-Glowrm is **infrastructure for trust that travels**. It provides lightweight primitives for:
+Glowrm builds the governance primitives that let decentralized environments operate with accountability. It's not a platform—it's the decision-layer architecture that enables communities to establish authority, verify claims, and route trust when no central entity controls the system.
 
 ### 1. Identity Verification
 - Portable credentials (not locked to one platform)
@@ -227,10 +223,9 @@ Glowrm is one of several interconnected projects exploring decentralized infrast
 
 ## What This Demonstrates
 
-- **Decentralized trust infrastructure**: Building reputation systems that don't require centralized platforms
-- **Portable identity primitives**: Proving credentials and reputation can travel across networks
-- **Privacy-preserving verification**: Using cryptography to prove claims without revealing data
-- **Context-aware consent**: Designing granular permission systems for decentralized spaces
-- **Trust routing**: Solving how vouches and reputation propagate between communities
-- **Moderation tooling**: Creating safety infrastructure that works across platforms
-- **User sovereignty**: Giving people control over their trust data and how it's shared
+- **Governance primitives for decentralized systems**: Building the trust infrastructure that lets distributed environments operate with accountability
+- **Authority models without centralization**: Demonstrating how credibility, verification, and enforcement function when no platform controls the system
+- **Trust routing as decision architecture**: Establishing how reputation and vouching propagate across network boundaries without collapsing into centralized control
+- **Portable governance**: Creating accountability mechanisms that travel with users rather than being locked to platforms
+- **Privacy-preserving trust**: Using cryptography to enable verification and consent enforcement while maintaining user sovereignty
+- **Institutional design for public environments**: Showing how decision systems can be made legible, auditable, and contestable in decentralized contexts

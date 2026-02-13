@@ -1,15 +1,15 @@
 ---
 title: "Leafroll — Professional Identity Layer"
-type: "delivery"
-lede: "Dynamic, modular professional profiles that travel across networks—rethinking how people present work, skills, and trajectory."
-summary: "A lightweight professional-identity prototype treating profiles as living documents composed of signals, artifacts, and endorsements that can be rearranged depending on context—collaboration, hiring, or discovery."
+type: "concept"
+lede: "Professional credentialing infrastructure demonstrating how verification, endorsement systems, and reputation routing operate outside platform control."
+summary: "Trust infrastructure for professional contexts—showing how portable credentials, verified endorsements, and context-aware presentation function as governance primitives when identity and reputation must travel across networks."
 itemType: "project"
-systemType: "Professional identity + portfolio infrastructure"
-outcome: "Working prototype exploring composable profiles and portable reputation"
+systemType: "Credentialing infrastructure + trust primitives"
+outcome: "Operational system demonstrating composable professional identity and portable verification mechanisms"
 order: 110
 featured: true
-tags: ["AT Protocol", "Professional Identity", "Portfolios", "Composable Records"]
-role: "Designer, Developer, Architect"
+tags: ["Trust Infrastructure", "Credentialing Systems", "Verification Primitives", "Reputation Routing", "AT Protocol"]
+role: "Founder, Architect"
 timeline: "2024 - Present"
 externalUrl: "https://leafroll.fun"
 parent: "atproto-projects"
@@ -269,10 +269,8 @@ Leafroll explores:
 
 ## What This Demonstrates
 
-- **Composable professional identity**: Treating careers as living documents, not static snapshots
-- **Portable reputation systems**: Building verified endorsements that travel across platforms
-- **Context-aware presentation**: Adapting profiles based on audience and use case
-- **Social proof infrastructure**: Creating trusted verification without centralized platforms
-- **Decentralized career infrastructure**: Proving you can build professional networks without LinkedIn-style lock-in
-- **Modular data design**: Showing how structured components enable flexible presentation
-- **Trajectory thinking**: Emphasizing evolution and growth over fixed credentials
+- **Credentialing infrastructure outside platforms**: How professional verification, endorsement systems, and reputation routing function when identity isn't controlled by LinkedIn or similar centralized services
+- **Trust primitives for professional contexts**: Building the governance mechanisms—verified endorsements, portable credentials, context-aware presentation—that enable accountability in decentralized professional networks
+- **Reputation as portable infrastructure**: Demonstrating how trust signals can travel with users across systems rather than being locked to platforms
+- **Context-aware credentialing**: Showing how verification and presentation adapt based on use case—hiring, collaboration, community—while maintaining audit trails
+- **Composable governance**: Creating modular identity components that services can build on without reimplementing verification from scratch
