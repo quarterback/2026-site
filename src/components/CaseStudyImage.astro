@@ -1,7 +1,7 @@
 ---
 interface Props {
   src: string;
-  layout?: 'hero' | 'full-bleed' | 'inline' | 'bordered' | 'screenshot';
+  layout?: 'hero' | 'full-bleed' | 'inline' | 'bordered' | 'screenshot' | 'float-left' | 'float-right';
   caption?: string;
   alt?: string;
   height?: string;
@@ -128,6 +128,30 @@ const { src, layout = 'inline', caption, alt = '', height = '70vh' } = Astro.pro
     object-fit: contain;
   }
 
+  /* Float left layout - floats image to the left with text wrapping around it */
+  .case-study-image--float-left {
+    float: left;
+    max-width: 45%;
+    margin: var(--size-3) var(--size-6) var(--size-6) 0;
+  }
+
+  .case-study-image--float-left img {
+    max-height: 500px;
+    object-fit: cover;
+  }
+
+  /* Float right layout - floats image to the right with text wrapping around it */
+  .case-study-image--float-right {
+    float: right;
+    max-width: 45%;
+    margin: var(--size-3) 0 var(--size-6) var(--size-6);
+  }
+
+  .case-study-image--float-right img {
+    max-height: 500px;
+    object-fit: cover;
+  }
+
   @media (max-width: 768px) {
     .case-study-image--hero,
     .case-study-image--full-bleed {
@@ -142,6 +166,13 @@ const { src, layout = 'inline', caption, alt = '', height = '70vh' } = Astro.pro
     .case-study-image--screenshot img,
     .case-study-image--bordered img {
       padding: var(--size-1);
+    }
+
+    .case-study-image--float-left,
+    .case-study-image--float-right {
+      float: none;
+      max-width: 100%;
+      margin: var(--size-6) 0;
     }
   }
 </style>
