@@ -56,13 +56,22 @@ const fonts = [
       <div class="container">
         <div class="about-grid">
           <div class="bio-text">
-            <p>The future is here. We're existing in a world that's increasingly illegible to most, and the decision frameworks that power it are increasingly opaque.</p>
+            <p>The future showed up inside the interfaces first. We're living inside systems most people never see, powered by decision frameworks that quietly decide who counts, what qualifies, and which paths stay open.</p>
 
-            <p>For nearly two decades, I've worked across bureaucracies to bring human-centered design methods to tools, systems, and platforms that serve the public. That work taught me something fundamental: the hardest problems are almost never technical. They're about authority, discretion, and how people and institutions actually make decisions when stakes are high.</p>
+            <p>For nearly two decades I've worked across public institutions, vendors, and strange edge-cases to understand how those systems actually behave. That work started as service and interaction design for government services; over time it evolved toward authority, discretion, and how decisions really move when stakes are high.</p>
 
-            <p>That understanding now drives my focus on the tactical primitives and frameworks that keep humans in the loop where it matters most—from public services to AI-mediated decisioning.</p>
+            <p>These days my practice focuses on the primitives that keep humans on the button in automated systems—how we structure judgment, route cases, and design the escape hatches that let people contest or correct a decision. I think about this as public mechanics: the choreography between policy, software, and everyday urban life.</p>
 
-            <p>AI and the agentic era represent a fundamental reshift in how we experience software. In the absence of functional governance, people need accountability into the tools that reshape our lives. I've gone from thinking about the touchpoints of service design to the large-scale systems that change how we transact.</p>
+            <p><strong>My work cuts across a few lanes:</strong></p>
+
+            <ul class="work-lanes">
+              <li>Designing and shipping digital services in messy institutions</li>
+              <li>Building prototypes and tools for decision and trust infrastructure</li>
+              <li>Developing frameworks like judgment routing, consequence design, and civil economics</li>
+              <li>Teaching students and practitioners how to see these systems and work on them without losing the plot</li>
+            </ul>
+
+            <p>I move between roles—advisor, founder, faculty, coach—the practice holds: map the system, find the load-bearing points, build things that help people navigate the world machines are quietly rearranging.</p>
 
             <div class="contact-ctas">
               <a href="mailto:hello@ronbronson.dev" class="cta-button cta-button--primary">
@@ -147,6 +156,31 @@ const fonts = [
 
   .bio-text p:last-child {
     margin-bottom: 0;
+  }
+
+  .work-lanes {
+    list-style: none;
+    padding: 0;
+    margin: var(--size-4) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .work-lanes li {
+    font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
+    line-height: 1.6;
+    color: var(--text-2);
+    padding-left: var(--size-4);
+    position: relative;
+  }
+
+  .work-lanes li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--brand);
+    font-weight: var(--font-weight-7);
   }
 
   /* Contact CTAs */
