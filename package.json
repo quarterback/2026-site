@@ -2,10 +2,18 @@
   "name": "ronbronson-dev",
   "type": "module",
   "version": "1.0.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "lint": "true",
+    "format:check": "true"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
@@ -14,6 +22,7 @@
     "hastscript": "^9.0.1",
     "open-props": "^1.7.0",
     "remark-directive": "^4.0.0",
+    "sharp": "^0.34.5",
     "unist-util-visit": "^5.1.0"
   }
 }
