@@ -18,9 +18,9 @@ featured: true
 
 ## The Core Problem
 
-AI deployment in public institutions is happening without governance architecture. Organizations are automating high-stakes decisions—eligibility, enforcement, resource allocation—but lack the conceptual frameworks to structure oversight, maintain accountability, or ensure human authority remains on the critical path.
+AI deployment in public institutions requires governance architecture. Organizations automating high-stakes decisions—eligibility, enforcement, resource allocation—need conceptual frameworks to structure oversight, maintain accountability, and ensure human authority remains on the critical path.
 
-The challenge isn't automation versus human judgment. It's that institutions need decision-layer architecture: frameworks for judgment routing, consequence design, authority delegation, and trust instrumentation that let them operate AI-dependent systems safely and accountably.
+Institutions need decision-layer architecture: frameworks for judgment routing, consequence design, authority delegation, and trust instrumentation that let them operate AI-dependent systems safely and accountably.
 
 ## What State Capacity AI Provides
 
@@ -57,7 +57,7 @@ State Capacity AI publishes:
 - **Consequence mapping tools**: Methods for tracing impact pathways and identifying failure modes
 - **Procurement primitives**: Evaluation frameworks for AI vendors operating in high-stakes domains
 
-These aren't theoretical—they're operational frameworks used in real institutional contexts where AI is on the critical path.
+These are operational frameworks used in institutional contexts where AI is on the critical path.
 
 ![Government building representing public institutions](https://images.unsplash.com/photo-1555374018-13a8994ab246?w=1200&h=600&fit=crop)
 
@@ -69,7 +69,7 @@ Institutions deploying AI in high-consequence domains need more than tools—the
 
 ## What This Demonstrates
 
-- **Governance primitive development**: Creating the foundational frameworks that inform institutional AI architecture
-- **Conceptual infrastructure**: Building the models and guides that practitioners need to structure accountable systems
-- **Decision-layer design**: Establishing how authority, discretion, and oversight get encoded in AI-mediated environments
-- **Institutional architecture at scale**: Demonstrating how public organizations can operate confidently in AI-dependent contexts
+- **Governance primitive development**: Foundational frameworks that inform institutional AI architecture
+- **Conceptual infrastructure**: Models and guides that practitioners use to structure accountable systems
+- **Decision-layer design**: How authority, discretion, and oversight get encoded in AI-mediated environments
+- **Institutional architecture at scale**: Public organizations operating confidently in AI-dependent contexts

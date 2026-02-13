@@ -18,9 +18,9 @@ hero:
 
 ## Institutional Design in Public Environments
 
-This suite of projects demonstrates how decision systems, authority models, and trust infrastructure operate when they must be publicly visible, auditable, and contestable. Built on AT Protocol's decentralized foundation, these systems show what governance architecture looks like in environments where no central authority can dictate outcomes—where accountability must be designed into the system itself.
+This suite of projects demonstrates how decision systems, authority models, and trust infrastructure operate when they must be publicly visible, auditable, and contestable. Built on AT Protocol's decentralized foundation, these systems show governance architecture in environments where accountability is designed into the system itself.
 
-The work explores a core challenge: **how do you build governable systems in public contexts?** Not user-facing services, but the trust scaffolding and decision-layer architecture that makes public systems legible, accountable, and safe to operate.
+The work explores building governable systems in public contexts—the trust scaffolding and decision-layer architecture that makes public systems legible, accountable, and safe to operate.
 
 Shared governance principles across all projects:
 
@@ -85,9 +85,9 @@ These projects explore how to build public goods on decentralized foundations—
 
 ## What This Demonstrates
 
-- **Institutional design for public contexts**: How decision systems, authority models, and trust scaffolding function when governance must be publicly visible and contestable
-- **Public mechanics at scale**: Demonstrating the choreography between technical architecture, authority delegation, and accountability in environments where centralized control isn't an option
-- **Trust infrastructure as governance**: Building the primitives—verification, reputation routing, consent enforcement—that let decentralized systems operate with institutional accountability
-- **Authority models without platforms**: Showing how credibility, oversight, and enforcement function when distributed across network participants rather than controlled centrally
-- **Decision-layer architecture**: Establishing how judgment routing, consequence design, and override mechanisms operate in public environments where every decision must be auditable
-- **Composable governance primitives**: Creating infrastructure that services build on (HeyPBJ uses Glowrm, Leafroll integrates trust routing) rather than implementing governance in silos
+- **Institutional design for public contexts**: Decision systems, authority models, and trust scaffolding where governance is publicly visible and contestable
+- **Public mechanics at scale**: Choreography between technical architecture, authority delegation, and accountability in distributed environments
+- **Trust infrastructure as governance**: Primitives—verification, reputation routing, consent enforcement—that enable decentralized systems to operate with institutional accountability
+- **Authority models in distributed systems**: Credibility, oversight, and enforcement distributed across network participants
+- **Decision-layer architecture**: Judgment routing, consequence design, and override mechanisms in public environments where decisions must be auditable
+- **Composable governance primitives**: Infrastructure that services build on (HeyPBJ uses Glowrm, Leafroll integrates trust routing)

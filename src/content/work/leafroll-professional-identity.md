@@ -269,8 +269,8 @@ Leafroll explores:
 
 ## What This Demonstrates
 
-- **Credentialing infrastructure outside platforms**: How professional verification, endorsement systems, and reputation routing function when identity isn't controlled by LinkedIn or similar centralized services
-- **Trust primitives for professional contexts**: Building the governance mechanisms—verified endorsements, portable credentials, context-aware presentation—that enable accountability in decentralized professional networks
-- **Reputation as portable infrastructure**: Demonstrating how trust signals can travel with users across systems rather than being locked to platforms
-- **Context-aware credentialing**: Showing how verification and presentation adapt based on use case—hiring, collaboration, community—while maintaining audit trails
-- **Composable governance**: Creating modular identity components that services can build on without reimplementing verification from scratch
+- **Credentialing infrastructure outside platforms**: Professional verification, endorsement systems, and reputation routing function with distributed identity control
+- **Trust primitives for professional contexts**: Governance mechanisms—verified endorsements, portable credentials, context-aware presentation—that enable accountability in decentralized professional networks
+- **Reputation as portable infrastructure**: Trust signals travel with users across systems
+- **Context-aware credentialing**: Verification and presentation adapt based on use case—hiring, collaboration, community—while maintaining audit trails
+- **Composable governance**: Modular identity components that services build on for verification

@@ -43,17 +43,17 @@ Interactive estimator for budgeting AI spend based on usage patterns and provide
 
 ## The Governance Problem
 
-Organizations deploying AI-dependent systems lack visibility into the economic layer of their decision infrastructure. Procurement happens without instruments to assess fair value, track cost dynamics, or evaluate vendor positioning. This opacity creates governance risk: institutions can't determine whether their AI spending is rational, sustainable, or strategically sound.
+Organizations deploying AI-dependent systems lack visibility into the economic layer of their decision infrastructure. Procurement happens without instruments to assess fair value, track cost dynamics, or evaluate vendor positioning. This opacity creates governance risk: institutions need tools to determine whether their AI spending is rational, sustainable, and strategically sound.
 
-The underlying issue is a missing instrumentation layer—no public benchmarks exist to make compute economics visible, contestable, or governable.
+Public benchmarks for compute economics—visible, contestable, and governable—provide this instrumentation layer.
 
 ---
 
 ## Decision-Layer Infrastructure
 
-Occupant builds the instrumentation that makes AI compute economics legible to institutions. It's not a procurement tool—it's the trust infrastructure that allows organizations to operate confidently in AI-dependent environments by making market dynamics visible and auditable.
+Occupant builds the instrumentation that makes AI compute economics legible to institutions. The trust infrastructure allows organizations to operate confidently in AI-dependent environments by making market dynamics visible and auditable.
 
-The system aggregates pricing from multiple sources (OpenRouter, LiteLLM, Chatbot Arena), computes indices daily via automated infrastructure, and publishes benchmarks as public goods—creating the transparency layer needed for accountable AI procurement.
+The system aggregates pricing from multiple sources (OpenRouter, LiteLLM, Chatbot Arena), computes indices daily via automated infrastructure, and publishes benchmarks as public goods—creating the transparency layer for accountable AI procurement.
 
 **Key design decisions:**
 
@@ -156,8 +156,8 @@ All datasets published as JSON under `/data/` for programmatic access.
 
 ## What This Demonstrates
 
-- **Decision-layer instrumentation**: Building the infrastructure that makes automated systems' economic foundations visible and governable
-- **Compute intelligence**: Creating benchmarks and frameworks that let organizations assess strategic positioning in AI-dependent environments
-- **Trust infrastructure as public goods**: Establishing transparency layers that enable accountable procurement and oversight
-- **Governance primitives in production**: Demonstrating how institutions can operate confidently when they have visibility into the systems they depend on
-- **Applied architecture at scale**: Operational infrastructure serving strategic planning, procurement oversight, and market intelligence across institutional contexts
+- **Decision-layer instrumentation**: Infrastructure that makes automated systems' economic foundations visible and governable
+- **Compute intelligence**: Benchmarks and frameworks enabling organizations to assess strategic positioning in AI-dependent environments
+- **Trust infrastructure as public goods**: Transparency layers enabling accountable procurement and oversight
+- **Governance primitives in production**: Institutions operating confidently with visibility into the systems they depend on
+- **Applied architecture at scale**: Operational infrastructure serving strategic planning, procurement oversight, and market intelligence

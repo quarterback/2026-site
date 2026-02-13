@@ -177,8 +177,8 @@ HeyPBJ is one of several interconnected projects exploring decentralized infrast
 
 ## What This Demonstrates
 
-- **Decision-layer architecture in public contexts**: How routing systems, judgment frameworks, and compatibility mechanics function when they must be transparent, auditable, and contestable
-- **Constraint-based decision infrastructure**: Demonstrating how limits and structure create governable systems—cohort formation, weighted signals, guided prompts—rather than opaque algorithmic feeds
-- **Transparent routing mechanics**: Showing users why decisions were made (compatibility scores, matching rationale) establishes accountability and trust in automated systems
-- **Judgment routing at human scale**: Using small-group dynamics to provide context before binary decisions—a pattern applicable to case management, triage, and escalation systems
-- **Governable automation**: Building systems that optimize for legible outcomes rather than engagement metrics—proving decision infrastructure can serve human goals when properly instrumented
+- **Decision-layer architecture in public contexts**: Routing systems, judgment frameworks, and compatibility mechanics that are transparent, auditable, and contestable
+- **Constraint-based decision infrastructure**: Limits and structure create governable systems through cohort formation, weighted signals, and guided prompts
+- **Transparent routing mechanics**: Compatibility scores and matching rationale establish accountability in automated systems
+- **Judgment routing at human scale**: Small-group dynamics provide context before binary decisions—patterns applicable to case management, triage, and escalation
+- **Governable automation**: Systems optimized for legible outcomes, demonstrating decision infrastructure serving human goals when properly instrumented
