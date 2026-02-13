@@ -1,0 +1,282 @@
+---
+title: "Oregon High School Tennis Rankings"
+type: "founder"
+lede: "I bet on transparent methodology over committee politics. Turned out the technical challenge wasn't the algorithm—it was earning trust from coaches who'd been burned by 'data-driven' promises before."
+metadata:
+  - label: "Year"
+    value: "2024"
+  - label: "Status"
+    value: "Live, used by coaches across Oregon"
+  - label: "Operating cost"
+    value: "$0/month (static site, cached data)"
+links:
+  - label: "Visit oregontennis.org"
+    url: "https://oregontennis.org"
+tags:
+  - "Civic Technology"
+  - "Sports Analytics"
+  - "Public Infrastructure"
+featured: true
+order: 7
+toc: true
+---
+
+import Callout from '../../components/Callout.astro';
+import InsightsList from '../../components/InsightsList.astro';
+
+## The Problem: Politics Disguised as Expertise
+
+Oregon high school tennis playoff seeding was decided by committee. Coaches lobbied. Athletic directors made calls based on "feel." Parents filed complaints. Everyone claimed objectivity, but the real process was:
+
+1. Look at win-loss records (ignore schedule strength)
+2. Apply "expert judgment" (read: politics and relationships)
+3. Seed the playoff bracket
+4. Deal with appeals and controversy
+
+**The stated problem:** "We need better data to make fair seeding decisions."
+
+**The actual problem:** Nobody trusted anyone else's data. Committees don't want transparency—it removes discretion. Coaches don't want algorithms—they want to lobby. The system worked for the people running it.
+
+I built a ranking system anyway. Not because it was wanted, but because I thought it should exist.
+
+---
+
+::image{src="/img/2023_title.jpg" layout="float-left" caption="Oregon high school tennis championship competition"}
+
+## The Bet: Transparency Forces Better Decisions
+
+**My hypothesis:** If you make ranking methodology completely transparent and defensible, it eliminates room for politics. Coaches can't lobby an algorithm. Committee members can't override data without looking arbitrary.
+
+**What I was wrong about:** I thought technical correctness would be enough. Build a good algorithm, show your work, watch adoption follow.
+
+**What I learned:** Trust isn't earned through correctness. It's earned through consistency, clear communication, and admitting limitations. Coaches didn't need a *better* algorithm—they needed a *defensible* one they could explain to parents.
+
+That's why I chose RPI (the same formula college basketball uses) over inventing something novel. Not because it's optimal, but because when a parent challenges a ranking, "we use the same methodology as NCAA basketball" ends the argument. Familiarity beats innovation when you're trying to build trust.
+
+---
+
+## What I Built (And What I Gave Up to Build It)
+
+### The System
+
+A static website that publishes daily rankings for Oregon high school tennis teams. Two core metrics:
+
+1. **APR (Adjusted Power Rating):** Strength of schedule + win percentage (using RPI formula)
+2. **FWS (Flight-Weighted Score):** Roster depth metric unique to tennis
+
+**Power Index = (APR × 0.50) + (FWS × 0.50)**
+
+Plus:
+- Playoff bracket simulator with geographic optimization
+- Historical tracking across seasons
+- Head-to-head tiebreaker logic
+- "What-if" scenario tools
+
+### The Data Pipeline
+
+```
+OSAA API → Normalization → Statistical Processing → Static HTML
+```
+
+Everything runs locally. No database. No server. The entire site regenerates from source data on each build. Hosts on GitHub Pages for $0/month.
+
+### What I Gave Up
+
+**1. Real-time updates**
+I could have built a live system that updates as matches finish. Instead, I run the pipeline manually every few days during the season. Why? Because real-time means infrastructure costs, monitoring, and potential downtime during playoff season—exactly when reliability matters most.
+
+Static means: slow updates, but zero failure modes.
+
+**2. User accounts and personalization**
+Coaches asked for "follow my team" features, saved scenarios, email alerts. All would require authentication, databases, ongoing maintenance.
+
+I said no. Every dynamic feature is a commitment to support it indefinitely. I'm one person doing this in my spare time. Static sites don't break. User accounts do.
+
+**3. Novel methodology**
+I could have invented a better ranking formula. Spent months testing approaches, tuning weights, optimizing for accuracy.
+
+Instead, I used the existing RPI formula and invested that time in *explaining* how it works. Because the problem wasn't technical sophistication—it was stakeholder buy-in.
+
+---
+
+::image{src="/img/oaca2022.jpg" layout="float-right" caption="Oregon tennis teams competing at the state championship"}
+
+## The Hard Parts (And What They Taught Me)
+
+### 1. The Data Is Always Messier Than You Think
+
+OSAA (Oregon's athletics association) publishes match data via an API. Sounds great, right?
+
+**Reality:**
+- Schools report their own data (typos, inconsistencies, missing matches)
+- City names don't standardize ("Portland" vs "Portland, OR" vs "Ptld")
+- Schools change classifications mid-season
+- Some teams play 6 flights, others play 8, forfeits count as 0-0 ties
+- Rain-outs get recorded as 4-3 wins sometimes
+
+I spent weeks building normalization logic just to reconcile school identities across seasons. The ranking algorithm took days. Data cleaning took *weeks*.
+
+**Lesson:** In civic tech, data quality is always the bottleneck. The algorithm is the easy part.
+
+### 2. Users Don't Want Complex—They Want Defensible
+
+Early versions exposed normalized FWS scores (0.0-1.0 scale, mathematically elegant). Coaches hated it.
+
+"What does 0.73 mean? How do I explain that to my athletic director?"
+
+So I switched to raw flight scores (0-3.95 range). Now a coach sees "we averaged 2.8 flight wins per match" and immediately understands it. Internally, the system still normalizes for calculations. But the interface shows the intuitive version.
+
+**Lesson:** Don't make users learn your abstraction. Meet them where they are.
+
+### 3. Geographic Optimization Was the Sleeper Feature
+
+I almost didn't build the playoff simulator's "Regional Mode." It felt like scope creep—the core product was rankings, not bracket generation.
+
+But Oregon is big. A pure-seeded bracket might send a team from Pendleton (eastern Oregon) to Brookings (southern coast)—over 400 miles—in the first round. That's an 8-hour drive for a high school sports team.
+
+So I added geographic optimization:
+- Top 4 seeds: pure seeding (they earned it)
+- Seeds 5-12: optimize for proximity while avoiding same-district matchups
+- Seeds 13-16: place near likely round-two opponents
+
+Coaches loved it. Not because it was technically clever, but because it showed I understood their operational reality. Playoff brackets aren't just about fairness—they're about logistics, budgets, and getting kids home before midnight on a school night.
+
+**Lesson:** The constraint you almost ignore is often the one that earns trust.
+
+### 4. I Built This Because I Could, Not Because I Should
+
+Here's the uncomfortable truth: I could only build this because I had free time, technical skills, and no need to monetize it.
+
+That's privilege. Most civic tech problems don't get solved because the people who experience them can't build the solutions, and the people who can build solutions don't experience the problems.
+
+I knew tennis. I knew data pipelines. I had nights and weekends to spare. That combination is rare and unfairly distributed.
+
+**What this means:** I'm not solving the civic tech problem. I'm demonstrating what's possible when someone with resources chooses to work on it. The real question is: how do we make this sustainable without relying on founder privilege?
+
+I don't have a good answer yet.
+
+---
+
+## Technical Decisions I'd Defend
+
+### Static Site Generation Over Dynamic Infrastructure
+
+Every engineer I talked to said: "Just use a database. It's easier."
+
+They're right—for features. A database makes real-time updates, user accounts, and personalization trivial.
+
+But for this project:
+- **Zero infrastructure cost** means it can outlive my involvement
+- **No security surface** means I'm not responsible for protecting user data
+- **Offline-capable** means coaches can save the page and use it on the bus to a match
+- **Fast** means it works on rural Oregon cellular data
+
+Could I have built more features with a database? Absolutely. Would those features be worth the operational burden? Not for a side project I might abandon in two years.
+
+**The tradeoff:** I optimized for *longevity* over *capability*. If I get hit by a bus tomorrow, this site keeps working. That matters for public infrastructure.
+
+### Embedded JSON Over API Calls
+
+The entire dataset (1,200 team-seasons, all match results, computed rankings) fits in ~800KB of JSON. I embed it directly in the HTML.
+
+This is "wrong" by modern web development standards. Everyone uses APIs now. Separation of concerns. Microservices.
+
+**Why I did it anyway:**
+- Eliminates latency (no API round-trips)
+- Simplifies deployment (one file, no coordination)
+- Makes the system self-contained (no external dependencies)
+- Enables offline use (service worker caches everything)
+
+800KB isn't nothing, but it's less than a single hero image on most marketing sites. And it loads once per session.
+
+**The tradeoff:** Flexibility for simplicity. I can't build a mobile app that reuses the API. I can't let other developers extend the data. But I also don't have to maintain an API, handle rate limiting, or debug CORS issues.
+
+For this use case, boring and simple wins.
+
+### OpenStreetMap Geocoding Over Google Maps API
+
+Google Maps API costs money. OpenStreetMap's Nominatim is free but rate-limited.
+
+I cache all geocoding results in the repo. First build is slow (geocoding ~200 cities). Subsequent builds are instant (read from cache). Fresh clones get the cache for free (committed to git).
+
+**Why this matters:** If Google changes their pricing or API terms, I don't care. If Nominatim goes down, I don't care. The system is decoupled from external dependencies because the data lives in version control.
+
+**The tradeoff:** Slower first build, larger repo size. But I only build once per season, and the repo is still under 5MB. Worth it for independence.
+
+---
+
+## What Changed (And What Didn't)
+
+### In Use
+Coaches across Oregon use the rankings during the season. Athletic directors reference it for playoff seeding discussions. Parents cite it when questioning bracket placement.
+
+### Not Adopted (Yet)
+OSAA hasn't officially integrated it into their playoff selection process. The committee still makes final decisions. My system is informational, not authoritative.
+
+**Why this doesn't bother me:** I didn't build this to replace the committee. I built it to create accountability. Now when a committee makes a decision that contradicts the data, they have to justify it. That's enough.
+
+### Unexpected Impact
+Other states have reached out asking about replicating it. The methodology is exportable—if another state's athletics association has an API, the system could adapt.
+
+I haven't pursued this. Not because it wouldn't be valuable, but because I'd rather do one thing well than spread thin across multiple states. Civic tech graveyard is full of "we'll scale this nationally" projects that collapsed under their own ambition.
+
+---
+
+## What I Learned About Building in Public
+
+### 1. Constraints Are Clarifying
+
+"No budget" forced static site architecture. "No team" forced simple UX. "No business model" forced focus on pure utility.
+
+Every constraint eliminated a category of decisions. That's freeing, not limiting.
+
+### 2. Transparency Creates Accountability (For Me Too)
+
+The ranking algorithm is public. The data sources are documented. The calculation methods are explained in plain English.
+
+This means I can't bullshit. If the rankings are wrong, coaches can tell me exactly why. If my methodology is flawed, someone will call it out.
+
+That's uncomfortable. It's also the only way to build trust.
+
+### 3. Maintenance Is the Real Product
+
+Launching the site took two months. Maintaining it—handling data quirks, answering coach questions, updating for rule changes—is ongoing.
+
+Most case studies show the launch. The real work is year two, when nobody's watching and you still have to update the geocoding cache because three schools changed addresses.
+
+That's the part that proves whether you actually care or just wanted a portfolio piece.
+
+### 4. "Public Good" Doesn't Mean "Free Labor Forever"
+
+I built this because I thought it should exist. But "should exist" doesn't obligate me to maintain it indefinitely.
+
+If this becomes a burden instead of something I enjoy, I'll shut it down or hand it off. The civic tech world has a bad habit of guilt-tripping maintainers into perpetual free labor.
+
+Public infrastructure is valuable. That doesn't mean one person has to carry it alone.
+
+---
+
+<Callout>
+**What this project really taught me:** Building in public isn't about perfect execution. It's about making decisions visible, admitting limitations, and optimizing for longevity over flash. The technical work matters, but the hard part is earning trust from people who've been burned by "data-driven solutions" before.
+</Callout>
+
+---
+
+## If You're Building Something Similar
+
+**Do:**
+- Use boring technology (static sites, simple pipelines)
+- Optimize for trust over sophistication
+- Cache everything (APIs fail, cached data doesn't)
+- Show your work (methodology transparency builds credibility)
+- Design for maintenance, not launch
+
+**Don't:**
+- Assume technical correctness equals adoption
+- Add features you can't maintain indefinitely
+- Ignore operational realities (travel logistics matter as much as rankings)
+- Guilt yourself into perpetual free labor
+- Overcomplicate the tech stack (every dependency is a liability)
+
+**Remember:**
+Public infrastructure should outlive you. If it can't run without you, it's not infrastructure—it's a dependency.
