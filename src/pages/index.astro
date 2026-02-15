@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
-import WorkCard from '../components/WorkCard.astro';
+import FeatureCard from '../components/FeatureCard.astro';
 import Writing from '../components/Writing.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
@@ -11,9 +11,46 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
 
-const allWork = await getCollection('work', ({ data }) => !data.draft);
-const featuredWork = allWork.filter(({ data }) => data.featured);
-const work = featuredWork.sort((a, b) => a.data.order - b.data.order);
+// Feature cards with narrative structure
+const featureCards = [
+  // Tier 1 (Hero cards - 2-column span)
+  {
+    tier: 1,
+    title: "Occupant — AI Compute Benchmarks",
+    narrative: "Nobody knows what AI actually costs. Institutions are signing contracts they can't evaluate, with no benchmark for whether they're overpaying or what the market looks like.",
+    image: "/img/occupant.png",
+    href: "/work/occupant-ai-benchmarks"
+  },
+  {
+    tier: 1,
+    title: "18F — Building Design Practice & Federal Leadership",
+    narrative: "I built and scaled the design practice at 18F from 21 to 40 practitioners, then served as Chief of Staff at the Technology Transformation Services. Eight years learning how to make institutions work differently from the inside.",
+    image: "/img/18f-leadership.svg",
+    href: "/work/18f-leadership"
+  },
+  {
+    tier: 1,
+    title: "State Capacity AI",
+    narrative: "AI is making decisions, and nobody has to tell you. There's no standard for disclosure, no shared language for what kind of authority a system has, and no easy way to contest a decision made by software.",
+    image: "/img/statecapacity-ai.svg",
+    href: "/work/state-capacity-ai"
+  },
+  // Tier 2 (Standard width)
+  {
+    tier: 2,
+    title: "AT Protocol Projects — Trust Infrastructure",
+    narrative: "Interconnected suite of decentralized data infrastructure and public goods experiments exploring how identity, reputation, and trust can work without centralized platform control.",
+    image: "/img/heypbj.xyz.png",
+    href: "/work/atproto-projects"
+  },
+  {
+    tier: 2,
+    title: "Teaching Public Mechanics at Michigan",
+    narrative: "Design education shouldn't train people to build more apps. It should teach them to understand infrastructure, repair what's broken, and build systems that serve the public.",
+    image: "/img/michigan-teaching.svg",
+    href: "/work/michigan-teaching"
+  }
+];
 
 const rssFeeds = [
   'https://makingpublicwork.com/rss/',
@@ -139,20 +176,18 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Projects -->
+    <!-- Featured Work -->
     <section id="work">
       <div class="container">
-        <h2 class="section-heading">Projects</h2>
-        <div class="work-grid">
-          {work.map(item => (
-            <WorkCard
-              title={item.data.title}
-              type={item.data.type}
-              lede={item.data.lede}
-              metadata={item.data.metadata}
-              href={`/work/${item.slug}`}
-              featured={item.data.featured}
-              coverImage={item.data.hero?.image}
+        <h2 class="section-heading">Featured Work</h2>
+        <div class="feature-grid">
+          {featureCards.map(card => (
+            <FeatureCard
+              title={card.title}
+              narrative={card.narrative}
+              image={card.image}
+              href={card.href}
+              tier={card.tier}
             />
           ))}
         </div>
@@ -268,22 +303,39 @@ const fonts: string[] = [];
     }
   }
 
-  /* Work grid - 3 columns, denser */
-  .work-grid {
+  /* Feature grid - supports tier system */
+  .feature-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--size-4);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--size-5);
+  }
+
+  /* Tier 1 cards span 2 columns */
+  .feature-grid > a[class*="tier-1"] {
+    grid-column: span 2;
+  }
+
+  /* Tier 2 cards are standard width */
+  .feature-grid > a[class*="tier-2"] {
+    grid-column: span 1;
   }
 
   @media (max-width: 900px) {
-    .work-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-4);
+    }
+
+    /* All cards full width on tablet/mobile */
+    .feature-grid > a[class*="tier-1"],
+    .feature-grid > a[class*="tier-2"] {
+      grid-column: span 1;
     }
   }
 
   @media (max-width: 600px) {
-    .work-grid {
-      grid-template-columns: 1fr;
+    .feature-grid {
+      gap: var(--size-3);
     }
   }
 

@@ -1,0 +1,175 @@
+---
+interface Props {
+  title: string;
+  narrative: string;
+  image?: string;
+  href: string;
+  tier: 1 | 2;
+}
+
+const {
+  title,
+  narrative,
+  image,
+  href,
+  tier
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class={`feature-card feature-card--tier-${tier}`}
+>
+  {image && (
+    <div class="feature-card__image">
+      <img src={image} alt={title} loading="lazy" />
+    </div>
+  )}
+  <div class="feature-card__content">
+    <h3 class="feature-card__title">{title}</h3>
+    <p class="feature-card__narrative">{narrative}</p>
+    <span class="feature-card__cta">Read case study →</span>
+  </div>
+</a>
+
+<style>
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .feature-card:hover {
+    border-color: var(--brand);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Tier 1 (Hero) cards */
+  .feature-card--tier-1 .feature-card__image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: var(--surface-1);
+  }
+
+  .feature-card--tier-1 .feature-card__content {
+    padding: var(--size-6);
+  }
+
+  .feature-card--tier-1 .feature-card__title {
+    font-size: var(--font-size-4);
+    font-weight: var(--font-weight-7);
+    color: var(--text-1);
+    margin-bottom: var(--size-3);
+    line-height: var(--font-lineheight-2);
+  }
+
+  .feature-card--tier-1 .feature-card__narrative {
+    font-size: var(--font-size-2);
+    color: var(--text-2);
+    margin-bottom: var(--size-4);
+    line-height: var(--font-lineheight-3);
+  }
+
+  /* Tier 2 (Standard) cards */
+  .feature-card--tier-2 .feature-card__image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: var(--surface-1);
+  }
+
+  .feature-card--tier-2 .feature-card__content {
+    padding: var(--size-5);
+  }
+
+  .feature-card--tier-2 .feature-card__title {
+    font-size: var(--font-size-3);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin-bottom: var(--size-3);
+    line-height: var(--font-lineheight-2);
+  }
+
+  .feature-card--tier-2 .feature-card__narrative {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    margin-bottom: var(--size-4);
+    line-height: var(--font-lineheight-3);
+  }
+
+  /* Common styles */
+  .feature-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .feature-card:hover .feature-card__image img {
+    transform: scale(1.05);
+  }
+
+  .feature-card__narrative {
+    /* Ensure readability - 2-3 sentences should be visible */
+    max-width: 65ch;
+  }
+
+  .feature-card__cta {
+    font-size: var(--font-size-1);
+    color: var(--brand);
+    font-weight: var(--font-weight-5);
+    display: inline-block;
+  }
+
+  .feature-card:hover .feature-card__cta {
+    text-decoration: underline;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 900px) {
+    .feature-card--tier-1 .feature-card__content,
+    .feature-card--tier-2 .feature-card__content {
+      padding: var(--size-4);
+    }
+
+    .feature-card--tier-1 .feature-card__image {
+      height: 220px;
+    }
+
+    .feature-card--tier-2 .feature-card__image {
+      height: 180px;
+    }
+
+    .feature-card--tier-1 .feature-card__title {
+      font-size: var(--font-size-3);
+    }
+
+    .feature-card--tier-1 .feature-card__narrative {
+      font-size: var(--font-size-1);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .feature-card--tier-1 .feature-card__content,
+    .feature-card--tier-2 .feature-card__content {
+      padding: var(--size-3);
+    }
+
+    .feature-card__image {
+      height: 160px;
+    }
+
+    .feature-card--tier-1 .feature-card__title,
+    .feature-card--tier-2 .feature-card__title {
+      font-size: var(--font-size-2);
+    }
+  }
+</style>
