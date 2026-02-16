@@ -1,5 +1,4 @@
 ---
-import ThemeToggle from '../components/ThemeToggle.astro';
 import StatusTicker from '../components/StatusTicker.astro';
 
 interface Props {
@@ -42,7 +41,6 @@ const tickerItems = [
   </head>
   <body>
     <StatusTicker items={tickerItems} />
-    <ThemeToggle />
     <slot />
   </body>
 </html>

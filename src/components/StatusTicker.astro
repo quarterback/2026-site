@@ -24,6 +24,11 @@ const { items, name = "Ron Bronson" } = Astro.props;
           </a>
         </>
       ))}
+      <span class="ticker__separator">·</span>
+      <button id="theme-toggle" class="ticker__theme-toggle" aria-label="Toggle theme">
+        <span class="theme-light">☀</span>
+        <span class="theme-dark">☾</span>
+      </button>
     </div>
   </div>
 </div>
@@ -87,7 +92,6 @@ const { items, name = "Ron Bronson" } = Astro.props;
 
     .ticker__container {
       padding-inline: var(--size-3);
-      padding-right: 3.5rem; /* Space for theme toggle */
       gap: var(--size-3);
     }
 
@@ -116,6 +120,38 @@ const { items, name = "Ron Bronson" } = Astro.props;
     color: var(--text-1);
   }
 
+  .ticker__theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-3);
+    cursor: pointer;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1;
+    transition: color 0.15s ease;
+    text-transform: uppercase;
+  }
+
+  .ticker__theme-toggle:hover {
+    color: var(--text-1);
+  }
+
+  .theme-light {
+    display: none;
+  }
+
+  .theme-dark {
+    display: inline;
+  }
+
+  :global([data-theme="light"]) .theme-light {
+    display: inline;
+  }
+
+  :global([data-theme="light"]) .theme-dark {
+    display: none;
+  }
+
   /* Optional: animated entrance */
   @media (prefers-reduced-motion: no-preference) {
     .ticker {
@@ -134,3 +170,29 @@ const { items, name = "Ron Bronson" } = Astro.props;
     }
   }
 </style>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+
+  // Get initial theme from localStorage or default to light
+  const getInitialTheme = () => {
+    const stored = localStorage.getItem('theme');
+    return stored || 'light';
+  };
+
+  // Apply theme to document
+  const applyTheme = (theme: string) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  };
+
+  // Initialize theme
+  applyTheme(getInitialTheme());
+
+  // Toggle theme on click
+  toggle?.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    applyTheme(next);
+  });
+</script>
