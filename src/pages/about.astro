@@ -94,6 +94,19 @@ const fonts = [
       </div>
     </section>
 
+    <section class="coaching-section">
+      <div class="container">
+        <div class="coaching-card">
+          <h3>Coaching</h3>
+          <p>Head Girls Varsity Tennis Coach at Catlin Gabel School in Portland. State champion, district titles, and a constraint-led approach focused on developing problem-solvers on the court.</p>
+          <a href="/coaching" class="card-link">
+            Learn more about my coaching
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section class="favorites-section">
       <div class="container">
         <h2 class="favorites-heading">Current Favorites</h2>
@@ -156,6 +169,49 @@ const fonts = [
 
   .bio-text p:last-child {
     margin-bottom: 0;
+  }
+
+  .coaching-card {
+    background: var(--surface-2);
+    border: 2px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-5);
+    margin-top: var(--size-6);
+    margin-bottom: var(--size-6);
+  }
+
+  .coaching-card h3 {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin: 0 0 var(--size-3) 0;
+  }
+
+  .coaching-card p {
+    font-size: var(--font-size-1);
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0 0 var(--size-4) 0;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+    color: var(--brand);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  .card-link:hover {
+    gap: var(--size-3);
+  }
+
+  .card-link i {
+    font-size: var(--font-size-0);
   }
 
   .work-lanes {
@@ -251,10 +307,15 @@ const fonts = [
     display: block;
   }
 
-  .favorites-section {
+  .coaching-section {
     padding-top: var(--size-10);
-    padding-bottom: var(--size-fluid-5);
+    padding-bottom: var(--size-6);
     border-top: 1px solid var(--surface-3);
+  }
+
+  .favorites-section {
+    padding-top: var(--size-6);
+    padding-bottom: var(--size-fluid-5);
   }
 
   .favorites-heading {
