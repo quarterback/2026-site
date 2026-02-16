@@ -1,5 +1,4 @@
 ---
-import ThemeToggle from '../components/ThemeToggle.astro';
 import StatusTicker from '../components/StatusTicker.astro';
 
 interface Props {
@@ -10,10 +9,11 @@ interface Props {
 const { title, description = "Designer focused on public systems and decision-making" } = Astro.props;
 
 const tickerItems = [
-  { label: "Work", url: "/#work" },
   { label: "About", url: "/about" },
   { label: "Coaching", url: "/coaching" },
-  { label: "Contact", url: "/#contact" },
+  { label: "Newsletter", url: "https://makingpublicwork.com" },
+  { label: "Blog", url: "https://blog.ronbronson.com" },
+  { label: "Work with me", url: "/work-with-me" },
 ];
 ---
 
@@ -41,7 +41,6 @@ const tickerItems = [
   </head>
   <body>
     <StatusTicker items={tickerItems} />
-    <ThemeToggle />
     <slot />
   </body>
 </html>

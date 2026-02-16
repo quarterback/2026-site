@@ -4,7 +4,9 @@ const currentPath = Astro.url.pathname;
 const navItems = [
   { label: "About", href: "/about" },
   { label: "Coaching", href: "/coaching" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Newsletter", href: "https://makingpublicwork.com", external: true },
+  { label: "Blog", href: "https://blog.ronbronson.com", external: true },
+  { label: "Work with me", href: "/work-with-me" },
 ];
 ---
 
@@ -19,6 +21,8 @@ const navItems = [
             <a
               href={item.href}
               class:list={["nav__link", { "nav__link--active": currentPath === item.href }]}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
             >
               {item.label}
             </a>
