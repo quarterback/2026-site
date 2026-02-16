@@ -73,6 +73,8 @@ const fonts = [
 
             <p>I move between roles—advisor, founder, faculty, coach—the practice holds: map the system, find the load-bearing points, build things that help people navigate the world machines are quietly rearranging.</p>
 
+            <p class="coaching-note">I also work one-on-one with designers, researchers, and product people navigating complex systems—especially those working in civic tech, government, or decision-heavy domains. <a href="/coaching">Learn more about coaching</a>.</p>
+
             <div class="contact-ctas">
               <a href="mailto:hello@ronbronson.dev" class="cta-button cta-button--primary">
                 Email me
@@ -156,6 +158,22 @@ const fonts = [
 
   .bio-text p:last-child {
     margin-bottom: 0;
+  }
+
+  .coaching-note {
+    font-style: italic;
+    color: var(--text-3);
+  }
+
+  .coaching-note a {
+    color: var(--brand);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  .coaching-note a:hover {
+    color: var(--text-1);
   }
 
   .work-lanes {
