@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
+import FeatureCard from '../components/FeatureCard.astro';
 import { Image } from 'astro:assets';
 import rontennisImg from '../../public/img/rontennis.jpg';
 
@@ -9,6 +10,24 @@ const techStack = [
 ];
 
 const fonts: string[] = [];
+
+// Coaching-related case studies
+const coachingProjects = [
+  {
+    tier: 2,
+    title: "Oregon High School Tennis Rankings System",
+    narrative: "A data-driven ranking and playoff simulation system for Oregon high school tennis, designed to solve real problems in how teams are evaluated and seeded for state competition.",
+    image: "/img/2023_title.jpg",
+    href: "/work/oregon-tennis-rankings"
+  },
+  {
+    tier: 2,
+    title: "Revamping Oregon Tournament Format",
+    narrative: "Five years of systems thinking, stakeholder coordination, and institutional change—moving Oregon high school tennis from a fragmented individual championship to a unified team dual-match format.",
+    image: "/img/2023_title.jpg",
+    href: "/work/oregon-tennis-tournament-format"
+  }
+];
 ---
 
 <Base title="Tennis Coaching — Ron Bronson">
@@ -84,6 +103,22 @@ const fonts: string[] = [];
             <li><a href="https://blog.ronbronson.com/naming-the-courts" target="_blank" rel="noopener noreferrer">Naming the courts</a></li>
             <li><a href="https://blog.ronbronson.com/motivating-or-setting-realistic-goals-when-your-team-loses-a-lot" target="_blank" rel="noopener noreferrer">Motivating or setting realistic goals when your team loses a lot</a></li>
           </ul>
+        </div>
+
+        <div class="projects-section">
+          <h2>Related Projects</h2>
+          <p class="section-intro">Systems thinking applied to high school tennis in Oregon.</p>
+          <div class="coaching-projects-grid">
+            {coachingProjects.map(project => (
+              <FeatureCard
+                title={project.title}
+                narrative={project.narrative}
+                image={project.image}
+                href={project.href}
+                tier={project.tier}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -255,6 +290,40 @@ const fonts: string[] = [];
   .writing-links a:hover {
     color: var(--brand);
     border-color: transparent;
+  }
+
+  .projects-section {
+    margin-top: var(--size-8);
+    padding-top: var(--size-8);
+    border-top: 1px solid var(--surface-3);
+    max-width: none;
+  }
+
+  .projects-section h2 {
+    font-size: clamp(var(--font-size-3), 4vw, var(--font-size-4));
+    font-weight: var(--font-weight-7);
+    margin-bottom: var(--size-3);
+    color: var(--text-1);
+  }
+
+  .section-intro {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    margin-bottom: var(--size-5);
+    max-width: 70ch;
+  }
+
+  .coaching-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--size-5);
+  }
+
+  @media (max-width: 900px) {
+    .coaching-projects-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-4);
+    }
   }
 
   @media (max-width: 900px) {

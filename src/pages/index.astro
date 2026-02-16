@@ -176,6 +176,27 @@ const fonts: string[] = [];
       </div>
     </section>
 
+    <!-- Featured Writing -->
+    <section class="featured-writing-section">
+      <div class="container">
+        <div class="featured-writing-content">
+          <p class="label">Featured Writing</p>
+          <div class="featured-writing-items">
+            <a href="https://makingpublicwork.com" target="_blank" rel="noopener" class="writing-item">
+              <span class="writing-item__label">Newsletter</span>
+              <span class="writing-item__title">Making Public Work</span>
+              <span class="writing-item__description">Essays on AI, public services, and institutional design</span>
+            </a>
+            <a href="https://blog.ronbronson.com" target="_blank" rel="noopener" class="writing-item">
+              <span class="writing-item__label">Blog</span>
+              <span class="writing-item__title">Personal Essays</span>
+              <span class="writing-item__description">Coaching, design practice, and long-form thinking</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Featured Work -->
     <section id="work">
       <div class="container">
@@ -269,6 +290,72 @@ const fonts: string[] = [];
     max-width: 70ch;
     line-height: 1.6;
     margin: 0;
+  }
+
+  /* Featured Writing section */
+  .featured-writing-section {
+    background: var(--surface-2);
+    border-left: 4px solid var(--brand);
+    margin-bottom: var(--size-5);
+  }
+
+  .featured-writing-content {
+    padding: var(--size-4);
+  }
+
+  .featured-writing-content .label {
+    margin-bottom: var(--size-3);
+  }
+
+  .featured-writing-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--size-4);
+  }
+
+  .writing-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+    padding: var(--size-4);
+    background: var(--surface-1);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .writing-item:hover {
+    border-color: var(--brand);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .writing-item__label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brand);
+  }
+
+  .writing-item__title {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+  }
+
+  .writing-item__description {
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .featured-writing-items {
+      grid-template-columns: 1fr;
+      gap: var(--size-3);
+    }
   }
 
   /* Section headings */
