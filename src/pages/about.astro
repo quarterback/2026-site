@@ -73,7 +73,14 @@ const fonts = [
 
             <p>I move between roles—advisor, founder, faculty, coach—the practice holds: map the system, find the load-bearing points, build things that help people navigate the world machines are quietly rearranging.</p>
 
-            <p class="coaching-note">I also work one-on-one with designers, researchers, and product people navigating complex systems—especially those working in civic tech, government, or decision-heavy domains. <a href="/coaching">Learn more about coaching</a>.</p>
+            <div class="coaching-card">
+              <h3>Coaching</h3>
+              <p>I work one-on-one with designers, researchers, and product people navigating complex systems—especially in civic tech, government, or decision-heavy domains.</p>
+              <a href="/coaching" class="card-link">
+                Learn more
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
 
             <div class="contact-ctas">
               <a href="mailto:hello@ronbronson.dev" class="cta-button cta-button--primary">
@@ -160,20 +167,47 @@ const fonts = [
     margin-bottom: 0;
   }
 
-  .coaching-note {
-    font-style: italic;
-    color: var(--text-3);
+  .coaching-card {
+    background: var(--surface-2);
+    border: 2px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-5);
+    margin-top: var(--size-6);
+    margin-bottom: var(--size-6);
   }
 
-  .coaching-note a {
-    color: var(--brand);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-  }
-
-  .coaching-note a:hover {
+  .coaching-card h3 {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
     color: var(--text-1);
+    margin: 0 0 var(--size-3) 0;
+  }
+
+  .coaching-card p {
+    font-size: var(--font-size-1);
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0 0 var(--size-4) 0;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+    color: var(--brand);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  .card-link:hover {
+    gap: var(--size-3);
+  }
+
+  .card-link i {
+    font-size: var(--font-size-0);
   }
 
   .work-lanes {
