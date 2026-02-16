@@ -1,6 +1,6 @@
 ---
 interface Props {
-  headline: string;
+  headline?: string;
   subheadline: string;
   primaryCTA?: {
     label: string;
@@ -24,7 +24,7 @@ const {
 
 <section class="hero">
   <div class="container">
-    <h1 class="hero__headline">{headline}</h1>
+    {headline && <h1 class="hero__headline">{headline}</h1>}
     <p class="hero__subheadline">{subheadline}</p>
 
     <div class="hero__cta-group">
