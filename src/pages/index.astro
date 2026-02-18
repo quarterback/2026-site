@@ -14,25 +14,25 @@ import { fetchMultipleRSS } from '../lib/rss';
 // Top 3 featured projects — BuzzFeed-style hero cards
 const heroCards = [
   {
-    title: "Occupant — AI Compute Benchmarks",
-    description: "Nobody knows what AI actually costs. Occupant is building the consumer price index for AI compute so institutions can stop guessing and start negotiating.",
+    title: "Nobody Knows What AI Actually Costs",
+    description: "I built a consumer price index for AI compute, making black-box AI spend legible.",
     image: "/img/occupant.png",
     href: "/work/occupant-ai-benchmarks",
     label: "Product",
   },
   {
-    title: "HeyPBJ — Structured Matching Platform",
-    description: "Dating and social discovery aren't content problems — they're routing problems. HeyPBJ treats connection as infrastructure, assembling compatible cohorts through declared preferences and weighted signals.",
+    title: "Solving Dating with a Fantasy Draft",
+    description: "Swiping is a social disaster. My fix? I replaced the infinite swipe with a 15-pick weekly draft.",
     image: "/img/heypbj.xyz.png",
     href: "/work/heypbj-matching-platform",
     label: "Platform",
   },
   {
-    title: "AT Protocol Projects",
-    description: "A suite of decentralized data infrastructure and public goods experiments exploring how identity, reputation, and trust can work without centralized platform control.",
-    image: "/img/heypbj.xyz.png",
-    href: "/work/atproto-projects",
-    label: "Infrastructure",
+    title: "State Capacity AI",
+    description: "New models for Agent Experience (AX) and decision engineering — building the frameworks that help institutions figure out what to delegate, what to keep, and how to tell the difference.",
+    image: "/img/occupant.png",
+    href: "/work/state-capacity-ai",
+    label: "Research",
   },
 ];
 
@@ -177,6 +177,7 @@ const fonts: string[] = [];
     <!-- Featured Projects — BuzzFeed-style hero cards -->
     <section id="featured-projects">
       <div class="container">
+        <h2 class="section-heading">Frameworks in Action</h2>
         <div class="hero-cards-stack">
           {heroCards.map(card => (
             <HeroCard
@@ -185,6 +186,34 @@ const fonts: string[] = [];
               image={card.image}
               href={card.href}
               label={card.label}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Currently — AIM style status -->
+    <section class="currently-section">
+      <div class="container">
+        <div class="currently-content">
+          <p class="label">Currently</p>
+          <p class="currently-status">Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College. Organizing <a href="https://yearsahead.io">Yearsahead.io</a>, bridging the gap between civic tech's past and its future. Inventing models for Agent Experience (AX) and decision engineering at <a href="https://occupant.ee">Occupant.ee</a> &amp; State Capacity AI. Probably retiring from pro skeeball.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies — culled to most relevant work -->
+    <section id="work">
+      <div class="container">
+        <h2 class="section-heading">Selected Work</h2>
+        <div class="case-studies-grid">
+          {caseStudies.map(card => (
+            <FeatureCard
+              title={card.title}
+              narrative={card.narrative}
+              image={card.image}
+              href={card.href}
+              tier={card.tier}
             />
           ))}
         </div>
@@ -212,24 +241,6 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Case Studies — culled to most relevant work -->
-    <section id="work">
-      <div class="container">
-        <h2 class="section-heading">Selected Work</h2>
-        <div class="case-studies-grid">
-          {caseStudies.map(card => (
-            <FeatureCard
-              title={card.title}
-              narrative={card.narrative}
-              image={card.image}
-              href={card.href}
-              tier={card.tier}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-
     <!-- Recent Appearances -->
     <section id="media">
       <div class="container">
@@ -239,19 +250,6 @@ const fonts: string[] = [];
             <MediaCard {...item} />
           ))}
         </div>
-      </div>
-    </section>
-
-    <!-- Currently -->
-    <section class="currently">
-      <div class="container">
-        <p class="currently__label">Currently</p>
-        <ul class="currently__list">
-          <li>Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College.</li>
-          <li>Organizing <a href="https://yearsahead.io">Yearsahead.io</a>, bridging the gap between civic tech's past and its future.</li>
-          <li>Inventing models for Agent Experience (AX) and decision engineering at <a href="https://occupant.ee">Occupant.ee</a> &amp; State Capacity AI.</li>
-          <li>Probably retiring from pro skeeball.</li>
-        </ul>
       </div>
     </section>
 
@@ -392,59 +390,36 @@ const fonts: string[] = [];
     gap: var(--size-4);
   }
 
-  /* Currently — professional affiliations */
-  .currently {
+  /* Currently section — AIM style status */
+  .currently-section {
     background: var(--surface-2);
     border-left: 4px solid var(--brand);
     margin-bottom: var(--size-5);
+  }
+
+  .currently-content {
     padding: var(--size-4);
   }
 
-  .currently .container {
-    padding: 0;
+  .currently-content .label {
+    margin-bottom: var(--size-2);
   }
 
-  .currently__label {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-00);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--brand);
-    margin-bottom: var(--size-3);
-    font-weight: var(--font-weight-6);
-  }
-
-  .currently__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-2);
-  }
-
-  .currently__list li {
+  .currently-status {
     font-size: var(--font-size-1);
-    color: var(--text-2);
-    line-height: 1.5;
-    padding-left: var(--size-4);
-    position: relative;
+    color: var(--text-1);
+    max-width: 70ch;
+    line-height: 1.6;
+    margin: 0;
   }
 
-  .currently__list li::before {
-    content: "—";
-    position: absolute;
-    left: 0;
-    color: var(--text-3, var(--text-2));
-  }
-
-  .currently__list a {
+  .currently-status a {
     color: var(--text-1);
     text-decoration-color: var(--brand);
     text-underline-offset: 2px;
   }
 
-  .currently__list a:hover {
+  .currently-status a:hover {
     color: var(--brand);
   }
 
