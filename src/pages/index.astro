@@ -169,8 +169,7 @@ const fonts: string[] = [];
   <main>
     <Hero
       headline="Designing the systems that give people their agency back."
-      subheadline="I architect products and lead teams building the next generation of public and social infrastructure. I'm focused on the mechanics of how we connect, the logic of how we decide, and the tools that make institutional power legible."
-      practiceNote="Assistant Professor of Practice at the University of Michigan Taubman College. Organizing Yearsahead.io to design the next chapter of civic tech. Inventing new models for decision and trust and agent experience at Occupant.ee."
+      subheadline="I work on how decisions get made and how people move through the services that shape their lives. My focus is the mechanics of connection, the logic of delegation, and the tools that make complex systems understandable enough to change."
       primaryCTA={{ label: "About me", url: "/about", icon: "fa-user" }}
       secondaryCTA={{ label: "Let's connect", url: "https://linkedin.com/in/ronbronson", icon: "fa-linkedin" }}
     />
@@ -243,13 +242,16 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Currently — AIM style status -->
-    <section class="currently-section">
+    <!-- Currently -->
+    <section class="currently">
       <div class="container">
-        <div class="currently-content">
-          <p class="label">Currently</p>
-          <p class="currently-status">Building a consumer price index to measure AI spend via Occupant.ee. Still thinking about Andor. ICYMI: My <a href="/year-in-review">2025 year in review</a> is here.</p>
-        </div>
+        <p class="currently__label">Currently</p>
+        <ul class="currently__list">
+          <li>Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College.</li>
+          <li>Organizing <a href="https://yearsahead.io">Yearsahead.io</a>, bridging the gap between civic tech's past and its future.</li>
+          <li>Inventing models for Agent Experience (AX) and decision engineering at <a href="https://occupant.ee">Occupant.ee</a> &amp; State Capacity AI.</li>
+          <li>Probably retiring from pro skeeball.</li>
+        </ul>
       </div>
     </section>
 
@@ -390,27 +392,60 @@ const fonts: string[] = [];
     gap: var(--size-4);
   }
 
-  /* Currently section - AIM style with distinct background */
-  .currently-section {
+  /* Currently — professional affiliations */
+  .currently {
     background: var(--surface-2);
     border-left: 4px solid var(--brand);
     margin-bottom: var(--size-5);
-  }
-
-  .currently-content {
     padding: var(--size-4);
   }
 
-  .currently-content .label {
-    margin-bottom: var(--size-2);
+  .currently .container {
+    padding: 0;
   }
 
-  .currently-status {
-    font-size: var(--font-size-1);
-    color: var(--text-1);
-    max-width: 70ch;
-    line-height: 1.6;
+  .currently__label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brand);
+    margin-bottom: var(--size-3);
+    font-weight: var(--font-weight-6);
+  }
+
+  .currently__list {
+    list-style: none;
+    padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .currently__list li {
+    font-size: var(--font-size-1);
+    color: var(--text-2);
+    line-height: 1.5;
+    padding-left: var(--size-4);
+    position: relative;
+  }
+
+  .currently__list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--text-3, var(--text-2));
+  }
+
+  .currently__list a {
+    color: var(--text-1);
+    text-decoration-color: var(--brand);
+    text-underline-offset: 2px;
+  }
+
+  .currently__list a:hover {
+    color: var(--brand);
   }
 
   /* Media section - Books & Albums side by side */
