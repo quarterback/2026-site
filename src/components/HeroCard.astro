@@ -1,0 +1,147 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+  label?: string;
+}
+
+const { title, description, image, href, label } = Astro.props;
+---
+
+<a href={href} class="hero-card" style={`--bg-image: url(${image})`}>
+  <div class="hero-card__overlay"></div>
+  <div class="hero-card__content">
+    {label && <span class="hero-card__label">{label}</span>}
+    <h3 class="hero-card__title">{title}</h3>
+    <p class="hero-card__description">{description}</p>
+    <span class="hero-card__cta">Read more &rarr;</span>
+  </div>
+</a>
+
+<style>
+  .hero-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-height: 280px;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--radius-3);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .hero-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .hero-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.5) 50%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+    transition: background 0.2s ease;
+  }
+
+  .hero-card:hover .hero-card__overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.55) 50%,
+      rgba(0, 0, 0, 0.25) 100%
+    );
+  }
+
+  .hero-card__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    min-height: 280px;
+    padding: var(--size-6) var(--size-7);
+  }
+
+  .hero-card__label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--brand-bright, #ffd333);
+    margin-bottom: var(--size-2);
+    font-weight: var(--font-weight-6);
+  }
+
+  [data-theme="light"] .hero-card__label {
+    color: #8eb4ff;
+  }
+
+  .hero-card__title {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    font-weight: var(--font-weight-7);
+    color: #fff;
+    line-height: 1.15;
+    margin: 0 0 var(--size-3) 0;
+    max-width: 45ch;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-card__description {
+    font-size: var(--font-size-1);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+    margin: 0 0 var(--size-3) 0;
+    max-width: 55ch;
+  }
+
+  .hero-card__cta {
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-6);
+    color: var(--brand-bright, #ffd333);
+    transition: color 0.2s ease;
+  }
+
+  [data-theme="light"] .hero-card__cta {
+    color: #8eb4ff;
+  }
+
+  .hero-card:hover .hero-card__cta {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .hero-card {
+      min-height: 240px;
+    }
+
+    .hero-card__content {
+      min-height: 240px;
+      padding: var(--size-5) var(--size-5);
+    }
+
+    .hero-card__title {
+      font-size: clamp(1.25rem, 5vw, 1.75rem);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-card {
+      min-height: 200px;
+    }
+
+    .hero-card__content {
+      min-height: 200px;
+      padding: var(--size-4);
+    }
+  }
+</style>

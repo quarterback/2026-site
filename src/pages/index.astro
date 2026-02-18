@@ -2,54 +2,62 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import HeroCard from '../components/HeroCard.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import Writing from '../components/Writing.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
 import MediaCard from '../components/MediaCard.astro';
-import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
 
-// Feature cards with narrative structure
-const featureCards = [
-  // Tier 1 (Hero cards - 2-column span)
+// Top 3 featured projects — BuzzFeed-style hero cards
+const heroCards = [
   {
-    tier: 1,
     title: "Occupant — AI Compute Benchmarks",
-    narrative: "Nobody knows what AI actually costs. Institutions are signing contracts they can't evaluate, with no benchmark for whether they're overpaying or what the market looks like.",
+    description: "Nobody knows what AI actually costs. Occupant is building the consumer price index for AI compute so institutions can stop guessing and start negotiating.",
     image: "/img/occupant.png",
-    href: "/work/occupant-ai-benchmarks"
+    href: "/work/occupant-ai-benchmarks",
+    label: "Product",
   },
   {
-    tier: 1,
+    title: "HeyPBJ — Structured Matching Platform",
+    description: "Dating and social discovery aren't content problems — they're routing problems. HeyPBJ treats connection as infrastructure, assembling compatible cohorts through declared preferences and weighted signals.",
+    image: "/img/heypbj.xyz.png",
+    href: "/work/heypbj-matching-platform",
+    label: "Platform",
+  },
+  {
+    title: "AT Protocol Projects",
+    description: "A suite of decentralized data infrastructure and public goods experiments exploring how identity, reputation, and trust can work without centralized platform control.",
+    image: "/img/heypbj.xyz.png",
+    href: "/work/atproto-projects",
+    label: "Infrastructure",
+  },
+];
+
+// Culled case studies — only the most relevant work
+const caseStudies = [
+  {
+    tier: 2 as const,
     title: "18F — Building Design Practice & Federal Leadership",
     narrative: "I built and scaled the design practice at 18F from 21 to 40 practitioners, then served as Chief of Staff at the Technology Transformation Services. Eight years learning how to make institutions work differently from the inside.",
     image: "/img/18f-leadership.svg",
-    href: "/work/18f-leadership"
+    href: "/work/18f-leadership",
   },
   {
-    tier: 1,
-    title: "State Capacity AI",
-    narrative: "AI is making decisions, and nobody has to tell you. There's no standard for disclosure, no shared language for what kind of authority a system has, and no easy way to contest a decision made by software.",
-    image: "/img/statecapacity-ai.svg",
-    href: "/work/state-capacity-ai"
-  },
-  // Tier 2 (Standard width)
-  {
-    tier: 2,
-    title: "AT Protocol Projects — Trust Infrastructure",
-    narrative: "Interconnected suite of decentralized data infrastructure and public goods experiments exploring how identity, reputation, and trust can work without centralized platform control.",
-    image: "/img/heypbj.xyz.png",
-    href: "/work/atproto-projects"
+    tier: 2 as const,
+    title: "Portland Digital Corps",
+    narrative: "Volunteer effort bringing together 50+ practitioners to rebuild six nonprofit websites. Following the closure of 18F, a community-focused alternative for digital service work.",
+    image: "/img/digitalcorpspdx.org.png",
+    href: "/work/portland-digital-corps",
   },
   {
-    tier: 2,
-    title: "Teaching Public Mechanics at Michigan",
-    narrative: "Design education shouldn't train people to build more apps. It should teach them to understand infrastructure, repair what's broken, and build systems that serve the public.",
-    image: "/img/michigan-teaching.svg",
-    href: "/work/michigan-teaching"
-  }
+    tier: 2 as const,
+    title: "Design For The Public 24",
+    narrative: "Two-day unconference bringing together 80+ civic technologists and designers to discuss what we build and envision future directions for public-facing work.",
+    href: "/work/design-for-the-public-24",
+  },
 ];
 
 const rssFeeds = [
@@ -165,6 +173,23 @@ const fonts: string[] = [];
       secondaryCTA={{ label: "Let's connect", url: "https://linkedin.com/in/ronbronson", icon: "fa-linkedin" }}
     />
 
+    <!-- Featured Projects — BuzzFeed-style hero cards -->
+    <section id="featured-projects">
+      <div class="container">
+        <div class="hero-cards-stack">
+          {heroCards.map(card => (
+            <HeroCard
+              title={card.title}
+              description={card.description}
+              image={card.image}
+              href={card.href}
+              label={card.label}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- Featured Writing -->
     <section class="featured-writing-section">
       <div class="container">
@@ -186,12 +211,12 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Featured Work -->
+    <!-- Case Studies — culled to most relevant work -->
     <section id="work">
       <div class="container">
-        <h2 class="section-heading">Featured Work</h2>
-        <div class="feature-grid">
-          {featureCards.map(card => (
+        <h2 class="section-heading">Selected Work</h2>
+        <div class="case-studies-grid">
+          {caseStudies.map(card => (
             <FeatureCard
               title={card.title}
               narrative={card.narrative}
@@ -204,17 +229,7 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Currently - AIM style status -->
-    <section class="currently-section">
-      <div class="container">
-        <div class="currently-content">
-          <p class="label">Currently</p>
-          <p class="currently-status">Building a consumer price index to measure AI spend via Occupant.ee. Still thinking about Andor. ICYMI: My <a href="/year-in-review">2025 year in review</a> is here.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Media -->
+    <!-- Recent Appearances -->
     <section id="media">
       <div class="container">
         <h2 class="section-heading">Recent Appearances</h2>
@@ -226,37 +241,23 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Media Section: Books & Albums side by side -->
+    <!-- Currently — AIM style status -->
+    <section class="currently-section">
+      <div class="container">
+        <div class="currently-content">
+          <p class="label">Currently</p>
+          <p class="currently-status">Building a consumer price index to measure AI spend via Occupant.ee. Still thinking about Andor. ICYMI: My <a href="/year-in-review">2025 year in review</a> is here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Media Consumption: Books & Albums -->
     <section id="media-consumption">
       <div class="container">
         <div class="media-grid">
           <Books books={currentBooks} />
           <Albums albums={currentAlbums} />
         </div>
-      </div>
-    </section>
-
-    <!-- Writing -->
-    <section id="writing">
-      <div class="container">
-        {recentPosts.length > 0 ? (
-          <Writing posts={recentPosts} blogUrl="https://makingpublicwork.com" />
-        ) : (
-          <div class="writing-fallback">
-            <h2 class="section-heading">Writing</h2>
-            <p>Read my essays and newsletters at <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> and <a href="https://blog.ronbronson.com" target="_blank" rel="noopener">my blog</a>.</p>
-          </div>
-        )}
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact">
-      <div class="container">
-        <Contact
-          email="bronsonr@umich.edu"
-          socials={socials}
-        />
       </div>
     </section>
   </main>
@@ -268,27 +269,15 @@ const fonts: string[] = [];
 </Base>
 
 <style>
-  /* Currently section - AIM style with distinct background */
-  .currently-section {
-    background: var(--surface-2);
-    border-left: 4px solid var(--brand);
-    margin-bottom: var(--size-5);
+  /* Hero cards stack — full-width cards stacked vertically */
+  #featured-projects {
+    padding-block: var(--size-6);
   }
 
-  .currently-content {
-    padding: var(--size-4);
-  }
-
-  .currently-content .label {
-    margin-bottom: var(--size-2);
-  }
-
-  .currently-status {
-    font-size: var(--font-size-1);
-    color: var(--text-1);
-    max-width: 70ch;
-    line-height: 1.6;
-    margin: 0;
+  .hero-cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-5);
   }
 
   /* Featured Writing section */
@@ -365,6 +354,26 @@ const fonts: string[] = [];
     font-weight: var(--font-weight-6);
   }
 
+  /* Case Studies grid — 3 columns */
+  .case-studies-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--size-5);
+  }
+
+  @media (max-width: 900px) {
+    .case-studies-grid {
+      grid-template-columns: 1fr;
+      gap: var(--size-4);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .case-studies-grid {
+      gap: var(--size-3);
+    }
+  }
+
   /* Recent Appearances section */
   #media {
     background: var(--surface-1);
@@ -379,105 +388,27 @@ const fonts: string[] = [];
     gap: var(--size-4);
   }
 
-  .section-intro {
-    color: var(--text-3);
-    margin-bottom: var(--size-4);
-    font-size: var(--font-size-1);
-  }
-
-  @media (max-width: 600px) {
-    .section-heading {
-      margin-bottom: var(--size-3);
-    }
-
-    .section-intro {
-      margin-bottom: var(--size-3);
-    }
-  }
-
-  /* Feature grid - supports tier system */
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--size-5);
-  }
-
-  /* Tier 1 cards span 2 columns */
-  .feature-grid > a[class*="tier-1"] {
-    grid-column: span 2;
-  }
-
-  /* Tier 2 cards are standard width */
-  .feature-grid > a[class*="tier-2"] {
-    grid-column: span 1;
-  }
-
-  @media (max-width: 900px) {
-    .feature-grid {
-      grid-template-columns: 1fr;
-      gap: var(--size-4);
-    }
-
-    /* All cards full width on tablet/mobile */
-    .feature-grid > a[class*="tier-1"],
-    .feature-grid > a[class*="tier-2"] {
-      grid-column: span 1;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .feature-grid {
-      gap: var(--size-3);
-    }
-  }
-
-  /* Preview sections */
-  #about-preview,
-  #media-preview {
+  /* Currently section - AIM style with distinct background */
+  .currently-section {
+    background: var(--surface-2);
+    border-left: 4px solid var(--brand);
     margin-bottom: var(--size-5);
   }
 
-  .about-preview-text,
-  .media-preview-text {
+  .currently-content {
+    padding: var(--size-4);
+  }
+
+  .currently-content .label {
+    margin-bottom: var(--size-2);
+  }
+
+  .currently-status {
     font-size: var(--font-size-1);
-    color: var(--text-2);
+    color: var(--text-1);
     max-width: 70ch;
     line-height: 1.6;
-    margin-bottom: var(--size-3);
-  }
-
-  .section-link {
-    display: inline-flex;
-    align-items: center;
-    font-size: var(--font-size-1);
-    color: var(--brand);
-    font-weight: var(--font-weight-5);
-    text-decoration: none;
-  }
-
-  .section-link:hover {
-    text-decoration: underline;
-  }
-
-  /* Writing fallback */
-  .writing-fallback {
-    margin-block: var(--size-6);
-  }
-
-  .writing-fallback p {
-    font-size: var(--font-size-1);
-    color: var(--text-2);
-    max-width: 70ch;
-    line-height: 1.6;
-  }
-
-  .writing-fallback a {
-    color: var(--brand);
-    text-decoration: none;
-  }
-
-  .writing-fallback a:hover {
-    text-decoration: underline;
+    margin: 0;
   }
 
   /* Media section - Books & Albums side by side */
@@ -495,6 +426,20 @@ const fonts: string[] = [];
     .media-grid {
       grid-template-columns: 1fr;
       gap: var(--size-5);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .section-heading {
+      margin-bottom: var(--size-3);
+    }
+
+    .hero-cards-stack {
+      gap: var(--size-4);
+    }
+
+    #featured-projects {
+      padding-block: var(--size-4);
     }
   }
 </style>
