@@ -16,148 +16,63 @@ hero:
   image: "/img/occupant.png"
 ---
 
-## Models & Artifacts
+## The Bloomberg Terminal for AI Compute
 
-Occupant produces several public benchmark models:
+Nobody knows what AI actually costs. Pricing is fragmented across providers, resellers, and model routers. Procurement teams are buying blind. Researchers are budgeting on vibes. Government buyers have zero benchmark for what a "fair deal" looks like.
 
-### 1. Compute CPI (Consumer Price Index)
-A price deflation index tracking how fast AI compute costs are falling across capability tiers. Answers: "Is compute getting cheaper? How fast?"
-
-### 2. AI Economic Activity Index (AEAI)
-Market activity proxy measuring economic growth in AI usage. Tracks volume, diversity, and market structure changes.
-
-### 3. Market Intelligence Dashboard
-Sabermetrics-style analytics showing:
-- Model rankings and performance tiers
-- Premiumization vs. commoditization signals
-- Provider market share and pricing strategies
-- Price volatility and discrepancy alerts
-
-### 4. Government Procurement Benchmarks
-Fair market price ranges and vendor evaluation questions specifically for public-sector buyers. Includes procurement worksheet templates.
-
-### 5. Cost Calculator
-Interactive estimator for budgeting AI spend based on usage patterns and provider pricing.
+Occupant fixes that. It's a **public price index for AI compute** — daily-updated, methodology-transparent, free to use, and built to serve anyone who needs to know what this stuff actually costs.
 
 ---
 
-## The Problem
+## What It Tracks
 
-AI model pricing is volatile and fragmented across providers, resellers, and model routers. Buyers can't easily answer:
-- What's the fair market price per token for a given capability?
-- Is our vendor giving us a competitive rate?
-- Should we budget for continued deflation or stabilization?
-- What procurement questions should we ask?
+**2,300+ models. Updated daily. Zero paywall.**
 
----
+### Compute CPI
+A price deflation index answering the only question that matters: **is compute getting cheaper, and how fast?** Tracks cost trajectories across capability tiers so you can plan budgets against real data instead of vendor promises.
 
-## The Solution: Public Data Infrastructure
+### AI Economic Activity Index (AEAI)
+Market activity proxy measuring volume, diversity, and structural shifts in AI usage. Think of it as the pulse check for whether the market is consolidating or fragmenting.
 
-A static website that aggregates pricing from multiple sources (OpenRouter, LiteLLM, Chatbot Arena, etc.), computes indices daily via GitHub Actions, and publishes JSON datasets + interactive dashboards.
+### Market Intelligence
+Sabermetrics for AI models — rankings, performance tiers, premiumization vs. commoditization signals, provider market share, pricing strategy analysis, and price volatility alerts.
 
-**Key design decisions:**
+### Government Procurement Benchmarks
+Fair market price ranges and vendor evaluation questions built specifically for public-sector buyers. Includes downloadable procurement worksheets. Because no government CTO should be negotiating a compute contract without independent pricing data.
 
-### Static Site + Daily Regeneration
-No database. No server. Just:
-- Daily cron job fetches pricing data
-- Python scripts compute CPI, AEAI, market intel
-- Regenerates JSON files committed to repo
-- GitHub Pages deploys updated static site
-
-### Client-Side Rendering
-Calculator and dashboards use vanilla JavaScript + Fetch API. No framework bloat. Progressive Web App (PWA) with service worker for offline access.
-
-### Zero Tracking
-- No analytics
-- No cookies (except localStorage for theme)
-- No user data collection
-- Short-retention server logs only
+### Cost Calculator
+Interactive estimator for budgeting AI spend based on your actual usage patterns and provider pricing. No signup required.
 
 ---
 
-## Data Sources & Credibility
+## Built to Last, Built for Free
 
-Aggregates from multiple public sources with cross-checking:
-- OpenRouter Rankings (Weekly)
-- Chatbot Arena (Weekly)
-- LiteLLM pricing feeds (Daily)
-- pricepertoken.com (Daily)
+Occupant runs on a deliberately simple architecture: **no database, no server, no login, no tracking.**
 
-Price discrepancies exceeding 10% trigger manual review before publication.
+- **Daily cron job** fetches pricing from OpenRouter, LiteLLM, Chatbot Arena, and pricepertoken.com
+- **Python scripts** compute CPI, AEAI, and market intelligence indices
+- **GitHub Actions** regenerates JSON datasets and deploys to GitHub Pages
+- **Static HTML + vanilla JS** renders dashboards client-side
+- **PWA with service worker** for offline access
 
-Full transparency disclosure published at `/tardigrade.html` covering data sources, AI usage, and privacy posture.
+Total hosting cost: zero. Total tracking: zero. Price discrepancies exceeding 10% trigger manual review before publication. Full transparency disclosure published at `/tardigrade.html`.
 
----
-
-## Technical Architecture
-
-**Backend (Python + GitHub Actions):**
-- `src/data_collector.py` - Fetches pricing from all sources
-- `src/calculate_cpi.py` - Computes CPI baskets and deflation rates
-- `src/calculate_aeai.py` - Computes activity index
-- `src/market_intel.py` - Generates rankings and signals
-- `src/scrape_rankings.py` - Pulls OpenRouter/Arena data
-
-**Frontend (Static HTML + Vanilla JS):**
-- `index.html` - Landing page with live index values
-- `cpi-data.html` - CPI dashboard + historical data
-- `aeai.html` - AEAI dashboard
-- `sabermetrics.html` - Market intelligence
-- `calculator.html` - Interactive cost estimator
-- `gov.html` + `gov-worksheet.html` - Procurement tools
-- `glossary.html` - Metric definitions
-- `tardigrade.html` - Transparency disclosure
-
-**Data Artifacts:**
-All datasets published as JSON under `/data/` for programmatic access.
+Every dataset is available as downloadable JSON under `/data/` for anyone who wants to build on it.
 
 ---
 
-## User Journeys
+## Who It's For
 
-**Procurement / Finance User:**
-1. Checks CPI/AEAI headline numbers on index
-2. Opens gov benchmark page for "fair deal" ranges
-3. Uses calculator to estimate spend
-4. Downloads worksheet for vendor evaluation
+**Procurement and finance teams** check headline CPI/AEAI numbers, pull fair-deal ranges from the gov benchmark page, estimate spend with the calculator, and download worksheets for vendor evaluation.
 
-**Research / Market Watcher:**
-1. Reviews CPI time series for deflation trends
-2. Opens market intel for structure analysis
-3. References glossary for metric definitions
-4. Accesses JSON API for analysis
+**Researchers and market watchers** track CPI time series for deflation trends, analyze market structure shifts, reference the glossary for metric definitions, and pull JSON datasets for their own analysis.
 
-**Developer / Analyst:**
-1. Fetches JSON datasets directly
-2. Integrates into internal dashboards
-3. Uses data for budgeting models
+**Developers and analysts** fetch JSON directly and integrate into internal dashboards and budgeting models.
 
 ---
 
-## Why It's Built This Way
+## Why It Matters
 
-1. **Static = resilient, cheap, fast**
-   - No server to crash or scale
-   - GitHub Pages hosting (free)
-   - Cacheable, works offline (PWA)
+The AI market has a transparency problem. Vendors set prices, buyers accept them, and nobody has independent data to push back. Occupant is **public data infrastructure** — the kind of thing that should exist as a utility, not a SaaS product with a pricing page.
 
-2. **Daily regeneration = fresh data without live queries**
-   - Compute happens in CI, not at request time
-   - Users get instant page loads
-   - No API rate limits to worry about
-
-3. **Public data infrastructure**
-   - No login required
-   - No tracking or paywalls
-   - Transparent methodology
-   - Downloadable datasets
-
----
-
-## What This Demonstrates
-
-- **Public data infrastructure design**: Building credible benchmarks that serve procurement, research, and strategic planning
-- **Static architecture patterns**: Proving you don't need a database/server for daily-updated data products
-- **Transparency posture**: Publishing methodology, sources, and AI usage disclosure
-- **Progressive enhancement**: PWA features for offline access without JavaScript requirements
-- **Government-focused UX**: Procurement worksheet and "fair deal" benchmarks tailored to public sector needs
+It proves you can build credible, daily-updated data products on static architecture with zero operational cost. And it gives every buyer — from a startup founder to a federal CTO — the data they need to negotiate from a position of knowledge instead of faith.

@@ -15,222 +15,75 @@ externalUrl: "https://glowrm.tech"
 parent: "atproto-projects"
 ---
 
-## The Core Problem
+## The Problem Every Platform Ignores
 
-Social platforms collapse trust, identity, and moderation into a single service's control. When you move to a new platform, you start from zero:
-- No reputation history
-- No verification credentials
-- No interaction context
-- No trust signals from previous communities
+Every time you join a new platform, you start from zero. No reputation. No verified credentials. No signal that you're a real person who's been trusted in other spaces. Years of community standing, evaporated at every signup screen.
 
-Worse, there's no way to **route trust** between spaces. A community vouching for you in one place doesn't travel. References and reputation are trapped in silos.
+Meanwhile, bad actors exploit exactly this — the fact that trust doesn't travel. They get banned somewhere, create a new account somewhere else, and start over clean. The people who play by the rules get punished with cold starts. The people who don't get infinite fresh starts.
+
+Glowrm is **infrastructure for trust that travels.**
 
 ---
 
-## What Glowrm Does
+## What It Does
 
-Glowrm is **infrastructure for trust that travels**. It provides lightweight primitives for:
+Four primitives. All portable. All user-controlled.
 
-### 1. Identity Verification
-- Portable credentials (not locked to one platform)
-- Multi-source verification (domain ownership, social proof, community attestations)
-- Cryptographic signatures for tamper-proof claims
-- Granular disclosure (prove attributes without revealing data)
+### Identity Verification
+Credentials that aren't locked to one platform. Multi-source verification — domain ownership, social proof, community attestations — with cryptographic signatures so nobody can fake them. Prove what you need to prove without revealing everything.
 
-### 2. Reputation Tracking
-- Interaction history that users control
-- Community vouches and endorsements
-- Negative signals (blocks, reports) with context
-- Reputation scores across dimensions (reliability, expertise, civility)
+### Reputation That Follows You
+Interaction history you own. Community vouches and endorsements. Negative signals with context (not just a scarlet letter). Multi-dimensional reputation — reliability, expertise, civility — because "trustworthy" means different things in different contexts.
 
-### 3. Consent & Boundaries
-- Persistent preference declarations (communication style, boundaries)
-- Context-aware consent (different rules for different spaces)
-- Revocable permissions (pull access back when trust breaks)
-- Transparent data flows (who sees what, when, why)
+### Consent and Boundaries
+Persistent preference declarations that travel with you. "No unsolicited DMs" set once, enforced everywhere. Context-aware rules for different spaces. Revocable permissions when trust breaks. Transparent data flows so you always know who sees what.
 
-### 4. Trust Routing
-- How do vouches from one community inform decisions in another?
-- Can endorsements be weighted by relationship strength?
-- How do negative signals propagate without becoming permanent scarlet letters?
-- What happens when trust networks conflict?
+### Trust Routing
+The hard problem: how do vouches from one community inform decisions in another? Can endorsements be weighted by relationship strength? How do negative signals propagate without becoming permanent? What happens when trust networks conflict? Glowrm answers these by treating trust as a routing layer, not a binary score.
 
 ---
 
-## Design Principles
+## Already Powering PBJ
 
-### Portable, Not Platform-Locked
-Trust data lives with the **user**, not the platform. You can take your reputation, credentials, and interaction history anywhere AT Protocol is supported.
+This isn't theoretical. Glowrm is the trust backbone for [HeyPBJ's matching platform](/work/heypbj-matching-platform):
 
-### Granular & Context-Aware
-Trust isn't binary. Glowrm supports:
-- Different trust levels for different contexts
-- Relationship-specific permissions
-- Time-bounded credentials
-- Conditional visibility
+- **Identity verification** in dating rundles — you know who you're talking to
+- **Cross-network safety checks** — reputation from other communities factors into matching
+- **Trust-weighted compatibility** — mutual vouches from friends boost match quality
+- **Consent enforcement** — communication preferences declared in Glowrm apply automatically in PBJ
 
-### Transparent & Auditable
-Users can see:
-- Who vouched for someone (and why)
-- What data is being shared (and with whom)
-- How reputation scores are calculated
-- When/why trust signals changed
-
-### User-Controlled
-You decide:
-- What credentials to share
-- Which communities can vouch for you
-- How your reputation travels
-- When to revoke access
+Two products, one trust layer. When you build on open protocols, interoperability isn't a roadmap item — it's the starting condition.
 
 ---
 
-## Use Cases
+## How Communities Use It
 
-### Moderation Tooling
-Communities can:
-- Check if a new member has community vouches
-- See interaction history across networks
-- Route trust signals from allied spaces
-- Apply graduated moderation based on reputation
+**Moderation tooling.** A forum checks if new applicants have endorsements from trusted communities. Cold-start spam drops. Graduated moderation replaces ban-or-allow binary thinking.
 
-**Example:** A forum checks if applicants have endorsements from trusted communities, reducing cold-start spam/harassment.
+**Safe onboarding.** A new platform accepts portable verification instead of making everyone prove themselves from scratch. Trusted users get access faster. Unknown users get scaffolded in.
 
-### Safe Onboarding
-New platforms can:
-- Accept portable verification instead of starting from zero
-- Trust vouches from established networks
-- Apply reputation-based permissions (e.g., new users can read but not post until vouched)
-
-**Example:** A dating app (like HeyPBJ) uses Glowrm credentials to verify identity and check for safety flags across networks.
-
-### Consent Management
-Users can:
-- Declare communication preferences that follow them
-- Set boundaries that platforms must respect
-- Revoke permissions if trust breaks
-- See who accessed their data and when
-
-**Example:** A user sets "no unsolicited DMs" as a persistent preference; compatible platforms enforce this automatically.
-
-### Trust-Based Discovery
-Matching/routing systems can:
-- Weight compatibility by mutual connections
-- Use vouches as signals for quality
-- Route people toward communities where they're already trusted
-- Reduce cold-start problems in social discovery
-
-**Example:** HeyPBJ uses Glowrm trust scores to prioritize matches where mutual friends have vouched for both parties.
+**Trust-based discovery.** Matching and routing systems weight compatibility by mutual connections. People get routed toward communities where they're already known. Cold-start problems shrink.
 
 ---
 
-## Technical Architecture
+## Built on AT Protocol
 
-**AT Protocol Foundation:**
-- Decentralized identity (DIDs)
-- User-controlled data repositories
-- Cryptographic signatures for attestations
-- Composable schemas for trust primitives
+Everything runs on decentralized infrastructure. Trust data lives with the user, not the platform.
 
-**Trust Primitives (Data Structures):**
-- **Credentials:** Portable identity claims (verified email, domain ownership, community membership)
-- **Attestations:** Third-party vouches (endorsements, references, community approvals)
-- **Interaction Records:** Encrypted logs of connection history
-- **Reputation Scores:** Multi-dimensional trust metrics
-- **Consent Declarations:** Portable preference/boundary records
+- **DIDs** (decentralized identifiers) for tamper-proof identity
+- **User-controlled data repos** — you decide what's shared and with whom
+- **Cryptographic attestations** — third-party vouches that can't be forged
+- **Zero-knowledge proofs** for privacy-preserving verification — prove claims without revealing underlying data
+- **Composable schemas** so any AT Protocol app can read and write trust primitives
 
-**Services:**
-- **Verification Service:** Cryptographically validate credentials
-- **Reputation Aggregator:** Compute trust scores from multiple sources
-- **Trust Router:** Determine how signals propagate between networks
-- **Consent Enforcer:** Check if actions respect declared boundaries
-
-**Privacy Layer:**
-- Zero-knowledge proofs for selective disclosure
-- Encrypted interaction logs (only participants can decrypt)
-- Relationship-scoped visibility (different people see different data)
-- Revocable access controls
+If Glowrm disappears tomorrow, your trust data doesn't. That's the point.
 
 ---
 
-## How It Works: Example Flow
+## Why This Is Category-Defining
 
-1. **User joins new community:**
-   - Presents AT Protocol DID (decentralized identity)
-   - Shares relevant credentials (e.g., "verified member of X community since 2023")
-   - Community checks Glowrm for reputation/vouches
+Every social platform reinvents trust from scratch — poorly. Centralized moderation doesn't scale. Binary block lists don't capture nuance. Platform-locked reputation creates walled gardens where incumbents win by default.
 
-2. **Community evaluates trust:**
-   - Sees endorsements from allied spaces
-   - Checks interaction history for red flags
-   - Applies graduated permissions based on trust level
-   - Grants access or requests additional verification
+Glowrm treats trust as **shared infrastructure**, not a platform feature. It's the layer that makes niche apps viable — because a new social product with 500 users can tap into trust signals from networks with millions. You don't need scale to have safety. You need interoperability.
 
-3. **Trust signals accumulate:**
-   - As user interacts, reputation updates
-   - Community members can vouch/endorse
-   - Positive signals increase access/privileges
-   - Negative signals trigger review/moderation
-
-4. **User moves to another space:**
-   - Brings full trust history (portable)
-   - New community can reference previous vouches
-   - User controls what's disclosed
-   - Trust doesn't restart from zero
-
----
-
-## Research Questions
-
-Glowrm explores:
-- Can **portable reputation** reduce cold-start problems without creating permanent records?
-- How do **trust networks** interact when they have conflicting signals?
-- What **consent primitives** are needed for decentralized social spaces?
-- Can **cryptographic proofs** enable privacy-preserving verification?
-- How do we prevent **reputation marketplaces** or gaming?
-
----
-
-## Integration with Other Projects
-
-### HeyPBJ (Matching Platform)
-Uses Glowrm for:
-- Identity verification in dating/social rundles
-- Safety checks (cross-network reputation)
-- Trust-weighted compatibility scoring
-- Consent enforcement (communication preferences)
-
-### Leafroll (Professional Identity)
-Uses Glowrm for:
-- Endorsement verification (are these references real?)
-- Skill attestations from collaborators
-- Trust routing for hiring/collaboration
-- Reputation portability across professional networks
-
-### Occupant (AI Benchmarks)
-Could use Glowrm for:
-- Contributor verification (who's submitting data?)
-- Community moderation (trusted contributors vs. spam)
-- Peer review attestations
-
----
-
-## Part of the AT Protocol Suite
-
-Glowrm is one of several interconnected projects exploring decentralized infrastructure:
-- [AT Protocol Projects](/work/atproto-projects) (Parent project)
-- [HeyPBJ](/work/heypbj-matching-platform) (Matching platform)
-- [Leafroll](/work/leafroll-professional-identity) (Professional identity)
-- [Occupant](/work/occupant-ai-benchmarks) (Public data infrastructure)
-
----
-
-## What This Demonstrates
-
-- **Decentralized trust infrastructure**: Building reputation systems that don't require centralized platforms
-- **Portable identity primitives**: Proving credentials and reputation can travel across networks
-- **Privacy-preserving verification**: Using cryptography to prove claims without revealing data
-- **Context-aware consent**: Designing granular permission systems for decentralized spaces
-- **Trust routing**: Solving how vouches and reputation propagate between communities
-- **Moderation tooling**: Creating safety infrastructure that works across platforms
-- **User sovereignty**: Giving people control over their trust data and how it's shared
+The thesis: portable trust is the unlock for the next generation of social products. Without it, every new platform is starting from zero on the hardest problem in social software. With it, the barrier to building safe, credible social spaces drops dramatically.
