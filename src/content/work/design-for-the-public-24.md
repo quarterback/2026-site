@@ -16,6 +16,8 @@ venue: "Portland, Oregon"
 hero:
   image: "/img/dfp24.jpg"
 externalUrl: "https://designforthepublic.com"
+hero:
+  image: "/img/dfp24.jpg"
 ---
 
 ## The vision
