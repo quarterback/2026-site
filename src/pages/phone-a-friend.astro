@@ -1,0 +1,387 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+
+const techStack = [
+  "built hastily using Astro, Open Props, FontAwesome, TypeScript, Inter, JetBrains Mono, Netlify & GitHub"
+];
+
+const fonts: string[] = [];
+---
+
+<Base title="Phone a Friend — Ron Bronson">
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Phone a Friend</h1>
+      </div>
+    </section>
+
+    <section class="paf-content">
+      <div class="container">
+        <div class="paf-main">
+          <!-- The Hook -->
+          <div class="paf-hook">
+            <p class="paf-lede">You're about to make a technology decision and you're not sure it's the right one. Let's talk before you sign.</p>
+          </div>
+
+          <!-- When to Call -->
+          <h2 class="section-label">When to call</h2>
+          <ul class="paf-scenarios">
+            <li>A vendor's pitching AI and you can't tell if it's real or slideware</li>
+            <li>A project's stalled and nobody can explain why</li>
+            <li>You're about to sign a contract that locks you in for years</li>
+            <li>You inherited a system that's already sideways</li>
+            <li>You need expertise you can't hire full-time</li>
+          </ul>
+
+          <!-- What it looks like -->
+          <h2 class="section-label">What it looks like</h2>
+          <div class="paf-tiers">
+            <div class="tier-card">
+              <div class="tier-header">
+                <h3>The Gut Check</h3>
+                <span class="tier-format">60-Minute Call</span>
+              </div>
+              <p>You bring the proposal, the vendor deck, the thing that's keeping you up at night. We talk through it before you commit to anything.</p>
+            </div>
+            <div class="tier-card">
+              <div class="tier-header">
+                <h3>The Deep Look</h3>
+                <span class="tier-format">1-Week Sprint</span>
+              </div>
+              <p>I dig into a stalled project, a failing system, or a decision that needs more than a conversation. You get a clear picture of what's broken and what to do about it.</p>
+            </div>
+            <div class="tier-card">
+              <div class="tier-header">
+                <h3>The Sounding Board</h3>
+                <span class="tier-format">Monthly Retainer</span>
+              </div>
+              <p>Ongoing access for the questions that don't fit in a meeting. Scaling teams, vetting vendors, making sense of AI hype, building digital capacity without getting locked into bad contracts.</p>
+            </div>
+          </div>
+
+          <!-- Why me -->
+          <h2 class="section-label">Why me</h2>
+          <div class="paf-bio">
+            <p>I spent eight years inside federal digital services, advising senior leaders and shipping work that touched billions in funding. I oversaw 40+ designers and design managers. I've been in the White House.</p>
+            <p>I've also been the IT guy in an Indiana city. I led digital for a state college system. I've lived in places like Goshen County, Wyoming and had lunch in towns with one stoplight.</p>
+            <p>Most places under 100k don't have someone to call when they're navigating these decisions. I'm that call.</p>
+          </div>
+
+          <!-- Who this is for -->
+          <h2 class="section-label">Who this is for</h2>
+          <p class="paf-audience">Cities and towns under 100k. State agencies without CTO-level capacity. Anyone making digital or AI decisions without internal expertise to vet them.</p>
+          <p class="paf-audience">If you're about to buy something, build something, or sign something and you need a second opinion from someone who's seen the terrain: reach out.</p>
+
+          <!-- Intake form -->
+          <div class="paf-intake">
+            <h2 class="section-label">Get in touch</h2>
+            <form class="intake-form" action="mailto:ron@ronbronson.com" method="POST" enctype="text/plain">
+              <div class="form-group">
+                <label for="situation">What's the situation?</label>
+                <textarea id="situation" name="situation" rows="4" placeholder="Tell me what's going on."></textarea>
+              </div>
+              <div class="form-group">
+                <label for="timeline">What's the timeline?</label>
+                <input type="text" id="timeline" name="timeline" placeholder="When does the decision need to happen?" />
+              </div>
+              <div class="form-group">
+                <label for="contact">How do I reach you?</label>
+                <input type="text" id="contact" name="contact" placeholder="Email, phone, carrier pigeon." />
+              </div>
+              <button type="submit" class="cta-button cta-button--primary">
+                Send it
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Procurement note -->
+          <div class="paf-procurement">
+            <p>Available for 1099 independent advisory, micro-purchase, or fractional engagement. No vendor affiliations. Independent expertise for the public interest.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer
+    techStack={techStack}
+    fonts={fonts}
+  />
+</Base>
+
+<style>
+  .page-header {
+    padding-top: var(--size-fluid-5);
+    padding-bottom: var(--size-fluid-4);
+  }
+
+  .page-header h1 {
+    font-size: clamp(var(--font-size-4), 6vw, var(--font-size-6));
+    font-family: var(--font-mono);
+  }
+
+  .paf-content {
+    padding-bottom: var(--size-fluid-5);
+  }
+
+  .paf-main {
+    max-width: 65ch;
+  }
+
+  /* Hook / lede */
+  .paf-hook {
+    margin-bottom: var(--size-8);
+  }
+
+  .paf-lede {
+    font-size: clamp(var(--font-size-2), 3vw, var(--font-size-3));
+    line-height: 1.4;
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin: 0;
+  }
+
+  /* Section labels */
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: var(--size-8);
+    margin-bottom: var(--size-4);
+  }
+
+  /* Scenarios list */
+  .paf-scenarios {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .paf-scenarios li {
+    font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
+    line-height: 1.6;
+    color: var(--text-2);
+    padding-left: var(--size-5);
+    position: relative;
+  }
+
+  .paf-scenarios li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 8px;
+    height: 2px;
+    background: var(--brand);
+  }
+
+  /* Service tiers */
+  .paf-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+  }
+
+  .tier-card {
+    background: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    padding: var(--size-5);
+    transition: border-color 0.2s;
+  }
+
+  .tier-card:hover {
+    border-color: var(--brand);
+  }
+
+  .tier-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--size-3);
+    gap: var(--size-3);
+  }
+
+  .tier-header h3 {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin: 0;
+  }
+
+  .tier-format {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--brand);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .tier-card p {
+    font-size: var(--font-size-1);
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0;
+  }
+
+  /* Bio */
+  .paf-bio {
+    border-left: 4px solid var(--brand);
+    padding-left: var(--size-5);
+  }
+
+  .paf-bio p {
+    font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
+    line-height: 1.6;
+    color: var(--text-2);
+    margin-bottom: var(--size-4);
+  }
+
+  .paf-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Audience */
+  .paf-audience {
+    font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
+    line-height: 1.6;
+    color: var(--text-2);
+    margin-bottom: var(--size-3);
+  }
+
+  /* Intake form */
+  .paf-intake {
+    margin-top: var(--size-8);
+    padding: var(--size-6);
+    background: var(--surface-2);
+    border: 2px solid var(--brand);
+    border-radius: var(--radius-2);
+  }
+
+  .paf-intake .section-label {
+    margin-top: 0;
+  }
+
+  .intake-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .form-group label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: var(--size-3);
+    font-size: var(--font-size-1);
+    font-family: inherit;
+    background: var(--surface-1);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    color: var(--text-1);
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--brand);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--size-2);
+    padding: var(--size-3) var(--size-6);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+    text-decoration: none;
+    border-radius: var(--radius-2);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+
+  .cta-button--primary {
+    background: var(--text-1);
+    color: var(--surface-1);
+    border: 2px solid var(--text-1);
+  }
+
+  .cta-button--primary:hover {
+    background: var(--brand);
+    border-color: var(--brand);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .cta-button i {
+    font-size: var(--font-size-1);
+  }
+
+  /* Procurement footer */
+  .paf-procurement {
+    margin-top: var(--size-6);
+    padding-top: var(--size-5);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .paf-procurement p {
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .tier-header {
+      flex-direction: column;
+      gap: var(--size-1);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .page-header {
+      padding-top: var(--size-8);
+      padding-bottom: var(--size-6);
+    }
+
+    .paf-content {
+      padding-bottom: var(--size-8);
+    }
+
+    .paf-intake {
+      padding: var(--size-4);
+    }
+  }
+</style>
