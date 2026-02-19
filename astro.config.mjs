@@ -108,7 +108,7 @@ function remarkCustomDirectives() {
 }
 
 export default defineConfig({
-  site: 'https://ronbronson.dev',
+  site: 'https://ronbronson.com',
   integrations: [
     mdx({
       remarkPlugins: [remarkDirective, remarkCustomDirectives],
