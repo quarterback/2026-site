@@ -8,6 +8,7 @@ systemType: "AI governance + decision system design"
 outcome: "Framework for responsible AI deployment in high-stakes public contexts"
 order: 103
 featured: true
+toc: true
 tags: ["AI", "Policy", "Research", "Decision Systems"]
 role: "Lead Researcher & Advisor"
 timeline: "2024 - Present"

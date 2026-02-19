@@ -8,6 +8,7 @@ systemType: "Decentralized infrastructure + experimental platforms"
 outcome: "Multiple production services serving public data and experimental tooling"
 order: 105
 featured: true
+toc: true
 tags: ["AT Protocol", "Decentralized", "Open Source", "Public Goods"]
 role: "Designer, Developer, Architect"
 timeline: "2024 - Present"

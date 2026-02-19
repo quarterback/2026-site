@@ -8,6 +8,7 @@ systemType: "Federal websites + content strategy"
 outcome: "Repositioned 18F, increased traffic and content output"
 order: 107
 featured: false
+toc: true
 tags: ["18F", "Federal", "Content Strategy", "Website"]
 role: "Head of Design & Strategic Communications Director"
 timeline: "2023"

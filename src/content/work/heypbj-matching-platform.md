@@ -8,6 +8,7 @@ systemType: "Matching infrastructure + social discovery"
 outcome: "Production platform exploring constraint-based matching and small-group dynamics"
 order: 108
 featured: true
+toc: true
 tags: ["AT Protocol", "Matching", "Social Discovery", "Routing"]
 role: "Designer, Developer, Architect"
 timeline: "2024 - Present"
@@ -17,169 +18,62 @@ hero:
   image: "/img/heypbj.xyz.png"
 ---
 
-## The Core Idea
+## Swiping Is a Market Failure
 
-Dating and social discovery aren't content problems—they're **routing problems**. HeyPBJ treats connection as infrastructure: users signal what they're looking for, the system assembles compatible cohorts, and matches unfold through guided prompts rather than infinite scrolling.
+Every dating app on the market optimizes for the same thing: time-on-app. More swipes, more sessions, more ad impressions. The user's actual goal — meaningful connection — is structurally misaligned with the business model.
 
-Instead of feeds, swipes, and algorithmic mystery, HeyPBJ uses:
-- **Declared preferences** (what you're seeking, how you want to interact)
-- **Weighted signals** (compatibility metrics across multiple dimensions)
-- **Small cohorts** ("rundles"—compatible groups of 3-8 people)
-- **Guided prompts** (structured interaction contexts)
-- **Mutual visibility** (everyone sees the same compatibility data)
+HeyPBJ starts from a different premise: **connection is a routing problem, not a content problem.** The system should get you to the right people faster, not keep you scrolling longer.
 
 ---
 
-## The Problem with Feeds
+## The 15-Pick Weekly Draft
 
-Traditional dating/social apps treat discovery as an engagement optimization problem:
-- Endless swiping creates decision fatigue
-- Algorithmic feeds prioritize retention over connection
-- Matches lack context or shared understanding
-- Success metrics (time-on-app, swipes) misalign with user goals (meaningful connection)
+Instead of infinite feeds, PBJ gives you a **weekly draft** — a curated cohort of 15 compatible people, assembled from declared preferences and weighted compatibility signals. You pick. They pick. Matches form from mutual selection within a bounded set.
 
-The result: people spend hours scrolling but rarely find compatible matches, and when they do, there's no shared framework for moving forward.
+This isn't a personality quiz feeding a black box. It's **transparent routing**: you say what you want, the system shows you why these people landed in your draft, and you make an informed call.
+
+**Small-group dynamics ("rundles")** — cohorts of 3–8 people — provide social context before anyone pairs off. You see how someone shows up in a group before you commit to a one-on-one. That's data no profile can give you.
 
 ---
 
-## How HeyPBJ Works
+## Why It Works
 
-### 1. Declared Preferences
-Users explicitly state what they're looking for:
-- Connection type (dating, friendship, collaboration)
-- Interaction preferences (pacing, communication style)
-- Values and priorities
-- Deal-breakers and must-haves
+**Constraint breeds quality.** Fifteen picks forces intentionality. No doom-scrolling, no paradox of choice, no algorithmic mystery. You get good options with clear rationale.
 
-This isn't a personality quiz—it's **routing metadata**. The system uses these signals to compute compatibility.
+**Transparency builds trust.** Everyone in a rundle sees the same compatibility data. No hidden algorithms deciding who sees whom. The system shows its work.
 
-### 2. Weighted Compatibility Metrics
-Rather than binary yes/no, HeyPBJ calculates **multi-dimensional compatibility**:
-- Alignment on core values
-- Complementary interaction styles
-- Shared interests and context
-- Geographic/logistical feasibility
+**Pacing prevents burnout.** Weekly cadence, guided prompts, progressive disclosure. The interaction design respects your time instead of exploiting it.
 
-Scores are **transparent and mutual**: everyone in a rundle sees the same data about why they were matched.
-
-### 3. Rundles (Small Cohorts)
-Instead of one-on-one matches, the system creates **small groups** of 3-8 compatible people. This:
-- Reduces pressure of binary yes/no decisions
-- Provides social context (how you interact in a group matters)
-- Allows for organic subgroup formation
-- Creates shared understanding before pairing off
-
-### 4. Guided Prompts & Decision Mechanics
-Interaction happens through **structured prompts** rather than freeform chat:
-- Icebreaker questions
-- Group activities or challenges
-- Progressive disclosure (reveal info as trust builds)
-- Lightweight decision points (signal interest without commitment)
-
-This pacing prevents premature intimacy and provides scaffolding for connection.
+**Context before chemistry.** Group interaction reveals compatibility signals that profiles and DMs never capture — how someone listens, responds under pressure, shows up for others.
 
 ---
 
-## Design Principles
+## Built on AT Protocol
 
-### Intentionality Over Engagement
-HeyPBJ optimizes for **successful connection**, not time-on-app. Users should spend *less* time in the system if it's working.
+PBJ runs on decentralized infrastructure. Your identity, preferences, and interaction history belong to you — not the platform. If PBJ disappears tomorrow, your data doesn't.
 
-### Constraint-Based Matching
-Small cohorts, explicit criteria, and pacing constraints make the space more legible. Instead of infinite choice, users get **good options with clear rationale**.
-
-### Mutual Visibility
-No hidden algorithms. Everyone sees:
-- Why they were matched
-- Compatibility scores and dimensions
-- Who else is in their rundle
-- How the system made decisions
-
-### Context Before Chemistry
-Compatibility data and group interaction provide **shared context** before one-on-one pairing. This reduces awkward cold-start conversations.
+- **Decentralized identity** — users own their profiles via AT Protocol DIDs
+- **Portable preferences** — your matching criteria travel with you across compatible services
+- **Client-side scoring** — compatibility computed locally for privacy
+- **Open data model** — structured records, not proprietary lock-in
 
 ---
 
-## Technical Architecture
+## Interoperable with Glowrm
 
-**Frontend:**
-- Progressive web app (PWA) for cross-platform access
-- Client-side compatibility scoring for privacy
-- Real-time interaction via WebSocket/AT Protocol events
+This is where it gets interesting. PBJ plugs directly into [Glowrm's trust layer](/work/glowrm-trust-layer) for identity verification and safety:
 
-**Backend (AT Protocol-based):**
-- Decentralized identity (users own their data)
-- Preference declarations as structured records
-- Compatibility computation as composable service
-- Rundle formation as routing layer
-- Interaction history stays with user, not platform
+- **Portable reputation** — carry verified credentials from other networks into your PBJ profile
+- **Trust-weighted matching** — mutual vouches from friends and communities factor into compatibility
+- **Safety signals** — cross-network reputation checks without centralized surveillance
+- **Consent enforcement** — communication preferences declared in Glowrm travel into PBJ automatically
 
-**Matching Engine:**
-- Multi-dimensional compatibility scoring
-- Constraint satisfaction for cohort formation
-- Pacing and decision mechanics
-- Progressive disclosure rules
+Two platforms, one trust layer. This is what interoperability actually looks like when you build on open protocols instead of walled gardens.
 
 ---
 
-## User Journey
+## What This Unlocks
 
-1. **Onboarding:** User declares preferences, priorities, and interaction style
-2. **Matching:** System computes compatibility and forms rundles
-3. **Introduction:** User receives cohort with transparency about why
-4. **Interaction:** Guided prompts and group activities provide context
-5. **Decision Points:** Lightweight signals to express interest in subgroups/individuals
-6. **Pairing:** System suggests one-on-one connections within cohort based on mutual signals
-7. **Iteration:** User refines preferences based on what worked
+PBJ isn't just a dating app. It's a proof of concept for **structured matching as infrastructure** — applicable to co-founder discovery, roommate matching, mentorship pairing, collaboration routing. Any domain where people need to find compatible others and the current tools are a feed-shaped waste of everyone's time.
 
----
-
-## What Makes This Different
-
-### Not a Feed
-No infinite scroll, no engagement maximization. Just periodic cohort assignments with clear rationale.
-
-### Not Algorithmic Mystery
-Users see exactly why they were matched and can adjust their preferences to improve future rundles.
-
-### Not One-on-One from Start
-Group context reduces pressure and provides richer compatibility data before pairing.
-
-### Not Platform Lock-In
-AT Protocol foundation means users own their data and can move between compatible services.
-
----
-
-## Research Questions
-
-HeyPBJ explores:
-- Can **constraint-based matching** produce better outcomes than infinite choice?
-- Do **small-group dynamics** provide better compatibility signals than profiles alone?
-- Does **transparency** (showing the algorithm's work) increase trust and satisfaction?
-- Can **pacing mechanisms** prevent burnout and premature ghosting?
-- How do **portable identity and preferences** change platform power dynamics?
-
----
-
-## Part of the AT Protocol Suite
-
-HeyPBJ is one of several interconnected projects exploring decentralized infrastructure:
-- [AT Protocol Projects](/work/atproto-projects) (Parent project)
-- [Glowrm](/work/glowrm-trust-layer) (Trust and reputation layer)
-- [Leafroll](/work/leafroll-professional-identity) (Professional identity)
-- [Occupant](/work/occupant-ai-benchmarks) (Public data infrastructure)
-
-**Glowrm integration:** HeyPBJ uses Glowrm's trust primitives for safety/moderation—users can carry reputation and verified credentials across networks.
-
-**Leafroll integration:** Professional discovery rundles can pull from Leafroll profiles for skill-based matching and collaboration.
-
----
-
-## What This Demonstrates
-
-- **Routing infrastructure as social product**: Treating discovery as a systems problem rather than a content problem
-- **Constraint-based design**: How limits and structure can produce more humane outcomes than infinite choice
-- **Transparent algorithms**: Showing users why decisions were made builds trust and improves outcomes
-- **Decentralized matching**: Proving you can build discovery infrastructure without platform lock-in
-- **Small-group dynamics**: Using cohorts to provide context before one-on-one connection
-- **Intentionality-first UX**: Designing for successful connection rather than engagement metrics
+The underlying architecture — declared preferences, weighted scoring, cohort formation, pacing mechanics, transparent algorithms — is a framework, not a feature set. It's designed to be forked, extended, and adapted.

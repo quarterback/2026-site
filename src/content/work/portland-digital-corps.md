@@ -8,6 +8,7 @@ systemType: "Community organizing + civic tech"
 outcome: "Six nonprofit sites rebuilt, model replicated nationwide"
 order: 105
 featured: true
+toc: true
 hero:
   image: "/img/digitalcorpspdx.org.png"
 tags: ["Community", "Nonprofit", "Organizing", "Portland"]

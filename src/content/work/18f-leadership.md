@@ -8,6 +8,7 @@ systemType: "Organizational leadership + institutional design"
 outcome: "Scaled design practice from 21 to 40+ practitioners, led TTS strategic operations"
 order: 102
 featured: true
+toc: true
 tags: ["18F", "Leadership", "Federal", "Organizational Design"]
 role: "Head of Design, Chief of Staff"
 timeline: "2016 - 2024"

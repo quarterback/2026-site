@@ -17,6 +17,7 @@ links:
 tags: ["Framework", "Speaking", "Research"]
 order: 2
 featured: false
+toc: true
 ---
 
 ## The problem

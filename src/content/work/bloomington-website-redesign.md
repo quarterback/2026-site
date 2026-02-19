@@ -12,6 +12,7 @@ links:
     url: "https://youtu.be/REUJCWpFOcI?si=aTHrZO-fP_yCmulN"
 tags: ["Municipal", "Service Design", "Content Strategy"]
 featured: false
+toc: true
 order: 6
 ---
 

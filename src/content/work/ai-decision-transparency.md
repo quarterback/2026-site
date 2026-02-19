@@ -8,6 +8,7 @@ systemType: "AI + decision systems"
 outcome: "Prototype demonstrating transparency without cognitive overload"
 order: 103
 featured: false
+toc: true
 tags: ["AI", "Prototype", "Benefits", "Transparency"]
 role: "Designer & Developer"
 timeline: "2025"

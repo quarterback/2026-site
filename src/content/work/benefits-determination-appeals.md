@@ -8,6 +8,7 @@ systemType: "Benefits + eligibility systems"
 outcome: "Interactive prototype demonstrating decision lifecycle"
 order: 100
 featured: false
+toc: true
 tags: ["Prototype", "React", "Benefits", "AI"]
 role: "Designer & Developer"
 timeline: "2025"
