@@ -13,8 +13,6 @@ tags: ["Conference", "Portland", "Community", "Organizing"]
 role: "Organizer, Keynote Speaker"
 timeline: "October 16-17, 2024"
 venue: "Portland, Oregon"
-hero:
-  image: "/img/dfp24.jpg"
 externalUrl: "https://designforthepublic.com"
 hero:
   image: "/img/dfp24.jpg"
