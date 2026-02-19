@@ -56,20 +56,30 @@ const fonts = [
       <div class="container">
         <div class="about-grid">
           <div class="bio-text">
-            <p>Invisible systems decide who qualifies, what gets funded, and which paths stay open. I've spent nearly twenty years finding where those systems break—and building the tools to fix them.</p>
+            <h2 class="beliefs-heading">What I believe</h2>
 
-            <p>Started in service design for government. Evolved into decision infrastructure: how judgment moves through automated systems, who holds override authority, and what happens when nobody does.</p>
+            <p><a href="https://blog.ronbronson.com/stuff-should-work-on-doing-civic-tech%E2%80%A6">Stuff should work.</a> That's the starting point. Not "digital transformation," not "modernization," not any frame that assumes you transform and then you arrive. Public life requires ongoing attention. The forms, the signage, the complaint line, the algorithm deciding your benefits — someone has to care whether those things actually work, and most of the time nobody does.</p>
 
-            <p><strong>The work:</strong></p>
+            <p>I used to call this "civic tech." <a href="https://blog.ronbronson.com/on-public-mechanics-or-why-im-done-talking-about-civic-tech">I'm done with that label.</a> The movement failed in ways we don't want to admit — the love of flashy launches, the allergic reaction to maintenance, the unwillingness to see that the hard part of making public life work is mostly boring. What I care about now is <strong>public mechanics</strong>: how tools, platforms, software, and systems shape the way we govern daily life. Not the tech. The mechanics.</p>
 
-            <ul class="work-lanes">
-              <li>Shipping digital services inside messy institutions</li>
-              <li>Prototyping decision and trust infrastructure</li>
-              <li>Frameworks: judgment routing, consequence design, civil economics</li>
-              <li>Teaching practitioners to see—and repair—the systems that shape public life</li>
+            <h2 class="beliefs-heading">My priors</h2>
+
+            <ul class="priors-list">
+              <li><strong>The hard part is mostly boring.</strong> Better signage. Faster forms. Clearer decisions. The path forward isn't a moonshot — it's a lot of small, durable, iterative things that nobody wants to fund or celebrate.</li>
+              <li><strong>Governance is the work. Technology is just one of the materials.</strong> We keep conflating cost with value and losing sight of the thing that matters: does the system actually serve the people inside it?</li>
+              <li><strong><a href="https://blog.ronbronson.com/delivery-is-a-visibility-problem">Delivery is a visibility problem.</a></strong> The frameworks we use to ship things assume shared context will naturally emerge. It doesn't. The best teams I've seen can describe what they're doing and why, question assumptions without fear, and recover quickly when something changes.</li>
+              <li><strong>You learn more from running the experiment than from planning it.</strong> I launched the Portland Digital Corps <a href="https://blog.ronbronson.com/wrapped-up-the-pdx-digital-corps-experiment-this-week">without thinking about it too much</a> and it was one of the most rewarding things I've done. Overplanning kills the work that matters most.</li>
             </ul>
 
-            <p>Advisor, founder, faculty, coach. The role changes. The practice doesn't: map the system, find the load-bearing points, build what helps people navigate what machines are rearranging.</p>
+            <h2 class="beliefs-heading">How I got here</h2>
+
+            <p>I've had an <a href="https://blog.ronbronson.com/on-doing-what-you-can">interesting trajectory as a professional</a>. From IT shops to "digital" to "UX" to whatever we're calling it now. I started working on government services before anyone was calling it "civic tech." Spent eight years at 18F and the Technology Transformation Services — hired and grew a design practice from 21 to 40+ people, served as Chief of Staff, learned how institutions actually resist changing even when the people inside them want to.</p>
+
+            <p><a href="https://blog.ronbronson.com/some-thoughts-on-hiring-quality-public-service">What people misunderstand about public service</a> is the sheer quality and commitment of the people who choose it. Our job postings would go up for a week — sometimes only a single day — and we'd consistently get 1,000+ applicants for every opening. Public service isn't a consolation prize. The systems fail people, not the other way around.</p>
+
+            <p>Now I teach at the University of Michigan, where I'm trying to give students the vocabulary for the systems they're about to inherit. I run a research lab on AI and state capacity. I coach high school tennis — where <a href="https://blog.ronbronson.com/delivery-is-a-visibility-problem">on changeovers I'm very often saying "I trust you"</a> because the person closest to the play should be the one making the call. I build prototypes — matching platforms, trust infrastructure, licensing frameworks — because sometimes you have to build the thing before you know if the idea holds.</p>
+
+            <p>I'm also motivated by the improbability of doing stuff that <a href="https://blog.ronbronson.com/building-a-career-by-holding-the-door-open">seemed unimaginable at earlier stages of my life</a>. When I look at what's actually driving me, it's less about proving something and more about wanting to be part of the conversation. Being seen often equates with being invited. Being invited means you're accepted, your perspective has value. I like opening doors for people as much as I like being invited in myself.</p>
 
             <div class="contact-ctas">
               <a href="mailto:hello@ronbronson.dev" class="cta-button cta-button--primary">
@@ -212,29 +222,50 @@ const fonts = [
     font-size: var(--font-size-0);
   }
 
-  .work-lanes {
-    list-style: none;
-    padding: 0;
-    margin: var(--size-4) 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-2);
+  .beliefs-heading {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin-top: var(--size-6);
+    margin-bottom: var(--size-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
-  .work-lanes li {
+  .beliefs-heading:first-child {
+    margin-top: 0;
+  }
+
+  .priors-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--size-3) 0 var(--size-4) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .priors-list li {
     font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
     line-height: 1.6;
     color: var(--text-2);
-    padding-left: var(--size-4);
+    padding-left: var(--size-5);
     position: relative;
   }
 
-  .work-lanes li::before {
-    content: '•';
+  .priors-list li::before {
+    content: '';
     position: absolute;
     left: 0;
-    color: var(--brand);
-    font-weight: var(--font-weight-7);
+    top: 0.6em;
+    width: 8px;
+    height: 2px;
+    background: var(--brand);
+  }
+
+  .priors-list li strong {
+    color: var(--text-1);
   }
 
   /* Contact CTAs */

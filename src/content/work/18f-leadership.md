@@ -1,7 +1,7 @@
 ---
-title: "18F — Building Design Practice & Federal Leadership"
+title: "18F — Eight Years Inside the Machine"
 type: "leadership"
-lede: "I built and scaled the design practice at 18F from 21 to 40 practitioners, then served as Chief of Staff at the Technology Transformation Services. Eight years learning how to make institutions work differently from the inside."
+lede: "I joined 18F as a designer and left as Chief of Staff. What happened in between taught me most of what I know about how institutions actually change."
 summary: "Eight years building and leading federal design practice, from hiring and scaling to organizational transformation at the Technology Transformation Services."
 itemType: "project"
 systemType: "Organizational leadership + institutional design"
@@ -16,70 +16,42 @@ hero:
   image: "/img/18f-leadership.png"
 ---
 
-## The Arc
+## What I walked into
 
-I joined 18F in 2016 as a designer working on agency projects. Over eight years, I moved from individual contributor to Head of Design, then Chief of Staff at the Technology Transformation Services (TTS)—the parent organization of 18F, login.gov, and cloud.gov.
+I arrived at 18F in 2016 thinking I understood how government worked. I didn't. I understood how *projects* worked. Government isn't projects — it's procurement cycles that outlast any roadmap, hiring freezes that arrive without warning, political transitions that rewrite priorities overnight. The org chart reflects a political reality, not a design logic.
 
-This wasn't a traditional climb. I learned how federal institutions work by navigating procurement rules, hiring constraints, political transitions, and the everyday friction of getting things done inside government. I left understanding how to build practice, influence without authority, and lead organizational change in contexts where nothing moves fast.
+18F was supposed to be the startup inside government. In some ways it was. But the interesting question was never "how do we work around the constraints?" It was "what does good look like *inside* them?"
 
-## The Work
+## The people
 
-### Scaling the Design Practice (2018-2023)
+Here's the thing [people don't realize about jobs within TTS](https://blog.ronbronson.com/some-thoughts-on-hiring-quality-public-service), especially at 18F: people across industries who work in tech knew about us. As civic tech's lore grew — the place you go in government when you want to do good stuff or help people — it meant people actively sought out our job postings. Our postings would go up for a week, sometimes only a single day. Even with those restrictions, we'd consistently get 1,000+ applicants for every opening.
 
-When I became Head of Design, the practice had 21 people. I grew it to over 40 while maintaining quality, clarifying what design meant in a federal context, and building infrastructure for hiring, onboarding, and professional development.
+I was Head of Design for close to four years, overseeing what was the largest in-house team of human-centered designers anywhere in the federal government. When we finally got the green light to backfill attrition, it let us focus on priorities I cared about: growing our UX engineering and product design expertise, expanding our content strategy outfit — still the best in the entire government — and most importantly, building the first in-house service design unit anywhere in government.
 
-**What I built:**
-- Hiring processes that actually worked in federal timelines (6-12 month cycles)
-- Career frameworks that acknowledged design work happens differently in government
-- Critique and feedback systems that balanced project delivery with skill development
-- Cross-agency partnerships that positioned 18F designers as thought leaders, not just contractors
+Our staff represented the country. I had colleagues from Alaska to rural western states like Montana, from Puerto Rico to the Deep South. Far more people living on farms in rural states than in big cities. This felt right for work that impacted people everywhere.
 
-I didn't just manage headcount. I defined what it meant to be a designer at 18F—someone who could translate policy into service design, work within constraints, and build capacity in partner agencies rather than just delivering projects.
+[Public service isn't a consolation prize.](https://blog.ronbronson.com/some-thoughts-on-hiring-quality-public-service) Every single designer we hired was top-tier. Even our backups — and the backups' backups — would've been fantastic hires. It might surprise some people that public servants genuinely care about their neighbors, even those they'll never meet. People want to contribute to something bigger than themselves.
 
-### Strategic Communications & Public Presence (2022-2023)
+## The visibility problem
 
-As Strategic Communications Director, I repositioned 18F's public identity to reflect what we actually did: build agency capacity, not just deliver consulting projects.
+The deeper I got into leading teams — at 18F, in teaching, in [coaching](https://blog.ronbronson.com/delivery-is-a-visibility-problem) — the more I kept running into the same breakdown. Delivery is a visibility problem. The frameworks we use to ship things assume shared context will naturally emerge. It doesn't. Someone sees a performance issue, someone else sees a scope problem, leadership sees a timeline risk — everyone's solving a different problem, and nobody realizes it until the retrospective.
 
-This included:
-- [Website redesign](/work/18f-website-redesign) that clarified service offerings
-- Publishing frameworks that encouraged staff transparency
-- Documented practices that became the public record of 18F's work
+In my tennis coaching, early on I noticed players looking at me in crucial moments when their eyes should've been on the court. I vowed to instill a level of confidence in them that even when their decisions don't work out, they can learn to trust themselves. On changeovers, I'm very often saying "I trust you." That instinct — trusting the person closest to the play to make the call — is the same thing that makes delivery teams work.
 
-The impact wasn't immediate traffic spikes—it was long-term credibility. When 18F closed, the practices and content I established became the lasting archive of what the organization accomplished.
+The best teams I saw at 18F could do three things: describe what they were doing and why, question assumptions without fear, and recover quickly when something changed. The struggling teams had plenty of talent. What they lacked was the ability to see the same picture at the same time.
 
-### Chief of Staff, Technology Transformation Services (2023-2024)
+Because 18F was designed so people would rotate out on term-limited appointments, there were defined rituals around documentation and knowledge transfer. We had rituals for surfacing what we were *seeing*, beyond just what we were *doing*. Authority rotated based on who had the clearest read, regardless of seniority. We rebuilt the picture constantly because teams were always changing and we couldn't afford to let context drift. That level of clarity made it easier for new people to join without losing rhythm.
 
-I moved from leading one practice to supporting an entire organization. As Chief of Staff at TTS, I worked across 18F, login.gov, cloud.gov, and the Presidential Innovation Fellows program to:
-- Coordinate cross-product strategy
-- Navigate budget and workforce planning during federal transitions
-- Translate between technical teams, agency partners, and political leadership
-- Manage organizational communications during uncertainty
+## The political part
 
-This role required understanding how systems work—not just software systems, but institutional systems. I learned how decisions get made when multiple stakeholders have competing priorities and nobody has unilateral authority.
+As Chief of Staff at TTS — the parent org of 18F, login.gov, and cloud.gov — I got a different education. Translating between technical teams and political leadership. Managing communications during uncertainty. Coordinating strategy across products with different funding models, different constituencies, different definitions of success.
 
-## The Reach
+## The hard lesson
 
-The designers I hired and developed are now leading practices at agencies across government:
-- Veterans Affairs
-- Centers for Medicare & Medicaid Services
-- U.S. Digital Service
-- State and local governments
+You can build something excellent inside an institution and still watch it get dismantled for reasons that have nothing to do with quality. 18F closed. The work didn't disappear — it lives in the agencies it changed, the people it trained, the practices that became standard. But the institution couldn't survive the politics.
 
-The frameworks I built for hiring, critique, and professional development have been adapted by other federal teams. The content strategies I established documented 18F's work in ways that outlasted the organization itself.
+I'm not worried about the people we hired finding new opportunities. [I'm disappointed they won't be able to work on the things they cared about.](https://blog.ronbronson.com/some-thoughts-on-hiring-quality-public-service) I'm disappointed for the people who won't get a chance to learn from them. And ultimately, I'm disappointed for the country.
 
-But the real reach is less visible: I showed that you can build rigorous design practice inside government constraints. You can hire excellent people into bureaucratic systems. You can influence organizational culture without changing the org chart.
+Institutions remember practices, not people. The brilliant solo contribution gets forgotten. The hiring process, the critique protocol, the way you documented things — those survive. If you want lasting impact, build things other people can maintain when you leave.
 
-## The Takeaway
-
-Federal leadership isn't about moving fast and breaking things. It's about moving deliberately within systems designed to resist change—and still making progress.
-
-I learned:
-- **Influence happens through repetition, not revelation.** You don't change institutional culture with a keynote. You change it by showing up consistently, modeling the work, and building trust over years.
-- **Constraints clarify strategy.** Limited budgets, hiring freezes, and procurement rules force you to prioritize ruthlessly. That discipline produces better outcomes than unlimited resources.
-- **Institutions remember practices, not heroes.** The work that lasts isn't the brilliant solo contribution—it's the systems you build that others can maintain when you leave.
-
-## What This Demonstrates
-
-I can lead at multiple scales: individual contributors, design practices, and cross-functional organizations. I know how to navigate federal bureaucracy, build teams under constraint, and position technical work to land with political leadership.
-
-I don't just critique how institutions work—I've done the grinding, unglamorous work of making them work better from the inside.
+Eight years taught me that making institutions work differently is slow, unglamorous, and deeply political. It's also — and I didn't expect this when I started — the most important work I've done.
