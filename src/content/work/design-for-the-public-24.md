@@ -14,6 +14,8 @@ role: "Organizer, Keynote Speaker"
 timeline: "October 16-17, 2024"
 venue: "Portland, Oregon"
 externalUrl: "https://designforthepublic.com"
+hero:
+  image: "/img/dfp24.jpg"
 ---
 
 ## The vision
