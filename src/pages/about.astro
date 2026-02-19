@@ -56,20 +56,28 @@ const fonts = [
       <div class="container">
         <div class="about-grid">
           <div class="bio-text">
-            <p>Invisible systems decide who qualifies, what gets funded, and which paths stay open. I've spent nearly twenty years finding where those systems break—and building the tools to fix them.</p>
+            <h2 class="beliefs-heading">What I believe</h2>
 
-            <p>Started in service design for government. Evolved into decision infrastructure: how judgment moves through automated systems, who holds override authority, and what happens when nobody does.</p>
+            <p>Most of the systems that shape daily life — who qualifies for benefits, how a city routes a complaint, what an algorithm decides you deserve — were designed once and then left alone. The people inside them cope. The people outside them suffer. Almost nobody is tasked with repair.</p>
 
-            <p><strong>The work:</strong></p>
+            <p>I think design is repair work. Not the glamorous kind. The kind where you map a broken process, sit with the people it fails, and figure out which seams can actually be re-opened. I've been doing this for close to twenty years across federal agencies, city halls, nonprofits, and a few strange corners of the internet.</p>
 
-            <ul class="work-lanes">
-              <li>Shipping digital services inside messy institutions</li>
-              <li>Prototyping decision and trust infrastructure</li>
-              <li>Frameworks: judgment routing, consequence design, civil economics</li>
-              <li>Teaching practitioners to see—and repair—the systems that shape public life</li>
+            <h2 class="beliefs-heading">My priors</h2>
+
+            <ul class="priors-list">
+              <li><strong>Decisions are the unit of analysis.</strong> Not screens, not journeys, not user stories. The moment someone (or something) makes a consequential choice — that's where design either holds or breaks.</li>
+              <li><strong>Maintenance beats invention.</strong> Building new things is easy to celebrate. Keeping things working — adapting them as context shifts — is harder and matters more.</li>
+              <li><strong>Constraints are information.</strong> A hiring freeze, a legacy system, a policy that makes no sense — these aren't obstacles to route around. They're the actual terrain. The work happens inside them.</li>
+              <li><strong>Trust has to travel.</strong> Reputation locked to one platform is a trap. I keep coming back to infrastructure that lets trust, identity, and consent move with people across systems.</li>
             </ul>
 
-            <p>Advisor, founder, faculty, coach. The role changes. The practice doesn't: map the system, find the load-bearing points, build what helps people navigate what machines are rearranging.</p>
+            <h2 class="beliefs-heading">The path</h2>
+
+            <p>I started designing government services before "civic tech" had a name. Spent eight years at 18F and the Technology Transformation Services learning how institutions actually work — and how they resist changing. Built and led a design practice of 40+ people inside federal constraints. Served as Chief of Staff when the politics got hard.</p>
+
+            <p>Now I teach at the University of Michigan, where I'm trying to give students the vocabulary for the systems they're about to inherit. I run a research lab on AI and state capacity. I organize communities of practice. I coach tennis. I build prototypes for things that don't exist yet — matching platforms, trust layers, licensing frameworks — because sometimes you have to build the thing to see if the idea holds.</p>
+
+            <p>The roles keep changing. The questions don't: Who holds the pen? What happens when no one does? And how do you design for that?</p>
 
             <div class="contact-ctas">
               <a href="mailto:hello@ronbronson.dev" class="cta-button cta-button--primary">
@@ -212,29 +220,50 @@ const fonts = [
     font-size: var(--font-size-0);
   }
 
-  .work-lanes {
-    list-style: none;
-    padding: 0;
-    margin: var(--size-4) 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-2);
+  .beliefs-heading {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    margin-top: var(--size-6);
+    margin-bottom: var(--size-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
-  .work-lanes li {
+  .beliefs-heading:first-child {
+    margin-top: 0;
+  }
+
+  .priors-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--size-3) 0 var(--size-4) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .priors-list li {
     font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
     line-height: 1.6;
     color: var(--text-2);
-    padding-left: var(--size-4);
+    padding-left: var(--size-5);
     position: relative;
   }
 
-  .work-lanes li::before {
-    content: '•';
+  .priors-list li::before {
+    content: '';
     position: absolute;
     left: 0;
-    color: var(--brand);
-    font-weight: var(--font-weight-7);
+    top: 0.6em;
+    width: 8px;
+    height: 2px;
+    background: var(--brand);
+  }
+
+  .priors-list li strong {
+    color: var(--text-1);
   }
 
   /* Contact CTAs */

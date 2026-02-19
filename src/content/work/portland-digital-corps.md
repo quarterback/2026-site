@@ -1,7 +1,7 @@
 ---
 title: "Portland Digital Corps"
 type: "program"
-lede: "Volunteer effort bringing together 50+ practitioners to rebuild six nonprofit websites."
+lede: "18F closed and I needed to know if the thing I'd been preaching — community-driven service delivery — actually worked when you stripped away the federal badge."
 summary: "Volunteer effort bringing together 50+ practitioners to rebuild six nonprofit websites."
 itemType: "project"
 systemType: "Community organizing + civic tech"
@@ -17,32 +17,32 @@ timeline: "March–July 2025"
 externalUrl: "https://digitalcorpspdx.org"
 ---
 
-## The catalyst
+## Why this happened
 
-Following the closure of 18F, I wanted to establish a community-focused alternative for digital service work. I launched Portland Digital Corps expecting modest participation—but over 100 people signed up, with 50+ volunteers actively contributing.
+When 18F shut down, I had a question I couldn't answer from inside an institution: does this work actually require government to make it go? Or can a community of practitioners self-organize around service delivery without a federal mandate, a budget line, or a GS pay scale?
+
+I needed to find out. So I posted a call for volunteers in Portland, expecting maybe 20 people. Over 100 signed up.
+
+## What we actually did
+
+Fifty-plus designers, developers, strategists, and data people rebuilt six nonprofit websites. The organizations — Built Oregon, OSU Uplift Lab, Families for Safe Streets Oregon, Cape Perpetua Collaborative, and others — were doing important work with digital presences that didn't reflect it.
 
 ![Portland Digital Corps website](/img/digitalcorpspdx.org.png)
 
-## What we did
+The format was simple: small cross-functional teams paired with a nonprofit partner for a focused sprint. No multi-month discovery phase. No 80-page strategy deck. Just: what does this organization need its website to do, and how fast can we get it there?
 
-We assembled designers, developers, data visualization specialists, strategists, and product managers to rebuild websites for nonprofit organizations across Portland.
+## What surprised me
 
-The team successfully rebuilt **six nonprofit websites** while partnering with local organizations including:
-- Built Oregon
-- OSU Uplift Lab
-- Families for Safe Streets Oregon
-- Cape Perpetua Collaborative
+The work itself went roughly as expected. What I didn't anticipate was the community effect. People kept showing up — not because the projects were exciting (rebuilding a nonprofit site isn't glamorous) but because they wanted to work alongside people they wouldn't normally meet. Designers next to data engineers. Strategists next to developers. The cross-pollination was the draw, not the deliverable.
 
-In-person events achieved strong attendance, indicating genuine community interest in collaborative digital service work.
+Groups from other cities started reaching out, asking how to replicate it. That told me something: the demand for this kind of collaborative, low-ego service work vastly exceeds the supply of places to do it. Most people who care about public service don't have a path to it. They just need someone to organize the on-ramp.
 
-## Community impact
+## What it taught me
 
-Participants consistently reported valuing the opportunity to connect with professionals they might not otherwise meet. This relationship-building extended beyond the initial cohort, with volunteers expressing interest in future iterations.
+**Community infrastructure is its own discipline.** Organizing people is not a lesser version of building software. It requires its own design thinking — how you structure teams, set expectations, create the conditions for strangers to trust each other quickly.
 
-Groups nationwide contacted us seeking to replicate the model in their respective cities. I plan to publish a "building a digital service" guide by end of 2025 to support similar initiatives elsewhere.
+**Stripped-down works.** No budget. No office. No institutional backing. Six websites shipped. The overhead I assumed was necessary — procurement, approvals, formal partnerships — turned out to be optional for this kind of work. That changes how I think about what's possible.
 
-## What this demonstrates
-
-I can organize cross-functional teams around public service work. I don't just design systems for institutions—I build the community infrastructure that makes collaborative delivery possible.
+**The proof is in who comes back.** The volunteers from the first cohort asked when the next one starts. That's not engagement metrics. That's people telling you the thing you built meets a need they couldn't articulate before it existed.
 
 More at [digitalcorpspdx.org](https://digitalcorpspdx.org)

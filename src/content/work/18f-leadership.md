@@ -1,7 +1,7 @@
 ---
-title: "18F — Building Design Practice & Federal Leadership"
+title: "18F — Eight Years Inside the Machine"
 type: "leadership"
-lede: "I built and scaled the design practice at 18F from 21 to 40 practitioners, then served as Chief of Staff at the Technology Transformation Services. Eight years learning how to make institutions work differently from the inside."
+lede: "I joined 18F as a designer and left as Chief of Staff. What happened in between taught me most of what I know about how institutions actually change."
 summary: "Eight years building and leading federal design practice, from hiring and scaling to organizational transformation at the Technology Transformation Services."
 itemType: "project"
 systemType: "Organizational leadership + institutional design"
@@ -16,70 +16,36 @@ hero:
   image: "/img/18f-leadership.png"
 ---
 
-## The Arc
+## What I walked into
 
-I joined 18F in 2016 as a designer working on agency projects. Over eight years, I moved from individual contributor to Head of Design, then Chief of Staff at the Technology Transformation Services (TTS)—the parent organization of 18F, login.gov, and cloud.gov.
+I arrived at 18F in 2016 thinking I knew how government worked. I didn't. I knew how projects worked — scoping, shipping, presenting results. I didn't know how institutions worked: the procurement cycles that outlast any roadmap, the hiring freezes that arrive without warning, the political transitions that rewrite priorities overnight.
 
-This wasn't a traditional climb. I learned how federal institutions work by navigating procurement rules, hiring constraints, political transitions, and the everyday friction of getting things done inside government. I left understanding how to build practice, influence without authority, and lead organizational change in contexts where nothing moves fast.
+18F was supposed to be different — a startup inside government. And in some ways it was. But the constraints were real. Federal hiring takes 6–12 months. Budgets are set years in advance. The org chart reflects a political reality, not a design logic. I learned quickly that the interesting question wasn't how to work around these constraints. It was how to work *inside* them and still make something good.
 
-## The Work
+## Building the practice
 
-### Scaling the Design Practice (2018-2023)
+When I became Head of Design, we had 21 designers. I grew that to over 40 — but headcount was never the point. The point was defining what design *meant* in a federal context, which is a harder problem than it sounds.
 
-When I became Head of Design, the practice had 21 people. I grew it to over 40 while maintaining quality, clarifying what design meant in a federal context, and building infrastructure for hiring, onboarding, and professional development.
+In the private sector, design leadership is about shipping product. In government, it's about building capacity in partner agencies — teaching people to do the work after you leave. That changes everything: what you hire for, how you measure success, how you run critique.
 
-**What I built:**
-- Hiring processes that actually worked in federal timelines (6-12 month cycles)
-- Career frameworks that acknowledged design work happens differently in government
-- Critique and feedback systems that balanced project delivery with skill development
-- Cross-agency partnerships that positioned 18F designers as thought leaders, not just contractors
+I built hiring processes that worked within federal timelines. Career frameworks that acknowledged government design is its own discipline, not a lesser version of tech design. Feedback systems that balanced delivery pressure with growth. None of this was glamorous. Most of it was spreadsheets, one-on-ones, and conversations that took months to land.
 
-I didn't just manage headcount. I defined what it meant to be a designer at 18F—someone who could translate policy into service design, work within constraints, and build capacity in partner agencies rather than just delivering projects.
+The thing I'm proudest of isn't a specific program. It's that the designers I hired went on to lead practices at the VA, CMS, USDS, and state and local agencies across the country. The practice outlived the organization. That's how you know it worked.
 
-### Strategic Communications & Public Presence (2022-2023)
+## The political part
 
-As Strategic Communications Director, I repositioned 18F's public identity to reflect what we actually did: build agency capacity, not just deliver consulting projects.
+As Chief of Staff at the Technology Transformation Services — the parent org of 18F, login.gov, and cloud.gov — I got a different education. This wasn't about design practice. It was about organizational survival.
 
-This included:
-- [Website redesign](/work/18f-website-redesign) that clarified service offerings
-- Publishing frameworks that encouraged staff transparency
-- Documented practices that became the public record of 18F's work
+I learned how to translate between technical teams and political leadership. How to manage communications during uncertainty. How to coordinate strategy across products that had different funding models, different constituencies, and different definitions of success.
 
-The impact wasn't immediate traffic spikes—it was long-term credibility. When 18F closed, the practices and content I established became the lasting archive of what the organization accomplished.
+The hardest lesson: you can build something excellent inside an institution and still watch it get dismantled for reasons that have nothing to do with quality. 18F eventually closed. The work didn't disappear — it lives in the agencies it transformed, the people it trained, the practices that became standard. But the institution itself couldn't survive the politics.
 
-### Chief of Staff, Technology Transformation Services (2023-2024)
+## What it taught me
 
-I moved from leading one practice to supporting an entire organization. As Chief of Staff at TTS, I worked across 18F, login.gov, cloud.gov, and the Presidential Innovation Fellows program to:
-- Coordinate cross-product strategy
-- Navigate budget and workforce planning during federal transitions
-- Translate between technical teams, agency partners, and political leadership
-- Manage organizational communications during uncertainty
+**Influence is repetition, not revelation.** You don't change institutional culture with a keynote or a framework doc. You change it by showing up every day, modeling the work, building trust through consistency. It takes years, not quarters.
 
-This role required understanding how systems work—not just software systems, but institutional systems. I learned how decisions get made when multiple stakeholders have competing priorities and nobody has unilateral authority.
+**Constraints clarify everything.** When you can't hire freely, you learn who you actually need. When budgets are fixed, you learn what actually matters. Constraints aren't a bug in institutional design — they're the primary design material.
 
-## The Reach
+**Institutions remember practices, not people.** The brilliant individual contribution gets forgotten. The hiring process, the critique protocol, the documentation standard — those survive. If you want lasting impact inside an institution, build things other people can maintain after you leave.
 
-The designers I hired and developed are now leading practices at agencies across government:
-- Veterans Affairs
-- Centers for Medicare & Medicaid Services
-- U.S. Digital Service
-- State and local governments
-
-The frameworks I built for hiring, critique, and professional development have been adapted by other federal teams. The content strategies I established documented 18F's work in ways that outlasted the organization itself.
-
-But the real reach is less visible: I showed that you can build rigorous design practice inside government constraints. You can hire excellent people into bureaucratic systems. You can influence organizational culture without changing the org chart.
-
-## The Takeaway
-
-Federal leadership isn't about moving fast and breaking things. It's about moving deliberately within systems designed to resist change—and still making progress.
-
-I learned:
-- **Influence happens through repetition, not revelation.** You don't change institutional culture with a keynote. You change it by showing up consistently, modeling the work, and building trust over years.
-- **Constraints clarify strategy.** Limited budgets, hiring freezes, and procurement rules force you to prioritize ruthlessly. That discipline produces better outcomes than unlimited resources.
-- **Institutions remember practices, not heroes.** The work that lasts isn't the brilliant solo contribution—it's the systems you build that others can maintain when you leave.
-
-## What This Demonstrates
-
-I can lead at multiple scales: individual contributors, design practices, and cross-functional organizations. I know how to navigate federal bureaucracy, build teams under constraint, and position technical work to land with political leadership.
-
-I don't just critique how institutions work—I've done the grinding, unglamorous work of making them work better from the inside.
+I didn't understand any of this when I started. Eight years taught me that making institutions work differently is slow, unglamorous, and deeply political. It's also the most consequential design work I've ever done.
