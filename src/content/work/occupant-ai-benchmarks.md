@@ -8,6 +8,7 @@ systemType: "Data infrastructure + public goods"
 outcome: "Daily-updated public benchmarks tracking 2,300+ AI models across providers"
 order: 107
 featured: true
+toc: true
 tags: ["Data Infrastructure", "Open Data", "AI Economics"]
 role: "Designer, Developer"
 timeline: "2024 - Present"

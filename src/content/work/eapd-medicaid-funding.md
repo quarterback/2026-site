@@ -8,6 +8,7 @@ systemType: "Federal procurement + funding"
 outcome: "Production system managing billions in federal Medicaid investment"
 order: 102
 featured: false
+toc: true
 tags: ["Federal", "18F", "CMS", "Content Strategy"]
 role: "Inaugural Content Strategist, Design Researcher, Lead Information Architect"
 timeline: "~1 year"

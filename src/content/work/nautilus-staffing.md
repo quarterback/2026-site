@@ -8,6 +8,7 @@ systemType: "Team operations + workforce management"
 outcome: "Interactive prototype with roster, timeline, and comparison views"
 order: 104
 featured: false
+toc: true
 tags: ["Prototype", "React", "Staffing", "Operations"]
 role: "Designer & Developer"
 timeline: "2025"

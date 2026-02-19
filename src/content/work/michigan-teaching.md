@@ -8,6 +8,7 @@ systemType: "Design education + public service pedagogy"
 outcome: "New curriculum bridging technology, policy, and public service"
 order: 101
 featured: true
+toc: true
 tags: ["Teaching", "Michigan", "Public Mechanics", "Urban Technology"]
 role: "Assistant Professor of Practice"
 timeline: "2024 - Present"

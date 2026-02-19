@@ -8,6 +8,7 @@ systemType: "Professional identity + portfolio infrastructure"
 outcome: "Working prototype exploring composable profiles and portable reputation"
 order: 110
 featured: true
+toc: true
 tags: ["AT Protocol", "Professional Identity", "Portfolios", "Composable Records"]
 role: "Designer, Developer, Architect"
 timeline: "2024 - Present"

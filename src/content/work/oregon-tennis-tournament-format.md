@@ -8,6 +8,7 @@ systemType: "Institutional design + sports governance"
 outcome: "New statewide team dual-match championship structure approved for implementation"
 order: 106
 featured: true
+toc: true
 tags: ["Sports Governance", "Institutional Change", "Stakeholder Management", "Systems Design"]
 role: "OACA State Tennis Co-Chair, Proposal Author"
 timeline: "2020 - Present"

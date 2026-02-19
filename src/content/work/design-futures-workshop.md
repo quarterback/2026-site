@@ -14,6 +14,7 @@ metadata:
 tags: ["Workshop", "Consequence Design", "Training"]
 order: 5
 featured: false
+toc: true
 ---
 
 ## Workshop format

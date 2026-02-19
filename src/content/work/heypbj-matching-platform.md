@@ -8,6 +8,7 @@ systemType: "Matching infrastructure + social discovery"
 outcome: "Production platform exploring constraint-based matching and small-group dynamics"
 order: 108
 featured: true
+toc: true
 tags: ["AT Protocol", "Matching", "Social Discovery", "Routing"]
 role: "Designer, Developer, Architect"
 timeline: "2024 - Present"

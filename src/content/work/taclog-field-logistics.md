@@ -8,6 +8,7 @@ systemType: "Field operations + logistics"
 outcome: "Offline-capable prototype informed by military operations"
 order: 101
 featured: false
+toc: true
 tags: ["Mobile", "Prototype", "Military", "Offline-first"]
 role: "Designer & Developer"
 timeline: "2025"

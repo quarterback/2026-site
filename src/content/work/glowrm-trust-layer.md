@@ -8,6 +8,7 @@ systemType: "Trust infrastructure + decentralized moderation"
 outcome: "Working prototype exploring portable trust, reputation, and consent mechanisms"
 order: 109
 featured: true
+toc: true
 tags: ["AT Protocol", "Trust", "Reputation", "Decentralized Identity", "Moderation"]
 role: "Designer, Developer, Architect"
 timeline: "2024 - Present"
