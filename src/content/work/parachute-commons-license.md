@@ -8,6 +8,7 @@ systemType: "Governance infrastructure + legal framework"
 outcome: "Published license with PCL-0 variant already in use"
 order: 130
 featured: true
+toc: true
 tags: ["Open Source", "Licensing", "Governance", "Commons", "Infrastructure"]
 role: "Designer, Author"
 timeline: "2025 - Present"
