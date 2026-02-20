@@ -2,6 +2,7 @@
 interface Props {
   headline?: string;
   taxonomyTerms?: string[];
+  taxonomyResult?: string;
   subheadline: string;
   primaryCTA?: {
     label: string;
@@ -21,6 +22,7 @@ interface Props {
 const {
   headline,
   taxonomyTerms,
+  taxonomyResult,
   subheadline,
   primaryCTA = { label: "Email me", url: "mailto:ron@ronbronson.com", icon: "fa-envelope" },
   secondaryCTA = { label: "Phone a friend", url: "/phone-a-friend", icon: "fa-phone" }
@@ -34,6 +36,9 @@ const {
         {taxonomyTerms.map(term => (
           <span class="hero__taxonomy-term">{term}</span>
         ))}
+        {taxonomyResult && (
+          <span class="hero__taxonomy-result">{taxonomyResult}</span>
+        )}
       </div>
     )}
     {headline && !taxonomyTerms && <h1 class="hero__headline">{headline}</h1>}
@@ -87,6 +92,15 @@ const {
     line-height: 1.3;
     font-family: var(--font-mono);
     text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .hero__taxonomy-result {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: var(--font-weight-7);
+    color: var(--brand);
+    line-height: 1.3;
+    font-family: var(--font-mono);
     letter-spacing: 0.02em;
   }
 
