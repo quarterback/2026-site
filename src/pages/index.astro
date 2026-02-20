@@ -177,10 +177,20 @@ const fonts: string[] = [];
     <Hero
       taxonomyTerms={["AI", "Service Design", "Civic Tech", "Strategy", "Digital Transformation"]}
       taxonomyResult="[Trusted Advisor]"
-      subheadline="I build and stabilize the systems that run public life. Most of my work starts where strategy hits the ground—and gets stuck. I help leaders navigate the gap between high-level policy and the reality of delivery, ensuring we don't remove human judgment from the decision stack. I've led federal portfolios supporting millions of people and built the frameworks for how we govern in an automated age. Today, I lead State Capacity AI (part of Occupant) and am a faculty member in the Urban Technology program at the University of Michigan. Previously, I served in senior leadership at 18F.gov and served in the US Air Force."
+      subheadline="I build and stabilize the systems that run public life. My work helps leaders & tech teams navigate the gap between high-level policy and the reality of delivery."
       primaryCTA={{ label: "About me", url: "/about", icon: "fa-user" }}
       secondaryCTA={{ label: "Phone a friend", url: "/phone-a-friend", icon: "fa-phone" }}
     />
+
+    <!-- Currently — AIM style status -->
+    <section class="currently-section">
+      <div class="container">
+        <div class="currently-content">
+          <p class="label">Currently</p>
+          <p class="currently-status">Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College. Organizing <a href="https://yearsahead.io">Yearsahead.io</a>. Building frameworks for Agent Experience (AX) and decision engineering at <a href="https://statecapacity.ai">State Capacity AI</a>. Probably retiring from pro skeeball.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- Featured Projects — BuzzFeed-style hero cards -->
     <section id="featured-projects">
@@ -196,16 +206,6 @@ const fonts: string[] = [];
               label={card.label}
             />
           ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Currently — AIM style status -->
-    <section class="currently-section">
-      <div class="container">
-        <div class="currently-content">
-          <p class="label">Currently</p>
-          <p class="currently-status">Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College. Organizing <a href="https://yearsahead.io">Yearsahead.io</a>. Building frameworks for Agent Experience (AX) and decision engineering at <a href="https://statecapacity.ai">State Capacity AI</a>. Probably retiring from pro skeeball.</p>
         </div>
       </div>
     </section>
