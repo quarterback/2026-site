@@ -131,30 +131,14 @@ const fonts: string[] = [];
     <!-- GET IN TOUCH -->
     <section class="paf-contact" id="get-in-touch">
       <div class="container">
-        <div class="contact-layout">
-          <div class="contact-copy">
-            <h2 class="paf-section-label">Get in touch</h2>
-            <p class="contact-copy__graf">You know who to call when the plumbing breaks. Now you know who to call when the systems break.</p>
-            <p class="contact-copy__procurement">Available for 1099 independent advisory, micro-purchase, fractional leadership, workshops, and training. No vendor affiliations. Independent expertise for the public interest.</p>
-          </div>
-          <form class="contact-form" action="mailto:ron@ronbronson.com" method="POST" enctype="text/plain">
-            <div class="form-group">
-              <label for="situation">What's going on?</label>
-              <textarea id="situation" name="situation" rows="4" placeholder="The problem, the question, the thing you're stuck on."></textarea>
-            </div>
-            <div class="form-group">
-              <label for="timeline">What's the timeline?</label>
-              <input type="text" id="timeline" name="timeline" placeholder="When does this need to happen?" />
-            </div>
-            <div class="form-group">
-              <label for="contact">How do I reach you?</label>
-              <input type="text" id="contact" name="contact" placeholder="Email, phone, carrier pigeon." />
-            </div>
-            <button type="submit" class="contact-form__submit">
-              Send it
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </form>
+        <div class="contact-block">
+          <h2 class="paf-section-label">Get in touch</h2>
+          <p class="contact-block__graf">You know who to call when the plumbing breaks. Now you know who to call when the systems break.</p>
+          <a href="mailto:contact@ronbronson.com" class="contact-block__cta">
+            contact@ronbronson.com
+            <i class="fas fa-envelope"></i>
+          </a>
+          <p class="contact-block__procurement">Available for 1099 independent advisory, micro-purchase, fractional leadership, workshops, and training. No vendor affiliations. Independent expertise for the public interest.</p>
         </div>
       </div>
     </section>
@@ -394,107 +378,56 @@ const fonts: string[] = [];
     margin-bottom: 0;
   }
 
-  /* ===== CONTACT / FORM ===== */
+  /* ===== CONTACT ===== */
   .paf-contact {
     background: var(--surface-2);
     padding-block: clamp(3rem, 8vh, 6rem);
   }
 
-  .contact-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--size-8);
-    align-items: start;
+  .contact-block {
+    max-width: 55ch;
   }
 
-  .contact-copy__graf {
+  .contact-block__graf {
     font-size: clamp(var(--font-size-1), 2.5vw, var(--font-size-2));
     line-height: 1.5;
     color: var(--text-1);
     margin-bottom: var(--size-6);
-    max-width: 45ch;
     font-weight: var(--font-weight-6);
   }
 
-  .contact-copy__procurement {
+  .contact-block__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-3);
+    padding: var(--size-4) var(--size-7);
+    font-size: clamp(var(--font-size-1), 2vw, var(--font-size-2));
+    font-weight: var(--font-weight-6);
+    font-family: var(--font-mono);
+    background: var(--text-1);
+    color: var(--surface-1);
+    border-radius: var(--radius-2);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    margin-bottom: var(--size-6);
+  }
+
+  .contact-block__cta:hover {
+    background: var(--brand);
+    color: var(--surface-1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .contact-block__cta i {
+    font-size: var(--font-size-1);
+  }
+
+  .contact-block__procurement {
     font-size: var(--font-size-0);
     color: var(--text-3);
     line-height: 1.6;
     font-style: italic;
-    max-width: 45ch;
-  }
-
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-4);
-    background: var(--surface-1);
-    border: 2px solid var(--surface-3);
-    border-radius: var(--radius-3);
-    padding: var(--size-6);
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-2);
-  }
-
-  .form-group label {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-0);
-    font-weight: var(--font-weight-6);
-    color: var(--text-1);
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: var(--size-3);
-    font-size: var(--font-size-1);
-    font-family: inherit;
-    background: var(--surface-2);
-    border: 1px solid var(--surface-3);
-    border-radius: var(--radius-2);
-    color: var(--text-1);
-    transition: border-color 0.2s;
-  }
-
-  .form-group input:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--brand);
-  }
-
-  .form-group textarea {
-    resize: vertical;
-  }
-
-  .contact-form__submit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--size-2);
-    padding: var(--size-3) var(--size-6);
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-6);
-    background: var(--text-1);
-    color: var(--surface-1);
-    border: 2px solid var(--text-1);
-    border-radius: var(--radius-2);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    align-self: flex-start;
-  }
-
-  .contact-form__submit:hover {
-    background: var(--brand);
-    border-color: var(--brand);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  .contact-form__submit i {
-    font-size: var(--font-size-0);
   }
 
   /* ===== RESPONSIVE ===== */
@@ -512,10 +445,6 @@ const fonts: string[] = [];
       gap: var(--size-4);
     }
 
-    .contact-layout {
-      grid-template-columns: 1fr;
-      gap: var(--size-6);
-    }
   }
 
   @media (max-width: 600px) {
@@ -533,8 +462,5 @@ const fonts: string[] = [];
       gap: var(--size-4);
     }
 
-    .contact-form {
-      padding: var(--size-4);
-    }
   }
 </style>

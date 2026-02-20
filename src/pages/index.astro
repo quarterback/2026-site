@@ -175,12 +175,22 @@ const fonts: string[] = [];
 <Base title="Ron Bronson">
   <main>
     <Hero
-      taxonomyTerms={["AI", "Service Design", "Technology", "Strategy", "Delivery"]}
+      taxonomyTerms={["AI", "Service Design", "Civic Tech", "Strategy", "Digital Transformation"]}
       taxonomyResult="[Trusted Advisor]"
-      subheadline="I work on the civil stack: policy, technology, operations, trust. I help teams diagnose what's stuck and build the muscle to move it. Two decades across federal agencies, local governments, civic tech, and academia. Building, leading, advising, and doing the work to fix what's stuck."
+      subheadline="I build and stabilize the systems that run public life. My work helps leaders & tech teams navigate the gap between high-level policy and the reality of delivery."
       primaryCTA={{ label: "About me", url: "/about", icon: "fa-user" }}
       secondaryCTA={{ label: "Phone a friend", url: "/phone-a-friend", icon: "fa-phone" }}
     />
+
+    <!-- Currently — AIM style status -->
+    <section class="currently-section">
+      <div class="container">
+        <div class="currently-content">
+          <p class="label">Currently</p>
+          <p class="currently-status">Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College. Organizing <a href="https://yearsahead.io">Yearsahead.io</a>. Building frameworks for Agent Experience (AX) and decision engineering at <a href="https://statecapacity.ai">State Capacity AI</a>. Probably retiring from pro skeeball.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- Featured Projects — BuzzFeed-style hero cards -->
     <section id="featured-projects">
@@ -196,16 +206,6 @@ const fonts: string[] = [];
               label={card.label}
             />
           ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- Currently — AIM style status -->
-    <section class="currently-section">
-      <div class="container">
-        <div class="currently-content">
-          <p class="label">Currently</p>
-          <p class="currently-status">Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College. Organizing <a href="https://yearsahead.io">Yearsahead.io</a>. Building frameworks for Agent Experience (AX) and decision engineering at <a href="https://statecapacity.ai">State Capacity AI</a>. Probably retiring from pro skeeball.</p>
         </div>
       </div>
     </section>
