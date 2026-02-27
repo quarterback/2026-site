@@ -226,6 +226,22 @@ const fonts: string[] = [];
       </div>
     </section>
 
+    <!-- Excerpt interstitial slot 1 -->
+    <div class="excerpt-slot" data-excerpt-slot>
+      <div class="container">
+        {writingExcerpts.map((excerpt, i) => (
+          <div data-excerpt={i} hidden>
+            <WritingExcerpt
+              quote={excerpt.quote}
+              title={excerpt.title}
+              href={excerpt.href}
+              label={excerpt.label}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
     <!-- Case Studies — culled to most relevant work -->
     <section id="work">
       <div class="container">
@@ -244,19 +260,21 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Writing Excerpts — pull quotes as interstitials -->
-    <section class="writing-excerpts-section">
+    <!-- Excerpt interstitial slot 2 -->
+    <div class="excerpt-slot" data-excerpt-slot>
       <div class="container">
-        {writingExcerpts.map(excerpt => (
-          <WritingExcerpt
-            quote={excerpt.quote}
-            title={excerpt.title}
-            href={excerpt.href}
-            label={excerpt.label}
-          />
+        {writingExcerpts.map((excerpt, i) => (
+          <div data-excerpt={i} hidden>
+            <WritingExcerpt
+              quote={excerpt.quote}
+              title={excerpt.title}
+              href={excerpt.href}
+              label={excerpt.label}
+            />
+          </div>
         ))}
       </div>
-    </section>
+    </div>
 
     <!-- Recent Appearances -->
     <section id="media">
@@ -299,15 +317,9 @@ const fonts: string[] = [];
     gap: var(--size-5);
   }
 
-  /* Writing Excerpts section */
-  .writing-excerpts-section {
+  /* Excerpt interstitial slots */
+  .excerpt-slot {
     padding-block: var(--size-3);
-  }
-
-  .writing-excerpts-section .container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-5);
   }
 
   /* Section headings */
@@ -417,3 +429,25 @@ const fonts: string[] = [];
     }
   }
 </style>
+
+<script is:inline>
+  (function () {
+    var slots = document.querySelectorAll('[data-excerpt-slot]');
+    if (!slots.length) return;
+    var total = slots[0].querySelectorAll('[data-excerpt]').length;
+    if (!total) return;
+    // Build shuffled index array
+    var indices = [];
+    for (var i = 0; i < total; i++) indices.push(i);
+    for (var i = indices.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
+    }
+    // Reveal one unique excerpt per slot
+    slots.forEach(function (slot, si) {
+      var idx = indices[si % indices.length];
+      var el = slot.querySelector('[data-excerpt="' + idx + '"]');
+      if (el) el.hidden = false;
+    });
+  })();
+</script>
