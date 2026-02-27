@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import HeroCard from '../components/HeroCard.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import Writing from '../components/Writing.astro';
+import WritingExcerpt from '../components/WritingExcerpt.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
 import MediaCard from '../components/MediaCard.astro';
@@ -64,6 +65,21 @@ const caseStudies = [
     title: "Design For The Public 24",
     narrative: "Two-day unconference bringing together 80+ civic technologists and designers in Portland.",
     href: "/work/design-for-the-public-24",
+  },
+];
+
+const writingExcerpts = [
+  {
+    quote: "Most people think design is about making things beautiful. But the real work of design is repair—patching the gaps between intention and reality, between policy and the lived experience of the people who depend on public systems.",
+    title: "Design as Repair",
+    href: "https://blog.ronbronson.com/design-as-repair",
+    label: "Essay",
+  },
+  {
+    quote: "The question isn't whether AI agents will make decisions. They already do. The question is who holds the pen when those decisions go wrong—and whether the systems we build have a manager, not just a manual.",
+    title: "Who Holds the Pen?",
+    href: "https://makingpublicwork.com/who-holds-the-pen-why-ai-agents-need-a-manager-not-just-a-manual/",
+    label: "Analysis",
   },
 ];
 
@@ -228,24 +244,17 @@ const fonts: string[] = [];
       </div>
     </section>
 
-    <!-- Featured Writing -->
-    <section class="featured-writing-section">
+    <!-- Writing Excerpts — pull quotes as interstitials -->
+    <section class="writing-excerpts-section">
       <div class="container">
-        <div class="featured-writing-content">
-          <p class="label">Featured Writing</p>
-          <div class="featured-writing-items">
-            <a href="https://blog.ronbronson.com/design-as-repair" target="_blank" rel="noopener" class="writing-item">
-              <span class="writing-item__label">Essay</span>
-              <span class="writing-item__title">Design as Repair</span>
-              <span class="writing-item__description">Rethinking design practice through the lens of maintenance and repair work</span>
-            </a>
-            <a href="https://makingpublicwork.com/who-holds-the-pen-why-ai-agents-need-a-manager-not-just-a-manual/" target="_blank" rel="noopener" class="writing-item">
-              <span class="writing-item__label">Analysis</span>
-              <span class="writing-item__title">Who Holds the Pen?</span>
-              <span class="writing-item__description">Why AI agents need a manager, not just a manual—on judgment routing in automated systems</span>
-            </a>
-          </div>
-        </div>
+        {writingExcerpts.map(excerpt => (
+          <WritingExcerpt
+            quote={excerpt.quote}
+            title={excerpt.title}
+            href={excerpt.href}
+            label={excerpt.label}
+          />
+        ))}
       </div>
     </section>
 
@@ -290,70 +299,15 @@ const fonts: string[] = [];
     gap: var(--size-5);
   }
 
-  /* Featured Writing section */
-  .featured-writing-section {
-    background: var(--surface-2);
-    border-left: 4px solid var(--brand);
-    margin-bottom: var(--size-5);
+  /* Writing Excerpts section */
+  .writing-excerpts-section {
+    padding-block: var(--size-3);
   }
 
-  .featured-writing-content {
-    padding: var(--size-4);
-  }
-
-  .featured-writing-content .label {
-    margin-bottom: var(--size-3);
-  }
-
-  .featured-writing-items {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--size-4);
-  }
-
-  .writing-item {
+  .writing-excerpts-section .container {
     display: flex;
     flex-direction: column;
-    gap: var(--size-2);
-    padding: var(--size-4);
-    background: var(--surface-1);
-    border: 1px solid var(--surface-3);
-    border-radius: var(--radius-2);
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-
-  .writing-item:hover {
-    border-color: var(--brand);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  .writing-item__label {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-00);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--brand);
-  }
-
-  .writing-item__title {
-    font-size: var(--font-size-2);
-    font-weight: var(--font-weight-6);
-    color: var(--text-1);
-  }
-
-  .writing-item__description {
-    font-size: var(--font-size-0);
-    color: var(--text-2);
-    line-height: 1.5;
-  }
-
-  @media (max-width: 768px) {
-    .featured-writing-items {
-      grid-template-columns: 1fr;
-      gap: var(--size-3);
-    }
+    gap: var(--size-5);
   }
 
   /* Section headings */
