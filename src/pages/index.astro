@@ -99,16 +99,12 @@ try {
 
 const currentBooks = [
   {
-    title: "Waging A Good War",
-    author: "Thomas E. Ricks",
+    title: "1929",
+    author: "Andrew Ross Sorkin",
   },
   {
-    title: "Maintenance of Everything: Part One",
-    author: "Stewart Brand",
-  },
-  {
-    title: "Religion And The Decline of Magic",
-    author: "Keith Thomas",
+    title: "Exocapitalism: The Political Economy of Software",
+    author: "Charles Mudede",
   },
   {
     title: "The Field Guide to Design Futures",
@@ -118,16 +114,20 @@ const currentBooks = [
 
 const currentAlbums = [
   {
-    title: "Sunshine and Balance Beams",
-    artist: "Pile",
+    title: "Until It's Time For Me to Go",
+    artist: "Jim Croce",
   },
   {
-    title: "Ripped and Torn",
-    artist: "Lifeguard Radio",
+    title: "There Is Nothing more to Say",
+    artist: "The Millenium",
   },
   {
-    title: "DDR",
-    artist: "Sharp Pins",
+    title: "Another Song for the End of the World",
+    artist: "Sophie May",
+  },
+  {
+    title: "People Make The World Go Round",
+    artist: "Saeed",
   },
 ];
 
@@ -203,7 +203,7 @@ const fonts: string[] = [];
       <div class="container">
         <div class="currently-content">
           <p class="label">Currently</p>
-          <p class="currently-status">Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College. Organizing <a href="https://yearsahead.io">Yearsahead.io</a>. Building frameworks for Agent Experience (AX) and decision engineering at <a href="https://statecapacity.ai">State Capacity AI</a>. Probably retiring from pro skeeball.</p>
+          <p class="currently-status">Director of <a href="https://publiccapacity.org">Public Capacity Lab</a>. <a href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/">Assistant Professor of Practice in Urban Technology</a> at the University of Michigan.</p>
         </div>
       </div>
     </section>
@@ -293,7 +293,7 @@ const fonts: string[] = [];
       <div class="container">
         <div class="media-grid">
           <Books books={currentBooks} />
-          <Albums albums={currentAlbums} />
+          <Albums albums={currentAlbums} title="Now Listening" />
         </div>
       </div>
     </section>
