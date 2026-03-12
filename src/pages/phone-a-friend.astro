@@ -16,12 +16,18 @@ const fonts: string[] = [];
     <section class="paf-hero">
       <div class="container">
         <span class="paf-hero__label">Phone a Friend</span>
-        <h1 class="paf-hero__headline">Senior advisory for the problems nobody else in the building has seen before.</h1>
+        <h1 class="paf-hero__headline">Strategy & Foresight for Technology.</h1>
         <p class="paf-hero__sub">I've advised executive leaders across federal agencies, rebuilt city websites with three-person teams, stood up digital service programs from scratch, and taught the next generation how public systems actually work. If you need someone who's operated at every level of government and can help you think clearly about what comes next, I'm that call.</p>
-        <a href="#get-in-touch" class="paf-hero__cta">
-          Get in touch
-          <i class="fas fa-arrow-down"></i>
-        </a>
+        <div class="paf-hero__ctas">
+          <a href="#get-in-touch" class="paf-hero__cta">
+            Get in touch
+            <i class="fas fa-arrow-down"></i>
+          </a>
+          <a href="https://www.occupant.works/" class="paf-hero__cta paf-hero__cta--occupant">
+            Occupant
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -138,7 +144,6 @@ const fonts: string[] = [];
             contact@ronbronson.com
             <i class="fas fa-envelope"></i>
           </a>
-          <p class="contact-block__procurement">Also available through <a href="https://www.occupant.works/" class="contact-block__link">Occupant</a> for consulting engagements.</p>
           <p class="contact-block__procurement">Available for 1099 independent advisory, micro-purchase, fractional leadership, workshops, and training. No vendor affiliations. Independent expertise for the public interest.</p>
         </div>
       </div>
@@ -209,11 +214,28 @@ const fonts: string[] = [];
     transition: all 0.2s ease;
   }
 
+  .paf-hero__ctas {
+    display: flex;
+    gap: var(--size-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .paf-hero__cta:hover {
     background: var(--brand);
     color: var(--surface-1);
     transform: translateY(-2px);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .paf-hero__cta--occupant {
+    background: transparent;
+    color: var(--text-1);
+    border: 2px solid var(--text-1);
+  }
+
+  .paf-hero__cta--occupant:hover {
+    border-color: var(--brand);
   }
 
   /* ===== SECTION LABEL ===== */
@@ -429,17 +451,6 @@ const fonts: string[] = [];
     color: var(--text-3);
     line-height: 1.6;
     font-style: italic;
-  }
-
-  .contact-block__link {
-    color: var(--brand);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    transition: color 0.2s;
-  }
-
-  .contact-block__link:hover {
-    color: var(--text-1);
   }
 
   /* ===== RESPONSIVE ===== */
