@@ -16,11 +16,11 @@ const fonts: string[] = [];
     <section class="paf-hero">
       <div class="container">
         <span class="paf-hero__label">Phone a Friend</span>
-        <h1 class="paf-hero__headline">Senior advisory for the problems nobody else in the building has seen before.</h1>
+        <h1 class="paf-hero__headline">Strategy & Foresight for Technology.</h1>
         <p class="paf-hero__sub">I've advised executive leaders across federal agencies, rebuilt city websites with three-person teams, stood up digital service programs from scratch, and taught the next generation how public systems actually work. If you need someone who's operated at every level of government and can help you think clearly about what comes next, I'm that call.</p>
-        <a href="#get-in-touch" class="paf-hero__cta">
-          Get in touch
-          <i class="fas fa-arrow-down"></i>
+        <a href="https://www.occupant.works/" class="paf-hero__cta">
+          Hire me
+          <i class="fas fa-arrow-right"></i>
         </a>
       </div>
     </section>
@@ -124,21 +124,6 @@ const fonts: string[] = [];
             <p class="audience__graf">Cities and towns that don't have a CTO. State agencies navigating digital transformation without internal expertise. Civic technology organizations that need someone who's led at scale. Universities and programs building public interest technology curriculum.</p>
             <p class="audience__graf">If your problems feel too complex for a chatbot and too expensive for a big consultancy, you're in the right place.</p>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GET IN TOUCH -->
-    <section class="paf-contact" id="get-in-touch">
-      <div class="container">
-        <div class="contact-block">
-          <h2 class="paf-section-label">Get in touch</h2>
-          <p class="contact-block__graf">You know who to call when the plumbing breaks. Now you know who to call when the systems break.</p>
-          <a href="mailto:contact@ronbronson.com" class="contact-block__cta">
-            contact@ronbronson.com
-            <i class="fas fa-envelope"></i>
-          </a>
-          <p class="contact-block__procurement">Available for 1099 independent advisory, micro-purchase, fractional leadership, workshops, and training. No vendor affiliations. Independent expertise for the public interest.</p>
         </div>
       </div>
     </section>
@@ -376,58 +361,6 @@ const fonts: string[] = [];
   .audience__graf:last-child {
     font-weight: var(--font-weight-6);
     margin-bottom: 0;
-  }
-
-  /* ===== CONTACT ===== */
-  .paf-contact {
-    background: var(--surface-2);
-    padding-block: clamp(3rem, 8vh, 6rem);
-  }
-
-  .contact-block {
-    max-width: 55ch;
-  }
-
-  .contact-block__graf {
-    font-size: clamp(var(--font-size-1), 2.5vw, var(--font-size-2));
-    line-height: 1.5;
-    color: var(--text-1);
-    margin-bottom: var(--size-6);
-    font-weight: var(--font-weight-6);
-  }
-
-  .contact-block__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--size-3);
-    padding: var(--size-4) var(--size-7);
-    font-size: clamp(var(--font-size-1), 2vw, var(--font-size-2));
-    font-weight: var(--font-weight-6);
-    font-family: var(--font-mono);
-    background: var(--text-1);
-    color: var(--surface-1);
-    border-radius: var(--radius-2);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    margin-bottom: var(--size-6);
-  }
-
-  .contact-block__cta:hover {
-    background: var(--brand);
-    color: var(--surface-1);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .contact-block__cta i {
-    font-size: var(--font-size-1);
-  }
-
-  .contact-block__procurement {
-    font-size: var(--font-size-0);
-    color: var(--text-3);
-    line-height: 1.6;
-    font-style: italic;
   }
 
   /* ===== RESPONSIVE ===== */
