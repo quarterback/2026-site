@@ -49,6 +49,7 @@ const fonts = [
     <section class="page-header">
       <div class="container">
         <h1>About</h1>
+        <p class="page-subtitle">Who I am, what I do, what this is.</p>
       </div>
     </section>
 
@@ -56,9 +57,11 @@ const fonts = [
       <div class="container">
         <div class="about-grid">
           <div class="bio-text">
-<p>Public systems are full of small failures that compound: a form that doesn't save, an eligibility rule that contradicts itself, a policy that works on paper and nowhere else. I study how these failures propagate and how institutions can build the capacity to catch them before they cascade.</p>
+            <p class="intro-line">Hello. I'm Ron, a public systems thinker in Portland — working at the intersection of delivery, governance, and institutional repair.</p>
 
-<p>My work sits at the intersection of delivery and governance. I build frameworks for decision architecture, AI accountability, and institutional repair. I teach, I advise, and occasionally I build the thing myself when that's what's needed.</p> Also, I'm unreasonably enthusiastic about <a href="https://www.superpesis.fi/ajankohtaista/superpesis-yhdysvaltalainen-ron-bronson-toteutti-unelmansa-ja-matkusti-suomeen-katsomaan-pesapalloa">pesäpallo.</a></p>
+            <p>Public systems are full of small failures that compound: a form that doesn't save, an eligibility rule that contradicts itself, a policy that works on paper and nowhere else. I study how these failures propagate and how institutions can build the capacity to catch them before they cascade.</p>
+
+            <p>My work sits at the intersection of delivery and governance. I build frameworks for decision architecture, AI accountability, and institutional repair. I teach, I advise, and occasionally I build the thing myself when that's what's needed.</p>
 
             <div class="contact-ctas">
               <a href="mailto:ron@ronbronson.com" class="cta-button cta-button--primary">
@@ -73,23 +76,59 @@ const fonts = [
           </div>
 
           <aside class="sidebar">
-            <div class="bio-photo">
+            <figure class="bio-photo">
               <img src="/ron-bronson.jpg" alt="Ron Bronson" />
-            </div>
+              <figcaption class="photo-credit">Photo credit TK</figcaption>
+            </figure>
           </aside>
         </div>
       </div>
     </section>
 
-    <section class="coaching-section">
-      <div class="container">
-        <div class="coaching-card">
-          <h3>Coaching</h3>
-          <p>Head Girls Varsity Tennis Coach at Catlin Gabel School in Portland. State champion, district titles, and a constraint-led approach focused on developing problem-solvers on the court.</p>
-          <a href="/coaching" class="card-link">
-            Learn more about my coaching
+    <section class="narrative-section">
+      <div class="container container--narrow">
+        <h2 class="narrative-heading">Work</h2>
+        <p>I've spent my career trying to make public-facing systems work better for the people who depend on them. That's meant stints in federal service at 18F, leading design and technology strategy, and advising organisations on how to build real capacity for delivery — not just buy more software.</p>
+
+        <p>These days I focus on decision architecture, AI accountability, and what it actually takes for institutions to repair themselves. I teach, I write, I advise, and when the situation calls for it, I roll up my sleeves and build.</p>
+
+        <p>I'm also the Head Girls Varsity Tennis Coach at Catlin Gabel School — state champion, district titles, and a constraint-led approach focused on developing problem-solvers on the court.</p>
+
+        <div class="narrative-links">
+          <a href="/work" class="narrative-link">
+            Case studies
             <i class="fas fa-arrow-right"></i>
           </a>
+          <a href="/media" class="narrative-link">
+            Talks & media
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="narrative-section">
+      <div class="container container--narrow">
+        <h2 class="narrative-heading">Life</h2>
+        <p>I live in Portland, Oregon. I'm unreasonably enthusiastic about <a href="https://www.superpesis.fi/ajankohtaista/superpesis-yhdysvaltalainen-ron-bronson-toteutti-unelmansa-ja-matkusti-suomeen-katsomaan-pesapalloa">pesäpallo</a> (Finnish baseball) — enthusiastic enough to have travelled to Finland to watch it in person.</p>
+
+        <p>I prefer things that are a bit twisted, dark, surprising, or subversive. I like tea more than coffee, fragrance more than fashion, and board games more than most things.</p>
+      </div>
+    </section>
+
+    <section class="narrative-section">
+      <div class="container container--narrow">
+        <h2 class="narrative-heading">This site</h2>
+        <p>This is a personal site — part portfolio, part notebook. It's built with Astro, styled with Open Props, and deployed as static HTML. No tracking, no analytics, no cookies.</p>
+
+        <p>You can find me elsewhere on the internet:</p>
+        <div class="social-links">
+          {socials.map(s => (
+            <a href={s.url} class="social-link" target="_blank" rel="noopener noreferrer">
+              {s.name}
+              <i class="fas fa-arrow-up-right-from-square"></i>
+            </a>
+          ))}
         </div>
       </div>
     </section>
@@ -132,6 +171,13 @@ const fonts = [
     font-family: var(--font-mono);
   }
 
+  .page-subtitle {
+    font-size: clamp(var(--font-size-1), 2.5vw, var(--font-size-2));
+    color: var(--text-3);
+    margin-top: var(--size-2);
+    max-width: 40ch;
+  }
+
   .about-content {
     padding-bottom: var(--size-fluid-5);
   }
@@ -147,6 +193,14 @@ const fonts = [
     max-width: 65ch;
   }
 
+  .intro-line {
+    font-size: clamp(var(--font-size-1), 2.5vw, var(--font-size-2));
+    font-weight: var(--font-weight-6);
+    color: var(--text-1);
+    line-height: 1.5;
+    margin-bottom: var(--size-5);
+  }
+
   .bio-text p {
     font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
     line-height: 1.6;
@@ -154,115 +208,8 @@ const fonts = [
     margin-bottom: var(--size-4);
   }
 
-  .bio-text p:last-child {
+  .bio-text p:last-of-type {
     margin-bottom: 0;
-  }
-
-  .coaching-card {
-    background: var(--surface-2);
-    border: 2px solid var(--surface-3);
-    border-radius: var(--radius-2);
-    padding: var(--size-5);
-    margin-top: var(--size-6);
-    margin-bottom: var(--size-6);
-  }
-
-  .coaching-card h3 {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-2);
-    font-weight: var(--font-weight-6);
-    color: var(--text-1);
-    margin: 0 0 var(--size-3) 0;
-  }
-
-  .coaching-card p {
-    font-size: var(--font-size-1);
-    line-height: 1.6;
-    color: var(--text-2);
-    margin: 0 0 var(--size-4) 0;
-  }
-
-  .card-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--size-2);
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-5);
-    color: var(--brand);
-    text-decoration: none;
-    transition: gap 0.2s ease;
-  }
-
-  .card-link:hover {
-    gap: var(--size-3);
-  }
-
-  .card-link i {
-    font-size: var(--font-size-0);
-  }
-
-  .beliefs-heading {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-6);
-    color: var(--text-1);
-    margin-top: var(--size-6);
-    margin-bottom: var(--size-3);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .beliefs-heading:first-child {
-    margin-top: 0;
-  }
-
-  .priors-list {
-    list-style: none;
-    padding: 0;
-    margin: var(--size-3) 0 var(--size-4) 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-3);
-  }
-
-  .priors-list li {
-    font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
-    line-height: 1.6;
-    color: var(--text-2);
-    padding-left: var(--size-5);
-    position: relative;
-  }
-
-  .priors-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.6em;
-    width: 8px;
-    height: 2px;
-    background: var(--brand);
-  }
-
-  .priors-list li strong {
-    color: var(--text-1);
-  }
-
-  .state-capacity-cta {
-    font-size: clamp(var(--font-size-1), 2.5vw, var(--font-size-2));
-    font-weight: var(--font-weight-6);
-    color: var(--text-1);
-    margin-top: var(--size-6);
-    margin-bottom: 0;
-  }
-
-  .state-capacity-cta a {
-    color: var(--text-1);
-    text-decoration-color: var(--brand);
-    text-underline-offset: 2px;
-  }
-
-  .state-capacity-cta a:hover {
-    color: var(--brand);
   }
 
   /* Contact CTAs */
@@ -324,6 +271,7 @@ const fonts = [
     border-radius: var(--radius-3);
     overflow: hidden;
     border: 3px solid var(--surface-3);
+    margin: 0;
   }
 
   .bio-photo img {
@@ -333,15 +281,113 @@ const fonts = [
     display: block;
   }
 
-  .coaching-section {
-    padding-top: var(--size-10);
-    padding-bottom: var(--size-6);
+  .photo-credit {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    color: var(--text-3);
+    text-align: center;
+    padding: var(--size-2) 0;
+    background: var(--surface-2);
+  }
+
+  /* Narrative sections */
+  .narrative-section {
+    padding-top: var(--size-fluid-5);
+    padding-bottom: var(--size-fluid-5);
     border-top: 1px solid var(--surface-3);
   }
 
+  .narrative-heading {
+    font-family: var(--font-mono);
+    font-size: clamp(var(--font-size-2), 3vw, var(--font-size-3));
+    font-weight: var(--font-weight-7);
+    color: var(--text-1);
+    margin-bottom: var(--size-5);
+  }
+
+  .narrative-section p {
+    font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
+    line-height: 1.6;
+    color: var(--text-2);
+    margin-bottom: var(--size-4);
+    max-width: 65ch;
+  }
+
+  .narrative-section p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .narrative-section a {
+    color: var(--brand);
+    text-underline-offset: 2px;
+  }
+
+  .narrative-section a:hover {
+    color: var(--text-1);
+  }
+
+  .narrative-links {
+    display: flex;
+    gap: var(--size-5);
+    margin-top: var(--size-6);
+    flex-wrap: wrap;
+  }
+
+  .narrative-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-5);
+    color: var(--brand);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  .narrative-link:hover {
+    gap: var(--size-3);
+  }
+
+  .narrative-link i {
+    font-size: var(--font-size-0);
+  }
+
+  /* Social links */
+  .social-links {
+    display: flex;
+    gap: var(--size-3);
+    flex-wrap: wrap;
+    margin-top: var(--size-4);
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-1);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-0);
+    color: var(--text-2);
+    text-decoration: none;
+    padding: var(--size-2) var(--size-3);
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-2);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .social-link:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+  }
+
+  .social-link i {
+    font-size: var(--font-size-00);
+  }
+
+  /* Favorites */
   .favorites-section {
     padding-top: var(--size-6);
     padding-bottom: var(--size-fluid-5);
+    border-top: 1px solid var(--surface-3);
   }
 
   .favorites-heading {
@@ -446,6 +492,20 @@ const fonts = [
 
     .bio-photo {
       max-width: 100%;
+    }
+
+    .narrative-section {
+      padding-top: var(--size-8);
+      padding-bottom: var(--size-8);
+    }
+
+    .narrative-links {
+      flex-direction: column;
+      gap: var(--size-3);
+    }
+
+    .social-links {
+      gap: var(--size-2);
     }
 
     .favorites-section {
