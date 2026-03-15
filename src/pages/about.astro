@@ -119,11 +119,12 @@ const fonts = [
   }
 
   .photo {
-    max-width: 320px;
+    float: right;
+    max-width: 280px;
     border-radius: var(--radius-3);
     overflow: hidden;
     border: 3px solid var(--surface-3);
-    margin-bottom: var(--size-8);
+    margin: 0 0 var(--size-4) var(--size-6);
   }
 
   .photo img {
@@ -228,7 +229,9 @@ const fonts = [
     }
 
     .photo {
-      max-width: 100%;
+      float: none;
+      max-width: 280px;
+      margin: 0 0 var(--size-6) 0;
     }
 
     .about h2 {
