@@ -198,12 +198,36 @@ const fonts: string[] = [];
       secondaryCTA={{ label: "Phone a friend", url: "https://www.occupant.works/", icon: "fa-phone" }}
     />
 
-    <!-- Currently — AIM style status -->
-    <section class="currently-section">
+    <!-- Affiliations -->
+    <section class="affiliations-section">
       <div class="container">
-        <div class="currently-content">
-          <p class="label">Currently</p>
-          <p class="currently-status">Director of <a href="https://publiccapacity.org">Public Capacity Lab</a>. <a href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/">Assistant Professor of Practice in Urban Technology</a> at the University of Michigan.</p>
+        <h2 class="affiliations-heading">Affiliations</h2>
+        <div class="affiliations-grid">
+          <div class="affiliation-item affiliation-item--primary">
+            <a href="https://publiccapacity.org">Public Capacity Lab</a>
+          </div>
+          <div class="affiliation-item affiliation-item--primary">
+            <a href="https://statecapacity.ai">State Capacity AI</a>
+          </div>
+          <div class="affiliation-item affiliation-item--primary">
+            Joint Frontiers Helsinki
+          </div>
+          <div class="affiliation-item">
+            <span class="affiliation-role">Faculty</span>
+            <a href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/">University of Michigan Urban Technology Program</a>
+          </div>
+          <div class="affiliation-item">
+            <span class="affiliation-role">Co-founder</span>
+            PDX Design Month
+          </div>
+          <div class="affiliation-item">
+            <span class="affiliation-role">Ex-officio Board &amp; Past President</span>
+            AIGA Portland
+          </div>
+          <div class="affiliation-item">
+            <span class="affiliation-role">Former Head of Design</span>
+            <a href="https://18f.org">18F</a>
+          </div>
         </div>
       </div>
     </section>
@@ -364,37 +388,72 @@ const fonts: string[] = [];
     gap: var(--size-4);
   }
 
-  /* Currently section — AIM style status */
-  .currently-section {
-    background: var(--surface-2);
-    border-left: 4px solid var(--brand);
+  /* Affiliations section */
+  .affiliations-section {
+    padding-block: var(--size-6);
+    margin-bottom: var(--size-5);
+    border-top: 1px solid var(--surface-3);
+    border-bottom: 1px solid var(--surface-3);
+  }
+
+  .affiliations-heading {
+    font-size: var(--font-size-0);
+    font-family: var(--font-mono);
+    font-weight: var(--font-weight-6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-2);
     margin-bottom: var(--size-5);
   }
 
-  .currently-content {
-    padding: var(--size-4);
+  .affiliations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--size-4);
   }
 
-  .currently-content .label {
-    margin-bottom: var(--size-2);
-  }
-
-  .currently-status {
+  .affiliation-item {
     font-size: var(--font-size-1);
     color: var(--text-1);
-    max-width: 70ch;
-    line-height: 1.6;
-    margin: 0;
+    line-height: 1.4;
   }
 
-  .currently-status a {
+  .affiliation-item--primary {
+    font-size: var(--font-size-2);
+    font-weight: var(--font-weight-6);
+  }
+
+  .affiliation-role {
+    display: block;
+    font-size: var(--font-size-00);
+    font-family: var(--font-mono);
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--size-1);
+  }
+
+  .affiliation-item a {
     color: var(--text-1);
     text-decoration-color: var(--brand);
-    text-underline-offset: 2px;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
   }
 
-  .currently-status a:hover {
+  .affiliation-item--primary a {
     color: var(--brand);
+    text-decoration: none;
+  }
+
+  .affiliation-item a:hover {
+    color: var(--brand);
+  }
+
+  @media (max-width: 600px) {
+    .affiliations-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--size-3);
+    }
   }
 
   /* Media section - Books & Albums side by side */
