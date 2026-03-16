@@ -193,41 +193,26 @@ const fonts: string[] = [];
     <Hero
       taxonomyTerms={["AI", "Service Design", "Civic Tech", "Strategy", "Digital Transformation"]}
       taxonomyResult="[Trusted Advisor]"
-      subheadline="I build and stabilize the systems that run public life. My work helps leaders & tech teams navigate the gap between high-level policy and the reality of delivery."
+      subheadline="I build and fix the systems that run public life."
+      credentials={[
+        { text: "Head of Design, 18F", href: "https://18f.org" },
+        { text: "Faculty, University of Michigan", href: "https://taubmancollege.umich.edu/faculty/directory/ron-bronson/" },
+        { text: "Public Capacity Lab", href: "https://publiccapacity.org" },
+        { text: "State Capacity AI", href: "https://statecapacity.ai" },
+        { text: "Joint Frontiers Helsinki" },
+      ]}
       primaryCTA={{ label: "About me", url: "/about", icon: "fa-user" }}
       secondaryCTA={{ label: "Phone a friend", url: "https://www.occupant.works/", icon: "fa-phone" }}
     />
 
-    <!-- Affiliations -->
+    <!-- Additional affiliations -->
     <section class="affiliations-section">
       <div class="container">
-        <h2 class="affiliations-heading">Affiliations</h2>
-        <div class="affiliations-grid">
-          <div class="affiliation-item affiliation-item--primary">
-            <a href="https://publiccapacity.org">Public Capacity Lab</a>
-          </div>
-          <div class="affiliation-item affiliation-item--primary">
-            <a href="https://statecapacity.ai">State Capacity AI</a>
-          </div>
-          <div class="affiliation-item affiliation-item--primary">
-            Joint Frontiers Helsinki
-          </div>
-          <div class="affiliation-item">
-            <span class="affiliation-role">Faculty</span>
-            <a href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/">University of Michigan Urban Technology Program</a>
-          </div>
-          <div class="affiliation-item">
-            <span class="affiliation-role">Co-founder</span>
-            PDX Design Month
-          </div>
-          <div class="affiliation-item">
-            <span class="affiliation-role">Ex-officio Board &amp; Past President</span>
-            AIGA Portland
-          </div>
-          <div class="affiliation-item">
-            <span class="affiliation-role">Former Head of Design</span>
-            <a href="https://18f.org">18F</a>
-          </div>
+        <div class="affiliations-inline">
+          <span>Also:</span>
+          <span>Co-founder, PDX Design Month</span>
+          <span class="affiliations-sep">&middot;</span>
+          <span>Past President, AIGA Portland</span>
         </div>
       </div>
     </section>
@@ -388,72 +373,23 @@ const fonts: string[] = [];
     gap: var(--size-4);
   }
 
-  /* Affiliations section */
+  /* Affiliations — secondary line */
   .affiliations-section {
-    padding-block: var(--size-6);
     margin-bottom: var(--size-5);
-    border-top: 1px solid var(--surface-3);
-    border-bottom: 1px solid var(--surface-3);
   }
 
-  .affiliations-heading {
+  .affiliations-inline {
     font-size: var(--font-size-0);
-    font-family: var(--font-mono);
-    font-weight: var(--font-weight-6);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
     color: var(--text-2);
-    margin-bottom: var(--size-5);
-  }
-
-  .affiliations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--size-4);
-  }
-
-  .affiliation-item {
-    font-size: var(--font-size-1);
-    color: var(--text-1);
-    line-height: 1.4;
-  }
-
-  .affiliation-item--primary {
-    font-size: var(--font-size-2);
-    font-weight: var(--font-weight-6);
-  }
-
-  .affiliation-role {
-    display: block;
-    font-size: var(--font-size-00);
     font-family: var(--font-mono);
-    color: var(--text-2);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: var(--size-1);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-2);
+    align-items: center;
   }
 
-  .affiliation-item a {
-    color: var(--text-1);
-    text-decoration-color: var(--brand);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 3px;
-  }
-
-  .affiliation-item--primary a {
-    color: var(--brand);
-    text-decoration: none;
-  }
-
-  .affiliation-item a:hover {
-    color: var(--brand);
-  }
-
-  @media (max-width: 600px) {
-    .affiliations-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--size-3);
-    }
+  .affiliations-sep {
+    color: var(--surface-4);
   }
 
   /* Media section - Books & Albums side by side */

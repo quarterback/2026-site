@@ -1,9 +1,15 @@
 ---
+interface CredentialItem {
+  text: string;
+  href?: string;
+}
+
 interface Props {
   headline?: string;
   taxonomyTerms?: string[];
   taxonomyResult?: string;
   subheadline: string;
+  credentials?: CredentialItem[];
   primaryCTA?: {
     label: string;
     url: string;
@@ -24,6 +30,7 @@ const {
   taxonomyTerms,
   taxonomyResult,
   subheadline,
+  credentials,
   primaryCTA = { label: "Email me", url: "mailto:ron@ronbronson.com", icon: "fa-envelope" },
   secondaryCTA = { label: "Phone a friend", url: "https://www.occupant.works/", icon: "fa-phone" }
 } = Astro.props;
@@ -43,6 +50,21 @@ const {
     )}
     {headline && !taxonomyTerms && <h1 class="hero__headline">{headline}</h1>}
     <p class="hero__subheadline">{subheadline}</p>
+
+    {credentials && credentials.length > 0 && (
+      <p class="hero__credentials">
+        {credentials.map((cred, i) => (
+          <>
+            {i > 0 && <span class="hero__cred-arrow">{"\u2192"}</span>}
+            {cred.href ? (
+              <a href={cred.href} class="hero__cred-link">{cred.text}</a>
+            ) : (
+              <span>{cred.text}</span>
+            )}
+          </>
+        ))}
+      </p>
+    )}
 
     <div class="hero__cta-group">
       {primaryCTA && (
@@ -118,9 +140,34 @@ const {
   .hero__subheadline {
     font-size: clamp(1.125rem, 2vw, 1.5rem);
     color: var(--text-2);
-    margin-bottom: var(--size-8);
+    margin-bottom: var(--size-4);
     max-width: 60ch;
     line-height: 1.6;
+  }
+
+  /* Credential trajectory line */
+  .hero__credentials {
+    font-size: var(--font-size-1);
+    font-family: var(--font-mono);
+    color: var(--text-2);
+    margin-bottom: var(--size-8);
+    line-height: 1.8;
+  }
+
+  .hero__cred-arrow {
+    margin-inline: var(--size-2);
+    color: var(--brand);
+  }
+
+  .hero__cred-link {
+    color: var(--text-1);
+    text-decoration-color: var(--brand);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  .hero__cred-link:hover {
+    color: var(--brand);
   }
 
   /* CTA Button Group */
