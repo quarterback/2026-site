@@ -193,20 +193,17 @@ const fonts: string[] = [];
     <Hero
       taxonomyTerms={["AI", "Service Design", "Civic Tech", "Strategy", "Digital Transformation"]}
       taxonomyResult="[Trusted Advisor]"
-      subheadline="I build and stabilize the systems that run public life. My work helps leaders & tech teams navigate the gap between high-level policy and the reality of delivery."
+      subheadline="I build and fix the systems that run public life."
+      credentials={[
+        { text: "Head of Design, 18F", href: "https://18f.org" },
+        { text: "Faculty, University of Michigan", href: "https://taubmancollege.umich.edu/faculty/directory/ron-bronson/" },
+        { text: "Public Capacity Lab", href: "https://publiccapacity.org" },
+        { text: "State Capacity AI", href: "https://statecapacity.ai" },
+        { text: "Board Member & Co-founder, PDX Design Month", href: "https://aigapdx.org" },
+      ]}
       primaryCTA={{ label: "About me", url: "/about", icon: "fa-user" }}
       secondaryCTA={{ label: "Phone a friend", url: "https://www.occupant.works/", icon: "fa-phone" }}
     />
-
-    <!-- Currently — AIM style status -->
-    <section class="currently-section">
-      <div class="container">
-        <div class="currently-content">
-          <p class="label">Currently</p>
-          <p class="currently-status">Director of <a href="https://publiccapacity.org">Public Capacity Lab</a>. <a href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/">Assistant Professor of Practice in Urban Technology</a> at the University of Michigan.</p>
-        </div>
-      </div>
-    </section>
 
     <!-- Featured Projects — BuzzFeed-style hero cards -->
     <section id="featured-projects">
@@ -364,38 +361,6 @@ const fonts: string[] = [];
     gap: var(--size-4);
   }
 
-  /* Currently section — AIM style status */
-  .currently-section {
-    background: var(--surface-2);
-    border-left: 4px solid var(--brand);
-    margin-bottom: var(--size-5);
-  }
-
-  .currently-content {
-    padding: var(--size-4);
-  }
-
-  .currently-content .label {
-    margin-bottom: var(--size-2);
-  }
-
-  .currently-status {
-    font-size: var(--font-size-1);
-    color: var(--text-1);
-    max-width: 70ch;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .currently-status a {
-    color: var(--text-1);
-    text-decoration-color: var(--brand);
-    text-underline-offset: 2px;
-  }
-
-  .currently-status a:hover {
-    color: var(--brand);
-  }
 
   /* Media section - Books & Albums side by side */
   #media-consumption {
