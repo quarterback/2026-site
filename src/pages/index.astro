@@ -7,7 +7,7 @@ import FeatureCard from '../components/FeatureCard.astro';
 import Writing from '../components/Writing.astro';
 import WritingExcerpt from '../components/WritingExcerpt.astro';
 import Books from '../components/Books.astro';
-import Albums from '../components/Albums.astro';
+import NowPlaying from '../components/NowPlaying.astro';
 import MediaCard from '../components/MediaCard.astro';
 import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
@@ -80,24 +80,6 @@ const currentBooks = [
   },
 ];
 
-const currentAlbums = [
-  {
-    title: "Until It's Time For Me to Go",
-    artist: "Jim Croce",
-  },
-  {
-    title: "There Is Nothing more to Say",
-    artist: "The Millenium",
-  },
-  {
-    title: "Another Song for the End of the World",
-    artist: "Sophie May",
-  },
-  {
-    title: "People Make The World Go Round",
-    artist: "Saeed",
-  },
-];
 
 const recentMedia = [
   {
@@ -240,7 +222,12 @@ const fonts: string[] = [];
       <div class="container">
         <div class="media-grid">
           <Books books={currentBooks} />
-          <Albums albums={currentAlbums} title="Now Listening" />
+          <div class="listening-section">
+            <NowPlaying service="lastfm" username="statechampion" />
+            <a href="https://listening.ronbronson.com/" target="_blank" rel="noopener" class="listening-link">
+              468k+ scrobbles over 21 years →
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -324,6 +311,24 @@ const fonts: string[] = [];
       margin-bottom: var(--size-3);
     }
 
+  }
+
+  .listening-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .listening-link {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .listening-link:hover {
+    color: var(--brand);
   }
 </style>
 
