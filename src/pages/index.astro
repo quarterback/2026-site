@@ -2,54 +2,10 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
-
-import FeatureCard from '../components/FeatureCard.astro';
-import Writing from '../components/Writing.astro';
-import WritingExcerpt from '../components/WritingExcerpt.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
-import MediaCard from '../components/MediaCard.astro';
 import Footer from '../components/Footer.astro';
 import { fetchMultipleRSS } from '../lib/rss';
-
-// Culled case studies — only the most relevant work
-const caseStudies = [
-  {
-    tier: 2 as const,
-    title: "18F - Design Leadership at Scale",
-    narrative: "Service delivery & deployment in support of millions of Americans.",
-    image: "/img/18f-leadership.svg",
-    href: "/work/18f-leadership",
-  },
-  {
-    tier: 2 as const,
-    title: "Portland Digital Corps",
-    narrative: "Volunteer effort bringing together 50+ practitioners to rebuild six nonprofit websites.",
-    image: "/img/digitalcorpspdx.org.png",
-    href: "/work/portland-digital-corps",
-  },
-  {
-    tier: 2 as const,
-    title: "Design For The Public 24",
-    narrative: "Two-day unconference bringing together 80+ civic technologists and designers in Portland.",
-    href: "/work/design-for-the-public-24",
-  },
-];
-
-const writingExcerpts = [
-  {
-    quote: "Most people think design is about making things beautiful. But the real work of design is repair—patching the gaps between intention and reality, between policy and the lived experience of the people who depend on public systems.",
-    title: "Design as Repair",
-    href: "https://blog.ronbronson.com/design-as-repair",
-    label: "Essay",
-  },
-  {
-    quote: "The question isn't whether AI agents will make decisions. They already do. The question is who holds the pen when those decisions go wrong—and whether the systems we build have a manager, not just a manual.",
-    title: "Who Holds the Pen?",
-    href: "https://makingpublicwork.com/who-holds-the-pen-why-ai-agents-need-a-manager-not-just-a-manual/",
-    label: "Analysis",
-  },
-];
 
 const rssFeeds = [
   'https://makingpublicwork.com/rss/',
@@ -99,143 +55,154 @@ const currentAlbums = [
   },
 ];
 
-const recentMedia = [
-  {
-    title: "Future Perfect Book Club",
-    source: "futureperfectbook.club",
-    description: "Co-hosted with Joel Goodman, exploring the intersection of design, technology, and the future of institutions.",
-    mediaType: "podcast" as const,
-    url: "https://futureperfectbook.club",
-    date: "2025",
-  },
-  {
-    title: "Some advice on managing your design career upwards",
-    source: "Piccalil.li",
-    description: "Navigating design leadership, building influence across organizations, and positioning yourself for strategic impact.",
-    mediaType: "article" as const,
-    url: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
-    image: "/img/piccalil.li.png",
-    date: "January 2026",
-  },
-  {
-    title: "Beyond Civic Tech: Public Mechanics Starts at Home",
-    source: "Cascadia Open Source Fall Conference",
-    description: "Why civic tech fails when it ignores maintenance, repair, and the invisible work that keeps public services running.",
-    mediaType: "talk" as const,
-    embedUrl: "https://youtube.com/watch?v=hnAScuK-oMo",
-    date: "November 2025",
-  },
-  {
-    title: "Repairing Service Design for the Age of AI",
-    source: "Service Design Show Podcast",
-    description: "Exploring how service design must evolve to address the challenges and opportunities of AI-driven systems.",
-    mediaType: "podcast" as const,
-    url: "https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505",
-    date: "September 2025",
-  },
-  {
-    title: "Design Systems and Public Services",
-    source: "YouTube",
-    description: "Discussion on service design, public sector innovation, and building decision systems that work at scale.",
-    mediaType: "video" as const,
-    embedUrl: "https://www.youtube.com/watch?v=kL0gYtoUtvI",
-    date: "October 2025",
-  },
-];
-
-const socials = [
-  { name: "Bluesky", url: "https://bsky.app/profile/ronbronson.com" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/ronbronson" },
-  { name: "GitHub", url: "https://github.com/ronbronson" },
-];
-
 const techStack = [
-  "built hastily using Astro, Open Props, FontAwesome, TypeScript, Inter, JetBrains Mono, Netlify & GitHub"
+  "built hastily using Astro, Open Props, FontAwesome, TypeScript, Playfair Display, DM Sans, DM Mono, Netlify & GitHub"
 ];
 
 const fonts: string[] = [];
 ---
 
 <Base title="Ron Bronson">
-  <main>
+  <main id="main">
     <Hero
-      taxonomyTerms={["AI", "Service Design", "Civic Tech", "Strategy", "Digital Transformation"]}
-      taxonomyResult="[Trusted Advisor]"
-      subheadline="I build and fix the systems that run public life."
-      credentials={[
-        { text: "Head of Design, 18F", href: "https://18f.org" },
-        { text: "Faculty, University of Michigan", href: "https://taubmancollege.umich.edu/faculty/directory/ron-bronson/" },
+      kicker="Designer · Educator · Practitioner"
+      headline='I build and fix<br>the systems that<br>run <em>public life.</em>'
+      bio='Former Head of Design at <strong>18F</strong>, where I scaled federal design practice and led delivery across dozens of agencies. Now Assistant Professor at the <strong>University of Michigan</strong> and principal of <strong>Occupant</strong> — working on public mechanics, the discipline of how services actually work.'
+      affiliations={[
+        { text: "18F / GSA TTS", href: "https://18f.org" },
+        { text: "Taubman College, U of M", href: "https://taubmancollege.umich.edu/faculty/directory/ron-bronson/" },
         { text: "Public Capacity Lab", href: "https://publiccapacity.org" },
         { text: "State Capacity AI", href: "https://statecapacity.ai" },
-        { text: "Board Member & Co-founder, PDX Design Month", href: "https://aigapdx.org" },
+        { text: "Occupant", href: "https://occupant.works" },
       ]}
-      primaryCTA={{ label: "About me", url: "/about", icon: "fa-user" }}
-      secondaryCTA={{ label: "Phone a friend", url: "https://www.occupant.works/", icon: "fa-phone" }}
+      primaryCTA={{ label: "Making Public Work ↗", url: "https://makingpublicwork.com" }}
+      secondaryCTA={{ label: "Independent Practice", url: "https://occupant.works" }}
     />
 
-    <!-- Excerpt interstitial slot 1 -->
-    <div class="excerpt-slot" data-excerpt-slot>
+    <!-- Work Grid -->
+    <section class="section" id="work" aria-labelledby="work-heading">
       <div class="container">
-        {writingExcerpts.map((excerpt, i) => (
-          <div data-excerpt={i} hidden>
-            <WritingExcerpt
-              quote={excerpt.quote}
-              title={excerpt.title}
-              href={excerpt.href}
-              label={excerpt.label}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- Case Studies — culled to most relevant work -->
-    <section id="work">
-      <div class="container">
-        <h2 class="section-heading">Selected Work</h2>
-        <div class="case-studies-grid">
-          {caseStudies.map(card => (
-            <FeatureCard
-              title={card.title}
-              narrative={card.narrative}
-              image={card.image}
-              href={card.href}
-              tier={card.tier}
-            />
-          ))}
+        <p class="section-label" id="work-heading">Selected Work</p>
+        <div class="work-grid">
+          <a href="/work/18f-leadership" class="work-item">
+            <span class="work-tag">Federal · 2016–2024</span>
+            <span class="work-title">Design Leadership at Scale, 18F</span>
+            <span class="work-desc">Built and led a 40-person design practice across federal agencies including the VA, IRS, HHS, DOD, and FTC. Delivery work touched millions of Americans.</span>
+            <span class="work-arrow">See the work →</span>
+          </a>
+          <a href="/frameworks" class="work-item">
+            <span class="work-tag">Research · Ongoing</span>
+            <span class="work-title">Public Mechanics</span>
+            <span class="work-desc">Original frameworks for how public services are built, maintained, and fail — including Trajectory Management and Delivery Forensics.</span>
+            <span class="work-arrow">Read the frameworks →</span>
+          </a>
+          <a href="https://statecapacity.ai" class="work-item">
+            <span class="work-tag">Tool · 2024–Ongoing</span>
+            <span class="work-title">State Capacity AI</span>
+            <span class="work-desc">Tracks AI model pricing and performance for institutional procurement. Built for decision-makers who need vendor intelligence without the sales pitch.</span>
+            <span class="work-arrow">statecapacity.ai →</span>
+          </a>
+          <a href="/work/portland-digital-corps" class="work-item">
+            <span class="work-tag">Community · 2025</span>
+            <span class="work-title">Portland Digital Corps</span>
+            <span class="work-desc">Assembled 50+ practitioners to rebuild six Oregon nonprofit websites. Volunteer infrastructure for civic digital capacity.</span>
+            <span class="work-arrow">See the work →</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Excerpt interstitial slot 2 -->
-    <div class="excerpt-slot" data-excerpt-slot>
-      <div class="container">
-        {writingExcerpts.map((excerpt, i) => (
-          <div data-excerpt={i} hidden>
-            <WritingExcerpt
-              quote={excerpt.quote}
-              title={excerpt.title}
-              href={excerpt.href}
-              label={excerpt.label}
-            />
-          </div>
-        ))}
+    <!-- Pull Quote -->
+    <div class="pull-quote">
+      <div class="pull-quote-inner container">
+        <blockquote>
+          Most design work is repair — patching the gaps between intention and reality, between policy and the lived experience of the people who depend on public systems.
+          <cite>— Design as Repair, 2025</cite>
+        </blockquote>
       </div>
     </div>
 
-    <!-- Recent Appearances -->
-    <section id="media">
+    <!-- Writing + Speaking -->
+    <section class="section" id="writing" aria-labelledby="writing-heading">
       <div class="container">
-        <h2 class="section-heading">Recent Appearances</h2>
-        <div class="media-list-featured">
-          {recentMedia.map(item => (
-            <MediaCard {...item} />
-          ))}
+        <p class="section-label" id="writing-heading">Writing &amp; Speaking</p>
+        <div class="two-col">
+
+          <div>
+            <p class="col-label">Recent Writing</p>
+            <ul class="writing-list">
+              <li>
+                <a href="https://makingpublicwork.com/who-holds-the-pen-why-ai-agents-need-a-manager-not-just-a-manual/" class="writing-item">
+                  <span class="writing-type">Analysis</span>
+                  <span class="writing-title">Who Holds the Pen?</span>
+                  <span class="writing-pub">makingpublicwork.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://blog.ronbronson.com/design-as-repair" class="writing-item">
+                  <span class="writing-type">Essay</span>
+                  <span class="writing-title">Design as Repair</span>
+                  <span class="writing-pub">ronbronson.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/" class="writing-item">
+                  <span class="writing-type">Article</span>
+                  <span class="writing-title">Managing Your Design Career Upwards</span>
+                  <span class="writing-pub">Piccalilli</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://makingpublicwork.com" class="writing-item">
+                  <span class="writing-type">Newsletter</span>
+                  <span class="writing-title">Making Public Work — Ongoing</span>
+                  <span class="writing-pub">Subscribe →</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div id="speaking">
+            <p class="col-label">Recent Speaking</p>
+            <ul class="speaking-list">
+              <li class="speaking-item">
+                <span class="speaking-venue">IxDA Oslo</span>
+                <span class="speaking-title">Keynote</span>
+                <span class="speaking-date">2025</span>
+              </li>
+              <li class="speaking-item">
+                <span class="speaking-venue">Service Design Show</span>
+                <span class="speaking-title">Repairing Service Design for the Age of AI</span>
+                <span class="speaking-date">Sep 2025</span>
+              </li>
+              <li class="speaking-item">
+                <span class="speaking-venue">Code for America Summit</span>
+                <span class="speaking-title">Panel</span>
+                <span class="speaking-date">2025</span>
+              </li>
+              <li class="speaking-item">
+                <span class="speaking-venue">Hype Studies, Barcelona</span>
+                <span class="speaking-title">Workshop</span>
+                <span class="speaking-date">2025</span>
+              </li>
+              <li class="speaking-item">
+                <span class="speaking-venue">Throughline Conference</span>
+                <span class="speaking-title">Design as Repair</span>
+                <span class="speaking-date">2025</span>
+              </li>
+              <li class="speaking-item">
+                <span class="speaking-venue">Cascadia Open Source GIS</span>
+                <span class="speaking-title">Beyond Civic Tech</span>
+                <span class="speaking-date">Nov 2025</span>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Media Consumption: Books & Albums -->
+    <!-- Media Consumption: Books & Albums (personal section) -->
     <section id="media-consumption">
       <div class="container">
         <div class="media-grid">
@@ -253,55 +220,231 @@ const fonts: string[] = [];
 </Base>
 
 <style>
-  /* Excerpt interstitial slots */
-  .excerpt-slot {
-    padding-block: var(--size-3);
+  /* ===== SECTIONS ===== */
+  .section {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: clamp(3rem, 7vh, 5rem) var(--pad);
+    border-top: 1px solid var(--rule);
   }
 
-  /* Section headings */
-  .section-heading {
-    font-size: clamp(var(--font-size-2), 4vw, var(--font-size-3));
-    margin-bottom: var(--size-4);
+  .section-label {
     font-family: var(--font-mono);
-    font-weight: var(--font-weight-6);
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 2.5rem;
   }
 
-  /* Case Studies grid — 3 columns */
-  .case-studies-grid {
+  /* ===== WORK GRID ===== */
+  .work-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--size-5);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
   }
 
-  @media (max-width: 900px) {
-    .case-studies-grid {
-      grid-template-columns: 1fr;
-      gap: var(--size-4);
-    }
-  }
-
-  @media (max-width: 600px) {
-    .case-studies-grid {
-      gap: var(--size-3);
-    }
-  }
-
-  /* Recent Appearances section */
-  #media {
-    background: var(--surface-1);
-    padding: var(--size-6) 0;
-    margin: var(--size-6) 0;
-  }
-
-  /* Featured Media List */
-  .media-list-featured {
+  .work-item {
+    background: var(--bg);
+    padding: 2rem;
+    text-decoration: none;
     display: flex;
     flex-direction: column;
-    gap: var(--size-4);
+    gap: 0.6rem;
+    transition: background 0.15s;
   }
 
+  .work-item:hover {
+    background: var(--bg-warm);
+  }
 
-  /* Media section - Books & Albums side by side */
+  .work-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .work-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .work-desc {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .work-arrow {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    margin-top: 0.5rem;
+    transition: color 0.15s;
+  }
+
+  .work-item:hover .work-arrow {
+    color: var(--accent);
+  }
+
+  /* ===== PULL QUOTE ===== */
+  .pull-quote {
+    background: var(--bg-warm);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: clamp(3rem, 7vh, 5rem) 0;
+  }
+
+  .pull-quote-inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+  }
+
+  .pull-quote blockquote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 740px;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--accent);
+  }
+
+  .pull-quote blockquote cite {
+    display: block;
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 1.25rem;
+  }
+
+  /* ===== WRITING + SPEAKING TWO-COL ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .col-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 1.5rem;
+  }
+
+  .writing-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .writing-item {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr auto;
+    align-items: baseline;
+    gap: 1.25rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+  }
+
+  .writing-item:first-child {
+    border-top: 1px solid var(--rule);
+  }
+
+  .writing-item:hover .writing-title {
+    color: var(--accent);
+  }
+
+  .writing-type {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .writing-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.35;
+    transition: color 0.15s;
+  }
+
+  .writing-pub {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+
+  .speaking-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .speaking-item {
+    padding: 1.1rem;
+    background: var(--bg-ink);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .speaking-venue {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .speaking-title {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .speaking-date {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: auto;
+    padding-top: 0.4rem;
+  }
+
+  /* ===== MEDIA CONSUMPTION (kept from original) ===== */
   #media-consumption {
     margin-bottom: var(--size-5);
   }
@@ -312,39 +455,39 @@ const fonts: string[] = [];
     gap: var(--size-6);
   }
 
+  /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .two-col {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .writing-item {
+      grid-template-columns: 3.5rem 1fr;
+    }
+
+    .writing-pub {
+      display: none;
+    }
+
     .media-grid {
       grid-template-columns: 1fr;
       gap: var(--size-5);
     }
   }
 
-  @media (max-width: 600px) {
-    .section-heading {
-      margin-bottom: var(--size-3);
+  @media (max-width: 480px) {
+    .writing-item {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
     }
 
+    .writing-type {
+      display: none;
+    }
   }
 </style>
-
-<script is:inline>
-  (function () {
-    var slots = document.querySelectorAll('[data-excerpt-slot]');
-    if (!slots.length) return;
-    var total = slots[0].querySelectorAll('[data-excerpt]').length;
-    if (!total) return;
-    // Build shuffled index array
-    var indices = [];
-    for (var i = 0; i < total; i++) indices.push(i);
-    for (var i = indices.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var tmp = indices[i]; indices[i] = indices[j]; indices[j] = tmp;
-    }
-    // Reveal one unique excerpt per slot
-    slots.forEach(function (slot, si) {
-      var idx = indices[si % indices.length];
-      var el = slot.querySelector('[data-excerpt="' + idx + '"]');
-      if (el) el.hidden = false;
-    });
-  })();
-</script>
