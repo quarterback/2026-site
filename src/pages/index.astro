@@ -130,7 +130,7 @@ const fonts: string[] = [];
                   <a href={post.link} class="writing-item" target="_blank" rel="noopener">
                     <span class="writing-type">Post</span>
                     <span class="writing-title">{post.title}</span>
-                    <span class="writing-pub">{new URL(post.link).hostname.replace('www.', '')}</span>
+                    <span class="writing-pub">{(() => { try { return new URL(post.link).hostname.replace('www.', ''); } catch { return ''; } })()}</span>
                   </a>
                 </li>
               ))}
