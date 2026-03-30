@@ -3,72 +3,61 @@
 @import "open-props/normalize";
 
 /* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&family=Halant:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
 
 :root {
   /* Layout */
-  --content-width: 1100px;
+  --content-width: 1080px;
   --content-width-narrow: 720px;
   --section-gap: var(--size-4);
+  --pad: clamp(1.25rem, 5vw, 2.5rem);
 
   /* Fonts */
-  --font-sans: 'Urbanist', sans-serif;
-  --font-serif: 'Halant', serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  /* Cherry blossom palette */
+  --bg:        #f5ece8;
+  --bg-warm:   #efe4df;
+  --bg-ink:    #e8dbd6;
+  --border:    rgba(60,30,20,0.12);
+  --rule:      rgba(60,30,20,0.08);
+  --ink:       #1a1210;
+  --ink-mid:   #5a3e38;
+  --ink-muted: #9a7a72;
+  --ink-faint: #c4a89e;
+  --accent:    #8b2e1a;
+
+  /* Map to existing variable names for component compat */
+  --surface-1: var(--bg);
+  --surface-2: var(--bg-warm);
+  --surface-3: var(--bg-ink);
+  --surface-4: var(--border);
+  --text-1: var(--ink);
+  --text-2: var(--ink-mid);
+  --text-3: var(--ink-muted);
+  --brand: var(--accent);
+  --brand-dim: #6e2414;
+  --brand-bright: #a8432b;
 }
 
-/* Light theme (default) */
-:root,
-[data-theme="light"] {
-  /* Electric blue accent */
-  --brand: #2323FF;
-  --brand-dim: #1a1acc;
-  --brand-bright: #4d4dff;
-
-  /* Light surfaces - off-white */
-  --surface-1: #F2F0EF;
-  --surface-2: #e8e6e5;
-  --surface-3: #d9d7d6;
-  --surface-4: #c5c3c2;
-
-  /* Text */
-  --text-1: #1a1a1a;
-  --text-2: #404040;
-  --text-3: #737373;
-}
-
-/* Dark theme */
-[data-theme="dark"] {
-  /* Amber/gold accent */
-  --brand: #FFBF00;
-  --brand-dim: #cc9900;
-  --brand-bright: #ffd333;
-
-  /* Dark brown surfaces */
-  --surface-1: #614900;
-  --surface-2: #735916;
-  --surface-3: #85692c;
-  --surface-4: #997a42;
-
-  /* Text */
-  --text-1: #fef7e6;
-  --text-2: #f5ecd0;
-  --text-3: #d4c9a8;
-}
-
-html { color-scheme: dark light; }
+html { color-scheme: light; }
 
 body {
-  background: var(--surface-1);
-  color: var(--text-1);
+  background: var(--bg);
+  color: var(--ink);
   font-family: var(--font-sans);
-  font-size: var(--font-size-1);
-  line-height: var(--font-lineheight-4);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Typography - tighter, more confident */
+/* Typography */
 h1, h2, h3, h4 {
-  font-weight: var(--font-weight-7);
-  line-height: var(--font-lineheight-1);
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.15;
   letter-spacing: -0.02em;
 }
 
@@ -79,16 +68,16 @@ h3 { font-size: var(--font-size-2); }
 p { max-width: 65ch; }
 
 a {
-  color: var(--brand);
+  color: var(--accent);
   text-decoration: none;
 }
-a:hover { color: var(--brand-bright); }
+a:hover { color: var(--brand-dim); }
 
 /* Container */
 .container {
   max-width: var(--content-width);
   margin-inline: auto;
-  padding-inline: var(--size-fluid-3);
+  padding-inline: var(--pad);
 }
 
 .container--narrow {
@@ -117,13 +106,13 @@ section { padding-block: var(--section-gap); }
   font-size: var(--font-size-00);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-3);
+  color: var(--ink-muted);
 }
 
 /* Card */
 .card {
-  background: var(--surface-2);
-  border: 1px solid var(--surface-3);
+  background: var(--bg-warm);
+  border: 1px solid var(--border);
   border-radius: var(--radius-2);
   padding: var(--size-4);
 }
@@ -143,4 +132,10 @@ section { padding-block: var(--section-gap); }
 }
 @media (max-width: 600px) {
   .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }

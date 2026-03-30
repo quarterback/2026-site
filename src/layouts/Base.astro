@@ -27,19 +27,12 @@ const tickerItems = [
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Space Grotesk for headers/callouts, Inter for body, JetBrains Mono for code/metrics -->
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <style>
-      :root {
-        --font-grotesk: 'Space Grotesk', system-ui, sans-serif;
-        --font-sans: 'Inter', system-ui, sans-serif;
-        --font-mono: 'JetBrains Mono', monospace;
-      }
-    </style>
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <StatusTicker items={tickerItems} />
     <slot />
   </body>
@@ -48,4 +41,21 @@ const tickerItems = [
 <style is:global>
   @import "../styles/design-tokens.css";
   @import "../styles/global.css";
+
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-decoration: none;
+    z-index: 999;
+  }
+  .skip-link:focus {
+    top: 0.5rem;
+    color: #fff;
+  }
 </style>
