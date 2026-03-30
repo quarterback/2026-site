@@ -125,27 +125,15 @@ const fonts: string[] = [];
           <div>
             <p class="col-label">Recent Writing</p>
             <ul class="writing-list">
-              <li>
-                <a href="https://makingpublicwork.com/who-holds-the-pen-why-ai-agents-need-a-manager-not-just-a-manual/" class="writing-item">
-                  <span class="writing-type">Analysis</span>
-                  <span class="writing-title">Who Holds the Pen?</span>
-                  <span class="writing-pub">makingpublicwork.com</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://blog.ronbronson.com/design-as-repair" class="writing-item">
-                  <span class="writing-type">Essay</span>
-                  <span class="writing-title">Design as Repair</span>
-                  <span class="writing-pub">ronbronson.com</span>
-                </a>
-              </li>
-              <li>
-                <a href="https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/" class="writing-item">
-                  <span class="writing-type">Article</span>
-                  <span class="writing-title">Managing Your Design Career Upwards</span>
-                  <span class="writing-pub">Piccalilli</span>
-                </a>
-              </li>
+              {recentPosts.map(post => (
+                <li>
+                  <a href={post.link} class="writing-item" target="_blank" rel="noopener">
+                    <span class="writing-type">Post</span>
+                    <span class="writing-title">{post.title}</span>
+                    <span class="writing-pub">{new URL(post.link).hostname.replace('www.', '')}</span>
+                  </a>
+                </li>
+              ))}
               <li>
                 <a href="https://makingpublicwork.com" class="writing-item">
                   <span class="writing-type">Newsletter</span>
@@ -159,19 +147,16 @@ const fonts: string[] = [];
           <div id="speaking">
             <p class="col-label">Recent Speaking</p>
             <ul class="speaking-list">
-              <li><a href="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505" class="speaking-item" target="_blank" rel="noopener">
+              <li class="speaking-item">
                 <span class="speaking-venue">Service Design Show</span>
                 <span class="speaking-title">Repairing Service Design for the Age of AI</span>
                 <span class="speaking-date">Sep 2025</span>
-              </a></li>
-
-
-
-              <li><a href="https://youtube.com/watch?v=hnAScuK-oMo" class="speaking-item" target="_blank" rel="noopener">
+              </li>
+              <li class="speaking-item">
                 <span class="speaking-venue">Cascadia Open Source GIS</span>
                 <span class="speaking-title">Beyond Civic Tech</span>
                 <span class="speaking-date">Nov 2025</span>
-              </a></li>
+              </li>
             </ul>
           </div>
 
