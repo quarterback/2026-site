@@ -4,20 +4,20 @@ interface Affiliation {
   href?: string;
 }
 
+interface CTA {
+  label: string;
+  url: string;
+  style: 'primary' | 'ghost' | 'text';
+  external?: boolean;
+}
+
 interface Props {
   kicker?: string;
   headline: string;
   headlineAccent?: string;
   bio: string;
   affiliations?: Affiliation[];
-  primaryCTA?: {
-    label: string;
-    url: string;
-  };
-  secondaryCTA?: {
-    label: string;
-    url: string;
-  };
+  ctas?: CTA[];
 }
 
 const {
@@ -26,8 +26,7 @@ const {
   headlineAccent,
   bio,
   affiliations,
-  primaryCTA,
-  secondaryCTA,
+  ctas,
 } = Astro.props;
 ---
 
@@ -39,16 +38,19 @@ const {
 
     <h1 id="hero-heading" class="hero-headline" set:html={headline} />
 
-    <p class="hero-bio" set:html={bio} />
+    <div class="hero-bio" set:html={bio} />
 
-    <div class="hero-cta-row">
-      {primaryCTA && (
-        <a href={primaryCTA.url} class="btn btn-primary">{primaryCTA.label}</a>
-      )}
-      {secondaryCTA && (
-        <a href={secondaryCTA.url} class="btn btn-ghost">{secondaryCTA.label}</a>
-      )}
-    </div>
+    {ctas && ctas.length > 0 && (
+      <div class="hero-cta-row">
+        {ctas.map(cta => (
+          <a
+            href={cta.url}
+            class={`btn btn-${cta.style}`}
+            {...(cta.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >{cta.label}</a>
+        ))}
+      </div>
+    )}
 
     {affiliations && affiliations.length > 0 && (
       <nav class="hero-spine" aria-label="Affiliations">
@@ -118,6 +120,14 @@ const {
     margin-bottom: 2.5rem;
   }
 
+  .hero-bio :global(p) {
+    margin: 0 0 1rem;
+  }
+
+  .hero-bio :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
   .hero-bio :global(strong) {
     font-weight: 500;
     color: var(--ink);
@@ -163,6 +173,17 @@ const {
   .btn-ghost:hover {
     border-color: var(--ink-muted);
     color: var(--ink);
+  }
+
+  .btn-text {
+    background: transparent;
+    border-color: transparent;
+    color: var(--ink-muted);
+  }
+
+  .btn-text:hover {
+    color: var(--accent);
+    border-color: transparent;
   }
 
   .hero-spine {
