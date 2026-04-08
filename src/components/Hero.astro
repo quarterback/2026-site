@@ -38,7 +38,7 @@ const {
 
     <h1 id="hero-heading" class="hero-headline" set:html={headline} />
 
-    <p class="hero-bio" set:html={bio} />
+    <div class="hero-bio" set:html={bio} />
 
     {ctas && ctas.length > 0 && (
       <div class="hero-cta-row">
@@ -118,6 +118,14 @@ const {
     color: var(--ink-mid);
     max-width: 620px;
     margin-bottom: 2.5rem;
+  }
+
+  .hero-bio :global(p) {
+    margin: 0 0 1rem;
+  }
+
+  .hero-bio :global(p:last-child) {
+    margin-bottom: 0;
   }
 
   .hero-bio :global(strong) {
