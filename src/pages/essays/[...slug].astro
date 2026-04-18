@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Webmentions from '../../components/Webmentions.astro';
 
 export async function getStaticPaths() {
   const essays = await getCollection('essays', ({ data }) => !data.draft);
@@ -18,26 +19,35 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   month: 'long',
   day: 'numeric'
 }).format(essay.data.date);
+
+const canonical = new URL(`/essays/${essay.slug}`, Astro.site ?? 'https://ronbronson.com').toString();
 ---
 
 <Base title={essay.data.title}>
-  <article class="essay">
+  <article class="h-entry essay">
     <div class="essay__header">
-      <time class="essay__date" datetime={essay.data.date.toISOString()}>
-        {formattedDate}
-      </time>
-      <h1 class="essay__title">{essay.data.title}</h1>
+      <a class="u-url" href={canonical}>
+        <time class="dt-published essay__date" datetime={essay.data.date.toISOString()}>
+          {formattedDate}
+        </time>
+      </a>
+      <h1 class="p-name essay__title">{essay.data.title}</h1>
+      <a class="p-author h-card essay__author" href="https://ronbronson.com/" rel="author">
+        Ron Bronson
+      </a>
     </div>
 
-    <div class="essay__body">
+    <div class="e-content essay__body">
       <Content />
     </div>
   </article>
+
+  <Webmentions url={`/essays/${essay.slug}/`} />
 </Base>
 
 <style>
   .essay {
-    max-width: 70ch;
+    max-width: var(--measure);
     margin-inline: auto;
     padding-block: var(--size-10);
     padding-inline: var(--size-4);
@@ -49,18 +59,25 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 
   .essay__date {
     display: block;
-    font-size: var(--font-size-0);
-    color: var(--text-2);
-    margin-block-end: var(--size-2);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-mid);
+    margin-block-end: var(--size-3);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
   }
 
   .essay__title {
-    font-size: var(--font-size-6);
-    font-weight: var(--font-weight-7);
-    line-height: var(--font-lineheight-2);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-display);
+    font-weight: 700;
+    line-height: var(--line-height-display);
+    letter-spacing: -0.02em;
     margin: 0;
+  }
+
+  .essay__author {
+    display: none;
   }
 
   .essay__body {

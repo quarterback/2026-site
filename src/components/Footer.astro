@@ -4,6 +4,7 @@ interface Social {
   url: string;
   icon: string;
   solid?: boolean;
+  me?: boolean;
 }
 
 interface Props {
@@ -14,14 +15,14 @@ interface Props {
 
 const defaultSocials: Social[] = [
   { platform: 'Last.fm', url: 'https://last.fm/user/statechampion', icon: 'fa-lastfm' },
-  { platform: 'Bluesky', url: 'https://bsky.app/profile/ronbronson.com', icon: 'fa-bluesky' },
+  { platform: 'Bluesky', url: 'https://bsky.app/profile/ronbronson.com', icon: 'fa-bluesky', me: true },
   { platform: 'LinkedIn', url: 'https://linkedin.com/in/ronbronson', icon: 'fa-linkedin' },
-  { platform: 'GitHub', url: 'https://github.com/ronbronson', icon: 'fa-github' },
+  { platform: 'GitHub', url: 'https://github.com/ronbronson', icon: 'fa-github', me: true },
   { platform: 'Instagram', url: 'https://instagram.com/ronbronson', icon: 'fa-instagram' },
   { platform: 'pi.fyi', url: 'https://www.pi.fyi/u/ron', icon: 'fa-vine' },
   { platform: 'Record Club', url: 'https://record.club/ron', icon: 'fa-record-vinyl', solid: true },
   { platform: 'Letterboxd', url: 'https://letterboxd.com/ronbronson', icon: 'fa-letterboxd' },
-  { platform: 'Mastodon', url: 'https://mastodon.social/@ronbronson', icon: 'fa-mastodon' },
+  { platform: 'Mastodon', url: 'https://mastodon.social/@ronbronson', icon: 'fa-mastodon', me: true },
   { platform: 'Literal', url: 'https://literal.club/ronbronson', icon: 'fa-book', solid: true },
   { platform: 'Mixcloud', url: 'https://mixcloud.com/908RB', icon: 'fa-mixcloud' },
 ];
@@ -36,7 +37,7 @@ const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
         <a
           href={social.url}
           target="_blank"
-          rel="noopener"
+          rel={social.me ? 'me noopener' : 'noopener'}
           title={social.platform}
           class="social-link"
         >

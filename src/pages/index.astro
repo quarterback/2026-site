@@ -6,6 +6,7 @@ import MediaCard from '../components/MediaCard.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
 import Footer from '../components/Footer.astro';
+import LastScrobble from '../components/LastScrobble.astro';
 import { fetchMultipleRSS } from '../lib/rss';
 
 const rssFeeds = [
@@ -224,6 +225,9 @@ const fonts: string[] = [];
     <!-- Media Consumption: Books & Albums (personal section) -->
     <section id="media-consumption">
       <div class="container">
+        <div class="now-playing-row">
+          <LastScrobble />
+        </div>
         <div class="media-grid">
           <Books books={currentBooks} />
           <Albums albums={currentAlbums} title="Now Listening" />
@@ -479,6 +483,18 @@ const fonts: string[] = [];
   /* ===== MEDIA CONSUMPTION (kept from original) ===== */
   #media-consumption {
     margin-bottom: var(--size-5);
+  }
+
+  .now-playing-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-block-end: var(--size-5);
+  }
+
+  @media (max-width: 600px) {
+    .now-playing-row {
+      justify-content: flex-start;
+    }
   }
 
   .media-grid {
