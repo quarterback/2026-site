@@ -14,12 +14,6 @@ function formatDate(d: Date): string {
     day: 'numeric',
   });
 }
-
-const typeLabel: Record<StreamItem['type'], string> = {
-  note: 'Note',
-  essay: 'Essay',
-  post: 'Post',
-};
 ---
 
 <ul class="stream">
@@ -28,22 +22,18 @@ const typeLabel: Record<StreamItem['type'], string> = {
       <a
         href={item.url}
         class="stream-link"
-        {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+        target="_blank"
+        rel="noopener"
       >
         <div class="stream-meta">
           <time class="stream-date" datetime={item.date.toISOString()}>{formatDate(item.date)}</time>
-          <span class="stream-type">{typeLabel[item.type]}</span>
+          <span class="stream-source">{item.source}</span>
         </div>
         <div class="stream-body">
           <h3 class="stream-title">{item.title}</h3>
           {item.excerpt && <p class="stream-excerpt">{item.excerpt}</p>}
-          {item.tags && item.tags.length > 0 && (
-            <p class="stream-tags">
-              {item.tags.map(t => (<span class="stream-tag">#{t}</span>))}
-            </p>
-          )}
         </div>
-        <span class="stream-source">{item.source}{item.external ? ' ↗' : ''}</span>
+        <span class="stream-arrow" aria-hidden="true">↗</span>
       </a>
     </li>
   ))}
@@ -66,7 +56,7 @@ const typeLabel: Record<StreamItem['type'], string> = {
 
   .stream-link {
     display: grid;
-    grid-template-columns: 9rem 1fr auto;
+    grid-template-columns: 10rem 1fr auto;
     align-items: baseline;
     gap: 1.75rem;
     padding: 1.4rem 0;
@@ -97,10 +87,10 @@ const typeLabel: Record<StreamItem['type'], string> = {
     color: var(--ink-mid);
   }
 
-  .stream-type {
+  .stream-source {
     font-family: var(--font-mono);
     font-size: 0.58rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--accent);
   }
@@ -130,37 +120,20 @@ const typeLabel: Record<StreamItem['type'], string> = {
     max-width: 62ch;
   }
 
-  .stream-tags {
-    margin: 0.5rem 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .stream-tag {
+  .stream-arrow {
     font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.04em;
+    font-size: 0.75rem;
     color: var(--ink-faint);
-  }
-
-  .stream-source {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    white-space: nowrap;
     padding-top: 0.25rem;
   }
 
   @media (max-width: 768px) {
     .stream-link {
-      grid-template-columns: 6.5rem 1fr;
+      grid-template-columns: 7rem 1fr;
       gap: 1rem;
     }
 
-    .stream-source {
+    .stream-arrow {
       display: none;
     }
   }

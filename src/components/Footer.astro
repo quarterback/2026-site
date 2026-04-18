@@ -7,16 +7,8 @@ interface Social {
   me?: boolean;
 }
 
-interface NavLink {
-  label: string;
-  url: string;
-  external?: boolean;
-}
-
 interface Props {
   socials?: Social[];
-  siteLinks?: NavLink[];
-  legalLinks?: NavLink[];
   techStack?: string | string[];
   fonts?: string | string[];
   copyright?: string;
@@ -36,31 +28,8 @@ const defaultSocials: Social[] = [
   { platform: 'Mixcloud', url: 'https://mixcloud.com/908RB', icon: 'fa-mixcloud' },
 ];
 
-const defaultSiteLinks: NavLink[] = [
-  { label: 'Home', url: '/' },
-  { label: 'Notes', url: '/notes' },
-  { label: 'Essays', url: '/essays' },
-  { label: 'Work', url: '/work' },
-  { label: 'Speaking', url: '/media' },
-  { label: 'Newsletter', url: 'https://makingpublicwork.com', external: true },
-  { label: 'Blog', url: 'https://blog.ronbronson.com', external: true },
-  { label: 'Listening log', url: 'https://listening.ronbronson.com', external: true },
-  { label: 'Now', url: '/now' },
-  { label: 'About', url: '/about' },
-  { label: 'Coaching', url: '/coaching' },
-];
-
-const defaultLegalLinks: NavLink[] = [
-  { label: 'Privacy', url: '/privacy' },
-  { label: 'Webmention endpoint', url: 'https://webmention.io/ronbronson.com/webmention', external: true },
-  { label: 'RSS — Essays', url: '/rss.xml' },
-  { label: 'RSS — Notes', url: '/notes.xml' },
-];
-
 const {
   socials = defaultSocials,
-  siteLinks = defaultSiteLinks,
-  legalLinks = defaultLegalLinks,
   techStack: techStackProp = 'Built with Astro, Open Props, Playfair Display, DM Sans, and DM Mono.',
   fonts: fontsProp = '',
   copyright = '© 2026 Ron Bronson',
@@ -78,53 +47,23 @@ const fonts = Array.isArray(fontsProp) ? fontsProp.join(', ') : fontsProp;
       <a href="mailto:ron@ronbronson.com" class="footer-email">ron@ronbronson.com</a>
     </div>
 
-    <div class="footer-columns">
-      <div class="footer-col">
-        <p class="footer-label">Site</p>
-        <ul>
-          {siteLinks.map(link => (
-            <li>
-              <a
-                href={link.url}
-                {...(link.external ? { target: '_blank', rel: 'noopener' } : {})}
-              >{link.label}{link.external ? ' ↗' : ''}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <p class="footer-label">Elsewhere</p>
-        <ul class="footer-social-list">
-          {socials.map(social => (
-            <li>
-              <a
-                href={social.url}
-                target="_blank"
-                rel={social.me ? 'me noopener' : 'noopener'}
-                title={social.platform}
-              >
-                <i class={social.solid ? `fa-solid ${social.icon}` : `fa-brands ${social.icon}`} aria-hidden="true"></i>
-                <span>{social.platform}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <p class="footer-label">Meta</p>
-        <ul>
-          {legalLinks.map(link => (
-            <li>
-              <a
-                href={link.url}
-                {...(link.external ? { target: '_blank', rel: 'noopener' } : {})}
-              >{link.label}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div class="footer-social">
+      <p class="footer-label">Elsewhere</p>
+      <ul class="footer-social-list">
+        {socials.map(social => (
+          <li>
+            <a
+              href={social.url}
+              target="_blank"
+              rel={social.me ? 'me noopener' : 'noopener'}
+              title={social.platform}
+            >
+              <i class={social.solid ? `fa-solid ${social.icon}` : `fa-brands ${social.icon}`} aria-hidden="true"></i>
+              <span>{social.platform}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </div>
 
     <div class="footer-colophon">
@@ -183,37 +122,28 @@ const fonts = Array.isArray(fontsProp) ? fontsProp.join(', ') : fontsProp;
     color: var(--accent);
   }
 
-  .footer-columns {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--size-6);
-  }
-
-  .footer-col ul {
+  .footer-social-list {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    flex-direction: column;
-    gap: var(--size-2);
-  }
-
-  .footer-col a {
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    color: var(--ink-mid);
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-
-  .footer-col a:hover {
-    color: var(--accent);
+    flex-wrap: wrap;
+    gap: var(--size-3) var(--size-5);
   }
 
   .footer-social-list a {
     display: inline-flex;
     align-items: center;
     gap: var(--size-2);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-social-list a:hover {
+    color: var(--accent);
   }
 
   .footer-social-list i {
@@ -251,17 +181,5 @@ const fonts = Array.isArray(fontsProp) ? fontsProp.join(', ') : fontsProp;
     margin: 0;
     flex: 1;
     min-width: 260px;
-  }
-
-  @media (max-width: 768px) {
-    .footer-columns {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .footer-columns {
-      grid-template-columns: 1fr;
-    }
   }
 </style>

@@ -48,24 +48,4 @@ const work = defineCollection({
   }),
 });
 
-const essays = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-    draft: z.boolean().default(false),
-  }),
-});
-
-const notes = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string().optional(),
-    date: z.date(),
-    tags: z.array(z.string()).default([]),
-    reply_to: z.string().url().optional(),
-    draft: z.boolean().default(false),
-  }),
-});
-
-export const collections = { work, essays, notes };
+export const collections = { work };
