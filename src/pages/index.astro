@@ -12,20 +12,14 @@ const stream = await getHomepageStream(12);
 
     <!-- HERO -->
     <section class="hero" aria-labelledby="hero-heading">
-      <div class="container hero-inner">
-        <div class="hero-avatar">
-          <img src="/ron-bronson.jpg" alt="Ron Bronson" width="140" height="140" />
-        </div>
+      <div class="container">
+        <h1 id="hero-heading" class="hero-headline">
+          I build and fix<br>the systems that<br>run <em>public life.</em>
+        </h1>
 
-        <div class="hero-text">
-          <h1 id="hero-heading" class="hero-headline">
-            I build and fix<br>the systems that<br>run <em>public life.</em>
-          </h1>
-
-          <div class="hero-bio">
-            <p>Hi, I&rsquo;m Ron Bronson. I work in deployment and interaction policy, helping large institutions ship tech and AI &mdash; moving pilots into products, policies into working systems, and stalled programs back on track.</p>
-            <p>I run <a href="https://www.occupant.works/" target="_blank" rel="noopener">Occupant</a> (independent advisory for state and local government) and <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> (decision infrastructure for institutional AI), write the <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> newsletter, and teach at the <a href="/about">University of Michigan</a>.</p>
-          </div>
+        <div class="hero-bio">
+          <p>Hi, I&rsquo;m Ron Bronson. I work in deployment and interaction policy, helping large institutions ship tech and AI &mdash; moving pilots into products, policies into working systems, and stalled programs back on track.</p>
+          <p>I run <a href="https://www.occupant.works/" target="_blank" rel="noopener">Occupant</a> (independent advisory for state and local government) and <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> (decision infrastructure for institutional AI), write the <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> newsletter, and teach at the <a href="/about">University of Michigan</a>.</p>
         </div>
       </div>
     </section>
@@ -87,33 +81,6 @@ const stream = await getHomepageStream(12);
     max-width: var(--content-width);
     margin: 0 auto;
     padding: clamp(3rem, 8vh, 5rem) var(--pad) clamp(3rem, 6vh, 4rem);
-  }
-
-  .hero-inner {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
-    align-items: start;
-  }
-
-  .hero-avatar {
-    width: clamp(96px, 12vw, 140px);
-    height: clamp(96px, 12vw, 140px);
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid var(--border);
-    flex-shrink: 0;
-  }
-
-  .hero-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .hero-text {
-    min-width: 0;
   }
 
   .hero-headline {
@@ -281,10 +248,6 @@ const stream = await getHomepageStream(12);
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    .hero-inner {
-      grid-template-columns: 1fr;
-    }
-
     .service-cards {
       grid-template-columns: 1fr;
     }
