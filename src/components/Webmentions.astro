@@ -1,0 +1,219 @@
+---
+import { readFileSync, existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
+interface Props {
+  url: string;  // pathname, e.g. "/notes/hello/"
+}
+
+const { url } = Astro.props;
+
+interface Mention {
+  type?: string;
+  author?: { name?: string; photo?: string; url?: string };
+  url?: string;
+  published?: string;
+  'wm-received'?: string;
+  'wm-property'?: string;
+  'wm-source'?: string;
+  content?: { text?: string; html?: string } | string;
+}
+
+type WebmentionCache = Record<string, Mention[]>;
+
+const here = dirname(fileURLToPath(import.meta.url));
+const cachePath = resolve(here, '../data/webmentions.json');
+
+let all: WebmentionCache = {};
+if (existsSync(cachePath)) {
+  try {
+    all = JSON.parse(readFileSync(cachePath, 'utf-8')) as WebmentionCache;
+  } catch {
+    all = {};
+  }
+}
+
+function normalizePath(p: string): string {
+  try {
+    const u = new URL(p, 'https://ronbronson.com');
+    let path = u.pathname;
+    if (!path.endsWith('/')) path += '/';
+    return path;
+  } catch {
+    return p;
+  }
+}
+
+const keyCandidates = [url, normalizePath(url)];
+let mentions: Mention[] = [];
+for (const k of keyCandidates) {
+  if (all[k]) { mentions = all[k]; break; }
+}
+
+const likes = mentions.filter((m) => m['wm-property'] === 'like-of');
+const reposts = mentions.filter((m) => m['wm-property'] === 'repost-of');
+const replies = mentions.filter(
+  (m) => m['wm-property'] === 'in-reply-to' || m['wm-property'] === 'mention-of'
+);
+
+function contentText(m: Mention): string {
+  const c = m.content;
+  if (!c) return '';
+  if (typeof c === 'string') return c;
+  return c.text ?? '';
+}
+
+const hasAny = likes.length + reposts.length + replies.length > 0;
+---
+
+{hasAny && (
+  <section class="webmentions" aria-label="Webmentions">
+    <h2 class="webmentions__heading">Responses</h2>
+
+    {(likes.length > 0 || reposts.length > 0) && (
+      <div class="webmentions__facepile">
+        {[...likes, ...reposts].map((m) => (
+          <a
+            href={m['wm-source'] || m.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="webmentions__face"
+            title={`${m.author?.name ?? 'Someone'} ${m['wm-property'] === 'repost-of' ? 'reposted' : 'liked'} this`}
+          >
+            {m.author?.photo ? (
+              <img src={m.author.photo} alt={m.author.name ?? ''} width="36" height="36" loading="lazy" />
+            ) : (
+              <span class="webmentions__face-placeholder" aria-hidden="true">{(m.author?.name ?? '?').slice(0, 1)}</span>
+            )}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {replies.length > 0 && (
+      <ul class="webmentions__replies">
+        {replies.map((m) => (
+          <li class="webmentions__reply">
+            <div class="webmentions__reply-meta">
+              {m.author?.photo && (
+                <img class="webmentions__avatar" src={m.author.photo} alt="" width="28" height="28" loading="lazy" />
+              )}
+              <a
+                class="webmentions__author"
+                href={m.author?.url ?? m['wm-source']}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {m.author?.name ?? 'Someone'}
+              </a>
+              {m.published && (
+                <time class="webmentions__time" datetime={m.published}>
+                  {new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(m.published))}
+                </time>
+              )}
+            </div>
+            <p class="webmentions__content">{contentText(m)}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+)}
+
+<style>
+  .webmentions {
+    max-width: var(--measure-narrow);
+    margin-inline: auto;
+    padding: var(--size-8) var(--pad);
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .webmentions__heading {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin: 0 0 var(--size-5);
+  }
+
+  .webmentions__facepile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size-2);
+    margin-block-end: var(--size-6);
+  }
+
+  .webmentions__face img,
+  .webmentions__face-placeholder {
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--bg-ink);
+  }
+
+  .webmentions__face-placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+  }
+
+  .webmentions__replies {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .webmentions__reply {
+    padding-block: var(--size-4);
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .webmentions__reply:last-child {
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .webmentions__reply-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--size-2);
+    margin-block-end: var(--size-2);
+    font-size: 0.8rem;
+  }
+
+  .webmentions__avatar {
+    border-radius: 50%;
+  }
+
+  .webmentions__author {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .webmentions__author:hover {
+    color: var(--accent);
+  }
+
+  .webmentions__time {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+  }
+
+  .webmentions__content {
+    margin: 0;
+    color: var(--ink-mid);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+</style>
