@@ -66,6 +66,16 @@ const fonts = [
 
 <p>Also, I'm unreasonably enthusiastic about <a href="https://www.superpesis.fi/ajankohtaista/superpesis-yhdysvaltalainen-ron-bronson-toteutti-unelmansa-ja-matkusti-suomeen-katsomaan-pesapalloa">pesäpallo.</a></p>
 
+            <div class="currently">
+              <p class="currently-label">Currently</p>
+              <ul class="currently-list">
+                <li>Assistant Professor of Practice in Urban Technology, University of Michigan</li>
+                <li>Founder, <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> &mdash; decision infrastructure for institutional AI procurement.</li>
+                <li>Founder, <a href="https://www.occupant.works/" target="_blank" rel="noopener">Occupant</a> &mdash; independent advisory for state and local government.</li>
+                <li>Writing at <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> and <a href="https://blog.ronbronson.com" target="_blank" rel="noopener">blog.ronbronson.com</a>.</li>
+              </ul>
+            </div>
+
             <div class="contact-ctas">
               <a href="mailto:ron@ronbronson.com" class="cta-button cta-button--primary">
                 Email me
@@ -269,6 +279,56 @@ const fonts = [
 
   .state-capacity-cta a:hover {
     color: var(--brand);
+  }
+
+  /* Currently list */
+  .currently {
+    margin-top: var(--size-6);
+    padding-top: var(--size-5);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .currently-label {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-00);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    margin: 0 0 var(--size-3);
+  }
+
+  .currently-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
+
+  .currently-list li {
+    font-size: clamp(var(--font-size-0), 2.5vw, var(--font-size-1));
+    line-height: 1.5;
+    color: var(--text-2);
+    padding-left: var(--size-4);
+    position: relative;
+  }
+
+  .currently-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 10px;
+    height: 1px;
+    background: var(--brand);
+  }
+
+  .currently-list a {
+    color: var(--text-1);
+    text-decoration: underline;
+    text-decoration-color: var(--brand);
+    text-underline-offset: 2px;
   }
 
   /* Contact CTAs */

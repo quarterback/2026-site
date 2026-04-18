@@ -1,541 +1,293 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Hero from '../components/Hero.astro';
-import MediaCard from '../components/MediaCard.astro';
-import Books from '../components/Books.astro';
-import Albums from '../components/Albums.astro';
 import Footer from '../components/Footer.astro';
-import LastScrobble from '../components/LastScrobble.astro';
-import { fetchMultipleRSS } from '../lib/rss';
+import WritingStream from '../components/WritingStream.astro';
+import { getHomepageStream } from '../lib/stream';
 
-const rssFeeds = [
-  'https://makingpublicwork.com/rss/',
-  'https://blog.ronbronson.com/feed.rss',
-];
-
-let recentPosts: any[] = [];
-try {
-  const allPosts = await fetchMultipleRSS(rssFeeds);
-  recentPosts = allPosts.slice(0, 5);
-} catch (error) {
-  console.error('Failed to fetch RSS feeds:', error);
-  recentPosts = [];
-}
-
-const currentBooks = [
-  {
-    title: "1929",
-    author: "Andrew Ross Sorkin",
-  },
-  {
-    title: "Exocapitalism: The Political Economy of Software",
-    author: "Charles Mudede",
-  },
-  {
-    title: "The Field Guide to Design Futures",
-    author: "Giovanni Caruso, Silvio Cioni",
-  },
-];
-
-const currentAlbums = [
-  {
-    title: "Until It's Time For Me to Go",
-    artist: "Jim Croce",
-  },
-  {
-    title: "There Is Nothing more to Say",
-    artist: "The Millenium",
-  },
-  {
-    title: "Another Song for the End of the World",
-    artist: "Sophie May",
-  },
-  {
-    title: "People Make The World Go Round",
-    artist: "Saeed",
-  },
-];
-
-const techStack = [
-  "built hastily using Astro, Open Props, FontAwesome, TypeScript, Playfair Display, DM Sans, DM Mono, Netlify & GitHub"
-];
-
-const fonts: string[] = [];
+const stream = await getHomepageStream(12);
 ---
 
 <Base title="Ron Bronson">
   <main id="main">
-    <Hero
-      headline='I build and fix<br>the systems that<br>run <em>public life.</em>'
-      bio='<p>I work on public sector programs and technology systems that aren&apos;t working. Delivery Forensics is how I figure out why &mdash; tracing where decisions broke down, where ownership got lost, and what actually caused a program to stall. Trajectory Management is what comes next: stabilizing or resetting the system so work can move again.</p><p>Through <strong>Occupant</strong>, I deploy cross-functional teams to do this work directly, and build tools that make it concrete: <a href="https://statecapacity.ai">State Capacity AI</a> tracks what AI actually costs governments, with live procurement benchmarks and decision infrastructure that surfaces what vendors obscure. I&apos;m an Assistant Professor of Practice in Urban Technology at the <strong>University of Michigan</strong> and founded <a href="https://aigapdx.org">PDX Design Month</a> and developed the model for <a href="https://pdxdigitalcorps.org">local civic response teams</a>.</p>'
-      ctas={[
-        { label: "See the work", url: "#work", style: "primary" },
-        { label: "Work with me ↗", url: "https://occupant.works", style: "ghost", external: true },
-        { label: "Read the thinking ↗", url: "https://makingpublicwork.com", style: "ghost", external: true },
-      ]}
-    />
 
-    <!-- Work Grid -->
-    <section class="section" id="work" aria-labelledby="work-heading">
-      <div class="container">
-        <p class="section-label" id="work-heading">Selected Work</p>
-        <div class="work-grid">
-          <a href="/work/18f-leadership" class="work-item">
-            <span class="work-tag">Federal · 2016–2024</span>
-            <span class="work-title">Design Leadership at Scale, 18F</span>
-            <span class="work-desc">Built and led a 40-person design practice across federal agencies including the VA, IRS, HHS, DOD, and FTC. Delivery work touched millions of Americans.</span>
-            <span class="work-arrow">See the work →</span>
-          </a>
-          <a href="/frameworks" class="work-item">
-            <span class="work-tag">Research · Ongoing</span>
-            <span class="work-title">Public Mechanics</span>
-            <span class="work-desc">Original frameworks for how public services are built, maintained, and fail — including Trajectory Management and Delivery Forensics.</span>
-            <span class="work-arrow">Read the frameworks →</span>
-          </a>
-          <a href="https://statecapacity.ai" class="work-item">
-            <span class="work-tag">Tool · 2024–Ongoing</span>
-            <span class="work-title">State Capacity AI</span>
-            <span class="work-desc">Tracks AI model pricing and performance for institutional procurement. Built for decision-makers who need vendor intelligence without the sales pitch.</span>
-            <span class="work-arrow">statecapacity.ai →</span>
-          </a>
-          <a href="/work/portland-digital-corps" class="work-item">
-            <span class="work-tag">Community · 2025</span>
-            <span class="work-title">Portland Digital Corps</span>
-            <span class="work-desc">Assembled 50+ practitioners to rebuild six Oregon nonprofit websites. Volunteer infrastructure for civic digital capacity.</span>
-            <span class="work-arrow">See the work →</span>
-          </a>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container hero-inner">
+        <div class="hero-avatar">
+          <img src="/ron-bronson.jpg" alt="Ron Bronson" width="140" height="140" />
         </div>
-      </div>
-    </section>
 
-    <!-- Pull Quote -->
-    <div class="pull-quote">
-      <div class="pull-quote-inner container">
-        <blockquote>
-          Most design work is repair — patching the gaps between intention and reality, between policy and the lived experience of the people who depend on public systems.
-          <cite>— Design as Repair, 2025</cite>
-        </blockquote>
-      </div>
-    </div>
+        <div class="hero-text">
+          <h1 id="hero-heading" class="hero-headline">
+            I build and fix<br>the systems that<br>run <em>public life.</em>
+          </h1>
 
-    <!-- Writing + Speaking -->
-    <section class="section" id="writing" aria-labelledby="writing-heading">
-      <div class="container">
-        <p class="section-label" id="writing-heading">Writing &amp; Speaking</p>
-        <div class="two-col">
-
-          <div>
-            <p class="col-label">Recent Writing</p>
-            <ul class="writing-list">
-              {recentPosts.map(post => (
-                <li>
-                  <a href={post.link} class="writing-item" target="_blank" rel="noopener">
-                    <span class="writing-type">Post</span>
-                    <span class="writing-title">{post.title}</span>
-                    <span class="writing-pub">{(() => { try { return new URL(post.link).hostname.replace('www.', ''); } catch { return ''; } })()}</span>
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a href="https://makingpublicwork.com" class="writing-item">
-                  <span class="writing-type">Newsletter</span>
-                  <span class="writing-title">Making Public Work — Ongoing</span>
-                  <span class="writing-pub">Subscribe →</span>
-                </a>
-              </li>
-            </ul>
+          <div class="hero-bio">
+            <p>Hi, I&rsquo;m Ron Bronson. I work in deployment and interaction policy, helping large institutions ship tech and AI &mdash; moving pilots into products, policies into working systems, and stalled programs back on track.</p>
+            <p>I run <a href="https://www.occupant.works/" target="_blank" rel="noopener">Occupant</a> (independent advisory for state and local government) and <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> (decision infrastructure for institutional AI), write the <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> newsletter, and teach at the <a href="/about">University of Michigan</a>.</p>
           </div>
-
-          <div id="speaking">
-            <p class="col-label">Recent Speaking</p>
-            <ul class="speaking-list">
-              <li><a href="https://www.ixda.no/talks/design-as-repair" class="speaking-item" target="_blank" rel="noopener">
-                <span class="speaking-venue">IxDA Oslo</span>
-                <span class="speaking-title">Design as Repair</span>
-                <span class="speaking-date">2025</span>
-              </a></li>
-              <li class="speaking-item">
-                <span class="speaking-venue">Service Design Show</span>
-                <span class="speaking-title">Repairing Service Design for the Age of AI</span>
-                <span class="speaking-date">Sep 2025</span>
-              </li>
-              <li class="speaking-item">
-                <span class="speaking-venue">Cascadia Open Source GIS</span>
-                <span class="speaking-title">Beyond Civic Tech</span>
-                <span class="speaking-date">Nov 2025</span>
-              </li>
-            </ul>
-          </div>
-
         </div>
       </div>
     </section>
 
-    <!-- Recent Appearances — with embeds -->
-    <section class="section" id="media" aria-labelledby="media-heading">
+    <!-- HOW CAN I HELP? -->
+    <section class="help" aria-labelledby="help-heading">
       <div class="container">
-        <p class="section-label" id="media-heading">Recent Appearances</p>
-        <div class="media-list">
-          <MediaCard
-            title="Future Perfect Book Club"
-            source="futureperfectbook.club"
-            description="Co-hosted with Joel Goodman, exploring the intersection of design, technology, and the future of institutions."
-            mediaType="podcast"
-            url="https://futureperfectbook.club"
-            date="2025"
-          />
-          <MediaCard
-            title="Some advice on managing your design career upwards"
-            source="Piccalil.li"
-            description="Navigating design leadership, building influence across organizations, and positioning yourself for strategic impact."
-            mediaType="article"
-            url="https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/"
-            image="/img/piccalil.li.png"
-            date="January 2026"
-          />
-          <MediaCard
-            title="Beyond Civic Tech: Public Mechanics Starts at Home"
-            source="Cascadia Open Source Fall Conference"
-            description="Why civic tech fails when it ignores maintenance, repair, and the invisible work that keeps public services running."
-            mediaType="talk"
-            embedUrl="https://youtube.com/watch?v=hnAScuK-oMo"
-            date="November 2025"
-          />
-          <MediaCard
-            title="Repairing Service Design for the Age of AI"
-            source="Service Design Show Podcast"
-            description="Exploring how service design must evolve to address the challenges and opportunities of AI-driven systems."
-            mediaType="podcast"
-            url="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505"
-            date="September 2025"
-          />
-          <MediaCard
-            title="Design Systems and Public Services"
-            source="YouTube"
-            description="Discussion on service design, public sector innovation, and building decision systems that work at scale."
-            mediaType="video"
-            embedUrl="https://www.youtube.com/watch?v=kL0gYtoUtvI"
-            date="October 2025"
-          />
+        <h2 id="help-heading" class="help-heading">How can I help?</h2>
+
+        <div class="service-cards">
+          <article class="service-card">
+            <h3 class="service-title">
+              <span class="service-arrow" aria-hidden="true">&rarr;</span>
+              Senior advisory for public-sector tech &amp; AI
+            </h3>
+            <p class="service-body">
+              I work with state, local, and federal institutions on deploying AI responsibly, stabilizing programs that have stalled, and building decision infrastructure that makes procurement and delivery tractable.
+            </p>
+            <a href="/work" class="service-cta">More about my work &rarr;</a>
+          </article>
+
+          <article class="service-card">
+            <h3 class="service-title">
+              <span class="service-arrow" aria-hidden="true">&rarr;</span>
+              Writing, speaking, and teaching
+            </h3>
+            <p class="service-body">
+              I publish Making Public Work, a newsletter on public-sector technology, teach at the University of Michigan, and speak with leadership teams about AI and institutional capacity.
+            </p>
+            <a href="/media" class="service-cta">More about speaking &rarr;</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Media Consumption: Books & Albums (personal section) -->
-    <section id="media-consumption">
+    <!-- LATEST POSTS -->
+    <section class="posts" aria-labelledby="posts-heading">
       <div class="container">
-        <div class="now-playing-row">
-          <LastScrobble />
-        </div>
-        <div class="media-grid">
-          <Books books={currentBooks} />
-          <Albums albums={currentAlbums} title="Now Listening" />
+        <h2 id="posts-heading" class="posts-heading">Latest Posts</h2>
+
+        <WritingStream items={stream} />
+
+        <div class="posts-more">
+          <a href="/notes">All notes &rarr;</a>
+          <a href="/essays">All essays &rarr;</a>
+          <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Newsletter &#8599;</a>
+          <a href="https://blog.ronbronson.com" target="_blank" rel="noopener">Blog &#8599;</a>
         </div>
       </div>
     </section>
+
   </main>
 
-  <Footer
-    techStack={techStack}
-    fonts={fonts}
-  />
+  <Footer />
 </Base>
 
 <style>
-  /* ===== SECTIONS ===== */
-  .section {
+  /* ===== HERO ===== */
+  .hero {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vh, 5rem) var(--pad) clamp(3rem, 6vh, 4rem);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+    align-items: start;
+  }
+
+  .hero-avatar {
+    width: clamp(96px, 12vw, 140px);
+    height: clamp(96px, 12vw, 140px);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .hero-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-text {
+    min-width: 0;
+  }
+
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 1.5rem;
+  }
+
+  .hero-headline :global(em) {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .hero-bio {
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.4vw, 1.1rem);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--ink-mid);
+    max-width: 64ch;
+  }
+
+  .hero-bio p {
+    margin: 0 0 1rem;
+  }
+
+  .hero-bio p:last-child {
+    margin-bottom: 0;
+  }
+
+  .hero-bio a {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 2px;
+    transition: color 0.15s;
+  }
+
+  .hero-bio a:hover {
+    color: var(--accent);
+  }
+
+  /* ===== HOW CAN I HELP? ===== */
+  .help {
     max-width: var(--content-width);
     margin: 0 auto;
     padding: clamp(3rem, 7vh, 5rem) var(--pad);
     border-top: 1px solid var(--rule);
   }
 
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 0.63rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 2.5rem;
+  .help-heading {
+    font-family: var(--font-serif);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin: 0 0 2.5rem;
   }
 
-  /* ===== WORK GRID ===== */
-  .work-grid {
+  .service-cards {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
+    gap: 1.5rem;
   }
 
-  .work-item {
+  .service-card {
     background: var(--bg);
-    padding: 2rem;
-    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: clamp(1.5rem, 3vw, 2rem);
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    transition: background 0.15s;
+    gap: 0.9rem;
+    transition: background 0.15s, border-color 0.15s;
   }
 
-  .work-item:hover {
+  .service-card:hover {
     background: var(--bg-warm);
+    border-color: var(--ink-faint);
   }
 
-  .work-tag {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .work-title {
+  .service-title {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 700;
+    line-height: 1.3;
     color: var(--ink);
-    line-height: 1.25;
+    margin: 0;
   }
 
-  .work-desc {
-    font-size: 0.875rem;
+  .service-arrow {
+    color: var(--accent);
+    font-weight: 400;
+    margin-right: 0.35rem;
+  }
+
+  .service-body {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
     font-weight: 300;
-    color: var(--ink-mid);
     line-height: 1.65;
+    color: var(--ink-mid);
+    margin: 0;
     flex: 1;
   }
 
-  .work-arrow {
+  .service-cta {
     font-family: var(--font-mono);
-    font-size: 0.63rem;
-    letter-spacing: 0.04em;
-    color: var(--ink-faint);
-    margin-top: 0.5rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    margin-top: 0.4rem;
+    align-self: flex-start;
     transition: color 0.15s;
   }
 
-  .work-item:hover .work-arrow {
-    color: var(--accent);
+  .service-cta:hover {
+    color: var(--brand-dim);
   }
 
-  /* ===== PULL QUOTE ===== */
-  .pull-quote {
-    background: var(--bg-warm);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: clamp(3rem, 7vh, 5rem) 0;
-  }
-
-  .pull-quote-inner {
+  /* ===== LATEST POSTS ===== */
+  .posts {
     max-width: var(--content-width);
     margin: 0 auto;
-  }
-
-  .pull-quote blockquote {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.3rem, 2.6vw, 1.85rem);
-    font-weight: 400;
-    line-height: 1.55;
-    color: var(--ink);
-    max-width: 740px;
-    padding-left: 1.5rem;
-    border-left: 3px solid var(--accent);
-  }
-
-  .pull-quote blockquote cite {
-    display: block;
-    font-family: var(--font-mono);
-    font-style: normal;
-    font-size: 0.62rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-top: 1.25rem;
-  }
-
-  /* ===== WRITING + SPEAKING TWO-COL ===== */
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
-  }
-
-  .col-label {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-bottom: 1.5rem;
-  }
-
-  .writing-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .writing-item {
-    display: grid;
-    grid-template-columns: 4.5rem 1fr auto;
-    align-items: baseline;
-    gap: 1.25rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--rule);
-    text-decoration: none;
-  }
-
-  .writing-item:first-child {
+    padding: clamp(3rem, 7vh, 5rem) var(--pad);
     border-top: 1px solid var(--rule);
   }
 
-  .writing-item:hover .writing-title {
-    color: var(--accent);
-  }
-
-  .writing-type {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .writing-title {
+  .posts-heading {
     font-family: var(--font-serif);
-    font-size: 1rem;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
     font-style: italic;
     color: var(--ink);
-    line-height: 1.35;
+    margin: 0 0 2rem;
+  }
+
+  .posts-more {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2rem;
+    margin-top: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .posts-more a {
+    color: var(--ink-mid);
+    text-decoration: none;
     transition: color 0.15s;
   }
 
-  .writing-pub {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    white-space: nowrap;
-  }
-
-  .speaking-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-
-  .speaking-item {
-    padding: 1.1rem;
-    background: var(--bg-ink);
-    border: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    text-decoration: none;
-    transition: background 0.15s;
-  }
-
-  .speaking-item:hover {
-    background: var(--bg-warm);
-  }
-
-  .speaking-venue {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .posts-more a:hover {
     color: var(--accent);
-  }
-
-  .speaking-title {
-    font-family: var(--font-serif);
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--ink);
-    line-height: 1.4;
-  }
-
-  .speaking-date {
-    font-family: var(--font-mono);
-    font-size: 0.58rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin-top: auto;
-    padding-top: 0.4rem;
-  }
-
-  /* ===== MEDIA APPEARANCES ===== */
-  .media-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-4);
-  }
-
-  /* ===== MEDIA CONSUMPTION (kept from original) ===== */
-  #media-consumption {
-    margin-bottom: var(--size-5);
-  }
-
-  .now-playing-row {
-    display: flex;
-    justify-content: flex-end;
-    margin-block-end: var(--size-5);
-  }
-
-  @media (max-width: 600px) {
-    .now-playing-row {
-      justify-content: flex-start;
-    }
-  }
-
-  .media-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--size-6);
   }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    .work-grid {
+    .hero-inner {
       grid-template-columns: 1fr;
     }
 
-    .two-col {
+    .service-cards {
       grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-
-    .writing-item {
-      grid-template-columns: 3.5rem 1fr;
-    }
-
-    .writing-pub {
-      display: none;
-    }
-
-    .media-grid {
-      grid-template-columns: 1fr;
-      gap: var(--size-5);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .writing-item {
-      grid-template-columns: 1fr;
-      gap: 0.15rem;
-    }
-
-    .writing-type {
-      display: none;
     }
   }
 </style>
