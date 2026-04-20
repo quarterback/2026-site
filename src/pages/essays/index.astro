@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const all = await getCollection('essays', ({ data }) => !data.draft);
+const essays = all.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const formatLong = (d: Date) =>
+  new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(d);
+---
+
+<Base title="Essays — Ron Bronson" description="Long-form essays on design, public systems, and institutional repair.">
+  <main id="main" class="essays-index">
+    <header class="essays-header">
+      <p class="essays-kicker">Essays</p>
+      <h1 class="essays-headline">Long-form, infrequent.</h1>
+      <p class="standfirst">
+        Longer pieces that need space to breathe. Shorter observations live in <a href="/notes">notes</a>.
+      </p>
+    </header>
+
+    {essays.length === 0 && (
+      <p class="essays-empty">No essays published yet.</p>
+    )}
+
+    <ul class="essays-list">
+      {essays.map((essay) => (
+        <li class="essays-list__item">
+          <a href={`/essays/${essay.slug}`} class="essays-list__link">
+            <time class="essays-list__date" datetime={essay.data.date.toISOString()}>
+              {formatLong(essay.data.date)}
+            </time>
+            <span class="essays-list__title">{essay.data.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>
+
+<style>
+  .essays-index {
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-block: var(--size-10);
+    padding-inline: var(--pad);
+  }
+
+  .essays-header {
+    margin-block-end: var(--size-10);
+  }
+
+  .essays-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 var(--size-3);
+  }
+
+  .essays-headline {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-display);
+    line-height: var(--line-height-display);
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--size-4);
+  }
+
+  .essays-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .essays-list__item {
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .essays-list__item:last-child {
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .essays-list__link {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding-block: var(--size-5);
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .essays-list__link:hover .essays-list__title {
+    color: var(--accent);
+  }
+
+  .essays-list__date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .essays-list__title {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    line-height: 1.3;
+    transition: color 0.15s;
+  }
+
+  .essays-empty {
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .essays-list__link {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>
