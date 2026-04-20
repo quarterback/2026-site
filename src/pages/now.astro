@@ -5,12 +5,32 @@ import LastScrobble from '../components/LastScrobble.astro';
 import Books from '../components/Books.astro';
 import Albums from '../components/Albums.astro';
 import MediaCard from '../components/MediaCard.astro';
+import { getBookhive } from '../lib/bookhive';
 
-const currentBooks = [
-  { title: "1929", author: "Andrew Ross Sorkin" },
-  { title: "Exocapitalism: The Political Economy of Software", author: "Charles Mudede" },
-  { title: "The Field Guide to Design Futures", author: "Giovanni Caruso, Silvio Cioni" },
-];
+const bookhive = await getBookhive();
+
+const reading = bookhive.reading.map(b => ({ title: b.title, author: b.authors }));
+const finished = bookhive.finished.slice(0, 6).map(b => ({
+  title: b.title,
+  author: b.authors,
+  stars: b.stars,
+  finishedAt: b.finishedAt,
+}));
+
+function formatFinished(iso?: string): string {
+  if (!iso) return '';
+  try {
+    return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+  } catch {
+    return '';
+  }
+}
+
+function starLine(n?: number): string {
+  if (!n) return '';
+  const filled = Math.round(n / 2);
+  return '★'.repeat(filled) + '☆'.repeat(5 - filled);
+}
 
 const currentAlbums = [
   { title: "Until It's Time For Me to Go", artist: "Jim Croce" },
@@ -46,7 +66,38 @@ const currentAlbums = [
     <section class="now-section" aria-labelledby="reading-heading">
       <div class="container">
         <h2 id="reading-heading" class="now-heading">Reading</h2>
-        <Books books={currentBooks} title="Currently Reading" />
+
+        {reading.length > 0 && (
+          <div class="books-block">
+            <Books books={reading} title="Currently reading" />
+          </div>
+        )}
+
+        {finished.length > 0 && (
+          <div class="books-block">
+            <h3 class="books-subhead">Recently finished</h3>
+            <ul class="finished-list">
+              {finished.map(b => (
+                <li>
+                  <div class="finished-body">
+                    <span class="finished-title">{b.title}</span>
+                    <span class="finished-author">&nbsp;by {b.author}</span>
+                  </div>
+                  <div class="finished-meta">
+                    {b.stars && <span class="finished-stars" title={`${b.stars}/10`}>{starLine(b.stars)}</span>}
+                    {b.finishedAt && <span class="finished-date">{formatFinished(b.finishedAt)}</span>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <p class="books-link">
+          <a href="https://bookhive.buzz/profile/ronbronson.com" target="_blank" rel="noopener">
+            Full library on Bookhive &#8599;
+          </a>
+        </p>
       </div>
     </section>
 
@@ -169,5 +220,95 @@ const currentAlbums = [
     display: flex;
     flex-direction: column;
     gap: var(--size-4);
+  }
+
+  .books-block {
+    margin-bottom: 2rem;
+  }
+
+  .books-subhead {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    color: var(--ink);
+    margin: 0 0 var(--size-2);
+  }
+
+  .finished-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .finished-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: var(--font-size-1);
+    line-height: 1.5;
+  }
+
+  .finished-list li:last-child {
+    border-bottom: none;
+  }
+
+  .finished-title {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .finished-author {
+    color: var(--ink-mid);
+    font-weight: 300;
+  }
+
+  .finished-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .finished-stars {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .finished-date {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .books-link {
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .books-link a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .books-link a:hover {
+    color: var(--brand-dim);
+  }
+
+  @media (max-width: 600px) {
+    .finished-list li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
   }
 </style>
