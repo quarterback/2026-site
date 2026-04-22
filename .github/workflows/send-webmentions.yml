@@ -1,0 +1,32 @@
+name: Send Webmentions
+
+# Uses webmention.app (https://webmention.app) to scan the notes/essays RSS feed
+# for outbound links and fire webmentions to the targets' endpoints.
+# Requires repo secret: WEBMENTION_APP_TOKEN (from webmention.app account).
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # every 6 hours
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/content/notes/**"
+      - "src/content/essays/**"
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger webmention.app for notes feed
+        env:
+          TOKEN: ${{ secrets.WEBMENTION_APP_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "WEBMENTION_APP_TOKEN not set — skipping."
+            exit 0
+          fi
+          curl -fsS -X POST \
+            "https://webmention.app/check?url=https%3A%2F%2Fronbronson.com%2Fnotes.xml&token=${TOKEN}" \
+            || echo "webmention.app returned non-zero; continuing."

@@ -1,0 +1,314 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import LastScrobble from '../components/LastScrobble.astro';
+import Books from '../components/Books.astro';
+import Albums from '../components/Albums.astro';
+import MediaCard from '../components/MediaCard.astro';
+import { getBookhive } from '../lib/bookhive';
+
+const bookhive = await getBookhive();
+
+const reading = bookhive.reading.map(b => ({ title: b.title, author: b.authors }));
+const finished = bookhive.finished.slice(0, 6).map(b => ({
+  title: b.title,
+  author: b.authors,
+  stars: b.stars,
+  finishedAt: b.finishedAt,
+}));
+
+function formatFinished(iso?: string): string {
+  if (!iso) return '';
+  try {
+    return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+  } catch {
+    return '';
+  }
+}
+
+function starLine(n?: number): string {
+  if (!n) return '';
+  const filled = Math.round(n / 2);
+  return '★'.repeat(filled) + '☆'.repeat(5 - filled);
+}
+
+const currentAlbums = [
+  { title: "Until It's Time For Me to Go", artist: "Jim Croce" },
+  { title: "There Is Nothing more to Say", artist: "The Millenium" },
+  { title: "Another Song for the End of the World", artist: "Sophie May" },
+  { title: "People Make The World Go Round", artist: "Saeed" },
+];
+---
+
+<Base title="Now — Ron Bronson">
+  <main id="main">
+
+    <section class="now-header">
+      <div class="container">
+        <p class="now-kicker">Now</p>
+        <h1 class="now-title">What I&rsquo;m doing, reading, and listening to.</h1>
+        <p class="now-standfirst">Updated occasionally.</p>
+      </div>
+    </section>
+
+    <section class="now-section" aria-labelledby="listening-heading">
+      <div class="container">
+        <h2 id="listening-heading" class="now-heading">Listening</h2>
+        <div class="now-scrobble">
+          <LastScrobble />
+        </div>
+        <div class="now-two-col">
+          <Albums albums={currentAlbums} title="Current rotation" />
+        </div>
+      </div>
+    </section>
+
+    <section class="now-section" aria-labelledby="reading-heading">
+      <div class="container">
+        <h2 id="reading-heading" class="now-heading">Reading</h2>
+
+        {reading.length > 0 && (
+          <div class="books-block">
+            <Books books={reading} title="Currently reading" />
+          </div>
+        )}
+
+        {finished.length > 0 && (
+          <div class="books-block">
+            <h3 class="books-subhead">Recently finished</h3>
+            <ul class="finished-list">
+              {finished.map(b => (
+                <li>
+                  <div class="finished-body">
+                    <span class="finished-title">{b.title}</span>
+                    <span class="finished-author">&nbsp;by {b.author}</span>
+                  </div>
+                  <div class="finished-meta">
+                    {b.stars && <span class="finished-stars" title={`${b.stars}/10`}>{starLine(b.stars)}</span>}
+                    {b.finishedAt && <span class="finished-date">{formatFinished(b.finishedAt)}</span>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <p class="books-link">
+          <a href="https://bookhive.buzz/profile/ronbronson.com" target="_blank" rel="noopener">
+            Full library on Bookhive &#8599;
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <section class="now-section" aria-labelledby="appearances-heading">
+      <div class="container">
+        <h2 id="appearances-heading" class="now-heading">Recent appearances</h2>
+        <div class="media-list">
+          <MediaCard
+            title="Future Perfect Book Club"
+            source="futureperfectbook.club"
+            description="Co-hosted with Joel Goodman, exploring the intersection of design, technology, and the future of institutions."
+            mediaType="podcast"
+            url="https://futureperfectbook.club"
+            date="2025"
+          />
+          <MediaCard
+            title="Some advice on managing your design career upwards"
+            source="Piccalil.li"
+            description="Navigating design leadership, building influence across organizations, and positioning yourself for strategic impact."
+            mediaType="article"
+            url="https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/"
+            image="/img/piccalil.li.png"
+            date="January 2026"
+          />
+          <MediaCard
+            title="Beyond Civic Tech: Public Mechanics Starts at Home"
+            source="Cascadia Open Source Fall Conference"
+            description="Why civic tech fails when it ignores maintenance, repair, and the invisible work that keeps public services running."
+            mediaType="talk"
+            embedUrl="https://youtube.com/watch?v=hnAScuK-oMo"
+            date="November 2025"
+          />
+          <MediaCard
+            title="Repairing Service Design for the Age of AI"
+            source="Service Design Show Podcast"
+            description="Exploring how service design must evolve to address the challenges and opportunities of AI-driven systems."
+            mediaType="podcast"
+            url="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505"
+            date="September 2025"
+          />
+          <MediaCard
+            title="Design Systems and Public Services"
+            source="YouTube"
+            description="Discussion on service design, public sector innovation, and building decision systems that work at scale."
+            mediaType="video"
+            embedUrl="https://www.youtube.com/watch?v=kL0gYtoUtvI"
+            date="October 2025"
+          />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .now-header {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vh, 5rem) var(--pad) clamp(1.5rem, 3vh, 2.5rem);
+  }
+
+  .now-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1rem;
+  }
+
+  .now-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 1rem;
+  }
+
+  .now-standfirst {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-mid);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .now-standfirst a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  .now-section {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 5vh, 3.5rem) var(--pad);
+    border-top: 1px solid var(--rule);
+  }
+
+  .now-heading {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+    margin: 0 0 2rem;
+  }
+
+  .now-scrobble {
+    margin-bottom: 2rem;
+  }
+
+  .media-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4);
+  }
+
+  .books-block {
+    margin-bottom: 2rem;
+  }
+
+  .books-subhead {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-1);
+    font-weight: var(--font-weight-6);
+    color: var(--ink);
+    margin: 0 0 var(--size-2);
+  }
+
+  .finished-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .finished-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: var(--font-size-1);
+    line-height: 1.5;
+  }
+
+  .finished-list li:last-child {
+    border-bottom: none;
+  }
+
+  .finished-title {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .finished-author {
+    color: var(--ink-mid);
+    font-weight: 300;
+  }
+
+  .finished-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .finished-stars {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .finished-date {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .books-link {
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .books-link a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .books-link a:hover {
+    color: var(--brand-dim);
+  }
+
+  @media (max-width: 600px) {
+    .finished-list li {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+  }
+</style>

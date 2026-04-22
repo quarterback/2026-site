@@ -1,0 +1,142 @@
+---
+interface Props {
+  user?: string;
+  apiKey?: string;
+}
+
+const {
+  user = 'statechampion',
+  apiKey = '4f1d49f394a1567717e2c9049947d004',
+} = Astro.props;
+---
+
+<a
+  class="last-scrobble"
+  href="https://listening.ronbronson.com"
+  data-user={user}
+  data-api-key={apiKey}
+  aria-live="polite"
+  hidden
+>
+  <img class="ls-art" alt="" width="44" height="44" />
+  <span class="ls-text">
+    <span class="ls-label">Last scrobble</span>
+    <span class="ls-track"></span>
+    <span class="ls-artist"></span>
+  </span>
+</a>
+
+<script>
+  (async () => {
+    const el = document.querySelector<HTMLAnchorElement>('.last-scrobble');
+    if (!el) return;
+
+    const user = el.dataset.user;
+    const apiKey = el.dataset.apiKey;
+    if (!user || !apiKey) return;
+
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${encodeURIComponent(user)}&limit=1&api_key=${encodeURIComponent(apiKey)}&format=json`;
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return;
+      const data = await res.json();
+
+      const track = data?.recenttracks?.track?.[0];
+      if (!track) return;
+
+      const isNow = track['@attr']?.nowplaying === 'true';
+      const name = track.name || '';
+      const artist = track.artist?.['#text'] || track.artist?.name || '';
+      const images = track.image || [];
+      const art = images.find((i: { size: string; '#text': string }) => i.size === 'large')?.['#text'] || '';
+
+      const $art = el.querySelector<HTMLImageElement>('.ls-art');
+      const $label = el.querySelector<HTMLElement>('.ls-label');
+      const $track = el.querySelector<HTMLElement>('.ls-track');
+      const $artist = el.querySelector<HTMLElement>('.ls-artist');
+
+      if ($art && art) {
+        $art.src = art;
+        $art.alt = `${name} — ${artist}`;
+      }
+      if ($label) $label.textContent = isNow ? 'Now playing' : 'Last scrobble';
+      if ($track) $track.textContent = name;
+      if ($artist) $artist.textContent = artist;
+
+      el.classList.toggle('ls-now', isNow);
+      el.hidden = false;
+    } catch {
+      /* silent fail — widget stays hidden */
+    }
+  })();
+</script>
+
+<style>
+  .last-scrobble {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.875rem;
+    background: var(--bg-warm);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    max-width: 360px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .last-scrobble:hover {
+    background: var(--bg-ink);
+    border-color: var(--accent);
+  }
+
+  .ls-art {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 2px;
+    background: var(--bg-ink);
+    flex-shrink: 0;
+  }
+
+  .ls-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+    min-width: 0;
+  }
+
+  .ls-label {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .last-scrobble.ls-now .ls-label {
+    color: var(--accent);
+  }
+
+  .ls-track {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .ls-artist {
+    font-size: 0.78rem;
+    color: var(--ink-mid);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>

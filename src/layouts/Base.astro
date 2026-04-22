@@ -10,9 +10,11 @@ const { title, description = "Designer focused on public systems and decision-ma
 
 const tickerItems = [
   { label: "About", url: "/about" },
+  { label: "Notes", url: "/notes" },
   { label: "Speaking", url: "/media" },
-  { label: "Newsletter", url: "https://makingpublicwork.com" },
-  { label: "Blog", url: "https://blog.ronbronson.com" },
+  { label: "Work", url: "/work" },
+  { label: "Blog ↗", url: "https://blog.ronbronson.com" },
+  { label: "Now", url: "/now" },
   { label: "🎧", url: "https://listening.ronbronson.com" },
 ];
 ---
@@ -30,6 +32,9 @@ const tickerItems = [
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Webmentions -->
+    <link rel="webmention" href="https://webmention.io/ronbronson.com/webmention" />
+    <link rel="pingback" href="https://webmention.io/ronbronson.com/xmlrpc" />
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to main content</a>

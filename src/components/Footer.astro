@@ -4,139 +4,182 @@ interface Social {
   url: string;
   icon: string;
   solid?: boolean;
+  me?: boolean;
 }
 
 interface Props {
   socials?: Social[];
-  techStack?: string[];
-  fonts?: string[];
+  techStack?: string | string[];
+  fonts?: string | string[];
+  copyright?: string;
 }
 
 const defaultSocials: Social[] = [
   { platform: 'Last.fm', url: 'https://last.fm/user/statechampion', icon: 'fa-lastfm' },
-  { platform: 'Bluesky', url: 'https://bsky.app/profile/ronbronson.com', icon: 'fa-bluesky' },
+  { platform: 'Bluesky', url: 'https://bsky.app/profile/ronbronson.com', icon: 'fa-bluesky', me: true },
   { platform: 'LinkedIn', url: 'https://linkedin.com/in/ronbronson', icon: 'fa-linkedin' },
-  { platform: 'GitHub', url: 'https://github.com/ronbronson', icon: 'fa-github' },
+  { platform: 'GitHub', url: 'https://github.com/ronbronson', icon: 'fa-github', me: true },
   { platform: 'Instagram', url: 'https://instagram.com/ronbronson', icon: 'fa-instagram' },
   { platform: 'pi.fyi', url: 'https://www.pi.fyi/u/ron', icon: 'fa-vine' },
   { platform: 'Record Club', url: 'https://record.club/ron', icon: 'fa-record-vinyl', solid: true },
   { platform: 'Letterboxd', url: 'https://letterboxd.com/ronbronson', icon: 'fa-letterboxd' },
-  { platform: 'Mastodon', url: 'https://mastodon.social/@ronbronson', icon: 'fa-mastodon' },
+  { platform: 'Mastodon', url: 'https://mastodon.social/@ronbronson', icon: 'fa-mastodon', me: true },
   { platform: 'Literal', url: 'https://literal.club/ronbronson', icon: 'fa-book', solid: true },
   { platform: 'Mixcloud', url: 'https://mixcloud.com/908RB', icon: 'fa-mixcloud' },
 ];
 
-const { socials = defaultSocials, techStack = [], fonts = [] } = Astro.props;
+const {
+  socials = defaultSocials,
+  techStack: techStackProp = 'Built with Astro, Open Props, Playfair Display, DM Sans, and DM Mono.',
+  fonts: fontsProp = '',
+  copyright = '© 2026 Ron Bronson',
+} = Astro.props;
+
+const techStack = Array.isArray(techStackProp) ? techStackProp.join(', ') : techStackProp;
+const fonts = Array.isArray(fontsProp) ? fontsProp.join(', ') : fontsProp;
 ---
 
 <footer>
-  <div class="container">
-    <div class="social-links">
-      {socials.map((social) => (
-        <a
-          href={social.url}
-          target="_blank"
-          rel="noopener"
-          title={social.platform}
-          class="social-link"
-        >
-          <i class={social.solid ? `fa-solid ${social.icon}` : `fa-brands ${social.icon}`} aria-hidden="true"></i>
+  <div class="container footer-inner">
+
+    <div class="footer-contact">
+      <p class="footer-label">Contact</p>
+      <a href="mailto:ron@ronbronson.com" class="footer-email">ron@ronbronson.com</a>
+    </div>
+
+    <div class="footer-social">
+      <p class="footer-label">Elsewhere</p>
+      <ul class="footer-social-list">
+        {socials.map(social => (
+          <li>
+            <a
+              href={social.url}
+              target="_blank"
+              rel={social.me ? 'me noopener' : 'noopener'}
+              title={social.platform}
+            >
+              <i class={social.solid ? `fa-solid ${social.icon}` : `fa-brands ${social.icon}`} aria-hidden="true"></i>
+              <span>{social.platform}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-colophon">
+      <div class="footer-license">
+        <a href="/privacy" title="Parachute Commons License">
+          <img src="/badges/parachute-commons.svg" alt="license: Parachute Commons" height="20" />
         </a>
-      ))}
-    </div>
-
-    <div class="license-badge">
-      <a href="/privacy" title="Parachute Commons License">
-        <img src="/badges/parachute-commons.svg" alt="license: Parachute Commons" height="20" />
-      </a>
-    </div>
-
-    {(techStack.length > 0 || fonts.length > 0) && (
-      <div class="colophon">
-        {techStack.length > 0 && (
-          <p class="colophon-item">
-            {techStack.join(', ')}
-          </p>
-        )}
-        {fonts.length > 0 && (
-          <p class="colophon-item">
-            <span class="colophon-label">Typefaces</span> {fonts.join(', ')}
-          </p>
-        )}
       </div>
-    )}
+      <p class="footer-copy">
+        {copyright} &middot; {techStack}{fonts ? ' ' + fonts : ''}
+      </p>
+    </div>
+
   </div>
 </footer>
 
 <style>
   footer {
-    margin-top: var(--size-2);
-    padding-block: var(--size-6);
-    border-top: 1px solid var(--surface-3);
+    margin-top: var(--size-6);
+    padding-block: var(--size-8) var(--size-6);
+    border-top: 1px solid var(--rule);
+    background: var(--surface-2);
   }
 
-  .social-links {
+  .footer-inner {
     display: flex;
-    justify-content: center;
-    gap: var(--size-4);
-    margin-bottom: var(--size-5);
+    flex-direction: column;
+    gap: var(--size-6);
+  }
+
+  .footer-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 var(--size-3);
+  }
+
+  .footer-contact {
+    padding-bottom: var(--size-5);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .footer-email {
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-style: italic;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+  }
+
+  .footer-email:hover {
+    color: var(--accent);
+  }
+
+  .footer-social-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
     flex-wrap: wrap;
+    gap: var(--size-3) var(--size-5);
   }
 
-  .social-link {
-    color: var(--text-2);
-    font-size: var(--font-size-2);
-    transition: color 0.2s ease;
+  .footer-social-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--size-2);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.15s;
   }
 
-  .social-link:hover {
-    color: var(--brand);
+  .footer-social-list a:hover {
+    color: var(--accent);
   }
 
-  .license-badge {
+  .footer-social-list i {
+    font-size: 0.95rem;
+    width: 1.1em;
+    text-align: center;
+  }
+
+  .footer-colophon {
     display: flex;
-    justify-content: center;
-    margin-bottom: var(--size-4);
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--size-4);
+    padding-top: var(--size-5);
+    border-top: 1px solid var(--rule);
   }
 
-  .license-badge a {
+  .footer-license a {
     display: inline-block;
     line-height: 0;
     transition: opacity 0.2s ease;
   }
 
-  .license-badge a:hover {
+  .footer-license a:hover {
     opacity: 0.8;
   }
 
-  .colophon {
-    text-align: left;
+  .footer-copy {
     font-family: var(--font-mono);
-    font-size: var(--font-size-00) !important;
-    line-height: 1.4;
-    color: var(--text-3);
-  }
-
-  .colophon-item {
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    line-height: 1.6;
     margin: 0;
-    margin-bottom: var(--size-2);
-    font-size: var(--font-size-00) !important;
-    line-height: 1.4;
-  }
-
-  .colophon-item:last-child {
-    margin-bottom: 0;
-  }
-
-  .colophon-label {
-    color: var(--text-2);
-    font-weight: var(--font-weight-5);
-    font-size: var(--font-size-00) !important;
-  }
-
-  @media (max-width: 600px) {
-    .social-link {
-      font-size: var(--font-size-1);
-    }
+    flex: 1;
+    min-width: 260px;
   }
 </style>

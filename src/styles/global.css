@@ -47,8 +47,8 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -56,15 +56,33 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
   font-weight: 700;
-  line-height: 1.15;
   letter-spacing: -0.02em;
 }
 
-h1 { font-size: clamp(1.75rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.5rem, 4vw, var(--font-size-4)); }
-h3 { font-size: var(--font-size-2); }
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
+}
+h2 {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+}
+h3 {
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+}
 
-p { max-width: 65ch; }
+p { max-width: var(--measure); }
+
+/* Lede / standfirst utility */
+.standfirst {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--font-size-standfirst);
+  line-height: 1.45;
+  color: var(--ink-mid);
+  max-width: var(--measure);
+}
 
 a {
   color: var(--accent);

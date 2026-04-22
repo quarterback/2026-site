@@ -10,6 +10,8 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "fetch:webmentions": "node scripts/fetch-webmentions.mjs",
+    "prebuild": "node scripts/fetch-webmentions.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "lint": "true",
