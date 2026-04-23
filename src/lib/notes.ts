@@ -10,6 +10,8 @@ export interface MergedNote {
   body?: string; // bluesky text, or a fallback first-line for untitled markdown
   url: string; // internal slug URL for markdown; external bsky.app URL for bluesky
   external: boolean;
+  image?: string; // markdown only for now
+  image_alt?: string;
 }
 
 function firstLine(raw: string | undefined): string {
@@ -28,6 +30,8 @@ export async function getMergedNotes(): Promise<MergedNote[]> {
     body: entry.data.title ? undefined : firstLine(entry.body),
     url: `/notes/${entry.slug}/`,
     external: false,
+    image: entry.data.image,
+    image_alt: entry.data.image_alt,
   }));
 
   const bluesky = await getBlueskyNotes();

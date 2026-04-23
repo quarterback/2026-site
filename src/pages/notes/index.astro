@@ -1,89 +1,38 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { getMergedNotes, type MergedNote } from '../../lib/notes';
-
-const notes = await getMergedNotes();
-
-function monthKey(d: Date) {
-  return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' }).format(d);
-}
-
-const groups: Record<string, MergedNote[]> = {};
-for (const note of notes) {
-  const key = monthKey(note.date);
-  (groups[key] ||= []).push(note);
-}
-
-const orderedGroupKeys = Object.keys(groups);
-
-function formatDay(d: Date) {
-  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' }).format(d);
-}
+import NowFeed from '../../components/NowFeed.astro';
 ---
 
-<Base title="Notes — Ron Bronson" description="Short-form notes and amplified hot takes.">
-  <main id="main" class="notes-index">
-    <header class="notes-header">
-      <p class="notes-kicker">Notes</p>
-      <h1 class="notes-headline">Short takes.</h1>
-      <p class="standfirst">
-        Links, half-finished thoughts, and posts from elsewhere worth pulling onto the home page. Longer pieces live in <a href="/essays">essays</a>.
+<Base title="Now — Ron Bronson" description="What I'm working on, thinking about, and doing right now.">
+  <main id="main" class="now-index">
+    <header class="now-index__header">
+      <p class="now-index__kicker">Now</p>
+      <h1 class="now-index__headline">What I&rsquo;m working on.</h1>
+      <p class="now-index__standfirst">
+        A running log of the work — talks, teaching, pilots shipping, filings, field notes. Short entries, irregular tempo. Longer pieces live on the <a href="https://blog.ronbronson.com">blog</a>.
       </p>
-      <p class="notes-subscribe">
+      <p class="now-index__subscribe">
         <a href="/notes.xml">RSS →</a>
       </p>
     </header>
 
-    {orderedGroupKeys.length === 0 && (
-      <p class="notes-empty">No notes yet.</p>
-    )}
-
-    {orderedGroupKeys.map((month) => (
-      <section class="notes-group">
-        <h2 class="notes-group__heading">{month}</h2>
-        <ul class="notes-list">
-          {groups[month].map((note) => (
-            <li class="notes-list__item">
-              <time class="notes-list__date" datetime={note.date.toISOString()}>
-                {formatDay(note.date)}
-              </time>
-              <a
-                href={note.url}
-                class="notes-list__link"
-                {...(note.external ? { target: '_blank', rel: 'noopener' } : {})}
-              >
-                {note.kind === 'markdown' ? (
-                  note.title ? (
-                    <span class="notes-list__title">{note.title}</span>
-                  ) : (
-                    <span class="notes-list__body">{note.body}</span>
-                  )
-                ) : (
-                  <span class="notes-list__body">{note.body}</span>
-                )}
-                {note.external && <span class="notes-list__external" aria-hidden="true"> ↗</span>}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
+    <NowFeed variant="full" />
   </main>
 </Base>
 
 <style>
-  .notes-index {
+  .now-index {
     max-width: var(--measure);
     margin-inline: auto;
     padding-block: var(--size-10);
     padding-inline: var(--pad);
   }
 
-  .notes-header {
+  .now-index__header {
     margin-block-end: var(--size-10);
   }
 
-  .notes-kicker {
+  .now-index__kicker {
     font-family: var(--font-mono);
     font-size: 0.63rem;
     letter-spacing: 0.12em;
@@ -92,7 +41,7 @@ function formatDay(d: Date) {
     margin: 0 0 var(--size-3);
   }
 
-  .notes-headline {
+  .now-index__headline {
     font-family: var(--font-serif);
     font-size: var(--font-size-display);
     line-height: var(--line-height-display);
@@ -100,97 +49,27 @@ function formatDay(d: Date) {
     margin: 0 0 var(--size-4);
   }
 
-  .notes-subscribe {
+  .now-index__standfirst {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-mid);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .now-index__standfirst a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  .now-index__subscribe {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-top: var(--size-5);
-  }
-
-  .notes-group {
-    margin-block-end: var(--size-10);
-  }
-
-  .notes-group__heading {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    font-weight: 500;
-    margin: 0 0 var(--size-4);
-    padding-block-end: var(--size-2);
-    border-block-end: 1px solid var(--rule);
-  }
-
-  .notes-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .notes-list__item {
-    display: grid;
-    grid-template-columns: 5rem 1fr;
-    align-items: baseline;
-    gap: 1.5rem;
-    padding-block: var(--size-4);
-    border-block-end: 1px solid var(--rule);
-  }
-
-  .notes-list__date {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .notes-list__link {
-    text-decoration: none;
-    color: var(--ink);
-  }
-
-  .notes-list__link:hover .notes-list__title,
-  .notes-list__link:hover .notes-list__body {
-    color: var(--accent);
-  }
-
-  .notes-list__title {
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
-    font-style: italic;
-    line-height: 1.35;
-    transition: color 0.15s;
-  }
-
-  .notes-list__body {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.55;
-    color: var(--ink);
-    transition: color 0.15s;
-    display: inline;
-  }
-
-  .notes-list__external {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--ink-faint);
-    margin-left: 0.25rem;
-  }
-
-  .notes-empty {
-    color: var(--ink-muted);
-    font-style: italic;
-  }
-
-  @media (max-width: 600px) {
-    .notes-list__item {
-      grid-template-columns: 4rem 1fr;
-      gap: 1rem;
-    }
   }
 </style>

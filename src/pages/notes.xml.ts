@@ -39,7 +39,7 @@ export async function GET(context: APIContext) {
     <title>Ron Bronson — Notes</title>
     <link>${new URL('/notes/', site).toString()}</link>
     <atom:link href="${new URL('/notes.xml', site).toString()}" rel="self" type="application/rss+xml" />
-    <description>Short-form notes, links, and replies from Ron Bronson.</description>
+    <description>What Ron Bronson is working on — short, dated entries about talks, teaching, pilots, and field notes.</description>
     <language>en-us</language>
 ${items}
   </channel>
