@@ -109,11 +109,6 @@ function remarkCustomDirectives() {
 
 export default defineConfig({
   site: 'https://ronbronson.com',
-  redirects: {
-    '/notes': '/now',
-    '/notes/[...slug]': '/now/[...slug]',
-    '/notes.xml': '/now.xml',
-  },
   integrations: [
     mdx({
       remarkPlugins: [remarkDirective, remarkCustomDirectives],

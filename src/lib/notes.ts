@@ -28,7 +28,7 @@ export async function getMergedNotes(): Promise<MergedNote[]> {
     date: entry.data.date,
     title: entry.data.title,
     body: entry.data.title ? undefined : firstLine(entry.body),
-    url: `/now/${entry.slug}/`,
+    url: `/notes/${entry.slug}/`,
     external: false,
     image: entry.data.image,
     image_alt: entry.data.image_alt,

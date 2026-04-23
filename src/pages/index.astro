@@ -26,12 +26,12 @@ const stream = await getHomepageStream(12);
       </div>
     </section>
 
-    <!-- NOW (activity log) -->
+    <!-- NOW (activity log, lives at /notes) -->
     <section class="now-home" aria-labelledby="now-home-heading">
       <div class="container">
         <div class="now-home__head">
           <h2 id="now-home-heading" class="now-home__heading">Now</h2>
-          <a href="/now" class="now-home__all">All entries &rarr;</a>
+          <a href="/notes" class="now-home__all">All entries &rarr;</a>
         </div>
         <NowFeed limit={6} variant="home" />
       </div>

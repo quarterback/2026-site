@@ -20,8 +20,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
   day: 'numeric',
 }).format(note.data.date);
 
-const canonical = new URL(`/now/${note.slug}`, Astro.site ?? 'https://ronbronson.com').toString();
-const pageTitle = note.data.title ? `${note.data.title} — Ron Bronson` : 'Now — Ron Bronson';
+const canonical = new URL(`/notes/${note.slug}`, Astro.site ?? 'https://ronbronson.com').toString();
+const pageTitle = note.data.title ? `${note.data.title} — Ron Bronson` : 'Notes — Ron Bronson';
 ---
 
 <Base title={pageTitle}>
@@ -29,7 +29,7 @@ const pageTitle = note.data.title ? `${note.data.title} — Ron Bronson` : 'Now 
     <article class="h-entry now-entry">
       <header class="now-entry__header">
         <p class="now-entry__kicker">
-          <a href="/now">Now</a>
+          <a href="/notes">Notes</a>
         </p>
 
         <a class="u-url" href={canonical}>
@@ -79,7 +79,7 @@ const pageTitle = note.data.title ? `${note.data.title} — Ron Bronson` : 'Now 
       )}
     </article>
 
-    <Webmentions url={`/now/${note.slug}/`} />
+    <Webmentions url={`/notes/${note.slug}/`} />
   </main>
 </Base>
 
