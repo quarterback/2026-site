@@ -1,0 +1,75 @@
+---
+import Base from '../../layouts/Base.astro';
+import NowFeed from '../../components/NowFeed.astro';
+---
+
+<Base title="Now — Ron Bronson" description="What I'm working on, thinking about, and doing right now.">
+  <main id="main" class="now-index">
+    <header class="now-index__header">
+      <p class="now-index__kicker">Now</p>
+      <h1 class="now-index__headline">What I&rsquo;m working on.</h1>
+      <p class="now-index__standfirst">
+        A running log of the work — talks, teaching, pilots shipping, filings, field notes. Short entries, irregular tempo. Longer pieces live on the <a href="https://blog.ronbronson.com">blog</a>.
+      </p>
+      <p class="now-index__subscribe">
+        <a href="/now.xml">RSS →</a>
+      </p>
+    </header>
+
+    <NowFeed variant="full" />
+  </main>
+</Base>
+
+<style>
+  .now-index {
+    max-width: var(--measure);
+    margin-inline: auto;
+    padding-block: var(--size-10);
+    padding-inline: var(--pad);
+  }
+
+  .now-index__header {
+    margin-block-end: var(--size-10);
+  }
+
+  .now-index__kicker {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 var(--size-3);
+  }
+
+  .now-index__headline {
+    font-family: var(--font-serif);
+    font-size: var(--font-size-display);
+    line-height: var(--line-height-display);
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--size-4);
+  }
+
+  .now-index__standfirst {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-mid);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .now-index__standfirst a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  .now-index__subscribe {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: var(--size-5);
+  }
+</style>

@@ -3,15 +3,10 @@ import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
 import WritingStream from '../components/WritingStream.astro';
 import MediaCard from '../components/MediaCard.astro';
+import NowFeed from '../components/NowFeed.astro';
 import { getHomepageStream } from '../lib/stream';
-// import { getMergedNotes } from '../lib/notes';
 
 const stream = await getHomepageStream(12);
-// const notesPreview = (await getMergedNotes()).slice(0, 5);
-
-// function formatNoteDate(d: Date) {
-//   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-// }
 ---
 
 <Base title="Ron Bronson">
@@ -28,6 +23,17 @@ const stream = await getHomepageStream(12);
           <p>Hi, I&rsquo;m Ron Bronson. I work in deployment and interaction policy, helping large institutions ship tech and AI &mdash; moving pilots into products, policies into working systems, and stalled programs back on track.</p>
           <p>I run <a href="https://www.occupant.works/" target="_blank" rel="noopener">Occupant</a> (independent advisory for state and local government) and <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> (decision infrastructure for institutional AI), write the <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> newsletter, and teach at the <a href="/about">University of Michigan</a>.</p>
         </div>
+      </div>
+    </section>
+
+    <!-- NOW (activity log) -->
+    <section class="now-home" aria-labelledby="now-home-heading">
+      <div class="container">
+        <div class="now-home__head">
+          <h2 id="now-home-heading" class="now-home__heading">Now</h2>
+          <a href="/now" class="now-home__all">All entries &rarr;</a>
+        </div>
+        <NowFeed limit={6} variant="home" />
       </div>
     </section>
 
@@ -61,39 +67,6 @@ const stream = await getHomepageStream(12);
         </div>
       </div>
     </section>
-
-    {/* NOTES — commented out until there's content to show
-    {notesPreview.length > 0 && (
-      <section class="notes-home" aria-labelledby="notes-home-heading">
-        <div class="container">
-          <div class="notes-home-head">
-            <h2 id="notes-home-heading" class="notes-home-heading">Notes</h2>
-            <a href="/notes" class="notes-home-all">All notes &rarr;</a>
-          </div>
-
-          <ul class="notes-home-list">
-            {notesPreview.map(note => (
-              <li class="notes-home-item">
-                <time class="notes-home-date" datetime={note.date.toISOString()}>{formatNoteDate(note.date)}</time>
-                <a
-                  href={note.url}
-                  class="notes-home-link"
-                  {...(note.external ? { target: '_blank', rel: 'noopener' } : {})}
-                >
-                  {note.kind === 'markdown' && note.title ? (
-                    <span class="notes-home-title">{note.title}</span>
-                  ) : (
-                    <span class="notes-home-body">{note.body}</span>
-                  )}
-                  {note.external && <span class="notes-home-external" aria-hidden="true"> ↗</span>}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    )}
-    */}
 
     <!-- RECENT APPEARANCES -->
     <section class="appearances" aria-labelledby="appearances-heading">
@@ -300,15 +273,15 @@ const stream = await getHomepageStream(12);
     color: var(--brand-dim);
   }
 
-  /* ===== NOTES (home) ===== */
-  .notes-home {
+  /* ===== NOW (home) ===== */
+  .now-home {
     max-width: var(--content-width);
     margin: 0 auto;
     padding: clamp(3rem, 7vh, 5rem) var(--pad);
     border-top: 1px solid var(--rule);
   }
 
-  .notes-home-head {
+  .now-home__head {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -316,7 +289,7 @@ const stream = await getHomepageStream(12);
     margin: 0 0 1.75rem;
   }
 
-  .notes-home-heading {
+  .now-home__heading {
     font-family: var(--font-serif);
     font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 400;
@@ -325,7 +298,7 @@ const stream = await getHomepageStream(12);
     margin: 0;
   }
 
-  .notes-home-all {
+  .now-home__all {
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.08em;
@@ -334,74 +307,8 @@ const stream = await getHomepageStream(12);
     text-decoration: none;
   }
 
-  .notes-home-all:hover {
+  .now-home__all:hover {
     color: var(--brand-dim);
-  }
-
-  .notes-home-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .notes-home-item {
-    display: grid;
-    grid-template-columns: 4.5rem 1fr;
-    gap: 1.25rem;
-    align-items: baseline;
-    padding: 0.9rem 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .notes-home-item:last-child {
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .notes-home-date {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .notes-home-link {
-    text-decoration: none;
-    color: var(--ink);
-    transition: color 0.15s;
-  }
-
-  .notes-home-link:hover .notes-home-title,
-  .notes-home-link:hover .notes-home-body {
-    color: var(--accent);
-  }
-
-  .notes-home-title {
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
-    font-style: italic;
-    line-height: 1.4;
-  }
-
-  .notes-home-body {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-
-  .notes-home-external {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--ink-faint);
-    margin-left: 0.3rem;
-  }
-
-  @media (max-width: 480px) {
-    .notes-home-item {
-      grid-template-columns: 3.5rem 1fr;
-      gap: 0.75rem;
-    }
   }
 
   /* ===== RECENT APPEARANCES ===== */

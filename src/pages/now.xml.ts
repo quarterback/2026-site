@@ -20,8 +20,8 @@ export async function GET(context: APIContext) {
   const sorted = notes.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
   const items = sorted.map((note) => {
-    const url = new URL(`/notes/${note.slug}/`, site).toString();
-    const title = note.data.title ?? 'Note';
+    const url = new URL(`/now/${note.slug}/`, site).toString();
+    const title = note.data.title ?? 'Now';
     const pubDate = note.data.date.toUTCString();
     const body = escapeXml(note.body ?? '');
     return `    <item>
@@ -36,10 +36,10 @@ export async function GET(context: APIContext) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ron Bronson — Notes</title>
-    <link>${new URL('/notes/', site).toString()}</link>
-    <atom:link href="${new URL('/notes.xml', site).toString()}" rel="self" type="application/rss+xml" />
-    <description>Short-form notes, links, and replies from Ron Bronson.</description>
+    <title>Ron Bronson — Now</title>
+    <link>${new URL('/now/', site).toString()}</link>
+    <atom:link href="${new URL('/now.xml', site).toString()}" rel="self" type="application/rss+xml" />
+    <description>What Ron Bronson is working on — short, dated entries about talks, teaching, pilots, and field notes.</description>
     <language>en-us</language>
 ${items}
   </channel>

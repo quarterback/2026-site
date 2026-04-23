@@ -1,0 +1,227 @@
+---
+import { getMergedNotes, type MergedNote } from '../lib/notes';
+
+interface Props {
+  limit?: number;
+  variant?: 'full' | 'home';
+}
+
+const { limit, variant = 'full' } = Astro.props;
+
+const all = await getMergedNotes();
+const notes = typeof limit === 'number' ? all.slice(0, limit) : all;
+
+function monthKey(d: Date) {
+  return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long' }).format(d);
+}
+
+function formatDay(d: Date) {
+  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' }).format(d);
+}
+
+const groups: Record<string, MergedNote[]> = {};
+if (variant === 'full') {
+  for (const note of notes) {
+    const key = monthKey(note.date);
+    (groups[key] ||= []).push(note);
+  }
+}
+const orderedGroupKeys = Object.keys(groups);
+---
+
+{variant === 'full' ? (
+  <>
+    {orderedGroupKeys.length === 0 && (
+      <p class="now-feed__empty">No entries yet.</p>
+    )}
+
+    {orderedGroupKeys.map((month) => (
+      <section class="now-feed__group">
+        <h2 class="now-feed__group-heading">{month}</h2>
+        <ul class="now-feed__list">
+          {groups[month].map((note) => (
+            <li class="now-feed__item">
+              <time class="now-feed__date" datetime={note.date.toISOString()}>
+                {formatDay(note.date)}
+              </time>
+              <div class="now-feed__body">
+                {note.image && (
+                  <a
+                    href={note.url}
+                    {...(note.external ? { target: '_blank', rel: 'noopener' } : {})}
+                    class="now-feed__image-link"
+                  >
+                    <img
+                      src={note.image}
+                      alt={note.image_alt ?? ''}
+                      loading="lazy"
+                      class="now-feed__image"
+                    />
+                  </a>
+                )}
+                <a
+                  href={note.url}
+                  class="now-feed__link"
+                  {...(note.external ? { target: '_blank', rel: 'noopener' } : {})}
+                >
+                  {note.kind === 'markdown' && note.title ? (
+                    <span class="now-feed__title">{note.title}</span>
+                  ) : (
+                    <span class="now-feed__text">{note.body}</span>
+                  )}
+                  {note.external && <span class="now-feed__external" aria-hidden="true"> ↗</span>}
+                </a>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </>
+) : (
+  <ul class="now-feed__list now-feed__list--home">
+    {notes.map((note) => (
+      <li class="now-feed__item">
+        <time class="now-feed__date" datetime={note.date.toISOString()}>
+          {formatDay(note.date)}
+        </time>
+        <div class="now-feed__body">
+          {note.image && (
+            <a
+              href={note.url}
+              {...(note.external ? { target: '_blank', rel: 'noopener' } : {})}
+              class="now-feed__image-link"
+            >
+              <img
+                src={note.image}
+                alt={note.image_alt ?? ''}
+                loading="lazy"
+                class="now-feed__image"
+              />
+            </a>
+          )}
+          <a
+            href={note.url}
+            class="now-feed__link"
+            {...(note.external ? { target: '_blank', rel: 'noopener' } : {})}
+          >
+            {note.kind === 'markdown' && note.title ? (
+              <span class="now-feed__title">{note.title}</span>
+            ) : (
+              <span class="now-feed__text">{note.body}</span>
+            )}
+            {note.external && <span class="now-feed__external" aria-hidden="true"> ↗</span>}
+          </a>
+        </div>
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .now-feed__empty {
+    color: var(--ink-mid);
+    font-style: italic;
+  }
+
+  .now-feed__group {
+    margin-block-end: var(--size-10);
+  }
+
+  .now-feed__group-heading {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+    margin: 0 0 var(--size-4);
+    padding-block-end: var(--size-2);
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .now-feed__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .now-feed__item {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding-block: var(--size-4);
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .now-feed__date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 0.2rem;
+  }
+
+  .now-feed__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+    min-width: 0;
+  }
+
+  .now-feed__image-link {
+    display: block;
+    line-height: 0;
+  }
+
+  .now-feed__image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+  }
+
+  .now-feed__link {
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .now-feed__link:hover .now-feed__title,
+  .now-feed__link:hover .now-feed__text {
+    color: var(--accent);
+  }
+
+  .now-feed__title {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-style: italic;
+    line-height: 1.35;
+    transition: color 0.15s;
+  }
+
+  .now-feed__text {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--ink);
+    transition: color 0.15s;
+    display: inline;
+  }
+
+  .now-feed__external {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-left: 0.25rem;
+  }
+
+  @media (max-width: 600px) {
+    .now-feed__item {
+      grid-template-columns: 4rem 1fr;
+      gap: 1rem;
+    }
+  }
+</style>
