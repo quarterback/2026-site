@@ -23,15 +23,6 @@ const stream = await getHomepageStream(12);
         <h1 id="hero-heading" class="hero-headline">
           I build and fix<br>the systems that<br>run <em>public life.</em>
         </h1>
-
-        <div class="hero-bio">
-          <p>Hi, I&rsquo;m Ron Bronson. I work in deployment and interaction policy, helping large institutions ship tech and AI &mdash; moving pilots into products, policies into working systems, and stalled programs back on track.</p>
-          <p>I run <a href="https://www.occupant.works/" target="_blank" rel="noopener">Occupant</a> (independent advisory for state and local government) and <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> (decision infrastructure for institutional AI), write the <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> newsletter, and teach at the <a href="/about">University of Michigan</a>.</p>
-        </div>
-
-        <div class="hero-cta">
-          <a href="mailto:ron@ronbronson.com?subject=Backlog%20engagement" class="hero-email">Email me about a backlog &rarr;</a>
-        </div>
       </div>
     </section>
 
@@ -52,7 +43,7 @@ const stream = await getHomepageStream(12);
             <p class="service-evidence">
               See <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> for what this looks like in practice.
             </p>
-            <a href="mailto:ron@ronbronson.com?subject=Backlog%20engagement" class="service-cta">Email me about a backlog &rarr;</a>
+            <a href="/work" class="service-cta">More about my work &rarr;</a>
           </article>
 
           <article class="service-card">
@@ -196,59 +187,6 @@ const stream = await getHomepageStream(12);
     font-style: italic;
     font-weight: 400;
     color: var(--accent);
-  }
-
-  .hero-bio {
-    font-family: var(--font-sans);
-    font-size: clamp(1rem, 1.4vw, 1.1rem);
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--ink-mid);
-    max-width: 64ch;
-  }
-
-  .hero-bio p {
-    margin: 0 0 1rem;
-  }
-
-  .hero-bio p:last-child {
-    margin-bottom: 0;
-  }
-
-  .hero-bio a {
-    color: var(--ink);
-    font-weight: 500;
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-underline-offset: 2px;
-    transition: color 0.15s;
-  }
-
-  .hero-bio a:hover {
-    color: var(--accent);
-  }
-
-  .hero-cta {
-    margin-top: 1.75rem;
-  }
-
-  .hero-email {
-    display: inline-block;
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--ink);
-    background: var(--bg-warm);
-    border: 1px solid var(--ink);
-    padding: 0.7rem 1.1rem;
-    text-decoration: none;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-  }
-
-  .hero-email:hover {
-    background: var(--ink);
-    color: var(--bg);
-    border-color: var(--ink);
   }
 
   /* ===== HOW CAN I HELP? ===== */
