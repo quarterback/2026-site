@@ -28,6 +28,10 @@ const stream = await getHomepageStream(12);
           <p>Hi, I&rsquo;m Ron Bronson. I work in deployment and interaction policy, helping large institutions ship tech and AI &mdash; moving pilots into products, policies into working systems, and stalled programs back on track.</p>
           <p>I run <a href="https://www.occupant.works/" target="_blank" rel="noopener">Occupant</a> (independent advisory for state and local government) and <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> (decision infrastructure for institutional AI), write the <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a> newsletter, and teach at the <a href="/about">University of Michigan</a>.</p>
         </div>
+
+        <div class="hero-cta">
+          <a href="mailto:ron@ronbronson.com?subject=Backlog%20engagement" class="hero-email">Email me about a backlog &rarr;</a>
+        </div>
       </div>
     </section>
 
@@ -40,12 +44,15 @@ const stream = await getHomepageStream(12);
           <article class="service-card">
             <h3 class="service-title">
               <span class="service-arrow" aria-hidden="true">&rarr;</span>
-              Senior advisory for public-sector tech &amp; AI
+              Bounded advisory &amp; scoped tools for public-sector tech &amp; AI
             </h3>
             <p class="service-body">
-              I work with state, local, and federal institutions on deploying AI responsibly, stabilizing programs that have stalled, and building decision infrastructure that makes procurement and delivery tractable.
+              I work with public-sector teams on bounded delivery problems &mdash; backlogs and stuck workflows that need a fix in weeks, not quarters. I scope the problem narrowly, build a working tool against your actual data, and price it to move without a procurement bottleneck. Most of the wins are pattern problems: eligibility triage, document classification, case routing, backlog review where AI can add eyeballs without replacing the people holding the system together.
             </p>
-            <a href="/work" class="service-cta">More about my work &rarr;</a>
+            <p class="service-evidence">
+              See <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> for what this looks like in practice.
+            </p>
+            <a href="mailto:ron@ronbronson.com?subject=Backlog%20engagement" class="service-cta">Email me about a backlog &rarr;</a>
           </article>
 
           <article class="service-card">
@@ -221,6 +228,29 @@ const stream = await getHomepageStream(12);
     color: var(--accent);
   }
 
+  .hero-cta {
+    margin-top: 1.75rem;
+  }
+
+  .hero-email {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--bg-warm);
+    border: 1px solid var(--ink);
+    padding: 0.7rem 1.1rem;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .hero-email:hover {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
+
   /* ===== HOW CAN I HELP? ===== */
   .help {
     max-width: var(--content-width);
@@ -282,6 +312,27 @@ const stream = await getHomepageStream(12);
     color: var(--ink-mid);
     margin: 0;
     flex: 1;
+  }
+
+  .service-evidence {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--ink-faint);
+    margin: 0;
+  }
+
+  .service-evidence a {
+    color: var(--ink-mid);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 2px;
+    transition: color 0.15s;
+  }
+
+  .service-evidence a:hover {
+    color: var(--accent);
   }
 
   .service-cta {
