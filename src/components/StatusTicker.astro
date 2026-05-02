@@ -25,10 +25,6 @@ const { items, name = "Ron Bronson" } = Astro.props;
         </>
       ))}
       <span class="ticker__separator">·</span>
-      <a href="https://www.occupant.works/" class="ticker__link ticker__icon-link" aria-label="Phone a friend" target="_blank" rel="noopener noreferrer">
-        <i class="fas fa-phone"></i>
-      </a>
-      <span class="ticker__separator">·</span>
       <button id="theme-toggle" class="ticker__theme-toggle" aria-label="Toggle theme">
         <span class="theme-light">☀</span>
         <span class="theme-dark">☾</span>
@@ -122,10 +118,6 @@ const { items, name = "Ron Bronson" } = Astro.props;
 
   .ticker__link:hover {
     color: var(--text-1);
-  }
-
-  .ticker__icon-link {
-    font-size: 0.85em;
   }
 
   .ticker__theme-toggle {

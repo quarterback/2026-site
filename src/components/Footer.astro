@@ -44,7 +44,9 @@ const fonts = Array.isArray(fontsProp) ? fontsProp.join(', ') : fontsProp;
 
     <div class="footer-contact">
       <p class="footer-label">Contact</p>
-      <a href="mailto:ron@ronbronson.com" class="footer-email">ron@ronbronson.com</a>
+      <a href="#" class="footer-email" data-u="ron" data-d="ronbronson.com" data-replace-text="true" rel="nofollow" aria-label="Email Ron Bronson">
+        ron <span aria-hidden="true">[at]</span> ronbronson <span aria-hidden="true">[dot]</span> com
+      </a>
     </div>
 
     <div class="footer-social">
@@ -183,3 +185,16 @@ const fonts = Array.isArray(fontsProp) ? fontsProp.join(', ') : fontsProp;
     min-width: 260px;
   }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('a[data-u][data-d]').forEach(link => {
+    const user = link.dataset.u;
+    const domain = link.dataset.d;
+    if (!user || !domain) return;
+    const addr = `${user}@${domain}`;
+    link.setAttribute('href', `mailto:${addr}`);
+    if (link.dataset.replaceText === 'true') {
+      link.textContent = addr;
+    }
+  });
+</script>
