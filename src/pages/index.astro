@@ -1,57 +1,292 @@
 ---
 import Single from '../layouts/Single.astro';
+
+const lenses = [
+  {
+    id: 'design',
+    label: 'Design Leader',
+    pov: "I built and ran the largest in-house design organization in the federal government. The work was institutional design strategy executed against active resistance, sustained across three administrations — design as the spine of how an institution decides what it can become.",
+    capabilities: [
+      'Made the foundational organizational bets that turned a 70-person experiment into the design backbone of federal civic technology, and watched them survive three administrations.',
+      'Operated at VP-managing-directors altitude in a flat-pay environment where impact came through positioning, not hierarchy.',
+      'Translate design leadership into procurement, hiring, and org-design decisions that survive turnover.',
+      'Teach this work at Michigan Taubman, where the next cohort gets the version I wish I had.'
+    ],
+    evidence: [
+      { href: 'https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/', label: 'Managing your design career upwards', source: 'Piccalilli' },
+      { href: 'https://www.ixda.no/talks/design-as-repair', label: 'Design as Repair', source: 'IxDA Oslo, 2025' },
+      { href: 'https://makingpublicwork.com', label: 'Making Public Work', source: 'Newsletter' }
+    ]
+  },
+  {
+    id: 'product',
+    label: 'Product Leader',
+    pov: "Public-sector product is portfolio judgment under political constraint. Every shipped surface lands on someone who didn't choose to be a user, and every bet has to survive procurement cycles, administration changes, and downstream consequence.",
+    capabilities: [
+      'Shipped public surfaces across three federal administrations, with measurable downstream effects on millions.',
+      'Operate fluently across delivery, policy, and procurement — the three layers most product orgs treat as someone else\'s problem.',
+      'Built Portland Digital Corps: 100+ technologists, six nonprofit deliveries, real outcomes.',
+      'Run live public indices at Occupant — Compute CPI, AI Economic Activity Index, Labor Displacement Index.'
+    ],
+    evidence: [
+      { href: 'https://occupant.ee', label: 'Occupant', source: 'Live indices' },
+      { href: 'https://podcasts.apple.com/it/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505', label: 'Repairing service design in the AI age', source: 'Service Design Show' },
+      { href: 'https://blog.ronbronson.com', label: 'Long-form writing', source: 'Blog' }
+    ]
+  },
+  {
+    id: 'tde',
+    label: 'Trust & Decision Engineering',
+    pov: "Trust & Safety handles incidents after they happen. Trust & Decision Engineering builds the decision infrastructure underneath — authority systems, escalation logic, accountability mechanisms — so governance scales beyond moderation. Platforms extract trust and destabilize it; TDE makes the permeability of trust an explicit design constraint.",
+    capabilities: [
+      'Built decision infrastructure inside the federal government across three administrations, where authority chains and escalation logic are the work.',
+      'Develop the vocabulary the field needs: Trust Bankruptcy, Substrate Degradation, Mirror Signaling, Domain Firewalls, Calculative Asymmetry.',
+      'Operate at the seam where Trust & Safety stops and Trust & Decision Engineering has to begin.',
+      'Diagnose where trust is being extracted faster than it can regenerate, before regulators or users force the recognition.'
+    ],
+    evidence: [
+      { href: 'https://blog.ronbronson.com', label: 'TDE framework writing', source: 'Blog' },
+      { href: 'https://www.ixda.no/talks/design-as-repair', label: 'Design as Repair', source: 'IxDA Oslo, 2025' },
+      { href: 'https://makingpublicwork.com', label: 'Making Public Work', source: 'Newsletter' }
+    ]
+  },
+  {
+    id: 'plumbing',
+    label: 'Agent Plumbing',
+    pov: "Agents that can act but can't explain why they were allowed to act create verification fatigue and trust collapse. The plumbing for the agentic era doesn't exist yet — the legitimacy layer that sits between an agent's proposal and the execution of an action, carrying authority context, producing decision receipts, making delegated judgment legible. That layer is the actual product of the next five years.",
+    capabilities: [
+      'Designed and shipped the Judgment Routing protocol scaffold — Authority Tokens, Decision Receipts, the agent-to-router handshake.',
+      'Stress-tested the abstractions through public-sector deployment, where authority has to be explicit and audit trails are mandatory.',
+      'Read the agent infrastructure stack from the legitimacy layer down, not from the orchestration layer up.',
+      'Build the plumbing the rest of the industry will eventually need but isn\'t yet staffed for.'
+    ],
+    evidence: [
+      { href: 'https://github.com/quarterback/judgment-routing', label: 'Judgment Routing', source: 'GitHub' },
+      { href: 'https://statecapacity.ai', label: 'State Capacity AI', source: 'Publishing & prototyping' },
+      { href: 'https://blog.ronbronson.com', label: 'Authority Token writing', source: 'Blog' }
+    ]
+  },
+  {
+    id: 'responsible-ai',
+    label: 'Responsible AI',
+    pov: "Deploying AI in regulated public contexts is the deployment problem nobody in AI safety is staffed for. The hard part isn't the model — it's the chain of humans, vendors, and statutory ambiguity the model lands inside, and the institutional capacity to govern decisions that don't reset.",
+    capabilities: [
+      'Spent a federal career deploying technology inside regulated environments where deployment is the whole job.',
+      'Run State Capacity AI: publishing and prototyping at the seam of governance and AI deployment.',
+      'Build measurement infrastructure for AI\'s economic and labor effects — Compute CPI, Labor Displacement Index.',
+      'Read deployment risk through procurement, eligibility systems, and the discretion layer between policy and person.'
+    ],
+    evidence: [
+      { href: 'https://statecapacity.ai', label: 'State Capacity AI', source: 'Publishing & prototyping' },
+      { href: 'https://occupant.ee', label: 'Compute CPI & related indices', source: 'Occupant' },
+      { href: 'https://blog.ronbronson.com', label: 'Writing on AI deployment', source: 'Blog' }
+    ]
+  },
+  {
+    id: 'mechanics',
+    label: 'Public Mechanics',
+    pov: "Public Mechanics is the field that takes the latency between policy and delivery seriously — the unbounded chain of handoffs where intention degrades, drifts, and gets interpreted into something else. It's where civic tech goes when delivery stops being the unit of analysis. I'm building the institutional and intellectual infrastructure for a discipline whose practitioners don't yet have a name for what they do.",
+    capabilities: [
+      'Teach UT-360 (Service Design and Urban Needs) and UT-402 (Public Mechanics) at Michigan Taubman.',
+      'Develop and publish the field\'s working vocabulary: Trajectory Management, Delivery Forensics, Civil Economics, Consequence Design, Last Documented Mile, Responsibility to Record.',
+      'Write Making Public Work — the newsletter for the people doing public work without a name for it.',
+      'Convene the field: organized Years Ahead 2026 at Michigan, partnered with the Ford School, building the rooms where this conversation happens.'
+    ],
+    evidence: [
+      { href: 'https://makingpublicwork.com', label: 'Making Public Work', source: 'Newsletter' },
+      { href: 'https://blog.ronbronson.com', label: 'Frameworks & essays', source: 'Blog' },
+      { href: 'https://statecapacity.ai', label: 'State Capacity AI', source: 'Publishing & prototyping' }
+    ]
+  }
+];
 ---
+
 <Single
   title="Ron Bronson"
-  description="Multilateral public delivery for governments at every scale."
+  description="An architecture of problems, viewed from several lenses."
 >
   <main class="page">
     <header class="hero">
       <div class="hero__lede">
         <h1 class="hero__name">Ron Bronson</h1>
-        <p class="hero__tagline">Multilateral public delivery</p>
+        <p class="hero__tagline">An architecture of problems</p>
       </div>
       <figure class="hero__portrait">
         <img src="/ron-bronson.jpg" alt="Ron Bronson" />
       </figure>
     </header>
-    <section class="section">
-      <p class="lede">
-       I've spent twenty years designing services, leading teams, advising leaders, and improving the public tech stack from the ground up for millions of people.
-      </p>
+
+    <section class="lens-switcher" aria-label="Choose a lens">
+      <p class="lens-switcher__prompt">Viewed from:</p>
+      <div class="lens-switcher__buttons" role="tablist">
+        {lenses.map((lens, i) => (
+          <button
+            type="button"
+            role="tab"
+            class="lens-button"
+            data-lens={lens.id}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls={`lens-panel-${lens.id}`}
+          >
+            {lens.label}
+          </button>
+        ))}
+      </div>
     </section>
-    <section class="section">
+
+    {lenses.map((lens, i) => (
+      <section
+        class="lens-panel"
+        id={`lens-panel-${lens.id}`}
+        data-lens-panel={lens.id}
+        role="tabpanel"
+        aria-hidden={i === 0 ? 'false' : 'true'}
+        hidden={i !== 0}
+      >
+        <p class="lens-pov">{lens.pov}</p>
+
+        <h2 class="lens-heading">How I show up</h2>
+        <ul class="lens-capabilities">
+          {lens.capabilities.map((cap) => <li>{cap}</li>)}
+        </ul>
+
+        <h2 class="lens-heading">Evidence</h2>
+        <ul class="lens-evidence">
+          {lens.evidence.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+              <span class="lens-evidence__source"> — {item.source}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <section class="section section--meta">
       <h2>Currently</h2>
       <p>
-       Currently: Occupant/State Capacity AI, Assistant Professor of Practice in Urban Technology at the University of Michigan Taubman College of Architecture and Urban Planning. 
-Past: 18F, Nava, PDX Digital Corps
+        Occupant SPC and State Capacity AI. Assistant Professor of Practice in Urban Technology, University of Michigan Taubman College of Architecture and Urban Planning. Tennis coach, Catlin Gabel.
+      </p>
+      <p class="meta-past">
+        Previously: senior leadership at 18F/GSA Technology Transformation Services across three administrations, including Head of Design and Acting Chief of Staff for TTS Consulting. Nava. Portland Digital Corps.
       </p>
     </section>
-    <section class="section">
-      <h2>Recently</h2>
-      <ul class="recent">
-        <li>
-          <a href="https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/">Some advice on managing your design career upwards</a> — Piccalil.li
-        </li>
-        <li>
-          <a href="https://www.ixda.no/talks/design-as-repair">Design As Repair</a> IxDA Oslo, Sept. 2025
-        </li>
-        <li>
-          <a href="https://podcasts.apple.com/it/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505">Repairing Service Design in the AI age</a> — Service Design Show podcast
-        </li>
-      </ul>
-    </section>
+
     <section class="section">
       <h2>Contact</h2>
       <p>
-        Email <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a>.
+        <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a>
       </p>
       <p>
-        Writing at <a href="https://blog.ronbronson.com.com">Blog</a>. Also on
-        <a href="https://bsky.app/profile/ronbronson.com">Bluesky</a>,
-        <a href="https://www.linkedin.com/in/ronbronson/">LinkedIn</a>, and
-        <a href="https://github.com/quarterback">GitHub</a>.
+        <a href="https://blog.ronbronson.com">Blog</a> ·
+        <a href="https://makingpublicwork.com">Newsletter</a> ·
+        <a href="https://bsky.app/profile/ronbronson.com">Bluesky</a> ·
+        <a href="https://www.linkedin.com/in/ronbronson/">LinkedIn</a> ·
+        <a href="https://github.com/quarterback">GitHub</a>
       </p>
     </section>
   </main>
 </Single>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.lens-button');
+  const panels = document.querySelectorAll<HTMLElement>('[data-lens-panel]');
+
+  function activateLens(lensId: string) {
+    buttons.forEach((btn) => {
+      const isActive = btn.dataset.lens === lensId;
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    panels.forEach((panel) => {
+      const isActive = panel.dataset.lensPanel === lensId;
+      panel.hidden = !isActive;
+      panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+    });
+
+    if (history.replaceState) {
+      history.replaceState(null, '', `#${lensId}`);
+    }
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const lensId = btn.dataset.lens;
+      if (lensId) activateLens(lensId);
+    });
+  });
+
+  // Honor deep links: ronbronson.design/#plumbing opens that lens.
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.querySelector(`[data-lens-panel="${hash}"]`)) {
+    activateLens(hash);
+  }
+</script>
+
+<style>
+  .lens-switcher {
+    margin: 2.5rem 0 1.5rem;
+  }
+  .lens-switcher__prompt {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+  }
+  .lens-switcher__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .lens-button {
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font: inherit;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 120ms ease;
+  }
+  .lens-button:hover { opacity: 0.85; }
+  .lens-button[aria-selected="true"] {
+    opacity: 1;
+    background: currentColor;
+    color: var(--bg, #fff);
+  }
+
+  .lens-panel {
+    margin: 1rem 0 2.5rem;
+  }
+  .lens-pov {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  .lens-heading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .lens-capabilities,
+  .lens-evidence {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .lens-capabilities li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(127,127,127,0.15);
+  }
+  .lens-capabilities li:last-child { border-bottom: none; }
+  .lens-evidence li {
+    padding: 0.3rem 0;
+  }
+  .lens-evidence__source {
+    opacity: 0.6;
+    font-size: 0.95em;
+  }
+  .section--meta { margin-top: 2rem; }
+  .meta-past { opacity: 0.7; font-size: 0.95em; }
+</style>
