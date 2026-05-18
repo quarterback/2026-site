@@ -1,463 +1,508 @@
 ---
-import Base from '../layouts/Base.astro';
-import Footer from '../components/Footer.astro';
-import WritingStream from '../components/WritingStream.astro';
-import MediaCard from '../components/MediaCard.astro';
-import { getHomepageStream } from '../lib/stream';
-// import { getMergedNotes } from '../lib/notes';
+const ME = {
+  name: "Ron Bronson",
+  byline: "Systems, Platforms, Design & Strategy.",
+  location: "Pacific Northwest",
+  portrait: "/hero.jpg",
+};
 
-const stream = await getHomepageStream(12);
-// const notesPreview = (await getMergedNotes()).slice(0, 5);
+const SITE_URL = "https://ronbronson.com";
+const PAGE_DESCRIPTION = `${ME.byline} Based in ${ME.location}.`;
+const PORTRAIT_URL = new URL(ME.portrait, SITE_URL).toString();
+const CANONICAL_URL = SITE_URL + "/";
 
-// function formatNoteDate(d: Date) {
-//   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-// }
+const WRITING = [
+  {
+    title: "Some advice on managing your design career upwards",
+    where: "Piccalil.li",
+    href: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
+  },
+  {
+    title: "Design as Repair",
+    href: "https://blog.ronbronson.com/design-as-repair",
+  },
+  {
+    title: "The Bureaucratic Banality of Andor",
+    href: "https://blog.ronbronson.com/the-bureaucratic-banality-of-andor",
+  },
+  {
+    title: "Administrative burden as a service",
+    href: "https://blog.ronbronson.com/better-technology-for-cruelty-or-administrative-burden-as-a-service",
+  },
+  {
+    title: "Building a career by holding the door open",
+    href: "https://blog.ronbronson.com/building-a-career-by-holding-the-door-open",
+  },
+];
+
+const INTERVIEWS = [
+  {
+    title: "Service Design Show Podcast",
+    href: "https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505",
+  },
+  {
+    title: "Leading the Field",
+    where: "Code for America",
+    href: "https://codeforamerica.org/news/leading-the-field-ron-bronson/",
+  },
+  {
+    title: "Did I Do That Podcast",
+    href: "https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson",
+  },
+  {
+    title: "Surfacing Podcast",
+    href: "https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7",
+  },
+  {
+    title: "Building Better User-Centered Products",
+    where: "Pixel Pioneers",
+    href: "https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson",
+  },
+];
+
+const TEACHING = [
+  { title: "UT 402 Public Mechanics", where: "F26, W26" },
+  { title: "UT 330 Interaction Design", where: "F26" },
+  { title: "UT 360 Service Design and Urban Needs", where: "W'26, W'24" },
+];
+
+const HOST = [
+  { title: "Future Perfect Book Club", href: "https://futureperfectbook.club" },
+  {
+    title: "The Sound Bulletin on KFFP-FM",
+    href: "https://www.mixcloud.com/908rb/",
+  },
+];
+
+const TALKS = [
+  {
+    title: "Design as Repair",
+    where: "IxDA Oslo",
+    href: "https://www.ixda.no/talks/design-as-repair",
+  },
+  {
+    title: "Deceptive Design / Consequence Design",
+    where: "digital.gov",
+    href: "https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design",
+  },
+  {
+    title: "Design Consequences in Everyday Life",
+    where: "Rosenfeld Civic Design, 2022",
+    href: "https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/",
+  },
+];
+
+const ELSEWHERE = [
+  { label: "Bluesky", href: "https://bsky.app/profile/ronbronson.com" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/ronbronson/" },
+  { label: "GitHub", href: "https://github.com/quarterback" },
+  { label: "Email", href: "mailto:hello@ronbronson.com" },
+  { label: "Letterboxd", href: "https://letterboxd.com/ronbronson/" },
+  { label: "Literal.club", href: "https://literal.club/ron" },
+  { label: "Record.club", href: "https://record.club/ron" },
+  { label: "Mastodon", href: "https://mastodon.social/@ronbronson" },
+  { label: "Twitter", href: "https://twitter.com/ronbronson" },
+  { label: "Instagram", href: "https://www.instagram.com/ronbronson/" },
+];
+
+const sections = [
+  { title: "Writing", items: WRITING, venue: true },
+  { title: "Interviews", items: INTERVIEWS, venue: true },
+  { title: "Teaching", items: TEACHING, venue: true },
+  { title: "Host", items: HOST, venue: false },
+  { title: "Talks", items: TALKS, venue: true },
+];
 ---
 
-<Base title="Ron Bronson">
-  <main id="main">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{ME.name}</title>
+    <meta name="description" content={PAGE_DESCRIPTION} />
+    <meta name="author" content={ME.name} />
+    <link rel="canonical" href={CANONICAL_URL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- HERO -->
-    <section class="hero" aria-labelledby="hero-heading">
-      <div class="container">
-        <h1 id="hero-heading" class="hero-headline">
-          I build and fix<br>the systems that<br>run <em>public life.</em>
-        </h1>
-      </div>
-    </section>
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={ME.name} />
+    <meta property="og:title" content={ME.name} />
+    <meta property="og:description" content={PAGE_DESCRIPTION} />
+    <meta property="og:url" content={CANONICAL_URL} />
+    <meta property="og:image" content={PORTRAIT_URL} />
+    <meta property="og:image:alt" content={`Portrait of ${ME.name}`} />
+    <meta property="profile:first_name" content="Ron" />
+    <meta property="profile:last_name" content="Bronson" />
 
-    <!-- HOW CAN I HELP? -->
-    <section class="help" aria-labelledby="help-heading">
-      <div class="container">
-        <h2 id="help-heading" class="help-heading">How can I help?</h2>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ronbronson" />
+    <meta name="twitter:creator" content="@ronbronson" />
+    <meta name="twitter:title" content={ME.name} />
+    <meta name="twitter:description" content={PAGE_DESCRIPTION} />
+    <meta name="twitter:image" content={PORTRAIT_URL} />
+    <meta name="twitter:image:alt" content={`Portrait of ${ME.name}`} />
 
-        <div class="service-cards">
-          <article class="service-card">
-            <h3 class="service-title">
-              <span class="service-arrow" aria-hidden="true">&rarr;</span>
-              Bounded advisory &amp; scoped tools for public-sector tech &amp; AI
-            </h3>
-            <p class="service-body">
-              I work with public-sector teams on bounded delivery problems &mdash; backlogs and stuck workflows that need a fix in weeks, not quarters. I scope the problem narrowly, build a working tool against your actual data, and price it to move without a procurement bottleneck. Most of the wins are pattern problems: eligibility triage, document classification, case routing, backlog review where AI can add eyeballs without replacing the people holding the system together.
-            </p>
-            <p class="service-evidence">
-              See <a href="https://statecapacity.ai" target="_blank" rel="noopener">State Capacity AI</a> for what this looks like in practice.
-            </p>
-            <a href="/work" class="service-cta">More about my work &rarr;</a>
-          </article>
+    <!-- Webmentions / IndieWeb -->
+    <link
+      rel="webmention"
+      href="https://webmention.io/ronbronson.com/webmention"
+    />
+    <link
+      rel="pingback"
+      href="https://webmention.io/ronbronson.com/xmlrpc"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="page h-card">
+      <a class="u-url u-uid" href={CANONICAL_URL} hidden aria-hidden="true"
+        >{ME.name}</a
+      >
 
-          <article class="service-card">
-            <h3 class="service-title">
-              <span class="service-arrow" aria-hidden="true">&rarr;</span>
-              Writing, speaking, and teaching
-            </h3>
-            <p class="service-body">
-              I publish Making Public Work, a newsletter on public-sector technology, teach at the University of Michigan, and speak with leadership teams about AI and institutional capacity.
-            </p>
-            <a href="/media" class="service-cta">More about speaking &rarr;</a>
-          </article>
-        </div>
-      </div>
-    </section>
+      <figure class="page__fig">
+        <img class="u-photo" src={ME.portrait} alt={ME.name} />
+      </figure>
 
-    {/* NOTES — commented out until there's content to show
-    {notesPreview.length > 0 && (
-      <section class="notes-home" aria-labelledby="notes-home-heading">
-        <div class="container">
-          <div class="notes-home-head">
-            <h2 id="notes-home-heading" class="notes-home-heading">Notes</h2>
-            <a href="/notes" class="notes-home-all">All notes &rarr;</a>
-          </div>
+      <header class="page__hdr">
+        <h1 class="page__name p-name">{ME.name}</h1>
+        <p class="page__byline">
+          <span class="p-job-title">{ME.byline}</span> Based in <span
+            class="p-locality">{ME.location}</span
+          >.
+        </p>
+      </header>
 
-          <ul class="notes-home-list">
-            {notesPreview.map(note => (
-              <li class="notes-home-item">
-                <time class="notes-home-date" datetime={note.date.toISOString()}>{formatNoteDate(note.date)}</time>
-                <a
-                  href={note.url}
-                  class="notes-home-link"
-                  {...(note.external ? { target: '_blank', rel: 'noopener' } : {})}
-                >
-                  {note.kind === 'markdown' && note.title ? (
-                    <span class="notes-home-title">{note.title}</span>
+      <p class="page__intro p-note">
+        I'm the Design Executive in Residence at <a
+          href="https://occupant.ee">Occupant</a> and Assistant Professor of
+        Practice in Urban Tech at the University of Michigan Taubman College
+        of Architecture &amp; Urban Planning. Previously, I launched the <a
+          href="https://digitalcorpspdx.org">Portland Digital Corps</a>
+        volunteer cohort and was formerly head of design at <a
+          href="https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html"
+          >18F</a>.
+      </p>
+
+      {
+        sections.map((section) => (
+          <section class="sec">
+            <h2 class="sec__h">
+              <span class="sec__name">{section.title}</span>
+            </h2>
+            <ul class="sec__list">
+              {section.items.map((it) => (
+                <li class="sec__row">
+                  {it.href && it.href !== "#" ? (
+                    <a href={it.href} target="_blank" rel="noopener noreferrer">
+                      {it.title}
+                    </a>
                   ) : (
-                    <span class="notes-home-body">{note.body}</span>
+                    <span>{it.title}</span>
                   )}
-                  {note.external && <span class="notes-home-external" aria-hidden="true"> ↗</span>}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+                  {section.venue && it.where ? (
+                    <span class="sec__where"> — {it.where}</span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+
+      <section class="sec">
+        <h2 class="sec__h">
+          <span class="sec__name">Elsewhere</span>
+        </h2>
+        <ul class="sec__list sec__list--inline">
+          {
+            ELSEWHERE.map((e, i) => {
+              const isEmail = e.href.startsWith("mailto:");
+              const isPlaceholder = e.href === "#";
+              const linkClass = isEmail ? "u-email" : "u-url";
+              const linkRel = isEmail ? "me" : "me noopener noreferrer";
+              return (
+                <li>
+                  {isPlaceholder ? (
+                    <span>{e.label}</span>
+                  ) : (
+                    <a
+                      class={linkClass}
+                      href={e.href}
+                      target={isEmail ? undefined : "_blank"}
+                      rel={linkRel}
+                    >
+                      {e.label}
+                    </a>
+                  )}
+                  {i < ELSEWHERE.length - 1 && (
+                    <span class="sec__sep" aria-hidden="true"> · </span>
+                  )}
+                </li>
+              );
+            })
+          }
+        </ul>
       </section>
-    )}
-    */}
 
-    <!-- RECENT APPEARANCES -->
-    <section class="appearances" aria-labelledby="appearances-heading">
-      <div class="container">
-        <h2 id="appearances-heading" class="appearances-heading">Recent appearances</h2>
-        <div class="appearances-list">
-          <MediaCard
-            title="Design as Repair"
-            source="IxDA Oslo"
-            description="Most design work is repair — patching the gaps between intention and reality, between policy and the lived experience of the people who depend on public systems."
-            mediaType="talk"
-            url="https://www.ixda.no/talks/design-as-repair"
-            date="2025"
-          />
-          <MediaCard
-            title="Future Perfect Book Club"
-            source="futureperfectbook.club"
-            description="Co-hosted with Joel Goodman, exploring the intersection of design, technology, and the future of institutions."
-            mediaType="podcast"
-            url="https://futureperfectbook.club"
-            date="2025"
-          />
-          <MediaCard
-            title="Some advice on managing your design career upwards"
-            source="Piccalil.li"
-            description="Navigating design leadership, building influence across organizations, and positioning yourself for strategic impact."
-            mediaType="article"
-            url="https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/"
-            image="/img/piccalil.li.png"
-            date="January 2026"
-          />
-          <MediaCard
-            title="Beyond Civic Tech: Public Mechanics Starts at Home"
-            source="Cascadia Open Source Fall Conference"
-            description="Why civic tech fails when it ignores maintenance, repair, and the invisible work that keeps public services running."
-            mediaType="talk"
-            embedUrl="https://youtube.com/watch?v=hnAScuK-oMo"
-            date="November 2025"
-          />
-          <MediaCard
-            title="Repairing Service Design for the Age of AI"
-            source="Service Design Show Podcast"
-            description="Exploring how service design must evolve to address the challenges and opportunities of AI-driven systems."
-            mediaType="podcast"
-            url="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505"
-            date="September 2025"
-          />
-          <MediaCard
-            title="Design Systems and Public Services"
-            source="YouTube"
-            description="Discussion on service design, public sector innovation, and building decision systems that work at scale."
-            mediaType="video"
-            embedUrl="https://www.youtube.com/watch?v=kL0gYtoUtvI"
-            date="October 2025"
-          />
-        </div>
-      </div>
-    </section>
+      <footer class="foot">
+        <em>Last updated <time datetime="2026-05-18">May 2026</time>.</em>
+      </footer>
+    </main>
+  </body>
+</html>
 
-    <!-- LATEST POSTS -->
-    <section class="posts" aria-labelledby="posts-heading">
-      <div class="container">
-        <h2 id="posts-heading" class="posts-heading">Latest Posts</h2>
+<style is:global>
+  /* ─────────────────────────────────────────────────────────────
+     TOKENS — WCAG verified on stone paper #ededeb:
+       #18181a on #ededeb   15.4 : 1   AAA   body
+       #5b5a55 on #ededeb    5.7 : 1   AA    meta / italic
+       #7a1f2c on #ededeb    7.4 : 1   AAA   oxblood accent
+       #1c3faa on #ededeb    8.4 : 1   AAA   link
+       #5c2d91 on #ededeb    7.0 : 1   AAA   visited
+     Paper is a near-neutral cool stone — explicitly NOT yellow/beige.
+     ───────────────────────────────────────────────────────────── */
+  :root {
+    --paper: #ededeb;
+    --ink: #18181a;
+    --ink-2: #5b5a55;
+    --ink-3: #95938d;
+    --oxblood: #7a1f2c;
+    --link: #1c3faa;
+    --link-vis: #5c2d91;
+    --link-hov: #0e2670;
+    --hair: #c9c8c4;
+    --hair-2: #dddcd8;
 
-        <WritingStream items={stream} />
-      </div>
-    </section>
-
-  </main>
-
-  <Footer />
-</Base>
-
-<style>
-  /* ===== HERO ===== */
-  .hero {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: clamp(3rem, 7vh, 4.5rem) var(--pad) clamp(2rem, 4vh, 3rem);
+    --serif: "Newsreader", "Source Serif 4", "Lyon Text", Georgia,
+      "Times New Roman", serif;
   }
 
-  .hero-headline {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4.5vw, 3.4rem);
-    font-weight: 900;
-    line-height: 1.06;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin: 0;
+  * {
+    box-sizing: border-box;
   }
-
-  .hero-headline :global(em) {
-    font-style: italic;
-    font-weight: 400;
-    color: var(--accent);
-  }
-
-  /* ===== HOW CAN I HELP? ===== */
-  .help {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: clamp(3rem, 7vh, 5rem) var(--pad);
-    border-top: 1px solid var(--rule);
-  }
-
-  .help-heading {
-    font-family: var(--font-serif);
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ink);
-    margin: 0 0 2.5rem;
-  }
-
-  .service-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .service-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    padding: clamp(1.5rem, 3vw, 2rem);
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    transition: background 0.15s, border-color 0.15s;
-  }
-
-  .service-card:hover {
-    background: var(--bg-warm);
-    border-color: var(--ink-faint);
-  }
-
-  .service-title {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--ink);
-    margin: 0;
-  }
-
-  .service-arrow {
-    color: var(--accent);
-    font-weight: 400;
-    margin-right: 0.35rem;
-  }
-
-  .service-body {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    font-weight: 300;
-    line-height: 1.65;
-    color: var(--ink-mid);
-    margin: 0;
-    flex: 1;
-  }
-
-  .service-evidence {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 300;
-    line-height: 1.55;
-    color: var(--ink-faint);
-    margin: 0;
-  }
-
-  .service-evidence a {
-    color: var(--ink-mid);
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-underline-offset: 2px;
-    transition: color 0.15s;
-  }
-
-  .service-evidence a:hover {
-    color: var(--accent);
-  }
-
-  .service-cta {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    margin-top: 0.4rem;
-    align-self: flex-start;
-    transition: color 0.15s;
-  }
-
-  .service-cta:hover {
-    color: var(--brand-dim);
-  }
-
-  /* ===== NOTES (home) ===== */
-  .notes-home {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: clamp(3rem, 7vh, 5rem) var(--pad);
-    border-top: 1px solid var(--rule);
-  }
-
-  .notes-home-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    margin: 0 0 1.75rem;
-  }
-
-  .notes-home-heading {
-    font-family: var(--font-serif);
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ink);
-    margin: 0;
-  }
-
-  .notes-home-all {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  .notes-home-all:hover {
-    color: var(--brand-dim);
-  }
-
-  .notes-home-list {
-    list-style: none;
+  html,
+  body {
     margin: 0;
     padding: 0;
   }
-
-  .notes-home-item {
-    display: grid;
-    grid-template-columns: 4.5rem 1fr;
-    gap: 1.25rem;
-    align-items: baseline;
-    padding: 0.9rem 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .notes-home-item:last-child {
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .notes-home-date {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-
-  .notes-home-link {
-    text-decoration: none;
+  body {
+    background: var(--paper);
     color: var(--ink);
-    transition: color 0.15s;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern", "liga", "onum";
+    font-optical-sizing: auto;
+    hanging-punctuation: first last;
   }
 
-  .notes-home-link:hover .notes-home-title,
-  .notes-home-link:hover .notes-home-body {
-    color: var(--accent);
+  .page {
+    max-width: 580px;
+    margin: 0 auto;
+    padding: 56px 28px 96px;
   }
 
-  .notes-home-title {
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
+  /* ───── Portrait — wide visual anchor at the top ───── */
+  .page__fig {
+    margin: 0 0 28px;
+    position: relative;
+  }
+  .page__fig img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: center 22%;
+    filter: saturate(0.86) contrast(1.06) brightness(0.98);
+    border: 0.5px solid rgba(24, 24, 26, 0.18);
+  }
+
+  /* ───── Name + byline ───── */
+  .page__hdr {
+    margin: 0 0 28px;
+  }
+  .page__name {
+    margin: 0;
+    font-family: var(--serif);
     font-style: italic;
+    font-weight: 600;
+    font-size: clamp(34px, 5.6vw, 44px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
+  }
+  .page__byline {
+    margin: 8px 0 0;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 17px;
     line-height: 1.4;
+    color: var(--ink-2);
+    text-wrap: pretty;
   }
 
-  .notes-home-body {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    line-height: 1.55;
+  /* ───── Intro paragraph ───── */
+  .page__intro {
+    margin: 0 0 56px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+    text-wrap: pretty;
+    max-width: 50ch;
+  }
+
+  /* ───── Section ───── */
+  .sec {
+    margin: 0 0 44px;
+  }
+
+  .sec__h {
+    margin: 0 0 14px;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--oxblood);
+    display: flex;
+    align-items: baseline;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid var(--hair);
+  }
+  .sec__name {
+    flex: 1;
+  }
+
+  .sec__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sec__row {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink);
+    text-wrap: pretty;
+    text-indent: 0;
+  }
+  .sec__where {
+    color: var(--ink-2);
+    font-style: italic;
+  }
+
+  /* Inline list — for the elsewhere row */
+  .sec__list--inline {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0;
+  }
+  .sec__list--inline li {
+    font-family: var(--serif);
+    font-size: 17px;
+  }
+  .sec__sep {
+    color: var(--ink-3);
+    padding: 0 4px;
+  }
+
+  /* ───── Links ───── */
+  a {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 0.7px;
+    text-underline-offset: 2.5px;
+    text-decoration-color: rgba(28, 63, 170, 0.45);
+    transition: color 120ms, text-decoration-color 120ms;
+  }
+  a:visited {
+    color: var(--link-vis);
+    text-decoration-color: rgba(92, 45, 145, 0.45);
+  }
+  a:hover {
+    color: var(--link-hov);
+    text-decoration-color: currentColor;
+  }
+  a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+
+  /* ───── Foot ───── */
+  .foot {
+    margin-top: 60px;
+    padding-top: 18px;
+    border-top: 0.5px solid var(--hair);
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--ink-2);
+    text-align: right;
+  }
+  .foot time {
+    font-variant-numeric: tabular-nums oldstyle-nums;
+  }
+
+  ::selection {
+    background: rgba(122, 31, 44, 0.18);
     color: var(--ink);
   }
 
-  .notes-home-external {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--ink-faint);
-    margin-left: 0.3rem;
-  }
-
-  @media (max-width: 480px) {
-    .notes-home-item {
-      grid-template-columns: 3.5rem 1fr;
-      gap: 0.75rem;
+  /* ─────────────────────────────────────────────────────────────
+     Responsive
+     ───────────────────────────────────────────────────────────── */
+  @media (max-width: 560px) {
+    .page {
+      padding: 32px 22px 64px;
+    }
+    body {
+      font-size: 16px;
+    }
+    .page__intro {
+      font-size: 17px;
+    }
+    .sec__row,
+    .sec__list--inline li {
+      font-size: 16px;
+    }
+    .page__byline {
+      font-size: 16px;
     }
   }
 
-  /* ===== RECENT APPEARANCES ===== */
-  .appearances {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: clamp(3rem, 7vh, 5rem) var(--pad);
-    border-top: 1px solid var(--rule);
+  @media (max-width: 380px) {
+    .page {
+      padding: 24px 16px 48px;
+    }
   }
 
-  .appearances-heading {
-    font-family: var(--font-serif);
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ink);
-    margin: 0 0 2rem;
-  }
-
-  .appearances-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-4);
-  }
-
-  /* ===== LATEST POSTS ===== */
-  .posts {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: clamp(3rem, 7vh, 5rem) var(--pad);
-    border-top: 1px solid var(--rule);
-  }
-
-  .posts-heading {
-    font-family: var(--font-serif);
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ink);
-    margin: 0 0 2rem;
-  }
-
-  .posts-more {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem 2rem;
-    margin-top: 2rem;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .posts-more a {
-    color: var(--ink-mid);
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-
-  .posts-more a:hover {
-    color: var(--accent);
-  }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 768px) {
-    .service-cards {
-      grid-template-columns: 1fr;
+  @media print {
+    body {
+      background: white;
+    }
+    .page__fig img {
+      filter: none;
+    }
+    a {
+      color: black;
     }
   }
 </style>
+</html>
