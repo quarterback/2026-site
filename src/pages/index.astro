@@ -6,6 +6,11 @@ const ME = {
   portrait: "/hero.jpg",
 };
 
+const SITE_URL = "https://ronbronson.com";
+const PAGE_DESCRIPTION = `${ME.byline}. Based in ${ME.location}.`;
+const PORTRAIT_URL = new URL(ME.portrait, SITE_URL).toString();
+const CANONICAL_URL = SITE_URL + "/";
+
 const WRITING = [
   {
     title: "Some advice on managing your design career upwards",
@@ -73,12 +78,39 @@ const sections = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Ron Bronson</title>
-    <meta
-      name="description"
-      content={`${ME.byline}. Based in ${ME.location}.`}
-    />
+    <title>{ME.name}</title>
+    <meta name="description" content={PAGE_DESCRIPTION} />
+    <meta name="author" content={ME.name} />
+    <link rel="canonical" href={CANONICAL_URL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={ME.name} />
+    <meta property="og:title" content={ME.name} />
+    <meta property="og:description" content={PAGE_DESCRIPTION} />
+    <meta property="og:url" content={CANONICAL_URL} />
+    <meta property="og:image" content={PORTRAIT_URL} />
+    <meta property="og:image:alt" content={`Portrait of ${ME.name}`} />
+    <meta property="profile:first_name" content="Ron" />
+    <meta property="profile:last_name" content="Bronson" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ME.name} />
+    <meta name="twitter:description" content={PAGE_DESCRIPTION} />
+    <meta name="twitter:image" content={PORTRAIT_URL} />
+    <meta name="twitter:image:alt" content={`Portrait of ${ME.name}`} />
+
+    <!-- Webmentions / IndieWeb -->
+    <link
+      rel="webmention"
+      href="https://webmention.io/ronbronson.com/webmention"
+    />
+    <link
+      rel="pingback"
+      href="https://webmention.io/ronbronson.com/xmlrpc"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -87,17 +119,25 @@ const sections = [
     />
   </head>
   <body>
-    <main class="page">
+    <main class="page h-card">
+      <a class="u-url u-uid" href={CANONICAL_URL} hidden aria-hidden="true"
+        >{ME.name}</a
+      >
+
       <figure class="page__fig">
-        <img src={ME.portrait} alt={ME.name} />
+        <img class="u-photo" src={ME.portrait} alt={ME.name} />
       </figure>
 
       <header class="page__hdr">
-        <h1 class="page__name">{ME.name}</h1>
-        <p class="page__byline">{ME.byline}. Based in {ME.location}.</p>
+        <h1 class="page__name p-name">{ME.name}</h1>
+        <p class="page__byline">
+          <span class="p-job-title">{ME.byline}</span>. Based in <span
+            class="p-locality">{ME.location}</span
+          >.
+        </p>
       </header>
 
-      <p class="page__intro">
+      <p class="page__intro p-note">
         I work with public-sector teams on bounded delivery problems — backlogs
         and stuck workflows that need a fix in weeks, not quarters. I publish <a
           href="https://makingpublicwork.com">Making Public Work</a>, teach at
@@ -136,16 +176,26 @@ const sections = [
         </h2>
         <ul class="sec__list sec__list--inline">
           {
-            ELSEWHERE.map((e, i) => (
-              <li>
-                <a href={e.href} target="_blank" rel="noopener noreferrer">
-                  {e.label}
-                </a>
-                {i < ELSEWHERE.length - 1 && (
-                  <span class="sec__sep" aria-hidden="true"> · </span>
-                )}
-              </li>
-            ))
+            ELSEWHERE.map((e, i) => {
+              const isEmail = e.href.startsWith("mailto:");
+              const linkClass = isEmail ? "u-email" : "u-url";
+              const linkRel = isEmail ? "me" : "me noopener noreferrer";
+              return (
+                <li>
+                  <a
+                    class={linkClass}
+                    href={e.href}
+                    target={isEmail ? undefined : "_blank"}
+                    rel={linkRel}
+                  >
+                    {e.label}
+                  </a>
+                  {i < ELSEWHERE.length - 1 && (
+                    <span class="sec__sep" aria-hidden="true"> · </span>
+                  )}
+                </li>
+              );
+            })
           }
         </ul>
       </section>
