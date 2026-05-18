@@ -1,13 +1,13 @@
 ---
 const ME = {
   name: "Ron Bronson",
-  byline: "Service designer & design leader",
+  byline: "Systems, Platforms, Design & Strategy.",
   location: "Pacific Northwest",
   portrait: "/hero.jpg",
 };
 
 const SITE_URL = "https://ronbronson.com";
-const PAGE_DESCRIPTION = `${ME.byline}. Based in ${ME.location}.`;
+const PAGE_DESCRIPTION = `${ME.byline} Based in ${ME.location}.`;
 const PORTRAIT_URL = new URL(ME.portrait, SITE_URL).toString();
 const CANONICAL_URL = SITE_URL + "/";
 
@@ -17,43 +17,60 @@ const WRITING = [
     where: "Piccalil.li",
     href: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
   },
+  {
+    title: "Design as Repair",
+    href: "https://blog.ronbronson.com/design-as-repair",
+  },
+  {
+    title: "The Bureaucratic Banality of Andor",
+    href: "https://blog.ronbronson.com/the-bureaucratic-banality-of-andor",
+  },
+  {
+    title: "Administrative burden as a service",
+    href: "https://blog.ronbronson.com/better-technology-for-cruelty-or-administrative-burden-as-a-service",
+  },
+  {
+    title: "Building a career by holding the door open",
+    href: "https://blog.ronbronson.com/building-a-career-by-holding-the-door-open",
+  },
 ];
 
 const INTERVIEWS = [
   {
-    title: "Repairing Service Design for the Age of AI",
-    where: "Service Design Show",
+    title: "Service Design Show Podcast",
     href: "https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505",
   },
   {
-    title: "Future Perfect Book Club",
-    where: "with Joel Goodman",
-    href: "https://futureperfectbook.club",
+    title: "Leading the Field",
+    where: "Code for America",
+    href: "https://codeforamerica.org/news/leading-the-field-ron-bronson/",
   },
+  {
+    title: "Did I Do That Podcast",
+    href: "https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson",
+  },
+  {
+    title: "Surfacing Podcast",
+    href: "#",
+  },
+];
+
+const TEACHING = [
+  { title: "UT 402 Public Mechanics", where: "F26, W26" },
+  { title: "UT 330 Interaction Design", where: "F26" },
+  { title: "UT 360 Service Design and Urban Needs", where: "W'26, W'24" },
+];
+
+const HOST = [
+  { title: "Future Perfect Book Club", href: "https://futureperfectbook.club" },
+  { title: "The Sound Bulletin on KFFP-FM", href: "#" },
 ];
 
 const TALKS = [
   {
     title: "Design as Repair",
-    where: "IxDA Oslo, 2025",
-    href: "https://www.ixda.no/talks/design-as-repair",
+    href: "https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design",
   },
-  {
-    title: "Beyond Civic Tech: Public Mechanics Starts at Home",
-    where: "Cascadia Open Source Fall Conference, 2025",
-    href: "https://youtube.com/watch?v=hnAScuK-oMo",
-  },
-  {
-    title: "Design Systems and Public Services",
-    where: "YouTube, 2025",
-    href: "https://www.youtube.com/watch?v=kL0gYtoUtvI",
-  },
-];
-
-const PROJECTS = [
-  { title: "State Capacity AI", href: "https://statecapacity.ai" },
-  { title: "Portland Digital Corps", href: "https://digitalcorpspdx.org" },
-  { title: "Making Public Work", href: "https://makingpublicwork.com" },
 ];
 
 const ELSEWHERE = [
@@ -61,15 +78,20 @@ const ELSEWHERE = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/ronbronson/" },
   { label: "GitHub", href: "https://github.com/quarterback" },
   { label: "Email", href: "mailto:hello@ronbronson.com" },
+  { label: "Letterboxd", href: "#" },
+  { label: "Literal.club", href: "#" },
+  { label: "Record.club", href: "#" },
+  { label: "Mastodon", href: "#" },
+  { label: "Twitter", href: "https://twitter.com/ronbronson" },
+  { label: "Instagram", href: "#" },
 ];
-
-const ROMANS = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
 
 const sections = [
   { title: "Writing", items: WRITING, venue: true },
   { title: "Interviews", items: INTERVIEWS, venue: true },
-  { title: "Talks", items: TALKS, venue: true },
-  { title: "Projects", items: PROJECTS, venue: false },
+  { title: "Teaching", items: TEACHING, venue: true },
+  { title: "Host", items: HOST, venue: false },
+  { title: "Talks", items: TALKS, venue: false },
 ];
 ---
 
@@ -133,34 +155,39 @@ const sections = [
       <header class="page__hdr">
         <h1 class="page__name p-name">{ME.name}</h1>
         <p class="page__byline">
-          <span class="p-job-title">{ME.byline}</span>. Based in <span
+          <span class="p-job-title">{ME.byline}</span> Based in <span
             class="p-locality">{ME.location}</span
           >.
         </p>
       </header>
 
       <p class="page__intro p-note">
-        I work with public-sector teams on bounded delivery problems — backlogs
-        and stuck workflows that need a fix in weeks, not quarters. I publish <a
-          href="https://makingpublicwork.com">Making Public Work</a>, teach at
-        the University of Michigan, and build tools like <a
-          href="https://statecapacity.ai">State Capacity AI</a> for institutions
-        trying to do more with the people and systems they already have.
+        I'm the Design Executive in Residence at <a
+          href="https://occupant.ee">Occupant</a> and Assistant Professor of
+        Practice in Urban Tech at the University of Michigan Taubman College
+        of Architecture &amp; Urban Planning. Previously, I launched the <a
+          href="https://digitalcorpspdx.org">Portland Digital Corps</a>
+        volunteer cohort and was formerly head of design at <a
+          href="https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html"
+          >18F</a>.
       </p>
 
       {
-        sections.map((section, i) => (
+        sections.map((section) => (
           <section class="sec">
             <h2 class="sec__h">
-              <span class="sec__num">{ROMANS[i]}.</span>
               <span class="sec__name">{section.title}</span>
             </h2>
             <ul class="sec__list">
               {section.items.map((it) => (
                 <li class="sec__row">
-                  <a href={it.href} target="_blank" rel="noopener noreferrer">
-                    {it.title}
-                  </a>
+                  {it.href && it.href !== "#" ? (
+                    <a href={it.href} target="_blank" rel="noopener noreferrer">
+                      {it.title}
+                    </a>
+                  ) : (
+                    <span>{it.title}</span>
+                  )}
                   {section.venue && it.where ? (
                     <span class="sec__where"> — {it.where}</span>
                   ) : null}
@@ -173,25 +200,29 @@ const sections = [
 
       <section class="sec">
         <h2 class="sec__h">
-          <span class="sec__num">{ROMANS[sections.length]}.</span>
           <span class="sec__name">Elsewhere</span>
         </h2>
         <ul class="sec__list sec__list--inline">
           {
             ELSEWHERE.map((e, i) => {
               const isEmail = e.href.startsWith("mailto:");
+              const isPlaceholder = e.href === "#";
               const linkClass = isEmail ? "u-email" : "u-url";
               const linkRel = isEmail ? "me" : "me noopener noreferrer";
               return (
                 <li>
-                  <a
-                    class={linkClass}
-                    href={e.href}
-                    target={isEmail ? undefined : "_blank"}
-                    rel={linkRel}
-                  >
-                    {e.label}
-                  </a>
+                  {isPlaceholder ? (
+                    <span>{e.label}</span>
+                  ) : (
+                    <a
+                      class={linkClass}
+                      href={e.href}
+                      target={isEmail ? undefined : "_blank"}
+                      rel={linkRel}
+                    >
+                      {e.label}
+                    </a>
+                  )}
                   {i < ELSEWHERE.length - 1 && (
                     <span class="sec__sep" aria-hidden="true"> · </span>
                   )}
@@ -329,19 +360,8 @@ const sections = [
     color: var(--oxblood);
     display: flex;
     align-items: baseline;
-    gap: 12px;
     padding-bottom: 10px;
     border-bottom: 0.5px solid var(--hair);
-  }
-  .sec__num {
-    font-style: italic;
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.05em;
-    color: var(--oxblood);
-    font-variant-numeric: lining-nums;
-    min-width: 26px;
-    text-transform: none;
   }
   .sec__name {
     flex: 1;
