@@ -1,12 +1,12 @@
 ---
 const ME = {
   name: "Ron Bronson",
-  byline: "Systems, Platforms, Design & Strategy.",
-  location: "Pacific Northwest",
+  byline: "Product Delivery Engineer + Critical Service Design Exec",
+  location: "",
   portrait: "/hero.jpg",
 };
 
-const SITE_URL = "https://ronbronson.com";
+const SITE_URL = "https://ronbronson.design";
 const PAGE_DESCRIPTION = `${ME.byline} Based in ${ME.location}.`;
 const PORTRAIT_URL = new URL(ME.portrait, SITE_URL).toString();
 const CANONICAL_URL = SITE_URL + "/";
@@ -26,12 +26,8 @@ const WRITING = [
     href: "https://blog.ronbronson.com/the-bureaucratic-banality-of-andor",
   },
   {
-    title: "Administrative burden as a service",
-    href: "https://blog.ronbronson.com/better-technology-for-cruelty-or-administrative-burden-as-a-service",
-  },
-  {
-    title: "Building a career by holding the door open",
-    href: "https://blog.ronbronson.com/building-a-career-by-holding-the-door-open",
+    title: "What Forward Deployed Design Actually Looks Like",
+    href: "https://blog.ronbronson.com/what-forward-deployed-design-actually-looks-like?ref=rogerwong.me",
   },
 ];
 
@@ -96,7 +92,7 @@ const ELSEWHERE = [
   { label: "Bluesky", href: "https://bsky.app/profile/ronbronson.com" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/ronbronson/" },
   { label: "GitHub", href: "https://github.com/quarterback" },
-  { label: "Email", href: "mailto:hello@ronbronson.com" },
+  { label: "Email", href: "mailto:ron@ronbronson.com" },
   { label: "Letterboxd", href: "https://letterboxd.com/ronbronson/" },
   { label: "Literal.club", href: "https://literal.club/ron" },
   { label: "Record.club", href: "https://record.club/ron" },
@@ -148,11 +144,11 @@ const sections = [
     <!-- Webmentions / IndieWeb -->
     <link
       rel="webmention"
-      href="https://webmention.io/ronbronson.com/webmention"
+      href="https://webmention.io/ronbronson.design/webmention"
     />
     <link
       rel="pingback"
-      href="https://webmention.io/ronbronson.com/xmlrpc"
+      href="https://webmention.io/ronbronson.design/xmlrpc"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -180,18 +176,31 @@ const sections = [
         </p>
       </header>
 
-      <p class="page__intro p-note">
-        I'm the Design Executive in Residence at <a
-          href="https://occupant.ee">Occupant</a> and <a
-          href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/"
-          >Assistant Professor of Practice in Urban Tech</a> at the University
-        of Michigan Taubman College of Architecture &amp; Urban Planning.
-        Previously, I launched the <a href="https://digitalcorpspdx.org"
-          >Portland Digital Corps</a> volunteer cohort and was formerly head
-        of design at <a
-          href="https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html"
-          >18F</a>.
-      </p>
+     <p class="page__intro p-note">
+  With over two decades building for the public, I work as a platform delivery
+  engineer and critical designer — which puts me in an unusual place: not just
+  designing good software, but modeling the practices behind it, implementing
+  them, and leading teams toward good outcomes. As a practitioner-scholar, I'm
+  formalizing the public mechanics stack, with research interests in urban
+  platform economics and what happens when governments and nonprofits delegate
+  human judgment to computers — and how the judgment and decision rights of
+  everyday people get formalized, or don't.
+</p>
+<p class="page__intro p-note">
+  I'm currently an 
+    href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/"
+    >Assistant Professor of Practice in Urban Technology</a> at the University
+  of Michigan's Taubman College of Architecture &amp; Urban Planning, a radio
+  host at <a href="https://www.mixcloud.com/908RB/">Freeform Portland</a>, and a
+  high school tennis coach. I launched <a href="https://yearsahead.io">Years
+  Ahead</a> in 2026 and <a href="https://designforthepublic.com">Design for the
+  Public</a> in 2024. Previously I founded the 
+  href="https://digitalcorpspdx.org">Portland Digital Corps</a> and led the
+  design practice at 
+    href="https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html"
+    >18F</a>, the federal government's in-house digital service at GSA, building
+  platforms, systems and digital services for millions of Americans.
+</p>
 
       {
         sections.map((section) => (
