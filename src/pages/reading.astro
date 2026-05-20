@@ -1,298 +1,304 @@
 ---
-import Base from '../layouts/Base.astro';
-import Footer from '../components/Footer.astro';
-import { getBookhive, type BookhiveBook } from '../lib/bookhive';
+import { getLiteral, type LiteralBook } from '../lib/literal';
 
-const { reading, finished } = await getBookhive();
+const { reading, finished } = await getLiteral();
 
-function formatLong(iso?: string): string {
-  if (!iso) return '';
-  try {
-    return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  } catch {
-    return '';
-  }
-}
+const ME = { name: 'Ron Bronson' };
+const SITE_URL = 'https://ronbronson.design';
+const CANONICAL_URL = SITE_URL + '/reading';
+const PAGE_DESCRIPTION =
+  'What Ron Bronson is reading now and a rolling log of recent finishes — references that shape the work.';
 
-function year(iso?: string): string {
-  if (!iso) return 'Undated';
-  const y = new Date(iso).getFullYear();
-  return Number.isNaN(y) ? 'Undated' : String(y);
-}
-
-function starLine(n?: number): string {
-  if (!n) return '';
-  const filled = Math.round(n / 2);
-  return '★'.repeat(filled) + '☆'.repeat(5 - filled);
-}
-
-// Group finished books by year, preserving the reverse-chronological sort.
-// A Map keeps insertion order; a plain object would reorder integer-like
-// (year) keys into ascending numeric order.
-const finishedByYear = new Map<string, BookhiveBook[]>();
-for (const book of finished) {
-  const key = year(book.finishedAt);
-  const bucket = finishedByYear.get(key);
-  if (bucket) bucket.push(book);
-  else finishedByYear.set(key, [book]);
-}
+const sections: { heading: string; books: LiteralBook[] }[] = [
+  { heading: 'Currently reading', books: reading },
+  { heading: 'Recently read', books: finished },
+];
 ---
 
-<Base
-  title="Reading — Ron Bronson"
-  description="A running log of books past and present — references that shape the work."
->
-  <main id="main" class="reading">
-    <header class="reading-header">
-      <p class="reading-kicker">Reading</p>
-      <h1 class="reading-headline">References, past and present.</h1>
-      <p class="reading-standfirst">
-        A running log of what I&rsquo;m reading now and what I&rsquo;ve finished &mdash;
-        the references that keep turning up in the work. Synced from
-        <a href="https://bookhive.buzz/profile/ronbronson.com" target="_blank" rel="noopener">Bookhive</a>.
-      </p>
-    </header>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reading — {ME.name}</title>
+    <meta name="description" content={PAGE_DESCRIPTION} />
+    <meta name="author" content={ME.name} />
+    <link rel="canonical" href={CANONICAL_URL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    {reading.length === 0 && finished.length === 0 && (
-      <p class="reading-empty">The shelf is loading &mdash; check back shortly.</p>
-    )}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={ME.name} />
+    <meta property="og:title" content={`Reading — ${ME.name}`} />
+    <meta property="og:description" content={PAGE_DESCRIPTION} />
+    <meta property="og:url" content={CANONICAL_URL} />
 
-    {reading.length > 0 && (
-      <section class="reading-section" aria-labelledby="present-heading">
-        <h2 id="present-heading" class="reading-section__heading">Currently reading</h2>
-        <ul class="reading-list">
-          {reading.map((book) => (
-            <li class="entry">
-              <a class="entry__cover" href={book.bookUrl} target="_blank" rel="noopener">
-                {book.coverUrl ? (
-                  <img src={book.coverUrl} alt={`Cover of ${book.title}`} loading="lazy" />
-                ) : (
-                  <span class="entry__cover-fallback" aria-hidden="true">{book.title.slice(0, 1)}</span>
-                )}
-              </a>
-              <div class="entry__body">
-                <h3 class="entry__title">
-                  <a href={book.bookUrl} target="_blank" rel="noopener">{book.title}</a>
-                </h3>
-                <p class="entry__author">{book.authors}</p>
-                {book.startedAt && (
-                  <p class="entry__meta">Started {formatLong(book.startedAt)}</p>
-                )}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="page">
+      <p class="page__back"><a href="/">&larr; {ME.name}</a></p>
 
-    {[...finishedByYear].map(([yr, books]) => (
-      <section class="reading-section" aria-labelledby={`year-${yr}`}>
-        <h2 id={`year-${yr}`} class="reading-section__heading">{yr}</h2>
-        <ul class="reading-list">
-          {books.map((book) => (
-            <li class="entry">
-              <a class="entry__cover" href={book.bookUrl} target="_blank" rel="noopener">
-                {book.coverUrl ? (
-                  <img src={book.coverUrl} alt={`Cover of ${book.title}`} loading="lazy" />
-                ) : (
-                  <span class="entry__cover-fallback" aria-hidden="true">{book.title.slice(0, 1)}</span>
-                )}
-              </a>
-              <div class="entry__body">
-                <h3 class="entry__title">
-                  <a href={book.bookUrl} target="_blank" rel="noopener">{book.title}</a>
-                </h3>
-                <p class="entry__author">{book.authors}</p>
-                <p class="entry__meta">
-                  {book.stars && <span class="entry__stars" title={`${book.stars}/10`}>{starLine(book.stars)}</span>}
-                  {book.finishedAt && <span class="entry__date">Finished {formatLong(book.finishedAt)}</span>}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
-  </main>
+      <header class="page__hdr">
+        <h1 class="page__name">Reading</h1>
+        <p class="page__intro">
+          What I&rsquo;m reading now and a rolling log of recent finishes &mdash;
+          the references that keep turning up in the work, in the order I actually
+          read them. The full shelf lives on
+          <a href="https://literal.club/ron" target="_blank" rel="noopener">Literal</a>.
+        </p>
+      </header>
 
-  <Footer />
-</Base>
+      {reading.length === 0 && finished.length === 0 && (
+        <p class="page__empty">The shelf is loading &mdash; check back shortly.</p>
+      )}
 
-<style>
-  .reading {
-    max-width: var(--content-width-narrow);
-    margin-inline: auto;
-    padding-block: clamp(3rem, 8vh, 5rem) clamp(2rem, 6vh, 4rem);
-    padding-inline: var(--pad);
+      {sections.map((section) => section.books.length > 0 && (
+        <section class="sec">
+          <h2 class="sec__h">{section.heading}</h2>
+          <ul class="booklist">
+            {section.books.map((book) => (
+              <li class="book">
+                <a class="book__cover" href={book.url} target="_blank" rel="noopener">
+                  <span class="book__cover-fallback" aria-hidden="true">{book.title.slice(0, 1)}</span>
+                  {book.cover && (
+                    <img
+                      src={book.cover}
+                      alt={`Cover of ${book.title}`}
+                      loading="lazy"
+                      onerror="this.remove()"
+                    />
+                  )}
+                </a>
+                <div class="book__body">
+                  <h3 class="book__title">
+                    <a href={book.url} target="_blank" rel="noopener">{book.title}</a>
+                  </h3>
+                  {book.subtitle && <p class="book__subtitle">{book.subtitle}</p>}
+                  {book.authors && <p class="book__author">{book.authors}</p>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+
+      <footer class="foot">
+        <em>Synced from <a href="https://literal.club/ron" target="_blank" rel="noopener">Literal</a>.</em>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --paper: #ededeb;
+    --ink: #18181a;
+    --ink-2: #5b5a55;
+    --ink-3: #95938d;
+    --oxblood: #7a1f2c;
+    --link: #1c3faa;
+    --link-vis: #5c2d91;
+    --link-hov: #0e2670;
+    --hair: #c9c8c4;
+
+    --serif: "Newsreader", "Source Serif 4", "Lyon Text", Georgia,
+      "Times New Roman", serif;
   }
 
-  .reading-header {
-    margin-block-end: clamp(2.5rem, 6vh, 4rem);
-  }
-
-  .reading-kicker {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 1rem;
-  }
-
-  .reading-headline {
-    font-family: var(--font-serif);
-    font-size: clamp(1.9rem, 4.5vw, 3rem);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
     color: var(--ink);
-    margin: 0 0 1rem;
-  }
-
-  .reading-standfirst {
-    font-family: var(--font-sans);
-    font-size: 1.0625rem;
-    font-weight: 300;
+    font-family: var(--serif);
+    font-size: 17px;
     line-height: 1.65;
-    color: var(--ink-mid);
-    max-width: 56ch;
-    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern", "liga", "onum";
+    font-optical-sizing: auto;
+    hanging-punctuation: first last;
   }
 
-  .reading-standfirst a {
-    color: var(--ink);
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
+  .page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 48px 28px 96px;
   }
 
-  .reading-empty {
-    color: var(--ink-muted);
+  .page__back {
+    margin: 0 0 36px;
+    font-size: 15px;
     font-style: italic;
   }
 
-  .reading-section {
-    margin-block-end: clamp(2.5rem, 6vh, 4rem);
+  .page__hdr { margin: 0 0 44px; }
+
+  .page__name {
+    margin: 0 0 16px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(34px, 5.6vw, 44px);
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 60;
   }
 
-  .reading-section__heading {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+  .page__intro {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+    text-wrap: pretty;
+    max-width: 52ch;
+  }
+
+  .page__empty { color: var(--ink-2); font-style: italic; }
+
+  .sec { margin: 0 0 48px; }
+
+  .sec__h {
+    margin: 0 0 22px;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-weight: 500;
-    color: var(--ink-faint);
-    margin: 0 0 var(--space-6);
-    padding-block-end: var(--space-3);
-    border-block-end: 1px solid var(--rule);
+    color: var(--oxblood);
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid var(--hair);
   }
 
-  .reading-list {
-    list-style: none;
+  .booklist {
     margin: 0;
     padding: 0;
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: clamp(1.5rem, 3vh, 2.25rem);
+    gap: 26px;
   }
 
-  .entry {
+  .book {
     display: grid;
-    grid-template-columns: 88px 1fr;
-    gap: 1.5rem;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
     align-items: start;
   }
 
-  .entry__cover {
+  .book__cover {
+    position: relative;
     display: block;
     aspect-ratio: 2 / 3;
-    background: var(--rule);
-    border-radius: 2px;
+    background: #e0dfdb;
     overflow: hidden;
-    box-shadow: 0 1px 3px rgba(20, 18, 16, 0.12);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 0.5px solid rgba(24, 24, 26, 0.18);
+    box-shadow: 0 1px 2px rgba(24, 24, 26, 0.12);
+    transition: transform 140ms ease, box-shadow 140ms ease;
   }
 
-  .entry__cover:hover {
+  .book__cover:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(20, 18, 16, 0.18);
+    box-shadow: 0 5px 14px rgba(24, 24, 26, 0.2);
   }
 
-  .entry__cover img {
+  .book__cover img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    filter: saturate(0.92) contrast(1.02);
   }
 
-  .entry__cover-fallback {
+  .book__cover-fallback {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    font-family: var(--font-serif);
-    font-size: 1.75rem;
-    color: var(--ink-muted);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--ink-3);
   }
 
-  .entry__body {
-    min-width: 0;
-  }
+  .book__body { min-width: 0; padding-top: 2px; }
 
-  .entry__title {
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
+  .book__title {
+    margin: 0 0 4px;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 19px;
     line-height: 1.25;
-    margin: 0 0 0.3rem;
+    letter-spacing: -0.01em;
   }
 
-  .entry__title a {
+  .book__title a {
     color: var(--ink);
     text-decoration: none;
   }
-
-  .entry__title a:hover {
-    color: var(--accent);
+  .book__title a:hover {
+    color: var(--oxblood);
+    text-decoration: underline;
+    text-decoration-thickness: 0.7px;
+    text-underline-offset: 2.5px;
   }
 
-  .entry__author {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    margin: 0 0 0.5rem;
+  .book__subtitle {
+    margin: 0 0 6px;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.3;
+    color: var(--ink-2);
   }
 
-  .entry__meta {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
+  .book__author {
     margin: 0;
+    font-size: 15px;
+    color: var(--ink-2);
   }
 
-  .entry__stars {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--accent);
-    letter-spacing: 0.05em;
+  .foot {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 0.5px solid var(--hair);
+    font-size: 14px;
+    color: var(--ink-2);
+    text-align: right;
   }
 
-  .entry__date {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
+  a {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-thickness: 0.7px;
+    text-underline-offset: 2.5px;
+    text-decoration-color: rgba(28, 63, 170, 0.45);
+    transition: color 120ms, text-decoration-color 120ms;
+  }
+  a:visited { color: var(--link-vis); text-decoration-color: rgba(92, 45, 145, 0.45); }
+  a:hover { color: var(--link-hov); text-decoration-color: currentColor; }
+  a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+    border-radius: 1px;
   }
 
-  @media (max-width: 480px) {
-    .entry {
-      grid-template-columns: 64px 1fr;
-      gap: 1rem;
-    }
+  ::selection { background: rgba(122, 31, 44, 0.18); color: var(--ink); }
 
-    .entry__title {
-      font-size: 1.15rem;
-    }
+  @media (max-width: 560px) {
+    .page { padding: 32px 22px 64px; }
+    body { font-size: 16px; }
+    .page__intro { font-size: 17px; }
+    .book { grid-template-columns: 52px 1fr; gap: 16px; }
+    .book__title { font-size: 18px; }
   }
 </style>
