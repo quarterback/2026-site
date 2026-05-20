@@ -204,6 +204,10 @@ const sections = [
   platforms, systems and digital services for millions of Americans.
 </p>
 
+      <p class="page__more">
+        <a href="/reading">Reading — books past &amp; present &rarr;</a>
+      </p>
+
       {
         sections.map((section) => (
           <section class="sec">
@@ -368,12 +372,18 @@ const sections = [
 
   /* ───── Intro paragraph ───── */
   .page__intro {
-    margin: 0 0 56px;
+    margin: 0 0 28px;
     font-size: 18px;
     line-height: 1.6;
     color: var(--ink);
     text-wrap: pretty;
     max-width: 50ch;
+  }
+
+  .page__more {
+    margin: 0 0 56px;
+    font-size: 18px;
+    font-style: italic;
   }
 
   /* ───── Section ───── */
