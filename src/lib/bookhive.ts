@@ -5,6 +5,8 @@ export interface BookhiveBook {
   finishedAt?: string;
   startedAt?: string;
   hiveId: string;
+  coverUrl?: string;
+  bookUrl: string;
 }
 
 interface BookhiveResponse {
@@ -29,7 +31,13 @@ interface Record {
     startedAt?: string;
     finishedAt?: string;
     createdAt?: string;
+    cover?: { ref?: { $link?: string } };
   };
+}
+
+function blobUrl(cid?: string): string | undefined {
+  if (!cid) return undefined;
+  return `${PDS}/xrpc/com.atproto.sync.getBlob?did=${encodeURIComponent(DID)}&cid=${encodeURIComponent(cid)}`;
 }
 
 export async function getBookhive(): Promise<BookhiveResponse> {
@@ -56,6 +64,8 @@ export async function getBookhive(): Promise<BookhiveResponse> {
         stars: v.stars,
         finishedAt: v.finishedAt,
         startedAt: v.startedAt,
+        coverUrl: blobUrl(v.cover?.ref?.$link),
+        bookUrl: `https://bookhive.buzz/books/${v.hiveId}`,
       };
 
       if (v.status === 'buzz.bookhive.defs#reading') {

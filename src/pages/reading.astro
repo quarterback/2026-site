@@ -1,0 +1,298 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import { getBookhive, type BookhiveBook } from '../lib/bookhive';
+
+const { reading, finished } = await getBookhive();
+
+function formatLong(iso?: string): string {
+  if (!iso) return '';
+  try {
+    return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  } catch {
+    return '';
+  }
+}
+
+function year(iso?: string): string {
+  if (!iso) return 'Undated';
+  const y = new Date(iso).getFullYear();
+  return Number.isNaN(y) ? 'Undated' : String(y);
+}
+
+function starLine(n?: number): string {
+  if (!n) return '';
+  const filled = Math.round(n / 2);
+  return '★'.repeat(filled) + '☆'.repeat(5 - filled);
+}
+
+// Group finished books by year, preserving the reverse-chronological sort.
+// A Map keeps insertion order; a plain object would reorder integer-like
+// (year) keys into ascending numeric order.
+const finishedByYear = new Map<string, BookhiveBook[]>();
+for (const book of finished) {
+  const key = year(book.finishedAt);
+  const bucket = finishedByYear.get(key);
+  if (bucket) bucket.push(book);
+  else finishedByYear.set(key, [book]);
+}
+---
+
+<Base
+  title="Reading — Ron Bronson"
+  description="A running log of books past and present — references that shape the work."
+>
+  <main id="main" class="reading">
+    <header class="reading-header">
+      <p class="reading-kicker">Reading</p>
+      <h1 class="reading-headline">References, past and present.</h1>
+      <p class="reading-standfirst">
+        A running log of what I&rsquo;m reading now and what I&rsquo;ve finished &mdash;
+        the references that keep turning up in the work. Synced from
+        <a href="https://bookhive.buzz/profile/ronbronson.com" target="_blank" rel="noopener">Bookhive</a>.
+      </p>
+    </header>
+
+    {reading.length === 0 && finished.length === 0 && (
+      <p class="reading-empty">The shelf is loading &mdash; check back shortly.</p>
+    )}
+
+    {reading.length > 0 && (
+      <section class="reading-section" aria-labelledby="present-heading">
+        <h2 id="present-heading" class="reading-section__heading">Currently reading</h2>
+        <ul class="reading-list">
+          {reading.map((book) => (
+            <li class="entry">
+              <a class="entry__cover" href={book.bookUrl} target="_blank" rel="noopener">
+                {book.coverUrl ? (
+                  <img src={book.coverUrl} alt={`Cover of ${book.title}`} loading="lazy" />
+                ) : (
+                  <span class="entry__cover-fallback" aria-hidden="true">{book.title.slice(0, 1)}</span>
+                )}
+              </a>
+              <div class="entry__body">
+                <h3 class="entry__title">
+                  <a href={book.bookUrl} target="_blank" rel="noopener">{book.title}</a>
+                </h3>
+                <p class="entry__author">{book.authors}</p>
+                {book.startedAt && (
+                  <p class="entry__meta">Started {formatLong(book.startedAt)}</p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {[...finishedByYear].map(([yr, books]) => (
+      <section class="reading-section" aria-labelledby={`year-${yr}`}>
+        <h2 id={`year-${yr}`} class="reading-section__heading">{yr}</h2>
+        <ul class="reading-list">
+          {books.map((book) => (
+            <li class="entry">
+              <a class="entry__cover" href={book.bookUrl} target="_blank" rel="noopener">
+                {book.coverUrl ? (
+                  <img src={book.coverUrl} alt={`Cover of ${book.title}`} loading="lazy" />
+                ) : (
+                  <span class="entry__cover-fallback" aria-hidden="true">{book.title.slice(0, 1)}</span>
+                )}
+              </a>
+              <div class="entry__body">
+                <h3 class="entry__title">
+                  <a href={book.bookUrl} target="_blank" rel="noopener">{book.title}</a>
+                </h3>
+                <p class="entry__author">{book.authors}</p>
+                <p class="entry__meta">
+                  {book.stars && <span class="entry__stars" title={`${book.stars}/10`}>{starLine(book.stars)}</span>}
+                  {book.finishedAt && <span class="entry__date">Finished {formatLong(book.finishedAt)}</span>}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .reading {
+    max-width: var(--content-width-narrow);
+    margin-inline: auto;
+    padding-block: clamp(3rem, 8vh, 5rem) clamp(2rem, 6vh, 4rem);
+    padding-inline: var(--pad);
+  }
+
+  .reading-header {
+    margin-block-end: clamp(2.5rem, 6vh, 4rem);
+  }
+
+  .reading-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1rem;
+  }
+
+  .reading-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 1rem;
+  }
+
+  .reading-standfirst {
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--ink-mid);
+    max-width: 56ch;
+    margin: 0;
+  }
+
+  .reading-standfirst a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+  }
+
+  .reading-empty {
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+
+  .reading-section {
+    margin-block-end: clamp(2.5rem, 6vh, 4rem);
+  }
+
+  .reading-section__heading {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-faint);
+    margin: 0 0 var(--space-6);
+    padding-block-end: var(--space-3);
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .reading-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 3vh, 2.25rem);
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .entry__cover {
+    display: block;
+    aspect-ratio: 2 / 3;
+    background: var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(20, 18, 16, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .entry__cover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(20, 18, 16, 0.18);
+  }
+
+  .entry__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .entry__cover-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--ink-muted);
+  }
+
+  .entry__body {
+    min-width: 0;
+  }
+
+  .entry__title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    line-height: 1.25;
+    margin: 0 0 0.3rem;
+  }
+
+  .entry__title a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .entry__title a:hover {
+    color: var(--accent);
+  }
+
+  .entry__author {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    margin: 0 0 0.5rem;
+  }
+
+  .entry__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .entry__stars {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .entry__date {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 480px) {
+    .entry {
+      grid-template-columns: 64px 1fr;
+      gap: 1rem;
+    }
+
+    .entry__title {
+      font-size: 1.15rem;
+    }
+  }
+</style>
