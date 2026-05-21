@@ -19,6 +19,7 @@ interface Source {
 const sources: Source[] = [
   { url: 'https://makingpublicwork.com/rss/', label: 'makingpublicwork.com' },
   { url: 'https://blog.ronbronson.com/feed.rss', label: 'blog.ronbronson.com' },
+  { url: 'https://gamedesign.leaflet.pub/rss', label: 'gamedesign.leaflet.pub', maxItems: 1 },
 ];
 
 export async function getHomepageStream(limit = 12): Promise<StreamItem[]> {
@@ -45,5 +46,21 @@ export async function getHomepageStream(limit = 12): Promise<StreamItem[]> {
 
   const all = perSource.flat();
   all.sort((a, b) => b.date.getTime() - a.date.getTime());
-  return all.slice(0, limit);
+
+  const seen = new Set<string>();
+  const deduped = all.filter(item => {
+    const key = normalizeTitle(item.title);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  return deduped.slice(0, limit);
+}
+
+function normalizeTitle(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim();
 }
