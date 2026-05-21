@@ -1,10 +1,14 @@
 ---
+import { getHomepageStream } from "../lib/stream";
+
 const ME = {
   name: "Ron Bronson",
   byline: "Product Delivery Engineer + Critical Service Design Exec",
   location: "",
   portrait: "/hero.jpg",
 };
+
+const POSTS = await getHomepageStream(5);
 
 const SITE_URL = "https://ronbronson.design";
 const PAGE_DESCRIPTION = `${ME.byline} ${ME.location}.`;
@@ -233,6 +237,26 @@ const sections = [
             </ul>
           </section>
         ))
+      }
+
+      {
+        POSTS.length > 0 && (
+          <section class="sec">
+            <h2 class="sec__h">
+              <span class="sec__name">Some Thoughts</span>
+            </h2>
+            <ul class="sec__list">
+              {POSTS.map((post) => (
+                <li class="sec__row">
+                  <a href={post.url} target="_blank" rel="noopener noreferrer">
+                    {post.title}
+                  </a>
+                  <span class="sec__where"> — {post.source}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
       }
 
       <section class="sec">
