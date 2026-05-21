@@ -19,7 +19,6 @@ interface Source {
 const sources: Source[] = [
   { url: 'https://makingpublicwork.com/rss/', label: 'makingpublicwork.com' },
   { url: 'https://blog.ronbronson.com/feed.rss', label: 'blog.ronbronson.com' },
-  { url: 'https://gamedesign.leaflet.pub/rss', label: 'gamedesign.leaflet.pub', maxItems: 1 },
 ];
 
 export async function getHomepageStream(limit = 12): Promise<StreamItem[]> {
