@@ -1,126 +1,98 @@
 /* -------------------------------------------------------------------
    frontdoor.ts — content for the homepage.
 
-   JOB: get Ron booked/hired. A stranger should grasp what he does FOR
-   them and have an obvious path to contact.
-   FORM: big confident statements, each anchored by visible proof
-   (photos, artifacts, named work). Authority, not a bio.
+   Structure follows the Martin Jordan model:
+     hero (big statement + about role lines + contact)
+     → Current Work (image-forward: image + title + role + collaborators
+       + short description)
+     → Speaking (recent talks, 2026 emphasized) → see all.
 
-   Edit this file to change the pitch. Copy below is placeholder
-   scaffolding to show the structure — replace the words and swap in real
-   proof photos from /public/img. Keep the shape.
+   Photos and final copy don't exist yet. Image slots left empty render as
+   intentional placeholders, so the layout reads before real photos arrive.
+   Items below are the ones Ron named to surface — refine the words, add
+   images to /public/img and reference them in `images`.
    ------------------------------------------------------------------- */
 
-export interface Cta {
-  label: string;
-  href: string;
-  external?: boolean;
+export interface Cta { label: string; href: string; external?: boolean; note?: string; }
+export interface Link { label: string; href: string; external?: boolean; }
+
+export interface Hero {
+  headline: string;                          // the big statement
+  about: { text: string; href?: string; external?: boolean }[]; // role lines
+  contact: Cta[];
+  links: Link[];
 }
 
-/* The lead pitch — value statement + a clear call to action. */
-export interface Lead {
-  name: string;
-  credential: string; // the credibility anchor, Jordan-style (former role)
-  headline: string;   // the big value statement (what he does, for whom)
-  sub: string;        // one supporting line
-  ctas: Cta[];        // primary + secondary action
-}
+export interface WorkImage { src: string; alt: string; }
 
-/* A piece of evidence under a claim — ideally a photo/artifact. */
-export interface ProofItem {
-  label: string;      // what it is
-  image?: string;     // /img/… ; omit for a text-only proof pill
+export interface CurrentWork {
+  title: string;
+  images: WorkImage[];        // empty = placeholder slot(s)
+  role?: string;
+  collaborators?: string[];
+  description: string;
   href?: string;
   external?: boolean;
 }
 
-/* A confident claim about what he does for you, backed by proof. */
-export interface Capability {
-  statement: string;  // bold: "I do X for you"
-  blurb: string;      // what you actually get / how it works
-  proof: ProofItem[]; // the receipts
-  cta?: Cta;          // optional deeper link
-}
-
-/* Logan-style social proof — the names that vouch for you. */
-export interface SocialProof {
-  label: string;
-  items: string[];    // institutions / venues
-}
-
-export interface Contact {
-  line: string;       // the ask
-  email: string;
-  ctas: Cta[];
+export interface TalkItem {
+  title: string;
+  venue?: string;
+  year?: string;
+  href?: string;
+  video?: boolean;
 }
 
 /* =================================================================== */
 
-export const LEAD: Lead = {
-  name: 'Ron Bronson',
-  credential: 'Former Head of Design, 18F · U.S. General Services Administration',
-  headline:
-    'I help institutions deploy public technology that actually reaches people.',
-  sub: 'Two decades closing the gap between policy and delivery — from small counties to federal agencies.',
-  ctas: [
-    { label: 'Get in touch', href: 'mailto:ron@ronbronson.com' },
-    { label: 'Book a talk', href: '/speaking' },
+export const HERO: Hero = {
+  headline: 'I help institutions deploy public technology that actually reaches people.',
+  about: [
+    { text: 'Assistant Professor of Practice, University of Michigan Urban Technology', href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/', external: true },
+    { text: 'Former Head of Design, 18F · U.S. General Services Administration' },
+  ],
+  contact: [
+    { label: 'Write a message', href: 'mailto:ron@ronbronson.com', note: 'via email' },
+    { label: 'Book a session', href: '#', note: 'via Calendly' },
+  ],
+  links: [
+    { label: 'Bluesky', href: 'https://bsky.app/profile/ronbronson.com', external: true },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ronbronson/', external: true },
+    { label: 'GitHub', href: 'https://github.com/quarterback', external: true },
   ],
 };
 
-export const SOCIAL_PROOF: SocialProof = {
-  label: 'Worked with & spoken at',
-  items: [
-    '18F / GSA',
-    'Dept. of Veterans Affairs',
-    'IRS',
-    'HHS',
-    'Dept. of Defense',
-    'University of Michigan',
-    'Code for America',
-    'Bloomberg',
-    'IxDA',
-    'Rosenfeld',
-    'Cloudflare',
-  ],
-};
-
-export const CAPABILITIES: Capability[] = [
+export const CURRENT_WORK: CurrentWork[] = [
   {
-    statement: 'I stabilize stalled delivery programs.',
-    blurb:
-      'I diagnose where ownership got lost, reset deployment plans that aren’t working, and build the internal capacity a program needs to outlast the engagement.',
-    proof: [
-      { label: 'Federal delivery at 18F', image: '/img/18f-leadership.svg' },
-      { label: 'Portland Digital Corps', image: '/img/digitalcorpspdx.org.png', href: 'https://digitalcorpspdx.org', external: true },
-    ],
+    title: 'Years Ahead',
+    images: [],
+    role: 'Founder & lead',
+    description: 'Running yearsahead.io at the University of Michigan. [One or two sentences on what it is and who it serves.]',
+    href: 'https://yearsahead.io',
+    external: true,
   },
   {
-    statement: 'I advise leadership on institutional AI deployment.',
-    blurb:
-      'I help governments and large institutions evaluate AI with procurement benchmarks and decision infrastructure — clarity without the sales pitch.',
-    proof: [
-      { label: 'Writing at Making Public Work', href: 'https://makingpublicwork.com', external: true },
-    ],
+    title: 'Teaching Urban Technology',
+    images: [{ src: '/img/michigan-teaching.svg', alt: 'University of Michigan' }],
+    role: 'Assistant Professor of Practice',
+    description: 'Teaching Public Mechanics, Interaction Design, and Service Design in U-Michigan’s Urban Technology program. [Add a line on the angle.]',
+    href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/',
+    external: true,
   },
   {
-    statement: 'I speak and teach on how public systems really work.',
-    blurb:
-      'Keynotes, workshops, and a faculty practice at U-Michigan — energetic talks on delivery, consequence design, and public mechanics.',
-    cta: { label: 'Speaking', href: '/speaking' },
-    proof: [
-      { label: 'Design for the Public', image: '/img/dfp24.jpg' },
-      { label: 'IxDA Oslo', image: '/img/oaca2022.jpg', href: 'https://www.ixda.no/talks/design-as-repair', external: true },
-      { label: 'U-Michigan, Urban Technology', image: '/img/michigan-teaching.svg', href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/', external: true },
-    ],
+    title: 'Portland Digital Corps',
+    images: [{ src: '/img/digitalcorpspdx.org.png', alt: 'Portland Digital Corps' }],
+    role: 'Founder',
+    description: 'An all-volunteer cohort delivering digital services for local public institutions. [Add scope / impact.]',
+    href: 'https://digitalcorpspdx.org',
+    external: true,
   },
 ];
 
-export const CONTACT: Contact = {
-  line: "If your project is too important to leave the gap between pilot and product to chance, let's talk.",
-  email: 'ron@ronbronson.com',
-  ctas: [
-    { label: 'Email me', href: 'mailto:ron@ronbronson.com' },
-    { label: 'Book a talk', href: '/speaking' },
-  ],
-};
+/* Recent speaking — emphasize 2026, then notable 2025 keynotes. */
+export const SPEAKING: TalkItem[] = [
+  { title: '[2026 talk — add as they happen]', year: '2026' },
+  { title: 'Design as Repair — keynote', venue: 'IxDA Oslo', year: '2025', href: 'https://www.ixda.no/talks/design-as-repair', video: true },
+  { title: 'Beyond Civic Tech: Public Mechanics — keynote', venue: 'CUGOS / Cascadia GIS', year: '2025', href: 'https://youtube.com/watch?v=hnAScuK-oMo', video: true },
+  { title: 'Repairing Service Design in the Age of AI', venue: 'The Service Design Show', year: '2025', href: 'https://www.youtube.com/watch?v=4HKTGod1Xyo' },
+];
