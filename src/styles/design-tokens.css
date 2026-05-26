@@ -1,6 +1,65 @@
-/* Design Tokens: Spacing, Typography, Grid */
+/* Design Tokens: Color, Fonts, Spacing, Typography, Grid
+   Single source of truth for all design primitives.
+   Consumed by global.css and every component via var(). */
+
+/* -------------------------------------------------------------------
+   FONTS — one place to swap families.
+   To adopt purchased fonts later: drop woff2 into /public/fonts/,
+   add @font-face rules above :root, then change ONLY the family name
+   inside --font-display / --font-body / --font-mono. No component edits.
+   ------------------------------------------------------------------- */
+/*
+@font-face {
+  font-family: 'Display';
+  src: url('/fonts/display.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+*/
 
 :root {
+  /* ===== FONTS ===== */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono:    'DM Mono', ui-monospace, 'Courier New', monospace;
+
+  /* Back-compat aliases (existing components reference these) */
+  --font-serif: var(--font-display);
+  --font-sans:  var(--font-body);
+
+  /* ===== COLOR =====
+     WCAG on paper #f5ece8 (light):
+       #1a1210 ink       ~15:1  AAA  body
+       #5a3e38 ink-mid    ~6:1  AA   meta / italic
+       #7a1f2c oxblood    ~7:1  AAA  accent / links */
+  --bg:        #f5ece8;
+  --bg-warm:   #efe4df;
+  --bg-ink:    #e8dbd6;
+  --border:    rgba(60,30,20,0.14);
+  --rule:      rgba(60,30,20,0.08);
+  --ink:       #1a1210;
+  --ink-mid:   #5a3e38;
+  --ink-muted: #8a6a62;
+  --ink-faint: #c4a89e;
+
+  /* Signature accent — oxblood, used decisively */
+  --accent:        #7a1f2c;
+  --accent-dim:    #611825;
+  --accent-bright: #9a3142;
+
+  /* Map to legacy variable names for component compat */
+  --surface-1: var(--bg);
+  --surface-2: var(--bg-warm);
+  --surface-3: var(--bg-ink);
+  --surface-4: var(--border);
+  --text-1: var(--ink);
+  --text-2: var(--ink-mid);
+  --text-3: var(--ink-muted);
+  --brand: var(--accent);
+  --brand-dim: var(--accent-dim);
+  --brand-bright: var(--accent-bright);
+
   /* ===== SPACING SCALE ===== */
   --space-2: 0.5rem;    /* 8px */
   --space-3: 0.75rem;   /* 12px */

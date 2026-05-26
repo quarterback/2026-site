@@ -5,40 +5,11 @@
 /* Fonts loaded via <link> in Base.astro — no @import here */
 
 :root {
-  /* Layout */
+  /* Layout (color + fonts now live in design-tokens.css) */
   --content-width: 1080px;
   --content-width-narrow: 720px;
   --section-gap: var(--size-4);
   --pad: clamp(1.25rem, 5vw, 2.5rem);
-
-  /* Fonts */
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'DM Sans', system-ui, sans-serif;
-  --font-mono: 'DM Mono', 'Courier New', monospace;
-
-  /* Cherry blossom palette */
-  --bg:        #f5ece8;
-  --bg-warm:   #efe4df;
-  --bg-ink:    #e8dbd6;
-  --border:    rgba(60,30,20,0.12);
-  --rule:      rgba(60,30,20,0.08);
-  --ink:       #1a1210;
-  --ink-mid:   #5a3e38;
-  --ink-muted: #9a7a72;
-  --ink-faint: #c4a89e;
-  --accent:    #8b2e1a;
-
-  /* Map to existing variable names for component compat */
-  --surface-1: var(--bg);
-  --surface-2: var(--bg-warm);
-  --surface-3: var(--bg-ink);
-  --surface-4: var(--border);
-  --text-1: var(--ink);
-  --text-2: var(--ink-mid);
-  --text-3: var(--ink-muted);
-  --brand: var(--accent);
-  --brand-dim: #6e2414;
-  --brand-bright: #a8432b;
 }
 
 html { color-scheme: light; }

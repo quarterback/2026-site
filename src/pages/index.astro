@@ -1,552 +1,378 @@
 ---
-import { getHomepageStream } from "../lib/stream";
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro';
+import LastScrobble from '../components/LastScrobble.astro';
+import { getHomepageStream } from '../lib/stream';
+import { getBookhive } from '../lib/bookhive';
+import {
+  POSITIONING,
+  CURRENT_WORK,
+  UPCOMING,
+  WRITING,
+  TALKS,
+  INTERVIEWS,
+  TEACHING,
+  HOST,
+  ELSEWHERE,
+} from '../data/frontdoor';
 
-const ME = {
-  name: "Ron Bronson",
-  byline: "Product Delivery Engineer + Critical Service Design Exec",
-  location: "",
-  portrait: "/hero.jpg",
-};
+const SITE_URL = 'https://ronbronson.com';
+const CANONICAL_URL = SITE_URL + '/';
+const PAGE_DESCRIPTION = `${POSITIONING.name} — ${POSITIONING.role}. ${POSITIONING.statement}`;
+const PORTRAIT_URL = new URL(POSITIONING.portrait, SITE_URL).toString();
 
 const POSTS = await getHomepageStream(5);
 
-const SITE_URL = "https://ronbronson.design";
-const PAGE_DESCRIPTION = `${ME.byline} ${ME.location}.`;
-const PORTRAIT_URL = new URL(ME.portrait, SITE_URL).toString();
-const CANONICAL_URL = SITE_URL + "/";
+const bookhive = await getBookhive();
+const reading = bookhive.reading[0];
 
-const WRITING = [
-  {
-    title: "Some advice on managing your design career upwards",
-    where: "Piccalil.li",
-    href: "https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/",
-  },
-  {
-    title: "Design as Repair",
-    href: "https://blog.ronbronson.com/design-as-repair",
-  },
-  {
-    title: "The Bureaucratic Banality of Andor",
-    href: "https://blog.ronbronson.com/the-bureaucratic-banality-of-andor",
-  },
-  {
-    title: "What Forward Deployed Design Actually Looks Like",
-    href: "https://blog.ronbronson.com/what-forward-deployed-design-actually-looks-like?ref=rogerwong.me",
-  },
-];
+const now = new Date();
+const upcoming = UPCOMING
+  .filter((e) => new Date(e.date) >= now)
+  .sort((a, b) => +new Date(a.date) - +new Date(b.date));
 
-const INTERVIEWS = [
-  {
-    title: "Service Design Show Podcast",
-    href: "https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505",
-  },
-  {
-    title: "Leading the Field",
-    where: "Code for America",
-    href: "https://codeforamerica.org/news/leading-the-field-ron-bronson/",
-  },
-  {
-    title: "Did I Do That Podcast",
-    href: "https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson",
-  },
-  {
-    title: "Surfacing Podcast",
-    href: "https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7",
-  },
-  {
-    title: "Building Better User-Centered Products",
-    where: "Pixel Pioneers",
-    href: "https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson",
-  },
-];
+function fmtDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
 
-const TEACHING = [
-  { title: "UT 402 Public Mechanics", where: "F26, W26" },
-  { title: "UT 330 Interaction Design", where: "F26" },
-  { title: "UT 360 Service Design and Urban Needs", where: "W'26, W'24" },
-];
-
-const HOST = [
-  { title: "Future Perfect Book Club", href: "https://futureperfectbook.club" },
-  {
-    title: "The Sound Bulletin on KFFP-FM",
-    href: "https://www.mixcloud.com/908rb/",
-  },
-];
-
-const TALKS = [
-  {
-    title: "Design as Repair",
-    where: "IxDA Oslo",
-    href: "https://www.ixda.no/talks/design-as-repair",
-  },
-  {
-    title: "Deceptive Design / Consequence Design",
-    where: "digital.gov",
-    href: "https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design",
-  },
-  {
-    title: "Design Consequences in Everyday Life",
-    where: "Rosenfeld Civic Design, 2022",
-    href: "https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/",
-  },
-];
-
-const ELSEWHERE = [
-  { label: "Bluesky", href: "https://bsky.app/profile/ronbronson.com" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/ronbronson/" },
-  { label: "GitHub", href: "https://github.com/quarterback" },
-  { label: "Email", href: "mailto:ron@ronbronson.com" },
-  { label: "Letterboxd", href: "https://letterboxd.com/ronbronson/" },
-  { label: "Listening", href: "https://listening.ronbronson.com" },
-  { label: "Literal.club", href: "https://literal.club/ron" },
-  { label: "Record.club", href: "https://record.club/ron" },
-  { label: "Mastodon", href: "https://mastodon.social/@ronbronson" },
-  { label: "Twitter", href: "https://twitter.com/ronbronson" },
-  { label: "Instagram", href: "https://www.instagram.com/ronbronson/" },
-];
-
-const sections = [
-  { title: "Writing", items: WRITING, venue: true },
-  { title: "Interviews", items: INTERVIEWS, venue: true },
-  { title: "Teaching", items: TEACHING, venue: true },
-  { title: "Host", items: HOST, venue: false },
-  { title: "Talks", items: TALKS, venue: true },
+const refSections = [
+  { title: 'Writing', items: WRITING },
+  { title: 'Talks', items: TALKS },
+  { title: 'Interviews', items: INTERVIEWS },
+  { title: 'Teaching', items: TEACHING },
+  { title: 'Host', items: HOST },
 ];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{ME.name}</title>
-    <meta name="description" content={PAGE_DESCRIPTION} />
-    <meta name="author" content={ME.name} />
+<Base title={POSITIONING.name} description={PAGE_DESCRIPTION} noindex={false}>
+  <Fragment slot="head">
     <link rel="canonical" href={CANONICAL_URL} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <!-- Open Graph -->
     <meta property="og:type" content="profile" />
-    <meta property="og:site_name" content={ME.name} />
-    <meta property="og:title" content={ME.name} />
+    <meta property="og:site_name" content={POSITIONING.name} />
+    <meta property="og:title" content={POSITIONING.name} />
     <meta property="og:description" content={PAGE_DESCRIPTION} />
     <meta property="og:url" content={CANONICAL_URL} />
     <meta property="og:image" content={PORTRAIT_URL} />
-    <meta property="og:image:alt" content={`Portrait of ${ME.name}`} />
-    <meta property="profile:first_name" content="Ron" />
-    <meta property="profile:last_name" content="Bronson" />
-
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@ronbronson" />
     <meta name="twitter:creator" content="@ronbronson" />
-    <meta name="twitter:title" content={ME.name} />
-    <meta name="twitter:description" content={PAGE_DESCRIPTION} />
     <meta name="twitter:image" content={PORTRAIT_URL} />
-    <meta name="twitter:image:alt" content={`Portrait of ${ME.name}`} />
+  </Fragment>
 
-    <!-- Webmentions / IndieWeb -->
-    <link
-      rel="webmention"
-      href="https://webmention.io/ronbronson.design/webmention"
-    />
-    <link
-      rel="pingback"
-      href="https://webmention.io/ronbronson.design/xmlrpc"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <main class="page h-card">
-      <a class="u-url u-uid" href={CANONICAL_URL} hidden aria-hidden="true"
-        >{ME.name}</a
-      >
+  <main id="main" class="home">
 
-      <figure class="page__fig">
-        <img class="u-photo" src={ME.portrait} alt={ME.name} />
+    <!-- Masthead — authority: who, what, for whom -->
+    <header class="masthead">
+      <div class="masthead__text">
+        <p class="kicker">{POSITIONING.role}</p>
+        <h1 class="masthead__name">{POSITIONING.name}</h1>
+        <p class="masthead__statement">{POSITIONING.statement}</p>
+      </div>
+      <figure class="masthead__fig">
+        <img src={POSITIONING.portrait} alt={POSITIONING.name} width="480" height="600" />
       </figure>
+    </header>
 
-      <header class="page__hdr">
-        <h1 class="page__name p-name">{ME.name}</h1>
-        {/*
-        <p class="page__byline">
-          <span class="p-job-title">{ME.byline}</span> Based in <span
-            class="p-locality">{ME.location}</span
-          >.
-        </p>
-        */}
-      </header>
+    <!-- Now — a small, anchored window into the present -->
+    <section class="now-strip" aria-label="Now">
+      <span class="kicker kicker--inline">Now</span>
+      {reading && (
+        <span class="now-strip__item">
+          Reading <em>{reading.title}</em>{reading.authors ? <> &middot; {reading.authors}</> : null}
+        </span>
+      )}
+      <LastScrobble />
+      <a class="now-strip__more" href="/now">More &rarr;</a>
+    </section>
 
-     <p class="page__intro p-note">
-  I'm a critical urbanist and design executive building resilience into how we
-  deploy systems and software for the public at large. I speak globally on
-  service design &amp; delivery at tech and design events.
-</p>
-<p class="page__intro p-note">
-  What if the present could be as good as we imagine the future we want?
-  That's essentially the crux of my stack of practitioner and scholarly
-  interests.
-</p>
-<p class="page__intro p-note">
-  These days, I'm focused on branching past the "civic tech" of the web 2.0
-  world towards something closer to public mechanics: the work of closing the
-  latency between written policy and on-the-ground deployment, identifying
-  where human judgment actually lives inside delivery, and naming the
-  consequences that travel the last documented mile from institution to
-  person. With AI proliferating, agentic decision rights need to be
-  formalized, codified, and actually enforced, so I've spent most of 2026
-  working on primitives and strategy to better improve how we're deploying
-  consequential technology in the contexts of daily and urban life.
-</p>
-<p class="page__intro p-note">
- Currently an <a href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/">Assistant Professor of Practice</a> in the University of Michigan's Urban Technology program. I founded the <a href="https://digitalcorpspdx.org">Portland Digital Corps</a> all volunteer cohort. I served as head of design in the US General Services Administration's <a href="https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html">18F unit</a>, building platforms, systems, and digital services for millions of Americans. For two decades I have led digital transformation from small counties with more cows than people to the municipal, state and federal levels, while staying hands on in delivery, building teams, growing leaders, and advising executives on modernization.</p>
-      <p class="page__more">
-        <a href="/reading">Reading — books past &amp; present &rarr;</a>
-      </p>
-
-      {
-        sections.map((section) => (
-          <section class="sec">
-            <h2 class="sec__h">
-              <span class="sec__name">{section.title}</span>
-            </h2>
-            <ul class="sec__list">
-              {section.items.map((it) => (
-                <li class="sec__row">
-                  {it.href && it.href !== "#" ? (
-                    <a href={it.href} target="_blank" rel="noopener noreferrer">
-                      {it.title}
+    <!-- Current Work — the anchor. Repeatable, ongoing practice. -->
+    <section class="block" aria-labelledby="cw-h">
+      <h2 class="block__h" id="cw-h"><span class="kicker">Current Work</span></h2>
+      <ul class="cw">
+        {CURRENT_WORK.map((w) => (
+          <li class="cw__item">
+            <div class="cw__head">
+              <h3 class="cw__title">{w.title}</h3>
+              <span class={`pill pill--${w.status}`}>{w.status}</span>
+            </div>
+            <p class="cw__blurb">{w.blurb}</p>
+            <p class="cw__meta">
+              {w.since && <span class="cw__since">{w.since}</span>}
+              {w.metric && <span class="cw__metric">{w.metric}</span>}
+              {w.collaborators && w.collaborators.length > 0 && (
+                <span class="cw__collab">with {w.collaborators.join(', ')}</span>
+              )}
+            </p>
+            {w.links && w.links.length > 0 && (
+              <p class="cw__links">
+                {w.links.map((l, i) => (
+                  <>
+                    {i > 0 && <span class="dot"> · </span>}
+                    <a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined}>
+                      {l.label}{l.external ? ' ↗' : ''}
                     </a>
-                  ) : (
-                    <span>{it.title}</span>
-                  )}
-                  {section.venue && it.where ? (
-                    <span class="sec__where"> — {it.where}</span>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          </section>
-        ))
-      }
+                  </>
+                ))}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
 
-      {
-        POSTS.length > 0 && (
-          <section class="sec">
-            <h2 class="sec__h">
-              <span class="sec__name">Some Thoughts</span>
-            </h2>
-            <ul class="sec__list">
-              {POSTS.map((post) => (
-                <li class="sec__row">
-                  <a href={post.url} target="_blank" rel="noopener noreferrer">
-                    {post.title}
-                  </a>
-                  <span class="sec__where"> — {post.source}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )
-      }
-
-      <section class="sec">
-        <h2 class="sec__h">
-          <span class="sec__name">Elsewhere</span>
-        </h2>
-        <ul class="sec__list sec__list--inline">
-          {
-            ELSEWHERE.map((e, i) => {
-              const isEmail = e.href.startsWith("mailto:");
-              const isPlaceholder = e.href === "#";
-              const linkClass = isEmail ? "u-email" : "u-url";
-              const linkRel = isEmail ? "me" : "me noopener noreferrer";
-              return (
-                <li>
-                  {isPlaceholder ? (
-                    <span>{e.label}</span>
-                  ) : (
-                    <a
-                      class={linkClass}
-                      href={e.href}
-                      target={isEmail ? undefined : "_blank"}
-                      rel={linkRel}
-                    >
-                      {e.label}
-                    </a>
-                  )}
-                  {i < ELSEWHERE.length - 1 && (
-                    <span class="sec__sep" aria-hidden="true"> · </span>
-                  )}
-                </li>
-              );
-            })
-          }
+    {upcoming.length > 0 && (
+      <section class="block" aria-labelledby="up-h">
+        <h2 class="block__h" id="up-h"><span class="kicker">Upcoming</span></h2>
+        <ul class="rows">
+          {upcoming.map((e) => (
+            <li class="row">
+              <time class="row__date" datetime={e.date}>{fmtDate(e.date)}</time>
+              <span class="row__body">
+                {e.href ? <a href={e.href} target="_blank" rel="noopener noreferrer">{e.title}</a> : e.title}
+                <span class="row__where"> — {e.venue}{e.location ? `, ${e.location}` : ''}</span>
+              </span>
+            </li>
+          ))}
         </ul>
       </section>
+    )}
 
-      <footer class="foot">
-        <em>Last updated <time datetime="2026-05-18">May 2026</time>.</em>
-      </footer>
-    </main>
-  </body>
-</html>
+    {POSTS.length > 0 && (
+      <section class="block" aria-labelledby="rec-h">
+        <h2 class="block__h" id="rec-h"><span class="kicker">Recent Writing</span></h2>
+        <ul class="rows">
+          {POSTS.map((post) => (
+            <li class="row">
+              <span class="row__body">
+                <a href={post.url} target="_blank" rel="noopener noreferrer">{post.title}</a>
+                <span class="row__where"> — {post.source}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
 
-<style is:global>
-  /* ─────────────────────────────────────────────────────────────
-     TOKENS — WCAG verified on stone paper #ededeb:
-       #18181a on #ededeb   15.4 : 1   AAA   body
-       #5b5a55 on #ededeb    5.7 : 1   AA    meta / italic
-       #7a1f2c on #ededeb    7.4 : 1   AAA   oxblood accent
-       #1c3faa on #ededeb    8.4 : 1   AAA   link
-       #5c2d91 on #ededeb    7.0 : 1   AAA   visited
-     Paper is a near-neutral cool stone — explicitly NOT yellow/beige.
-     ───────────────────────────────────────────────────────────── */
-  :root {
-    --paper: #ededeb;
-    --ink: #18181a;
-    --ink-2: #5b5a55;
-    --ink-3: #95938d;
-    --oxblood: #7a1f2c;
-    --link: #1c3faa;
-    --link-vis: #5c2d91;
-    --link-hov: #0e2670;
-    --hair: #c9c8c4;
-    --hair-2: #dddcd8;
+    <!-- Evidence — show-not-tell: writing, talks, interviews, teaching, host -->
+    <section class="block" aria-labelledby="proof-h">
+      <h2 class="block__h" id="proof-h"><span class="kicker">Selected Work</span></h2>
+      <div class="proof">
+        {refSections.map((s) => (
+          <div class="proof__col">
+            <h3 class="proof__h">{s.title}</h3>
+            <ul class="rows rows--tight">
+              {s.items.map((it) => (
+                <li class="row">
+                  <span class="row__body">
+                    {it.href ? (
+                      <a href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a>
+                    ) : it.title}
+                    {it.where && <span class="row__where"> — {it.where}</span>}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
 
-    --serif: "Newsreader", "Source Serif 4", "Lyon Text", Georgia,
-      "Times New Roman", serif;
-  }
+    <section class="block" aria-labelledby="else-h">
+      <h2 class="block__h" id="else-h"><span class="kicker">Elsewhere</span></h2>
+      <ul class="inline">
+        {ELSEWHERE.map((e, i) => (
+          <li>
+            {i > 0 && <span class="dot" aria-hidden="true"> · </span>}
+            <a href={e.href} target={e.href.startsWith('mailto:') ? undefined : '_blank'} rel="me noopener noreferrer">{e.label}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-  * {
-    box-sizing: border-box;
-  }
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: var(--serif);
-    font-size: 17px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "kern", "liga", "onum";
-    font-optical-sizing: auto;
-    hanging-punctuation: first last;
-  }
+  </main>
 
-  .page {
-    max-width: 580px;
+  <Footer />
+</Base>
+
+<style>
+  .home {
+    max-width: var(--content-width-narrow);
     margin: 0 auto;
-    padding: 56px 28px 96px;
+    padding: clamp(2.5rem, 6vw, 4.5rem) var(--pad) 0;
   }
 
-  /* ───── Portrait — wide visual anchor at the top ───── */
-  .page__fig {
-    margin: 0 0 28px;
-    position: relative;
-  }
-  .page__fig img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    object-position: center 22%;
-    filter: saturate(0.86) contrast(1.06) brightness(0.98);
-    border: 0.5px solid rgba(24, 24, 26, 0.18);
-  }
-
-  /* ───── Name + byline ───── */
-  .page__hdr {
-    margin: 0 0 28px;
-  }
-  .page__name {
-    margin: 0;
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 600;
-    font-size: clamp(34px, 5.6vw, 44px);
-    line-height: 1.02;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-    font-variation-settings: "opsz" 60;
-  }
-  .page__byline {
-    margin: 8px 0 0;
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 400;
-    font-size: 17px;
-    line-height: 1.4;
-    color: var(--ink-2);
-    text-wrap: pretty;
-  }
-
-  /* ───── Intro paragraph ───── */
-  .page__intro {
-    margin: 0 0 28px;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--ink);
-    text-wrap: pretty;
-    max-width: 50ch;
-  }
-
-  .page__more {
-    margin: 0 0 56px;
-    font-size: 18px;
-    font-style: italic;
-  }
-
-  /* ───── Section ───── */
-  .sec {
-    margin: 0 0 44px;
-  }
-
-  .sec__h {
-    margin: 0 0 14px;
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 1;
-    letter-spacing: 0.14em;
+  /* ───── Kicker label — mono, oxblood, tracked ───── */
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--oxblood);
-    display: flex;
-    align-items: baseline;
-    padding-bottom: 10px;
-    border-bottom: 0.5px solid var(--hair);
-  }
-  .sec__name {
-    flex: 1;
-  }
-
-  .sec__list {
+    color: var(--accent);
     margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
   }
-  .sec__row {
-    font-family: var(--serif);
-    font-size: 17px;
-    line-height: 1.5;
-    color: var(--ink);
-    text-wrap: pretty;
-    text-indent: 0;
+  .kicker--inline { display: inline; }
+
+  /* ───── Masthead ───── */
+  .masthead {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: end;
+    padding-bottom: clamp(2rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--rule);
   }
-  .sec__where {
-    color: var(--ink-2);
+  .masthead__name {
+    font-family: var(--font-display);
     font-style: italic;
+    font-weight: 900;
+    font-size: clamp(3rem, 9vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin: 0.5rem 0 0.75rem;
+    color: var(--ink);
+  }
+  .masthead__statement {
+    font-family: var(--font-body);
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+    line-height: 1.5;
+    color: var(--ink-mid);
+    max-width: 40ch;
+    margin: 0;
+  }
+  .masthead__fig { margin: 0; }
+  .masthead__fig img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 20%;
+    filter: saturate(0.9) contrast(1.04);
+    border: 1px solid var(--border);
   }
 
-  /* Inline list — for the elsewhere row */
-  .sec__list--inline {
-    flex-direction: row;
+  /* ───── Now strip ───── */
+  .now-strip {
+    display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--ink-mid);
   }
-  .sec__list--inline li {
-    font-family: var(--serif);
-    font-size: 17px;
+  .now-strip__item em { font-style: italic; color: var(--ink); }
+  .now-strip :global(.last-scrobble) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ink-mid);
+    text-decoration: none;
   }
-  .sec__sep {
-    color: var(--ink-3);
-    padding: 0 4px;
+  .now-strip :global(.last-scrobble .ls-label) {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
   }
+  .now-strip :global(.last-scrobble .ls-art) { border-radius: 2px; }
+  .now-strip__more {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ───── Generic block ───── */
+  .block { padding: clamp(2.25rem, 5vw, 3.25rem) 0; border-bottom: 1px solid var(--rule); }
+  .block__h { margin: 0 0 1.5rem; }
+
+  /* ───── Current Work ───── */
+  .cw { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.75rem; }
+  .cw__item { padding-left: 1rem; border-left: 2px solid var(--accent); }
+  .cw__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem; margin-bottom: 0.4rem; }
+  .cw__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    line-height: 1.1;
+    margin: 0;
+    color: var(--ink);
+  }
+  .pill {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 100px;
+    padding: 0.15rem 0.55rem;
+    white-space: nowrap;
+  }
+  .cw__blurb {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink-mid);
+    margin: 0 0 0.5rem;
+    max-width: 52ch;
+  }
+  .cw__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    margin: 0 0 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .cw__links { margin: 0; font-family: var(--font-body); font-size: 0.95rem; }
+
+  /* ───── Row lists ───── */
+  .rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .rows--tight { gap: 0.3rem; }
+  .row { font-family: var(--font-body); font-size: 1rem; line-height: 1.45; display: flex; gap: 0.75rem; }
+  .row__date {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+  .row__where { color: var(--ink-muted); font-style: italic; }
+
+  /* ───── Selected Work columns ───── */
+  .proof { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem 2.5rem; }
+  .proof__h {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ───── Inline (Elsewhere) ───── */
+  .inline { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; font-family: var(--font-body); font-size: 1rem; }
+  .inline li { display: inline; }
+  .dot { color: var(--ink-faint); padding: 0 0.25rem; }
 
   /* ───── Links ───── */
-  a {
-    color: var(--link);
-    text-decoration: underline;
-    text-decoration-thickness: 0.7px;
-    text-underline-offset: 2.5px;
-    text-decoration-color: rgba(28, 63, 170, 0.45);
-    transition: color 120ms, text-decoration-color 120ms;
-  }
-  a:visited {
-    color: var(--link-vis);
-    text-decoration-color: rgba(92, 45, 145, 0.45);
-  }
-  a:hover {
-    color: var(--link-hov);
-    text-decoration-color: currentColor;
-  }
-  a:focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: 2px;
-    border-radius: 1px;
-  }
+  .home a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent); text-underline-offset: 2.5px; transition: text-decoration-color 0.15s; }
+  .home a:hover { text-decoration-color: var(--accent); }
 
-  /* ───── Foot ───── */
-  .foot {
-    margin-top: 60px;
-    padding-top: 18px;
-    border-top: 0.5px solid var(--hair);
-    font-family: var(--serif);
-    font-size: 14px;
-    color: var(--ink-2);
-    text-align: right;
-  }
-  .foot time {
-    font-variant-numeric: tabular-nums oldstyle-nums;
-  }
-
-  ::selection {
-    background: rgba(122, 31, 44, 0.18);
-    color: var(--ink);
-  }
-
-  /* ─────────────────────────────────────────────────────────────
-     Responsive
-     ───────────────────────────────────────────────────────────── */
-  @media (max-width: 560px) {
-    .page {
-      padding: 32px 22px 64px;
-    }
-    body {
-      font-size: 16px;
-    }
-    .page__intro {
-      font-size: 17px;
-    }
-    .sec__row,
-    .sec__list--inline li {
-      font-size: 16px;
-    }
-    .page__byline {
-      font-size: 16px;
-    }
-  }
-
-  @media (max-width: 380px) {
-    .page {
-      padding: 24px 16px 48px;
-    }
-  }
-
-  @media print {
-    body {
-      background: white;
-    }
-    .page__fig img {
-      filter: none;
-    }
-    a {
-      color: black;
-    }
+  /* ───── Responsive ───── */
+  @media (max-width: 640px) {
+    .masthead { grid-template-columns: 1fr; align-items: start; }
+    .masthead__fig { order: -1; max-width: 240px; }
   }
 </style>
