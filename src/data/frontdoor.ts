@@ -20,6 +20,7 @@ export interface Cta {
 /* The lead pitch — value statement + a clear call to action. */
 export interface Lead {
   name: string;
+  credential: string; // the credibility anchor, Jordan-style (former role)
   headline: string;   // the big value statement (what he does, for whom)
   sub: string;        // one supporting line
   ctas: Cta[];        // primary + secondary action
@@ -57,6 +58,7 @@ export interface Contact {
 
 export const LEAD: Lead = {
   name: 'Ron Bronson',
+  credential: 'Former Head of Design, 18F · U.S. General Services Administration',
   headline:
     'I help institutions deploy public technology that actually reaches people.',
   sub: 'Two decades closing the gap between policy and delivery — from small counties to federal agencies.',
@@ -87,22 +89,18 @@ export const CAPABILITIES: Capability[] = [
   {
     statement: 'I stabilize stalled delivery programs.',
     blurb:
-      'Through Occupant, I diagnose where ownership got lost and reset deployment plans so programs outlast the engagement.',
-    cta: { label: 'Occupant', href: 'https://www.occupant.works/', external: true },
+      'I diagnose where ownership got lost, reset deployment plans that aren’t working, and build the internal capacity a program needs to outlast the engagement.',
     proof: [
+      { label: 'Federal delivery at 18F', image: '/img/18f-leadership.svg' },
       { label: 'Portland Digital Corps', image: '/img/digitalcorpspdx.org.png', href: 'https://digitalcorpspdx.org', external: true },
-      { label: '18F delivery, federal scale', image: '/img/18f-leadership.svg' },
-      { label: 'Occupant', image: '/img/occupant.png', href: 'https://www.occupant.works/', external: true },
     ],
   },
   {
     statement: 'I advise leadership on institutional AI deployment.',
     blurb:
-      'State Capacity AI builds the procurement benchmarks and decision infrastructure governments need to evaluate AI without the sales pitch.',
-    cta: { label: 'State Capacity AI', href: 'https://statecapacity.ai', external: true },
+      'I help governments and large institutions evaluate AI with procurement benchmarks and decision infrastructure — clarity without the sales pitch.',
     proof: [
-      { label: 'State Capacity AI', image: '/img/statecapacity-ai.svg', href: 'https://statecapacity.ai', external: true },
-      { label: 'Public Mechanics', href: 'https://makingpublicwork.com', external: true },
+      { label: 'Writing at Making Public Work', href: 'https://makingpublicwork.com', external: true },
     ],
   },
   {
@@ -123,7 +121,6 @@ export const CONTACT: Contact = {
   email: 'ron@ronbronson.com',
   ctas: [
     { label: 'Email me', href: 'mailto:ron@ronbronson.com' },
-    { label: 'Advising via Occupant', href: 'https://www.occupant.works/', external: true },
     { label: 'Book a talk', href: '/speaking' },
   ],
 };

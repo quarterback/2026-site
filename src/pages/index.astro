@@ -25,8 +25,8 @@ const OG_IMAGE = new URL('/hero.jpg', SITE_URL).toString();
 
     <!-- Lead — the pitch + a clear path to act -->
     <header class="lead">
-      <p class="lead__name">{LEAD.name}</p>
       <h1 class="lead__headline">{LEAD.headline}</h1>
+      <p class="lead__credential">{LEAD.credential}</p>
       <p class="lead__sub">{LEAD.sub}</p>
       <div class="lead__ctas">
         {LEAD.ctas.map((c, i) => (
@@ -128,14 +128,6 @@ const OG_IMAGE = new URL('/hero.jpg', SITE_URL).toString();
 
   /* ───── Lead ───── */
   .lead { padding: clamp(3rem, 9vw, 6rem) 0 clamp(1.5rem, 3vw, 2.5rem); }
-  .lead__name {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    margin: 0 0 1.5rem;
-  }
   .lead__headline {
     font-family: var(--font-display);
     font-weight: 700;
@@ -145,6 +137,16 @@ const OG_IMAGE = new URL('/hero.jpg', SITE_URL).toString();
     color: var(--ink);
     margin: 0;
     max-width: 18ch;
+  }
+  .lead__credential {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 1.5rem 0 0;
+    padding-left: 0.85rem;
+    border-left: 3px solid var(--accent);
   }
   .lead__sub {
     font-family: var(--font-body);
