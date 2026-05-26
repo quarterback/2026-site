@@ -38,8 +38,9 @@ export const CURRENT_WORK: CaseStudy[] = [
     title: 'Portland Digital Corps',
     href: 'https://digitalcorpspdx.org',
     body: 'An all-volunteer practice I founded in 2025 — fifty-plus practitioners delivering nonprofit websites in eight-week engagements, no procurement. The model has since spread to other cities.',
+    // Drop /img/pdx-finale.jpg into /public/img and uncomment the src line:
     images: [
-      { placeholder: 'PDX Digital Corps cohort photo' },
+      { /* src: '/img/pdx-finale.jpg', */ alt: 'PDX Digital Corps Finale Show & Tell', placeholder: 'PDX Digital Corps Finale Show & Tell' },
       { placeholder: 'Shipped nonprofit site' },
     ],
   },
@@ -65,7 +66,11 @@ export const PAST_WORK: CaseStudy[] = [
     title: 'Head of Design at 18F · U.S. General Services Administration',
     span: '2021 – 2025',
     body: "Led the design practice at the federal government's internal digital consultancy, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
-    images: [{ placeholder: '18F project photo or team shot' }],
+    // Drop these two files into /public/img and uncomment the src lines:
+    images: [
+      { /* src: '/img/18f-launch.jpg', */ alt: '18F website launch — ribbon-cutting on the GSA stage', placeholder: '18F website launch — GSA stage ribbon-cutting' },
+      { /* src: '/img/18f-team.jpg', */ alt: '18F design team', placeholder: '18F design team' },
+    ],
     reading: [
       { label: '18F UX Guide', href: '#' },
       { label: '18F Methods', href: '#' },
