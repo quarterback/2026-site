@@ -12,13 +12,16 @@ const techStack = [
 ];
 ---
 
-<Base title="All Work — Ron Bronson">
-  <main>
+<Base title="Work — Ron Bronson">
+  <main id="main">
+    <header class="page-head">
+      <p class="kicker">Archive</p>
+      <h1 class="page-head__title">Work</h1>
+      <p class="page-head__lede">A complete archive of projects, prototypes, and community initiatives — federal programs, civic technology, municipal services, and public-sector innovation.</p>
+    </header>
+
     <section>
       <div class="container">
-        <h1 class="page-heading">All Work</h1>
-        <p class="page-intro">A complete archive of projects, prototypes, and community initiatives spanning federal programs, civic technology, municipal services, and public sector innovation.</p>
-
         <div class="work-grid">
           {work.map(item => (
             <WorkCard
@@ -42,25 +45,11 @@ const techStack = [
 </Base>
 
 <style>
-  .page-heading {
-    font-size: clamp(var(--font-size-4), 6vw, var(--font-size-6));
-    margin-bottom: var(--size-3);
-    font-family: var(--font-mono);
-    font-weight: var(--font-weight-7);
-  }
-
-  .page-intro {
-    font-size: var(--font-size-1);
-    color: var(--text-2);
-    max-width: 70ch;
-    line-height: 1.6;
-    margin-bottom: var(--size-6);
-  }
-
   .work-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--size-4);
+    padding-block: clamp(2rem, 5vw, 3rem);
   }
 
   @media (max-width: 900px) {
