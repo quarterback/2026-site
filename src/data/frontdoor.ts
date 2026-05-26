@@ -13,15 +13,16 @@ export interface Course { code: string; title: string; terms: string; }
 export interface CaseStudy {
   id: string;
   title: string;
+  href?: string;
   span?: string;
-  body: string;
+  body?: string;
   images?: RImage[];
   reading?: RLink[];
   courses?: Course[];
 }
 
 export interface SpeakItem { date: string; title: string; where: string; href?: string; }
-export interface Highlight { month: string; title: string; body: string; placeholder: string; href?: string; }
+export interface Highlight { month: string; title: string; body: string; placeholder: string; image?: string; href?: string; }
 export interface Piece { title: string; where: string; href?: string; }
 export interface ElseLink { label: string; href: string; }
 
@@ -35,10 +36,10 @@ export const CURRENT_WORK: CaseStudy[] = [
   {
     id: 'umich',
     title: 'Public Mechanics at the University of Michigan',
-    body: "Teaching Public Mechanics, Interaction Design, and Service Design at Taubman College's Urban Technology program. Course material and ongoing research live at yearsahead.io.",
+    href: 'https://urbantechnology.substack.com/p/urban-technology-at-university-of-72c',
     images: [
-      { placeholder: 'Photo from an Urban Tech studio session' },
-      { placeholder: 'yearsahead.io screenshot' },
+      { src: '/img/umich-lets-grow.jpg', alt: 'Urban Technology students presenting Let’s Grow Michigan work', placeholder: '' },
+      { src: '/img/umich-mittencorps.jpg', alt: 'MittenCorps student presentation', placeholder: '' },
     ],
     reading: [
       { label: 'yearsahead.io', href: 'https://yearsahead.io' },
@@ -53,6 +54,7 @@ export const CURRENT_WORK: CaseStudy[] = [
   {
     id: 'pdx',
     title: 'Portland Digital Corps',
+    href: 'https://digitalcorpspdx.org',
     body: 'An all-volunteer practice I founded in 2025 — fifty-plus practitioners delivering nonprofit websites in eight-week engagements, no procurement. The model has since spread to other cities.',
     images: [
       { placeholder: 'PDX Digital Corps cohort photo' },
@@ -92,10 +94,12 @@ export const SPEAKING_PAST: SpeakItem[] = [
 
 export const HIGHLIGHTS_2026: Highlight[] = [
   {
-    month: 'Q1/Q2 2026 — Add as they happen',
-    title: 'Placeholder',
-    body: 'Use this space to surface things as they happen: new fellowships, keynotes booked, pieces of writing, podcast appearances, research milestones. Pattern from the 2025 cards below.',
-    placeholder: 'Add image',
+    month: 'Apr 2026',
+    title: 'Led civic-tech panels at U-M Service Design Weekend',
+    body: 'Hosted panels connecting students and practitioners on civic technology and service design at Michigan.',
+    placeholder: 'Service Design Weekend photo',
+    image: '/img/ssw-civic-tech-2026.jpg',
+    href: 'https://taubmancollege.umich.edu/news/2026/04/15/bronson-leads-civic-tech-panels-at-u-m-service-design-weekend/',
   },
 ];
 
@@ -167,7 +171,7 @@ export const MEDIA: MediaEmbed[] = [
   {
     kind: 'audio',
     title: 'Future Perfect Book Club',
-    where: 'Speculative futures book club',
+    where: 'Podcast · co-hosted with Joel Goodman',
     // embed: 'https://open.spotify.com/embed/show/…',  // add the show embed when handy
     href: 'https://futureperfectbook.club',
   },
