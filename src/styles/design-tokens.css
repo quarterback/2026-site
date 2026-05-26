@@ -19,56 +19,58 @@
 */
 
 :root {
-  /* ===== FONTS — clean sans, no serif =====
-     --font-display and --font-body both DM Sans (display uses heavier
-     weights). Swap to purchased fonts later by editing only these tokens. */
-  --font-display: 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-mono:    'DM Mono', ui-monospace, 'Courier New', monospace;
+  /* ===== FONTS — Geist sans + Geist Mono (2026 Site v2) =====
+     Swap to purchased fonts later by editing only these tokens. */
+  --sans: "Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* Back-compat aliases (existing components reference these).
-     --font-serif now resolves to the sans, eliminating serif sitewide. */
-  --font-serif: var(--font-body);
-  --font-sans:  var(--font-body);
+  --font-display: var(--sans);
+  --font-body:    var(--sans);
+  --font-mono:    var(--mono);
+  /* Back-compat aliases (existing components reference these) */
+  --font-serif: var(--sans);
+  --font-sans:  var(--sans);
 
-  /* ===== COLOR =====
-     Off-white canvas, near-black ink, bright accents used as chips/fills.
-     Text/links stay ink for AA; the palette lives in tags, photos, panels.
-       #1a1a1a ink   on #F9F9F9  ~16:1 AAA  body
-       #4a4a4a mid   on #F9F9F9  ~8:1  AAA  meta
-       #6f6f6f muted on #F9F9F9  ~4.7:1 AA  faint meta */
-  --bg:        #F9F9F9;
-  --bg-warm:   #f1f1ef;
-  --bg-ink:    #ececea;
-  --border:    rgba(0,0,0,0.12);
-  --rule:      rgba(0,0,0,0.08);
-  --ink:       #1a1a1a;
-  --ink-mid:   #4a4a4a;
-  --ink-muted: #6f6f6f;
-  --ink-faint: #9a9a9a;
+  /* ===== COLOR — bright canvas, atypical punchy accents =====
+     Bright periwinkle-white paper, near-black ink, and a hot-pink /
+     electric-blue / acid accent set used boldly (labels, links, cards). */
+  --bg:       #eaf0ff;
+  --bg-card:  #ffffff;
+  --ink:      #0d0d12;
+  --ink-2:    #2a2a36;
+  --ink-3:    #585866;
+  --ink-4:    #8a8a99;
+  --hair:     #cdd6f5;
+  --hair-2:   #bcc6ee;
 
-  /* Bright accent palette (use as fills/chips with dark text, or underlines) */
-  --blue:      #5AA9E6;
-  --blue-soft: #7FC8F8;
-  --gold:      #FFE45E;
-  --pink:      #FF6392;
+  /* Atypical accent set */
+  --accent:    #ff2e88;   /* hot magenta-pink — primary */
+  --accent-2:  #2f6bff;   /* electric blue — secondary */
+  --accent-3:  #ffc73a;   /* acid gold — pop */
+  --accent-4:  #15d6a6;   /* mint-teal — pop */
 
-  /* Signature accent = pink, used for underlines/markers (not body text) */
-  --accent:        #FF6392;
-  --accent-dim:    #e8497f;
-  --accent-bright: #ff84a6;
+  /* Aliases mapping the site's existing token names onto v2 values */
+  --bg-warm:   var(--bg-card);
+  --bg-ink:    #e3e2df;
+  --border:    var(--hair);
+  --rule:      var(--hair);
+  --ink-mid:   var(--ink-2);
+  --ink-muted: var(--ink-3);
+  --ink-faint: var(--ink-4);
+  --accent-dim:    var(--accent);
+  --accent-bright: var(--accent-2);
 
-  /* Map to legacy variable names for component compat */
   --surface-1: var(--bg);
-  --surface-2: var(--bg-warm);
-  --surface-3: var(--bg-ink);
-  --surface-4: var(--border);
+  --surface-2: var(--bg-card);
+  --surface-3: var(--hair);
+  --surface-4: var(--hair-2);
   --text-1: var(--ink);
-  --text-2: var(--ink-mid);
-  --text-3: var(--ink-muted);
+  --text-2: var(--ink-2);
+  --text-3: var(--ink-3);
   --brand: var(--accent);
-  --brand-dim: var(--accent-dim);
-  --brand-bright: var(--accent-bright);
+  --brand-dim: var(--accent);
+  --brand-bright: var(--accent-2);
+
 
   /* ===== SPACING SCALE ===== */
   --space-2: 0.5rem;    /* 8px */
@@ -157,4 +159,17 @@
   --breakpoint-mobile: 640px;
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1024px;
+}
+
+/* ===== DARK THEME (toggled via [data-theme="dark"]) ===== */
+[data-theme="dark"] {
+  --bg:      #0c0c0d;
+  --bg-card: #16161a;
+  --ink:     #f4f3f0;
+  --ink-2:   #c5c4be;
+  --ink-3:   #95948f;
+  --ink-4:   #6a6a6e;
+  --hair:    #232323;
+  --hair-2:  #2f2f30;
+  --bg-ink:  #1d1d20;
 }

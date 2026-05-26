@@ -1,98 +1,145 @@
 /* -------------------------------------------------------------------
-   frontdoor.ts — content for the homepage.
-
-   Structure follows the Martin Jordan model:
-     hero (big statement + about role lines + contact)
-     → Current Work (image-forward: image + title + role + collaborators
-       + short description)
-     → Speaking (recent talks, 2026 emphasized) → see all.
-
-   Photos and final copy don't exist yet. Image slots left empty render as
-   intentional placeholders, so the layout reads before real photos arrive.
-   Items below are the ones Ron named to surface — refine the words, add
-   images to /public/img and reference them in `images`.
+   frontdoor.ts — homepage content, ported from the 2026 Site v2 design.
+   Structure: hero → Current work (case studies) → Speaking → Highlights
+   (with 2025 toggle) → Recent past work → Writing/Podcasts → Hosting →
+   footer. Image slots are placeholders until real photos exist.
+   Edit freely; "[…]" marks slots to fill.
    ------------------------------------------------------------------- */
 
-export interface Cta { label: string; href: string; external?: boolean; note?: string; }
-export interface Link { label: string; href: string; external?: boolean; }
+export interface RImage { placeholder: string; src?: string; alt?: string; }
+export interface RLink { label: string; href: string; }
+export interface Course { code: string; title: string; terms: string; }
 
-export interface Hero {
-  headline: string;                          // the big statement
-  about: { text: string; href?: string; external?: boolean }[]; // role lines
-  contact: Cta[];
-  links: Link[];
-}
-
-export interface WorkImage { src: string; alt: string; }
-
-export interface CurrentWork {
+export interface CaseStudy {
+  id: string;
   title: string;
-  images: WorkImage[];        // empty = placeholder slot(s)
-  role?: string;
-  collaborators?: string[];
-  description: string;
-  href?: string;
-  external?: boolean;
+  role: string;
+  collab?: string;
+  span?: string;
+  body: string;
+  images?: RImage[];
+  reading?: RLink[];
+  courses?: Course[];
 }
 
-export interface TalkItem {
-  title: string;
-  venue?: string;
-  year?: string;
-  href?: string;
-  video?: boolean;
-}
+export interface SpeakItem { date: string; title: string; where: string; href?: string; }
+export interface Highlight { month: string; title: string; body: string; placeholder: string; href?: string; }
+export interface Piece { title: string; where: string; href?: string; }
+export interface ElseLink { label: string; href: string; }
 
-/* =================================================================== */
-
-export const HERO: Hero = {
-  headline: 'I help institutions deploy public technology that actually reaches people.',
-  about: [
-    { text: 'Assistant Professor of Practice, University of Michigan Urban Technology', href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/', external: true },
-    { text: 'Former Head of Design, 18F · U.S. General Services Administration' },
-  ],
-  contact: [
-    { label: 'Write a message', href: 'mailto:ron@ronbronson.com', note: 'via email' },
-    { label: 'Book a session', href: '#', note: 'via Calendly' },
-  ],
-  links: [
-    { label: 'Bluesky', href: 'https://bsky.app/profile/ronbronson.com', external: true },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ronbronson/', external: true },
-    { label: 'GitHub', href: 'https://github.com/quarterback', external: true },
-  ],
+export const ME = {
+  name: 'Ron Bronson',
+  role: 'Critical urbanist and design executive. I work on public mechanics — closing the latency between written policy and on-the-ground deployment, and naming where consequential decisions live inside delivery.',
+  email: 'ron@ronbronson.com',
 };
 
-export const CURRENT_WORK: CurrentWork[] = [
+export const CURRENT_WORK: CaseStudy[] = [
   {
-    title: 'Years Ahead',
-    images: [],
-    role: 'Founder & lead',
-    description: 'Running yearsahead.io at the University of Michigan. [One or two sentences on what it is and who it serves.]',
-    href: 'https://yearsahead.io',
-    external: true,
+    id: 'umich',
+    title: 'Public Mechanics at the University of Michigan',
+    role: 'Assistant Professor of Practice · Urban Technology',
+    body: "Teaching at Taubman College's Urban Technology program — Public Mechanics, Interaction Design, and Service Design & Urban Needs. The throughline is the discipline I call public mechanics: closing the latency between written policy and on-the-ground deployment, and naming where human judgment actually lives inside delivery. Course material and ongoing research are collected at yearsahead.io.",
+    images: [
+      { placeholder: 'Photo from an Urban Tech studio session' },
+      { placeholder: 'yearsahead.io screenshot' },
+    ],
+    reading: [
+      { label: 'yearsahead.io', href: 'https://yearsahead.io' },
+      { label: 'Faculty page', href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/' },
+    ],
+    courses: [
+      { code: 'UT 402', title: 'Public Mechanics', terms: 'F26 · W26' },
+      { code: 'UT 330', title: 'Interaction Design', terms: 'F26' },
+      { code: 'UT 360', title: 'Service Design & Urban Needs', terms: 'W26 · W24' },
+    ],
   },
   {
-    title: 'Teaching Urban Technology',
-    images: [{ src: '/img/michigan-teaching.svg', alt: 'University of Michigan' }],
-    role: 'Assistant Professor of Practice',
-    description: 'Teaching Public Mechanics, Interaction Design, and Service Design in U-Michigan’s Urban Technology program. [Add a line on the angle.]',
-    href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/',
-    external: true,
-  },
-  {
+    id: 'pdx',
     title: 'Portland Digital Corps',
-    images: [{ src: '/img/digitalcorpspdx.org.png', alt: 'Portland Digital Corps' }],
-    role: 'Founder',
-    description: 'An all-volunteer cohort delivering digital services for local public institutions. [Add scope / impact.]',
-    href: 'https://digitalcorpspdx.org',
-    external: true,
+    role: 'Founder · ongoing organiser',
+    collab: 'with a rotating cohort of practitioners',
+    body: 'An all-volunteer practice I founded in 2025 that organises fifty-plus designers, engineers, researchers, and writers to deliver nonprofit websites in eight-week engagements — without procurement, without institutional cover. The model has since been picked up in other cities. My continued involvement is to hold the door open.',
+    images: [
+      { placeholder: 'PDX Digital Corps cohort photo' },
+      { placeholder: 'Shipped nonprofit site' },
+    ],
+    reading: [{ label: 'Portland Digital Corps', href: 'https://digitalcorpspdx.org' }],
   },
 ];
 
-/* Recent speaking — emphasize 2026, then notable 2025 keynotes. */
-export const SPEAKING: TalkItem[] = [
-  { title: '[2026 talk — add as they happen]', year: '2026' },
-  { title: 'Design as Repair — keynote', venue: 'IxDA Oslo', year: '2025', href: 'https://www.ixda.no/talks/design-as-repair', video: true },
-  { title: 'Beyond Civic Tech: Public Mechanics — keynote', venue: 'CUGOS / Cascadia GIS', year: '2025', href: 'https://youtube.com/watch?v=hnAScuK-oMo', video: true },
-  { title: 'Repairing Service Design in the Age of AI', venue: 'The Service Design Show', year: '2025', href: 'https://www.youtube.com/watch?v=4HKTGod1Xyo' },
+export const PAST_WORK: CaseStudy[] = [
+  {
+    id: '18f',
+    title: '18F · U.S. General Services Administration',
+    role: 'Head of Design',
+    span: '2021 – 2025',
+    body: "Led the design practice at the federal government's internal digital consultancy. Built platforms, systems, and digital services used by millions of Americans, across federal partners. 18F was eliminated in March 2025; the work and the people remain a body I keep referring back to.",
+    images: [{ placeholder: '18F project photo or team shot' }],
+    reading: [{ label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' }],
+  },
+];
+
+export const SPEAKING_2026: SpeakItem[] = [
+  { date: 'TBD 2026', title: '[Add event title]', where: '[Conference / venue]', href: '#' },
+  { date: 'TBD 2026', title: '[Add event title]', where: '[Conference / venue]', href: '#' },
+];
+
+export const SPEAKING_PAST: SpeakItem[] = [
+  { date: 'Oct 2025', title: 'Design as Repair', where: 'IxDA Oslo · Keynote', href: 'https://www.ixda.no/talks/design-as-repair' },
+  { date: 'Sep 2025', title: '[CUGOS GIS keynote title]', where: 'CUGOS · Keynote', href: '#' },
+  { date: '2024', title: 'Deceptive Design / Consequence Design', where: 'digital.gov', href: 'https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design' },
+  { date: '2022', title: 'Design Consequences in Everyday Life', where: 'Rosenfeld Civic Design', href: 'https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/' },
+];
+
+export const HIGHLIGHTS_2026: Highlight[] = [
+  {
+    month: 'Q1/Q2 2026 — Add as they happen',
+    title: 'Placeholder',
+    body: 'Use this space to surface things as they happen: new fellowships, keynotes booked, pieces of writing, podcast appearances, research milestones. Pattern from the 2025 cards below.',
+    placeholder: 'Add image',
+  },
+];
+
+export const HIGHLIGHTS_2025: Highlight[] = [
+  { month: 'Oct 2025', title: 'Design as Repair · IxDA Oslo keynote', body: 'Keynote on repair as a design discipline — what changes when the failure modes that matter are dead ends rather than rough happy paths.', placeholder: 'IxDA Oslo stage photo', href: 'https://www.ixda.no/talks/design-as-repair' },
+  { month: 'Sep 2025', title: 'CUGOS GIS · Keynote', body: '[Brief description — the through-line of the talk, who was in the room, what landed.]', placeholder: 'CUGOS stage / slide photo' },
+  { month: 'Aug 2025', title: 'Portland Digital Corps launched', body: 'Founded an all-volunteer practice that organised fifty-plus practitioners to deliver six nonprofit websites in eight-week engagements. Model has since been picked up in other cities.', placeholder: 'Cohort photo', href: 'https://digitalcorpspdx.org' },
+  { month: 'Mar 2025', title: 'End of 18F', body: '18F was eliminated by executive action. Four years as Head of Design closed under those circumstances. Writing about what the practice was, and what it leaves behind, is ongoing.', placeholder: '18F team or project photo', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
+  { month: '2025', title: 'Service Design Show · Ep. 236', body: 'Long-form podcast conversation on repairing service design for the age of AI.', placeholder: 'Podcast artwork or recording photo', href: 'https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505' },
+  { month: '2025', title: 'Leading the Field · Code for America', body: 'Conversation with Code for America on leading design practice inside U.S. government.', placeholder: 'CfA interview thumbnail', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
+];
+
+export const WRITING: Piece[] = [
+  { title: 'Some advice on managing your design career upwards', where: 'Piccalil.li', href: 'https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/' },
+  { title: 'Design as Repair', where: 'blog.ronbronson.com', href: 'https://blog.ronbronson.com/design-as-repair' },
+  { title: 'The Bureaucratic Banality of Andor', where: 'blog.ronbronson.com', href: 'https://blog.ronbronson.com/the-bureaucratic-banality-of-andor' },
+  { title: 'What Forward Deployed Design Actually Looks Like', where: 'blog.ronbronson.com', href: 'https://blog.ronbronson.com/what-forward-deployed-design-actually-looks-like' },
+  { title: 'Your AI Agent (or your printer) is Not a Coworker', where: 'makingpublicwork.com', href: 'https://makingpublicwork.com/3mmcnbrnins2q' },
+  { title: 'Technologist is not a job', where: 'makingpublicwork.com', href: 'https://makingpublicwork.com/3mm5oz4i3kk2s' },
+  { title: 'The Banality of Rules', where: 'makingpublicwork.com', href: 'https://makingpublicwork.com/3mlkawmzzfc2b' },
+];
+
+export const PODCASTS: Piece[] = [
+  { title: 'Repairing Service Design for the Age of AI', where: 'Service Design Show · Ep. 236', href: 'https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505' },
+  { title: 'Leading the Field', where: 'Code for America', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
+  { title: 'What Huh Me Huh What', where: 'Did I Do That Podcast', href: 'https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson' },
+  { title: 'Surfacing', where: 'Surfacing Podcast', href: 'https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7' },
+  { title: 'Building Better User-Centered Products', where: 'Pixel Pioneers', href: 'https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson' },
+];
+
+export const HOSTING: Piece[] = [
+  { title: 'Future Perfect Book Club', where: 'Speculative futures book club', href: 'https://futureperfectbook.club' },
+  { title: 'The Sound Bulletin', where: 'KFFP-FM', href: 'https://www.mixcloud.com/908rb/' },
+];
+
+export const ELSEWHERE: ElseLink[] = [
+  { label: 'Bluesky', href: 'https://bsky.app/profile/ronbronson.com' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ronbronson/' },
+  { label: 'GitHub', href: 'https://github.com/quarterback' },
+  { label: 'Mastodon', href: 'https://mastodon.social/@ronbronson' },
+  { label: 'Letterboxd', href: 'https://letterboxd.com/ronbronson/' },
+  { label: 'Literal', href: 'https://literal.club/ron' },
+  { label: 'Record Club', href: 'https://record.club/ron' },
+  { label: 'Listening', href: 'https://listening.ronbronson.com' },
+  { label: 'Instagram', href: 'https://www.instagram.com/ronbronson/' },
 ];

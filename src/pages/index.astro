@@ -1,214 +1,409 @@
 ---
 import Base from '../layouts/Base.astro';
-import Footer from '../components/Footer.astro';
-import { HERO, CURRENT_WORK, SPEAKING } from '../data/frontdoor';
+import {
+  ME, CURRENT_WORK, PAST_WORK,
+  SPEAKING_2026, SPEAKING_PAST,
+  HIGHLIGHTS_2026, HIGHLIGHTS_2025,
+  WRITING, PODCASTS, HOSTING, ELSEWHERE,
+} from '../data/frontdoor';
 
 const SITE_URL = 'https://ronbronson.design';
 const CANONICAL_URL = SITE_URL + '/';
-const PAGE_DESCRIPTION = HERO.headline;
 const OG_IMAGE = new URL('/hero.jpg', SITE_URL).toString();
+
+const cases = (items: typeof CURRENT_WORK) => items;
 ---
 
-<Base title={`Ron Bronson — ${HERO.headline}`} description={PAGE_DESCRIPTION} noindex={false}>
+<Base title={ME.name} description={ME.role} noindex={false}>
   <Fragment slot="head">
     <link rel="canonical" href={CANONICAL_URL} />
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Ron Bronson" />
-    <meta property="og:description" content={PAGE_DESCRIPTION} />
+    <meta property="og:title" content={ME.name} />
+    <meta property="og:description" content={ME.role} />
     <meta property="og:url" content={CANONICAL_URL} />
     <meta property="og:image" content={OG_IMAGE} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content={OG_IMAGE} />
   </Fragment>
 
-  <main id="main" class="home">
+  <main class="v2-page">
+    <header class="v2-hdr">
+      <h1 class="v2-name">{ME.name}</h1>
+      <p class="v2-role">{ME.role}</p>
+    </header>
 
-    <!-- Hero — big statement + about + contact -->
-    <header class="hero">
-      <h1 class="hero__headline">{HERO.headline}</h1>
-      <div class="hero__meta">
-        <div class="hero__col">
-          <p class="kicker">About</p>
-          {HERO.about.map((a) => (
-            <p class="hero__about">
-              {a.href ? <a href={a.href} target={a.external ? '_blank' : undefined} rel={a.external ? 'noopener noreferrer' : undefined}>{a.text}</a> : a.text}
-            </p>
+    {/* ── Current work ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Current work</span></div>
+      <div class="v2-cases">
+        {cases(CURRENT_WORK).map((it) => (
+          <article class="v2-case">
+            <h3 class="v2-case__title">{it.title}</h3>
+            {it.images && it.images.length > 0 && (
+              <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
+                {it.images.map((img) => (
+                  <figure class="v2-img" style="aspect-ratio: 3 / 2"><span class="v2-img__hint">{img.placeholder}</span></figure>
+                ))}
+              </div>
+            )}
+            <div class="v2-case__grid">
+              <div class="v2-case__meta">
+                <p class="v2-case__role"><strong>Role:</strong> {it.role}</p>
+                {it.collab && <p class="v2-case__collab">{it.collab}</p>}
+                {it.span && <p class="v2-case__span">{it.span}</p>}
+              </div>
+              <div class="v2-case__bodywrap">
+                <p class="v2-case__body">{it.body}</p>
+                {it.courses && (
+                  <ul class="v2-courses">
+                    {it.courses.map((c) => (
+                      <li>
+                        <span class="v2-courses__code">{c.code}</span>
+                        <span class="v2-courses__title">{c.title}</span>
+                        <span class="v2-courses__terms">{c.terms}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {it.reading && (
+                  <div class="v2-case__reading">
+                    <span class="v2-case__reading-label">Further reading</span>
+                    <ul>
+                      {it.reading.map((r) => (
+                        <li><a href={r.href} target="_blank" rel="noopener noreferrer">{r.label}</a></li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {/* ── Speaking ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Speaking</span><span class="v2-seclabel__right">Booking 2026–2027 · keynotes, workshops, panels</span></div>
+      <div class="v2-speak-wrap">
+        <div class="v2-subhead">Upcoming · 2026</div>
+        <ul class="v2-speaks">
+          {SPEAKING_2026.map((it) => (
+            <li class="v2-speak">
+              <span class="v2-speak__date">{it.date}</span>
+              <span class="v2-speak__body">
+                {it.href && it.href !== '#' ? <a class="v2-speak__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : <span class="v2-speak__title">{it.title}</span>}
+                <span class="v2-speak__where"> — {it.where}</span>
+              </span>
+            </li>
           ))}
-        </div>
-        <div class="hero__col">
-          <p class="kicker">Contact</p>
-          {HERO.contact.map((c) => (
-            <p class="hero__link">
-              <a href={c.href} target={c.external ? '_blank' : undefined} rel={c.external ? 'noopener noreferrer' : undefined}>{c.label}</a>
-              {c.note && <span class="hero__note"> {c.note}</span>}
-            </p>
+        </ul>
+        <div class="v2-subhead v2-subhead--mt">Recent talks</div>
+        <ul class="v2-speaks">
+          {SPEAKING_PAST.map((it) => (
+            <li class="v2-speak">
+              <span class="v2-speak__date">{it.date}</span>
+              <span class="v2-speak__body">
+                {it.href && it.href !== '#' ? <a class="v2-speak__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : <span class="v2-speak__title">{it.title}</span>}
+                <span class="v2-speak__where"> — {it.where}</span>
+              </span>
+            </li>
           ))}
-        </div>
-        <div class="hero__col">
-          <p class="kicker">Links</p>
-          {HERO.links.map((l) => (
-            <p class="hero__link"><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a></p>
+        </ul>
+      </div>
+    </section>
+
+    {/* ── Highlights ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Highlights</span><span class="v2-seclabel__right">2026</span></div>
+      <h2 class="v2-bigh">Q1 / Q2 2026 Highlights</h2>
+      <div class="v2-hlgrid">
+        {HIGHLIGHTS_2026.map((it) => (
+          <article class="v2-hl">
+            <figure class="v2-hl__img" aria-hidden="true"><span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span></figure>
+            <div class="v2-hl__pad">
+              <div class="v2-hl__month">{it.month}</div>
+              <h3 class="v2-hl__title">{it.title}</h3>
+              <p class="v2-hl__body">{it.body}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <button id="hl-toggle" class="v2-toggle" aria-expanded="true" aria-controls="hl-2025">
+        <span class="v2-toggle__txt">Hide 2025 highlights</span>
+        <span class="v2-toggle__chev" aria-hidden="true">▲</span>
+      </button>
+
+      <div id="hl-2025">
+        <h2 class="v2-bigh v2-bigh--sub">2025 Highlights</h2>
+        <div class="v2-hlgrid">
+          {HIGHLIGHTS_2025.map((it) => (
+            it.href ? (
+              <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
+                <figure class="v2-hl__img" aria-hidden="true"><span class="v2-hl__imghint">{it.placeholder}</span></figure>
+                <div class="v2-hl__pad">
+                  <div class="v2-hl__month">{it.month}</div>
+                  <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
+                  <p class="v2-hl__body">{it.body}</p>
+                </div>
+              </a>
+            ) : (
+              <article class="v2-hl">
+                <figure class="v2-hl__img" aria-hidden="true"><span class="v2-hl__imghint">{it.placeholder}</span></figure>
+                <div class="v2-hl__pad">
+                  <div class="v2-hl__month">{it.month}</div>
+                  <h3 class="v2-hl__title">{it.title}</h3>
+                  <p class="v2-hl__body">{it.body}</p>
+                </div>
+              </article>
+            )
           ))}
         </div>
       </div>
-    </header>
-
-    <!-- Current Work — image-forward (Martin-style) -->
-    <section class="block" aria-labelledby="cw-h">
-      <h2 id="cw-h" class="block__h"><span class="kicker">Current Work</span></h2>
-      {CURRENT_WORK.map((w) => (
-        <article class="work">
-          <h3 class="work__title">
-            {w.href ? <a href={w.href} target={w.external ? '_blank' : undefined} rel={w.external ? 'noopener noreferrer' : undefined}>{w.title}{w.external ? ' ↗' : ''}</a> : w.title}
-          </h3>
-          <div class={`work__media work__media--${w.images.length === 0 ? 'empty' : (w.images.length > 1 ? 'pair' : 'one')}`}>
-            {w.images.length === 0 ? (
-              <div class="work__placeholder"><span>photo</span></div>
-            ) : (
-              w.images.map((img) => (
-                <figure class="work__fig"><img src={img.src} alt={img.alt} loading="lazy" /></figure>
-              ))
-            )}
-          </div>
-          <div class="work__body">
-            <div class="work__roleblock">
-              {w.role && <p class="work__role"><strong>Role:</strong> {w.role}</p>}
-              {w.collaborators && w.collaborators.length > 0 && (
-                <p class="work__collab">with {w.collaborators.join(', ')}</p>
-              )}
-            </div>
-            <p class="work__desc">{w.description}</p>
-          </div>
-        </article>
-      ))}
     </section>
 
-    <!-- Speaking — recent, 2026 first -->
-    <section class="block" aria-labelledby="sp-h">
-      <h2 id="sp-h" class="block__h"><span class="kicker">Speaking</span></h2>
-      <ul class="talks">
-        {SPEAKING.map((t) => (
-          <li class="talk">
-            <span class="talk__body">
-              {t.href ? <a href={t.href} target="_blank" rel="noopener noreferrer">{t.title}</a> : <span class="talk__title">{t.title}</span>}
-              {t.video && <span class="talk__icon" aria-hidden="true"> ▶</span>}
-              {t.venue && <span class="talk__venue"> — {t.venue}</span>}
-            </span>
-            {t.year && <span class="talk__year">{t.year}</span>}
-          </li>
+    {/* ── Recent past work ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Recent past work</span></div>
+      <div class="v2-cases">
+        {cases(PAST_WORK).map((it) => (
+          <article class="v2-case">
+            <h3 class="v2-case__title">{it.title}</h3>
+            {it.images && it.images.length > 0 && (
+              <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
+                {it.images.map((img) => (
+                  <figure class="v2-img" style="aspect-ratio: 3 / 2"><span class="v2-img__hint">{img.placeholder}</span></figure>
+                ))}
+              </div>
+            )}
+            <div class="v2-case__grid">
+              <div class="v2-case__meta">
+                <p class="v2-case__role"><strong>Role:</strong> {it.role}</p>
+                {it.collab && <p class="v2-case__collab">{it.collab}</p>}
+                {it.span && <p class="v2-case__span">{it.span}</p>}
+              </div>
+              <div class="v2-case__bodywrap">
+                <p class="v2-case__body">{it.body}</p>
+                {it.reading && (
+                  <div class="v2-case__reading">
+                    <span class="v2-case__reading-label">Further reading</span>
+                    <ul>
+                      {it.reading.map((r) => (
+                        <li><a href={r.href} target="_blank" rel="noopener noreferrer">{r.label}</a></li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {/* ── Writing / Podcasts ── */}
+    <section class="v2-block">
+      <div class="v2-twocol">
+        <div>
+          <div class="v2-seclabel"><span>Writing</span></div>
+          <ul class="v2-pieces">
+            {WRITING.map((it) => (
+              <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <div class="v2-seclabel"><span>Podcasts &amp; interviews</span></div>
+          <ul class="v2-pieces">
+            {PODCASTS.map((it) => (
+              <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* ── Hosting ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Hosting</span></div>
+      <ul class="v2-pieces">
+        {HOSTING.map((it) => (
+          <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
         ))}
       </ul>
-      <p class="seeall"><a href="/speaking">→ See all speaking</a></p>
     </section>
 
+    {/* ── Footer ── */}
+    <footer class="v2-foot">
+      <div class="v2-foot__grid">
+        <div>
+          <div class="v2-subhead">Contact</div>
+          <p class="v2-foot__line">Write a message <a href={`mailto:${ME.email}`}>via email</a></p>
+          <p class="v2-foot__hint">A short note describing the situation, the constraint, and what a useful next step looks like will receive a faster, better reply than a calendar invitation.</p>
+        </div>
+        <div>
+          <div class="v2-subhead">Elsewhere</div>
+          <ul class="v2-foot__list">
+            {ELSEWHERE.map((e) => (
+              <li><a href={e.href} target="_blank" rel="noopener noreferrer">{e.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div class="v2-foot__updated">Last updated <time datetime="2026-05-26">May 2026</time>.</div>
+    </footer>
   </main>
-
-  <Footer />
 </Base>
 
-<style>
-  .home { max-width: 1080px; margin: 0 auto; padding: 0 var(--pad); }
+<style is:global>
+  /* 2026 Site v2 — ported layout, recolored bright + atypical accents */
+  .v2-page { max-width: 1180px; margin: 0 auto; padding: 64px 48px 96px; }
 
-  .kicker {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    margin: 0 0 0.9rem;
+  .v2-hdr { margin-bottom: 96px; }
+  .v2-name {
+    margin: 0; font-family: var(--sans); font-weight: 800;
+    font-size: clamp(64px, 11vw, 152px); line-height: 0.92;
+    letter-spacing: -0.045em; color: var(--ink);
+  }
+  .v2-role {
+    margin: 28px 0 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.35;
+    color: var(--ink); max-width: 30ch; font-weight: 500;
+    letter-spacing: -0.018em; text-wrap: balance;
   }
 
-  /* ───── Hero ───── */
-  .hero { padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(2rem, 5vw, 3.5rem); }
-  .hero__headline {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(2.4rem, 7vw, 5rem);
-    line-height: 1.02;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    margin: 0 0 clamp(2.5rem, 6vw, 4rem);
-    max-width: 16ch;
+  .v2-block { margin-top: 96px; }
+  .v2-seclabel {
+    font-family: var(--sans); font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink);
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin: 0 0 36px; padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
   }
-  .hero__meta {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    padding-top: 1.75rem;
-    border-top: 1px solid var(--rule);
+  .v2-seclabel__right {
+    font-weight: 500; letter-spacing: 0.04em; color: var(--accent-2);
+    text-transform: none; font-size: 13px;
   }
-  .hero__about, .hero__link { font-family: var(--font-body); font-size: 1rem; line-height: 1.45; color: var(--ink); margin: 0 0 0.6rem; }
-  .hero__note { color: var(--ink-muted); }
-
-  /* ───── Block ───── */
-  .block { padding: clamp(2.5rem, 6vw, 4rem) 0; border-top: 1px solid var(--rule); }
-  .block__h { margin: 0 0 2rem; }
-
-  /* ───── Current Work — image forward ───── */
-  .work { margin-bottom: clamp(3rem, 7vw, 5rem); }
-  .work:last-child { margin-bottom: 0; }
-  .work__title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    margin: 0 0 1.25rem;
+  .v2-subhead {
+    font-family: var(--sans); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: 14px;
   }
-  .work__title a { color: var(--ink); text-decoration: none; }
-  .work__title a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .v2-subhead--mt { margin-top: 40px; }
 
-  .work__media { display: grid; gap: 0.75rem; margin-bottom: 1.5rem; }
-  .work__media--pair { grid-template-columns: 1fr 1fr; }
-  .work__fig { margin: 0; overflow: hidden; border-radius: 6px; background: var(--bg-ink); }
-  .work__fig img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 16 / 9; }
-  .work__media--pair .work__fig img { aspect-ratio: 4 / 3; }
-
-  .work__placeholder {
-    aspect-ratio: 16 / 9;
-    border-radius: 6px;
-    background: repeating-linear-gradient(45deg, var(--bg-warm), var(--bg-warm) 12px, var(--bg-ink) 12px, var(--bg-ink) 24px);
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
+  .v2-cases { display: flex; flex-direction: column; gap: 96px; }
+  .v2-case__title {
+    margin: 0 0 32px; font-family: var(--sans); font-weight: 700;
+    font-size: clamp(28px, 4vw, 48px); line-height: 1.05;
+    letter-spacing: -0.028em; color: var(--ink); max-width: 22ch; text-wrap: balance;
   }
-  .work__placeholder span {
-    font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--ink-muted);
-    background: var(--bg); padding: 0.3rem 0.7rem; border-radius: 100px;
-  }
+  .v2-case__media { display: grid; gap: 12px; margin-bottom: 28px; }
+  .v2-case__media--1 { grid-template-columns: 1fr; }
+  .v2-case__media--2 { grid-template-columns: 1fr 1fr; }
+  .v2-case__grid { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
+  .v2-case__meta { font-size: 15px; line-height: 1.5; color: var(--ink-3); }
+  .v2-case__meta p { margin: 0 0 4px; }
+  .v2-case__meta strong { color: var(--ink); font-weight: 600; }
+  .v2-case__collab { font-style: italic; }
+  .v2-case__span { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ink-3); margin-top: 8px !important; }
+  .v2-case__body { margin: 0; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; color: var(--ink); max-width: 62ch; text-wrap: pretty; letter-spacing: -0.008em; }
 
-  .work__body {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 1.5rem 2.5rem;
-    align-items: start;
-  }
-  .work__role { font-family: var(--font-body); font-size: 1rem; color: var(--ink); margin: 0 0 0.25rem; }
-  .work__role strong { font-weight: 600; }
-  .work__collab { font-family: var(--font-body); font-size: 0.95rem; color: var(--ink-muted); margin: 0; }
-  .work__desc { font-family: var(--font-body); font-size: 1.1rem; line-height: 1.55; color: var(--ink); margin: 0; }
+  .v2-courses { margin: 28px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; max-width: 56ch; }
+  .v2-courses li { display: grid; grid-template-columns: 72px 1fr auto; gap: 16px; padding: 10px 0; border-top: 1px solid var(--hair); font-size: 15px; align-items: baseline; }
+  .v2-courses li:last-child { border-bottom: 1px solid var(--hair); }
+  .v2-courses__code { font-family: var(--mono); font-size: 12.5px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent-2); }
+  .v2-courses__title { color: var(--ink); }
+  .v2-courses__terms { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); letter-spacing: 0.04em; }
 
-  /* ───── Speaking ───── */
-  .talks { list-style: none; margin: 0; padding: 0; }
-  .talk {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-    padding: 0.9rem 0;
-    border-top: 1px solid var(--rule);
-    font-family: var(--font-body); font-size: 1.15rem; line-height: 1.35;
-  }
-  .talk:first-child { border-top: none; }
-  .talk a, .talk__title { color: var(--ink); text-decoration: none; }
-  .talk a { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
-  .talk a:hover { text-decoration-thickness: 2.5px; }
-  .talk__icon { color: var(--accent); font-size: 0.7em; }
-  .talk__venue { color: var(--ink-muted); }
-  .talk__year { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-faint); white-space: nowrap; }
-  .seeall { margin: 1.75rem 0 0; font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.04em; }
+  .v2-case__reading { margin-top: 28px; }
+  .v2-case__reading-label { display: block; font-family: var(--sans); font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; }
+  .v2-case__reading ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; font-size: 16px; }
 
-  @media (max-width: 700px) {
-    .work__body { grid-template-columns: 1fr; gap: 0.75rem; }
-    .work__media--pair { grid-template-columns: 1fr; }
-    .talk { flex-direction: column; gap: 0.2rem; }
+  .v2-img {
+    margin: 0;
+    background: repeating-linear-gradient(135deg, var(--bg-card) 0, var(--bg-card) 12px, color-mix(in srgb, var(--bg-card), var(--hair) 60%) 12px, color-mix(in srgb, var(--bg-card), var(--hair) 60%) 13px);
+    border: 1px solid var(--hair); display: flex; align-items: center; justify-content: center; text-align: center; padding: 12px;
+  }
+  .v2-img__hint { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); background: var(--bg); padding: 4px 10px; }
+
+  .v2-speak-wrap { display: flex; flex-direction: column; }
+  .v2-speaks { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+  .v2-speak { display: grid; grid-template-columns: 140px 1fr; gap: 28px; padding: 14px 0; border-top: 1px solid var(--hair); align-items: baseline; }
+  .v2-speaks li:last-child { border-bottom: 1px solid var(--hair); }
+  .v2-speak__date { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--accent-2); font-variant-numeric: tabular-nums; }
+  .v2-speak__title { font-family: var(--sans); font-size: 19px; font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
+  .v2-speak__where { color: var(--ink-3); font-size: 16px; }
+
+  .v2-bigh { margin: 0 0 36px; font-family: var(--sans); font-weight: 800; font-size: clamp(36px, 5vw, 56px); line-height: 1.0; letter-spacing: -0.028em; color: var(--ink); }
+  .v2-bigh--sub { margin-top: 56px; }
+  .v2-hlgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .v2-hl { background: var(--bg-card); border: 1px solid var(--hair); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; border-top: 4px solid var(--accent); transition: border-color 160ms, transform 160ms; }
+  .v2-hlgrid .v2-hl:nth-child(4n+2) { border-top-color: var(--accent-2); }
+  .v2-hlgrid .v2-hl:nth-child(4n+3) { border-top-color: var(--accent-3); }
+  .v2-hlgrid .v2-hl:nth-child(4n+4) { border-top-color: var(--accent-4); }
+  .v2-hl--linked { color: inherit; text-decoration: none; cursor: pointer; }
+  .v2-hl--linked:hover { transform: translateY(-3px); }
+  .v2-hl__img { margin: 0; aspect-ratio: 4 / 3; background: repeating-linear-gradient(135deg, var(--bg-card) 0, var(--bg-card) 12px, color-mix(in srgb, var(--bg-card), var(--hair) 60%) 12px, color-mix(in srgb, var(--bg-card), var(--hair) 60%) 13px); border-bottom: 1px solid var(--hair); display: flex; align-items: center; justify-content: center; padding: 12px; }
+  .v2-hl__imghint { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); background: var(--bg); padding: 3px 8px; }
+  .v2-hl__pad { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .v2-hl__month { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .v2-hl__title { margin: 0; font-family: var(--sans); font-size: 21px; font-weight: 600; line-height: 1.18; letter-spacing: -0.018em; color: var(--ink); }
+  .v2-hl__arrow { font-weight: 400; color: var(--ink-3); }
+  .v2-hl__body { margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-2); text-wrap: pretty; }
+
+  .v2-toggle { margin: 40px 0 0; font: inherit; font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 10px 16px; background: var(--bg-card); border: 1px solid var(--hair); border-radius: 4px; color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; gap: 10px; transition: border-color 120ms, background 120ms; }
+  .v2-toggle:hover { border-color: var(--accent); }
+  .v2-toggle__chev { font-size: 9px; color: var(--accent); }
+  #hl-2025.is-hidden { display: none; }
+
+  .v2-twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .v2-pieces { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+  .v2-piece { padding: 12px 0; border-top: 1px solid var(--hair); font-size: 17px; line-height: 1.4; }
+  .v2-pieces li:last-child { border-bottom: 1px solid var(--hair); }
+  .v2-piece__title { font-family: var(--sans); font-weight: 500; letter-spacing: -0.015em; }
+  .v2-piece__where { color: var(--ink-3); font-size: 15px; }
+
+  .v2-foot { margin-top: 120px; padding-top: 36px; border-top: 2px solid var(--accent); }
+  .v2-foot__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .v2-foot__line { margin: 0 0 12px; font-size: 28px; font-weight: 500; letter-spacing: -0.022em; color: var(--ink); line-height: 1.2; }
+  .v2-foot__hint { margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-3); max-width: 50ch; }
+  .v2-foot__list { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 17px; }
+  .v2-foot__updated { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+
+  @media (max-width: 960px) {
+    .v2-page { padding: 48px 28px 80px; }
+    .v2-hdr { margin-bottom: 64px; }
+    .v2-block { margin-top: 72px; }
+    .v2-case__grid { grid-template-columns: 1fr; gap: 24px; }
+    .v2-hlgrid { grid-template-columns: 1fr 1fr; }
+    .v2-twocol { grid-template-columns: 1fr; gap: 48px; }
+    .v2-foot__grid { grid-template-columns: 1fr; gap: 36px; }
+  }
+  @media (max-width: 640px) {
+    .v2-page { padding: 32px 20px 64px; }
+    .v2-name { font-size: clamp(46px, 14vw, 80px); }
+    .v2-role { font-size: 18px; }
+    .v2-case__media--2 { grid-template-columns: 1fr; }
+    .v2-hlgrid { grid-template-columns: 1fr; }
+    .v2-speak { grid-template-columns: 1fr; gap: 4px; }
+    .v2-courses li { grid-template-columns: 60px 1fr; }
+    .v2-courses__terms { grid-column: 2; }
+    .v2-foot__line { font-size: 22px; }
+  }
+  @media print {
+    .v2-img, .v2-hl__img { display: none; }
   }
 </style>
+
+<script>
+  const btn = document.getElementById('hl-toggle');
+  const panel = document.getElementById('hl-2025');
+  const txt = btn?.querySelector('.v2-toggle__txt');
+  const chev = btn?.querySelector('.v2-toggle__chev');
+  btn?.addEventListener('click', () => {
+    const hidden = panel?.classList.toggle('is-hidden');
+    if (btn) btn.setAttribute('aria-expanded', String(!hidden));
+    if (txt) txt.textContent = hidden ? 'Show 2025 highlights' : 'Hide 2025 highlights';
+    if (chev) chev.textContent = hidden ? '▼' : '▲';
+  });
+</script>

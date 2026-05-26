@@ -12,15 +12,19 @@
   --pad: clamp(1.25rem, 5vw, 2.5rem);
 }
 
-html { color-scheme: light; }
+html { color-scheme: light dark; }
+html[data-theme="dark"] { color-scheme: dark; }
 
 body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: var(--font-size-body);
-  line-height: var(--line-height-body);
+  line-height: 1.55;
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern", "ss01";
 }
 
 /* Typography */
@@ -58,11 +62,13 @@ p { max-width: var(--measure); }
 a {
   color: var(--ink);
   text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 2px;
+  text-decoration-thickness: 1.2px;
+  text-underline-offset: 3.5px;
+  text-decoration-color: color-mix(in oklch, var(--ink) 32%, transparent);
+  transition: text-decoration-color 120ms, color 120ms;
 }
-a:hover { text-decoration-thickness: 2.5px; }
+a:hover { text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+::selection { background: color-mix(in oklch, var(--accent) 30%, transparent); color: var(--ink); }
 
 /* Container */
 .container {
