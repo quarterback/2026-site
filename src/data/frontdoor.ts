@@ -1,163 +1,129 @@
 /* -------------------------------------------------------------------
-   frontdoor.ts — hand-curated content for the homepage (the front door).
-   Audience: people who DON'T know Ron. Lead with what he's been up to,
-   not a long bio. Photo-forward where good photos exist.
+   frontdoor.ts — content for the homepage.
 
-   The HIGHLIGHTS array is the core: a low-effort, easy-to-update feed of
-   things he's done (events run, things built, taught, spoken). Add an entry,
-   optionally point it at a photo in /public/img, done.
+   JOB: get Ron booked/hired. A stranger should grasp what he does FOR
+   them and have an obvious path to contact.
+   FORM: big confident statements, each anchored by visible proof
+   (photos, artifacts, named work). Authority, not a bio.
 
-   Placeholder copy below is structural scaffolding — replace the words and
-   swap in real photos. Keep the shape.
+   Edit this file to change the pitch. Copy below is placeholder
+   scaffolding to show the structure — replace the words and swap in real
+   proof photos from /public/img. Keep the shape.
    ------------------------------------------------------------------- */
 
-export interface Link {
+export interface Cta {
   label: string;
   href: string;
   external?: boolean;
 }
 
-/* Minimal masthead — name + one short line. No long bio. */
-export interface Positioning {
+/* The lead pitch — value statement + a clear call to action. */
+export interface Lead {
   name: string;
-  role: string;          // one sharp line a stranger reads first
-  tagline: string;       // ONE short sentence, present tense
-  portrait: string;
+  headline: string;   // the big value statement (what he does, for whom)
+  sub: string;        // one supporting line
+  ctas: Cta[];        // primary + secondary action
 }
 
-/* A highlight — one thing he's done. Photo optional. */
-export interface Highlight {
-  title: string;
-  blurb?: string;        // 1 short sentence, optional
-  tag?: 'Ran' | 'Built' | 'Founded' | 'Teaching' | 'Speaking' | 'Writing' | 'Coaching';
-  image?: string;        // /img/… ; omit for a text-only card
-  alt?: string;
+/* A piece of evidence under a claim — ideally a photo/artifact. */
+export interface ProofItem {
+  label: string;      // what it is
+  image?: string;     // /img/… ; omit for a text-only proof pill
   href?: string;
   external?: boolean;
-  when?: string;         // "2024", "2024–present"
 }
 
-/* Dated, future-facing items. Sorted + future-filtered in the page. */
-export interface UpcomingEvent {
-  title: string;
-  venue: string;
-  date: string;          // ISO "2026-09-14"
-  href?: string;
-  location?: string;
+/* A confident claim about what he does for you, backed by proof. */
+export interface Capability {
+  statement: string;  // bold: "I do X for you"
+  blurb: string;      // what you actually get / how it works
+  proof: ProofItem[]; // the receipts
+  cta?: Cta;          // optional deeper link
 }
 
-/* Plain link items (writing, talks, interviews — used on /speaking). */
-export interface RefItem {
-  title: string;
-  where?: string;
-  href?: string;
+/* Logan-style social proof — the names that vouch for you. */
+export interface SocialProof {
+  label: string;
+  items: string[];    // institutions / venues
+}
+
+export interface Contact {
+  line: string;       // the ask
+  email: string;
+  ctas: Cta[];
 }
 
 /* =================================================================== */
 
-export const POSITIONING: Positioning = {
+export const LEAD: Lead = {
   name: 'Ron Bronson',
-  role: 'Critical urbanist & design executive',
-  tagline:
-    'I help institutions close the gap between policy and what actually reaches people.',
-  portrait: '/hero.jpg',
+  headline:
+    'I help institutions deploy public technology that actually reaches people.',
+  sub: 'Two decades closing the gap between policy and delivery — from small counties to federal agencies.',
+  ctas: [
+    { label: 'Get in touch', href: 'mailto:ron@ronbronson.com' },
+    { label: 'Book a talk', href: '/speaking' },
+  ],
 };
 
-export const HIGHLIGHTS: Highlight[] = [
+export const SOCIAL_PROOF: SocialProof = {
+  label: 'Worked with & spoken at',
+  items: [
+    '18F / GSA',
+    'Dept. of Veterans Affairs',
+    'IRS',
+    'HHS',
+    'Dept. of Defense',
+    'University of Michigan',
+    'Code for America',
+    'Bloomberg',
+    'IxDA',
+    'Rosenfeld',
+    'Cloudflare',
+  ],
+};
+
+export const CAPABILITIES: Capability[] = [
   {
-    title: 'Design for the Public',
-    blurb: 'Convened practitioners working on public-interest technology and delivery.',
-    tag: 'Ran',
-    image: '/img/dfp24.jpg',
-    alt: 'Ron Bronson speaking at Design for the Public',
-    when: '2024',
+    statement: 'I stabilize stalled delivery programs.',
+    blurb:
+      'Through Occupant, I diagnose where ownership got lost and reset deployment plans so programs outlast the engagement.',
+    cta: { label: 'Occupant', href: 'https://www.occupant.works/', external: true },
+    proof: [
+      { label: 'Portland Digital Corps', image: '/img/digitalcorpspdx.org.png', href: 'https://digitalcorpspdx.org', external: true },
+      { label: '18F delivery, federal scale', image: '/img/18f-leadership.svg' },
+      { label: 'Occupant', image: '/img/occupant.png', href: 'https://www.occupant.works/', external: true },
+    ],
   },
   {
-    title: 'Portland Digital Corps',
-    blurb: 'Founded an all-volunteer cohort delivering digital services for local public institutions.',
-    tag: 'Founded',
-    image: '/img/digitalcorpspdx.org.png',
-    alt: 'Portland Digital Corps',
-    href: 'https://digitalcorpspdx.org',
-    external: true,
-    when: '2023–present',
+    statement: 'I advise leadership on institutional AI deployment.',
+    blurb:
+      'State Capacity AI builds the procurement benchmarks and decision infrastructure governments need to evaluate AI without the sales pitch.',
+    cta: { label: 'State Capacity AI', href: 'https://statecapacity.ai', external: true },
+    proof: [
+      { label: 'State Capacity AI', image: '/img/statecapacity-ai.svg', href: 'https://statecapacity.ai', external: true },
+      { label: 'Public Mechanics', href: 'https://makingpublicwork.com', external: true },
+    ],
   },
   {
-    title: 'Urban Technology at U-Michigan',
-    blurb: 'Assistant Professor of Practice — teaching Public Mechanics, Interaction & Service Design.',
-    tag: 'Teaching',
-    image: '/img/michigan-teaching.svg',
-    alt: 'University of Michigan',
-    href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/',
-    external: true,
-    when: '2024–present',
-  },
-  {
-    title: 'Public Mechanics',
-    blurb: 'Primitives and strategy for formalizing agentic decision rights in public delivery.',
-    tag: 'Writing',
-    href: 'https://makingpublicwork.com',
-    external: true,
-    when: '2025–present',
-  },
-  {
-    title: 'Design as Repair',
-    blurb: 'Keynote on treating public-sector work as repair more than reinvention.',
-    tag: 'Speaking',
-    image: '/img/oaca2022.jpg',
-    alt: 'Ron Bronson speaking',
-    href: 'https://www.ixda.no/talks/design-as-repair',
-    external: true,
-    when: 'IxDA Oslo',
-  },
-  {
-    title: 'State champions',
-    blurb: 'Head Girls Varsity Tennis Coach at Catlin Gabel — a constraint-led, problem-solver approach.',
-    tag: 'Coaching',
-    image: '/img/2023_title.jpg',
-    alt: 'State championship tennis team',
-    href: '/coaching',
+    statement: 'I speak and teach on how public systems really work.',
+    blurb:
+      'Keynotes, workshops, and a faculty practice at U-Michigan — energetic talks on delivery, consequence design, and public mechanics.',
+    cta: { label: 'Speaking', href: '/speaking' },
+    proof: [
+      { label: 'Design for the Public', image: '/img/dfp24.jpg' },
+      { label: 'IxDA Oslo', image: '/img/oaca2022.jpg', href: 'https://www.ixda.no/talks/design-as-repair', external: true },
+      { label: 'U-Michigan, Urban Technology', image: '/img/michigan-teaching.svg', href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/', external: true },
+    ],
   },
 ];
 
-export const UPCOMING: UpcomingEvent[] = [
-  // { title: 'Talk title', venue: 'Conference', date: '2026-09-14', location: 'Oslo', href: '#' },
-];
-
-/* Used on the consolidated /speaking page (not the homepage). */
-export const WRITING: RefItem[] = [
-  {
-    title: 'Some advice on managing your design career upwards',
-    where: 'Piccalil.li',
-    href: 'https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/',
-  },
-  { title: 'Design as Repair', href: 'https://blog.ronbronson.com/design-as-repair' },
-  {
-    title: 'What Forward Deployed Design Actually Looks Like',
-    href: 'https://blog.ronbronson.com/what-forward-deployed-design-actually-looks-like',
-  },
-];
-
-export const TALKS: RefItem[] = [
-  { title: 'Design as Repair', where: 'IxDA Oslo', href: 'https://www.ixda.no/talks/design-as-repair' },
-  {
-    title: 'Deceptive Design / Consequence Design',
-    where: 'digital.gov',
-    href: 'https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design',
-  },
-  {
-    title: 'Design Consequences in Everyday Life',
-    where: 'Rosenfeld Civic Design, 2022',
-    href: 'https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/',
-  },
-];
-
-export const INTERVIEWS: RefItem[] = [
-  {
-    title: 'Repairing Service Design for the Age of AI',
-    where: 'Service Design Show',
-    href: 'https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505',
-  },
-  { title: 'Leading the Field', where: 'Code for America', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
-  { title: 'Did I Do That Podcast', href: 'https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson' },
-];
+export const CONTACT: Contact = {
+  line: "If your project is too important to leave the gap between pilot and product to chance, let's talk.",
+  email: 'ron@ronbronson.com',
+  ctas: [
+    { label: 'Email me', href: 'mailto:ron@ronbronson.com' },
+    { label: 'Advising via Occupant', href: 'https://www.occupant.works/', external: true },
+    { label: 'Book a talk', href: '/speaking' },
+  ],
+};

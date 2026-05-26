@@ -1,93 +1,103 @@
 ---
 import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
-import LastScrobble from '../components/LastScrobble.astro';
-import { getHomepageStream } from '../lib/stream';
-import { getBookhive } from '../lib/bookhive';
-import { POSITIONING, HIGHLIGHTS } from '../data/frontdoor';
+import { LEAD, SOCIAL_PROOF, CAPABILITIES, CONTACT } from '../data/frontdoor';
 
 const SITE_URL = 'https://ronbronson.design';
 const CANONICAL_URL = SITE_URL + '/';
-const PAGE_DESCRIPTION = `${POSITIONING.name} — ${POSITIONING.role}. ${POSITIONING.tagline}`;
-const PORTRAIT_URL = new URL(POSITIONING.portrait, SITE_URL).toString();
-
-const POSTS = await getHomepageStream(5);
-const bookhive = await getBookhive();
-const reading = bookhive.reading[0];
+const PAGE_DESCRIPTION = LEAD.headline;
+const OG_IMAGE = new URL('/hero.jpg', SITE_URL).toString();
 ---
 
-<Base title={POSITIONING.name} description={PAGE_DESCRIPTION} noindex={false}>
+<Base title={`${LEAD.name} — ${LEAD.headline}`} description={PAGE_DESCRIPTION} noindex={false}>
   <Fragment slot="head">
     <link rel="canonical" href={CANONICAL_URL} />
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content={POSITIONING.name} />
+    <meta property="og:title" content={LEAD.name} />
     <meta property="og:description" content={PAGE_DESCRIPTION} />
     <meta property="og:url" content={CANONICAL_URL} />
-    <meta property="og:image" content={PORTRAIT_URL} />
+    <meta property="og:image" content={OG_IMAGE} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={PORTRAIT_URL} />
+    <meta name="twitter:image" content={OG_IMAGE} />
   </Fragment>
 
   <main id="main" class="home">
 
-    <!-- Masthead — lead with name + what he does, not a title. -->
-    <header class="mast">
-      <h1 class="mast__name">{POSITIONING.name}</h1>
-      <p class="mast__line">{POSITIONING.tagline}</p>
+    <!-- Lead — the pitch + a clear path to act -->
+    <header class="lead">
+      <p class="lead__name">{LEAD.name}</p>
+      <h1 class="lead__headline">{LEAD.headline}</h1>
+      <p class="lead__sub">{LEAD.sub}</p>
+      <div class="lead__ctas">
+        {LEAD.ctas.map((c, i) => (
+          <a
+            class={i === 0 ? 'btn' : 'btn btn--ghost'}
+            href={c.href}
+            target={c.external ? '_blank' : undefined}
+            rel={c.external ? 'noopener noreferrer' : undefined}
+          >{c.label}</a>
+        ))}
+      </div>
     </header>
 
-    <!-- Now — slim present-tense pulse -->
-    <section class="pulse" aria-label="Now">
-      <span class="kicker">Now</span>
-      {reading && (
-        <span class="pulse__item">Reading <em>{reading.title}</em></span>
-      )}
-      <LastScrobble />
-      <a class="pulse__more" href="/now">More &rarr;</a>
-    </section>
-
-    <!-- Highlights — photo-forward grid of things done. The core. -->
-    <section class="block" aria-labelledby="hl-h">
-      <h2 id="hl-h" class="block__h"><span class="kicker">Highlights</span></h2>
-      <ul class="cards">
-        {HIGHLIGHTS.map((h) => (
-          <li class="card">
-            {h.image && (
-              <figure class="card__fig">
-                <img src={h.image} alt={h.alt ?? h.title} loading="lazy" />
-              </figure>
-            )}
-            <div class="card__body">
-              {h.tag && <span class={`chip chip--${h.tag.toLowerCase()}`}>{h.tag}</span>}
-              <h3 class="card__title">
-                {h.href ? (
-                  <a href={h.href} target={h.external ? '_blank' : undefined} rel={h.external ? 'noopener noreferrer' : undefined}>
-                    {h.title}{h.external ? ' ↗' : ''}
-                  </a>
-                ) : h.title}
-              </h3>
-              {h.blurb && <p class="card__blurb">{h.blurb}</p>}
-              {h.when && <span class="card__when">{h.when}</span>}
-            </div>
-          </li>
-        ))}
+    <!-- Social proof — the names that vouch (Logan) -->
+    <section class="proofbar" aria-label={SOCIAL_PROOF.label}>
+      <span class="proofbar__label">{SOCIAL_PROOF.label}</span>
+      <ul class="proofbar__list">
+        {SOCIAL_PROOF.items.map((name) => <li>{name}</li>)}
       </ul>
     </section>
 
-    <!-- Recent writing — simple list pattern -->
-    {POSTS.length > 0 && (
-      <section class="block" aria-labelledby="rw-h">
-        <h2 id="rw-h" class="block__h"><span class="kicker">Recent Writing</span></h2>
-        <ul class="rows">
-          {POSTS.map((post) => (
-            <li class="row">
-              <a href={post.url} target="_blank" rel="noopener noreferrer">{post.title}</a>
-              <span class="row__where">{post.source}</span>
-            </li>
-          ))}
+    <!-- Capabilities — big statements, each anchored by work (Martin) -->
+    {CAPABILITIES.map((cap) => (
+      <section class="cap">
+        <div class="cap__lead">
+          <h2 class="cap__statement">{cap.statement}</h2>
+          <p class="cap__blurb">{cap.blurb}</p>
+          {cap.cta && (
+            <a class="cap__cta" href={cap.cta.href} target={cap.cta.external ? '_blank' : undefined} rel={cap.cta.external ? 'noopener noreferrer' : undefined}>
+              {cap.cta.label}{cap.cta.external ? ' ↗' : ' →'}
+            </a>
+          )}
+        </div>
+        <ul class="cap__proof">
+          {cap.proof.map((p) => {
+            const inner = (
+              <>
+                {p.image && (
+                  <figure class="proof__fig">
+                    <img src={p.image} alt={p.label} loading="lazy" />
+                  </figure>
+                )}
+                <span class="proof__label">{p.label}{p.href && p.external ? ' ↗' : ''}</span>
+              </>
+            );
+            return (
+              <li class={p.image ? 'proof' : 'proof proof--text'}>
+                {p.href ? (
+                  <a href={p.href} target={p.external ? '_blank' : undefined} rel={p.external ? 'noopener noreferrer' : undefined}>{inner}</a>
+                ) : inner}
+              </li>
+            );
+          })}
         </ul>
       </section>
-    )}
+    ))}
+
+    <!-- Contact — the ask -->
+    <section class="contact">
+      <p class="contact__line">{CONTACT.line}</p>
+      <div class="contact__ctas">
+        {CONTACT.ctas.map((c, i) => (
+          <a
+            class={i === 0 ? 'btn' : 'btn btn--ghost'}
+            href={c.href}
+            target={c.external ? '_blank' : undefined}
+            rel={c.external ? 'noopener noreferrer' : undefined}
+          >{c.label}</a>
+        ))}
+      </div>
+    </section>
 
   </main>
 
@@ -95,149 +105,179 @@ const reading = bookhive.reading[0];
 </Base>
 
 <style>
-  .home {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vw, 4.5rem) var(--pad) 0;
-  }
+  .home { max-width: 1000px; margin: 0 auto; padding: 0 var(--pad); }
 
-  /* ───── Kicker — mono label, neutral for legibility ───── */
-  .kicker {
+  /* ───── Buttons ───── */
+  .btn {
+    display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.7rem 1.25rem;
+    border-radius: 100px;
+    background: var(--ink);
+    color: #fff;
+    border: 1.5px solid var(--ink);
+    transition: background 0.15s, color 0.15s;
+  }
+  .btn:hover { background: var(--accent); border-color: var(--accent); color: #1a1a1a; }
+  .btn--ghost { background: transparent; color: var(--ink); }
+  .btn--ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+  /* ───── Lead ───── */
+  .lead { padding: clamp(3rem, 9vw, 6rem) 0 clamp(1.5rem, 3vw, 2.5rem); }
+  .lead__name {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-mid);
-    margin: 0;
+    margin: 0 0 1.5rem;
   }
-
-  /* ───── Masthead ───── */
-  .mast {
-    padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
-  }
-  .mast__name {
+  .lead__headline {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
-    line-height: 1;
+    font-size: clamp(2.1rem, 6vw, 4rem);
+    line-height: 1.05;
     letter-spacing: -0.03em;
-    margin: 0 0 0.75rem;
     color: var(--ink);
-  }
-  .mast__line {
-    font-family: var(--font-body);
-    font-size: clamp(1.15rem, 2vw, 1.5rem);
-    font-weight: 400;
-    line-height: 1.4;
-    color: var(--ink-mid);
-    max-width: 30ch;
     margin: 0;
+    max-width: 18ch;
   }
+  .lead__sub {
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    line-height: 1.5;
+    color: var(--ink-mid);
+    max-width: 52ch;
+    margin: 1.25rem 0 0;
+  }
+  .lead__ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 
-  /* ───── Now pulse ───── */
-  .pulse {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.4rem 1.25rem;
-    padding: 0.85rem 0;
+  /* ───── Social proof bar ───── */
+  .proofbar {
+    padding: 1.25rem 0;
     border-top: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1.5rem;
+  }
+  .proofbar__label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .proofbar__list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1rem;
     font-family: var(--font-body);
     font-size: 0.9rem;
     color: var(--ink-mid);
   }
-  .pulse__item em { font-style: normal; font-weight: 600; color: var(--ink); }
-  .pulse :global(.last-scrobble) {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    color: var(--ink-mid); text-decoration: none;
-  }
-  .pulse :global(.last-scrobble .ls-label) {
-    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--ink-faint); display: block;
-  }
-  .pulse__more { margin-left: auto; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .proofbar__list li { white-space: nowrap; }
 
-  /* ───── Block ───── */
-  .block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
-  .block__h { margin: 0 0 1.75rem; }
+  /* ───── Capability blocks ───── */
+  .cap {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    align-items: start;
+    padding: clamp(2.5rem, 6vw, 4.5rem) 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cap__statement {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .cap__blurb {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--ink-mid);
+    margin: 1rem 0 0;
+    max-width: 42ch;
+  }
+  .cap__cta {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
+  }
+  .cap__cta:hover { text-decoration-thickness: 2.5px; }
 
-  /* ───── Highlight cards — photo-forward grid ───── */
-  .cards {
+  /* proof grid — work artifacts */
+  .cap__proof {
     list-style: none; margin: 0; padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
   }
-  .card { display: flex; flex-direction: column; }
-  .card__fig {
-    margin: 0 0 1rem;
+  .proof a { text-decoration: none; color: inherit; display: block; }
+  .proof__fig {
+    margin: 0 0 0.5rem;
     aspect-ratio: 4 / 3;
     overflow: hidden;
     background: var(--bg-ink);
-    border-radius: 6px;
+    border-radius: 5px;
   }
-  .card__fig img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .card__body { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-  .card__title {
+  .proof__fig img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.25s; }
+  .proof a:hover .proof__fig img { transform: scale(1.04); }
+  .proof__label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    line-height: 1.3;
+  }
+  /* text-only proof = a pill */
+  .proof--text {
+    align-self: start;
+  }
+  .proof--text .proof__label {
+    display: inline-block;
+    background: var(--bg-ink);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.35rem 0.7rem;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.8rem;
+  }
+
+  /* ───── Contact band ───── */
+  .contact { padding: clamp(3rem, 7vw, 5rem) 0; }
+  .contact__line {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 1.35rem;
+    font-size: clamp(1.5rem, 3.5vw, 2.4rem);
     line-height: 1.15;
-    letter-spacing: -0.01em;
-    margin: 0;
+    letter-spacing: -0.02em;
     color: var(--ink);
-  }
-  .card__title a { color: var(--ink); text-decoration: none; }
-  .card__title a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  .card__blurb {
-    font-family: var(--font-body);
-    font-size: 0.98rem;
-    line-height: 1.5;
-    color: var(--ink-mid);
+    max-width: 24ch;
     margin: 0;
   }
-  .card__when {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
+  .contact__ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
 
-  /* ───── Category chips — the bright palette lives here ───── */
-  .chip {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: #1a1a1a;
-    padding: 0.2rem 0.55rem;
-    border-radius: 100px;
-  }
-  .chip--ran,
-  .chip--speaking      { background: var(--pink); }
-  .chip--founded,
-  .chip--built         { background: var(--blue); }
-  .chip--teaching,
-  .chip--writing       { background: var(--gold); }
-  .chip--coaching      { background: var(--blue-soft); }
-
-  /* ───── Row list (recent writing) ───── */
-  .rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
-  .row {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
-    padding: 0.85rem 0;
-    border-top: 1px solid var(--rule);
-    font-family: var(--font-body); font-size: 1.05rem;
-  }
-  .row:last-child { border-bottom: 1px solid var(--rule); }
-  .row a { color: var(--ink); text-decoration: none; }
-  .row a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  .row__where { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
-
-  @media (max-width: 560px) {
-    .row { flex-direction: column; gap: 0.2rem; }
+  @media (max-width: 720px) {
+    .cap { grid-template-columns: 1fr; gap: 1.5rem; }
   }
 </style>
