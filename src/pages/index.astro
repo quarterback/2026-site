@@ -2,9 +2,8 @@
 import Base from '../layouts/Base.astro';
 import {
   ME, CURRENT_WORK, PAST_WORK,
-  SPEAKING_PAST,
   HIGHLIGHTS_2026, HIGHLIGHTS_2025,
-  WRITING, PODCASTS, HOSTING, ELSEWHERE,
+  WRITING, HOSTING, ELSEWHERE,
 } from '../data/frontdoor';
 
 const SITE_URL = 'https://ronbronson.design';
@@ -41,30 +40,6 @@ const cases = (items: typeof CURRENT_WORK) => items;
         ))}
       </ul>
       <p class="v2-seeall"><a href="https://blog.ronbronson.com" target="_blank" rel="noopener noreferrer">→ See all writing</a></p>
-    </section>
-
-    {/* ── Select media ── */}
-    <section class="v2-block">
-      <div class="v2-seclabel"><span>Select media</span></div>
-      <div class="v2-twocol">
-        <div>
-          <div class="v2-subhead">Talks</div>
-          <ul class="v2-pieces">
-            {SPEAKING_PAST.slice(0, 4).map((it) => (
-              <li class="v2-piece">{it.href && it.href !== '#' ? <a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : <span class="v2-piece__title">{it.title}</span>}<span class="v2-piece__where"> — {it.where}</span></li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <div class="v2-subhead">Podcasts &amp; interviews</div>
-          <ul class="v2-pieces">
-            {PODCASTS.slice(0, 4).map((it) => (
-              <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <p class="v2-seeall"><a href="/speaking">→ See all speaking</a></p>
     </section>
 
     {/* ── Selected work ── */}
