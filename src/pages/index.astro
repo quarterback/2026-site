@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import {
   ME, CURRENT_WORK, PAST_WORK,
-  SPEAKING_2026, SPEAKING_PAST,
+  SPEAKING_PAST,
   HIGHLIGHTS_2026, HIGHLIGHTS_2025,
   WRITING, PODCASTS, HOSTING, ELSEWHERE,
 } from '../data/frontdoor';
@@ -32,6 +32,41 @@ const cases = (items: typeof CURRENT_WORK) => items;
       <p class="v2-role">{ME.role}</p>
     </header>
 
+    {/* ── Select writing (bonafides first) ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Select writing</span></div>
+      <ul class="v2-pieces">
+        {WRITING.slice(0, 5).map((it) => (
+          <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
+        ))}
+      </ul>
+      <p class="v2-seeall"><a href="https://blog.ronbronson.com" target="_blank" rel="noopener noreferrer">→ See all writing</a></p>
+    </section>
+
+    {/* ── Select media ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Select media</span></div>
+      <div class="v2-twocol">
+        <div>
+          <div class="v2-subhead">Talks</div>
+          <ul class="v2-pieces">
+            {SPEAKING_PAST.slice(0, 4).map((it) => (
+              <li class="v2-piece">{it.href && it.href !== '#' ? <a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : <span class="v2-piece__title">{it.title}</span>}<span class="v2-piece__where"> — {it.where}</span></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <div class="v2-subhead">Podcasts &amp; interviews</div>
+          <ul class="v2-pieces">
+            {PODCASTS.slice(0, 4).map((it) => (
+              <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p class="v2-seeall"><a href="/speaking">→ See all speaking</a></p>
+    </section>
+
     {/* ── Selected work ── */}
     <section class="v2-block">
       <div class="v2-seclabel"><span>Selected work</span></div>
@@ -43,7 +78,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
             {it.images && it.images.length > 0 && (
               <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
                 {it.images.map((img) => (
-                  <figure class="v2-img" style="aspect-ratio: 3 / 2"><span class="v2-img__hint">{img.placeholder}</span></figure>
+                  <figure class="v2-img"><span class="v2-img__hint">{img.placeholder}</span></figure>
                 ))}
               </div>
             )}
@@ -76,38 +111,40 @@ const cases = (items: typeof CURRENT_WORK) => items;
       </div>
     </section>
 
-    {/* ── Speaking ── */}
+    {/* ── Recent past work ── */}
     <section class="v2-block">
-      <div class="v2-seclabel"><span>Speaking</span></div>
-      <div class="v2-speak-wrap">
-        <div class="v2-subhead">Upcoming · 2026</div>
-        <ul class="v2-speaks">
-          {SPEAKING_2026.map((it) => (
-            <li class="v2-speak">
-              <span class="v2-speak__date">{it.date}</span>
-              <span class="v2-speak__body">
-                {it.href && it.href !== '#' ? <a class="v2-speak__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : <span class="v2-speak__title">{it.title}</span>}
-                <span class="v2-speak__where"> — {it.where}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
-        <div class="v2-subhead v2-subhead--mt">Recent talks</div>
-        <ul class="v2-speaks">
-          {SPEAKING_PAST.map((it) => (
-            <li class="v2-speak">
-              <span class="v2-speak__date">{it.date}</span>
-              <span class="v2-speak__body">
-                {it.href && it.href !== '#' ? <a class="v2-speak__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : <span class="v2-speak__title">{it.title}</span>}
-                <span class="v2-speak__where"> — {it.where}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
+      <div class="v2-seclabel"><span>Recent past work</span></div>
+      <div class="v2-cases">
+        {cases(PAST_WORK).map((it) => (
+          <article class="v2-case">
+            <h3 class="v2-case__title">{it.title}</h3>
+            {it.span && <p class="v2-case__span">{it.span}</p>}
+            {it.images && it.images.length > 0 && (
+              <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
+                {it.images.map((img) => (
+                  <figure class="v2-img"><span class="v2-img__hint">{img.placeholder}</span></figure>
+                ))}
+              </div>
+            )}
+            <div class="v2-case__bodywrap">
+              <p class="v2-case__body">{it.body}</p>
+              {it.reading && (
+                <div class="v2-case__reading">
+                  <span class="v2-case__reading-label">Further reading</span>
+                  <ul>
+                    {it.reading.map((r) => (
+                      <li>{r.href && r.href !== '#' ? <a href={r.href} target="_blank" rel="noopener noreferrer">{r.label}</a> : <span>{r.label}</span>}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </article>
+        ))}
       </div>
     </section>
 
-    {/* ── Highlights ── */}
+    {/* ── Highlights (after the bonafides) ── */}
     <section class="v2-block">
       <div class="v2-seclabel"><span>Highlights</span></div>
       <h2 class="v2-bigh">2026 so far</h2>
@@ -153,61 +190,6 @@ const cases = (items: typeof CURRENT_WORK) => items;
               </article>
             )
           ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ── Recent past work ── */}
-    <section class="v2-block">
-      <div class="v2-seclabel"><span>Recent past work</span></div>
-      <div class="v2-cases">
-        {cases(PAST_WORK).map((it) => (
-          <article class="v2-case">
-            <h3 class="v2-case__title">{it.title}</h3>
-            {it.span && <p class="v2-case__span">{it.span}</p>}
-            {it.images && it.images.length > 0 && (
-              <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
-                {it.images.map((img) => (
-                  <figure class="v2-img" style="aspect-ratio: 3 / 2"><span class="v2-img__hint">{img.placeholder}</span></figure>
-                ))}
-              </div>
-            )}
-            <div class="v2-case__bodywrap">
-              <p class="v2-case__body">{it.body}</p>
-              {it.reading && (
-                <div class="v2-case__reading">
-                  <span class="v2-case__reading-label">Further reading</span>
-                  <ul>
-                    {it.reading.map((r) => (
-                      <li>{r.href && r.href !== '#' ? <a href={r.href} target="_blank" rel="noopener noreferrer">{r.label}</a> : <span>{r.label}</span>}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    {/* ── Writing / Podcasts ── */}
-    <section class="v2-block">
-      <div class="v2-twocol">
-        <div>
-          <div class="v2-seclabel"><span>Writing</span></div>
-          <ul class="v2-pieces">
-            {WRITING.map((it) => (
-              <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <div class="v2-seclabel"><span>Podcasts &amp; interviews</span></div>
-          <ul class="v2-pieces">
-            {PODCASTS.map((it) => (
-              <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
@@ -285,9 +267,12 @@ const cases = (items: typeof CURRENT_WORK) => items;
     font-size: clamp(28px, 4vw, 48px); line-height: 1.05;
     letter-spacing: -0.028em; color: var(--ink); max-width: 22ch; text-wrap: balance;
   }
-  .v2-case__media { display: grid; gap: 12px; margin-bottom: 28px; }
+  /* Full-bleed case imagery — break out to the viewport edges */
+  .v2-case__media { display: grid; gap: 4px; margin-bottom: 40px; width: 100vw; margin-inline: calc(50% - 50vw); }
   .v2-case__media--1 { grid-template-columns: 1fr; }
   .v2-case__media--2 { grid-template-columns: 1fr 1fr; }
+  .v2-case__media .v2-img { height: clamp(300px, 52vh, 600px); }
+  .v2-seeall { margin: 24px 0 0; font-family: var(--sans); font-size: 15px; font-weight: 500; }
   .v2-case__grid { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
   .v2-case__meta { font-size: 15px; line-height: 1.5; color: var(--ink-3); }
   .v2-case__meta p { margin: 0 0 4px; }

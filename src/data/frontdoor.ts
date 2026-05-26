@@ -35,7 +35,7 @@ export const CURRENT_WORK: CaseStudy[] = [
   {
     id: 'umich',
     title: 'Public Mechanics at the University of Michigan',
-    body: "Teaching at Taubman College's Urban Technology program — Public Mechanics, Interaction Design, and Service Design & Urban Needs. The throughline is the discipline I call public mechanics: closing the latency between written policy and on-the-ground deployment, and naming where human judgment actually lives inside delivery. Course material and ongoing research are collected at yearsahead.io.",
+    body: "Teaching Public Mechanics, Interaction Design, and Service Design at Taubman College's Urban Technology program. Course material and ongoing research live at yearsahead.io.",
     images: [
       { placeholder: 'Photo from an Urban Tech studio session' },
       { placeholder: 'yearsahead.io screenshot' },
@@ -53,7 +53,7 @@ export const CURRENT_WORK: CaseStudy[] = [
   {
     id: 'pdx',
     title: 'Portland Digital Corps',
-    body: 'An all-volunteer practice I founded in 2025 that organises fifty-plus designers, engineers, researchers, and writers to deliver nonprofit websites in eight-week engagements — without procurement, without institutional cover. The model has since been picked up in other cities. My continued involvement is to hold the door open.',
+    body: 'An all-volunteer practice I founded in 2025 — fifty-plus practitioners delivering nonprofit websites in eight-week engagements, no procurement. The model has since spread to other cities.',
     images: [
       { placeholder: 'PDX Digital Corps cohort photo' },
       { placeholder: 'Shipped nonprofit site' },
@@ -67,11 +67,12 @@ export const PAST_WORK: CaseStudy[] = [
     id: '18f',
     title: 'Head of Design at 18F · U.S. General Services Administration',
     span: '2021 – 2025',
-    body: "Led the design practice at the federal government's internal digital consultancy. Built platforms, systems, and digital services used by millions of Americans, across federal partners. I'm a code owner of the 18F UX Guide and 18F Methods. 18F was eliminated in March 2025; the work and the people remain a body I keep referring back to.",
+    body: "Led the design practice at the federal government's internal digital consultancy, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
     images: [{ placeholder: '18F project photo or team shot' }],
     reading: [
       { label: '18F UX Guide', href: '#' },
       { label: '18F Methods', href: '#' },
+      { label: '18F blog', href: '#' },
       { label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
     ],
   },
