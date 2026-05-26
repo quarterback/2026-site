@@ -111,7 +111,8 @@ export default defineConfig({
   site: 'https://ronbronson.com',
   redirects: {
     '/work': '/',
-    '/media': '/speaking',
+    '/media': '/',
+    '/speaking': '/',
   },
   integrations: [
     mdx({

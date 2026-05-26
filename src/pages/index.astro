@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import {
   ME, CURRENT_WORK, PAST_WORK,
   HIGHLIGHTS_2026, HIGHLIGHTS_2025,
-  WRITING, HOSTING, ELSEWHERE,
+  WRITING, MEDIA, ELSEWHERE,
 } from '../data/frontdoor';
 
 const SITE_URL = 'https://ronbronson.design';
@@ -40,6 +40,28 @@ const cases = (items: typeof CURRENT_WORK) => items;
         ))}
       </ul>
       <p class="v2-seeall"><a href="https://blog.ronbronson.com" target="_blank" rel="noopener noreferrer">→ See all writing</a></p>
+    </section>
+
+    {/* ── Media (embeddable proof of work) ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Media</span></div>
+      <div class="v2-media-grid">
+        {MEDIA.map((m) => (
+          <article class={`v2-media v2-media--${m.kind}`}>
+            {m.embed ? (
+              <div class="v2-media__frame">
+                <iframe src={m.embed} title={m.title} loading="lazy" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+              </div>
+            ) : (
+              <a class="v2-media__placeholder" href={m.href} target="_blank" rel="noopener noreferrer"><span>Listen / watch →</span></a>
+            )}
+            <p class="v2-media__meta">
+              {m.href ? <a class="v2-media__title" href={m.href} target="_blank" rel="noopener noreferrer">{m.title}</a> : <span class="v2-media__title">{m.title}</span>}
+              <span class="v2-media__where"> — {m.where}</span>
+            </p>
+          </article>
+        ))}
+      </div>
     </section>
 
     {/* ── Selected work ── */}
@@ -169,16 +191,6 @@ const cases = (items: typeof CURRENT_WORK) => items;
       </div>
     </section>
 
-    {/* ── Hosting ── */}
-    <section class="v2-block">
-      <div class="v2-seclabel"><span>Hosting</span></div>
-      <ul class="v2-pieces">
-        {HOSTING.map((it) => (
-          <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
-        ))}
-      </ul>
-    </section>
-
     {/* ── Footer ── */}
     <footer class="v2-foot">
       <div class="v2-foot__grid">
@@ -248,6 +260,24 @@ const cases = (items: typeof CURRENT_WORK) => items;
   .v2-case__media--2 { grid-template-columns: 1fr 1fr; }
   .v2-case__media .v2-img { height: clamp(300px, 52vh, 600px); }
   .v2-seeall { margin: 24px 0 0; font-family: var(--sans); font-size: 15px; font-weight: 500; }
+
+  /* ── Media embeds ── */
+  .v2-media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .v2-media { display: flex; flex-direction: column; }
+  .v2-media__frame { border: 1px solid var(--hair); border-radius: 4px; overflow: hidden; background: var(--bg-card); }
+  .v2-media__frame iframe { width: 100%; display: block; border: 0; }
+  .v2-media--video .v2-media__frame iframe { aspect-ratio: 16 / 9; }
+  .v2-media--audio .v2-media__frame iframe { height: 120px; }
+  .v2-media__placeholder {
+    display: flex; align-items: center; justify-content: center; aspect-ratio: 16 / 9;
+    border: 1px solid var(--hair); border-radius: 4px; text-decoration: none;
+    background: repeating-linear-gradient(135deg, var(--bg-card) 0, var(--bg-card) 12px, color-mix(in srgb, var(--bg-card), var(--hair) 60%) 12px, color-mix(in srgb, var(--bg-card), var(--hair) 60%) 13px);
+  }
+  .v2-media__placeholder span { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-2); background: var(--bg); padding: 6px 12px; border-radius: 100px; }
+  .v2-media__meta { margin: 14px 0 0; font-size: 16px; line-height: 1.4; }
+  .v2-media__title { font-family: var(--sans); font-weight: 600; letter-spacing: -0.015em; }
+  .v2-media__where { color: var(--ink-3); font-size: 15px; }
+  @media (max-width: 760px) { .v2-media-grid { grid-template-columns: 1fr; } }
   .v2-case__grid { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
   .v2-case__meta { font-size: 15px; line-height: 1.5; color: var(--ink-3); }
   .v2-case__meta p { margin: 0 0 4px; }

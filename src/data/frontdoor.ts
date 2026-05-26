@@ -131,6 +131,48 @@ export const HOSTING: Piece[] = [
   { title: 'The Sound Bulletin', where: 'KFFP-FM', href: 'https://www.mixcloud.com/908rb/' },
 ];
 
+/* Curated, embeddable proof of work — a talk, a guest podcast, the things
+   Ron hosts. `embed` is an iframe src; without it the card links out.
+   Swap in real embed URLs / add or remove items freely. */
+export interface MediaEmbed {
+  kind: 'video' | 'audio';
+  title: string;
+  where: string;
+  embed?: string;
+  href?: string;
+}
+
+export const MEDIA: MediaEmbed[] = [
+  {
+    kind: 'video',
+    title: 'Beyond Civic Tech: Public Mechanics',
+    where: 'CUGOS · Keynote',
+    embed: 'https://www.youtube.com/embed/hnAScuK-oMo',
+    href: 'https://youtube.com/watch?v=hnAScuK-oMo',
+  },
+  {
+    kind: 'video',
+    title: 'Repairing Service Design for the Age of AI',
+    where: 'The Service Design Show',
+    embed: 'https://www.youtube.com/embed/4HKTGod1Xyo',
+    href: 'https://www.youtube.com/watch?v=4HKTGod1Xyo',
+  },
+  {
+    kind: 'audio',
+    title: 'The Sound Bulletin',
+    where: 'Freeform Portland · KFFP-FM',
+    embed: 'https://www.mixcloud.com/widget/iframe/?feed=%2F908rb%2F&light=1&hide_cover=1&mini=1',
+    href: 'https://www.mixcloud.com/908rb/',
+  },
+  {
+    kind: 'audio',
+    title: 'Future Perfect Book Club',
+    where: 'Speculative futures book club',
+    // embed: 'https://open.spotify.com/embed/show/…',  // add the show embed when handy
+    href: 'https://futureperfectbook.club',
+  },
+];
+
 export const ELSEWHERE: ElseLink[] = [
   { label: 'Bluesky', href: 'https://bsky.app/profile/ronbronson.com' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ronbronson/' },
