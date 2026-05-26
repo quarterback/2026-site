@@ -236,9 +236,9 @@ const recentTalks = [
   .about-kicker {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--ink-mid);
     margin: 0 0 1rem;
   }
 
@@ -253,11 +253,11 @@ const recentTalks = [
   }
 
   .about-lede {
-    font-family: var(--font-serif) !important;
-    font-style: italic;
-    font-size: clamp(1.25rem, 2.5vw, 1.6rem) !important;
-    font-weight: 400 !important;
-    line-height: 1.35 !important;
+    font-family: var(--font-display) !important;
+    font-size: clamp(1.5rem, 3vw, 2.1rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em;
     color: var(--ink) !important;
     margin-bottom: 1.5rem !important;
   }
@@ -313,23 +313,18 @@ const recentTalks = [
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    color: var(--ink-mid);
+    gap: 0.5rem;
   }
 
   .affiliations-list li {
-    position: relative;
-    padding-right: 1.25rem;
-  }
-
-  .affiliations-list li:not(:last-child)::after {
-    content: '·';
-    position: absolute;
-    right: 0;
-    color: var(--ink-faint);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    background: var(--bg-ink);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.3rem 0.7rem;
   }
 
   /* Service areas */
@@ -352,11 +347,11 @@ const recentTalks = [
   }
 
   .service-heading {
-    font-family: var(--font-serif);
+    font-family: var(--font-display);
     font-size: clamp(1.3rem, 2.3vw, 1.7rem);
-    font-weight: 400;
-    font-style: italic;
-    line-height: 1.25;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
     color: var(--ink);
     margin: 0;
     position: sticky;
@@ -394,13 +389,15 @@ const recentTalks = [
     font-size: 0.68rem !important;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    text-decoration: none !important;
-    color: var(--accent) !important;
+    text-decoration: underline !important;
+    text-decoration-color: var(--accent) !important;
+    text-underline-offset: 3px;
+    color: var(--ink) !important;
     font-weight: 500;
   }
 
   .service-cta:hover {
-    color: var(--brand-dim) !important;
+    text-decoration-thickness: 2.5px;
   }
 
   .talks-list {
@@ -492,8 +489,10 @@ const recentTalks = [
     font-size: 0.7rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
+    text-underline-offset: 3px;
     transition: gap 0.2s ease;
   }
 
