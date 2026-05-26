@@ -131,14 +131,25 @@ const cases = (items: typeof CURRENT_WORK) => items;
       <h2 class="v2-bigh">2026 so far</h2>
       <div class="v2-hlgrid">
         {HIGHLIGHTS_2026.map((it) => (
-          <article class="v2-hl">
-            <figure class="v2-hl__img" aria-hidden="true">{it.image ? <img src={it.image} alt="" loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
-            <div class="v2-hl__pad">
-              <div class="v2-hl__month">{it.month}</div>
-              <h3 class="v2-hl__title">{it.title}</h3>
-              <p class="v2-hl__body">{it.body}</p>
-            </div>
-          </article>
+          it.href ? (
+            <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
+              <figure class="v2-hl__img" aria-hidden="true">{it.image ? <img src={it.image} alt="" loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
+              <div class="v2-hl__pad">
+                <div class="v2-hl__month">{it.month}</div>
+                <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
+                <p class="v2-hl__body">{it.body}</p>
+              </div>
+            </a>
+          ) : (
+            <article class="v2-hl">
+              <figure class="v2-hl__img" aria-hidden="true">{it.image ? <img src={it.image} alt="" loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
+              <div class="v2-hl__pad">
+                <div class="v2-hl__month">{it.month}</div>
+                <h3 class="v2-hl__title">{it.title}</h3>
+                <p class="v2-hl__body">{it.body}</p>
+              </div>
+            </article>
+          )
         ))}
       </div>
 

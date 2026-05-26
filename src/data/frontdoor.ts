@@ -34,24 +34,6 @@ export const ME = {
 
 export const CURRENT_WORK: CaseStudy[] = [
   {
-    id: 'umich',
-    title: 'Public Mechanics at the University of Michigan',
-    href: 'https://urbantechnology.substack.com/p/urban-technology-at-university-of-72c',
-    images: [
-      { src: '/img/umich-lets-grow.jpg', alt: 'Urban Technology students presenting Let’s Grow Michigan work', placeholder: '' },
-      { src: '/img/umich-mittencorps.jpg', alt: 'MittenCorps student presentation', placeholder: '' },
-    ],
-    reading: [
-      { label: 'yearsahead.io', href: 'https://yearsahead.io' },
-      { label: 'Faculty page', href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/' },
-    ],
-    courses: [
-      { code: 'UT 402', title: 'Public Mechanics', terms: 'F26 · W26' },
-      { code: 'UT 330', title: 'Interaction Design', terms: 'F26' },
-      { code: 'UT 360', title: 'Service Design & Urban Needs', terms: 'W26 · W24' },
-    ],
-  },
-  {
     id: 'pdx',
     title: 'Portland Digital Corps',
     href: 'https://digitalcorpspdx.org',
@@ -60,7 +42,20 @@ export const CURRENT_WORK: CaseStudy[] = [
       { placeholder: 'PDX Digital Corps cohort photo' },
       { placeholder: 'Shipped nonprofit site' },
     ],
-    reading: [{ label: 'Portland Digital Corps', href: 'https://digitalcorpspdx.org' }],
+  },
+  {
+    id: 'umich',
+    title: 'Public Mechanics at the University of Michigan',
+    href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/',
+    images: [
+      { src: '/img/umich-lets-grow.jpg', alt: 'Urban Technology students presenting Let’s Grow Michigan work', placeholder: '' },
+      { src: '/img/umich-mittencorps.jpg', alt: 'MittenCorps student presentation', placeholder: '' },
+    ],
+    courses: [
+      { code: 'UT 402', title: 'Public Mechanics', terms: 'F26 · W26' },
+      { code: 'UT 330', title: 'Interaction Design', terms: 'F26' },
+      { code: 'UT 360', title: 'Service Design & Urban Needs', terms: 'W26 · W24' },
+    ],
   },
 ];
 
