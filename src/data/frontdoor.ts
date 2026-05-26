@@ -35,7 +35,7 @@ export const ME = {
 export const CURRENT_WORK: CaseStudy[] = [
   {
     id: 'pdx',
-    title: 'Portland Digital Corps',
+    title: 'Volunteer digital service delivery at Portland Digital Corps',
     href: 'https://digitalcorpspdx.org',
     body: 'An all-volunteer practice I founded in 2025 — fifty-plus practitioners delivering nonprofit websites in eight-week engagements, no procurement. The model has since spread to other cities.',
     // Drop /img/pdx-finale.jpg into /public/img and uncomment the src line:
@@ -46,12 +46,13 @@ export const CURRENT_WORK: CaseStudy[] = [
   },
   {
     id: 'umich',
-    title: 'Public Mechanics at the University of Michigan',
+    title: 'Teaching design and delivery in Urban Technology at the University of Michigan',
     href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/',
     images: [
       { src: '/img/umich-lets-grow.jpg', alt: 'Urban Technology students presenting Let’s Grow Michigan work', placeholder: '' },
       { src: '/img/umich-mittencorps.jpg', alt: 'MittenCorps student presentation', placeholder: '' },
     ],
+    reading: [{ label: 'yearsahead.io', href: 'https://yearsahead.io' }],
     courses: [
       { code: 'UT 402', title: 'Public Mechanics', terms: 'F26 · W26' },
       { code: 'UT 330', title: 'Interaction Design', terms: 'F26' },
@@ -63,7 +64,7 @@ export const CURRENT_WORK: CaseStudy[] = [
 export const PAST_WORK: CaseStudy[] = [
   {
     id: '18f',
-    title: 'Head of Design at 18F · U.S. General Services Administration',
+    title: 'Design and delivery across federal agencies at 18F (GSA)',
     span: '2021 – 2025',
     body: "Led the design practice at the federal government's internal digital consultancy, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
     // Drop these two files into /public/img and uncomment the src lines:
@@ -72,9 +73,6 @@ export const PAST_WORK: CaseStudy[] = [
       { /* src: '/img/18f-team.jpg', */ alt: '18F design team', placeholder: '18F design team' },
     ],
     reading: [
-      { label: '18F UX Guide', href: '#' },
-      { label: '18F Methods', href: '#' },
-      { label: '18F blog', href: '#' },
       { label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
     ],
   },
@@ -167,13 +165,6 @@ export const MEDIA: MediaEmbed[] = [
     where: 'Freeform Portland · KFFP-FM',
     embed: 'https://www.mixcloud.com/widget/iframe/?feed=%2F908rb%2F&light=1&hide_cover=1&mini=1',
     href: 'https://www.mixcloud.com/908rb/',
-  },
-  {
-    kind: 'audio',
-    title: 'Future Perfect Book Club',
-    where: 'Podcast · co-hosted with Joel Goodman',
-    // embed: 'https://open.spotify.com/embed/show/…',  // add the show embed when handy
-    href: 'https://futureperfectbook.club',
   },
 ];
 

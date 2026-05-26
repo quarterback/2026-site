@@ -79,7 +79,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
             {it.images && it.images.length > 0 && (
               <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
                 {it.images.map((img) => (
-                  <figure class="v2-img">{img.src ? <img src={img.src} alt={img.alt ?? ''} loading="lazy" /> : <span class="v2-img__hint">{img.placeholder}</span>}</figure>
+                  <figure class="v2-img">{img.src ? <img src={img.src} alt={img.alt || img.placeholder} loading="lazy" /> : <span class="v2-img__hint">{img.placeholder}</span>}</figure>
                 ))}
               </div>
             )}
@@ -95,6 +95,13 @@ const cases = (items: typeof CURRENT_WORK) => items;
                     </li>
                   ))}
                 </ul>
+              )}
+              {it.reading && it.reading.length > 0 && (
+                <p class="v2-case__links">
+                  {it.reading.map((r, i) => (
+                    <Fragment>{i > 0 && <span class="v2-case__sep"> · </span>}<a href={r.href} target="_blank" rel="noopener noreferrer">{r.label} ↗</a></Fragment>
+                  ))}
+                </p>
               )}
             </div>
           </article>
@@ -113,12 +120,19 @@ const cases = (items: typeof CURRENT_WORK) => items;
             {it.images && it.images.length > 0 && (
               <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
                 {it.images.map((img) => (
-                  <figure class="v2-img">{img.src ? <img src={img.src} alt={img.alt ?? ''} loading="lazy" /> : <span class="v2-img__hint">{img.placeholder}</span>}</figure>
+                  <figure class="v2-img">{img.src ? <img src={img.src} alt={img.alt || img.placeholder} loading="lazy" /> : <span class="v2-img__hint">{img.placeholder}</span>}</figure>
                 ))}
               </div>
             )}
             <div class="v2-case__bodywrap">
               {it.body && <p class="v2-case__body">{it.body}</p>}
+              {it.reading && it.reading.length > 0 && (
+                <p class="v2-case__links">
+                  {it.reading.map((r, i) => (
+                    <Fragment>{i > 0 && <span class="v2-case__sep"> · </span>}<a href={r.href} target="_blank" rel="noopener noreferrer">{r.label} ↗</a></Fragment>
+                  ))}
+                </p>
+              )}
             </div>
           </article>
         ))}
@@ -133,7 +147,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
         {HIGHLIGHTS_2026.map((it) => (
           it.href ? (
             <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
-              <figure class="v2-hl__img" aria-hidden="true">{it.image ? <img src={it.image} alt="" loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
+              <figure class="v2-hl__img" aria-hidden={it.image ? undefined : "true"}>{it.image ? <img src={it.image} alt={it.placeholder} loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
               <div class="v2-hl__pad">
                 <div class="v2-hl__month">{it.month}</div>
                 <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
@@ -142,7 +156,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
             </a>
           ) : (
             <article class="v2-hl">
-              <figure class="v2-hl__img" aria-hidden="true">{it.image ? <img src={it.image} alt="" loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
+              <figure class="v2-hl__img" aria-hidden={it.image ? undefined : "true"}>{it.image ? <img src={it.image} alt={it.placeholder} loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
               <div class="v2-hl__pad">
                 <div class="v2-hl__month">{it.month}</div>
                 <h3 class="v2-hl__title">{it.title}</h3>
@@ -164,7 +178,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
           {HIGHLIGHTS_2025.map((it) => (
             it.href ? (
               <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
-                <figure class="v2-hl__img" aria-hidden="true">{it.image ? <img src={it.image} alt="" loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder}</span>}</figure>
+                <figure class="v2-hl__img" aria-hidden={it.image ? undefined : "true"}>{it.image ? <img src={it.image} alt={it.placeholder} loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder}</span>}</figure>
                 <div class="v2-hl__pad">
                   <div class="v2-hl__month">{it.month}</div>
                   <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
@@ -173,7 +187,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
               </a>
             ) : (
               <article class="v2-hl">
-                <figure class="v2-hl__img" aria-hidden="true">{it.image ? <img src={it.image} alt="" loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder}</span>}</figure>
+                <figure class="v2-hl__img" aria-hidden={it.image ? undefined : "true"}>{it.image ? <img src={it.image} alt={it.placeholder} loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder}</span>}</figure>
                 <div class="v2-hl__pad">
                   <div class="v2-hl__month">{it.month}</div>
                   <h3 class="v2-hl__title">{it.title}</h3>
@@ -192,7 +206,6 @@ const cases = (items: typeof CURRENT_WORK) => items;
         <div>
           <div class="v2-subhead">Contact</div>
           <p class="v2-foot__line">Write a message <a href={`mailto:${ME.email}`}>via email</a></p>
-          <p class="v2-foot__hint">A short note describing the situation, the constraint, and what a useful next step looks like will receive a faster, better reply than a calendar invitation.</p>
         </div>
         <div>
           <div class="v2-subhead">Elsewhere</div>
@@ -203,7 +216,10 @@ const cases = (items: typeof CURRENT_WORK) => items;
           </ul>
         </div>
       </div>
-      <div class="v2-foot__updated">Last updated <time datetime="2026-05-26">May 2026</time>.</div>
+      <div class="v2-foot__updated">
+        <span>Built with Astro, Open Props, Geist &amp; Geist Mono. Handcoded &amp; hosted on renewable energy.</span>
+        <span>Last updated <time datetime="2026-05-26">May 2026</time>.</span>
+      </div>
     </footer>
   </main>
 </Base>
@@ -287,6 +303,8 @@ const cases = (items: typeof CURRENT_WORK) => items;
   .v2-case__meta strong { color: var(--ink); font-weight: 600; }
   .v2-case__collab { font-style: italic; }
   .v2-case__span { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--accent-2); margin: -18px 0 26px; }
+  .v2-case__links { margin: 22px 0 0; font-family: var(--sans); font-size: 16px; }
+  .v2-case__sep { color: var(--ink-4); padding: 0 4px; }
   .v2-case__body { margin: 0; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; color: var(--ink); max-width: 62ch; text-wrap: pretty; letter-spacing: -0.008em; }
 
   .v2-courses { margin: 28px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; max-width: 56ch; }
@@ -354,7 +372,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
   .v2-foot__line { margin: 0 0 12px; font-size: 28px; font-weight: 500; letter-spacing: -0.022em; color: var(--ink); line-height: 1.2; }
   .v2-foot__hint { margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-3); max-width: 50ch; }
   .v2-foot__list { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 17px; }
-  .v2-foot__updated { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+  .v2-foot__updated { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--hair); font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 32px; }
 
   @media (max-width: 960px) {
     .v2-page { padding: 48px 28px 80px; }
