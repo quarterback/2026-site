@@ -32,13 +32,14 @@ const cases = (items: typeof CURRENT_WORK) => items;
       <p class="v2-role">{ME.role}</p>
     </header>
 
-    {/* ── Current work ── */}
+    {/* ── Selected work ── */}
     <section class="v2-block">
-      <div class="v2-seclabel"><span>Current work</span></div>
+      <div class="v2-seclabel"><span>Selected work</span></div>
       <div class="v2-cases">
         {cases(CURRENT_WORK).map((it) => (
           <article class="v2-case">
             <h3 class="v2-case__title">{it.title}</h3>
+            {it.span && <p class="v2-case__span">{it.span}</p>}
             {it.images && it.images.length > 0 && (
               <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
                 {it.images.map((img) => (
@@ -46,36 +47,29 @@ const cases = (items: typeof CURRENT_WORK) => items;
                 ))}
               </div>
             )}
-            <div class="v2-case__grid">
-              <div class="v2-case__meta">
-                <p class="v2-case__role"><strong>Role:</strong> {it.role}</p>
-                {it.collab && <p class="v2-case__collab">{it.collab}</p>}
-                {it.span && <p class="v2-case__span">{it.span}</p>}
-              </div>
-              <div class="v2-case__bodywrap">
-                <p class="v2-case__body">{it.body}</p>
-                {it.courses && (
-                  <ul class="v2-courses">
-                    {it.courses.map((c) => (
-                      <li>
-                        <span class="v2-courses__code">{c.code}</span>
-                        <span class="v2-courses__title">{c.title}</span>
-                        <span class="v2-courses__terms">{c.terms}</span>
-                      </li>
+            <div class="v2-case__bodywrap">
+              <p class="v2-case__body">{it.body}</p>
+              {it.courses && (
+                <ul class="v2-courses">
+                  {it.courses.map((c) => (
+                    <li>
+                      <span class="v2-courses__code">{c.code}</span>
+                      <span class="v2-courses__title">{c.title}</span>
+                      <span class="v2-courses__terms">{c.terms}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {it.reading && (
+                <div class="v2-case__reading">
+                  <span class="v2-case__reading-label">Further reading</span>
+                  <ul>
+                    {it.reading.map((r) => (
+                      <li>{r.href && r.href !== '#' ? <a href={r.href} target="_blank" rel="noopener noreferrer">{r.label}</a> : <span>{r.label}</span>}</li>
                     ))}
                   </ul>
-                )}
-                {it.reading && (
-                  <div class="v2-case__reading">
-                    <span class="v2-case__reading-label">Further reading</span>
-                    <ul>
-                      {it.reading.map((r) => (
-                        <li><a href={r.href} target="_blank" rel="noopener noreferrer">{r.label}</a></li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </article>
         ))}
@@ -84,7 +78,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
 
     {/* ── Speaking ── */}
     <section class="v2-block">
-      <div class="v2-seclabel"><span>Speaking</span><span class="v2-seclabel__right">Booking 2026–2027 · keynotes, workshops, panels</span></div>
+      <div class="v2-seclabel"><span>Speaking</span></div>
       <div class="v2-speak-wrap">
         <div class="v2-subhead">Upcoming · 2026</div>
         <ul class="v2-speaks">
@@ -115,8 +109,8 @@ const cases = (items: typeof CURRENT_WORK) => items;
 
     {/* ── Highlights ── */}
     <section class="v2-block">
-      <div class="v2-seclabel"><span>Highlights</span><span class="v2-seclabel__right">2026</span></div>
-      <h2 class="v2-bigh">Q1 / Q2 2026 Highlights</h2>
+      <div class="v2-seclabel"><span>Highlights</span></div>
+      <h2 class="v2-bigh">2026 so far</h2>
       <div class="v2-hlgrid">
         {HIGHLIGHTS_2026.map((it) => (
           <article class="v2-hl">
@@ -170,6 +164,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
         {cases(PAST_WORK).map((it) => (
           <article class="v2-case">
             <h3 class="v2-case__title">{it.title}</h3>
+            {it.span && <p class="v2-case__span">{it.span}</p>}
             {it.images && it.images.length > 0 && (
               <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
                 {it.images.map((img) => (
@@ -177,25 +172,18 @@ const cases = (items: typeof CURRENT_WORK) => items;
                 ))}
               </div>
             )}
-            <div class="v2-case__grid">
-              <div class="v2-case__meta">
-                <p class="v2-case__role"><strong>Role:</strong> {it.role}</p>
-                {it.collab && <p class="v2-case__collab">{it.collab}</p>}
-                {it.span && <p class="v2-case__span">{it.span}</p>}
-              </div>
-              <div class="v2-case__bodywrap">
-                <p class="v2-case__body">{it.body}</p>
-                {it.reading && (
-                  <div class="v2-case__reading">
-                    <span class="v2-case__reading-label">Further reading</span>
-                    <ul>
-                      {it.reading.map((r) => (
-                        <li><a href={r.href} target="_blank" rel="noopener noreferrer">{r.label}</a></li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+            <div class="v2-case__bodywrap">
+              <p class="v2-case__body">{it.body}</p>
+              {it.reading && (
+                <div class="v2-case__reading">
+                  <span class="v2-case__reading-label">Further reading</span>
+                  <ul>
+                    {it.reading.map((r) => (
+                      <li>{r.href && r.href !== '#' ? <a href={r.href} target="_blank" rel="noopener noreferrer">{r.label}</a> : <span>{r.label}</span>}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </article>
         ))}
@@ -305,7 +293,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
   .v2-case__meta p { margin: 0 0 4px; }
   .v2-case__meta strong { color: var(--ink); font-weight: 600; }
   .v2-case__collab { font-style: italic; }
-  .v2-case__span { font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--ink-3); margin-top: 8px !important; }
+  .v2-case__span { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--accent-2); margin: -18px 0 26px; }
   .v2-case__body { margin: 0; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.55; color: var(--ink); max-width: 62ch; text-wrap: pretty; letter-spacing: -0.008em; }
 
   .v2-courses { margin: 28px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; max-width: 56ch; }
