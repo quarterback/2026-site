@@ -2,604 +2,140 @@
 import Base from '../layouts/Base.astro';
 import Footer from '../components/Footer.astro';
 
-interface Favorite {
-  category: string;
-  labelColor: string;
-  items: string[];
+// Biography & vita — the about page. Edit these freely (no venture names).
+const portrait = {
+  src: '/ron-bronson.jpg',
+  credit: 'Photograph: —',
+  download: '/ron-bronson.jpg',
+  spec: 'JPG, high resolution',
+};
+
+const shortBio = `Ron Bronson is a critical urbanist and design executive who helps institutions deploy public technology that actually reaches people. He was Head of Design at 18F, the U.S. General Services Administration's digital services unit, leading design across federal agencies including the VA, IRS, HHS, and DOD. He is now an Assistant Professor of Practice in the University of Michigan's Urban Technology program and founder of the Portland Digital Corps. He speaks globally on service design and delivery.`;
+
+const extendedBio = [
+  `Ron Bronson is a critical urbanist and design executive who helps institutions deploy public technology that actually reaches people. For two decades he has led digital transformation from small counties with more cows than people to the municipal, state, and federal levels — staying hands-on in delivery while building teams, growing leaders, and advising executives on modernization.`,
+  `He was Head of Design at 18F, the U.S. General Services Administration's digital services unit, where he built platforms, systems, and digital services for millions of Americans across agencies including the VA, IRS, HHS, and DOD. He is now an Assistant Professor of Practice in the University of Michigan's Urban Technology program, and founded the Portland Digital Corps, an all-volunteer cohort delivering digital services for local public institutions.`,
+  `His current work focuses on public mechanics: closing the latency between written policy and on-the-ground deployment, naming where human judgment lives inside delivery, and formalizing how consequential technology — increasingly agentic AI — gets deployed in daily and urban life. He writes at Making Public Work, hosts the Future Perfect Book Club, and speaks globally on service design and delivery at tech and design events.`,
+];
+
+function counts(text) {
+  const words = text.trim().split(/\s+/).length;
+  return { words, chars: text.length };
 }
-
-const favorites: Favorite[] = [
-  {
-    category: 'TEAS',
-    labelColor: 'var(--green-6)',
-    items: ['Wild lapsang', 'almonicha', 'Benifuki'],
-  },
-  {
-    category: 'FILMS/TV',
-    labelColor: 'var(--orange-6)',
-    items: ['Pantheon', 'Counterpart', 'The Night Agent'],
-  },
-  {
-    category: 'FRAGRANCES',
-    labelColor: 'var(--pink-6)',
-    items: ['Nocturnaility (Arquisite)', 'Apricot in Cognac (Scents of Wood)'],
-  },
-];
-
-const affiliations = [
-  '18F',
-  'Department of Veterans Affairs',
-  'Internal Revenue Service',
-  'Department of Health and Human Services',
-  'Department of Defense',
-  'Federal Trade Commission',
-  'University of Michigan',
-  'Portland Digital Corps',
-  'PDX Design Month',
-];
-
-const recentTalks = [
-  {
-    title: 'Design as Repair',
-    venue: 'IxDA Oslo',
-    year: '2025',
-    url: 'https://www.ixda.no/talks/design-as-repair',
-  },
-  {
-    title: 'Repairing Service Design for the Age of AI',
-    venue: 'Service Design Show Podcast',
-    year: '2025',
-    url: 'https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505',
-  },
-  {
-    title: 'Beyond Civic Tech: Public Mechanics Starts at Home',
-    venue: 'Cascadia Open Source Fall Conference',
-    year: '2025',
-    url: 'https://youtube.com/watch?v=hnAScuK-oMo',
-  },
-];
+const shortCounts = counts(shortBio);
+const extendedCounts = counts(extendedBio.join(' '));
 ---
 
-<Base title="About — Ron Bronson">
+<Base title="About — Ron Bronson" description="Ron Bronson's biography in a few lengths, plus a downloadable portrait, for press and event use.">
   <main id="main">
+    <header class="page-head">
+      <p class="kicker">Biography &amp; vita</p>
+      <h1 class="page-head__title">About</h1>
+      <p class="page-head__lede">Bios in a few lengths for when you're writing about me or my work. <a href="#" data-u="ron" data-d="ronbronson.com" rel="nofollow">Get in touch</a> with questions about current or past work.</p>
+    </header>
 
-    <section class="about-hero">
-      <div class="container about-hero-grid">
-        <div class="about-intro">
-          <p class="about-kicker">About</p>
-          <p class="about-lede">
-            Hi, I&rsquo;m Ron Bronson &mdash; I work in deployment and interaction policy, helping large institutions ship tech and AI.
-          </p>
-          <p>
-            I&rsquo;ve spent my career learning how public systems fail in small ways that compound, and building the capacity inside institutions to catch those failures before they cascade. I spent nearly a decade at 18F, the federal government&rsquo;s digital services unit, leading design across agencies including the VA, IRS, HHS, and DOD. That work taught me what delivery actually looks like inside bureaucracies that resist it &mdash; and how to build teams that ship anyway.
-          </p>
-          <p>
-            Now I advise institutions on stabilizing stalled programs and deploying AI responsibly, teach at the University of Michigan, and write at <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a>. If your project is too important to leave the gap between pilot and product to chance, <a href="#" data-u="ron" data-d="ronbronson.com" rel="nofollow">let&rsquo;s talk</a>.
-          </p>
+    <div class="container bio">
+
+      <section class="portrait">
+        <figure class="portrait__fig">
+          <img src={portrait.src} alt="Portrait of Ron Bronson" width="480" height="600" />
+          <figcaption>{portrait.credit}</figcaption>
+        </figure>
+        <a class="portrait__dl" href={portrait.download} download>
+          ↓ Download portrait
+          <span class="portrait__spec">{portrait.spec}</span>
+        </a>
+      </section>
+
+      <section class="biotext">
+        <div class="biotext__head">
+          <h2 class="kicker">Short biography</h2>
+          <span class="biotext__count">{shortCounts.words} words · {shortCounts.chars} characters</span>
         </div>
+        <p class="biotext__body">{shortBio}</p>
+      </section>
 
-        <aside class="about-photo">
-          <img src="/ron-bronson.jpg" alt="Ron Bronson" />
-        </aside>
-      </div>
-    </section>
-
-    <section class="about-affiliations" aria-label="Past and present affiliations">
-      <div class="container">
-        <p class="affiliations-label">Past and present</p>
-        <ul class="affiliations-list">
-          {affiliations.map(name => (
-            <li>{name}</li>
-          ))}
-        </ul>
-      </div>
-    </section>
-
-    <section class="service-area">
-      <div class="container service-area-inner">
-        <h2 class="service-heading">Deployment and interaction policy</h2>
-        <div class="service-body">
-          <p>
-            I work where policy meets delivery &mdash; the layer where an institution&rsquo;s rules, incentives, and staff patterns meet the technology it&rsquo;s trying to use. Most large programs stall there. Procurement commits to vendors the operating teams can&rsquo;t support. Pilots get approval without a path to production. AI arrives without the decision infrastructure it needs to be trusted.
-          </p>
-          <p>
-            I advise state, local, and federal leadership on stabilizing stalled programs, resetting deployment plans that aren&rsquo;t working, and building the internal capacity a program needs to outlast the engagement. Most of the work is diagnostic before it&rsquo;s constructive: figuring out where ownership got lost, where a decision broke, or what an org actually has to be good at before the next thing ships.
-          </p>
-          <p>
-            <a href="#" data-u="ron" data-d="ronbronson.com" rel="nofollow" class="service-cta">Get in touch &rarr;</a>
-          </p>
+      <section class="biotext">
+        <div class="biotext__head">
+          <h2 class="kicker">Extended biography</h2>
+          <span class="biotext__count">{extendedCounts.words} words · {extendedCounts.chars} characters</span>
         </div>
-      </div>
-    </section>
+        {extendedBio.map((para) => <p class="biotext__body">{para}</p>)}
+      </section>
 
-    <section class="service-area">
-      <div class="container service-area-inner">
-        <h2 class="service-heading">Decision infrastructure for institutional AI</h2>
-        <div class="service-body">
-          <p>
-            The product side of the same problem: governments and large institutions are being sold AI faster than they can evaluate it, and the intelligence that would let them compare vendors, track real costs, or benchmark performance doesn&rsquo;t exist in a form they can actually use.
-          </p>
-          <p>
-            I build that intelligence &mdash; live procurement benchmarks, honest pricing, and decision infrastructure that surfaces what vendors obscure &mdash; for decision-makers who need vendor intelligence without the sales pitch.
-          </p>
-          <p>
-            <a href="#" data-u="ron" data-d="ronbronson.com" rel="nofollow" class="service-cta">Get in touch &rarr;</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="service-area">
-      <div class="container service-area-inner">
-        <h2 class="service-heading">Public speaking</h2>
-        <div class="service-body">
-          <p>
-            I speak with leadership teams, conferences, and institutional audiences about deploying AI in public-sector contexts, what capacity actually looks like inside bureaucracies, and why most digital-transformation work is repair more than reinvention.
-          </p>
-          <ul class="talks-list">
-            {recentTalks.map(talk => (
-              <li>
-                <a href={talk.url} target="_blank" rel="noopener">
-                  <em>{talk.title}</em>, {talk.venue}
-                </a>
-                <span class="talk-year">{talk.year}</span>
-              </li>
-            ))}
-          </ul>
-          <p>
-            <a href="/speaking" class="service-cta">See more speaking &rarr;</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="service-area">
-      <div class="container service-area-inner">
-        <h2 class="service-heading">Teaching</h2>
-        <div class="service-body">
-          <p>
-            I&rsquo;m an Assistant Professor of Practice in Urban Technology at the University of Michigan, where I teach students how to work on public-sector systems that don&rsquo;t want to be worked on. The courses sit at the intersection of design, policy, and delivery &mdash; the same territory I&rsquo;ve been practicing in my whole career.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="service-area">
-      <div class="container service-area-inner">
-        <h2 class="service-heading">Writing</h2>
-        <div class="service-body">
-          <p>
-            I write <a href="https://makingpublicwork.com" target="_blank" rel="noopener">Making Public Work</a>, a newsletter on public-sector technology and institutional capacity; longer essays at <a href="https://blog.ronbronson.com" target="_blank" rel="noopener">blog.ronbronson.com</a>; and occasional pieces on game design and sports at <a href="https://gamedesign.leaflet.pub" target="_blank" rel="noopener">Sideline Engineering</a>.
-          </p>
-          <p>
-            <a href="https://makingpublicwork.com" target="_blank" rel="noopener" class="service-cta">Subscribe to the newsletter &rarr;</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="coaching-section">
-      <div class="container">
-        <div class="coaching-card">
-          <h3>Coaching</h3>
-          <p>Head Girls Varsity Tennis Coach at Catlin Gabel School in Portland. State champion, district titles, and a constraint-led approach focused on developing problem-solvers on the court.</p>
-          <a href="/coaching" class="card-link">
-            Learn more about my coaching
-            <i class="fas fa-arrow-right"></i>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="favorites-section">
-      <div class="container">
-        <h2 class="favorites-heading">Current Favorites</h2>
-        <div class="favorites-grid">
-          {favorites.map(favorite => (
-            <article class="favorite-card">
-              <span class="favorite-badge" style={`background-color: ${favorite.labelColor}`}>
-                {favorite.category}
-              </span>
-              <ul class="favorite-items">
-                {favorite.items.map(item => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-        <p class="pesapallo">
-          Also, I&rsquo;m unreasonably enthusiastic about <a href="https://www.superpesis.fi/ajankohtaista/superpesis-yhdysvaltalainen-ron-bronson-toteutti-unelmansa-ja-matkusti-suomeen-katsomaan-pesapalloa" target="_blank" rel="noopener">pesäpallo</a>.
-        </p>
-      </div>
-    </section>
+    </div>
   </main>
 
   <Footer />
 </Base>
 
 <style>
-  /* About hero */
-  .about-hero {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: clamp(3rem, 8vh, 5rem) var(--pad) clamp(2rem, 5vh, 3rem);
-  }
+  .bio { padding-block: clamp(2rem, 5vw, 3.5rem); max-width: 720px; }
 
-  .about-hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: start;
-  }
-
-  .about-kicker {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--ink-mid);
-    margin: 0 0 1rem;
-  }
-
-  .about-intro p {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    font-weight: 300;
-    line-height: 1.75;
-    color: var(--ink-mid);
-    margin: 0 0 1.1rem;
-    max-width: 62ch;
-  }
-
-  .about-lede {
-    font-family: var(--font-display) !important;
-    font-size: clamp(1.5rem, 3vw, 2.1rem) !important;
-    font-weight: 700 !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.02em;
-    color: var(--ink) !important;
-    margin-bottom: 1.5rem !important;
-  }
-
-  .about-intro a {
-    color: var(--ink);
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-underline-offset: 2px;
-    font-weight: 500;
-  }
-
-  .about-intro a:hover {
-    color: var(--accent);
-  }
-
-  .about-photo {
-    width: 100%;
-    border-radius: 2px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    position: sticky;
-    top: clamp(3rem, 10vh, 6rem);
-  }
-
-  .about-photo img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* Affiliations strip */
-  .about-affiliations {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: clamp(2rem, 4vh, 3rem) var(--pad);
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .affiliations-label {
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    margin: 0 0 1rem;
-  }
-
-  .affiliations-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .portrait {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .affiliations-list li {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    background: var(--bg-ink);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 0.3rem 0.7rem;
-  }
-
-  /* Service areas */
-  .service-area {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: clamp(2.5rem, 6vh, 4rem) var(--pad);
-    border-top: 1px solid var(--rule);
-  }
-
-  .service-area:first-of-type {
-    border-top: none;
-  }
-
-  .service-area-inner {
-    display: grid;
-    grid-template-columns: 16rem 1fr;
-    gap: clamp(1.5rem, 4vw, 3rem);
-    align-items: start;
-  }
-
-  .service-heading {
-    font-family: var(--font-display);
-    font-size: clamp(1.3rem, 2.3vw, 1.7rem);
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin: 0;
-    position: sticky;
-    top: clamp(3rem, 10vh, 6rem);
-  }
-
-  .service-body p {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 300;
-    line-height: 1.7;
-    color: var(--ink-mid);
-    margin: 0 0 1.1rem;
-    max-width: 62ch;
-  }
-
-  .service-body p:last-child {
-    margin-bottom: 0;
-  }
-
-  .service-body a {
-    color: var(--ink);
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-    text-underline-offset: 2px;
-    font-weight: 500;
-  }
-
-  .service-body a:hover {
-    color: var(--accent);
-  }
-
-  .service-cta {
-    font-family: var(--font-mono) !important;
-    font-size: 0.68rem !important;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: underline !important;
-    text-decoration-color: var(--accent) !important;
-    text-underline-offset: 3px;
-    color: var(--ink) !important;
-    font-weight: 500;
-  }
-
-  .service-cta:hover {
-    text-decoration-thickness: 2.5px;
-  }
-
-  .talks-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .talks-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    padding-bottom: 0.75rem;
+    align-items: flex-end;
+    gap: 1.5rem 2rem;
+    padding-bottom: clamp(2rem, 5vw, 3rem);
     border-bottom: 1px solid var(--rule);
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    color: var(--ink-mid);
   }
-
-  .talks-list li:last-child {
-    border-bottom: none;
+  .portrait__fig { margin: 0; max-width: 260px; }
+  .portrait__fig img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: block;
   }
-
-  .talks-list a {
-    color: var(--ink) !important;
-    text-decoration: none !important;
-    font-weight: 400 !important;
-  }
-
-  .talks-list a em {
-    font-style: italic;
-    font-family: var(--font-serif);
-    color: var(--ink);
-  }
-
-  .talks-list a:hover em {
-    color: var(--accent);
-  }
-
-  .talk-year {
+  .portrait__fig figcaption {
     font-family: var(--font-mono);
     font-size: 0.62rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: var(--ink-faint);
-    white-space: nowrap;
+    margin-top: 0.6rem;
   }
-
-  /* Coaching / Favorites (retained) */
-  .coaching-section {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: var(--size-6) var(--pad);
-    border-top: 1px solid var(--rule);
-  }
-
-  .coaching-card {
-    background: var(--surface-2);
-    border: 1px solid var(--surface-3);
-    padding: var(--size-5);
-  }
-
-  .coaching-card h3 {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-6);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-1);
-    margin: 0 0 var(--size-3) 0;
-  }
-
-  .coaching-card p {
-    font-size: var(--font-size-1);
-    line-height: 1.6;
-    color: var(--text-2);
-    margin: 0 0 var(--size-4) 0;
-  }
-
-  .card-link {
+  .portrait__dl {
     display: inline-flex;
-    align-items: center;
-    gap: var(--size-2);
+    flex-direction: column;
+    gap: 0.2rem;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--ink);
     text-decoration: underline;
     text-decoration-color: var(--accent);
     text-underline-offset: 3px;
-    transition: gap 0.2s ease;
   }
+  .portrait__dl:hover { text-decoration-thickness: 2.5px; }
+  .portrait__spec { font-size: 0.62rem; color: var(--ink-faint); text-transform: none; letter-spacing: 0; }
 
-  .card-link:hover {
-    gap: var(--size-3);
+  .biotext {
+    padding-block: clamp(1.75rem, 4vw, 2.75rem);
+    border-bottom: 1px solid var(--rule);
   }
-
-  .favorites-section {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: var(--size-6) var(--pad) var(--size-8);
-    border-top: 1px solid var(--rule);
-  }
-
-  .favorites-heading {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-1);
-    font-weight: var(--font-weight-6);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-1);
-    margin: 0 0 var(--size-5);
-  }
-
-  .favorites-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: var(--size-3);
-  }
-
-  .favorite-card {
-    background: var(--surface-2);
-    border: 1px solid var(--surface-3);
-    padding: var(--size-4);
+  .biotext__head {
     display: flex;
-    flex-direction: column;
-    gap: var(--size-3);
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-bottom: 1.1rem;
   }
-
-  .favorite-badge {
-    display: inline-block;
-    padding: var(--size-1) var(--size-3);
-    color: var(--gray-9);
-    font-weight: var(--font-weight-6);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: var(--font-size-00);
+  .biotext__count {
     font-family: var(--font-mono);
-    align-self: flex-start;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
   }
-
-  .favorite-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-2);
+  .biotext__body {
+    font-family: var(--font-body);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 1rem;
+    max-width: none;
   }
-
-  .favorite-items li {
-    font-size: var(--font-size-0);
-    line-height: 1.5;
-    color: var(--text-2);
-    font-family: var(--font-mono);
-  }
-
-  .pesapallo {
-    margin-top: var(--size-6);
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-style: italic;
-    color: var(--ink-muted);
-  }
-
-  .pesapallo a {
-    color: var(--ink-mid);
-    text-decoration: underline;
-    text-decoration-color: var(--accent);
-  }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    .about-hero-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .about-photo {
-      max-width: 280px;
-      position: static;
-    }
-
-    .service-area-inner {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .service-heading {
-      position: static;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .talks-list li {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.25rem;
-    }
-  }
+  .biotext__body:last-child { margin-bottom: 0; }
 </style>
