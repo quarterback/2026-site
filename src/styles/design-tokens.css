@@ -19,34 +19,44 @@
 */
 
 :root {
-  /* ===== FONTS ===== */
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  /* ===== FONTS — clean sans, no serif =====
+     --font-display and --font-body both DM Sans (display uses heavier
+     weights). Swap to purchased fonts later by editing only these tokens. */
+  --font-display: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
   --font-mono:    'DM Mono', ui-monospace, 'Courier New', monospace;
 
-  /* Back-compat aliases (existing components reference these) */
-  --font-serif: var(--font-display);
+  /* Back-compat aliases (existing components reference these).
+     --font-serif now resolves to the sans, eliminating serif sitewide. */
+  --font-serif: var(--font-body);
   --font-sans:  var(--font-body);
 
   /* ===== COLOR =====
-     WCAG on paper #f5ece8 (light):
-       #1a1210 ink       ~15:1  AAA  body
-       #5a3e38 ink-mid    ~6:1  AA   meta / italic
-       #7a1f2c oxblood    ~7:1  AAA  accent / links */
-  --bg:        #f5ece8;
-  --bg-warm:   #efe4df;
-  --bg-ink:    #e8dbd6;
-  --border:    rgba(60,30,20,0.14);
-  --rule:      rgba(60,30,20,0.08);
-  --ink:       #1a1210;
-  --ink-mid:   #5a3e38;
-  --ink-muted: #8a6a62;
-  --ink-faint: #c4a89e;
+     Off-white canvas, near-black ink, bright accents used as chips/fills.
+     Text/links stay ink for AA; the palette lives in tags, photos, panels.
+       #1a1a1a ink   on #F9F9F9  ~16:1 AAA  body
+       #4a4a4a mid   on #F9F9F9  ~8:1  AAA  meta
+       #6f6f6f muted on #F9F9F9  ~4.7:1 AA  faint meta */
+  --bg:        #F9F9F9;
+  --bg-warm:   #f1f1ef;
+  --bg-ink:    #ececea;
+  --border:    rgba(0,0,0,0.12);
+  --rule:      rgba(0,0,0,0.08);
+  --ink:       #1a1a1a;
+  --ink-mid:   #4a4a4a;
+  --ink-muted: #6f6f6f;
+  --ink-faint: #9a9a9a;
 
-  /* Signature accent — oxblood, used decisively */
-  --accent:        #7a1f2c;
-  --accent-dim:    #611825;
-  --accent-bright: #9a3142;
+  /* Bright accent palette (use as fills/chips with dark text, or underlines) */
+  --blue:      #5AA9E6;
+  --blue-soft: #7FC8F8;
+  --gold:      #FFE45E;
+  --pink:      #FF6392;
+
+  /* Signature accent = pink, used for underlines/markers (not body text) */
+  --accent:        #FF6392;
+  --accent-dim:    #e8497f;
+  --accent-bright: #ff84a6;
 
   /* Map to legacy variable names for component compat */
   --surface-1: var(--bg);

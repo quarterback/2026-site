@@ -11,7 +11,6 @@ interface Props {
   socials?: Social[];
   techStack?: string | string[];
   fonts?: string | string[];
-  copyright?: string;
 }
 
 const defaultSocials: Social[] = [
@@ -30,9 +29,8 @@ const defaultSocials: Social[] = [
 
 const {
   socials = defaultSocials,
-  techStack: techStackProp = 'Built with Astro, Open Props, Playfair Display, DM Sans, and DM Mono.',
+  techStack: techStackProp = 'Built with Astro, Open Props, DM Sans, and DM Mono.',
   fonts: fontsProp = '',
-  copyright = '© 2026 Ron Bronson',
 } = Astro.props;
 
 const techStack = Array.isArray(techStackProp) ? techStackProp.join(', ') : techStackProp;
@@ -75,7 +73,7 @@ const fonts = Array.isArray(fontsProp) ? fontsProp.join(', ') : fontsProp;
         </a>
       </div>
       <p class="footer-copy">
-        {copyright} &middot; {techStack}{fonts ? ' ' + fonts : ''}
+        {techStack}{fonts ? ' ' + fonts : ''}
       </p>
     </div>
 

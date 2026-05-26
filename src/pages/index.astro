@@ -4,189 +4,91 @@ import Footer from '../components/Footer.astro';
 import LastScrobble from '../components/LastScrobble.astro';
 import { getHomepageStream } from '../lib/stream';
 import { getBookhive } from '../lib/bookhive';
-import {
-  POSITIONING,
-  CURRENT_WORK,
-  UPCOMING,
-  WRITING,
-  TALKS,
-  INTERVIEWS,
-  TEACHING,
-  HOST,
-  ELSEWHERE,
-} from '../data/frontdoor';
+import { POSITIONING, HIGHLIGHTS } from '../data/frontdoor';
 
-const SITE_URL = 'https://ronbronson.com';
+const SITE_URL = 'https://ronbronson.design';
 const CANONICAL_URL = SITE_URL + '/';
-const PAGE_DESCRIPTION = `${POSITIONING.name} — ${POSITIONING.role}. ${POSITIONING.statement}`;
+const PAGE_DESCRIPTION = `${POSITIONING.name} — ${POSITIONING.role}. ${POSITIONING.tagline}`;
 const PORTRAIT_URL = new URL(POSITIONING.portrait, SITE_URL).toString();
 
 const POSTS = await getHomepageStream(5);
-
 const bookhive = await getBookhive();
 const reading = bookhive.reading[0];
-
-const now = new Date();
-const upcoming = UPCOMING
-  .filter((e) => new Date(e.date) >= now)
-  .sort((a, b) => +new Date(a.date) - +new Date(b.date));
-
-function fmtDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-}
-
-const refSections = [
-  { title: 'Writing', items: WRITING },
-  { title: 'Talks', items: TALKS },
-  { title: 'Interviews', items: INTERVIEWS },
-  { title: 'Teaching', items: TEACHING },
-  { title: 'Host', items: HOST },
-];
 ---
 
 <Base title={POSITIONING.name} description={PAGE_DESCRIPTION} noindex={false}>
   <Fragment slot="head">
     <link rel="canonical" href={CANONICAL_URL} />
     <meta property="og:type" content="profile" />
-    <meta property="og:site_name" content={POSITIONING.name} />
     <meta property="og:title" content={POSITIONING.name} />
     <meta property="og:description" content={PAGE_DESCRIPTION} />
     <meta property="og:url" content={CANONICAL_URL} />
     <meta property="og:image" content={PORTRAIT_URL} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content="@ronbronson" />
     <meta name="twitter:image" content={PORTRAIT_URL} />
   </Fragment>
 
   <main id="main" class="home">
 
-    <!-- Masthead — authority: who, what, for whom -->
-    <header class="masthead">
-      <div class="masthead__text">
-        <p class="kicker">{POSITIONING.role}</p>
-        <h1 class="masthead__name">{POSITIONING.name}</h1>
-        <p class="masthead__statement">{POSITIONING.statement}</p>
-      </div>
-      <figure class="masthead__fig">
-        <img src={POSITIONING.portrait} alt={POSITIONING.name} width="480" height="600" />
-      </figure>
+    <!-- Masthead — minimal: name + one line. No long bio. -->
+    <header class="mast">
+      <p class="kicker">{POSITIONING.role}</p>
+      <h1 class="mast__name">{POSITIONING.name}</h1>
+      <p class="mast__line">{POSITIONING.tagline}</p>
     </header>
 
-    <!-- Now — a small, anchored window into the present -->
-    <section class="now-strip" aria-label="Now">
-      <span class="kicker kicker--inline">Now</span>
+    <!-- Now — slim present-tense pulse -->
+    <section class="pulse" aria-label="Now">
+      <span class="kicker">Now</span>
       {reading && (
-        <span class="now-strip__item">
-          Reading <em>{reading.title}</em>{reading.authors ? <> &middot; {reading.authors}</> : null}
-        </span>
+        <span class="pulse__item">Reading <em>{reading.title}</em></span>
       )}
       <LastScrobble />
-      <a class="now-strip__more" href="/now">More &rarr;</a>
+      <a class="pulse__more" href="/now">More &rarr;</a>
     </section>
 
-    <!-- Current Work — the anchor. Repeatable, ongoing practice. -->
-    <section class="block" aria-labelledby="cw-h">
-      <h2 class="block__h" id="cw-h"><span class="kicker">Current Work</span></h2>
-      <ul class="cw">
-        {CURRENT_WORK.map((w) => (
-          <li class="cw__item">
-            <div class="cw__head">
-              <h3 class="cw__title">{w.title}</h3>
-              <span class={`pill pill--${w.status}`}>{w.status}</span>
-            </div>
-            <p class="cw__blurb">{w.blurb}</p>
-            <p class="cw__meta">
-              {w.since && <span class="cw__since">{w.since}</span>}
-              {w.metric && <span class="cw__metric">{w.metric}</span>}
-              {w.collaborators && w.collaborators.length > 0 && (
-                <span class="cw__collab">with {w.collaborators.join(', ')}</span>
-              )}
-            </p>
-            {w.links && w.links.length > 0 && (
-              <p class="cw__links">
-                {w.links.map((l, i) => (
-                  <>
-                    {i > 0 && <span class="dot"> · </span>}
-                    <a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener noreferrer' : undefined}>
-                      {l.label}{l.external ? ' ↗' : ''}
-                    </a>
-                  </>
-                ))}
-              </p>
+    <!-- Highlights — photo-forward grid of things done. The core. -->
+    <section class="block" aria-labelledby="hl-h">
+      <h2 id="hl-h" class="block__h"><span class="kicker">Highlights</span></h2>
+      <ul class="cards">
+        {HIGHLIGHTS.map((h) => (
+          <li class="card">
+            {h.image && (
+              <figure class="card__fig">
+                <img src={h.image} alt={h.alt ?? h.title} loading="lazy" />
+              </figure>
             )}
+            <div class="card__body">
+              {h.tag && <span class={`chip chip--${h.tag.toLowerCase()}`}>{h.tag}</span>}
+              <h3 class="card__title">
+                {h.href ? (
+                  <a href={h.href} target={h.external ? '_blank' : undefined} rel={h.external ? 'noopener noreferrer' : undefined}>
+                    {h.title}{h.external ? ' ↗' : ''}
+                  </a>
+                ) : h.title}
+              </h3>
+              {h.blurb && <p class="card__blurb">{h.blurb}</p>}
+              {h.when && <span class="card__when">{h.when}</span>}
+            </div>
           </li>
         ))}
       </ul>
     </section>
 
-    {upcoming.length > 0 && (
-      <section class="block" aria-labelledby="up-h">
-        <h2 class="block__h" id="up-h"><span class="kicker">Upcoming</span></h2>
-        <ul class="rows">
-          {upcoming.map((e) => (
-            <li class="row">
-              <time class="row__date" datetime={e.date}>{fmtDate(e.date)}</time>
-              <span class="row__body">
-                {e.href ? <a href={e.href} target="_blank" rel="noopener noreferrer">{e.title}</a> : e.title}
-                <span class="row__where"> — {e.venue}{e.location ? `, ${e.location}` : ''}</span>
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
-
+    <!-- Recent writing — simple list pattern -->
     {POSTS.length > 0 && (
-      <section class="block" aria-labelledby="rec-h">
-        <h2 class="block__h" id="rec-h"><span class="kicker">Recent Writing</span></h2>
+      <section class="block" aria-labelledby="rw-h">
+        <h2 id="rw-h" class="block__h"><span class="kicker">Recent Writing</span></h2>
         <ul class="rows">
           {POSTS.map((post) => (
             <li class="row">
-              <span class="row__body">
-                <a href={post.url} target="_blank" rel="noopener noreferrer">{post.title}</a>
-                <span class="row__where"> — {post.source}</span>
-              </span>
+              <a href={post.url} target="_blank" rel="noopener noreferrer">{post.title}</a>
+              <span class="row__where">{post.source}</span>
             </li>
           ))}
         </ul>
       </section>
     )}
-
-    <!-- Evidence — show-not-tell: writing, talks, interviews, teaching, host -->
-    <section class="block" aria-labelledby="proof-h">
-      <h2 class="block__h" id="proof-h"><span class="kicker">Selected Work</span></h2>
-      <div class="proof">
-        {refSections.map((s) => (
-          <div class="proof__col">
-            <h3 class="proof__h">{s.title}</h3>
-            <ul class="rows rows--tight">
-              {s.items.map((it) => (
-                <li class="row">
-                  <span class="row__body">
-                    {it.href ? (
-                      <a href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a>
-                    ) : it.title}
-                    {it.where && <span class="row__where"> — {it.where}</span>}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="block" aria-labelledby="else-h">
-      <h2 class="block__h" id="else-h"><span class="kicker">Elsewhere</span></h2>
-      <ul class="inline">
-        {ELSEWHERE.map((e, i) => (
-          <li>
-            {i > 0 && <span class="dot" aria-hidden="true"> · </span>}
-            <a href={e.href} target={e.href.startsWith('mailto:') ? undefined : '_blank'} rel="me noopener noreferrer">{e.label}</a>
-          </li>
-        ))}
-      </ul>
-    </section>
 
   </main>
 
@@ -195,184 +97,148 @@ const refSections = [
 
 <style>
   .home {
-    max-width: var(--content-width-narrow);
+    max-width: 1080px;
     margin: 0 auto;
     padding: clamp(2.5rem, 6vw, 4.5rem) var(--pad) 0;
   }
 
-  /* ───── Kicker label — mono, oxblood, tracked ───── */
+  /* ───── Kicker — mono label, neutral for legibility ───── */
   .kicker {
     font-family: var(--font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--ink-mid);
     margin: 0;
   }
-  .kicker--inline { display: inline; }
 
   /* ───── Masthead ───── */
-  .masthead {
-    display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.9fr);
-    gap: clamp(1.5rem, 4vw, 3rem);
-    align-items: end;
-    padding-bottom: clamp(2rem, 5vw, 3.5rem);
-    border-bottom: 1px solid var(--rule);
+  .mast {
+    padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
   }
-  .masthead__name {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 900;
-    font-size: clamp(3rem, 9vw, 5.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.02em;
-    margin: 0.5rem 0 0.75rem;
-    color: var(--ink);
-  }
-  .masthead__statement {
-    font-family: var(--font-body);
-    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
-    line-height: 1.5;
-    color: var(--ink-mid);
-    max-width: 40ch;
-    margin: 0;
-  }
-  .masthead__fig { margin: 0; }
-  .masthead__fig img {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    object-fit: cover;
-    object-position: center 20%;
-    filter: saturate(0.9) contrast(1.04);
-    border: 1px solid var(--border);
-  }
-
-  /* ───── Now strip ───── */
-  .now-strip {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.4rem 1rem;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--rule);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    color: var(--ink-mid);
-  }
-  .now-strip__item em { font-style: italic; color: var(--ink); }
-  .now-strip :global(.last-scrobble) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--ink-mid);
-    text-decoration: none;
-  }
-  .now-strip :global(.last-scrobble .ls-label) {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-    display: block;
-  }
-  .now-strip :global(.last-scrobble .ls-art) { border-radius: 2px; }
-  .now-strip__more {
-    margin-left: auto;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  /* ───── Generic block ───── */
-  .block { padding: clamp(2.25rem, 5vw, 3.25rem) 0; border-bottom: 1px solid var(--rule); }
-  .block__h { margin: 0 0 1.5rem; }
-
-  /* ───── Current Work ───── */
-  .cw { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.75rem; }
-  .cw__item { padding-left: 1rem; border-left: 2px solid var(--accent); }
-  .cw__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem; margin-bottom: 0.4rem; }
-  .cw__title {
+  .mast__name {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(1.4rem, 3vw, 1.9rem);
-    line-height: 1.1;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin: 0.5rem 0 0.5rem;
+    color: var(--ink);
+  }
+  .mast__line {
+    font-family: var(--font-body);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink-mid);
+    max-width: 30ch;
+    margin: 0;
+  }
+
+  /* ───── Now pulse ───── */
+  .pulse {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1.25rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+  }
+  .pulse__item em { font-style: normal; font-weight: 600; color: var(--ink); }
+  .pulse :global(.last-scrobble) {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--ink-mid); text-decoration: none;
+  }
+  .pulse :global(.last-scrobble .ls-label) {
+    font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-faint); display: block;
+  }
+  .pulse__more { margin-left: auto; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* ───── Block ───── */
+  .block { padding: clamp(2.5rem, 6vw, 4rem) 0; }
+  .block__h { margin: 0 0 1.75rem; }
+
+  /* ───── Highlight cards — photo-forward grid ───── */
+  .cards {
+    list-style: none; margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .card { display: flex; flex-direction: column; }
+  .card__fig {
+    margin: 0 0 1rem;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--bg-ink);
+    border-radius: 6px;
+  }
+  .card__fig img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card__body { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .card__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
     margin: 0;
     color: var(--ink);
   }
-  .pill {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: 100px;
-    padding: 0.15rem 0.55rem;
-    white-space: nowrap;
-  }
-  .cw__blurb {
+  .card__title a { color: var(--ink); text-decoration: none; }
+  .card__title a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .card__blurb {
     font-family: var(--font-body);
-    font-size: 1.05rem;
-    line-height: 1.55;
+    font-size: 0.98rem;
+    line-height: 1.5;
     color: var(--ink-mid);
-    margin: 0 0 0.5rem;
-    max-width: 52ch;
+    margin: 0;
   }
-  .cw__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1rem;
-    margin: 0 0 0.4rem;
+  .card__when {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.04em;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--ink-faint);
   }
-  .cw__links { margin: 0; font-family: var(--font-body); font-size: 0.95rem; }
 
-  /* ───── Row lists ───── */
-  .rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
-  .rows--tight { gap: 0.3rem; }
-  .row { font-family: var(--font-body); font-size: 1rem; line-height: 1.45; display: flex; gap: 0.75rem; }
-  .row__date {
+  /* ───── Category chips — the bright palette lives here ───── */
+  .chip {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    color: var(--accent);
-    white-space: nowrap;
-    flex-shrink: 0;
-    padding-top: 0.15rem;
-  }
-  .row__where { color: var(--ink-muted); font-style: italic; }
-
-  /* ───── Selected Work columns ───── */
-  .proof { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem 2.5rem; }
-  .proof__h {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--ink);
-    margin: 0 0 0.9rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--rule);
+    font-weight: 500;
+    color: #1a1a1a;
+    padding: 0.2rem 0.55rem;
+    border-radius: 100px;
   }
+  .chip--ran,
+  .chip--speaking      { background: var(--pink); }
+  .chip--founded,
+  .chip--built         { background: var(--blue); }
+  .chip--teaching,
+  .chip--writing       { background: var(--gold); }
+  .chip--coaching      { background: var(--blue-soft); }
 
-  /* ───── Inline (Elsewhere) ───── */
-  .inline { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; font-family: var(--font-body); font-size: 1rem; }
-  .inline li { display: inline; }
-  .dot { color: var(--ink-faint); padding: 0 0.25rem; }
+  /* ───── Row list (recent writing) ───── */
+  .rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+  .row {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-body); font-size: 1.05rem;
+  }
+  .row:last-child { border-bottom: 1px solid var(--rule); }
+  .row a { color: var(--ink); text-decoration: none; }
+  .row a:hover { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .row__where { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); white-space: nowrap; }
 
-  /* ───── Links ───── */
-  .home a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent); text-underline-offset: 2.5px; transition: text-decoration-color 0.15s; }
-  .home a:hover { text-decoration-color: var(--accent); }
-
-  /* ───── Responsive ───── */
-  @media (max-width: 640px) {
-    .masthead { grid-template-columns: 1fr; align-items: start; }
-    .masthead__fig { order: -1; max-width: 240px; }
+  @media (max-width: 560px) {
+    .row { flex-direction: column; gap: 0.2rem; }
   }
 </style>

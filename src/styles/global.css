@@ -56,10 +56,13 @@ p { max-width: var(--measure); }
 }
 
 a {
-  color: var(--accent);
-  text-decoration: none;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
 }
-a:hover { color: var(--brand-dim); }
+a:hover { text-decoration-thickness: 2.5px; }
 
 /* Container */
 .container {
@@ -136,7 +139,7 @@ section { padding-block: var(--section-gap); }
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--ink-mid);
   margin: 0;
 }
 
@@ -149,11 +152,10 @@ section { padding-block: var(--section-gap); }
 
 .page-head__title {
   font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(2.5rem, 7vw, 4.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: var(--ink);
   margin: 0.5rem 0 0;
 }

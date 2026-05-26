@@ -109,6 +109,10 @@ function remarkCustomDirectives() {
 
 export default defineConfig({
   site: 'https://ronbronson.com',
+  redirects: {
+    '/work': '/',
+    '/media': '/speaking',
+  },
   integrations: [
     mdx({
       remarkPlugins: [remarkDirective, remarkCustomDirectives],
