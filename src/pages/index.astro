@@ -34,11 +34,18 @@ const cases = (items: typeof CURRENT_WORK) => items;
     {/* ── Select writing (bonafides first) ── */}
     <section class="v2-block">
       <div class="v2-seclabel"><span>Select writing</span></div>
-      <ul class="v2-pieces">
-        {WRITING.slice(0, 5).map((it) => (
-          <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
-        ))}
-      </ul>
+      <div class="v2-twocol">
+        <ul class="v2-pieces">
+          {WRITING.slice(0, 3).map((it) => (
+            <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
+          ))}
+        </ul>
+        <ul class="v2-pieces">
+          {WRITING.slice(3, 6).map((it) => (
+            <li class="v2-piece"><a class="v2-piece__title" href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a><span class="v2-piece__where"> — {it.where}</span></li>
+          ))}
+        </ul>
+      </div>
       <p class="v2-seeall"><a href="https://blog.ronbronson.com" target="_blank" rel="noopener noreferrer">→ See all writing</a></p>
     </section>
 
@@ -339,9 +346,9 @@ const cases = (items: typeof CURRENT_WORK) => items;
 
   .v2-twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
   .v2-pieces { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
-  .v2-piece { padding: 12px 0; border-top: 1px solid var(--hair); font-size: 17px; line-height: 1.4; }
+  .v2-piece { padding: 16px 0; border-top: 1px solid var(--hair); font-size: 19px; line-height: 1.35; }
   .v2-pieces li:last-child { border-bottom: 1px solid var(--hair); }
-  .v2-piece__title { font-family: var(--sans); font-weight: 500; letter-spacing: -0.015em; }
+  .v2-piece__title { font-family: var(--sans); font-weight: 600; letter-spacing: -0.018em; }
   .v2-piece__where { color: var(--ink-3); font-size: 15px; }
 
   .v2-foot { margin-top: 120px; padding-top: 36px; border-top: 2px solid var(--accent); }
