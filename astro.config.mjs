@@ -113,6 +113,7 @@ export default defineConfig({
     '/work': '/',
     '/media': '/',
     '/speaking': '/',
+    '/about': '/',
   },
   integrations: [
     mdx({
