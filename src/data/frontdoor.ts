@@ -38,7 +38,8 @@ export const CURRENT_WORK: CaseStudy[] = [
     id: 'pdx',
     title: 'Volunteer digital service delivery at Portland Digital Corps',
     href: 'https://digitalcorpspdx.org',
-    body: 'A short-term civic-tech sprint I founded and ran from March to June 2025 — 100+ technologists shipping real digital projects for six Portland nonprofits, from Built Oregon to Families for Safe Streets.',
+    span: 'March–July 2025',
+    body: 'A short-term civic-tech sprint I founded and ran from March to July 2025 — 100+ technologists shipping real digital projects for six Portland nonprofits, from Built Oregon to Families for Safe Streets.',
     images: [
       { src: '/img/pdx-cape-perpetua.jpg', alt: 'A Portland Digital Corps cohort presenting the Cape Perpetua Collaborative website redesign at the finale show & tell', placeholder: '' },
     ],
@@ -71,6 +72,7 @@ export const PAST_WORK: CaseStudy[] = [
     ],
     reading: [
       { label: '18F Guides', href: 'https://guides.18f.org/' },
+      { label: 'De-risking Government Technology Field Guide', href: 'https://digitalgovernmenthub.org/wp-content/uploads/2022/07/federal-field-guide-4dccc06e01cd56773eb140ff6e6b2805cc517a460d6bff6689e7edd0ef349598.pdf' },
       { label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
       { label: 'How 18F transformed government tech (Techdirt)', href: 'https://www.techdirt.com/2025/04/04/how-18f-transformed-government-technology-%E2%88%92-and-why-its-elimination-matters/' },
     ],
@@ -114,7 +116,7 @@ export const SPEAKING_PAST: SpeakItem[] = [
 
 export const HIGHLIGHTS_2026: Highlight[] = [
   {
-    month: '2026',
+    month: 'April 2026',
     title: 'Organized a civic-tech panel at U-M Service Design Weekend',
     body: 'Brought students and practitioners together on civic technology and delivery.',
     placeholder: 'Service Design Weekend photo',
@@ -122,14 +124,14 @@ export const HIGHLIGHTS_2026: Highlight[] = [
     href: 'https://taubmancollege.umich.edu/news/2026/04/15/bronson-leads-civic-tech-panels-at-u-m-service-design-weekend/',
   },
   {
-    month: '2026',
+    month: 'Winter 2026',
     title: 'Guest lecture on administrative burdens — PubPol 750, Ford School',
-    body: 'On how administrative burdens shape who can actually access public services.',
+    body: 'Introduced students to public mechanics — the latency between policy as designed and delivery on the ground — and to civic tech and service design, and how their deployment differs in the U.S. versus the rest of the world.',
     placeholder: 'Add image',
     href: 'https://fordschool.umich.edu/course/winter/2025/pubpol-750020-topics-administrative-burdens-how-frictions-affect-access-public',
   },
   {
-    month: '2026',
+    month: 'January 2026',
     title: 'Speaker at Throughline Conference (online)',
     body: 'On design, delivery, and doing public-interest work that lasts.',
     placeholder: 'Add image',
@@ -138,10 +140,11 @@ export const HIGHLIGHTS_2026: Highlight[] = [
 ];
 
 export const HIGHLIGHTS_2025: Highlight[] = [
-  { month: '2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', body: 'A panel on designing government digital services that actually work.', placeholder: 'AIGA DC Dot Gov Design panel', image: '/img/aiga-dc.jpg', href: 'https://dotgovdesign.org/events' },
-  { month: '2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', body: 'Keynote on public mechanics — looking past apps and dashboards to the systems that keep public life running.', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://cugos.org/2025-fall-fling/' },
-  { month: '2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', body: 'A workshop, “Hype and its impact on the City,” on how technology extends the shelf life of culture — recirculating past eras instead of making new ones.', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
-  { month: '2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', body: 'Moderated “You can carry on where 18F left off,” on carrying public-interest technology forward.', placeholder: 'Code for America Summit', image: '/img/cfa-summit.jpg', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
+  { month: 'December 2025 · Washington, DC', title: 'Panelist at Dot Gov Design Conference', body: 'A panel on designing government digital services that actually work.', placeholder: 'Dot Gov Design panel', image: '/img/aiga-dc.jpg', href: 'https://dotgovdesign.org/events' },
+  { month: 'December 2025 · Washington, DC', title: 'Judge, AIGA DC Flux Design Competition', placeholder: 'Add image', href: 'https://fluxdesigncompetition.org/judges.php' },
+  { month: 'November 2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', body: 'Keynote on public mechanics — looking past apps and dashboards to the systems that keep public life running.', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://cugos.org/2025-fall-fling/' },
+  { month: 'September 2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', body: 'A workshop, “Hype and its impact on the City,” on how technology extends the shelf life of culture — recirculating past eras instead of making new ones.', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
+  { month: 'May 2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', body: 'Moderated a panel of former 18F employees on lessons learned and hope for the future.', placeholder: 'Code for America Summit', image: '/img/cfa-summit.jpg', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
   { month: 'Jun 2025 – Jan 2026', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Nava 10th anniversary', image: '/img/nava.jpg' },
 ];
 
