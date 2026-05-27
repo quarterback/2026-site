@@ -71,6 +71,7 @@ export const PAST_WORK: CaseStudy[] = [
       { /* src: '/img/18f-team.jpg', */ alt: '18F design team', placeholder: '18F design team' },
     ],
     reading: [
+      { label: '18F Guides', href: 'https://guides.18f.org/' },
       { label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
       { label: 'How 18F transformed government tech (Techdirt)', href: 'https://www.techdirt.com/2025/04/04/how-18f-transformed-government-technology-%E2%88%92-and-why-its-elimination-matters/' },
     ],
@@ -175,9 +176,10 @@ export const MEDIA: MediaEmbed[] = [
     href: 'https://www.youtube.com/watch?v=4HKTGod1Xyo',
   },
   {
-    kind: 'audio',
+    kind: 'video',
     title: 'What Huh Me Huh What',
     where: 'Did I Do That? · Oct 2025',
+    embed: 'https://www.youtube.com/embed/kL0gYtoUtvI',
     href: 'https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson',
   },
   {
