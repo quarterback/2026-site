@@ -99,12 +99,6 @@ export const HIGHLIGHTS_2026: Highlight[] = [
     href: 'https://taubmancollege.umich.edu/news/2026/04/15/bronson-leads-civic-tech-panels-at-u-m-service-design-weekend/',
   },
   {
-    month: 'Mar 2026',
-    title: 'Years Ahead Conference at the Ford School, University of Michigan',
-    placeholder: 'Years Ahead Conference photo',
-    href: 'https://yearsahead.io',
-  },
-  {
     month: 'Winter 2026',
     title: 'Guest lecture on administrative burdens — PubPol 750, Ford School',
     placeholder: 'Add image',
@@ -176,11 +170,10 @@ export const MEDIA: MediaEmbed[] = [
     href: 'https://www.youtube.com/watch?v=4HKTGod1Xyo',
   },
   {
-    kind: 'video',
+    kind: 'audio',
     title: 'What Huh Me Huh What',
     where: 'Did I Do That? · Oct 2025',
-    embed: 'https://www.youtube.com/embed/kL0gYtoUtvI',
-    href: 'https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson',
+    href: 'https://youtu.be/kL0gYtoUtvI',
   },
   {
     kind: 'audio',
