@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import {
-  ME, CURRENT_WORK, PAST_WORK,
+  ME, CURRENT_WORK, PAST_WORK, EVENTS,
   HIGHLIGHTS_2026, HIGHLIGHTS_2025,
   WRITING, MEDIA, ELSEWHERE,
 } from '../data/frontdoor';
@@ -11,6 +11,8 @@ const CANONICAL_URL = SITE_URL + '/';
 const OG_IMAGE = new URL('/hero.jpg', SITE_URL).toString();
 
 const cases = (items: typeof CURRENT_WORK) => items;
+const mediaLinks = MEDIA.filter((m) => !m.embed);
+const mediaEmbeds = MEDIA.filter((m) => m.embed);
 ---
 
 <Base title={ME.name} description={ME.role} noindex={false}>
@@ -29,6 +31,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
     <header class="v2-hdr">
       <h1 class="v2-name">{ME.name}</h1>
       <p class="v2-role">{ME.role}</p>
+      <p class="v2-bio" set:html={ME.bio}></p>
     </header>
 
     {/* ── Select writing (bonafides first) ── */}
@@ -42,30 +45,31 @@ const cases = (items: typeof CURRENT_WORK) => items;
       <p class="v2-seeall"><a href="https://blog.ronbronson.com" target="_blank" rel="noopener noreferrer">→ See all writing</a></p>
     </section>
 
-    {/* ── Media (embeddable proof of work) ── */}
+    {/* ── Interviews — non-embeddable links above, embeds below ── */}
     <section class="v2-block">
-      <div class="v2-seclabel"><span>Media</span></div>
-      <div class="v2-media-grid">
-        {MEDIA.map((m) => (
-          <article class={`v2-media v2-media--${m.kind}`}>
-            {m.embed ? (
+      <div class="v2-seclabel"><span>Interviews</span></div>
+      {mediaLinks.length > 0 && (
+        <ul class="v2-pieces">
+          {mediaLinks.map((m) => (
+            <li class="v2-piece"><a class="v2-piece__title" href={m.href} target="_blank" rel="noopener noreferrer">{m.title}</a><span class="v2-piece__where"> — {m.where}</span></li>
+          ))}
+        </ul>
+      )}
+      {mediaEmbeds.length > 0 && (
+        <div class="v2-media-grid">
+          {mediaEmbeds.map((m) => (
+            <article class={`v2-media v2-media--${m.kind}`}>
               <div class="v2-media__frame">
                 <iframe src={m.embed} title={m.title} loading="lazy" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
               </div>
-            ) : (
-              <a class="v2-media__cta" href={m.href} target="_blank" rel="noopener noreferrer">
-                <span class="v2-media__cta-k">{m.kind === 'audio' ? 'Podcast' : m.kind === 'article' ? 'Interview' : 'Watch'}</span>
-                <span class="v2-media__cta-t">{m.title}</span>
-                <span class="v2-media__cta-go">{m.kind === 'audio' ? 'Listen' : m.kind === 'article' ? 'Read' : 'Watch'} →</span>
-              </a>
-            )}
-            <p class="v2-media__meta">
-              {m.href ? <a class="v2-media__title" href={m.href} target="_blank" rel="noopener noreferrer">{m.title}</a> : <span class="v2-media__title">{m.title}</span>}
-              <span class="v2-media__where"> — {m.where}</span>
-            </p>
-          </article>
-        ))}
-      </div>
+              <p class="v2-media__meta">
+                <a class="v2-media__title" href={m.href} target="_blank" rel="noopener noreferrer">{m.title}</a>
+                <span class="v2-media__where"> — {m.where}</span>
+              </p>
+            </article>
+          ))}
+        </div>
+      )}
     </section>
 
     {/* ── Selected work ── */}
@@ -114,6 +118,36 @@ const cases = (items: typeof CURRENT_WORK) => items;
       <div class="v2-seclabel"><span>Recent past work</span></div>
       <div class="v2-cases">
         {cases(PAST_WORK).map((it) => (
+          <article class="v2-case">
+            <h3 class="v2-case__title">{it.href ? <a href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : it.title}</h3>
+            {it.span && <p class="v2-case__span">{it.span}</p>}
+            {it.images && it.images.length > 0 && (
+              <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
+                {it.images.map((img) => (
+                  <figure class="v2-img">{img.src ? <img src={img.src} alt={img.alt || img.placeholder} loading="lazy" /> : <span class="v2-img__hint">{img.placeholder}</span>}</figure>
+                ))}
+              </div>
+            )}
+            <div class="v2-case__bodywrap">
+              {it.body && <p class="v2-case__body">{it.body}</p>}
+              {it.reading && it.reading.length > 0 && (
+                <p class="v2-case__links">
+                  {it.reading.map((r, i) => (
+                    <Fragment>{i > 0 && <span class="v2-case__sep"> · </span>}<a href={r.href} target="_blank" rel="noopener noreferrer">{r.label} ↗</a></Fragment>
+                  ))}
+                </p>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    {/* ── Conferences & local events ── */}
+    <section class="v2-block">
+      <div class="v2-seclabel"><span>Conferences &amp; local events</span></div>
+      <div class="v2-cases">
+        {EVENTS.map((it) => (
           <article class="v2-case">
             <h3 class="v2-case__title">{it.href ? <a href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : it.title}</h3>
             {it.span && <p class="v2-case__span">{it.span}</p>}
@@ -236,9 +270,14 @@ const cases = (items: typeof CURRENT_WORK) => items;
   }
   .v2-role {
     margin: 28px 0 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.35;
-    color: var(--ink); max-width: 30ch; font-weight: 500;
+    color: var(--ink); max-width: 34ch; font-weight: 500;
     letter-spacing: -0.018em; text-wrap: balance;
   }
+  .v2-bio {
+    margin: 18px 0 0; font-size: 17px; line-height: 1.6; font-weight: 400;
+    color: var(--ink-3); max-width: 64ch;
+  }
+  .v2-bio a { color: var(--ink-2); }
 
   .v2-block { margin-top: 96px; }
   .v2-seclabel {

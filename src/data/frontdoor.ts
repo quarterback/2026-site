@@ -28,7 +28,8 @@ export interface ElseLink { label: string; href: string; }
 
 export const ME = {
   name: 'Ron Bronson',
-  role: 'Critical urbanist and design executive. I work on public mechanics — closing the latency between written policy and on-the-ground deployment, and naming where consequential decisions live inside delivery.',
+  role: 'Critical urbanist and design executive working on public mechanics.',
+  bio: `Former Head of Design at 18F, the U.S. government's digital consultancy. Now an Assistant Professor of Practice in Urban Technology at the University of Michigan, founder of Portland Digital Corps, and President of AIGA Portland. He co-hosts the <a href="https://futureperfectbook.club" target="_blank" rel="noopener noreferrer">Future Perfect Book Club</a> podcast with Joel Goodman and hosts The Sound Bulletin on Freeform Portland.`,
   email: 'ron@ronbronson.com',
 };
 
@@ -65,15 +66,36 @@ export const PAST_WORK: CaseStudy[] = [
     title: 'Design and delivery across federal agencies at 18F (GSA)',
     span: '2021 – 2025',
     body: "Led the design practice at the federal government's internal digital consultancy — part of a team that delivered 455+ projects for 34 agencies, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
-    // Drop these two files into /public/img and uncomment the src lines:
     images: [
-      { /* src: '/img/18f-launch.jpg', */ alt: '18F website launch — ribbon-cutting on the GSA stage', placeholder: '18F website launch — GSA stage ribbon-cutting' },
-      { /* src: '/img/18f-team.jpg', */ alt: '18F design team', placeholder: '18F design team' },
+      { src: '/img/18f-launch.jpg', alt: '18F website launch — ribbon-cutting on the GSA stage', placeholder: '' },
     ],
     reading: [
       { label: '18F Guides', href: 'https://guides.18f.org/' },
       { label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
       { label: 'How 18F transformed government tech (Techdirt)', href: 'https://www.techdirt.com/2025/04/04/how-18f-transformed-government-technology-%E2%88%92-and-why-its-elimination-matters/' },
+    ],
+  },
+];
+
+/* Conferences & local events Ron has organized/run. Same shape as case
+   studies — full-bleed imagery + short description. */
+export const EVENTS: CaseStudy[] = [
+  {
+    id: 'dfp',
+    title: 'Design for the Public — a civic-design conference in Portland',
+    span: 'Fall 2024',
+    body: 'Organized Design for the Public, convening practitioners working on public-interest technology and delivery for a day of talks and conversations in Portland.',
+    images: [
+      { src: '/img/dfp-panel.jpg', alt: 'A panel discussion on stage at Design for the Public', placeholder: '' },
+      { src: '/img/dfp-crowd.jpg', alt: 'The audience at Design for the Public', placeholder: '' },
+    ],
+  },
+  {
+    id: 'pdm',
+    title: 'PDX Design Month with AIGA Portland',
+    body: 'As President of AIGA Portland, helped launch PDX Design Month — a month of talks and events bringing the city’s design community together.',
+    images: [
+      { src: '/img/pdx-design-month.jpg', alt: 'Ron Bronson speaking at a PDX Design Month event', placeholder: '' },
     ],
   },
 ];
