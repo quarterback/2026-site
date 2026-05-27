@@ -15,7 +15,7 @@ export interface CaseStudy {
   title: string;
   href?: string;
   span?: string;
-  body?: string;
+  body?: string | string[];
   images?: RImage[];
   reading?: RLink[];
   courses?: Course[];
@@ -116,6 +116,7 @@ export const HIGHLIGHTS_2026: Highlight[] = [
   {
     month: '2026',
     title: 'Organized a civic-tech panel at U-M Service Design Weekend',
+    body: 'Brought students and practitioners together on civic technology and delivery.',
     placeholder: 'Service Design Weekend photo',
     image: '/img/ssw-civic-tech-2026.jpg',
     href: 'https://taubmancollege.umich.edu/news/2026/04/15/bronson-leads-civic-tech-panels-at-u-m-service-design-weekend/',
@@ -123,22 +124,24 @@ export const HIGHLIGHTS_2026: Highlight[] = [
   {
     month: '2026',
     title: 'Guest lecture on administrative burdens — PubPol 750, Ford School',
+    body: 'On how administrative burdens shape who can actually access public services.',
     placeholder: 'Add image',
     href: 'https://fordschool.umich.edu/course/winter/2025/pubpol-750020-topics-administrative-burdens-how-frictions-affect-access-public',
   },
   {
     month: '2026',
     title: 'Speaker at Throughline Conference (online)',
+    body: 'On design, delivery, and doing public-interest work that lasts.',
     placeholder: 'Add image',
     href: 'https://www.throughlineconf.com/',
   },
 ];
 
 export const HIGHLIGHTS_2025: Highlight[] = [
-  { month: '2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', placeholder: 'AIGA DC Dot Gov Design panel', image: '/img/aiga-dc.jpg' },
-  { month: '2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
-  { month: '2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
-  { month: '2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', placeholder: 'Code for America Summit', image: '/img/cfa-summit.jpg' },
+  { month: '2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', body: 'A panel on designing government digital services that actually work.', placeholder: 'AIGA DC Dot Gov Design panel', image: '/img/aiga-dc.jpg' },
+  { month: '2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', body: 'Keynote on public mechanics — looking past apps and dashboards to the systems that keep public life running.', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
+  { month: '2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', body: 'A workshop on hype, culture, and the long half-life of technological promises.', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
+  { month: '2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', body: 'Moderated a panel on carrying public-interest technology forward.', placeholder: 'Code for America Summit', image: '/img/cfa-summit.jpg' },
   { month: 'Jun 2025 – Jan 2026', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Nava 10th anniversary', image: '/img/nava.jpg' },
 ];
 

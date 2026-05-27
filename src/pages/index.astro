@@ -89,7 +89,7 @@ const mediaEmbeds = MEDIA.filter((m) => m.embed);
               </div>
             )}
             <div class="v2-case__bodywrap">
-              {it.body && <p class="v2-case__body">{it.body}</p>}
+              {it.body && (Array.isArray(it.body) ? it.body : [it.body]).map((p) => <p class="v2-case__body">{p}</p>)}
               {it.courses && (
                 <ul class="v2-courses">
                   {it.courses.map((c) => (
@@ -130,7 +130,7 @@ const mediaEmbeds = MEDIA.filter((m) => m.embed);
               </div>
             )}
             <div class="v2-case__bodywrap">
-              {it.body && <p class="v2-case__body">{it.body}</p>}
+              {it.body && (Array.isArray(it.body) ? it.body : [it.body]).map((p) => <p class="v2-case__body">{p}</p>)}
               {it.reading && it.reading.length > 0 && (
                 <p class="v2-case__links">
                   {it.reading.map((r, i) => (
@@ -160,7 +160,7 @@ const mediaEmbeds = MEDIA.filter((m) => m.embed);
               </div>
             )}
             <div class="v2-case__bodywrap">
-              {it.body && <p class="v2-case__body">{it.body}</p>}
+              {it.body && (Array.isArray(it.body) ? it.body : [it.body]).map((p) => <p class="v2-case__body">{p}</p>)}
               {it.reading && it.reading.length > 0 && (
                 <p class="v2-case__links">
                   {it.reading.map((r, i) => (
