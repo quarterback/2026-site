@@ -54,9 +54,9 @@ const cases = (items: typeof CURRENT_WORK) => items;
               </div>
             ) : (
               <a class="v2-media__cta" href={m.href} target="_blank" rel="noopener noreferrer">
-                <span class="v2-media__cta-k">{m.kind === 'audio' ? 'Podcast' : 'Watch'}</span>
+                <span class="v2-media__cta-k">{m.kind === 'audio' ? 'Podcast' : m.kind === 'article' ? 'Interview' : 'Watch'}</span>
                 <span class="v2-media__cta-t">{m.title}</span>
-                <span class="v2-media__cta-go">{m.kind === 'audio' ? 'Listen' : 'Watch'} →</span>
+                <span class="v2-media__cta-go">{m.kind === 'audio' ? 'Listen' : m.kind === 'article' ? 'Read' : 'Watch'} →</span>
               </a>
             )}
             <p class="v2-media__meta">
@@ -147,7 +147,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
         {HIGHLIGHTS_2026.map((it) => (
           it.href ? (
             <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
-              <figure class="v2-hl__img" aria-hidden={it.image ? undefined : "true"}>{it.image ? <img src={it.image} alt={it.placeholder} loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
+              {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
               <div class="v2-hl__pad">
                 <div class="v2-hl__month">{it.month}</div>
                 <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
@@ -156,7 +156,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
             </a>
           ) : (
             <article class="v2-hl">
-              <figure class="v2-hl__img" aria-hidden={it.image ? undefined : "true"}>{it.image ? <img src={it.image} alt={it.placeholder} loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder || 'Add image'}</span>}</figure>
+              {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
               <div class="v2-hl__pad">
                 <div class="v2-hl__month">{it.month}</div>
                 <h3 class="v2-hl__title">{it.title}</h3>
@@ -178,7 +178,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
           {HIGHLIGHTS_2025.map((it) => (
             it.href ? (
               <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
-                <figure class="v2-hl__img" aria-hidden={it.image ? undefined : "true"}>{it.image ? <img src={it.image} alt={it.placeholder} loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder}</span>}</figure>
+                {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
                 <div class="v2-hl__pad">
                   <div class="v2-hl__month">{it.month}</div>
                   <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
@@ -187,7 +187,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
               </a>
             ) : (
               <article class="v2-hl">
-                <figure class="v2-hl__img" aria-hidden={it.image ? undefined : "true"}>{it.image ? <img src={it.image} alt={it.placeholder} loading="lazy" /> : <span class="v2-hl__imghint">{it.placeholder}</span>}</figure>
+                {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
                 <div class="v2-hl__pad">
                   <div class="v2-hl__month">{it.month}</div>
                   <h3 class="v2-hl__title">{it.title}</h3>

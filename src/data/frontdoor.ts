@@ -44,7 +44,7 @@ export const CURRENT_WORK: CaseStudy[] = [
   },
   {
     id: 'umich',
-    title: 'Teaching design and delivery in Urban Technology at the University of Michigan',
+    title: 'Teaching in the Urban Technology program at the University of Michigan',
     href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/',
     images: [
       { src: '/img/umich-lets-grow.jpg', alt: 'Urban Technology students presenting Let’s Grow Michigan work', placeholder: '' },
@@ -93,7 +93,7 @@ export const SPEAKING_PAST: SpeakItem[] = [
 export const HIGHLIGHTS_2026: Highlight[] = [
   {
     month: 'Apr 2026',
-    title: 'Led civic-tech panels at U-M Service Design Weekend',
+    title: 'Organized a civic-tech panel at U-M Service Design Weekend',
     placeholder: 'Service Design Weekend photo',
     image: '/img/ssw-civic-tech-2026.jpg',
     href: 'https://taubmancollege.umich.edu/news/2026/04/15/bronson-leads-civic-tech-panels-at-u-m-service-design-weekend/',
@@ -112,12 +112,11 @@ export const HIGHLIGHTS_2026: Highlight[] = [
 ];
 
 export const HIGHLIGHTS_2025: Highlight[] = [
-  { month: 'Dec 2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', placeholder: 'Add image' },
+  { month: 'Dec 2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', placeholder: 'AIGA DC Dot Gov Design panel', image: '/img/aiga-dc.jpg' },
   { month: 'Nov 2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', placeholder: 'Cascadia keynote photo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
   { month: 'Sep 2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
   { month: 'May 2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', placeholder: 'Add image' },
   { month: 'Mar 2025', title: 'Founded Portland Digital Corps', body: 'A short-term civic-tech sprint — 100+ technologists helping six Portland nonprofits ship real digital projects, March–June 2025.', placeholder: 'PDX cohort photo', href: 'https://digitalcorpspdx.org' },
-  { month: 'Mar 2025', title: 'End of 18F', body: '18F was eliminated by executive action, closing four years as Head of Design.', placeholder: '18F team or project photo', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
 ];
 
 export const WRITING: Piece[] = [
@@ -147,7 +146,7 @@ export const HOSTING: Piece[] = [
    Ron hosts. `embed` is an iframe src; without it the card links out.
    Swap in real embed URLs / add or remove items freely. */
 export interface MediaEmbed {
-  kind: 'video' | 'audio';
+  kind: 'video' | 'audio' | 'article';
   title: string;
   where: string;
   embed?: string;
@@ -181,6 +180,12 @@ export const MEDIA: MediaEmbed[] = [
     where: 'Freeform Portland · KFFP-FM',
     embed: 'https://www.mixcloud.com/widget/iframe/?feed=%2F908rb%2F&light=1&hide_cover=1&mini=1',
     href: 'https://www.mixcloud.com/908rb/',
+  },
+  {
+    kind: 'article',
+    title: 'Building Better User-Centered Products',
+    where: 'Pixel Pioneers · Interview',
+    href: 'https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson',
   },
 ];
 
