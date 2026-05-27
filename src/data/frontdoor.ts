@@ -139,7 +139,7 @@ export const HIGHLIGHTS_2026: Highlight[] = [
 
 export const HIGHLIGHTS_2025: Highlight[] = [
   { month: '2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', body: 'A panel on designing government digital services that actually work.', placeholder: 'AIGA DC Dot Gov Design panel', image: '/img/aiga-dc.jpg', href: 'https://dotgovdesign.org/events' },
-  { month: '2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', body: 'Keynote on public mechanics — looking past apps and dashboards to the systems that keep public life running.', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
+  { month: '2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', body: 'Keynote on public mechanics — looking past apps and dashboards to the systems that keep public life running.', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://cugos.org/2025-fall-fling/' },
   { month: '2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', body: 'A workshop, “Hype and its impact on the City,” on how technology extends the shelf life of culture — recirculating past eras instead of making new ones.', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
   { month: '2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', body: 'Moderated a panel on carrying public-interest technology forward.', placeholder: 'Code for America Summit', image: '/img/cfa-summit.jpg' },
   { month: 'Jun 2025 – Jan 2026', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Nava 10th anniversary', image: '/img/nava.jpg' },
