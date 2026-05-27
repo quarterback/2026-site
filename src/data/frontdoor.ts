@@ -147,6 +147,7 @@ export const HIGHLIGHTS_2025: Highlight[] = [
 
 export const WRITING: Piece[] = [
   { title: 'Some advice on managing your design career upwards', where: 'Piccalil.li', href: 'https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/' },
+  { title: 'The Long Half-Life of Culture', where: 'blog.ronbronson.com', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
   { title: 'Design as Repair', where: 'blog.ronbronson.com', href: 'https://blog.ronbronson.com/design-as-repair' },
   { title: 'The Bureaucratic Banality of Andor', where: 'blog.ronbronson.com', href: 'https://blog.ronbronson.com/the-bureaucratic-banality-of-andor' },
   { title: 'What Forward Deployed Design Actually Looks Like', where: 'blog.ronbronson.com', href: 'https://blog.ronbronson.com/what-forward-deployed-design-actually-looks-like' },
