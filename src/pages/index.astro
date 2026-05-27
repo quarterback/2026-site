@@ -56,7 +56,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
               <a class="v2-media__cta" href={m.href} target="_blank" rel="noopener noreferrer">
                 <span class="v2-media__cta-k">{m.kind === 'audio' ? 'Podcast' : 'Watch'}</span>
                 <span class="v2-media__cta-t">{m.title}</span>
-                <span class="v2-media__cta-go">Listen →</span>
+                <span class="v2-media__cta-go">{m.kind === 'audio' ? 'Listen' : 'Watch'} →</span>
               </a>
             )}
             <p class="v2-media__meta">

@@ -38,10 +38,8 @@ export const CURRENT_WORK: CaseStudy[] = [
     title: 'Volunteer digital service delivery at Portland Digital Corps',
     href: 'https://digitalcorpspdx.org',
     body: 'An all-volunteer practice I founded in 2025 — fifty-plus practitioners delivering nonprofit websites in eight-week engagements, no procurement. The model has since spread to other cities.',
-    // Drop /img/pdx-finale.jpg into /public/img and uncomment the src line:
     images: [
-      { /* src: '/img/pdx-finale.jpg', */ alt: 'PDX Digital Corps Finale Show & Tell', placeholder: 'PDX Digital Corps Finale Show & Tell' },
-      { placeholder: 'Shipped nonprofit site' },
+      { src: '/img/pdx-cape-perpetua.jpg', alt: 'A Portland Digital Corps cohort presenting the Cape Perpetua Collaborative website redesign at the finale show & tell', placeholder: '' },
     ],
   },
   {
@@ -147,17 +145,22 @@ export interface MediaEmbed {
 export const MEDIA: MediaEmbed[] = [
   {
     kind: 'video',
-    title: 'Beyond Civic Tech: Public Mechanics',
-    where: 'CUGOS · Keynote',
-    embed: 'https://www.youtube.com/embed/hnAScuK-oMo',
-    href: 'https://youtube.com/watch?v=hnAScuK-oMo',
+    title: 'Design as Repair',
+    where: 'IxDA Oslo · Keynote · Sep 2025',
+    href: 'https://www.ixda.no/talks/design-as-repair',
   },
   {
     kind: 'video',
     title: 'Repairing Service Design for the Age of AI',
-    where: 'The Service Design Show',
+    where: 'The Service Design Show · Sep 2025',
     embed: 'https://www.youtube.com/embed/4HKTGod1Xyo',
     href: 'https://www.youtube.com/watch?v=4HKTGod1Xyo',
+  },
+  {
+    kind: 'audio',
+    title: 'What Huh Me Huh What',
+    where: 'Did I Do That? · Oct 2025',
+    href: 'https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson',
   },
   {
     kind: 'audio',
