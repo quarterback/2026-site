@@ -151,7 +151,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
               <div class="v2-hl__pad">
                 <div class="v2-hl__month">{it.month}</div>
                 <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
-                <p class="v2-hl__body">{it.body}</p>
+                {it.body && <p class="v2-hl__body">{it.body}</p>}
               </div>
             </a>
           ) : (
@@ -160,7 +160,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
               <div class="v2-hl__pad">
                 <div class="v2-hl__month">{it.month}</div>
                 <h3 class="v2-hl__title">{it.title}</h3>
-                <p class="v2-hl__body">{it.body}</p>
+                {it.body && <p class="v2-hl__body">{it.body}</p>}
               </div>
             </article>
           )
@@ -182,7 +182,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
                 <div class="v2-hl__pad">
                   <div class="v2-hl__month">{it.month}</div>
                   <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
-                  <p class="v2-hl__body">{it.body}</p>
+                  {it.body && <p class="v2-hl__body">{it.body}</p>}
                 </div>
               </a>
             ) : (
@@ -191,7 +191,7 @@ const cases = (items: typeof CURRENT_WORK) => items;
                 <div class="v2-hl__pad">
                   <div class="v2-hl__month">{it.month}</div>
                   <h3 class="v2-hl__title">{it.title}</h3>
-                  <p class="v2-hl__body">{it.body}</p>
+                  {it.body && <p class="v2-hl__body">{it.body}</p>}
                 </div>
               </article>
             )

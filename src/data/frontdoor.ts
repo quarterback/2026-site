@@ -22,7 +22,7 @@ export interface CaseStudy {
 }
 
 export interface SpeakItem { date: string; title: string; where: string; href?: string; }
-export interface Highlight { month: string; title: string; body: string; placeholder: string; image?: string; href?: string; }
+export interface Highlight { month: string; title: string; body?: string; placeholder: string; image?: string; href?: string; }
 export interface Piece { title: string; where: string; href?: string; }
 export interface ElseLink { label: string; href: string; }
 
@@ -37,7 +37,7 @@ export const CURRENT_WORK: CaseStudy[] = [
     id: 'pdx',
     title: 'Volunteer digital service delivery at Portland Digital Corps',
     href: 'https://digitalcorpspdx.org',
-    body: 'An all-volunteer practice I founded in 2025 — fifty-plus practitioners delivering nonprofit websites in eight-week engagements, no procurement. The model has since spread to other cities.',
+    body: 'A short-term civic-tech sprint I founded and ran from March to June 2025 — 100+ technologists shipping real digital projects for six Portland nonprofits, from Built Oregon to Families for Safe Streets.',
     images: [
       { src: '/img/pdx-cape-perpetua.jpg', alt: 'A Portland Digital Corps cohort presenting the Cape Perpetua Collaborative website redesign at the finale show & tell', placeholder: '' },
     ],
@@ -64,7 +64,7 @@ export const PAST_WORK: CaseStudy[] = [
     id: '18f',
     title: 'Design and delivery across federal agencies at 18F (GSA)',
     span: '2021 – 2025',
-    body: "Led the design practice at the federal government's internal digital consultancy, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
+    body: "Led the design practice at the federal government's internal digital consultancy — part of a team that delivered 455+ projects for 34 agencies, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
     // Drop these two files into /public/img and uncomment the src lines:
     images: [
       { /* src: '/img/18f-launch.jpg', */ alt: '18F website launch — ribbon-cutting on the GSA stage', placeholder: '18F website launch — GSA stage ribbon-cutting' },
@@ -72,6 +72,7 @@ export const PAST_WORK: CaseStudy[] = [
     ],
     reading: [
       { label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
+      { label: 'How 18F transformed government tech (Techdirt)', href: 'https://www.techdirt.com/2025/04/04/how-18f-transformed-government-technology-%E2%88%92-and-why-its-elimination-matters/' },
     ],
   },
 ];
@@ -92,20 +93,36 @@ export const HIGHLIGHTS_2026: Highlight[] = [
   {
     month: 'Apr 2026',
     title: 'Led civic-tech panels at U-M Service Design Weekend',
-    body: 'Hosted panels connecting students and practitioners on civic technology and service design at Michigan.',
     placeholder: 'Service Design Weekend photo',
     image: '/img/ssw-civic-tech-2026.jpg',
     href: 'https://taubmancollege.umich.edu/news/2026/04/15/bronson-leads-civic-tech-panels-at-u-m-service-design-weekend/',
   },
+  {
+    month: 'Mar 2026',
+    title: 'Years Ahead Conference at the Ford School, University of Michigan',
+    placeholder: 'Years Ahead Conference photo',
+    href: 'https://yearsahead.io',
+  },
+  {
+    month: 'Winter 2026',
+    title: 'Guest lecture on administrative burdens — PubPol 750, Ford School',
+    placeholder: 'Add image',
+    href: 'https://fordschool.umich.edu/course/winter/2025/pubpol-750020-topics-administrative-burdens-how-frictions-affect-access-public',
+  },
+  {
+    month: 'Jan 2026',
+    title: 'Speaker at Throughline Conference (online)',
+    placeholder: 'Add image',
+  },
 ];
 
 export const HIGHLIGHTS_2025: Highlight[] = [
-  { month: 'Oct 2025', title: 'Design as Repair · IxDA Oslo keynote', body: 'Keynote on repair as a design discipline — what changes when the failure modes that matter are dead ends rather than rough happy paths.', placeholder: 'IxDA Oslo stage photo', href: 'https://www.ixda.no/talks/design-as-repair' },
-  { month: 'Sep 2025', title: 'CUGOS GIS · Keynote', body: '[Brief description — the through-line of the talk, who was in the room, what landed.]', placeholder: 'CUGOS stage / slide photo' },
-  { month: 'Aug 2025', title: 'Portland Digital Corps launched', body: 'Founded an all-volunteer practice that organised fifty-plus practitioners to deliver six nonprofit websites in eight-week engagements. Model has since been picked up in other cities.', placeholder: 'Cohort photo', href: 'https://digitalcorpspdx.org' },
-  { month: 'Mar 2025', title: 'End of 18F', body: '18F was eliminated by executive action. Four years as Head of Design closed under those circumstances. Writing about what the practice was, and what it leaves behind, is ongoing.', placeholder: '18F team or project photo', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
-  { month: '2025', title: 'Service Design Show · Ep. 236', body: 'Long-form podcast conversation on repairing service design for the age of AI.', placeholder: 'Podcast artwork or recording photo', href: 'https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505' },
-  { month: '2025', title: 'Leading the Field · Code for America', body: 'Conversation with Code for America on leading design practice inside U.S. government.', placeholder: 'CfA interview thumbnail', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
+  { month: 'Dec 2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', placeholder: 'Add image' },
+  { month: 'Nov 2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', placeholder: 'Cascadia keynote photo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
+  { month: 'Sep 2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
+  { month: 'May 2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', placeholder: 'Add image' },
+  { month: 'Mar 2025', title: 'Founded Portland Digital Corps', body: 'A short-term civic-tech sprint — 100+ technologists helping six Portland nonprofits ship real digital projects, March–June 2025.', placeholder: 'PDX cohort photo', href: 'https://digitalcorpspdx.org' },
+  { month: 'Mar 2025', title: 'End of 18F', body: '18F was eliminated by executive action, closing four years as Head of Design.', placeholder: '18F team or project photo', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
 ];
 
 export const WRITING: Piece[] = [
@@ -147,6 +164,7 @@ export const MEDIA: MediaEmbed[] = [
     kind: 'video',
     title: 'Design as Repair',
     where: 'IxDA Oslo · Keynote · Sep 2025',
+    embed: 'https://player.vimeo.com/video/1177783240?h=ca450c1bd6',
     href: 'https://www.ixda.no/talks/design-as-repair',
   },
   {
