@@ -1,0 +1,34 @@
+---
+import type { Highlight } from '../data/frontdoor';
+interface Props { it: Highlight }
+const { it } = Astro.props;
+const iframeAllow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+---
+{it.embed ? (
+  <article class="v2-hl v2-hl--embed">
+    <div class="v2-hl__embed"><iframe src={it.embed} title={it.title} loading="lazy" frameborder="0" allow={iframeAllow} allowfullscreen></iframe></div>
+    <div class="v2-hl__pad">
+      <div class="v2-hl__month">{it.month}</div>
+      <h3 class="v2-hl__title">{it.href ? <a href={it.href} target="_blank" rel="noopener noreferrer">{it.title}<span class="v2-hl__arrow"> ↗</span></a> : it.title}</h3>
+      {it.body && <p class="v2-hl__body">{it.body}</p>}
+    </div>
+  </article>
+) : it.href ? (
+  <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
+    {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
+    <div class="v2-hl__pad">
+      <div class="v2-hl__month">{it.month}</div>
+      <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
+      {it.body && <p class="v2-hl__body">{it.body}</p>}
+    </div>
+  </a>
+) : (
+  <article class="v2-hl">
+    {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
+    <div class="v2-hl__pad">
+      <div class="v2-hl__month">{it.month}</div>
+      <h3 class="v2-hl__title">{it.title}</h3>
+      {it.body && <p class="v2-hl__body">{it.body}</p>}
+    </div>
+  </article>
+)}

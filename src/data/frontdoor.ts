@@ -22,7 +22,7 @@ export interface CaseStudy {
 }
 
 export interface SpeakItem { date: string; title: string; where: string; href?: string; }
-export interface Highlight { month: string; title: string; body?: string; placeholder: string; image?: string; href?: string; }
+export interface Highlight { month: string; title: string; body?: string; placeholder: string; image?: string; embed?: string; href?: string; }
 export interface Piece { title: string; where: string; href?: string; }
 export interface ElseLink { label: string; href: string; }
 
@@ -114,20 +114,20 @@ export const SPEAKING_PAST: SpeakItem[] = [
 
 export const HIGHLIGHTS_2026: Highlight[] = [
   {
-    month: 'Apr 2026',
+    month: '2026',
     title: 'Organized a civic-tech panel at U-M Service Design Weekend',
     placeholder: 'Service Design Weekend photo',
     image: '/img/ssw-civic-tech-2026.jpg',
     href: 'https://taubmancollege.umich.edu/news/2026/04/15/bronson-leads-civic-tech-panels-at-u-m-service-design-weekend/',
   },
   {
-    month: 'Winter 2026',
+    month: '2026',
     title: 'Guest lecture on administrative burdens — PubPol 750, Ford School',
     placeholder: 'Add image',
     href: 'https://fordschool.umich.edu/course/winter/2025/pubpol-750020-topics-administrative-burdens-how-frictions-affect-access-public',
   },
   {
-    month: 'Jan 2026',
+    month: '2026',
     title: 'Speaker at Throughline Conference (online)',
     placeholder: 'Add image',
     href: 'https://www.throughlineconf.com/',
@@ -135,11 +135,11 @@ export const HIGHLIGHTS_2026: Highlight[] = [
 ];
 
 export const HIGHLIGHTS_2025: Highlight[] = [
-  { month: 'Dec 2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', placeholder: 'AIGA DC Dot Gov Design panel', image: '/img/aiga-dc.jpg' },
-  { month: 'Nov 2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', placeholder: 'Cascadia keynote photo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
-  { month: 'Sep 2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
-  { month: 'May 2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', placeholder: 'Add image' },
-  { month: '2025', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Add image' },
+  { month: '2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', placeholder: 'AIGA DC Dot Gov Design panel', image: '/img/aiga-dc.jpg' },
+  { month: '2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
+  { month: '2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
+  { month: '2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', placeholder: 'Add image' },
+  { month: 'Jun 2025 – Jan 2026', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Add image' },
 ];
 
 export const WRITING: Piece[] = [

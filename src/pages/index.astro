@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import HighlightCard from '../components/HighlightCard.astro';
 import {
   ME, CURRENT_WORK, PAST_WORK, EVENTS,
   HIGHLIGHTS_2026, HIGHLIGHTS_2025,
@@ -178,27 +179,7 @@ const mediaEmbeds = MEDIA.filter((m) => m.embed);
       <div class="v2-seclabel"><span>Highlights</span></div>
       <h2 class="v2-bigh">2026 so far</h2>
       <div class="v2-hlgrid">
-        {HIGHLIGHTS_2026.map((it) => (
-          it.href ? (
-            <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
-              {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
-              <div class="v2-hl__pad">
-                <div class="v2-hl__month">{it.month}</div>
-                <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
-                {it.body && <p class="v2-hl__body">{it.body}</p>}
-              </div>
-            </a>
-          ) : (
-            <article class="v2-hl">
-              {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
-              <div class="v2-hl__pad">
-                <div class="v2-hl__month">{it.month}</div>
-                <h3 class="v2-hl__title">{it.title}</h3>
-                {it.body && <p class="v2-hl__body">{it.body}</p>}
-              </div>
-            </article>
-          )
-        ))}
+        {HIGHLIGHTS_2026.map((it) => <HighlightCard it={it} />)}
       </div>
 
       <button id="hl-toggle" class="v2-toggle" aria-expanded="true" aria-controls="hl-2025">
@@ -209,27 +190,7 @@ const mediaEmbeds = MEDIA.filter((m) => m.embed);
       <div id="hl-2025">
         <h2 class="v2-bigh v2-bigh--sub">2025 Highlights</h2>
         <div class="v2-hlgrid">
-          {HIGHLIGHTS_2025.map((it) => (
-            it.href ? (
-              <a class="v2-hl v2-hl--linked" href={it.href} target="_blank" rel="noopener noreferrer">
-                {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
-                <div class="v2-hl__pad">
-                  <div class="v2-hl__month">{it.month}</div>
-                  <h3 class="v2-hl__title">{it.title}<span class="v2-hl__arrow" aria-hidden="true"> ↗</span></h3>
-                  {it.body && <p class="v2-hl__body">{it.body}</p>}
-                </div>
-              </a>
-            ) : (
-              <article class="v2-hl">
-                {it.image && <figure class="v2-hl__img"><img src={it.image} alt={it.placeholder} loading="lazy" /></figure>}
-                <div class="v2-hl__pad">
-                  <div class="v2-hl__month">{it.month}</div>
-                  <h3 class="v2-hl__title">{it.title}</h3>
-                  {it.body && <p class="v2-hl__body">{it.body}</p>}
-                </div>
-              </article>
-            )
-          ))}
+          {HIGHLIGHTS_2025.map((it) => <HighlightCard it={it} />)}
         </div>
       </div>
     </section>
@@ -376,6 +337,8 @@ const mediaEmbeds = MEDIA.filter((m) => m.embed);
   .v2-bigh--sub { margin-top: 56px; }
   .v2-hlgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .v2-hl { background: var(--bg-card); border: 1px solid var(--hair); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; border-top: 4px solid var(--accent); transition: border-color 160ms, transform 160ms; }
+  .v2-hl__embed { width: 100%; aspect-ratio: 16 / 9; background: var(--ink); border-bottom: 1px solid var(--hair); }
+  .v2-hl__embed iframe { width: 100%; height: 100%; border: 0; display: block; }
   .v2-hlgrid .v2-hl:nth-child(4n+2) { border-top-color: var(--accent-2); }
   .v2-hlgrid .v2-hl:nth-child(4n+3) { border-top-color: var(--accent-3); }
   .v2-hlgrid .v2-hl:nth-child(4n+4) { border-top-color: var(--accent-4); }
