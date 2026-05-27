@@ -167,6 +167,14 @@ export const WRITING: Piece[] = [
   { title: 'The Banality of Rules', where: 'makingpublicwork.com', href: 'https://makingpublicwork.com/3mlkawmzzfc2b' },
 ];
 
+/* Others citing or covering Ron's work — social proof. */
+export const CITED: Piece[] = [
+  { title: 'Forward Deployed Design at 18F', where: 'Roger Wong', href: 'https://rogerwong.me/2026/05/forward-deployed-design-at-18f' },
+  { title: 'Design as Repair, applied to NHS emergency medicine', where: 'St Emlyn’s', href: 'https://www.stemlynsblog.org/design-as-repair-nhs-emergency-medicine/' },
+  { title: 'Design as Repair', where: 'Sublime', href: 'https://sublime.app/card/design-as-repair-ron-bronson?section=highlights' },
+  { title: 'Design as Repair', where: 'Jonathan Stephens · on the Throughline talk', href: 'https://jonathanstephens.us/journal/design-as-repair' },
+];
+
 export const PODCASTS: Piece[] = [
   { title: 'Repairing Service Design for the Age of AI', where: 'Service Design Show · Ep. 236', href: 'https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505' },
   { title: 'Leading the Field', where: 'Code for America', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
