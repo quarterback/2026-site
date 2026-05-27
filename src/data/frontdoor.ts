@@ -29,8 +29,8 @@ export interface ElseLink { label: string; href: string; }
 
 export const ME = {
   name: 'Ron Bronson',
-  role: 'Critical urbanist and design executive working on public mechanics.',
-  bio: `Former Head of Design at 18F, the U.S. government's digital consultancy. Now an Assistant Professor of Practice in Urban Technology at the University of Michigan, founder of Portland Digital Corps, and President of AIGA Portland. He co-hosts the <a href="https://futureperfectbook.club" target="_blank" rel="noopener noreferrer">Future Perfect Book Club</a> podcast with Joel Goodman and hosts The Sound Bulletin on Freeform Portland.`,
+  role: 'I work on what it takes to build services and the practices that build them, across government, education, and the institutions in between.',
+  bio: `Most recently led the design practice at 18F, the U.S. federal government's internal digital consultancy, until its closure in 2025. Now teaches in the Urban Technology program at the University of Michigan, runs a volunteer civic delivery practice in Portland, and serves as president of the local chapter of AIGA. Co-hosts the <a href="https://futureperfectbook.club" target="_blank" rel="noopener noreferrer">Future Perfect Book Club</a> podcast and hosts The Sound Bulletin on Freeform Portland.`,
   email: 'ron@ronbronson.com',
 };
 
@@ -39,7 +39,7 @@ export const CURRENT_WORK: CaseStudy[] = [
     id: '18f',
     title: 'Digital public infrastructure at 18F',
     span: 'Director, Head of Design · 2017–2025',
-    body: "Led the design practice at the federal government's internal digital consultancy — part of a team that delivered 455+ projects for 34 agencies, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
+    body: 'Ran the design practice for an organization that delivered hundreds of digital service projects to large institutional clients, scaling the design team from 21 to 40 across a portfolio of platforms and services used by millions. Owned the public-facing guides and methods library that the practice used and that thousands of practitioners outside the organization adopted. Also served as Acting Chief of Staff during the transition that followed.',
     images: [
       { src: '/img/18f-launch.jpg', alt: '18F website launch ribbon-cutting on the GSA stage', placeholder: '' },
     ],
@@ -55,7 +55,7 @@ export const CURRENT_WORK: CaseStudy[] = [
     title: 'Volunteer digital service delivery at Portland Digital Corps',
     href: 'https://digitalcorpspdx.org',
     span: 'March–July 2025',
-    body: 'A short-term civic-tech sprint I founded and ran from March to July 2025 — 100+ technologists shipping real digital projects for six Portland nonprofits, from Built Oregon to Families for Safe Streets.',
+    body: 'Founded and ran a volunteer practice that organized 100-plus designers, engineers, researchers, and writers to deliver digital projects for six mission-driven organizations across a four-month engagement window. The model has since been replicated in other cities.',
     images: [
       { src: '/img/pdx-cape-perpetua.jpg', alt: 'A Portland Digital Corps cohort presenting the Cape Perpetua Collaborative website redesign at the finale show & tell', placeholder: '' },
     ],
@@ -64,16 +64,12 @@ export const CURRENT_WORK: CaseStudy[] = [
     id: 'umich',
     title: 'Teaching in the Urban Technology program at the University of Michigan',
     href: 'https://taubmancollege.umich.edu/faculty/directory/ron-bronson/',
+    body: 'Teach three courses in an interdisciplinary urban technology program — on the design of public services, on interaction design, and on the gap between how policy is written and how delivery actually works on the ground. Students do project work with real partners; recent projects have addressed administrative burdens, court systems, and airport service redesign.',
     images: [
       { src: '/img/umich-lets-grow.jpg', alt: 'Urban Technology students presenting Let’s Grow Michigan work', placeholder: '' },
       { src: '/img/umich-mittencorps.jpg', alt: 'MittenCorps student presentation', placeholder: '' },
     ],
     reading: [{ label: 'yearsahead.io', href: 'https://yearsahead.io' }],
-    courses: [
-      { code: 'UT 402', title: 'Public Mechanics', terms: 'F26 · W26' },
-      { code: 'UT 330', title: 'Interaction Design', terms: 'F26' },
-      { code: 'UT 360', title: 'Service Design & Urban Needs', terms: 'W26 · W24' },
-    ],
   },
   {
     id: 'bloomington',
@@ -82,6 +78,15 @@ export const CURRENT_WORK: CaseStudy[] = [
     body: 'On a three-person team, redesigned the City of Bloomington’s decade-old website, migrating it from an in-house CMS to Drupal. I presented the work at DrupalCon 2018.',
     embed: 'https://www.youtube.com/embed/REUJCWpFOcI',
     reading: [{ label: 'bloomington.in.gov', href: 'https://bloomington.in.gov' }],
+  },
+  {
+    id: 'nava',
+    title: 'Digital services for federal health programs at Nava PBC',
+    span: 'Director of Design & Operations · 2025',
+    body: 'A public benefit corporation building digital services for major federal health programs. A six-month role spanning its tenth anniversary and a leadership transition.',
+    images: [
+      { src: '/img/nava.jpg', alt: 'Nava PBC tenth anniversary', placeholder: '' },
+    ],
   },
 ];
 
@@ -94,7 +99,7 @@ export const EVENTS: CaseStudy[] = [
     id: 'dfp',
     title: 'Design for the Public 24',
     span: 'October 16–17, 2024 · Portland, Oregon',
-    body: 'A two-day independent design conference on public interest design, held at Revolution Hall and the Wacom Experience Center in collaboration with Technologists for the Public Good.',
+    body: 'Convened a two-day gathering of practitioners working on the intersection of policy and delivery — talks, panels, and conversations on how complex services get built and maintained.',
     images: [
       { src: '/img/dfp-panel.jpg', alt: 'A panel discussion on stage at Design for the Public', placeholder: '' },
       { src: '/img/dfp-crowd.jpg', alt: 'The audience at Design for the Public', placeholder: '' },
@@ -103,7 +108,7 @@ export const EVENTS: CaseStudy[] = [
   {
     id: 'pdm',
     title: 'Portland Design Month',
-    body: 'Founded Portland Design Month — an annual October program sponsored by AIGA Portland that gathers the city’s design community through events organized by studios, schools, and creative groups across the city and beyond.',
+    body: 'President of AIGA Portland, the chapter’s professional design organization. Launched and ran the city’s annual design programming after the prior community festival closed in 2021 — events organized by studios, schools, and creative groups across the city under a shared banner.',
     images: [
       { src: '/img/pdx-design-month.jpg', alt: 'Ron Bronson speaking at a PDX Design Month event', placeholder: '' },
     ],
@@ -153,7 +158,6 @@ export const HIGHLIGHTS_2025: Highlight[] = [
   { month: 'November 2025', title: 'Keynote at the Cascadia Open Source GIS Conference, Seattle', body: 'Keynote on public mechanics — looking past apps and dashboards to the systems that keep public life running.', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://cugos.org/2025-fall-fling/' },
   { month: 'September 2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', body: 'A workshop, “Hype and its impact on the City,” on how technology extends the shelf life of culture — recirculating past eras instead of making new ones.', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
   { month: 'May 2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', body: 'Moderated a panel of former 18F employees on lessons learned and hope for the future.', placeholder: 'Code for America Summit', image: '/img/cfa-summit.jpg', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
-  { month: 'Jun 2025 – Jan 2026', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Nava 10th anniversary', image: '/img/nava.jpg' },
 ];
 
 export const WRITING: Piece[] = [
