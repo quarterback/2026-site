@@ -83,7 +83,7 @@ export const CURRENT_WORK: CaseStudy[] = [
     id: 'nava',
     title: 'Design hiring and operations at Nava PBC',
     span: 'Director of Design & Operations · 2025',
-    body: 'Ran hiring, staffing, and operations for the design practice at a public benefit corporation that builds digital services for major federal health programs. Recruited and placed designers across programs and managed senior designers and skip-level teams. A six-month role spanning a leadership transition and the practice’s tenth anniversary.',
+    body: 'Ran hiring, staffing, and operations for the design practice at a public benefit corporation that builds digital services for major federal health programs. Recruited and placed designers across programs, managed senior designers and skip-level teams, and spearheaded the organization’s web modernization and Drupal workstream.',
     images: [
       { src: '/img/nava.jpg', alt: 'Nava PBC tenth anniversary', placeholder: '' },
     ],
