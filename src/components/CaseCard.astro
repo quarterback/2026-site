@@ -1,0 +1,43 @@
+---
+import type { CaseStudy } from '../data/frontdoor';
+interface Props { it: CaseStudy }
+const { it } = Astro.props;
+const paras = it.body ? (Array.isArray(it.body) ? it.body : [it.body]) : [];
+const iframeAllow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+---
+<article class="v2-case">
+  <h3 class="v2-case__title">{it.href ? <a href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : it.title}</h3>
+  {it.span && <p class="v2-case__span">{it.span}</p>}
+
+  {it.embed ? (
+    <div class="v2-case__embed"><iframe src={it.embed} title={it.title} loading="lazy" frameborder="0" allow={iframeAllow} allowfullscreen></iframe></div>
+  ) : it.images && it.images.length > 0 && (
+    <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
+      {it.images.map((img) => (
+        <figure class="v2-img">{img.src ? <img src={img.src} alt={img.alt || img.placeholder} loading="lazy" /> : <span class="v2-img__hint">{img.placeholder}</span>}</figure>
+      ))}
+    </div>
+  )}
+
+  <div class="v2-case__bodywrap">
+    {paras.map((p) => <p class="v2-case__body">{p}</p>)}
+    {it.courses && (
+      <ul class="v2-courses">
+        {it.courses.map((c) => (
+          <li>
+            <span class="v2-courses__code">{c.code}</span>
+            <span class="v2-courses__title">{c.title}</span>
+            <span class="v2-courses__terms">{c.terms}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+    {it.reading && it.reading.length > 0 && (
+      <p class="v2-case__links">
+        {it.reading.map((r, i) => (
+          <Fragment>{i > 0 && <span class="v2-case__sep"> · </span>}<a href={r.href} target="_blank" rel="noopener noreferrer">{r.label} ↗</a></Fragment>
+        ))}
+      </p>
+    )}
+  </div>
+</article>

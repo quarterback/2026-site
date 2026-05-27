@@ -17,6 +17,7 @@ export interface CaseStudy {
   span?: string;
   body?: string | string[];
   images?: RImage[];
+  embed?: string;
   reading?: RLink[];
   courses?: Course[];
 }
@@ -73,6 +74,14 @@ export const CURRENT_WORK: CaseStudy[] = [
       { code: 'UT 330', title: 'Interaction Design', terms: 'F26' },
       { code: 'UT 360', title: 'Service Design & Urban Needs', terms: 'W26 · W24' },
     ],
+  },
+  {
+    id: 'bloomington',
+    title: 'Redesigning bloomington.in.gov',
+    span: 'UX Engineer & Service Designer · 2016–2017',
+    body: 'On a three-person team, redesigned the City of Bloomington’s decade-old website, migrating it from an in-house CMS to Drupal. I presented the work at DrupalCon 2018.',
+    embed: 'https://www.youtube.com/embed/REUJCWpFOcI',
+    reading: [{ label: 'bloomington.in.gov', href: 'https://bloomington.in.gov' }],
   },
 ];
 
