@@ -108,6 +108,7 @@ export const HIGHLIGHTS_2026: Highlight[] = [
     month: 'Jan 2026',
     title: 'Speaker at Throughline Conference (online)',
     placeholder: 'Add image',
+    href: 'https://www.throughlineconf.com/',
   },
 ];
 
