@@ -36,8 +36,8 @@ export const ME = {
 export const CURRENT_WORK: CaseStudy[] = [
   {
     id: '18f',
-    title: 'Director, Head of Design at 18F (GSA)',
-    span: '2017–2025',
+    title: 'Digital public infrastructure at 18F',
+    span: 'Director, Head of Design · 2017–2025',
     body: "Led the design practice at the federal government's internal digital consultancy — part of a team that delivered 455+ projects for 34 agencies, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
     images: [
       { src: '/img/18f-launch.jpg', alt: '18F website launch ribbon-cutting on the GSA stage', placeholder: '' },
