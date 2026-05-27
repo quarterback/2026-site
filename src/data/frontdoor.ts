@@ -139,7 +139,7 @@ export const HIGHLIGHTS_2025: Highlight[] = [
   { month: 'Nov 2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', placeholder: 'Cascadia keynote photo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
   { month: 'Sep 2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
   { month: 'May 2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', placeholder: 'Add image' },
-  { month: 'Mar 2025', title: 'Founded Portland Digital Corps', body: 'A short-term civic-tech sprint — 100+ technologists helping six Portland nonprofits ship real digital projects, March–June 2025.', placeholder: 'PDX cohort photo', href: 'https://digitalcorpspdx.org' },
+  { month: '2025', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Add image' },
 ];
 
 export const WRITING: Piece[] = [
