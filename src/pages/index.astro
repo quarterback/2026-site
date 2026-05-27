@@ -114,36 +114,6 @@ const mediaEmbeds = MEDIA.filter((m) => m.embed);
       </div>
     </section>
 
-    {/* ── Recent past work ── */}
-    <section class="v2-block">
-      <div class="v2-seclabel"><span>Recent past work</span></div>
-      <div class="v2-cases">
-        {cases(PAST_WORK).map((it) => (
-          <article class="v2-case">
-            <h3 class="v2-case__title">{it.href ? <a href={it.href} target="_blank" rel="noopener noreferrer">{it.title}</a> : it.title}</h3>
-            {it.span && <p class="v2-case__span">{it.span}</p>}
-            {it.images && it.images.length > 0 && (
-              <div class={`v2-case__media v2-case__media--${Math.min(it.images.length, 2)}`}>
-                {it.images.map((img) => (
-                  <figure class="v2-img">{img.src ? <img src={img.src} alt={img.alt || img.placeholder} loading="lazy" /> : <span class="v2-img__hint">{img.placeholder}</span>}</figure>
-                ))}
-              </div>
-            )}
-            <div class="v2-case__bodywrap">
-              {it.body && (Array.isArray(it.body) ? it.body : [it.body]).map((p) => <p class="v2-case__body">{p}</p>)}
-              {it.reading && it.reading.length > 0 && (
-                <p class="v2-case__links">
-                  {it.reading.map((r, i) => (
-                    <Fragment>{i > 0 && <span class="v2-case__sep"> · </span>}<a href={r.href} target="_blank" rel="noopener noreferrer">{r.label} ↗</a></Fragment>
-                  ))}
-                </p>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
     {/* ── Conferences & local events ── */}
     <section class="v2-block">
       <div class="v2-seclabel"><span>Conferences &amp; local events</span></div>

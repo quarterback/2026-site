@@ -35,6 +35,21 @@ export const ME = {
 
 export const CURRENT_WORK: CaseStudy[] = [
   {
+    id: '18f',
+    title: 'Director, Head of Design at 18F (GSA)',
+    span: '2017–2025',
+    body: "Led the design practice at the federal government's internal digital consultancy — part of a team that delivered 455+ projects for 34 agencies, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
+    images: [
+      { src: '/img/18f-launch.jpg', alt: '18F website launch ribbon-cutting on the GSA stage', placeholder: '' },
+    ],
+    reading: [
+      { label: '18F Guides', href: 'https://guides.18f.org/' },
+      { label: 'De-risking Government Technology Field Guide', href: 'https://digitalgovernmenthub.org/wp-content/uploads/2022/07/federal-field-guide-4dccc06e01cd56773eb140ff6e6b2805cc517a460d6bff6689e7edd0ef349598.pdf' },
+      { label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
+      { label: 'How 18F transformed government tech (Techdirt)', href: 'https://www.techdirt.com/2025/04/04/how-18f-transformed-government-technology-%E2%88%92-and-why-its-elimination-matters/' },
+    ],
+  },
+  {
     id: 'pdx',
     title: 'Volunteer digital service delivery at Portland Digital Corps',
     href: 'https://digitalcorpspdx.org',
@@ -61,32 +76,16 @@ export const CURRENT_WORK: CaseStudy[] = [
   },
 ];
 
-export const PAST_WORK: CaseStudy[] = [
-  {
-    id: '18f',
-    title: 'Design and delivery across federal agencies at 18F (GSA)',
-    span: '2021 – 2025',
-    body: "Led the design practice at the federal government's internal digital consultancy — part of a team that delivered 455+ projects for 34 agencies, shipping platforms and services used by millions. Code owner of the 18F UX Guide, 18F Methods, and the 18F blog. 18F was eliminated in March 2025.",
-    images: [
-      { src: '/img/18f-launch.jpg', alt: '18F website launch — ribbon-cutting on the GSA stage', placeholder: '' },
-    ],
-    reading: [
-      { label: '18F Guides', href: 'https://guides.18f.org/' },
-      { label: 'De-risking Government Technology Field Guide', href: 'https://digitalgovernmenthub.org/wp-content/uploads/2022/07/federal-field-guide-4dccc06e01cd56773eb140ff6e6b2805cc517a460d6bff6689e7edd0ef349598.pdf' },
-      { label: 'What happened to 18F (NYT)', href: 'https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html' },
-      { label: 'How 18F transformed government tech (Techdirt)', href: 'https://www.techdirt.com/2025/04/04/how-18f-transformed-government-technology-%E2%88%92-and-why-its-elimination-matters/' },
-    ],
-  },
-];
+export const PAST_WORK: CaseStudy[] = [];
 
 /* Conferences & local events Ron has organized/run. Same shape as case
    studies — full-bleed imagery + short description. */
 export const EVENTS: CaseStudy[] = [
   {
     id: 'dfp',
-    title: 'Design for the Public — a civic-design conference in Portland',
-    span: 'Fall 2024',
-    body: 'Organized Design for the Public, convening practitioners working on public-interest technology and delivery for a day of talks and conversations in Portland.',
+    title: 'Design for the Public 24',
+    span: 'October 16–17, 2024 · Portland, Oregon',
+    body: 'A two-day independent design conference on public interest design, held at Revolution Hall and the Wacom Experience Center in collaboration with Technologists for the Public Good.',
     images: [
       { src: '/img/dfp-panel.jpg', alt: 'A panel discussion on stage at Design for the Public', placeholder: '' },
       { src: '/img/dfp-crowd.jpg', alt: 'The audience at Design for the Public', placeholder: '' },
@@ -94,8 +93,8 @@ export const EVENTS: CaseStudy[] = [
   },
   {
     id: 'pdm',
-    title: 'PDX Design Month with AIGA Portland',
-    body: 'As President of AIGA Portland, helped launch PDX Design Month — a month of talks and events bringing the city’s design community together.',
+    title: 'Portland Design Month',
+    body: 'Founded Portland Design Month — an annual October program sponsored by AIGA Portland that gathers the city’s design community through events organized by studios, schools, and creative groups across the city and beyond.',
     images: [
       { src: '/img/pdx-design-month.jpg', alt: 'Ron Bronson speaking at a PDX Design Month event', placeholder: '' },
     ],
@@ -117,7 +116,7 @@ export const SPEAKING_PAST: SpeakItem[] = [
 export const HIGHLIGHTS_2026: Highlight[] = [
   {
     month: 'April 2026',
-    title: 'Organized a civic-tech panel at U-M Service Design Weekend',
+    title: 'Organized a civic tech panel at the University of Michigan Service Design Weekend',
     body: 'Brought students and practitioners together on civic technology and delivery.',
     placeholder: 'Service Design Weekend photo',
     image: '/img/ssw-civic-tech-2026.jpg',
@@ -125,7 +124,7 @@ export const HIGHLIGHTS_2026: Highlight[] = [
   },
   {
     month: 'Winter 2026',
-    title: 'Guest lecture on administrative burdens — PubPol 750, Ford School',
+    title: 'Guest lecture on administrative burdens for PubPol 750 at the Ford School',
     body: 'Introduced students to public mechanics — the latency between policy as designed and delivery on the ground — and to civic tech and service design, and how their deployment differs in the U.S. versus the rest of the world.',
     placeholder: 'Add image',
     href: 'https://fordschool.umich.edu/course/winter/2025/pubpol-750020-topics-administrative-burdens-how-frictions-affect-access-public',
@@ -141,8 +140,8 @@ export const HIGHLIGHTS_2026: Highlight[] = [
 
 export const HIGHLIGHTS_2025: Highlight[] = [
   { month: 'December 2025 · Washington, DC', title: 'Panelist at Dot Gov Design Conference', body: 'A panel on designing government digital services that actually work.', placeholder: 'Dot Gov Design panel', image: '/img/aiga-dc.jpg', href: 'https://dotgovdesign.org/events' },
-  { month: 'December 2025 · Washington, DC', title: 'Judge, AIGA DC Flux Design Competition', placeholder: 'Add image', href: 'https://fluxdesigncompetition.org/judges.php' },
-  { month: 'November 2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', body: 'Keynote on public mechanics — looking past apps and dashboards to the systems that keep public life running.', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://cugos.org/2025-fall-fling/' },
+  { month: 'December 2025 · Baltimore', title: 'Judge, AIGA Baltimore Flux Design Competition', placeholder: 'Add image', href: 'https://fluxdesigncompetition.org/judges.php' },
+  { month: 'November 2025', title: 'Keynote at the Cascadia Open Source GIS Conference, Seattle', body: 'Keynote on public mechanics — looking past apps and dashboards to the systems that keep public life running.', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://cugos.org/2025-fall-fling/' },
   { month: 'September 2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', body: 'A workshop, “Hype and its impact on the City,” on how technology extends the shelf life of culture — recirculating past eras instead of making new ones.', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
   { month: 'May 2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', body: 'Moderated a panel of former 18F employees on lessons learned and hope for the future.', placeholder: 'Code for America Summit', image: '/img/cfa-summit.jpg', href: 'https://codeforamerica.org/news/leading-the-field-ron-bronson/' },
   { month: 'Jun 2025 – Jan 2026', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Nava 10th anniversary', image: '/img/nava.jpg' },
