@@ -138,8 +138,8 @@ export const HIGHLIGHTS_2025: Highlight[] = [
   { month: '2025', title: 'Panelist at Dot Gov Design Conference (AIGA DC)', placeholder: 'AIGA DC Dot Gov Design panel', image: '/img/aiga-dc.jpg' },
   { month: '2025', title: 'Keynote at Cascadia Open Source Conference, Seattle', placeholder: 'Cascadia keynote photo', embed: 'https://www.youtube.com/embed/hnAScuK-oMo', href: 'https://youtube.com/watch?v=hnAScuK-oMo' },
   { month: '2025', title: 'Ran a workshop at Hype Studies Conference, Barcelona', placeholder: 'Add image', href: 'https://blog.ronbronson.com/the-long-half-life-of-culture' },
-  { month: '2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', placeholder: 'Add image' },
-  { month: 'Jun 2025 – Jan 2026', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Add image' },
+  { month: '2025', title: 'Moderated a panel at the Code for America Summit, Washington DC', placeholder: 'Code for America Summit', image: '/img/cfa-summit.jpg' },
+  { month: 'Jun 2025 – Jan 2026', title: 'Director of Design & Operations at Nava PBC', placeholder: 'Nava 10th anniversary', image: '/img/nava.jpg' },
 ];
 
 export const WRITING: Piece[] = [
