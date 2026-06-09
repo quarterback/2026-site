@@ -93,17 +93,17 @@ const TALKS = [
 ];
 
 const ELSEWHERE = [
-  { label: "Bluesky", href: "https://bsky.app/profile/ronbronson.com" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/ronbronson/" },
-  { label: "GitHub", href: "https://github.com/quarterback" },
-  { label: "Email", href: "mailto:ron@ronbronson.com" },
-  { label: "Letterboxd", href: "https://letterboxd.com/ronbronson/" },
-  { label: "Listening", href: "https://listening.ronbronson.com" },
-  { label: "Literal.club", href: "https://literal.club/ron" },
-  { label: "Record.club", href: "https://record.club/ron" },
-  { label: "Mastodon", href: "https://mastodon.social/@ronbronson" },
-  { label: "Twitter", href: "https://twitter.com/ronbronson" },
-  { label: "Instagram", href: "https://www.instagram.com/ronbronson/" },
+  { label: "Bluesky", href: "https://bsky.app/profile/ronbronson.com", icon: "fa-brands fa-bluesky" },
+  { label: "Mastodon", href: "https://mastodon.social/@ronbronson", icon: "fa-brands fa-mastodon" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/ronbronson/", icon: "fa-brands fa-linkedin-in" },
+  { label: "GitHub", href: "https://github.com/quarterback", icon: "fa-brands fa-github" },
+  { label: "Instagram", href: "https://www.instagram.com/ronbronson/", icon: "fa-brands fa-instagram" },
+  { label: "Twitter", href: "https://twitter.com/ronbronson", icon: "fa-brands fa-x-twitter" },
+  { label: "Letterboxd", href: "https://letterboxd.com/ronbronson/", icon: "fa-brands fa-letterboxd" },
+  { label: "Literal.club", href: "https://literal.club/ron", icon: "fa-solid fa-book" },
+  { label: "Record.club", href: "https://record.club/ron", icon: "fa-solid fa-record-vinyl" },
+  { label: "Listening", href: "https://listening.ronbronson.com", icon: "fa-solid fa-headphones" },
+  { label: "Email", href: "mailto:ron@ronbronson.com", icon: "fa-solid fa-envelope" },
 ];
 
 const sections = [
@@ -155,11 +155,15 @@ const sections = [
       rel="pingback"
       href="https://webmention.io/ronbronson.design/xmlrpc"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap"
+      href="https://api.fontshare.com/v2/css?f[]=sentient@400,500,700,401,501&f[]=general-sans@400,500,600&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"
     />
   </head>
   <body>
@@ -167,10 +171,6 @@ const sections = [
       <a class="u-url u-uid" href={CANONICAL_URL} hidden aria-hidden="true"
         >{ME.name}</a
       >
-
-      <figure class="page__fig">
-        <img class="u-photo" src={ME.portrait} alt={ME.name} />
-      </figure>
 
       <header class="page__hdr">
         <h1 class="page__name p-name">{ME.name}</h1>
@@ -183,29 +183,60 @@ const sections = [
         */}
       </header>
 
-     <p class="page__intro p-note">
-  I'm a critical urbanist and design executive building resilience into how we
-  deploy systems and software for the public at large. I speak globally on
-  service design &amp; delivery at tech and design events.
-</p>
-<p class="page__intro p-note">
-  What if the present could be as good as we imagine the future we want?
-  That's essentially the crux of my stack of practitioner and scholarly
-  interests.
-</p>
-<p class="page__intro p-note">
-  These days, I'm focused on branching past the "civic tech" of the web 2.0
-  world towards something closer to public mechanics: the work of closing the
-  latency between written policy and on-the-ground deployment, identifying
-  where human judgment actually lives inside delivery, and naming the
-  consequences that travel the last documented mile from institution to
-  person. With AI proliferating, agentic decision rights need to be
-  formalized, codified, and actually enforced, so I've spent most of 2026
-  working on primitives and strategy to better improve how we're deploying
-  consequential technology in the contexts of daily and urban life.
-</p>
-<p class="page__intro p-note">
- Currently an <a href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/">Assistant Professor of Practice</a> in the University of Michigan's Urban Technology program. I founded the <a href="https://digitalcorpspdx.org">Portland Digital Corps</a> all volunteer cohort. I served as head of design in the US General Services Administration's <a href="https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html">18F unit</a>, building platforms, systems, and digital services for millions of Americans. For two decades I have led digital transformation from small counties with more cows than people to the municipal, state and federal levels, while staying hands on in delivery, building teams, growing leaders, and advising executives on modernization.</p>
+      <p class="page__intro p-note">
+        From counties with more cows than people, to multilateral digital public
+        infrastructure, I'm living at the crossroads of tactical delivery and
+        measuring the societal impacts of consequential technology. In plain
+        language, I work at the altitude of systems but never too high that I
+        can't parachute down to Earth to fix what's going on at the street
+        level.
+      </p>
+      <p class="page__intro p-note">
+        Lately, I've been writing (and teaching) about <a
+          href="https://makingpublicwork.com/">public mechanics</a
+        >; back in March I organized <a href="https://yearsahead.io"
+          >Years Ahead</a
+        >. Currently: Head of Product Strategy for an EU-based civil AI concern,
+        and part-time faculty in the Urban Technology program at the University
+        of Michigan's Taubman College of Architecture and Urban Planning.
+      </p>
+      <p class="page__intro p-note">
+        In my spare time, I coach high school tennis, host a <a
+          href="https://www.mixcloud.com/908RB/">radio show</a
+        >, and news anchor on community radio sometimes. My buddy Joel and I
+        have an intermittent podcast about books, <a
+          href="https://futureperfectbook.club">Future Perfect Book Club</a
+        >.
+      </p>
+      <p class="page__intro p-note">
+        The first game I designed was a sport. I invented <a
+          href="https://en.wikipedia.org/wiki/Tennis_polo">Tennis Polo</a
+        > in 2004 and it's since been played in eighteen-plus countries. These
+        days, I build games of every kind, analog and digital. More of those
+        experiments live at <a href="https://ronbronson.dev">ronbronson.dev</a>.
+      </p>
+      <p class="page__intro p-note">
+        Previously: Head of Design at <a href="https://18f.org">18F</a>, and
+        founder of the <a href="https://digitalcorpspdx.org"
+          >Portland Digital Corps</a
+        >.
+      </p>
+
+      <a
+        class="np"
+        href="https://listening.ronbronson.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-live="polite"
+        hidden
+      >
+        <img class="np__art" alt="" width="40" height="40" />
+        <span class="np__text">
+          <span class="np__label">Now playing</span>
+          <span class="np__track"></span>
+          <span class="np__artist"></span>
+        </span>
+      </a>
       <p class="page__more">
         <a href="/reading">Reading — books past &amp; present &rarr;</a>
       </p>
@@ -260,30 +291,24 @@ const sections = [
         <h2 class="sec__h">
           <span class="sec__name">Elsewhere</span>
         </h2>
-        <ul class="sec__list sec__list--inline">
+        <ul class="sec__icons">
           {
-            ELSEWHERE.map((e, i) => {
+            ELSEWHERE.map((e) => {
               const isEmail = e.href.startsWith("mailto:");
-              const isPlaceholder = e.href === "#";
-              const linkClass = isEmail ? "u-email" : "u-url";
+              const linkClass = isEmail ? "icon-link u-email" : "icon-link u-url";
               const linkRel = isEmail ? "me" : "me noopener noreferrer";
               return (
                 <li>
-                  {isPlaceholder ? (
-                    <span>{e.label}</span>
-                  ) : (
-                    <a
-                      class={linkClass}
-                      href={e.href}
-                      target={isEmail ? undefined : "_blank"}
-                      rel={linkRel}
-                    >
-                      {e.label}
-                    </a>
-                  )}
-                  {i < ELSEWHERE.length - 1 && (
-                    <span class="sec__sep" aria-hidden="true"> · </span>
-                  )}
+                  <a
+                    class={linkClass}
+                    href={e.href}
+                    target={isEmail ? undefined : "_blank"}
+                    rel={linkRel}
+                    aria-label={e.label}
+                    title={e.label}
+                  >
+                    <i class={e.icon} aria-hidden="true" />
+                  </a>
                 </li>
               );
             })
@@ -291,37 +316,98 @@ const sections = [
         </ul>
       </section>
 
-      <footer class="foot">
-        <em>Last updated <time datetime="2026-05-18">May 2026</time>.</em>
+      <footer class="foot colophon">
+        <p class="colophon__line">
+          Say hello: <a class="u-email" href="mailto:ron@ronbronson.com" rel="me"
+            >ron@ronbronson.com</a
+          >
+        </p>
+        <p class="colophon__line">
+          Last updated <time datetime="2026-06-08">8 June 2026</time>.
+        </p>
+        <p class="colophon__line">
+          Built in Astro, HTML, CSS, JS and Font Awesome.
+        </p>
+        <p class="colophon__line">Fonts: Sentient and General Sans.</p>
       </footer>
     </main>
+
+    <script>
+      // Now playing — same last.fm source as listening.ronbronson.com
+      (async () => {
+        const el = document.querySelector<HTMLAnchorElement>(".np");
+        if (!el) return;
+
+        const user = "statechampion";
+        const apiKey = "4f1d49f394a1567717e2c9049947d004";
+        const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&limit=1&api_key=${apiKey}&format=json`;
+
+        try {
+          const res = await fetch(url);
+          if (!res.ok) return;
+          const data = await res.json();
+
+          const track = data?.recenttracks?.track?.[0];
+          if (!track) return;
+
+          const isNow = track["@attr"]?.nowplaying === "true";
+          const name = track.name || "";
+          const artist = track.artist?.["#text"] || track.artist?.name || "";
+          const images = track.image || [];
+          const art =
+            images.find(
+              (i: { size: string; "#text": string }) => i.size === "large",
+            )?.["#text"] || "";
+
+          const $art = el.querySelector<HTMLImageElement>(".np__art");
+          const $label = el.querySelector<HTMLElement>(".np__label");
+          const $track = el.querySelector<HTMLElement>(".np__track");
+          const $artist = el.querySelector<HTMLElement>(".np__artist");
+
+          if ($art && art) {
+            $art.src = art;
+            $art.alt = `${name} — ${artist}`;
+          }
+          if ($label) $label.textContent = isNow ? "Now playing" : "Last played";
+          if ($track) $track.textContent = name;
+          if ($artist) $artist.textContent = artist;
+
+          el.classList.toggle("np--now", isNow);
+          el.hidden = false;
+        } catch {
+          /* silent fail — widget stays hidden */
+        }
+      })();
+    </script>
   </body>
 </html>
 
 <style is:global>
   /* ─────────────────────────────────────────────────────────────
-     TOKENS — WCAG verified on stone paper #ededeb:
-       #18181a on #ededeb   15.4 : 1   AAA   body
-       #5b5a55 on #ededeb    5.7 : 1   AA    meta / italic
-       #7a1f2c on #ededeb    7.4 : 1   AAA   oxblood accent
-       #1c3faa on #ededeb    8.4 : 1   AAA   link
-       #5c2d91 on #ededeb    7.0 : 1   AAA   visited
-     Paper is a near-neutral cool stone — explicitly NOT yellow/beige.
+     TOKENS — neapolitan palette, WCAG verified on Navajo White #ffe0b5:
+       #462521 Espresso     10.7 : 1   AAA   body ink
+       #7a5847 Toffee dk      5.0 : 1   AA    meta / italic
+       #ca2e55 Rosewood       4.1 : 1   —     strawberry accent (bold labels)
+       #8a1f3a wine           7.1 : 1   AAA   link
+       #462521 Espresso      10.7 : 1   AAA   visited
+       #bdb246 Old Gold       —     selection wash
+     Paper is warm vanilla cream; ink is espresso; accent is strawberry.
      ───────────────────────────────────────────────────────────── */
   :root {
-    --paper: #ededeb;
-    --ink: #18181a;
-    --ink-2: #5b5a55;
-    --ink-3: #95938d;
-    --oxblood: #7a1f2c;
-    --link: #1c3faa;
-    --link-vis: #5c2d91;
-    --link-hov: #0e2670;
-    --hair: #c9c8c4;
-    --hair-2: #dddcd8;
+    --paper: #ffe0b5;
+    --ink: #462521;
+    --ink-2: #7a5847;
+    --ink-3: #8a6552;
+    --oxblood: #ca2e55;
+    --gold: #bdb246;
+    --link: #8a1f3a;
+    --link-vis: #462521;
+    --link-hov: #5e1426;
+    --hair: rgba(70, 37, 33, 0.2);
+    --hair-2: rgba(70, 37, 33, 0.12);
 
-    --serif: "Newsreader", "Source Serif 4", "Lyon Text", Georgia,
-      "Times New Roman", serif;
+    --serif: "Sentient", "Lyon Text", Georgia, "Times New Roman", serif;
+    --sans: "General Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
 
   * {
@@ -351,21 +437,6 @@ const sections = [
     padding: 56px 28px 96px;
   }
 
-  /* ───── Portrait — wide visual anchor at the top ───── */
-  .page__fig {
-    margin: 0 0 28px;
-    position: relative;
-  }
-  .page__fig img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    object-position: center 22%;
-    filter: saturate(0.86) contrast(1.06) brightness(0.98);
-    border: 0.5px solid rgba(24, 24, 26, 0.18);
-  }
-
   /* ───── Name + byline ───── */
   .page__hdr {
     margin: 0 0 28px;
@@ -374,12 +445,11 @@ const sections = [
     margin: 0;
     font-family: var(--serif);
     font-style: italic;
-    font-weight: 600;
+    font-weight: 500;
     font-size: clamp(34px, 5.6vw, 44px);
     line-height: 1.02;
     letter-spacing: -0.015em;
     color: var(--ink);
-    font-variation-settings: "opsz" 60;
   }
   .page__byline {
     margin: 8px 0 0;
@@ -402,6 +472,68 @@ const sections = [
     max-width: 50ch;
   }
 
+  /* ───── Now playing ───── */
+  .np {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0 0 56px;
+    padding: 7px 12px 7px 7px;
+    max-width: 100%;
+    border: 0.5px solid var(--hair);
+    border-radius: 2px;
+    background: rgba(70, 37, 33, 0.04);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 120ms, background 120ms;
+  }
+  .np:visited {
+    color: var(--ink);
+  }
+  .np:hover {
+    border-color: var(--oxblood);
+    background: rgba(202, 46, 85, 0.07);
+  }
+  .np__art {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 1px;
+    background: var(--hair-2);
+    flex-shrink: 0;
+  }
+  .np__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+    min-width: 0;
+  }
+  .np__label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .np--now .np__label {
+    color: var(--oxblood);
+  }
+  .np__track {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .np__artist {
+    font-size: 13px;
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .page__more {
     margin: 0 0 56px;
     font-size: 18px;
@@ -415,7 +547,7 @@ const sections = [
 
   .sec__h {
     margin: 0 0 14px;
-    font-family: var(--serif);
+    font-family: var(--sans);
     font-weight: 600;
     font-size: 13px;
     line-height: 1;
@@ -468,18 +600,56 @@ const sections = [
     padding: 0 4px;
   }
 
+  /* Icon row — for the elsewhere links */
+  .sec__icons {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px;
+  }
+  .sec__icons li {
+    display: flex;
+  }
+  .icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 120ms, transform 120ms;
+  }
+  .icon-link:visited {
+    color: var(--ink-2);
+  }
+  .icon-link:hover {
+    color: var(--oxblood);
+    transform: translateY(-1px);
+  }
+  .icon-link:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .icon-link i {
+    font-size: 20px;
+    line-height: 1;
+  }
+
   /* ───── Links ───── */
   a {
     color: var(--link);
     text-decoration: underline;
     text-decoration-thickness: 0.7px;
     text-underline-offset: 2.5px;
-    text-decoration-color: rgba(28, 63, 170, 0.45);
+    text-decoration-color: rgba(138, 31, 58, 0.4);
     transition: color 120ms, text-decoration-color 120ms;
   }
   a:visited {
     color: var(--link-vis);
-    text-decoration-color: rgba(92, 45, 145, 0.45);
+    text-decoration-color: rgba(70, 37, 33, 0.4);
   }
   a:hover {
     color: var(--link-hov);
@@ -491,22 +661,29 @@ const sections = [
     border-radius: 1px;
   }
 
-  /* ───── Foot ───── */
+  /* ───── Colophon ───── */
   .foot {
     margin-top: 60px;
     padding-top: 18px;
     border-top: 0.5px solid var(--hair);
-    font-family: var(--serif);
-    font-size: 14px;
+    font-family: var(--sans);
+    font-size: 13.5px;
+    line-height: 1.5;
     color: var(--ink-2);
-    text-align: right;
+    text-align: left;
+  }
+  .colophon__line {
+    margin: 0 0 4px;
+  }
+  .colophon__line:last-child {
+    margin-bottom: 0;
   }
   .foot time {
-    font-variant-numeric: tabular-nums oldstyle-nums;
+    font-variant-numeric: tabular-nums;
   }
 
   ::selection {
-    background: rgba(122, 31, 44, 0.18);
+    background: rgba(189, 178, 70, 0.4);
     color: var(--ink);
   }
 
@@ -541,9 +718,6 @@ const sections = [
   @media print {
     body {
       background: white;
-    }
-    .page__fig img {
-      filter: none;
     }
     a {
       color: black;
