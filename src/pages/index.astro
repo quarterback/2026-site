@@ -200,25 +200,52 @@ const sections = [
       </header>
 
       <p class="page__intro p-note">
-        Design executive and critical urbanist. Two decades building public
-        systems and software, from small counties to the federal government,
-        and still hands on in delivery.
+        From counties with more cows than people, to multilateral digital public
+        infrastructure, I'm living at the crossroads of tactical delivery and
+        measuring the societal impacts of consequential technology. In plain
+        language, I work at the altitude of systems but never too high that I
+        can't parachute down to Earth to fix what's going on at the street
+        level.
       </p>
       <p class="page__intro p-note">
-        Now: <a href="https://taubmancollege.umich.edu/faculty/directory/ron-bronson/"
-          >Assistant Professor of Practice</a
-        > in Urban Technology at the University of Michigan, and founder of the <a
-          href="https://digitalcorpspdx.org">Portland Digital Corps</a
-        >. Formerly head of design at <a
-          href="https://www.nytimes.com/2025/03/03/us/politics/18f-technology-specialists-fired.html"
-          >18F</a
+        Lately, I've been writing (and teaching) about <a
+          href="https://makingpublicwork.com/">public mechanics</a
+        >; back in March I organized <a href="https://yearsahead.io"
+          >Years Ahead</a
+        >. Currently: Head of Product Strategy for an EU-based civil AI concern,
+        and part-time faculty in the Urban Technology program at the University
+        of Michigan's Taubman College of Architecture and Urban Planning.
+      </p>
+      <p class="page__intro p-note">
+        In my spare time, I coach high school tennis, host a <a
+          href="https://www.mixcloud.com/908RB/">radio show</a
+        >, and news anchor on community radio sometimes. My buddy Joel and I
+        have an intermittent podcast about books, <a
+          href="https://futureperfectbook.club">Future Perfect Book Club</a
         >.
       </p>
       <p class="page__intro p-note">
-        Lately: public mechanics, the work of closing the gap between written
-        policy and on-the-ground delivery, and formalizing decision rights as AI
-        moves into consequential systems.
+        Previously: Head of Design at <a href="https://18f.org">18F</a>, and
+        founder of the <a href="https://digitalcorpspdx.org"
+          >Portland Digital Corps</a
+        >.
       </p>
+
+      <a
+        class="np"
+        href="https://listening.ronbronson.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-live="polite"
+        hidden
+      >
+        <img class="np__art" alt="" width="40" height="40" />
+        <span class="np__text">
+          <span class="np__label">Now playing</span>
+          <span class="np__track"></span>
+          <span class="np__artist"></span>
+        </span>
+      </a>
       <p class="page__more">
         <a href="/reading">Reading — books past &amp; present &rarr;</a>
       </p>
@@ -313,6 +340,54 @@ const sections = [
         <em>Last updated <time datetime="2026-06-09">June 2026</time>.</em>
       </footer>
     </main>
+
+    <script>
+      // Now playing — same last.fm source as listening.ronbronson.com
+      (async () => {
+        const el = document.querySelector<HTMLAnchorElement>(".np");
+        if (!el) return;
+
+        const user = "statechampion";
+        const apiKey = "4f1d49f394a1567717e2c9049947d004";
+        const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&limit=1&api_key=${apiKey}&format=json`;
+
+        try {
+          const res = await fetch(url);
+          if (!res.ok) return;
+          const data = await res.json();
+
+          const track = data?.recenttracks?.track?.[0];
+          if (!track) return;
+
+          const isNow = track["@attr"]?.nowplaying === "true";
+          const name = track.name || "";
+          const artist = track.artist?.["#text"] || track.artist?.name || "";
+          const images = track.image || [];
+          const art =
+            images.find(
+              (i: { size: string; "#text": string }) => i.size === "large",
+            )?.["#text"] || "";
+
+          const $art = el.querySelector<HTMLImageElement>(".np__art");
+          const $label = el.querySelector<HTMLElement>(".np__label");
+          const $track = el.querySelector<HTMLElement>(".np__track");
+          const $artist = el.querySelector<HTMLElement>(".np__artist");
+
+          if ($art && art) {
+            $art.src = art;
+            $art.alt = `${name} — ${artist}`;
+          }
+          if ($label) $label.textContent = isNow ? "Now playing" : "Last played";
+          if ($track) $track.textContent = name;
+          if ($artist) $artist.textContent = artist;
+
+          el.classList.toggle("np--now", isNow);
+          el.hidden = false;
+        } catch {
+          /* silent fail — widget stays hidden */
+        }
+      })();
+    </script>
   </body>
 </html>
 
@@ -418,6 +493,67 @@ const sections = [
     color: var(--ink);
     text-wrap: pretty;
     max-width: 50ch;
+  }
+
+  /* ───── Now playing ───── */
+  .np {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0 0 56px;
+    padding: 7px 12px 7px 7px;
+    max-width: 100%;
+    border: 0.5px solid var(--hair);
+    border-radius: 2px;
+    background: rgba(24, 24, 26, 0.02);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 120ms, background 120ms;
+  }
+  .np:visited {
+    color: var(--ink);
+  }
+  .np:hover {
+    border-color: var(--oxblood);
+    background: rgba(122, 31, 44, 0.04);
+  }
+  .np__art {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 1px;
+    background: var(--hair-2);
+    flex-shrink: 0;
+  }
+  .np__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+    min-width: 0;
+  }
+  .np__label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .np--now .np__label {
+    color: var(--oxblood);
+  }
+  .np__track {
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .np__artist {
+    font-size: 13px;
+    color: var(--ink-2);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .page__more {
