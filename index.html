@@ -3,11 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ron Bronson &mdash; Design</title>
-<meta name="description" content="A minimalist catalog of work by Ron Bronson — platforms, simulators, market mechanisms, and measurement instruments across public infrastructure and market design." />
+<title>Ron Bronson</title>
+<meta name="description" content="Ron Bronson — designer of information systems. Writing, teaching, talks, interviews, and the occasional invented sport." />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Ron Bronson — Design" />
-<meta name="twitter:description" content="A minimalist catalog of work by Ron Bronson." />
+<meta name="twitter:title" content="Ron Bronson" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -15,9 +14,8 @@
 <script src="assets/palette.js"></script>
 <style>
   /* ─────────────────────────────────────────────────────────────────
-     Index — minimalist catalog. A project with a screenshot is a card
-     in the grid; a project with no screenshot is a title-plus-blurb
-     row in a list. The 2px frame is the structure; the data composes.
+     Index — a now/colophon page. Masthead + rotating deck, then a
+     ruled stack of link sections in the technical register.
      ───────────────────────────────────────────────────────────────── */
 
   /* ── Masthead row: name + top-right link ─────────── */
@@ -51,124 +49,42 @@
   }
   .tagline span { display: block; text-wrap: balance; }
 
-  /* ── Intro ────────────────────────────── */
-  .intro {
-    padding: 0 0 clamp(28px, 5vw, 52px);
-    max-width: 62ch;
-  }
-  .intro p {
-    margin: 0;
-    font-family: var(--text);
-    font-weight: 500;
-    font-size: clamp(18px, 1.6vw, 22px);
-    line-height: 1.5;
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-
-  /* ── The grid (screenshot cards) ──────── */
-  .index {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  /* ── Now strip: music + reading ───────── */
+  .nowstrip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: clamp(10px, 2vw, 24px);
+    padding: clamp(14px, 2vw, 20px) 0;
+    margin: clamp(8px, 1.5vw, 16px) 0 clamp(28px, 5vw, 48px);
     border-top: var(--frame) solid var(--ink);
-    border-left: var(--frame) solid var(--ink);
-  }
-  .cell {
-    border-right: var(--frame) solid var(--ink);
     border-bottom: var(--frame) solid var(--ink);
-    padding: clamp(16px, 1.9vw, 26px);
-    display: flex;
-    flex-direction: column;
-    gap: clamp(12px, 1.3vw, 18px);
-  }
-  .cell__head { font-family: var(--mono); font-size: 12px; }
-  .cell__title {
-    margin: 0;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(23px, 2.2vw, 32px);
-    line-height: 1.04;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-    text-wrap: balance;
-  }
-  .cell__title a { color: inherit; }
-  .cell__title a:hover { color: var(--accent); }
-  .cell__media {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    background: var(--bg-deeper);
-    border: var(--frame) solid var(--ink);
-    aspect-ratio: 16 / 10;
-    transition: border-color .14s ease;
-  }
-  .cell:hover .cell__media { border-color: var(--accent); }
-  .cell__media svg.ph,
-  .cell__media img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: top center;
-  }
-  .cell__media svg.ph { z-index: 0; }
-  .cell__media img { z-index: 1; background: var(--bg-deeper); }
-  .cell__prose {
-    margin: 0;
     font-family: var(--text);
-    font-weight: 500;
-    font-size: clamp(14px, 1.05vw, 16px);
-    line-height: 1.5;
-    color: var(--ink);
-    text-wrap: pretty;
+    font-size: 15px;
   }
+  .nowstrip__label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-right: 8px;
+  }
+  .nowstrip b { font-weight: 600; }
+  .nowstrip .reading { margin-left: auto; }
+  .nowstrip a { border-bottom: var(--frame) solid var(--accent); padding-bottom: 1px; }
+  .nowstrip a:hover { color: var(--accent); }
 
-  /* ── The list (title-plus-blurb rows) ─── */
-  .list {
-    list-style: none;
-    margin: clamp(20px, 3vw, 32px) 0 0;
-    padding: 0;
-    border-top: var(--frame) solid var(--ink);
-  }
-  .row {
-    padding: clamp(14px, 1.6vw, 20px) 0;
-    border-bottom: var(--hair) solid var(--rule);
+  /* ── Sections: mono label + link list ─── */
+  .section {
     display: grid;
-    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
-    gap: clamp(8px, 2vw, 32px);
-    align-items: baseline;
+    grid-template-columns: minmax(120px, 0.4fr) minmax(0, 2fr);
+    gap: clamp(8px, 2vw, 36px);
+    padding: clamp(18px, 2.4vw, 28px) 0;
+    border-bottom: var(--hair) solid var(--rule);
   }
-  .row__title {
-    margin: 0;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(18px, 1.6vw, 23px);
-    line-height: 1.08;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-  }
-  .row__title a:hover { color: var(--accent); }
-  .row__blurb {
-    margin: 0;
-    font-family: var(--text);
-    font-weight: 500;
-    font-size: clamp(14px, 1.05vw, 16px);
-    line-height: 1.5;
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-
-  /* ── Section heading + past-work toggle ─ */
-  .section-rule {
-    margin: clamp(48px, 8vw, 88px) 0 0;
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    padding-bottom: clamp(8px, 1vw, 12px);
-  }
-  .section-rule h2 {
+  .section > h2 {
     margin: 0;
     font-family: var(--mono);
     font-size: 12px;
@@ -177,24 +93,32 @@
     text-transform: uppercase;
     color: var(--ink);
   }
-  .toggle {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-    background: none;
-    border: var(--frame) solid var(--ink);
-    border-radius: 0;
-    padding: 5px 10px;
-    cursor: pointer;
+  .section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(7px, 0.9vw, 11px);
   }
-  .toggle:hover { color: var(--accent); border-color: var(--accent); }
+  .section li {
+    font-family: var(--text);
+    font-weight: 500;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.35;
+    text-wrap: pretty;
+  }
+  .section a { color: var(--ink); }
+  .section a:hover { color: var(--accent); }
+  .src { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.01em; }
 
-  /* ── Responsive ───────────────────────── */
-  @media (max-width: 1040px) { .index { grid-template-columns: repeat(2, 1fr); } }
+  .elsewhere a {
+    border-bottom: var(--frame) solid var(--accent);
+    padding-bottom: 1px;
+  }
+
   @media (max-width: 680px) {
-    .index { grid-template-columns: 1fr; }
-    .row { grid-template-columns: 1fr; gap: 6px; }
+    .section { grid-template-columns: 1fr; gap: 8px; }
+    .nowstrip .reading { margin-left: 0; }
   }
 </style>
 </head>
@@ -239,47 +163,85 @@
     })();
   </script>
 
-  <section class="intro">
-    <p>A working catalog &mdash; each project is just the screenshot and a sentence. Follow a link to see the whole thing.</p>
+  <div class="nowstrip">
+    <span><span class="nowstrip__label">Last played</span> <b>Living My Life</b> &mdash; Deerhunter</span>
+    <span class="reading"><a href="#reading">Reading &mdash; books past &amp; present &rarr;</a></span>
+  </div>
+
+  <section class="section">
+    <h2>Writing</h2>
+    <ul>
+      <li>Some advice on managing your design career upwards <span class="src">— Piccalil.li</span></li>
+      <li>Design as Repair</li>
+      <li>The Bureaucratic Banality of Andor</li>
+      <li>What Forward Deployed Design Actually Looks Like</li>
+    </ul>
   </section>
 
-  <svg class="ph-defs" aria-hidden="true">
-    <defs>
-      <pattern id="m3a" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
-        <rect width="16" height="16" fill="#3f88c5"/>
-        <line x1="0" y1="0" x2="0" y2="16" stroke="#004e98" stroke-width="6"/>
-      </pattern>
-    </defs>
-  </svg>
+  <section class="section">
+    <h2>Interviews</h2>
+    <ul>
+      <li>Service Design Show Podcast</li>
+      <li>Leading the Field <span class="src">— Code for America</span></li>
+      <li>Did I Do That Podcast</li>
+      <li>Surfacing Podcast</li>
+      <li>Building Better User-Centered Products <span class="src">— Pixel Pioneers</span></li>
+    </ul>
+  </section>
 
-  <!-- Screenshot cards (projects with an image) -->
-  <section class="index" id="grid" aria-label="Projects" hidden></section>
+  <section class="section">
+    <h2>Teaching</h2>
+    <ul>
+      <li>UT 402 Public Mechanics <span class="src">— F26, W26</span></li>
+      <li>UT 330 Interaction Design <span class="src">— F26</span></li>
+      <li>UT 360 Service Design and Urban Needs <span class="src">— W&rsquo;26, W&rsquo;24</span></li>
+    </ul>
+  </section>
 
-  <!-- Title-plus-blurb rows (projects with no image) -->
-  <ul class="list" id="list" aria-label="More projects" hidden></ul>
+  <section class="section">
+    <h2>Host</h2>
+    <ul>
+      <li>Future Perfect Book Club</li>
+      <li>The Sound Bulletin on KFFP-FM</li>
+    </ul>
+  </section>
 
-  <!-- Past work — its own list, shown or hidden -->
-  <section id="past">
-    <div class="section-rule">
-      <h2>Past work</h2>
-      <button type="button" class="toggle" id="past-toggle" aria-expanded="false" aria-controls="past-body">Show past work</button>
-    </div>
-    <div id="past-body" hidden>
-      <section class="index" id="past-grid" aria-label="Past projects" hidden></section>
-      <ul class="list" id="past-list" aria-label="More past projects" hidden></ul>
-    </div>
+  <section class="section">
+    <h2>Talks</h2>
+    <ul>
+      <li>Design as Repair <span class="src">— IxDA Oslo</span></li>
+      <li>Deceptive Design / Consequence Design <span class="src">— digital.gov</span></li>
+      <li>Design Consequences in Everyday Life <span class="src">— Rosenfeld Civic Design, 2022</span></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Some Thoughts</h2>
+    <ul>
+      <li>I&rsquo;m going to build a dual match tennis simulator <span class="src">— gamedesign.leaflet.pub</span></li>
+      <li>Your AI Agent (or your printer) is Not a Coworker <span class="src">— makingpublicwork.com</span></li>
+      <li>Technologist is not a job <span class="src">— makingpublicwork.com</span></li>
+      <li>The Banality of Rules <span class="src">— makingpublicwork.com</span></li>
+      <li>What Forward Deployed Design Actually Looks Like <span class="src">— blog.ronbronson.com</span></li>
+    </ul>
+  </section>
+
+  <section class="section elsewhere">
+    <h2>Elsewhere</h2>
+    <ul>
+      <li>Say hello: <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a></li>
+    </ul>
   </section>
 
   <footer class="foot">
-    <p class="foot__contact">Reach me at <a href="mailto:contact@ronbronson.com">contact@ronbronson.com</a> &middot; more of my work lives at <a href="https://ronbronson.dev">ronbronson.dev</a>.</p>
     <section class="colophon" aria-label="Colophon">
       <h2>Colophon</h2>
-      <p>Built by hand as a static site: HTML, CSS, and vanilla JavaScript &mdash; no framework, no build step. Projects are data (<b>projects.json</b>), rendered by a small script. Colour is set by a client-side palette engine that audits its own WCAG contrast; live thumbnails are captured by thum.io.</p>
-      <p>Type currently in use: <b>Author</b> (display), <b>Switzer</b> SemiBold (deck), <b>Hanken Grotesk</b> (running text), and <b>JetBrains Mono</b> (labels).</p>
+      <p>Last updated 8 June 2026.</p>
+      <p>Built in Astro, HTML, CSS, JS and Font Awesome.</p>
+      <p>Fonts: Sentient and General Sans.</p>
     </section>
   </footer>
 
 </div>
-<script src="projects.js"></script>
 </body>
 </html>
