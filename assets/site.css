@@ -125,7 +125,6 @@ a { color: var(--ink); text-decoration: none; }
 header.masthead {
   padding: clamp(20px, 3.4vw, 44px) 0 clamp(16px, 2vw, 22px);
   margin-bottom: clamp(28px, 5vw, 56px);
-  border-bottom: var(--frame) solid var(--ink);
 }
 .masthead .name {
   display: inline-block;
