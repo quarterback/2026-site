@@ -42,7 +42,8 @@
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 6px 16px;
   }
   .site-link {
     font-family: var(--mono);
@@ -124,6 +125,7 @@
     font-size: clamp(16px, 1.3vw, 19px);
     line-height: 1.35;
     text-wrap: pretty;
+    overflow-wrap: anywhere;
   }
   .section a { color: var(--ink); }
   .section a:hover { color: var(--accent); }
