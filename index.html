@@ -131,6 +131,8 @@
   .section a:hover { color: var(--accent); }
   .src { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.01em; }
   .digression__label { color: var(--accent); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 6px; }
+  .colophon__digression a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+  .colophon__digression a:hover { color: var(--accent); }
   .src a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
   .src a:hover { color: var(--accent); }
 
@@ -293,24 +295,24 @@
       <p>Last updated 10 June 2026.</p>
       <p>Built by hand as a static site &mdash; HTML, CSS, and vanilla JavaScript, no framework or build step. Font Awesome for icons.</p>
       <p>Fonts: Author (display), Switzer (deck), Hanken Grotesk (text), and Azeret Mono (labels).</p>
-      <p class="colophon__digression"><span class="digression__label">Digression</span> <span id="digression">Pes&auml;pallo is the best sport you&rsquo;ve never watched.</span></p>
+      <p class="colophon__digression"><span class="digression__label">Digression</span> <span id="digression">Inexplicably, a Green Bay Packers shareholder.</span></p>
     </section>
   </footer>
   <script>
     /* Rotating digression — same trick as the masthead deck. Add as many
-       lines as you like (favorite teams, tangents, grievances); one shows
-       at random per load and never repeats the line shown last refresh.
-       The static line above is the no-JS fallback. */
+       lines as you like; one shows at random per load and never repeats
+       the line shown last refresh. Entries may contain inline HTML
+       (links, <em>, <s>). The static line above is the no-JS fallback. */
     (function () {
       var DIGRESSIONS = [
-        "Pesäpallo is the best sport you’ve never watched.",
-        "The single-elimination bracket is a beautiful lie.",
-        "Somewhere, a box score from 2007 is still open in a tab.",
-        "Ask me about Finnish baseball at your own risk.",
-        "Still litigating the designated-hitter question, internally.",
-        "The best day of any season is the schedule release.",
-        "Yes, I have a favorite tiebreak format.",
-        "Sports allegiances available on request."
+        "Inexplicably, a Green Bay Packers shareholder.",
+        "Favorite sports teams: Toronto Blue Jays, Vimpelin Veto, New Jersey Devils, Lapuan Virkiä, <s>New York Jets</s>, New York Knicks, Portland Timbers, Portland Thorns, Brighton &amp; Hove Albion, Sassuolo, Toluca, Toronto Tempo, Montreal Expos (RIP)",
+        "<em>Have you seen my fragrance collection?</em> <a href=\"https://www.oksmelly.xyz/\" target=\"_blank\" rel=\"noopener\">it’s here</a>",
+        "I’m a longtime tea sommelier. Ask me for loose-leaf recs!",
+        "I didn’t get into wine until I moved to Portland. Somehow, I also like coffee now, too?",
+        "Last.fm til they shut it down. Check out my scrobbles: <a href=\"https://www.last.fm/user/statechampion\" target=\"_blank\" rel=\"noopener\">last.fm/user/statechampion</a>",
+        "I’ve coached high school tennis for ten years across 3 states. My career varsity record apparently is 91-33-4. 1 team state championship, 4 District/Regional titles, 5 Conference titles. 4 individual state champions. So far…",
+        "Yes, I have a <a href=\"https://www.discogs.com/user/quarterback/collection?header=1\" target=\"_blank\" rel=\"noopener\">Discogs</a> 🙄"
       ];
       var el = document.getElementById("digression");
       if (!el) return;
@@ -319,7 +321,7 @@
       var i = Math.floor(Math.random() * DIGRESSIONS.length);
       while (DIGRESSIONS.length > 1 && i === last) i = Math.floor(Math.random() * DIGRESSIONS.length);
       try { sessionStorage.setItem("rb-digression", i); } catch (e) {}
-      el.textContent = DIGRESSIONS[i];
+      el.innerHTML = DIGRESSIONS[i];
     })();
   </script>
 
