@@ -1,0 +1,48 @@
+name: Refresh feed stream
+
+# Keeps data/stream.json (the homepage "Some Thoughts" list) current by
+# re-reading the RSS feeds on a schedule and committing any changes. The
+# page fetches that JSON same-origin, so this is what makes the list live
+# without a build step or a server.
+#
+# Note: scheduled workflows only run on the repository's default branch.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-stream
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Rebuild stream.json
+        run: node scripts/build-stream.mjs
+
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain data/stream.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add data/stream.json
+            git commit -m "Refresh Some Thoughts stream [skip ci]"
+            git push
+          else
+            echo "No changes."
+          fi

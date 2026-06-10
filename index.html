@@ -195,7 +195,7 @@
   </script>
 
   <div class="nowstrip">
-    <span><span class="nowstrip__label">Last played</span> <a href="https://listening.ronbronson.com" target="_blank" rel="noopener"><b>Living My Life</b> &mdash; Deerhunter</a></span>
+    <span class="np"><span class="nowstrip__label" id="np-label">Last played</span> <a id="np-link" href="https://listening.ronbronson.com" target="_blank" rel="noopener"><b id="np-track">Living My Life</b> &mdash; <span id="np-artist">Deerhunter</span></a></span>
     <span class="reading"><a href="reading.html">Reading &mdash; books past &amp; present &rarr;</a></span>
   </div>
 
@@ -248,7 +248,7 @@
 
   <section class="section">
     <h2>Some Thoughts</h2>
-    <ul>
+    <ul id="thoughts-list">
       <li><a href="https://blog.ronbronson.com/links-i-read-9-jun-26" target="_blank" rel="noopener">Links I Read (9 Jun 26)</a> <span class="src">— blog.ronbronson.com</span></li>
       <li><a href="https://gamedesign.leaflet.pub/3mnnr7twxxs2m" target="_blank" rel="noopener">I&rsquo;m going to build a dual match tennis simulator</a> <span class="src">— gamedesign.leaflet.pub</span></li>
       <li><a href="https://makingpublicwork.com/3mmcnbrnins2q" target="_blank" rel="noopener">Your AI Agent (or your printer) is Not a Coworker</a> <span class="src">— makingpublicwork.com</span></li>
@@ -285,5 +285,56 @@
   </footer>
 
 </div>
+
+<script>
+  /* Last played — live from last.fm (CORS-open). The static line above is
+     the fallback; on success we swap in the most recent scrobble and flip
+     the label to "Now playing" when something is currently on. */
+  (function () {
+    var USER = "statechampion";
+    var KEY = "4f1d49f394a1567717e2c9049947d004";
+    var url = "https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=" +
+      USER + "&limit=1&api_key=" + KEY + "&format=json";
+    fetch(url)
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) {
+        var t = d && d.recenttracks && d.recenttracks.track && d.recenttracks.track[0];
+        if (!t) return;
+        var now = t["@attr"] && t["@attr"].nowplaying === "true";
+        var name = t.name || "";
+        var artist = (t.artist && (t.artist["#text"] || t.artist.name)) || "";
+        var track = document.getElementById("np-track");
+        var art = document.getElementById("np-artist");
+        var label = document.getElementById("np-label");
+        if (track && name) track.textContent = name;
+        if (art && artist) art.textContent = artist;
+        if (label) label.textContent = now ? "Now playing" : "Last played";
+      })
+      .catch(function () { /* keep the baked line */ });
+  })();
+
+  /* Some Thoughts — live from data/stream.json, refreshed by a scheduled
+     GitHub Action (RSS hosts have no CORS, so we fetch our own JSON
+     same-origin). The baked list above is the fallback. */
+  (function () {
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+      });
+    }
+    fetch("data/stream.json", { cache: "no-cache" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (items) {
+        if (!Array.isArray(items) || !items.length) return;
+        var ul = document.getElementById("thoughts-list");
+        if (!ul) return;
+        ul.innerHTML = items.map(function (it) {
+          return '<li><a href="' + esc(it.url) + '" target="_blank" rel="noopener">' +
+            esc(it.title) + '</a> <span class="src">— ' + esc(it.source) + '</span></li>';
+        }).join("");
+      })
+      .catch(function () { /* keep the baked list */ });
+  })();
+</script>
 </body>
 </html>
