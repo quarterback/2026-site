@@ -130,6 +130,7 @@
   .section a { color: var(--ink); }
   .section a:hover { color: var(--accent); }
   .src { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.01em; }
+  .digression__label { color: var(--accent); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 6px; }
   .src a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
   .src a:hover { color: var(--accent); }
 
@@ -287,13 +288,40 @@
   </section>
 
   <footer class="foot">
-    <section class="colophon" aria-label="Colophon">
-      <h2>Colophon</h2>
+    <section class="colophon" aria-label="Colophon, with Digressions">
+      <h2>Colophon, with Digressions</h2>
       <p>Last updated 10 June 2026.</p>
       <p>Built by hand as a static site &mdash; HTML, CSS, and vanilla JavaScript, no framework or build step. Font Awesome for icons.</p>
       <p>Fonts: Author (display), Switzer (deck), Hanken Grotesk (text), and Azeret Mono (labels).</p>
+      <p class="colophon__digression"><span class="digression__label">Digression</span> <span id="digression">Pes&auml;pallo is the best sport you&rsquo;ve never watched.</span></p>
     </section>
   </footer>
+  <script>
+    /* Rotating digression — same trick as the masthead deck. Add as many
+       lines as you like (favorite teams, tangents, grievances); one shows
+       at random per load and never repeats the line shown last refresh.
+       The static line above is the no-JS fallback. */
+    (function () {
+      var DIGRESSIONS = [
+        "Pesäpallo is the best sport you’ve never watched.",
+        "The single-elimination bracket is a beautiful lie.",
+        "Somewhere, a box score from 2007 is still open in a tab.",
+        "Ask me about Finnish baseball at your own risk.",
+        "Still litigating the designated-hitter question, internally.",
+        "The best day of any season is the schedule release.",
+        "Yes, I have a favorite tiebreak format.",
+        "Sports allegiances available on request."
+      ];
+      var el = document.getElementById("digression");
+      if (!el) return;
+      var last = -1;
+      try { last = parseInt(sessionStorage.getItem("rb-digression"), 10); } catch (e) {}
+      var i = Math.floor(Math.random() * DIGRESSIONS.length);
+      while (DIGRESSIONS.length > 1 && i === last) i = Math.floor(Math.random() * DIGRESSIONS.length);
+      try { sessionStorage.setItem("rb-digression", i); } catch (e) {}
+      el.textContent = DIGRESSIONS[i];
+    })();
+  </script>
 
 </div>
 
