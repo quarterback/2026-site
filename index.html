@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ron Bronson</title>
+<meta name="author" content="Ron Bronson" />
+<meta name="description" content="Ron Bronson designs information systems — content strategy, information architecture, digital services, governance, and delivery leadership. Writing, teaching, talks, and the occasional invented sport." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ron Bronson" />
+<meta property="og:title" content="Ron Bronson" />
+<meta property="og:description" content="Designs information systems — content strategy, information architecture, digital services, governance, and delivery leadership." />
+<meta property="og:url" content="https://ronbronson.design/" />
+<meta property="og:image" content="https://ronbronson.design/assets/avatar.png" />
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Ron Bronson" />
+<meta name="twitter:description" content="Designs information systems — content strategy, information architecture, digital services, governance, and delivery leadership." />
+<meta name="twitter:image" content="https://ronbronson.design/assets/avatar.png" />
+
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/assets/avatar.png" />
+<link rel="apple-touch-icon" href="/assets/avatar.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" />
+<link rel="stylesheet" href="assets/site.css" />
+<script src="assets/palette.js"></script>
+<style>
+  /* ─────────────────────────────────────────────────────────────────
+     Index — a now/colophon page. Masthead + rotating deck, then a
+     ruled stack of link sections in the technical register.
+     ───────────────────────────────────────────────────────────────── */
+
+  /* ── Masthead row: name + top-right link ─────────── */
+  .masthead { position: relative; }
+  .masthead__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .site-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: var(--ink);
+    border-bottom: var(--frame) solid var(--accent);
+    padding-bottom: 1px;
+  }
+  .site-link:hover { color: var(--accent); }
+
+  /* ── Deck / rotating tagline ──────────── */
+  .tagline {
+    margin: clamp(14px, 2vw, 22px) 0 0;
+    font-family: "Switzer", var(--sans);
+    font-weight: 600;
+    font-size: clamp(19px, 2.5vw, 30px);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .tagline span { display: block; text-wrap: balance; }
+
+  /* ── Now strip: music + reading ───────── */
+  .nowstrip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: clamp(10px, 2vw, 24px);
+    padding: clamp(14px, 2vw, 20px) 0;
+    margin: clamp(8px, 1.5vw, 16px) 0 clamp(28px, 5vw, 48px);
+    border-top: var(--frame) solid var(--ink);
+    border-bottom: var(--frame) solid var(--ink);
+    font-family: var(--text);
+    font-size: 15px;
+  }
+  .nowstrip__label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-right: 8px;
+  }
+  .nowstrip b { font-weight: 600; }
+  .nowstrip .reading { margin-left: auto; }
+  .nowstrip a { border-bottom: var(--frame) solid var(--accent); padding-bottom: 1px; }
+  .nowstrip a:hover { color: var(--accent); }
+
+  /* ── Sections: mono label + link list ─── */
+  .section {
+    display: grid;
+    grid-template-columns: minmax(120px, 0.4fr) minmax(0, 2fr);
+    gap: clamp(8px, 2vw, 36px);
+    padding: clamp(18px, 2.4vw, 28px) 0;
+    border-bottom: var(--hair) solid var(--rule);
+  }
+  .section > h2 {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(7px, 0.9vw, 11px);
+  }
+  .section li {
+    font-family: var(--text);
+    font-weight: 500;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.35;
+    text-wrap: pretty;
+  }
+  .section a { color: var(--ink); }
+  .section a:hover { color: var(--accent); }
+  .src { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.01em; }
+
+  .section ul.icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(12px, 1.8vw, 22px);
+    align-items: center;
+  }
+  .section ul.icons a {
+    display: inline-flex;
+    font-size: clamp(19px, 1.7vw, 23px);
+    line-height: 1;
+    color: var(--ink);
+    transition: transform .1s ease, color .12s ease;
+  }
+  .section ul.icons a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 680px) {
+    .section { grid-template-columns: 1fr; gap: 8px; }
+    .nowstrip .reading { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead__top">
+      <a class="name" href="./index.html">Ron Bronson</a>
+      <a class="site-link" href="https://ronbronson.dev">ronbronson.dev &rarr;</a>
+    </div>
+    <h2 class="tagline" id="tagline">
+      <span>Finds messy systems.</span>
+      <span>Makes them legible.</span>
+      <span>Builds what&rsquo;s missing.</span>
+      <span>Keeps them moving.</span>
+    </h2>
+  </header>
+  <script>
+    /* Rotate the deck on every load — pick a random variant, never
+       repeating the one shown last refresh. No-JS render shows the
+       static V1 above. */
+    (function () {
+      var DECKS = [
+        ["Finds messy problems.", "Makes them legible.", "Builds things.", "Puts them into the world."],
+        ["Finds messy systems.", "Makes them legible.", "Builds what’s missing.", "Keeps them moving."],
+        ["Untangles complexity.", "Makes it understandable.", "Builds the missing pieces.", "Leaves behind working systems."],
+        ["Finds the bottleneck.", "Makes it visible.", "Builds the fix.", "Leaves others better equipped."],
+        ["Studies how things work.", "Explains why they don’t.", "Builds what they need.", "Helps them do the job."],
+        ["Makes the invisible visible.", "Makes the confusing clear.", "Builds what’s needed.", "Puts it to work."],
+        ["Finds the workarounds.", "Understands the system.", "Builds the missing infrastructure.", "Puts it into service."],
+        ["Finds the gap between policy and reality.", "Makes it legible.", "Builds the bridge.", "Puts it into the world."]
+      ];
+      var el = document.getElementById("tagline");
+      if (!el) return;
+      var last = -1;
+      try { last = parseInt(sessionStorage.getItem("rb-deck"), 10); } catch (e) {}
+      var i = Math.floor(Math.random() * DECKS.length);
+      while (i === last) i = Math.floor(Math.random() * DECKS.length);
+      try { sessionStorage.setItem("rb-deck", i); } catch (e) {}
+      el.innerHTML = DECKS[i].map(function (line) { return "<span>" + line + "</span>"; }).join("");
+    })();
+  </script>
+
+  <div class="nowstrip">
+    <span><span class="nowstrip__label">Last played</span> <a href="https://listening.ronbronson.com" target="_blank" rel="noopener"><b>Living My Life</b> &mdash; Deerhunter</a></span>
+    <span class="reading"><a href="/reading">Reading &mdash; books past &amp; present &rarr;</a></span>
+  </div>
+
+  <section class="section">
+    <h2>Writing</h2>
+    <ul>
+      <li><a href="https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/" target="_blank" rel="noopener">Some advice on managing your design career upwards</a> <span class="src">— Piccalil.li</span></li>
+      <li><a href="https://blog.ronbronson.com/design-as-repair" target="_blank" rel="noopener">Design as Repair</a></li>
+      <li><a href="https://blog.ronbronson.com/the-bureaucratic-banality-of-andor" target="_blank" rel="noopener">The Bureaucratic Banality of Andor</a></li>
+      <li><a href="https://blog.ronbronson.com/what-forward-deployed-design-actually-looks-like?ref=rogerwong.me" target="_blank" rel="noopener">What Forward Deployed Design Actually Looks Like</a></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Interviews</h2>
+    <ul>
+      <li><a href="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505" target="_blank" rel="noopener">Service Design Show Podcast</a></li>
+      <li><a href="https://codeforamerica.org/news/leading-the-field-ron-bronson/" target="_blank" rel="noopener">Leading the Field</a> <span class="src">— Code for America</span></li>
+      <li><a href="https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson" target="_blank" rel="noopener">Did I Do That Podcast</a></li>
+      <li><a href="https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7" target="_blank" rel="noopener">Surfacing Podcast</a></li>
+      <li><a href="https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson" target="_blank" rel="noopener">Building Better User-Centered Products</a> <span class="src">— Pixel Pioneers</span></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Teaching</h2>
+    <ul>
+      <li>UT 402 Public Mechanics <span class="src">— F26, W26</span></li>
+      <li>UT 330 Interaction Design <span class="src">— F26</span></li>
+      <li>UT 360 Service Design and Urban Needs <span class="src">— W&rsquo;26, W&rsquo;24</span></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Host</h2>
+    <ul>
+      <li><a href="https://futureperfectbook.club" target="_blank" rel="noopener">Future Perfect Book Club</a></li>
+      <li><a href="https://www.mixcloud.com/908rb/" target="_blank" rel="noopener">The Sound Bulletin on KFFP-FM</a></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Talks</h2>
+    <ul>
+      <li><a href="https://www.ixda.no/talks/design-as-repair" target="_blank" rel="noopener">Design as Repair</a> <span class="src">— IxDA Oslo</span></li>
+      <li><a href="https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design" target="_blank" rel="noopener">Deceptive Design / Consequence Design</a> <span class="src">— digital.gov</span></li>
+      <li><a href="https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/" target="_blank" rel="noopener">Design Consequences in Everyday Life</a> <span class="src">— Rosenfeld Civic Design, 2022</span></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Some Thoughts</h2>
+    <ul>
+      <li><a href="https://blog.ronbronson.com/links-i-read-9-jun-26" target="_blank" rel="noopener">Links I Read (9 Jun 26)</a> <span class="src">— blog.ronbronson.com</span></li>
+      <li><a href="https://gamedesign.leaflet.pub/3mnnr7twxxs2m" target="_blank" rel="noopener">I&rsquo;m going to build a dual match tennis simulator</a> <span class="src">— gamedesign.leaflet.pub</span></li>
+      <li><a href="https://makingpublicwork.com/3mmcnbrnins2q" target="_blank" rel="noopener">Your AI Agent (or your printer) is Not a Coworker</a> <span class="src">— makingpublicwork.com</span></li>
+      <li><a href="https://makingpublicwork.com/3mm5oz4i3kk2s" target="_blank" rel="noopener">Technologist is not a job</a> <span class="src">— makingpublicwork.com</span></li>
+      <li><a href="https://makingpublicwork.com/3mlkawmzzfc2b" target="_blank" rel="noopener">The Banality of Rules</a> <span class="src">— makingpublicwork.com</span></li>
+      <li><a href="https://blog.ronbronson.com/what-forward-deployed-design-actually-looks-like" target="_blank" rel="noopener">What Forward Deployed Design Actually Looks Like</a> <span class="src">— blog.ronbronson.com</span></li>
+    </ul>
+  </section>
+
+  <section class="section elsewhere">
+    <h2>Elsewhere</h2>
+    <ul class="icons">
+      <li><a href="https://bsky.app/profile/ronbronson.com" target="_blank" rel="me noopener" aria-label="Bluesky" title="Bluesky"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
+      <li><a href="https://mastodon.social/@ronbronson" target="_blank" rel="me noopener" aria-label="Mastodon" title="Mastodon"><i class="fa-brands fa-mastodon" aria-hidden="true"></i></a></li>
+      <li><a href="https://www.linkedin.com/in/ronbronson/" target="_blank" rel="me noopener" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+      <li><a href="https://github.com/quarterback" target="_blank" rel="me noopener" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+      <li><a href="https://www.instagram.com/ronbronson/" target="_blank" rel="me noopener" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+      <li><a href="https://twitter.com/ronbronson" target="_blank" rel="me noopener" aria-label="Twitter" title="Twitter"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+      <li><a href="https://letterboxd.com/ronbronson/" target="_blank" rel="me noopener" aria-label="Letterboxd" title="Letterboxd"><i class="fa-brands fa-letterboxd" aria-hidden="true"></i></a></li>
+      <li><a href="https://literal.club/ron" target="_blank" rel="me noopener" aria-label="Literal.club" title="Literal.club"><i class="fa-solid fa-book" aria-hidden="true"></i></a></li>
+      <li><a href="https://record.club/ron" target="_blank" rel="me noopener" aria-label="Record.club" title="Record.club"><i class="fa-solid fa-record-vinyl" aria-hidden="true"></i></a></li>
+      <li><a href="https://listening.ronbronson.com" target="_blank" rel="me noopener" aria-label="Listening" title="Listening"><i class="fa-solid fa-headphones" aria-hidden="true"></i></a></li>
+      <li><a href="mailto:ron@ronbronson.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <section class="colophon" aria-label="Colophon">
+      <h2>Colophon</h2>
+      <p>Last updated 8 June 2026.</p>
+      <p>Built in Astro, HTML, CSS, JS and Font Awesome.</p>
+      <p>Fonts: Sentient and General Sans.</p>
+    </section>
+  </footer>
+
+</div>
+</body>
+</html>
