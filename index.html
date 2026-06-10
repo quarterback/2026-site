@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ron Bronson &mdash; Design</title>
+<meta name="description" content="A minimalist catalog of work by Ron Bronson — platforms, simulators, market mechanisms, and measurement instruments across public infrastructure and market design." />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Ron Bronson — Design" />
+<meta name="twitter:description" content="A minimalist catalog of work by Ron Bronson." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<script src="assets/palette.js"></script>
+<style>
+  /* ─────────────────────────────────────────────────────────────────
+     Index — minimalist catalog. A project with a screenshot is a card
+     in the grid; a project with no screenshot is a title-plus-blurb
+     row in a list. The 2px frame is the structure; the data composes.
+     ───────────────────────────────────────────────────────────────── */
+
+  /* ── Masthead row: name + top-right link ─────────── */
+  .masthead { position: relative; }
+  .masthead__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .site-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: var(--ink);
+    border-bottom: var(--frame) solid var(--accent);
+    padding-bottom: 1px;
+  }
+  .site-link:hover { color: var(--accent); }
+
+  /* ── Deck / rotating tagline ──────────── */
+  .tagline {
+    margin: clamp(14px, 2vw, 22px) 0 0;
+    font-family: "Switzer", var(--sans);
+    font-weight: 600;
+    font-size: clamp(19px, 2.5vw, 30px);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .tagline span { display: block; text-wrap: balance; }
+
+  /* ── Intro ────────────────────────────── */
+  .intro {
+    padding: 0 0 clamp(28px, 5vw, 52px);
+    max-width: 62ch;
+  }
+  .intro p {
+    margin: 0;
+    font-family: var(--text);
+    font-weight: 500;
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.5;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  /* ── The grid (screenshot cards) ──────── */
+  .index {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: var(--frame) solid var(--ink);
+    border-left: var(--frame) solid var(--ink);
+  }
+  .cell {
+    border-right: var(--frame) solid var(--ink);
+    border-bottom: var(--frame) solid var(--ink);
+    padding: clamp(16px, 1.9vw, 26px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1.3vw, 18px);
+  }
+  .cell__head { font-family: var(--mono); font-size: 12px; }
+  .cell__title {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(23px, 2.2vw, 32px);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .cell__title a { color: inherit; }
+  .cell__title a:hover { color: var(--accent); }
+  .cell__media {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-deeper);
+    border: var(--frame) solid var(--ink);
+    aspect-ratio: 16 / 10;
+    transition: border-color .14s ease;
+  }
+  .cell:hover .cell__media { border-color: var(--accent); }
+  .cell__media svg.ph,
+  .cell__media img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .cell__media svg.ph { z-index: 0; }
+  .cell__media img { z-index: 1; background: var(--bg-deeper); }
+  .cell__prose {
+    margin: 0;
+    font-family: var(--text);
+    font-weight: 500;
+    font-size: clamp(14px, 1.05vw, 16px);
+    line-height: 1.5;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  /* ── The list (title-plus-blurb rows) ─── */
+  .list {
+    list-style: none;
+    margin: clamp(20px, 3vw, 32px) 0 0;
+    padding: 0;
+    border-top: var(--frame) solid var(--ink);
+  }
+  .row {
+    padding: clamp(14px, 1.6vw, 20px) 0;
+    border-bottom: var(--hair) solid var(--rule);
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+    gap: clamp(8px, 2vw, 32px);
+    align-items: baseline;
+  }
+  .row__title {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(18px, 1.6vw, 23px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .row__title a:hover { color: var(--accent); }
+  .row__blurb {
+    margin: 0;
+    font-family: var(--text);
+    font-weight: 500;
+    font-size: clamp(14px, 1.05vw, 16px);
+    line-height: 1.5;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+
+  /* ── Section heading + past-work toggle ─ */
+  .section-rule {
+    margin: clamp(48px, 8vw, 88px) 0 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: clamp(8px, 1vw, 12px);
+  }
+  .section-rule h2 {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .toggle {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    background: none;
+    border: var(--frame) solid var(--ink);
+    border-radius: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ── Responsive ───────────────────────── */
+  @media (max-width: 1040px) { .index { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 680px) {
+    .index { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead__top">
+      <a class="name" href="./index.html">Ron Bronson</a>
+      <a class="site-link" href="https://ronbronson.dev">ronbronson.dev &rarr;</a>
+    </div>
+    <h2 class="tagline" id="tagline">
+      <span>Finds messy systems.</span>
+      <span>Makes them legible.</span>
+      <span>Builds what&rsquo;s missing.</span>
+      <span>Keeps them moving.</span>
+    </h2>
+  </header>
+  <script>
+    /* Rotate the deck on every load — pick a random variant, never
+       repeating the one shown last refresh. No-JS render shows the
+       static V1 above. */
+    (function () {
+      var DECKS = [
+        ["Finds messy problems.", "Makes them legible.", "Builds things.", "Puts them into the world."],
+        ["Finds messy systems.", "Makes them legible.", "Builds what’s missing.", "Keeps them moving."],
+        ["Untangles complexity.", "Makes it understandable.", "Builds the missing pieces.", "Leaves behind working systems."],
+        ["Finds the bottleneck.", "Makes it visible.", "Builds the fix.", "Leaves others better equipped."],
+        ["Studies how things work.", "Explains why they don’t.", "Builds what they need.", "Helps them do the job."],
+        ["Makes the invisible visible.", "Makes the confusing clear.", "Builds what’s needed.", "Puts it to work."],
+        ["Finds the workarounds.", "Understands the system.", "Builds the missing infrastructure.", "Puts it into service."],
+        ["Finds the gap between policy and reality.", "Makes it legible.", "Builds the bridge.", "Puts it into the world."]
+      ];
+      var el = document.getElementById("tagline");
+      if (!el) return;
+      var last = -1;
+      try { last = parseInt(sessionStorage.getItem("rb-deck"), 10); } catch (e) {}
+      var i = Math.floor(Math.random() * DECKS.length);
+      while (i === last) i = Math.floor(Math.random() * DECKS.length);
+      try { sessionStorage.setItem("rb-deck", i); } catch (e) {}
+      el.innerHTML = DECKS[i].map(function (line) { return "<span>" + line + "</span>"; }).join("");
+    })();
+  </script>
+
+  <section class="intro">
+    <p>A working catalog &mdash; each project is just the screenshot and a sentence. Follow a link to see the whole thing.</p>
+  </section>
+
+  <svg class="ph-defs" aria-hidden="true">
+    <defs>
+      <pattern id="m3a" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+        <rect width="16" height="16" fill="#3f88c5"/>
+        <line x1="0" y1="0" x2="0" y2="16" stroke="#004e98" stroke-width="6"/>
+      </pattern>
+    </defs>
+  </svg>
+
+  <!-- Screenshot cards (projects with an image) -->
+  <section class="index" id="grid" aria-label="Projects" hidden></section>
+
+  <!-- Title-plus-blurb rows (projects with no image) -->
+  <ul class="list" id="list" aria-label="More projects" hidden></ul>
+
+  <!-- Past work — its own list, shown or hidden -->
+  <section id="past">
+    <div class="section-rule">
+      <h2>Past work</h2>
+      <button type="button" class="toggle" id="past-toggle" aria-expanded="false" aria-controls="past-body">Show past work</button>
+    </div>
+    <div id="past-body" hidden>
+      <section class="index" id="past-grid" aria-label="Past projects" hidden></section>
+      <ul class="list" id="past-list" aria-label="More past projects" hidden></ul>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="foot__contact">Reach me at <a href="mailto:contact@ronbronson.com">contact@ronbronson.com</a> &middot; more of my work lives at <a href="https://ronbronson.dev">ronbronson.dev</a>.</p>
+    <section class="colophon" aria-label="Colophon">
+      <h2>Colophon</h2>
+      <p>Built by hand as a static site: HTML, CSS, and vanilla JavaScript &mdash; no framework, no build step. Projects are data (<b>projects.json</b>), rendered by a small script. Colour is set by a client-side palette engine that audits its own WCAG contrast; live thumbnails are captured by thum.io.</p>
+      <p>Type currently in use: <b>Author</b> (display), <b>Switzer</b> SemiBold (deck), <b>Hanken Grotesk</b> (running text), and <b>JetBrains Mono</b> (labels).</p>
+    </section>
+  </footer>
+
+</div>
+<script src="projects.js"></script>
+</body>
+</html>
