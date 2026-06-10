@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" />
 <link rel="stylesheet" href="assets/site.css" />
 <script src="assets/palette.js"></script>
 <style>
@@ -111,14 +112,22 @@
   .section a:hover { color: var(--accent); }
   .src { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.01em; }
 
-  .section ul.links {
+  .section ul.icons {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(10px, 1.4vw, 20px);
+    gap: clamp(12px, 1.8vw, 22px);
+    align-items: center;
   }
-  .elsewhere a {
-    border-bottom: var(--frame) solid var(--accent);
-    padding-bottom: 1px;
+  .section ul.icons a {
+    display: inline-flex;
+    font-size: clamp(19px, 1.7vw, 23px);
+    line-height: 1;
+    color: var(--ink);
+    transition: transform .1s ease, color .12s ease;
+  }
+  .section ul.icons a:hover {
+    color: var(--accent);
+    transform: translateY(-2px);
   }
 
   @media (max-width: 680px) {
@@ -234,18 +243,18 @@
 
   <section class="section elsewhere">
     <h2>Elsewhere</h2>
-    <ul class="links">
-      <li><a href="https://bsky.app/profile/ronbronson.com" target="_blank" rel="me noopener">Bluesky</a></li>
-      <li><a href="https://mastodon.social/@ronbronson" target="_blank" rel="me noopener">Mastodon</a></li>
-      <li><a href="https://www.linkedin.com/in/ronbronson/" target="_blank" rel="me noopener">LinkedIn</a></li>
-      <li><a href="https://github.com/quarterback" target="_blank" rel="me noopener">GitHub</a></li>
-      <li><a href="https://www.instagram.com/ronbronson/" target="_blank" rel="me noopener">Instagram</a></li>
-      <li><a href="https://twitter.com/ronbronson" target="_blank" rel="me noopener">Twitter</a></li>
-      <li><a href="https://letterboxd.com/ronbronson/" target="_blank" rel="me noopener">Letterboxd</a></li>
-      <li><a href="https://literal.club/ron" target="_blank" rel="me noopener">Literal.club</a></li>
-      <li><a href="https://record.club/ron" target="_blank" rel="me noopener">Record.club</a></li>
-      <li><a href="https://listening.ronbronson.com" target="_blank" rel="me noopener">Listening</a></li>
-      <li><a href="mailto:ron@ronbronson.com" rel="me">Email</a></li>
+    <ul class="icons">
+      <li><a href="https://bsky.app/profile/ronbronson.com" target="_blank" rel="me noopener" aria-label="Bluesky" title="Bluesky"><i class="fa-brands fa-bluesky" aria-hidden="true"></i></a></li>
+      <li><a href="https://mastodon.social/@ronbronson" target="_blank" rel="me noopener" aria-label="Mastodon" title="Mastodon"><i class="fa-brands fa-mastodon" aria-hidden="true"></i></a></li>
+      <li><a href="https://www.linkedin.com/in/ronbronson/" target="_blank" rel="me noopener" aria-label="LinkedIn" title="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+      <li><a href="https://github.com/quarterback" target="_blank" rel="me noopener" aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+      <li><a href="https://www.instagram.com/ronbronson/" target="_blank" rel="me noopener" aria-label="Instagram" title="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a></li>
+      <li><a href="https://twitter.com/ronbronson" target="_blank" rel="me noopener" aria-label="Twitter" title="Twitter"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i></a></li>
+      <li><a href="https://letterboxd.com/ronbronson/" target="_blank" rel="me noopener" aria-label="Letterboxd" title="Letterboxd"><i class="fa-brands fa-letterboxd" aria-hidden="true"></i></a></li>
+      <li><a href="https://literal.club/ron" target="_blank" rel="me noopener" aria-label="Literal.club" title="Literal.club"><i class="fa-solid fa-book" aria-hidden="true"></i></a></li>
+      <li><a href="https://record.club/ron" target="_blank" rel="me noopener" aria-label="Record.club" title="Record.club"><i class="fa-solid fa-record-vinyl" aria-hidden="true"></i></a></li>
+      <li><a href="https://listening.ronbronson.com" target="_blank" rel="me noopener" aria-label="Listening" title="Listening"><i class="fa-solid fa-headphones" aria-hidden="true"></i></a></li>
+      <li><a href="mailto:ron@ronbronson.com" rel="me" aria-label="Email" title="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></li>
     </ul>
   </section>
 
