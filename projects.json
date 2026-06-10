@@ -2,119 +2,119 @@
   "current": [
     {
       "title": "State Capacity AI",
-      "blurb": "AI is making consequential decisions with no standard for disclosure — so this builds the missing language for authority, transparency, and contest.",
+      "blurb": "AI is making decisions, and nobody has to tell you. There's no standard for disclosure, no shared language for what kind of authority a system has, and no easy way to contest a decision made by software.",
       "url": "https://statecapacity.ai",
       "image": "https://image.thum.io/get/width/2000/crop/860/https://statecapacity.ai"
     },
     {
       "title": "Occupant — AI Compute Benchmarks",
-      "blurb": "A public, daily-updated price index for AI compute, tracking 2,300+ models so nobody has to budget on vibes.",
+      "blurb": "Public data infrastructure for AI model pricing, compute deflation tracking, and market intelligence.",
       "url": "https://occupant.ee",
       "image": "assets/shots/occupant.png"
     },
     {
-      "title": "HeyPBJ",
-      "blurb": "Dating and social discovery reframed as a routing problem — cohorts and guided prompts instead of endless feeds.",
+      "title": "HeyPBJ — Structured Matching Platform",
+      "blurb": "Dating and social discovery as a routing problem—using cohorts, compatibility metrics, and guided prompts instead of endless feeds.",
       "url": "https://heypbj.xyz",
       "image": "assets/shots/heypbj.xyz.png"
     },
     {
-      "title": "Glowrm",
-      "blurb": "Trust infrastructure for AT Protocol apps, letting reputation, identity, and consent travel across networks.",
+      "title": "Glowrm — Trust & Relationship Layer",
+      "blurb": "Portable trust primitives for decentralized social environments—how identity, reputation, and consent travel across networks.",
       "url": "https://glowrm.tech",
       "image": "https://image.thum.io/get/width/1200/crop/900/https://glowrm.tech"
     },
     {
-      "title": "Leafroll",
-      "blurb": "Dynamic, modular professional profiles that travel across networks instead of living inside one platform.",
+      "title": "Leafroll — Professional Identity Layer",
+      "blurb": "Dynamic, modular professional profiles that travel across networks—rethinking how people present work, skills, and trajectory.",
       "url": "https://leafroll.fun",
       "image": "https://image.thum.io/get/width/2000/crop/860/https://leafroll.fun"
     },
     {
       "title": "Portland Digital Corps",
-      "blurb": "After 18F closed, a test of whether community-driven service delivery actually works without the federal badge.",
+      "blurb": "18F closed and I needed to know: does community-driven service delivery actually work when you strip away the federal badge?",
       "url": "https://digitalcorpspdx.org",
       "image": "assets/shots/digitalcorpspdx.org.png"
     },
     {
       "title": "Design For The Public 24",
-      "blurb": "A two-day unconference bringing together 80+ civic technologists and designers.",
+      "blurb": "Two-day unconference bringing together 80+ civic technologists and designers.",
       "url": "https://designforthepublic.com",
       "image": "assets/shots/dfp24.jpg"
     },
     {
-      "title": "Oregon HS Tennis Tournament Format",
-      "blurb": "Five years of systems thinking and institutional change, moving Oregon high school tennis to a unified team dual-match format.",
+      "title": "Revamping Oregon High School Tennis Tournament Format",
+      "blurb": "Five years of systems thinking, stakeholder coordination, and institutional change—moving Oregon high school tennis from a fragmented individual championship to a unified team dual-match format.",
       "image": "assets/shots/2023_title.jpg"
     },
     {
-      "title": "Parachute Commons License",
-      "blurb": "A modular open-licensing framework that makes sustainability tradeoffs explicit — built to be read, forked, and adapted.",
+      "title": "Parachute Commons License — Open Licensing That Shows Its Work",
+      "blurb": "A modular license framework that makes sustainability tradeoffs explicit—designed to be read, forked, and adapted.",
       "url": "https://statecapacity.ai/guides/commons-license/",
       "image": "https://image.thum.io/get/width/2000/crop/860/https://statecapacity.ai/guides/commons-license/"
     },
     {
-      "title": "Oregon HS Tennis Rankings System",
-      "blurb": "A data-driven ranking and playoff-simulation system for evaluating and seeding Oregon high school tennis teams."
+      "title": "Oregon High School Tennis Rankings System",
+      "blurb": "A data-driven ranking and playoff simulation system for Oregon high school tennis, designed to solve real problems in how teams are evaluated and seeded for state competition."
     },
     {
       "title": "AI Economic Activity Index",
-      "blurb": "A real-time global index of AI compute activity — token volumes, spend, and energy — modeled on how the IMF tracks reserves."
+      "blurb": "A global index tracking AI compute activity in real-time, measuring token volumes, spend, and energy consumption across major providers—modeled on how the IMF tracks currency reserves."
     },
     {
       "title": "Teaching Public Mechanics — University of Michigan",
-      "blurb": "Design education that teaches people to understand infrastructure and repair what's broken, not just ship more apps."
+      "blurb": "Design education shouldn't train people to build more apps. It should teach them to understand infrastructure, repair what's broken, and build systems that serve the public. That's what I'm doing at Michigan."
     },
     {
       "title": "AT Protocol Projects",
-      "blurb": "An interconnected suite of decentralized data infrastructure and public-goods experiments.",
+      "blurb": "Interconnected suite of decentralized data infrastructure and public goods experiments.",
       "url": "https://heypbj.xyz"
     },
     {
       "title": "Consequence Design",
-      "blurb": "A framework for surfacing the downstream effects of design decisions before they ship."
+      "blurb": "Framework for understanding downstream effects of design decisions. Helping teams identify harm at scale, over time, and in edge cases before they ship."
     }
   ],
   "past": [
     {
       "title": "18F — Eight Years Inside the Machine",
-      "blurb": "Millions served and billions saved — how design impact can scale beyond the tech."
+      "blurb": "Millions serves, Billions Saved. How Design Impact Can Scale Beyond The Tech"
     },
     {
       "title": "Service Delivery at Scale",
-      "blurb": "Design leadership across federal programs serving millions, at the intersection of policy intent and delivery reality."
+      "blurb": "Design leadership across federal programs serving millions. Working at the intersection of policy intent and delivery reality to improve how eligibility systems, intake processes, and service recovery work in practice."
     },
     {
       "title": "18F Website Redesign",
-      "blurb": "A content-first refresh clarifying 18F's capacity-building role."
+      "blurb": "Content-first website refresh clarifying 18F's capacity-building role."
     },
     {
       "title": "eAPD (Electronic Advanced Planning Document)",
-      "blurb": "A federal web application modernizing how states submit Medicaid funding requests."
+      "blurb": "Federal web application modernizing Medicaid funding requests for states."
     },
     {
       "title": "Benefits Determination & Appeals System",
-      "blurb": "A full-stack prototype modeling government benefits review and appeals processes."
+      "blurb": "Full-stack prototype modeling government benefits review and appeals processes."
     },
     {
       "title": "AI Decision Transparency Dashboard",
-      "blurb": "A prototype exploring how automated benefits decisions can be reviewed and challenged."
+      "blurb": "Frontend prototype exploring how automated benefits decisions can be reviewed and challenged."
     },
     {
-      "title": "TACLOG — Field Delivery Supply App",
-      "blurb": "A mobile-first supply requisition prototype for offline field logistics."
+      "title": "TACLOG - Field Delivery Supply App",
+      "blurb": "Mobile-first supply requisition prototype for offline field logistics operations."
     },
     {
       "title": "Nautilus Staffing Prototype",
-      "blurb": "A staffing decision tool consolidating crew management and role requirements."
+      "blurb": "Staffing decision tool consolidating crew management and role requirements."
     },
     {
       "title": "City of Bloomington Website Redesign",
-      "blurb": "A full-site redesign reorganizing municipal content around resident tasks, not departments."
+      "blurb": "Full-site redesign reorganizing municipal content around resident tasks, not departmental ownership."
     },
     {
       "title": "Beyond Civic Tech: Public Mechanics Starts at Home",
-      "blurb": "A conference talk on the invisible maintenance and repair work that keeps public services running after launch day."
+      "blurb": "Conference talk about the systems that keep public services running after launch day—the invisible maintenance work, workarounds, and repair practices that hold services together."
     }
   ]
 }
