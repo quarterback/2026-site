@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon" href="/assets/avatar.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" />
 <link rel="stylesheet" href="assets/site.css" />
 <script src="assets/palette.js"></script>
@@ -130,6 +130,17 @@
   .section a { color: var(--ink); }
   .section a:hover { color: var(--accent); }
   .src { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.01em; }
+  /* Digression sits in its own colour, distinct from the colophon's
+     --ink-soft text and accessible on both grounds. Pumpkin #ff6700
+     fails AA on the light ground, so light uses a darkened rust
+     (#b23c00, ~4.7:1 on Platinum); dark uses pumpkin (~5.9:1 on Onyx). */
+  .colophon__digression { color: #b23c00; }
+  :root[data-palette="onyx"] .colophon__digression { color: var(--accent); }
+  .digression__label { font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-right: 6px; }
+  .colophon__digression a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+  .colophon__digression a:hover { color: var(--ink); }
+  .src a { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; }
+  .src a:hover { color: var(--accent); }
 
   .section ul.icons {
     display: flex;
@@ -212,34 +223,6 @@
   </section>
 
   <section class="section">
-    <h2>Interviews</h2>
-    <ul>
-      <li><a href="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505" target="_blank" rel="noopener">Service Design Show Podcast</a></li>
-      <li><a href="https://codeforamerica.org/news/leading-the-field-ron-bronson/" target="_blank" rel="noopener">Leading the Field</a> <span class="src">— Code for America</span></li>
-      <li><a href="https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson" target="_blank" rel="noopener">Did I Do That Podcast</a></li>
-      <li><a href="https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7" target="_blank" rel="noopener">Surfacing Podcast</a></li>
-      <li><a href="https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson" target="_blank" rel="noopener">Building Better User-Centered Products</a> <span class="src">— Pixel Pioneers</span></li>
-    </ul>
-  </section>
-
-  <section class="section">
-    <h2>Teaching</h2>
-    <ul>
-      <li>UT 402 Public Mechanics <span class="src">— F26, W26</span></li>
-      <li>UT 330 Interaction Design <span class="src">— F26</span></li>
-      <li>UT 360 Service Design and Urban Needs <span class="src">— W&rsquo;26, W&rsquo;24</span></li>
-    </ul>
-  </section>
-
-  <section class="section">
-    <h2>Host</h2>
-    <ul>
-      <li><a href="https://futureperfectbook.club" target="_blank" rel="noopener">Future Perfect Book Club</a></li>
-      <li><a href="https://www.mixcloud.com/908rb/" target="_blank" rel="noopener">The Sound Bulletin on KFFP-FM</a></li>
-    </ul>
-  </section>
-
-  <section class="section">
     <h2>Talks</h2>
     <ul>
       <li><a href="https://www.ixda.no/talks/design-as-repair" target="_blank" rel="noopener">Design as Repair</a> <span class="src">— IxDA Oslo</span></li>
@@ -249,7 +232,42 @@
   </section>
 
   <section class="section">
-    <h2>Some Thoughts</h2>
+    <h2>Interviews</h2>
+    <ul>
+      <li><a href="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505" target="_blank" rel="noopener">Service Design Show Podcast</a></li>
+      <li><a href="https://codeforamerica.org/news/leading-the-field-ron-bronson/" target="_blank" rel="noopener">Leading the Field</a> <span class="src">— Code for America</span></li>
+      <li><a href="https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson" target="_blank" rel="noopener">Did I Do That Podcast</a></li>
+      <li><a href="https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7" target="_blank" rel="noopener">Surfacing Podcast</a></li>
+      <li><a href="https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson" target="_blank" rel="noopener">Building Better User-Centered Products</a> <span class="src">— Pixel Pioneers</span></li>
+      <li><a href="https://www.youtube.com/watch?v=U0lsmfUmrLI" target="_blank" rel="noopener">First major-league Pes&auml;pallo game broadcast in English: Sotkamo v Imatra</a> <span class="src">— 25 Jul 2024</span></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Teaching</h2>
+    <ul>
+      <li>UT 402 Public Mechanics <span class="src">— <a href="https://taubmancollege.umich.edu/course/ut402-public-mechanics-how-services-work-section-1-fall-2026/" target="_blank" rel="noopener">F26</a>, <a href="https://taubmancollege.umich.edu/course/ut402-public-mechanics-how-services-work-section-5-winter-2026/" target="_blank" rel="noopener">W26</a></span></li>
+      <li>UT 330 Interaction Design <span class="src">— F26</span></li>
+      <li>UT 360 Service Design and Urban Needs <span class="src">— <a href="https://taubmancollege.umich.edu/course/ut360-advanced-studio-service-design-and-urban-needs-section-2-winter-2026/" target="_blank" rel="noopener">W&rsquo;26</a>, <a href="https://taubmancollege.umich.edu/news/2024/04/25/taubman-college-students-create-innovative-concepts-to-welcome-new-residents-in-collaboration-with-the-state-of-michigans-population-growth-effort/" target="_blank" rel="noopener">W&rsquo;24</a></span></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Host &amp; Events</h2>
+    <ul>
+      <li><a href="https://futureperfectbook.club" target="_blank" rel="noopener">Future Perfect Book Club</a></li>
+      <li><a href="https://www.mixcloud.com/908rb/" target="_blank" rel="noopener">The Sound Bulletin on KFFP-FM</a></li>
+      <li>Organizer, <a href="https://taubmancollege.umich.edu/news/2026/04/15/bronson-leads-civic-tech-panels-at-u-m-service-design-weekend/" target="_blank" rel="noopener">Years Ahead 26</a></li>
+      <li>Founding Director, <a href="https://digitalcorpspdx.org" target="_blank" rel="noopener">Portland Digital Corps</a></li>
+      <li>Organizer, <a href="https://designforthepublic.com" target="_blank" rel="noopener">Design For The Public 24</a></li>
+      <li>Founder, <a href="https://www.aigapdx.org/portland-design-month" target="_blank" rel="noopener">Portland Design Month</a></li>
+      <li>Founder, Indianapolis Design Week <span class="src">— 2016</span></li>
+      <li>Co-Founder, <a href="https://www.instagram.com/ggrgt" target="_blank" rel="noopener">Aggregate</a> <span class="src">— 2014</span></li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>The Feed</h2>
     <ul id="thoughts-list">
       <li><a href="https://blog.ronbronson.com/links-i-read-9-jun-26" target="_blank" rel="noopener">Links I Read (9 Jun 26)</a> <span class="src">— blog.ronbronson.com</span></li>
       <li><a href="https://gamedesign.leaflet.pub/3mnnr7twxxs2m" target="_blank" rel="noopener">I&rsquo;m going to build a dual match tennis simulator</a> <span class="src">— gamedesign.leaflet.pub</span></li>
@@ -278,13 +296,43 @@
   </section>
 
   <footer class="foot">
-    <section class="colophon" aria-label="Colophon">
-      <h2>Colophon</h2>
-      <p>Last updated 8 June 2026.</p>
-      <p>Built in Astro, HTML, CSS, JS and Font Awesome.</p>
-      <p>Fonts: Sentient and General Sans.</p>
+    <section class="colophon" aria-label="Colophon, with Digressions">
+      <h2>Colophon, with Digressions</h2>
+      <p class="colophon__digression"><span class="digression__label">Digression</span> <span id="digression">Inexplicably, a Green Bay Packers shareholder.</span></p>
+      <p>Last updated 10 June 2026.</p>
+      <p>Built by hand as a static site &mdash; HTML, CSS, and vanilla JavaScript, no framework or build step. Font Awesome for icons.</p>
+      <p>Fonts: Author (display), Switzer (deck), Hanken Grotesk (text), and Azeret Mono (labels).</p>
     </section>
   </footer>
+  <script>
+    /* Rotating digression — same trick as the masthead deck. Add as many
+       lines as you like; one shows at random per load and never repeats
+       the line shown last refresh. Entries may contain inline HTML
+       (links, <em>, <s>). The static line above is the no-JS fallback. */
+    (function () {
+      var DIGRESSIONS = [
+        "Inexplicably, a Green Bay Packers shareholder.",
+        "Favorite sports teams: Toronto Blue Jays, Vimpelin Veto, New Jersey Devils, Lapuan Virkiä, <s>New York Jets</s>, New York Knicks, Portland Timbers, Portland Thorns, Brighton &amp; Hove Albion, Sassuolo, Toluca, Toronto Tempo, Montreal Expos (RIP)",
+        "<em>Have you seen my fragrance collection?</em> <a href=\"https://www.oksmelly.xyz/\" target=\"_blank\" rel=\"noopener\">it’s here</a>",
+        "I’m a longtime tea sommelier. Ask me for loose-leaf recs!",
+        "Favorite wine regions: Slovenia, Georgia or anything that aged in amphorae or an old boot. I’m not picky.",
+        "I actually grew up watching golf, because my grandfather played. I still like a Par 3 because of him.",
+        "Last time I went fishing? 1994",
+        "Unsurprisingly, I was once a bar trivia host in Bloomington. One step closer to my true calling: game show host.",
+        "Last.fm til they shut it down. Check out my scrobbles: <a href=\"https://www.last.fm/user/statechampion\" target=\"_blank\" rel=\"noopener\">last.fm/user/statechampion</a>",
+        "I’ve coached high school tennis for ten years across 3 states. My career varsity record apparently is 91-33-4. 1 team state championship, 4 District/Regional titles, 5 Conference titles. 4 individual state champions. So far…",
+        "Yes, I have a <a href=\"https://www.discogs.com/user/quarterback/collection?header=1\" target=\"_blank\" rel=\"noopener\">Discogs</a> 🙄"
+      ];
+      var el = document.getElementById("digression");
+      if (!el) return;
+      var last = -1;
+      try { last = parseInt(sessionStorage.getItem("rb-digression"), 10); } catch (e) {}
+      var i = Math.floor(Math.random() * DIGRESSIONS.length);
+      while (DIGRESSIONS.length > 1 && i === last) i = Math.floor(Math.random() * DIGRESSIONS.length);
+      try { sessionStorage.setItem("rb-digression", i); } catch (e) {}
+      el.innerHTML = DIGRESSIONS[i];
+    })();
+  </script>
 
 </div>
 

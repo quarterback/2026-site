@@ -12,12 +12,12 @@
      --text    : grotesque sans — running body copy
      --mono    : monospace — labels, specs, document control
 
-   Custom faces drop into the SLOTS below. Until you add them the
-   stacks fall through to self-hosted Author (display) and the
-   Google fallbacks loaded per page (JetBrains Mono, Hanken
-   Grotesk). Colour tokens are written by palette.js before first
-   paint; the :root values here are the static "Paper" fallback so
-   a JS-off render still lands on the page, never on default white.
+   Custom faces drop into the SLOTS below. The stacks fall through to
+   self-hosted Author (display), self-hosted Azeret Mono (mono), and
+   Hanken Grotesk (loaded per page) for running text. Colour tokens are
+   written by palette.js before first paint; the :root values here are
+   the static "Platinum" fallback so a JS-off render still lands on the
+   page, never on default white.
    ────────────────────────────────────────────────────────── */
 
 /* ─────────────────────────────────────────────────────────────────
@@ -62,6 +62,16 @@
   font-display: swap;
 }
 
+/* ── Azeret Mono — self-hosted variable face; carries all monospace
+   labels, specs, and document-control marks. ─ */
+@font-face {
+  font-family: "Azeret Mono";
+  src: url("fonts/azeret-mono-variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Static "Platinum" fallback — palette.js overwrites these at load. */
   --bg: #ebebeb;        /* Platinum     */
@@ -79,7 +89,7 @@
   --display: "RB Display", "Author", "Times New Roman", Georgia, serif;
   --text:    "RB Sans", "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --sans:    "RB Sans", "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --mono:    "RB Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --mono:    "Azeret Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 * { box-sizing: border-box; }
