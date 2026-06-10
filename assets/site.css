@@ -62,6 +62,16 @@
   font-display: swap;
 }
 
+/* ── Azeret Mono — self-hosted variable face; carries all monospace
+   labels, specs, and document-control marks. ─ */
+@font-face {
+  font-family: "Azeret Mono";
+  src: url("fonts/azeret-mono-variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Static "Platinum" fallback — palette.js overwrites these at load. */
   --bg: #ebebeb;        /* Platinum     */
@@ -79,7 +89,7 @@
   --display: "RB Display", "Author", "Times New Roman", Georgia, serif;
   --text:    "RB Sans", "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --sans:    "RB Sans", "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --mono:    "RB Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --mono:    "Azeret Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 * { box-sizing: border-box; }
