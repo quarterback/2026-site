@@ -59,7 +59,7 @@
 
       <section class="sec">
         <h2 class="sec__h">Currently reading</h2>
-        <ul class="booklist">
+        <ul class="booklist" id="reading-list" data-state="IS_READING">
         <li class="book">
           <a class="book__cover" href="https://literal.club/book/edward-fishman-chokepoints-d3fjn" target="_blank" rel="noopener" aria-label="Chokepoints">
             <span class="book__cover-fallback" aria-hidden="true">C</span>
@@ -114,7 +114,7 @@
       </section>
       <section class="sec">
         <h2 class="sec__h">Recently read</h2>
-        <ul class="booklist">
+        <ul class="booklist" id="finished-list" data-state="FINISHED">
         <li class="book">
           <a class="book__cover" href="https://literal.club/book/the-hidden-girl-and-other-stories-4i0bv" target="_blank" rel="noopener" aria-label="The Hidden Girl and Other Stories">
             <span class="book__cover-fallback" aria-hidden="true">T</span>
@@ -362,5 +362,80 @@
     <p class="foot__contact">Reach me at <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a> &middot; back to <a href="./index.html">ronbronson.design</a>.</p>
   </footer>
 </div>
+<script>
+  /* Live refresh — the markup above is a baked snapshot that renders
+     instantly and survives no-JS. On load we re-pull the current shelf
+     from Literal's public GraphQL API (CORS-open) and replace each list
+     in place; on any failure the snapshot stays. */
+  (function () {
+    var ENDPOINT = "https://api.literal.club/graphql/";
+    var HANDLE = "ron";
+    var LIMIT = 24;
+
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+      });
+    }
+
+    function gql(query, variables) {
+      return fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: query, variables: variables }),
+      }).then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      }).then(function (j) {
+        if (j.errors) throw new Error("GraphQL error");
+        return j.data;
+      });
+    }
+
+    function book(raw) {
+      var cover = raw.cover ? raw.cover.replace(/^http:\/\//, "https://") : "";
+      var url = "https://literal.club/book/" + raw.slug;
+      var authors = (raw.authors || []).map(function (a) { return a.name; }).join(", ");
+      var img = cover
+        ? '<img src="' + esc(cover) + '" alt="Cover of ' + esc(raw.title) +
+          '" loading="lazy" onerror="this.remove()" />'
+        : "";
+      return '<li class="book">' +
+        '<a class="book__cover" href="' + esc(url) + '" target="_blank" rel="noopener" aria-label="' + esc(raw.title) + '">' +
+          '<span class="book__cover-fallback" aria-hidden="true">' + esc(raw.title.slice(0, 1)) + '</span>' + img +
+        '</a>' +
+        '<div class="book__body">' +
+          '<h3 class="book__title"><a href="' + esc(url) + '" target="_blank" rel="noopener">' + esc(raw.title) + '</a></h3>' +
+          (authors ? '<p class="book__by">' + esc(authors) + '</p>' : "") +
+        '</div>' +
+      '</li>';
+    }
+
+    var BOOKS_QUERY =
+      "query B($s: ReadingStatus!, $p: String!, $l: Int!) {" +
+      "  booksByReadingStateAndProfile(limit: $l, offset: 0, readingStatus: $s, profileId: $p) {" +
+      "    title subtitle slug cover authors { name }" +
+      "  }" +
+      "}";
+
+    function fill(id, status, profileId) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      return gql(BOOKS_QUERY, { s: status, p: profileId, l: LIMIT }).then(function (d) {
+        var books = (d && d.booksByReadingStateAndProfile) || [];
+        if (books.length) el.innerHTML = books.map(book).join("");
+      });
+    }
+
+    gql("query P($h: String!) { profileByHandle(handle: $h) { id } }", { h: HANDLE })
+      .then(function (d) {
+        var id = d && d.profileByHandle && d.profileByHandle.id;
+        if (!id) return;
+        fill("reading-list", "IS_READING", id);
+        fill("finished-list", "FINISHED", id);
+      })
+      .catch(function () { /* keep the baked snapshot */ });
+  })();
+</script>
 </body>
 </html>
