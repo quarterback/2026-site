@@ -111,6 +111,11 @@
   .section a:hover { color: var(--accent); }
   .src { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); letter-spacing: 0.01em; }
 
+  .section ul.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(10px, 1.4vw, 20px);
+  }
   .elsewhere a {
     border-bottom: var(--frame) solid var(--accent);
     padding-bottom: 1px;
@@ -164,28 +169,28 @@
   </script>
 
   <div class="nowstrip">
-    <span><span class="nowstrip__label">Last played</span> <b>Living My Life</b> &mdash; Deerhunter</span>
-    <span class="reading"><a href="#reading">Reading &mdash; books past &amp; present &rarr;</a></span>
+    <span><span class="nowstrip__label">Last played</span> <a href="https://listening.ronbronson.com" target="_blank" rel="noopener"><b>Living My Life</b> &mdash; Deerhunter</a></span>
+    <span class="reading"><a href="/reading">Reading &mdash; books past &amp; present &rarr;</a></span>
   </div>
 
   <section class="section">
     <h2>Writing</h2>
     <ul>
-      <li>Some advice on managing your design career upwards <span class="src">— Piccalil.li</span></li>
-      <li>Design as Repair</li>
-      <li>The Bureaucratic Banality of Andor</li>
-      <li>What Forward Deployed Design Actually Looks Like</li>
+      <li><a href="https://piccalil.li/blog/some-advice-on-managing-your-design-career-upwards/" target="_blank" rel="noopener">Some advice on managing your design career upwards</a> <span class="src">— Piccalil.li</span></li>
+      <li><a href="https://blog.ronbronson.com/design-as-repair" target="_blank" rel="noopener">Design as Repair</a></li>
+      <li><a href="https://blog.ronbronson.com/the-bureaucratic-banality-of-andor" target="_blank" rel="noopener">The Bureaucratic Banality of Andor</a></li>
+      <li><a href="https://blog.ronbronson.com/what-forward-deployed-design-actually-looks-like?ref=rogerwong.me" target="_blank" rel="noopener">What Forward Deployed Design Actually Looks Like</a></li>
     </ul>
   </section>
 
   <section class="section">
     <h2>Interviews</h2>
     <ul>
-      <li>Service Design Show Podcast</li>
-      <li>Leading the Field <span class="src">— Code for America</span></li>
-      <li>Did I Do That Podcast</li>
-      <li>Surfacing Podcast</li>
-      <li>Building Better User-Centered Products <span class="src">— Pixel Pioneers</span></li>
+      <li><a href="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505" target="_blank" rel="noopener">Service Design Show Podcast</a></li>
+      <li><a href="https://codeforamerica.org/news/leading-the-field-ron-bronson/" target="_blank" rel="noopener">Leading the Field</a> <span class="src">— Code for America</span></li>
+      <li><a href="https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson" target="_blank" rel="noopener">Did I Do That Podcast</a></li>
+      <li><a href="https://open.spotify.com/episode/2lC2xrhf4PIasyzJW4faP7" target="_blank" rel="noopener">Surfacing Podcast</a></li>
+      <li><a href="https://pixelpioneers.co/blog/building-better-user-centered-products-an-interview-with-ron-bronson" target="_blank" rel="noopener">Building Better User-Centered Products</a> <span class="src">— Pixel Pioneers</span></li>
     </ul>
   </section>
 
@@ -201,35 +206,45 @@
   <section class="section">
     <h2>Host</h2>
     <ul>
-      <li>Future Perfect Book Club</li>
-      <li>The Sound Bulletin on KFFP-FM</li>
+      <li><a href="https://futureperfectbook.club" target="_blank" rel="noopener">Future Perfect Book Club</a></li>
+      <li><a href="https://www.mixcloud.com/908rb/" target="_blank" rel="noopener">The Sound Bulletin on KFFP-FM</a></li>
     </ul>
   </section>
 
   <section class="section">
     <h2>Talks</h2>
     <ul>
-      <li>Design as Repair <span class="src">— IxDA Oslo</span></li>
-      <li>Deceptive Design / Consequence Design <span class="src">— digital.gov</span></li>
-      <li>Design Consequences in Everyday Life <span class="src">— Rosenfeld Civic Design, 2022</span></li>
+      <li><a href="https://www.ixda.no/talks/design-as-repair" target="_blank" rel="noopener">Design as Repair</a> <span class="src">— IxDA Oslo</span></li>
+      <li><a href="https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design" target="_blank" rel="noopener">Deceptive Design / Consequence Design</a> <span class="src">— digital.gov</span></li>
+      <li><a href="https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/" target="_blank" rel="noopener">Design Consequences in Everyday Life</a> <span class="src">— Rosenfeld Civic Design, 2022</span></li>
     </ul>
   </section>
 
   <section class="section">
     <h2>Some Thoughts</h2>
     <ul>
-      <li>I&rsquo;m going to build a dual match tennis simulator <span class="src">— gamedesign.leaflet.pub</span></li>
-      <li>Your AI Agent (or your printer) is Not a Coworker <span class="src">— makingpublicwork.com</span></li>
-      <li>Technologist is not a job <span class="src">— makingpublicwork.com</span></li>
-      <li>The Banality of Rules <span class="src">— makingpublicwork.com</span></li>
-      <li>What Forward Deployed Design Actually Looks Like <span class="src">— blog.ronbronson.com</span></li>
+      <li><a href="https://gamedesign.leaflet.pub" target="_blank" rel="noopener">I&rsquo;m going to build a dual match tennis simulator</a> <span class="src">— gamedesign.leaflet.pub</span></li>
+      <li><a href="https://makingpublicwork.com" target="_blank" rel="noopener">Your AI Agent (or your printer) is Not a Coworker</a> <span class="src">— makingpublicwork.com</span></li>
+      <li><a href="https://makingpublicwork.com" target="_blank" rel="noopener">Technologist is not a job</a> <span class="src">— makingpublicwork.com</span></li>
+      <li><a href="https://makingpublicwork.com" target="_blank" rel="noopener">The Banality of Rules</a> <span class="src">— makingpublicwork.com</span></li>
+      <li><a href="https://blog.ronbronson.com" target="_blank" rel="noopener">What Forward Deployed Design Actually Looks Like</a> <span class="src">— blog.ronbronson.com</span></li>
     </ul>
   </section>
 
   <section class="section elsewhere">
     <h2>Elsewhere</h2>
-    <ul>
-      <li>Say hello: <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a></li>
+    <ul class="links">
+      <li><a href="https://bsky.app/profile/ronbronson.com" target="_blank" rel="me noopener">Bluesky</a></li>
+      <li><a href="https://mastodon.social/@ronbronson" target="_blank" rel="me noopener">Mastodon</a></li>
+      <li><a href="https://www.linkedin.com/in/ronbronson/" target="_blank" rel="me noopener">LinkedIn</a></li>
+      <li><a href="https://github.com/quarterback" target="_blank" rel="me noopener">GitHub</a></li>
+      <li><a href="https://www.instagram.com/ronbronson/" target="_blank" rel="me noopener">Instagram</a></li>
+      <li><a href="https://twitter.com/ronbronson" target="_blank" rel="me noopener">Twitter</a></li>
+      <li><a href="https://letterboxd.com/ronbronson/" target="_blank" rel="me noopener">Letterboxd</a></li>
+      <li><a href="https://literal.club/ron" target="_blank" rel="me noopener">Literal.club</a></li>
+      <li><a href="https://record.club/ron" target="_blank" rel="me noopener">Record.club</a></li>
+      <li><a href="https://listening.ronbronson.com" target="_blank" rel="me noopener">Listening</a></li>
+      <li><a href="mailto:ron@ronbronson.com" rel="me">Email</a></li>
     </ul>
   </section>
 
