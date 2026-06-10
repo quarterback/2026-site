@@ -12,12 +12,12 @@
      --text    : grotesque sans — running body copy
      --mono    : monospace — labels, specs, document control
 
-   Custom faces drop into the SLOTS below. Until you add them the
-   stacks fall through to self-hosted Author (display) and the
-   Google fallbacks loaded per page (JetBrains Mono, Hanken
-   Grotesk). Colour tokens are written by palette.js before first
-   paint; the :root values here are the static "Paper" fallback so
-   a JS-off render still lands on the page, never on default white.
+   Custom faces drop into the SLOTS below. The stacks fall through to
+   self-hosted Author (display), self-hosted Azeret Mono (mono), and
+   Hanken Grotesk (loaded per page) for running text. Colour tokens are
+   written by palette.js before first paint; the :root values here are
+   the static "Platinum" fallback so a JS-off render still lands on the
+   page, never on default white.
    ────────────────────────────────────────────────────────── */
 
 /* ─────────────────────────────────────────────────────────────────
