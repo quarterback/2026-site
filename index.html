@@ -94,9 +94,10 @@
     margin-right: 8px;
   }
   .nowstrip b { font-weight: 600; }
-  .nowstrip .reading { margin-left: auto; }
   .nowstrip a { border-bottom: var(--frame) solid var(--accent); padding-bottom: 1px; }
   .nowstrip a:hover { color: var(--accent); }
+  .nowstrip .pages { margin-left: auto; display: flex; flex-wrap: wrap; align-items: baseline; gap: clamp(10px, 1.6vw, 18px); }
+  .nowstrip .pages .sep { color: var(--ink-soft); }
 
   /* ── Sections: mono label + link list ─── */
   .section {
@@ -165,7 +166,7 @@
 
   @media (max-width: 680px) {
     .section { grid-template-columns: 1fr; gap: 8px; }
-    .nowstrip .reading { margin-left: 0; }
+    .nowstrip .pages { margin-left: 0; }
   }
 </style>
 </head>
@@ -212,7 +213,11 @@
 
   <div class="nowstrip">
     <span class="np"><span class="nowstrip__label" id="np-label">Last played</span> <a id="np-link" href="https://listening.ronbronson.com" target="_blank" rel="noopener"><b id="np-track">Living My Life</b> &mdash; <span id="np-artist">Deerhunter</span></a></span>
-    <span class="reading"><a href="reading.html">Reading &mdash; books past &amp; present &rarr;</a></span>
+    <span class="pages">
+      <a href="how-i-work.html">How I work &rarr;</a>
+      <span class="sep" aria-hidden="true">&middot;</span>
+      <a href="reading.html">Reading &rarr;</a>
+    </span>
   </div>
 
   <section class="section">
