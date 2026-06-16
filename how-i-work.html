@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>How I Work &mdash; Ron Bronson</title>
 <meta name="author" content="Ron Bronson" />
-<meta name="description" content="What Ron Bronson actually does: finding messy systems, making them legible, building what's missing, and leaving them running without him." />
+<meta name="description" content="What Ron Bronson actually does: make complex systems understandable, build structure and clarity, lead people and programs, and build things." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Ron Bronson" />
 <meta property="og:title" content="How I Work — Ron Bronson" />
-<meta property="og:description" content="What I actually do: find messy systems, make them legible, build what's missing, and leave them running without me." />
+<meta property="og:description" content="What I actually do: make complex systems understandable, build structure and clarity, lead people and programs, and build things." />
 <meta property="og:url" content="https://ronbronson.design/how-i-work" />
 <meta property="og:image" content="https://ronbronson.design/assets/avatar.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="How I Work — Ron Bronson" />
-<meta name="twitter:description" content="What I actually do: find messy systems, make them legible, build what's missing, and leave them running without me." />
+<meta name="twitter:description" content="What I actually do: make complex systems understandable, build structure and clarity, lead people and programs, and build things." />
 <meta name="twitter:image" content="https://ronbronson.design/assets/avatar.png" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" href="/assets/avatar.png" />
@@ -30,35 +30,25 @@
   .site-link { position:absolute; top:clamp(20px,3.4vw,44px); right:0; font-family:var(--mono); font-size:12px; letter-spacing:0.04em; white-space:nowrap; color:var(--ink); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
   .site-link:hover { color:var(--accent); }
 
-  .lead { max-width:62ch; margin:clamp(14px,2vw,22px) 0 clamp(28px,5vw,48px); font-family:var(--text); font-weight:500; font-size:clamp(17px,1.5vw,20px); line-height:1.5; text-wrap:pretty; }
+  .lead { max-width:64ch; margin:clamp(14px,2vw,22px) 0 clamp(28px,5vw,48px); font-family:var(--text); font-weight:500; font-size:clamp(17px,1.5vw,20px); line-height:1.5; text-wrap:pretty; }
   .lead a { border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
   .lead a:hover { color:var(--accent); }
 
-  .sec { padding:clamp(20px,3vw,32px) 0; border-top:var(--frame) solid var(--ink); }
-  .sec__h { margin:0 0 clamp(16px,2vw,22px); font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink); }
+  /* ── Capability areas — numbered, ruled ─ */
+  .area { padding:clamp(22px,3.4vw,40px) 0; border-top:var(--frame) solid var(--ink); display:grid; grid-template-columns:minmax(48px,0.16fr) minmax(0,2fr); gap:clamp(12px,2.4vw,40px); }
+  .area__n { font-family:var(--mono); font-size:clamp(20px,2.4vw,30px); font-weight:600; color:var(--ink-soft); line-height:1; }
+  .area__h { margin:0 0 clamp(12px,1.6vw,16px); font-family:var(--display); font-weight:700; font-size:clamp(24px,3vw,40px); letter-spacing:-0.025em; line-height:1.0; color:var(--ink); text-wrap:balance; }
+  .area__p { margin:0 0 clamp(14px,1.8vw,20px); max-width:64ch; font-family:var(--text); font-weight:500; font-size:clamp(16px,1.3vw,19px); line-height:1.5; text-wrap:pretty; }
+  .area__p:last-of-type { margin-bottom:clamp(18px,2.4vw,26px); }
 
-  /* ── The four moves — numbered, ruled ─── */
-  .moves { list-style:none; margin:0; padding:0; display:grid; gap:clamp(20px,3vw,34px); }
-  .move { display:grid; grid-template-columns:minmax(40px,0.18fr) minmax(0,2fr); gap:clamp(10px,2vw,32px); align-items:baseline; }
-  .move__n { font-family:var(--mono); font-size:clamp(20px,2.4vw,30px); font-weight:600; color:var(--ink-soft); line-height:1; }
-  .move__h { margin:0 0 6px; font-family:var(--display); font-weight:700; font-size:clamp(21px,2.2vw,30px); letter-spacing:-0.02em; line-height:1.04; color:var(--ink); }
-  .move__p { margin:0; max-width:60ch; font-family:var(--text); font-weight:500; font-size:clamp(15px,1.2vw,18px); line-height:1.5; text-wrap:pretty; }
-
-  /* ── Practice — mono label + description ─ */
-  .practice { list-style:none; margin:0; padding:0; display:grid; gap:clamp(14px,2vw,20px); }
-  .practice li { display:grid; grid-template-columns:minmax(150px,0.4fr) minmax(0,2fr); gap:clamp(8px,2vw,32px); align-items:baseline; }
-  .practice dt, .practice .term { font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink); }
-  .practice .desc { margin:0; font-family:var(--text); font-weight:500; font-size:clamp(15px,1.2vw,18px); line-height:1.45; max-width:58ch; text-wrap:pretty; }
-
-  /* ── Principles ───────────────────────── */
-  .tenets { list-style:none; margin:0; padding:0; display:grid; gap:clamp(11px,1.4vw,16px); }
-  .tenets li { font-family:var(--text); font-weight:600; font-size:clamp(17px,1.6vw,22px); line-height:1.25; letter-spacing:-0.01em; max-width:58ch; text-wrap:balance; padding-left:18px; position:relative; }
-  .tenets li::before { content:"\2014"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+  /* ── Keyword index — mono, middot-ruled ─ */
+  .kw { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; font-family:var(--mono); font-size:12px; letter-spacing:0.02em; line-height:1.9; color:var(--ink-soft); }
+  .kw li { white-space:nowrap; }
+  .kw li:not(:last-child)::after { content:"\00B7"; margin:0 9px; color:var(--accent); }
 
   @media (max-width:680px) {
-    .move { grid-template-columns:1fr; gap:4px; }
-    .move__n { font-size:13px; letter-spacing:0.14em; }
-    .practice li { grid-template-columns:1fr; gap:4px; }
+    .area { grid-template-columns:1fr; gap:6px; }
+    .area__n { font-size:13px; letter-spacing:0.14em; }
   }
 </style>
 </head>
@@ -74,71 +64,88 @@
   <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,64px);letter-spacing:-0.03em;line-height:0.95;margin:clamp(20px,3vw,32px) 0 0;">How I Work</h1>
   <p class="lead">People ask what I actually <em>do</em> all day. The short version is on the <a href="./index.html">front page</a>: I find systems that have stopped making sense &mdash; to the people inside them and the people they&rsquo;re meant to serve &mdash; and I make them legible enough to fix. Here&rsquo;s the longer version.</p>
 
-  <section class="sec">
-    <h2 class="sec__h">The work, in four moves</h2>
-    <ol class="moves">
-      <li class="move">
-        <span class="move__n" aria-hidden="true">01</span>
-        <div>
-          <h3 class="move__h">Find the messy system</h3>
-          <p class="move__p">I go where the work actually happens &mdash; shadowing, interviewing, reading the policy and the workarounds side by side. The gap between how something is documented and how it really runs is usually where the problem is hiding. I don&rsquo;t trust the org chart; I trust the spreadsheet someone keeps on their desktop to make the real job possible.</p>
-        </div>
-      </li>
-      <li class="move">
-        <span class="move__n" aria-hidden="true">02</span>
-        <div>
-          <h3 class="move__h">Make it legible</h3>
-          <p class="move__p">I draw the map: service blueprints, information architecture, the journeys and the handoffs nobody owns. Most dysfunction isn&rsquo;t a people problem &mdash; it&rsquo;s an invisibility problem. Once everyone can see the same system at the same time, the argument stops being about blame and starts being about the fix.</p>
-        </div>
-      </li>
-      <li class="move">
-        <span class="move__n" aria-hidden="true">03</span>
-        <div>
-          <h3 class="move__h">Build what&rsquo;s missing</h3>
-          <p class="move__p">Then I build the missing piece &mdash; a prototype, a process, a tool, sometimes a team. Forward-deployed means I&rsquo;m in it with you, shipping something real, not handing over a deck and a calendar invite. I&rsquo;d rather put a rough working thing in front of people this week than a polished plan next quarter.</p>
-        </div>
-      </li>
-      <li class="move">
-        <span class="move__n" aria-hidden="true">04</span>
-        <div>
-          <h3 class="move__h">Keep it moving</h3>
-          <p class="move__p">And I stay long enough to leave it running without me &mdash; documentation, governance, and people who can carry it after I&rsquo;m gone. The job isn&rsquo;t finished when it works once; it&rsquo;s finished when someone else can keep it working. Repair over disruption.</p>
-        </div>
-      </li>
-    </ol>
+  <section class="area">
+    <span class="area__n" aria-hidden="true">01</span>
+    <div>
+      <h2 class="area__h">Make complex systems understandable</h2>
+      <p class="area__p">I help organizations understand how information, services, teams, technology, and decisions actually work: where information lives, who owns what, how decisions get made, and why progress has stalled.</p>
+      <ul class="kw">
+        <li>Information architecture</li>
+        <li>User experience (UX)</li>
+        <li>Service design</li>
+        <li>Content strategy</li>
+        <li>Content design</li>
+        <li>Content modeling</li>
+        <li>Taxonomy design</li>
+        <li>User research</li>
+        <li>Journey mapping</li>
+        <li>Stakeholder alignment</li>
+      </ul>
+    </div>
   </section>
 
-  <section class="sec">
-    <h2 class="sec__h">What that looks like in practice</h2>
-    <ul class="practice">
-      <li><span class="term">Discovery &amp; research</span><p class="desc">Interviews, observation, and document archaeology to surface how a service really behaves &mdash; not how it&rsquo;s described in the deck.</p></li>
-      <li><span class="term">Service design</span><p class="desc">Blueprints, journey maps, and the unglamorous handoffs between teams, channels, and systems where things quietly break.</p></li>
-      <li><span class="term">Information architecture</span><p class="desc">Structure, language, and content strategy so people can find what they need and trust what they find.</p></li>
-      <li><span class="term">Prototyping &amp; delivery</span><p class="desc">Building working artifacts &mdash; flows, tools, pilots &mdash; and shipping them in short cycles instead of long plans.</p></li>
-      <li><span class="term">Governance &amp; operations</span><p class="desc">The rules, roles, and rituals that keep a thing running and improving once the project lights go off.</p></li>
-      <li><span class="term">Teaching &amp; facilitation</span><p class="desc">Workshops, studios, and coursework &mdash; including teaching service and interaction design at <a href="https://taubmancollege.umich.edu/" target="_blank" rel="noopener" style="border-bottom:var(--frame) solid var(--accent);padding-bottom:1px;">Taubman College</a> &mdash; so teams leave more capable than I found them.</p></li>
-    </ul>
+  <section class="area">
+    <span class="area__n" aria-hidden="true">02</span>
+    <div>
+      <h2 class="area__h">Build structure and clarity</h2>
+      <p class="area__p">I create the frameworks, governance, and operating practices that help organizations function: enough structure to make decisions, coordinate work, manage change, and sustain delivery over time.</p>
+      <ul class="kw">
+        <li>Governance</li>
+        <li>Organizational design</li>
+        <li>Content governance</li>
+        <li>Operating models</li>
+        <li>Process improvement</li>
+        <li>Communications planning</li>
+        <li>Change management</li>
+        <li>Strategic planning</li>
+      </ul>
+    </div>
   </section>
 
-  <section class="sec">
-    <h2 class="sec__h">How I tend to engage</h2>
-    <ul class="practice">
-      <li><span class="term">Embedded, not adjacent</span><p class="desc">I work inside the team, in the open, on the real problem &mdash; not from the outside with a separate roadmap.</p></li>
-      <li><span class="term">Short cycles</span><p class="desc">Small, visible moves that earn the next one. Momentum beats a perfect plan that never ships.</p></li>
-      <li><span class="term">Plain language</span><p class="desc">If I can&rsquo;t explain the system to the people who live in it, I don&rsquo;t understand it yet.</p></li>
-      <li><span class="term">Leave it better</span><p class="desc">Success is a team that can keep going without me. I&rsquo;m trying to work myself out of the job.</p></li>
-    </ul>
+  <section class="area">
+    <span class="area__n" aria-hidden="true">03</span>
+    <div>
+      <h2 class="area__h">Lead people and programs</h2>
+      <p class="area__p">I build teams, develop leaders, and guide organizations through transition, growth, and change. The harder part is the part beneath the org chart: creating the conditions where people want to do difficult work and stay, and assembling people across boundaries who have no obvious reason to work together.</p>
+      <ul class="kw">
+        <li>People management</li>
+        <li>Program leadership</li>
+        <li>Portfolio management</li>
+        <li>Team design</li>
+        <li>Capability building</li>
+        <li>Hiring</li>
+        <li>Professional development</li>
+        <li>Executive operations</li>
+        <li>Chief of staff functions</li>
+        <li>Organizational change</li>
+      </ul>
+    </div>
   </section>
 
-  <section class="sec">
-    <h2 class="sec__h">What I believe</h2>
-    <ul class="tenets">
-      <li>Repair over disruption.</li>
-      <li>Legibility comes before solutions.</li>
-      <li>Design has consequences &mdash; name them out loud.</li>
-      <li>Build for the public, and build it in the open.</li>
-      <li>The work isn&rsquo;t done until someone else can do it.</li>
-    </ul>
+  <section class="area">
+    <span class="area__n" aria-hidden="true">04</span>
+    <div>
+      <h2 class="area__h">Build things</h2>
+      <p class="area__p">I started as a practitioner and stay hands-on. I still write, prototype, model, publish, and build.</p>
+      <p class="area__p">I move work from idea to delivery: websites, content systems, service blueprints, simulations, educational programs, public-facing digital tools.</p>
+      <p class="area__p">Along the way I&rsquo;ve served as a product owner, Scrum lead, project manager, procurement lead, evaluator, trainer, manager, and chief of staff. The titles changed. The work was usually the same: defining scope, making tradeoffs, organizing people, and getting things launched.</p>
+      <ul class="kw">
+        <li>Product ownership</li>
+        <li>Product management</li>
+        <li>Agile delivery</li>
+        <li>Scrum leadership</li>
+        <li>Project management</li>
+        <li>Requirements development</li>
+        <li>Procurement</li>
+        <li>Vendor evaluation</li>
+        <li>Digital strategy</li>
+        <li>Content operations</li>
+        <li>CMS implementation</li>
+        <li>Platform migration</li>
+        <li>Technical documentation</li>
+        <li>Launch management</li>
+      </ul>
+    </div>
   </section>
 
   <footer class="foot">
