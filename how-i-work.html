@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>How I Work &mdash; Ron Bronson</title>
+<meta name="author" content="Ron Bronson" />
+<meta name="description" content="What Ron Bronson actually does: make complex systems understandable, build structure and clarity, lead people and programs, and build things." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ron Bronson" />
+<meta property="og:title" content="How I Work — Ron Bronson" />
+<meta property="og:description" content="What I actually do: make complex systems understandable, build structure and clarity, lead people and programs, and build things." />
+<meta property="og:url" content="https://ronbronson.design/how-i-work" />
+<meta property="og:image" content="https://ronbronson.design/assets/avatar.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="How I Work — Ron Bronson" />
+<meta name="twitter:description" content="What I actually do: make complex systems understandable, build structure and clarity, lead people and programs, and build things." />
+<meta name="twitter:image" content="https://ronbronson.design/assets/avatar.png" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/assets/avatar.png" />
+<link rel="apple-touch-icon" href="/assets/avatar.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<script src="assets/palette.js"></script>
+<style>
+  .masthead { position:relative; }
+  .masthead__top { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 16px; }
+  .site-link { position:absolute; top:clamp(20px,3.4vw,44px); right:0; font-family:var(--mono); font-size:12px; letter-spacing:0.04em; white-space:nowrap; color:var(--ink); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .site-link:hover { color:var(--accent); }
+
+  .lead { max-width:64ch; margin:clamp(14px,2vw,22px) 0 clamp(24px,4vw,40px); }
+  .lead p { margin:0; font-family:var(--text); font-weight:500; font-size:clamp(17px,1.5vw,20px); line-height:1.5; text-wrap:pretty; }
+  .lead p + p { margin-top:1em; }
+  .lead a { border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .lead a:hover { color:var(--accent); }
+
+  /* ── Pull quote — left accent rule ────── */
+  .pullquote { max-width:64ch; margin:clamp(20px,3vw,32px) 0 clamp(30px,5vw,52px); padding-left:clamp(16px,2vw,24px); border-left:var(--frame) solid var(--accent); }
+  .pullquote blockquote { margin:0; }
+  .pullquote p { margin:0; font-family:"Switzer", var(--sans); font-weight:600; font-size:clamp(18px,1.9vw,25px); line-height:1.32; letter-spacing:-0.012em; color:var(--ink); text-wrap:pretty; }
+  .pullquote figcaption { margin-top:clamp(12px,1.6vw,18px); font-family:var(--mono); font-size:12px; letter-spacing:0.06em; color:var(--ink-soft); }
+
+  /* ── Capability areas — numbered, ruled ─ */
+  .area { padding:clamp(22px,3.4vw,40px) 0; border-top:var(--frame) solid var(--ink); display:grid; grid-template-columns:minmax(48px,0.16fr) minmax(0,2fr); gap:clamp(12px,2.4vw,40px); }
+  .area__n { font-family:var(--mono); font-size:clamp(20px,2.4vw,30px); font-weight:600; color:var(--ink-soft); line-height:1; }
+  .area__h { margin:0 0 clamp(12px,1.6vw,16px); font-family:var(--display); font-weight:700; font-size:clamp(24px,3vw,40px); letter-spacing:-0.025em; line-height:1.0; color:var(--ink); text-wrap:balance; }
+  .area__p { margin:0 0 clamp(14px,1.8vw,20px); max-width:64ch; font-family:var(--text); font-weight:500; font-size:clamp(16px,1.3vw,19px); line-height:1.5; text-wrap:pretty; }
+  .area__p:last-of-type { margin-bottom:clamp(18px,2.4vw,26px); }
+
+  /* ── Keyword index — mono, middot-ruled ─ */
+  .kw { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; font-family:var(--mono); font-size:12px; letter-spacing:0.02em; line-height:1.9; color:var(--ink-soft); }
+  .kw li { white-space:nowrap; }
+  .kw li:not(:last-child)::after { content:"\00B7"; margin:0 9px; color:var(--accent); }
+
+  @media (max-width:680px) {
+    .area { grid-template-columns:1fr; gap:6px; }
+    .area__n { font-size:13px; letter-spacing:0.14em; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="masthead__top">
+      <a class="name" href="./index.html">Ron Bronson</a>
+      <a class="site-link" href="./index.html">&larr; Back</a>
+    </div>
+  </header>
+
+  <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,64px);letter-spacing:-0.03em;line-height:0.95;margin:clamp(20px,3vw,32px) 0 0;">How I Work</h1>
+  <div class="lead">
+    <p>When you&rsquo;re someone who runs toward fires rather than away from them, it can be difficult to describe the work.</p>
+    <p>If we&rsquo;re just talking disciplines, we&rsquo;d probably say something like UX engineer, information architect, and service designer. But after 20+ years of building things for the web across public institutions, the answer lies somewhere in the margins.</p>
+    <p>Institutions. Technology. Strategy. If you need a one-pager to understand me better, here&rsquo;s my attempt.</p>
+  </div>
+
+  <figure class="pullquote">
+    <blockquote>
+      <p>&ldquo;I don&rsquo;t always understand what you do. I just know that we&rsquo;d bring problems to you, it&rsquo;d be quiet for a while, and after a while it&rsquo;d come back solved or better than we found it. Whenever I heard someone say, &lsquo;Ron is working on it,&rsquo; I always knew that it meant it was going to be handled well and with care.&rdquo;</p>
+    </blockquote>
+    <figcaption>&mdash; A former skip-level of mine, in a 1:1</figcaption>
+  </figure>
+
+  <section class="area">
+    <span class="area__n" aria-hidden="true">01</span>
+    <div>
+      <h2 class="area__h">Make complex systems understandable</h2>
+      <p class="area__p">I help organizations understand how information, services, teams, technology, and decisions actually work: where information lives, who owns what, how decisions get made, and why progress has stalled.</p>
+      <ul class="kw">
+        <li>Information architecture</li>
+        <li>User experience (UX)</li>
+        <li>Service design</li>
+        <li>Content strategy</li>
+        <li>Content design</li>
+        <li>Content modeling</li>
+        <li>Taxonomy design</li>
+        <li>User research</li>
+        <li>Journey mapping</li>
+        <li>Stakeholder alignment</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="area">
+    <span class="area__n" aria-hidden="true">02</span>
+    <div>
+      <h2 class="area__h">Build structure and clarity</h2>
+      <p class="area__p">I create the frameworks, governance, and operating practices that help organizations function: enough structure to make decisions, coordinate work, manage change, and sustain delivery over time.</p>
+      <ul class="kw">
+        <li>Governance</li>
+        <li>Organizational design</li>
+        <li>Content governance</li>
+        <li>Operating models</li>
+        <li>Process improvement</li>
+        <li>Communications planning</li>
+        <li>Change management</li>
+        <li>Strategic planning</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="area">
+    <span class="area__n" aria-hidden="true">03</span>
+    <div>
+      <h2 class="area__h">Lead people and programs</h2>
+      <p class="area__p">I build teams, develop leaders, and guide organizations through transition, growth, and change. The harder part is the part beneath the org chart: creating the conditions where people want to do difficult work and stay, and assembling people across boundaries who have no obvious reason to work together.</p>
+      <ul class="kw">
+        <li>People management</li>
+        <li>Program leadership</li>
+        <li>Portfolio management</li>
+        <li>Team design</li>
+        <li>Capability building</li>
+        <li>Hiring</li>
+        <li>Professional development</li>
+        <li>Executive operations</li>
+        <li>Chief of staff functions</li>
+        <li>Organizational change</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="area">
+    <span class="area__n" aria-hidden="true">04</span>
+    <div>
+      <h2 class="area__h">Build things</h2>
+      <p class="area__p">I started as a practitioner and stay hands-on. I still write, prototype, model, publish, and build.</p>
+      <p class="area__p">I move work from idea to delivery: websites, content systems, service blueprints, simulations, educational programs, public-facing digital tools.</p>
+      <p class="area__p">Along the way I&rsquo;ve served as a product owner, Scrum lead, project manager, procurement lead, evaluator, trainer, manager, and chief of staff. The titles changed. The work was usually the same: defining scope, making tradeoffs, organizing people, and getting things launched.</p>
+      <ul class="kw">
+        <li>Product ownership</li>
+        <li>Product management</li>
+        <li>Agile delivery</li>
+        <li>Scrum leadership</li>
+        <li>Project management</li>
+        <li>Requirements development</li>
+        <li>Procurement</li>
+        <li>Vendor evaluation</li>
+        <li>Digital strategy</li>
+        <li>Content operations</li>
+        <li>CMS implementation</li>
+        <li>Platform migration</li>
+        <li>Technical documentation</li>
+        <li>Launch management</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p class="foot__contact">Got a messy system? Reach me at <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a> &middot; back to <a href="./index.html">ronbronson.design</a>.</p>
+  </footer>
+</div>
+</body>
+</html>
