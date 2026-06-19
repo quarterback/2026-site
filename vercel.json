@@ -3,5 +3,27 @@
   "framework": null,
   "buildCommand": null,
   "installCommand": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/speaking", "destination": "/talks.html", "permanent": true },
+    { "source": "/speaking.html", "destination": "/talks.html", "permanent": true },
+    { "source": "/media", "destination": "/talks.html", "permanent": true },
+    { "source": "/reading", "destination": "/reading.html", "permanent": true },
+    { "source": "/about", "destination": "/", "permanent": false },
+    { "source": "/about.html", "destination": "/", "permanent": false },
+    { "source": "/coaching", "destination": "/", "permanent": true },
+    { "source": "/coaching.html", "destination": "/", "permanent": true },
+    { "source": "/frameworks", "destination": "/", "permanent": true },
+    { "source": "/now", "destination": "/", "permanent": true },
+    { "source": "/privacy", "destination": "/", "permanent": true },
+    { "source": "/year-in-review", "destination": "/", "permanent": true },
+    { "source": "/year-in-review.html", "destination": "/", "permanent": true },
+    { "source": "/phone-a-friend", "destination": "/", "permanent": true },
+    { "source": "/work", "destination": "/", "permanent": true },
+    { "source": "/work/:path*", "destination": "/", "permanent": true },
+    { "source": "/essays", "destination": "/", "permanent": true },
+    { "source": "/essays/:path*", "destination": "/", "permanent": true },
+    { "source": "/notes", "destination": "/", "permanent": true },
+    { "source": "/notes/:path*", "destination": "/", "permanent": true }
+  ]
 }
