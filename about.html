@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About &mdash; Ron Bronson</title>
+<meta name="author" content="Ron Bronson" />
+<meta name="description" content="A brief bio. Ron Bronson designs information systems across public institutions — UX engineering, information architecture, service design, and delivery leadership." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ron Bronson" />
+<meta property="og:title" content="About — Ron Bronson" />
+<meta property="og:description" content="A brief bio. Ron Bronson designs information systems across public institutions." />
+<meta property="og:url" content="https://ronbronson.design/about" />
+<meta property="og:image" content="https://ronbronson.design/assets/avatar.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="About — Ron Bronson" />
+<meta name="twitter:description" content="A brief bio. Ron Bronson designs information systems across public institutions." />
+<meta name="twitter:image" content="https://ronbronson.design/assets/avatar.png" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/assets/avatar.png" />
+<link rel="apple-touch-icon" href="/assets/avatar.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/site.css" />
+<script src="assets/palette.js"></script>
+<style>
+  /* ─────────────────────────────────────────────────────────────────
+     About — a brief bio. Deliberately simple: masthead, a heading, a
+     few short paragraphs, a framed portrait. The bio block is the part
+     that varies between the .design / .dev / studio sites; everything
+     else is the shared shell.
+     ───────────────────────────────────────────────────────────────── */
+  .masthead { position:relative; }
+  .masthead__top { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 16px; }
+  .site-link { position:absolute; top:clamp(20px,3.4vw,44px); right:0; font-family:var(--mono); font-size:12px; letter-spacing:0.04em; white-space:nowrap; color:var(--ink); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .site-link:hover { color:var(--accent); }
+
+  .bio { max-width:62ch; margin:clamp(14px,2vw,22px) 0 clamp(28px,5vw,48px); }
+  .bio p { margin:0; font-family:var(--text); font-weight:500; font-size:clamp(17px,1.5vw,20px); line-height:1.5; text-wrap:pretty; }
+  .bio p + p { margin-top:1em; }
+  .bio a { border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .bio a:hover { color:var(--accent); }
+
+  .portrait { margin:0 0 clamp(20px,3vw,32px); max-width:520px; }
+  .portrait img { display:block; width:100%; height:auto; border:var(--frame) solid var(--ink); }
+  .portrait figcaption { margin-top:10px; font-family:var(--mono); font-size:12px; letter-spacing:0.04em; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="masthead__top">
+      <a class="name" href="./index.html">Ron Bronson</a>
+      <a class="site-link" href="./index.html">&larr; Back</a>
+    </div>
+  </header>
+
+  <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,64px);letter-spacing:-0.03em;line-height:0.95;margin:clamp(20px,3vw,32px) 0 0;">About</h1>
+
+  <!-- ── BIO — edit this block per site (.design / .dev / studio) ─────── -->
+  <div class="bio">
+    <p>Ron Bronson designs information systems. For more than twenty years he&rsquo;s worked across public institutions as a UX engineer, information architect, and service designer &mdash; making complex systems legible and building the structure that keeps them running.</p>
+    <p>He teaches service and interaction design at the University of Michigan&rsquo;s Taubman College, and has founded and led civic design efforts including <a href="https://digitalcorpspdx.org" target="_blank" rel="noopener">Portland Digital Corps</a>, <a href="https://designforthepublic.com" target="_blank" rel="noopener">Design For The Public</a>, and Portland Design Month. He <a href="talks.html">speaks regularly</a> on service design, public mechanics, and the consequences of design.</p>
+    <p>Outside the work, he coaches girls varsity tennis at Catlin Gabel School in Portland. His <a href="https://blog.ronbronson.com" target="_blank" rel="noopener">writing</a>, <a href="talks.html">talks</a>, and <a href="reading.html">reading</a> live across this site &mdash; or you can <a href="mailto:ron@ronbronson.com">reach him directly</a>.</p>
+  </div>
+  <!-- ── /BIO ────────────────────────────────────────────────────────── -->
+
+  <figure class="portrait">
+    <img src="assets/avatar.png" alt="Ron Bronson" loading="lazy" />
+  </figure>
+
+  <footer class="foot">
+    <p class="foot__contact">Reach me at <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a> &middot; back to <a href="./index.html">ronbronson.design</a>.</p>
+  </footer>
+</div>
+</body>
+</html>

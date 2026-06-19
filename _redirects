@@ -2,15 +2,11 @@
 # point at the previous extensionless URLs. Netlify reads this file;
 # Vercel uses the matching "redirects" block in vercel.json.
 #
-# /about is a TEMPORARY (302) redirect on purpose — an about page is
-# coming, and a permanent 301 would be cached by browsers and shadow it.
-
 /speaking            /talks.html      301
 /speaking.html       /talks.html      301
 /media               /talks.html      301
 /reading             /reading.html    301
-/about               /                302
-/about.html          /                302
+/about               /about.html      301
 /coaching            /                301
 /coaching.html       /                301
 /frameworks          /                301
