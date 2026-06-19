@@ -45,19 +45,25 @@
     flex-wrap: wrap;
     gap: 6px 16px;
   }
-  .site-link {
+  .site-links {
     position: absolute;
     top: clamp(20px, 3.4vw, 44px);
     right: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
     font-family: var(--mono);
     font-size: 12px;
     letter-spacing: 0.04em;
     white-space: nowrap;
+  }
+  .site-links a {
     color: var(--ink);
     border-bottom: var(--frame) solid var(--accent);
     padding-bottom: 1px;
   }
-  .site-link:hover { color: var(--accent); }
+  .site-links a:hover { color: var(--accent); }
+  .site-links .sep { color: var(--ink-soft); }
 
   /* ── Deck / rotating tagline ──────────── */
   .tagline {
@@ -176,7 +182,11 @@
   <header class="masthead">
     <div class="masthead__top">
       <a class="name" href="./index.html">Ron Bronson</a>
-      <a class="site-link" href="https://ronbronson.dev">ronbronson.dev &rarr;</a>
+      <span class="site-links">
+        <a href="https://thinkingweapons.com">Studio &#8599;</a>
+        <span class="sep" aria-hidden="true">&middot;</span>
+        <a href="https://ronbronson.dev">ronbronson.dev &#8599;</a>
+      </span>
     </div>
     <h2 class="tagline" id="tagline">
       <span>Finds messy systems.</span>
