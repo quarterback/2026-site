@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Talks &mdash; Ron Bronson</title>
+<meta name="author" content="Ron Bronson" />
+<meta name="description" content="A running record of Ron Bronson's talks, keynotes, and conference appearances on service design, public mechanics, and the consequences of design — from 2008 to now." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ron Bronson" />
+<meta property="og:title" content="Talks — Ron Bronson" />
+<meta property="og:description" content="A running record of talks, keynotes, and conference appearances on service design, public mechanics, and the consequences of design." />
+<meta property="og:url" content="https://ronbronson.design/talks" />
+<meta property="og:image" content="https://ronbronson.design/assets/avatar.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Talks — Ron Bronson" />
+<meta name="twitter:description" content="A running record of talks, keynotes, and conference appearances on service design, public mechanics, and the consequences of design." />
+<meta name="twitter:image" content="https://ronbronson.design/assets/avatar.png" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/assets/avatar.png" />
+<link rel="apple-touch-icon" href="/assets/avatar.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" />
+<link rel="stylesheet" href="assets/site.css" />
+<script src="assets/palette.js"></script>
+<style>
+  /* ─────────────────────────────────────────────────────────────────
+     Talks — a chronological stream of speaking. Each talk is a titled
+     block; a talk given more than once stacks its appearances beneath
+     the title. Structure borrowed from a talks index I admired; the
+     register (Author display, mono labels, ruled frames, squared
+     badges) is the house style.
+     ───────────────────────────────────────────────────────────────── */
+
+  .masthead { position:relative; }
+  .masthead__top { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 16px; }
+  .site-link { position:absolute; top:clamp(20px,3.4vw,44px); right:0; font-family:var(--mono); font-size:12px; letter-spacing:0.04em; white-space:nowrap; color:var(--ink); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .site-link:hover { color:var(--accent); }
+
+  .lead { max-width:64ch; margin:clamp(14px,2vw,22px) 0 clamp(28px,5vw,48px); font-family:var(--text); font-weight:500; font-size:clamp(17px,1.5vw,20px); line-height:1.5; text-wrap:pretty; }
+  .lead a { border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .lead a:hover { color:var(--accent); }
+
+  /* ── A single talk ──────────────────────────────── */
+  .talk { padding:clamp(20px,3vw,34px) 0; border-top:var(--frame) solid var(--ink); }
+  .talk__title { margin:0; font-family:var(--display); font-weight:700; font-size:clamp(23px,3.4vw,40px); letter-spacing:-0.02em; line-height:1.04; text-wrap:balance; }
+  .talk__title a { color:var(--ink); }
+  .talk__title a:hover { color:var(--accent); }
+  .talk__desc { margin:clamp(10px,1.4vw,16px) 0 clamp(8px,1.2vw,14px); max-width:72ch; font-family:var(--text); font-weight:500; font-size:clamp(15px,1.3vw,18px); line-height:1.5; color:var(--ink); text-wrap:pretty; }
+
+  /* ── Appearance rows beneath a title ────────────── */
+  .appearances { list-style:none; margin:clamp(10px,1.4vw,16px) 0 0; padding:0; }
+  .appearance {
+    display:grid;
+    grid-template-columns:minmax(92px,128px) minmax(0,1fr) auto;
+    gap:clamp(10px,2vw,28px);
+    align-items:baseline;
+    padding:clamp(8px,1vw,12px) 0;
+    border-top:var(--hair) solid var(--rule);
+  }
+  .appearance:first-child { border-top:0; }
+  .appearance__date { font-family:var(--mono); font-size:12px; letter-spacing:0.02em; color:var(--ink-soft); white-space:nowrap; }
+  .appearance__venue { font-family:var(--text); font-weight:500; font-size:clamp(15px,1.2vw,18px); line-height:1.35; text-wrap:pretty; overflow-wrap:anywhere; }
+  .appearance__note { display:block; font-family:var(--mono); font-size:11px; letter-spacing:0.02em; color:var(--ink-soft); margin-top:2px; }
+
+  /* ── Action badges — squared, ruled, mono ───────── */
+  .badges { display:flex; flex-wrap:wrap; gap:8px; justify-self:end; }
+  .badge {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink);
+    border:var(--frame) solid var(--ink);
+    padding:3px 9px;
+    line-height:1.25;
+    white-space:nowrap;
+    transition:background-color .12s ease, color .12s ease, border-color .12s ease;
+  }
+  .badge:hover { color:var(--bg); background:var(--accent); border-color:var(--accent); }
+  .badge i { font-size:10px; }
+
+  @media (max-width:560px) {
+    .appearance { grid-template-columns:1fr; gap:4px; }
+    .badges { justify-self:start; margin-top:4px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="masthead__top">
+      <a class="name" href="./index.html">Ron Bronson</a>
+      <a class="site-link" href="./index.html">&larr; Back</a>
+    </div>
+  </header>
+
+  <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,64px);letter-spacing:-0.03em;line-height:0.95;margin:clamp(20px,3vw,32px) 0 0;">Talks</h1>
+  <p class="lead">A running record of talks, keynotes, panels, and guest lectures &mdash; on service design, public mechanics, web governance, and the consequences of design. The recent ones carry a note on what they were about; the older ones are kept here for the record. Roughly reverse&#8209;chronological, 2008 to now.</p>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       Each talk is a <article class="talk">. A talk given once has a
+       single .appearance row; a recurring talk stacks several. Add a
+       .talk__desc only for recent talks. Badge types: watch / listen /
+       slides / resources — drop the ones that don't apply.
+       ───────────────────────────────────────────────────────────── -->
+
+  <article class="talk">
+    <h2 class="talk__title"><a href="https://youtube.com/watch?v=hnAScuK-oMo" target="_blank" rel="noopener">Public Mechanics: Beyond Civic Tech</a></h2>
+    <p class="talk__desc">Civic tech often overpromises and underdelivers, focusing on apps or dashboards instead of the systems that quietly keep public life running. &ldquo;Public mechanics&rdquo; is a framework for seeing the rules, workarounds, and repair practices that hold services together after the launch moment has passed.</p>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">2025</span>
+        <span class="appearance__venue">Cascadia Open Source Conference</span>
+        <span class="badges"><a class="badge" href="https://youtube.com/watch?v=hnAScuK-oMo" target="_blank" rel="noopener"><i class="fa-solid fa-play" aria-hidden="true"></i> watch</a></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title"><a href="https://www.ixda.no/talks/design-as-repair" target="_blank" rel="noopener">Design as Repair</a></h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Sep. &rsquo;25</span>
+        <span class="appearance__venue">IxDA Oslo <span aria-hidden="true">🇳🇴</span></span>
+        <span class="badges"><a class="badge" href="https://www.ixda.no/talks/design-as-repair" target="_blank" rel="noopener"><i class="fa-solid fa-play" aria-hidden="true"></i> watch</a></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Service Delivery &amp; Innovation</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jul. &rsquo;25</span>
+        <span class="appearance__venue">US Forest Service ACIO Trailhead Summit<span class="appearance__note">Keynote</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">AI Agents and the Web: How Developers Can Build Smarter with Agent Experience</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jun. &rsquo;25</span>
+        <span class="appearance__venue">Webinar</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Leading From Where You Are</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Apr. &rsquo;25</span>
+        <span class="appearance__venue">Bloomberg Industry Summit</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Sprinkle Some AI On It: Service Design, Consequences &amp; How Tech Disrupts Everyday Life</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Apr. &rsquo;24</span>
+        <span class="appearance__venue">University of Michigan, Taubman College of Architecture &amp; Urban Planning</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Service Design <span style="font-weight:400;">(Art Talk)</span></h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Nov. &rsquo;23</span>
+        <span class="appearance__venue">George Fox University</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Graphic Design <span style="font-weight:400;">(Guest Lecture)</span></h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Feb. &rsquo;24</span>
+        <span class="appearance__venue">Portland State University</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">The Designer&rsquo;s Share of the Problem</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">May &rsquo;23</span>
+        <span class="appearance__venue">ConveyUX Conference</span>
+      </li>
+      <li class="appearance">
+        <span class="appearance__date">Feb. &rsquo;23</span>
+        <span class="appearance__venue">Outcome Conference, Chandigarh, India <span aria-hidden="true">🇮🇳</span></span>
+      </li>
+      <li class="appearance">
+        <span class="appearance__date">Nov. &rsquo;22</span>
+        <span class="appearance__venue">Rosenfeld Media Civic Design Conference</span>
+        <span class="badges"><a class="badge" href="https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/" target="_blank" rel="noopener"><i class="fa-solid fa-link" aria-hidden="true"></i> resources</a></span>
+      </li>
+      <li class="appearance">
+        <span class="appearance__date">Nov. &rsquo;21</span>
+        <span class="appearance__venue">IxDA Oslo <span aria-hidden="true">🇳🇴</span></span>
+        <span class="badges"><a class="badge" href="https://www.ixda.no/talks/the-designers-share-of-the-problem" target="_blank" rel="noopener"><i class="fa-solid fa-play" aria-hidden="true"></i> watch</a></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Federal CX Leadership Symposium</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Oct. &rsquo;22</span>
+        <span class="appearance__venue">Federal Customer Experience Leadership Symposium</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Service Design</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Aug. &rsquo;22</span>
+        <span class="appearance__venue">Cloudflare Design Growth Week</span>
+      </li>
+      <li class="appearance">
+        <span class="appearance__date">Aug. &rsquo;22</span>
+        <span class="appearance__venue">Federation of Tax Associates Tech Conference</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Consequence Design</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Oct. &rsquo;21</span>
+        <span class="appearance__venue">Design Week Colorado Springs</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">The Consequences in Service Design</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Oct. &rsquo;20</span>
+        <span class="appearance__venue">SDN Global Conference <span aria-hidden="true">🇪🇺</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Avoiding Deceptive Design Patterns</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Oct. &rsquo;20</span>
+        <span class="appearance__venue">Digital.gov Monthly</span>
+        <span class="badges"><a class="badge" href="https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design" target="_blank" rel="noopener"><i class="fa-solid fa-link" aria-hidden="true"></i> resources</a></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">The Researcher&rsquo;s Role in Reducing Consequence &amp; Hostile Design</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jul. &rsquo;20</span>
+        <span class="appearance__venue">An Event Apart &mdash; Human-Centered Design</span>
+      </li>
+      <li class="appearance">
+        <span class="appearance__date">Mar. &rsquo;20</span>
+        <span class="appearance__venue">UX Australia Design Research <span aria-hidden="true">🇦🇺</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Hostile Design of Digital Experiences</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Oct. &rsquo;19</span>
+        <span class="appearance__venue">ACM SIGDOC, Portland</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Involving Stakeholders in Design Research</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jun. &rsquo;19</span>
+        <span class="appearance__venue">UXR Conference, Toronto <span aria-hidden="true">🇨🇦</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Code for America Summit</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">May &rsquo;19</span>
+        <span class="appearance__venue">Code for America Summit<span class="appearance__note">Panel</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Portland Design Week</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Apr. &rsquo;19</span>
+        <span class="appearance__venue">Portland Design Week<span class="appearance__note">Panel</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Defense Against Dark Patterns</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Feb. &rsquo;19</span>
+        <span class="appearance__venue">Donut.js, Portland</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Improving the Product Toolbox</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Oct. &rsquo;18</span>
+        <span class="appearance__venue">Indy Design Week</span>
+      </li>
+      <li class="appearance">
+        <span class="appearance__date">Jul. &rsquo;17</span>
+        <span class="appearance__venue">Design &amp; Content, Vancouver &mdash; &ldquo;Discovery &amp; Microinteractions&rdquo; <span aria-hidden="true">🇨🇦</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Migrating a Small City to Drupal</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Apr. &rsquo;18</span>
+        <span class="appearance__venue">DrupalCon Nashville<span class="appearance__note">With Charles Brandt</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Service Design in Higher Education</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jan. &rsquo;18</span>
+        <span class="appearance__venue">Carnegie Conference, Orlando</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Tackling Content Migration &amp; Maintenance</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Nov. &rsquo;17</span>
+        <span class="appearance__venue">Confab Higher Ed</span>
+      </li>
+      <li class="appearance">
+        <span class="appearance__date">Apr. &rsquo;17</span>
+        <span class="appearance__venue">University of Illinois Web Conference</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Content Migration</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Sep. &rsquo;17</span>
+        <span class="appearance__venue">Confab Intensive</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Pixel Up!</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">May &rsquo;17</span>
+        <span class="appearance__venue">Pixel Up!, Cape Town <span aria-hidden="true">🇿🇦</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">What&rsquo;s Your Superhero Strategy: How Web Governance Can Save Your World</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jun. &rsquo;15</span>
+        <span class="appearance__venue">Web Conference at Penn State</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">A Clown Car of Nonsense: Choosing a Better Vehicle to Steer Content Governance</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">May &rsquo;15</span>
+        <span class="appearance__venue">Confab Central</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">The Kids Are Alright: Millennials in the Workplace</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Apr. &rsquo;15</span>
+        <span class="appearance__venue">Wayne State University Regional Web Conference</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Integrating a Web Team Into Your Marketing Department</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Nov. &rsquo;14</span>
+        <span class="appearance__venue">American Marketing Association Symposium for the Marketing of Higher Education</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Aggregate Conference, Louisville</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Sep. &rsquo;14</span>
+        <span class="appearance__venue">Aggregate Conference, Louisville<span class="appearance__note">Conference Director</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">The College Website Is a Potluck</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jun. &rsquo;14</span>
+        <span class="appearance__venue">Hannon Hill Webinar Series</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Managing the Ups and Downs of One-Person Offices and Small Teams</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jun. &rsquo;14</span>
+        <span class="appearance__venue">Confab for Nonprofits &mdash; &ldquo;The Lone Ranger&rdquo;</span>
+      </li>
+      <li class="appearance">
+        <span class="appearance__date">Nov. &rsquo;13</span>
+        <span class="appearance__venue">Confab Higher Ed &mdash; &ldquo;Armies of One&rdquo;</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Saving the World One Tumblr at a Time</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jun. &rsquo;14</span>
+        <span class="appearance__venue">Web Conference at Penn State</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Sunnier Days Ahead: Storytelling &amp; Social Media Across Silos</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jun. &rsquo;14</span>
+        <span class="appearance__venue">SUNYCUAD Conference</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Who Owns the Website? Making the Case for Digital Leadership</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">May &rsquo;14</span>
+        <span class="appearance__venue">University of Michigan Regional Web Conference</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Death to Governance&hellip; Embrace the Chaos</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Apr. &rsquo;14</span>
+        <span class="appearance__venue">HighEdWeb Pittsburgh Regional Conference<span class="appearance__note">With Tonya Oaks Smith</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Sharing the Sandbox: IT &amp; Marketing</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Nov. &rsquo;13</span>
+        <span class="appearance__venue">Udacity Webinar Series<span class="appearance__note">With Alaina Wiens</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Unboxing Yourself: Reaching Out for Professional Growth</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Jun. &rsquo;13</span>
+        <span class="appearance__venue">HighEdWeb Michigan Regional Conference</span>
+      </li>
+    </ul>
+  </article>
+
+  <article class="talk">
+    <h2 class="talk__title">Future Web Trends</h2>
+    <ul class="appearances">
+      <li class="appearance">
+        <span class="appearance__date">Sep. &rsquo;08</span>
+        <span class="appearance__venue">National Association of Government Webmasters Conference<span class="appearance__note">Panel</span></span>
+      </li>
+    </ul>
+  </article>
+
+  <footer class="foot">
+    <p class="foot__contact">Want me to speak? Reach me at <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a> &middot; back to <a href="./index.html">ronbronson.design</a>.</p>
+  </footer>
+</div>
+</body>
+</html>
