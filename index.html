@@ -45,10 +45,14 @@
     flex-wrap: wrap;
     gap: 6px 16px;
   }
+  .masthead__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px 16px;
+    margin-bottom: clamp(10px, 1.6vw, 16px);
+  }
   .site-link {
-    position: absolute;
-    top: clamp(20px, 3.4vw, 44px);
-    right: 0;
     font-family: var(--mono);
     font-size: 12px;
     letter-spacing: 0.04em;
@@ -174,9 +178,12 @@
 <div class="wrap">
 
   <header class="masthead">
+    <nav class="masthead__nav" aria-label="Network">
+      <a class="site-link" href="https://thinkingweapons.com">Studio &rarr;</a>
+      <a class="site-link" href="https://ronbronson.dev">ronbronson.dev &rarr;</a>
+    </nav>
     <div class="masthead__top">
       <a class="name" href="./index.html">Ron Bronson</a>
-      <a class="site-link" href="https://ronbronson.dev">ronbronson.dev &rarr;</a>
     </div>
     <h2 class="tagline" id="tagline">
       <span>Finds messy systems.</span>
