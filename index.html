@@ -46,12 +46,12 @@
     gap: 6px 16px;
   }
   .site-links {
-    position: absolute;
-    top: clamp(20px, 3.4vw, 44px);
-    right: 0;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
     align-items: baseline;
     gap: 10px;
+    margin-bottom: clamp(10px, 1.6vw, 16px);
     font-family: var(--mono);
     font-size: 12px;
     letter-spacing: 0.04em;
@@ -180,13 +180,13 @@
 <div class="wrap">
 
   <header class="masthead">
+    <span class="site-links">
+      <a href="https://thinkingweapons.com">Studio &#8599;</a>
+      <span class="sep" aria-hidden="true">&middot;</span>
+      <a href="https://ronbronson.dev">ronbronson.dev &#8599;</a>
+    </span>
     <div class="masthead__top">
       <a class="name" href="./index.html">Ron Bronson</a>
-      <span class="site-links">
-        <a href="https://thinkingweapons.com">Studio &#8599;</a>
-        <span class="sep" aria-hidden="true">&middot;</span>
-        <a href="https://ronbronson.dev">ronbronson.dev &#8599;</a>
-      </span>
     </div>
     <h2 class="tagline" id="tagline">
       <span>Finds messy systems.</span>
