@@ -77,6 +77,20 @@
   }
   .tagline span { display: block; text-wrap: balance; }
 
+  /* ── Lead-in: one plain-English sentence below the deck ─ */
+  .intro-lede {
+    margin: clamp(18px, 2.6vw, 30px) 0 0;
+    max-width: 54ch;
+    font-family: var(--text);
+    font-weight: 500;
+    font-size: clamp(18px, 1.9vw, 24px);
+    line-height: 1.4;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .intro-lede a { border-bottom: var(--frame) solid var(--accent); padding-bottom: 1px; }
+  .intro-lede a:hover { color: var(--accent); }
+
   /* ── Now strip: music + reading ───────── */
   .nowstrip {
     display: flex;
@@ -220,6 +234,8 @@
       el.innerHTML = DECKS[i].map(function (line) { return "<span>" + line + "</span>"; }).join("");
     })();
   </script>
+
+  <p class="intro-lede">Ron Bronson works on the decision layer &mdash; the systems that determine how institutions operate, coordinate, and stay accountable as AI becomes part of how the public gets served.</p>
 
   <div class="nowstrip">
     <span class="np"><span class="nowstrip__label" id="np-label">Last played</span> <a id="np-link" href="https://listening.ronbronson.com" target="_blank" rel="noopener"><b id="np-track">Living My Life</b> &mdash; <span id="np-artist">Deerhunter</span></a></span>
