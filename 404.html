@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>404 &mdash; Ron Bronson</title>
+<meta name="robots" content="noindex" />
+<meta name="description" content="Page not found." />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/assets/avatar.png" />
+<link rel="apple-touch-icon" href="/assets/avatar.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/site.css" />
+<script src="/assets/palette.js"></script>
+<style>
+  .masthead { position:relative; }
+  .masthead__top { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 16px; }
+  .site-link { position:absolute; top:clamp(20px,3.4vw,44px); right:0; font-family:var(--mono); font-size:12px; letter-spacing:0.04em; white-space:nowrap; color:var(--ink); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .site-link:hover { color:var(--accent); }
+
+  .e404 { font-family:var(--display); font-weight:700; font-size:clamp(96px,26vw,300px); letter-spacing:-0.04em; line-height:0.86; margin:clamp(20px,4vw,44px) 0 0; color:var(--ink); }
+  .lead { max-width:54ch; margin:clamp(14px,2vw,22px) 0 clamp(28px,5vw,44px); font-family:var(--text); font-weight:500; font-size:clamp(17px,1.5vw,20px); line-height:1.5; text-wrap:pretty; }
+  .backlinks { list-style:none; margin:0; padding:clamp(18px,2.4vw,26px) 0 0; border-top:var(--frame) solid var(--ink); display:flex; flex-wrap:wrap; gap:10px 22px; font-family:var(--mono); font-size:13px; }
+  .backlinks a { color:var(--ink); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .backlinks a:hover { color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="masthead__top">
+      <a class="name" href="/index.html">Ron Bronson</a>
+      <a class="site-link" href="/index.html">&larr; Home</a>
+    </div>
+  </header>
+
+  <p class="e404">404</p>
+  <p class="lead">That page isn&rsquo;t here. The site was rebuilt &mdash; whatever you were after has probably moved or been retired. Try one of these:</p>
+
+  <ul class="backlinks">
+    <li><a href="/index.html">Home &rarr;</a></li>
+    <li><a href="/about.html">About &rarr;</a></li>
+    <li><a href="/how-i-work.html">How I work &rarr;</a></li>
+    <li><a href="/talks.html">Talks &rarr;</a></li>
+    <li><a href="/reading.html">Reading &rarr;</a></li>
+  </ul>
+
+  <footer class="foot">
+    <p class="foot__contact">Lost? Reach me at <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a>.</p>
+  </footer>
+</div>
+</body>
+</html>

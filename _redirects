@@ -1,0 +1,27 @@
+# Old site routes still floating around in search results → main index,
+# so they stop resolving as 404s. /reading and /about keep going to their
+# live pages. Anything not listed falls through to 404.html.
+
+/reading             /reading.html    301
+/about               /about.html      301
+
+/speaking            /                301
+/speaking.html       /                301
+/media               /                301
+/coaching            /                301
+/coaching.html       /                301
+/frameworks          /                301
+/now                 /                301
+/privacy             /                301
+/year-in-review      /                301
+/year-in-review.html /                301
+/phone-a-friend      /                301
+/admin               /                301
+/upload              /                301
+/notes.xml           /                301
+/work                /                301
+/work/*              /                301
+/essays              /                301
+/essays/*            /                301
+/notes               /                301
+/notes/*             /                301

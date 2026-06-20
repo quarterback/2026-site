@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Talks &mdash; Ron Bronson</title>
+<meta name="author" content="Ron Bronson" />
+<meta name="description" content="A running record of Ron Bronson's talks, keynotes, workshops, and conference appearances on service design, public mechanics, and the consequences of design — from 2008 to now." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Ron Bronson" />
+<meta property="og:title" content="Talks — Ron Bronson" />
+<meta property="og:description" content="A running record of talks, keynotes, workshops, and conference appearances on service design, public mechanics, and the consequences of design." />
+<meta property="og:url" content="https://ronbronson.design/talks" />
+<meta property="og:image" content="https://ronbronson.design/assets/avatar.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Talks — Ron Bronson" />
+<meta name="twitter:description" content="A running record of talks, keynotes, workshops, and conference appearances on service design, public mechanics, and the consequences of design." />
+<meta name="twitter:image" content="https://ronbronson.design/assets/avatar.png" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/assets/avatar.png" />
+<link rel="apple-touch-icon" href="/assets/avatar.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" />
+<link rel="stylesheet" href="assets/site.css" />
+<script src="assets/palette.js"></script>
+<style>
+  /* ─────────────────────────────────────────────────────────────────
+     Talks — a traditional chronology, newest first, one event per line:
+     date · BOLD EVENT · location — talk title. Leading with the event
+     (and its place) keeps talks scannable and findable by venue/location.
+     House register: Switzer/mono, ruled hairlines, squared badges.
+     ───────────────────────────────────────────────────────────────── */
+  .masthead { position:relative; }
+  .masthead__top { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:6px 16px; }
+  .site-link { position:absolute; top:clamp(20px,3.4vw,44px); right:0; font-family:var(--mono); font-size:12px; letter-spacing:0.04em; white-space:nowrap; color:var(--ink); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .site-link:hover { color:var(--accent); }
+
+  .pagenav { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 14px; margin:0 0 clamp(22px,3.5vw,36px); padding:clamp(11px,1.5vw,15px) 0; border-top:var(--frame) solid var(--ink); border-bottom:var(--frame) solid var(--ink); font-family:var(--mono); font-size:12px; letter-spacing:0.04em; }
+  .pagenav a { color:var(--ink); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px; }
+  .pagenav a:hover { color:var(--accent); }
+  .pagenav .sep { color:var(--ink-soft); }
+  .pagenav [aria-current="page"] { color:var(--accent); }
+
+  .talks-list { list-style:none; margin:0; padding:0; border-top:var(--frame) solid var(--ink); }
+  .talk {
+    display:grid;
+    grid-template-columns:minmax(74px,94px) minmax(0,1fr);
+    gap:clamp(10px,2vw,24px);
+    padding:clamp(11px,1.4vw,16px) 0;
+    border-bottom:var(--hair) solid var(--rule);
+    align-items:baseline;
+  }
+  .talk__date { font-family:var(--mono); font-size:12px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap; }
+  .talk__line { margin:0; font-family:var(--text); font-weight:500; font-size:clamp(15px,1.25vw,18px); line-height:1.4; text-wrap:pretty; }
+  .talk__event { font-weight:700; color:var(--ink); }
+  .talk__event a { color:var(--ink); border-bottom:var(--hair) solid var(--accent); padding-bottom:1px; }
+  .talk__event a:hover { color:var(--accent); }
+  .talk__loc { color:var(--ink-soft); }
+  .talk__name { color:var(--ink); }
+  .talk__role { font-family:var(--mono); font-size:11px; letter-spacing:0.04em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap; }
+  .talk__desc { margin:6px 0 0; max-width:74ch; font-family:var(--text); font-weight:500; font-size:clamp(14px,1.1vw,16px); line-height:1.5; color:var(--ink-soft); text-wrap:pretty; }
+
+  .badges { margin:8px 0 0; display:flex; flex-wrap:wrap; gap:8px; }
+  .badge {
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:var(--mono); font-size:11px; font-weight:600;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--ink);
+    border:var(--frame) solid var(--ink); padding:2px 8px; line-height:1.25; white-space:nowrap;
+    transition:background-color .12s ease, color .12s ease, border-color .12s ease;
+  }
+  .badge:hover { color:var(--bg); background:var(--accent); border-color:var(--accent); }
+  .badge i { font-size:10px; }
+
+  @media (max-width:560px) {
+    .talk { grid-template-columns:1fr; gap:3px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="masthead__top">
+      <a class="name" href="./index.html">Ron Bronson</a>
+      <a class="site-link" href="./index.html">&larr; Back</a>
+    </div>
+  </header>
+
+  <nav class="pagenav" aria-label="Pages">
+    <a href="about.html">About &rarr;</a>
+    <span class="sep" aria-hidden="true">&middot;</span>
+    <a href="how-i-work.html">How I work &rarr;</a>
+    <span class="sep" aria-hidden="true">&middot;</span>
+    <a href="talks.html" aria-current="page">Talks &rarr;</a>
+    <span class="sep" aria-hidden="true">&middot;</span>
+    <a href="reading.html">Reading &rarr;</a>
+  </nav>
+
+  <h1 style="font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,64px);letter-spacing:-0.03em;line-height:0.95;margin:clamp(20px,3vw,32px) 0 clamp(26px,4vw,40px);">Talks</h1>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       One <li class="talk"> per event, newest first:
+         date · <strong>EVENT</strong>, location &mdash; talk title · ROLE
+       Add a .talk__desc and/or .badges where a talk earns them.
+       ───────────────────────────────────────────────────────────── -->
+  <ul class="talks-list">
+
+    <li class="talk">
+      <span class="talk__date">Mar. &rsquo;26</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event"><a href="https://yearsahead.io" target="_blank" rel="noopener">Years Ahead 26</a></strong><span class="talk__loc">, Service Design Weekend &middot; University of Michigan, Ann Arbor, MI</span> &middot; <span class="talk__role">Organizer &amp; panel moderator</span></p>
+        <p class="badges"><a class="badge" href="https://yearsahead.io" target="_blank" rel="noopener"><i class="fa-solid fa-link" aria-hidden="true"></i> panels</a></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jan. &rsquo;26</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Throughline Conference</strong> <span class="talk__name">&mdash; Design as Repair</span></p>
+        <p class="talk__desc">Systems don&rsquo;t usually fail all at once. They leak, jam, get stuck &mdash; and when that happens, it&rsquo;s not designers or senior leaders who respond, it&rsquo;s the people embedded in those systems, doing the work that keeps things running. Drawing on years inside federal and local government delivery, this talk argues the designer&rsquo;s job should focus on maintenance, not just shiny UIs and dashboards &mdash; for anyone tired of being told to innovate when what we actually need is to tag what&rsquo;s broken and start fixing it.</p>
+        <p class="badges">
+          <a class="badge" href="https://blog.ronbronson.com/design-as-repair" target="_blank" rel="noopener"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> talk notes</a>
+          <a class="badge" href="https://www.stemlynsblog.org/design-as-repair-nhs-emergency-medicine/" target="_blank" rel="noopener"><i class="fa-solid fa-link" aria-hidden="true"></i> NHS write-up</a>
+          <a class="badge" href="https://www.throughlineconf.com/speakers/ron-bronson" target="_blank" rel="noopener"><i class="fa-solid fa-link" aria-hidden="true"></i> details</a>
+        </p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;25</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Cascadia Open Source Conference</strong> <span class="talk__name">&mdash; Beyond Civic Tech: Public Mechanics Starts at Home</span> &middot; <span class="talk__role">Keynote</span></p>
+        <p class="talk__desc">Civic tech often overpromises and underdelivers, focusing on apps or dashboards instead of the systems that quietly keep public life running. Public mechanics is a framework for seeing the rules, workarounds, and repair practices that hold services together after the launch moment has passed. This keynote explores why the &ldquo;last mile&rdquo; of delivery is always political, how resilient processes safeguard against misuse, and why the unglamorous work of maintenance is what makes systems durable and worthy of public trust.</p>
+        <p class="badges"><a class="badge" href="https://youtube.com/watch?v=hnAScuK-oMo" target="_blank" rel="noopener"><i class="fa-solid fa-play" aria-hidden="true"></i> watch</a></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Sep. &rsquo;25</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Hype Studies Conference</strong><span class="talk__loc">, Universitat Oberta de Catalunya, Barcelona, Spain <span aria-hidden="true">🇪🇸</span></span> <span class="talk__name">&mdash; Hype and Its Impact on the City</span> &middot; <span class="talk__role">Workshop</span></p>
+        <p class="talk__desc">A workshop on hype and the city &mdash; on how technology has stretched culture&rsquo;s half-life, and what gets crowded out when nostalgia becomes the dominant cultural operating system.</p>
+        <p class="badges"><a class="badge" href="https://blog.ronbronson.com/the-long-half-life-of-culture" target="_blank" rel="noopener"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> notes</a></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Sep. &rsquo;25</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">IxDA Oslo</strong><span class="talk__loc">, Norway <span aria-hidden="true">🇳🇴</span></span> <span class="talk__name">&mdash; Design as Repair</span></p>
+        <p class="badges"><a class="badge" href="https://www.ixda.no/talks/design-as-repair" target="_blank" rel="noopener"><i class="fa-solid fa-play" aria-hidden="true"></i> watch</a></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Aug. &rsquo;25</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Seattle Design Festival</strong><span class="talk__loc">, Seattle, WA</span> <span class="talk__name">&mdash; Beyond the Comment Box: Rethinking Feedback as Civic Infrastructure</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jun. &rsquo;25</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Netlify</strong><span class="talk__loc">, Virtual</span> <span class="talk__name">&mdash; AI Agents and the Web: How Developers Can Build Smarter with Agent Experience</span> &middot; <span class="talk__role">Webinar</span></p>
+        <p class="badges"><a class="badge" href="https://www.youtube.com/watch?v=bMx5JnnVDIM" target="_blank" rel="noopener"><i class="fa-solid fa-play" aria-hidden="true"></i> watch</a></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">May &rsquo;25</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Code for America Summit</strong> <span class="talk__name">&mdash; You can carry on where 18F left off</span> &middot; <span class="talk__role">Panel moderator, with Sam Couch, Komal Rasheed &amp; Lindsay Young</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Apr. &rsquo;25</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Bloomberg Industry Summit</strong> <span class="talk__name">&mdash; Leading From Where You Are</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Aug. &rsquo;24</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Portland UX Book Club</strong><span class="talk__loc">, ADX, Portland, OR</span> <span class="talk__name">&mdash; Writing Is Designing</span> &middot; <span class="talk__role">Host, live podcast with Andy Welfle</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jul. &rsquo;24</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">US Forest Service ACIO Trailhead Summit</strong> <span class="talk__name">&mdash; Service Delivery &amp; Innovation</span> &middot; <span class="talk__role">Keynote</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Apr. &rsquo;24</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">University of Michigan, Taubman College</strong><span class="talk__loc">, Ann Arbor, MI</span> <span class="talk__name">&mdash; Sprinkle Some AI On It: Service Design, Consequences &amp; How Tech Disrupts Everyday Life</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Feb. &rsquo;24</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Portland State University</strong><span class="talk__loc">, Portland, OR</span> <span class="talk__name">&mdash; Graphic Design</span> &middot; <span class="talk__role">Guest lecture</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;23</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">George Fox University</strong><span class="talk__loc">, Newberg, OR</span> <span class="talk__name">&mdash; Service Design</span> &middot; <span class="talk__role">Art talk</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">May &rsquo;23</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">ConveyUX</strong><span class="talk__loc">, Seattle, WA</span> <span class="talk__name">&mdash; The Designer&rsquo;s Share of the Problem</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Feb. &rsquo;23</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Outcome Conference</strong><span class="talk__loc">, Chandigarh, India <span aria-hidden="true">🇮🇳</span></span> <span class="talk__name">&mdash; The Designer&rsquo;s Share of the Problem</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;22</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Rosenfeld Media Civic Design Conference</strong> <span class="talk__name">&mdash; The Designer&rsquo;s Share of the Problem</span></p>
+        <p class="badges"><a class="badge" href="https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/" target="_blank" rel="noopener"><i class="fa-solid fa-link" aria-hidden="true"></i> resources</a></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Oct. &rsquo;22</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Federal Customer Experience Leadership Symposium</strong></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Aug. &rsquo;22</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Cloudflare Design Growth Week</strong> <span class="talk__name">&mdash; Service Design</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Aug. &rsquo;22</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Federation of Tax Associates Tech Conference</strong> <span class="talk__name">&mdash; Service Design</span> &middot; <span class="talk__role">Keynote</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;21</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">IxDA Oslo</strong><span class="talk__loc">, Norway <span aria-hidden="true">🇳🇴</span></span> <span class="talk__name">&mdash; The Designer&rsquo;s Share of the Problem</span></p>
+        <p class="badges"><a class="badge" href="https://www.ixda.no/talks/the-designers-share-of-the-problem" target="_blank" rel="noopener"><i class="fa-solid fa-play" aria-hidden="true"></i> watch</a></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Oct. &rsquo;21</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Design Week Colorado Springs</strong><span class="talk__loc">, Colorado Springs, CO</span> <span class="talk__name">&mdash; Consequence Design</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;20</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">PDX UX Writers Meetup</strong><span class="talk__loc">, Portland, OR</span> <span class="talk__name">&mdash; Consequence Design in UX Writing</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Oct. &rsquo;20</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Service Design Network Global Conference</strong><span class="talk__loc"> <span aria-hidden="true">🇪🇺</span></span> <span class="talk__name">&mdash; The Consequences in Service Design</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Oct. &rsquo;20</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Digital.gov Monthly</strong><span class="talk__loc">, Virtual</span> <span class="talk__name">&mdash; Avoiding Deceptive Design Patterns</span></p>
+        <p class="badges"><a class="badge" href="https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design" target="_blank" rel="noopener"><i class="fa-solid fa-link" aria-hidden="true"></i> resources</a></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Oct. &rsquo;20</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">U.S. Web Design System Monthly Call</strong><span class="talk__loc">, Virtual</span> <span class="talk__name">&mdash; Consequence Design</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jul. &rsquo;20</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">An Event Apart</strong><span class="talk__loc">, Human-Centered Design &middot; Virtual</span> <span class="talk__name">&mdash; The Designer&rsquo;s Role in Consequence Design</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">May &rsquo;20</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Indy Design Week</strong><span class="talk__loc">, Virtual</span> <span class="talk__name">&mdash; Hostile Design of Digital Experiences</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Mar. &rsquo;20</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">UX Australia Design Research</strong><span class="talk__loc">, Australia <span aria-hidden="true">🇦🇺</span></span> <span class="talk__name">&mdash; The Researcher&rsquo;s Role in Reducing Hostile Design</span></p>
+        <p class="talk__desc">How does hostile design negatively impact users in a society where we&rsquo;re &ldquo;always online&rdquo;? In this talk, we&rsquo;ll explore what hostile design is, the common terms, and the ways user researchers can make the case for eliminating them from sites.</p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Oct. &rsquo;19</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">ACM SIGDOC</strong><span class="talk__loc">, Portland, OR</span> <span class="talk__name">&mdash; Hostile Design of Digital Experiences</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jun. 6&ndash;7, &rsquo;19</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Strive UX Research Conference (UXRConf)</strong><span class="talk__loc">, Toronto, Canada <span aria-hidden="true">🇨🇦</span></span> <span class="talk__name">&mdash; Involving Stakeholders in Design Research</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">May &rsquo;19</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Code for America Summit</strong> &middot; <span class="talk__role">Panel</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Apr. &rsquo;19</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Portland Design Week</strong><span class="talk__loc">, Portland, OR</span> &middot; <span class="talk__role">Panel</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Feb. &rsquo;19</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Donut.js</strong><span class="talk__loc">, Portland, OR</span> <span class="talk__name">&mdash; Defense Against Dark Patterns</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Oct. &rsquo;18</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Indy Design Week</strong><span class="talk__loc">, Indianapolis, IN</span> <span class="talk__name">&mdash; Improving the Product Toolbox</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Apr. &rsquo;18</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">DrupalCon</strong><span class="talk__loc">, Nashville, TN</span> <span class="talk__name">&mdash; Migrating a Small City to Drupal</span> &middot; <span class="talk__role">With Charles Brandt</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jan. &rsquo;18</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Carnegie Conference</strong><span class="talk__loc">, Orlando, FL</span> <span class="talk__name">&mdash; Thinking Like a Designer</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Dec. &rsquo;17</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Gather Content</strong><span class="talk__loc">, Virtual</span> <span class="talk__name">&mdash; Conducting a Stakeholder Audit</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;17</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Confab Higher Ed</strong> <span class="talk__name">&mdash; Tackling Content Migration &amp; Maintenance</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Sep. &rsquo;17</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Confab Intensive</strong><span class="talk__loc">, Denver, CO</span> <span class="talk__name">&mdash; Content Migration</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jul. &rsquo;17</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Design &amp; Content Conference</strong><span class="talk__loc">, Vancouver, Canada <span aria-hidden="true">🇨🇦</span></span> <span class="talk__name">&mdash; Discovery &amp; Microinteractions: Improving the Product Toolbox</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">May &rsquo;17</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Pixel Up!</strong><span class="talk__loc">, Cape Town, South Africa <span aria-hidden="true">🇿🇦</span></span> <span class="talk__name">&mdash; Content &amp; Design: Ways to Ruin the Product Experience</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Apr. &rsquo;17</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">University of Illinois Web Conference</strong><span class="talk__loc">, Champaign, IL</span> <span class="talk__name">&mdash; Tackling Content Migration &amp; Maintenance</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jun. &rsquo;15</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Web Conference at Penn State</strong><span class="talk__loc">, University Park, PA</span> <span class="talk__name">&mdash; What&rsquo;s Your Superhero Strategy: How Web Governance Can Save Your World</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">May &rsquo;15</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Confab Central</strong><span class="talk__loc">, Minneapolis, MN</span> <span class="talk__name">&mdash; A Clown Car of Nonsense: Choosing a Better Vehicle to Steer Content Governance</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Apr. &rsquo;15</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Wayne State University Regional Web Conference</strong><span class="talk__loc">, Detroit, MI</span> <span class="talk__name">&mdash; The Kids Are Alright: Millennials in the Workplace</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;14</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">American Marketing Association Symposium for the Marketing of Higher Education</strong> <span class="talk__name">&mdash; Integrating a Web Team Into Your Marketing Department</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Sep. &rsquo;14</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Aggregate Conference</strong><span class="talk__loc">, Louisville, KY</span> &middot; <span class="talk__role">Conference director</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jun. &rsquo;14</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Hannon Hill Webinar Series</strong><span class="talk__loc">, Virtual</span> <span class="talk__name">&mdash; The College Website Is a Potluck</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jun. &rsquo;14</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Confab for Nonprofits</strong> <span class="talk__name">&mdash; The Lone Ranger: Managing the Ups and Downs of One-Person Offices and Small Teams</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jun. &rsquo;14</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Web Conference at Penn State</strong><span class="talk__loc">, University Park, PA</span> <span class="talk__name">&mdash; Saving the World One Tumblr at a Time</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jun. &rsquo;14</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">SUNYCUAD Conference</strong> <span class="talk__name">&mdash; Sunnier Days Ahead: Storytelling &amp; Social Media Across Silos</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">May &rsquo;14</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">University of Michigan Regional Web Conference</strong><span class="talk__loc">, Ann Arbor, MI</span> <span class="talk__name">&mdash; Who Owns the Website? Making the Case for Digital Leadership</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Apr. &rsquo;14</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">HighEdWeb Pittsburgh Regional Conference</strong><span class="talk__loc">, Pittsburgh, PA</span> <span class="talk__name">&mdash; Death to Governance&hellip; Embrace the Chaos</span> &middot; <span class="talk__role">With Tonya Oaks Smith</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;13</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Confab Higher Ed</strong> <span class="talk__name">&mdash; Armies of One: Managing the Ups and Downs of One-Person Offices and Small Teams</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Nov. &rsquo;13</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">Udacity Webinar Series</strong><span class="talk__loc">, Virtual</span> <span class="talk__name">&mdash; Sharing the Sandbox: IT &amp; Marketing</span> &middot; <span class="talk__role">With Alaina Wiens</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Jun. &rsquo;13</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">HighEdWeb Michigan Regional Conference</strong><span class="talk__loc">, Michigan</span> <span class="talk__name">&mdash; Unboxing Yourself: Reaching Out for Professional Growth</span></p>
+      </div>
+    </li>
+
+    <li class="talk">
+      <span class="talk__date">Sep. &rsquo;08</span>
+      <div class="talk__body">
+        <p class="talk__line"><strong class="talk__event">National Association of Government Webmasters Conference</strong> <span class="talk__name">&mdash; Future Web Trends</span> &middot; <span class="talk__role">Panel</span></p>
+      </div>
+    </li>
+
+  </ul>
+
+  <footer class="foot">
+    <p class="foot__contact">Want me to speak? Reach me at <a href="mailto:ron@ronbronson.com">ron@ronbronson.com</a> &middot; back to <a href="./index.html">ronbronson.design</a>.</p>
+  </footer>
+</div>
+</body>
+</html>
