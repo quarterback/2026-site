@@ -45,19 +45,25 @@
     flex-wrap: wrap;
     gap: 6px 16px;
   }
-  .site-link {
+  .site-links {
     position: absolute;
     top: clamp(20px, 3.4vw, 44px);
     right: 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
     font-family: var(--mono);
     font-size: 12px;
     letter-spacing: 0.04em;
     white-space: nowrap;
+  }
+  .site-links a {
     color: var(--ink);
     border-bottom: var(--frame) solid var(--accent);
     padding-bottom: 1px;
   }
-  .site-link:hover { color: var(--accent); }
+  .site-links a:hover { color: var(--accent); }
+  .site-links .sep { color: var(--ink-soft); }
 
   /* ── Deck / rotating tagline ──────────── */
   .tagline {
@@ -176,7 +182,11 @@
   <header class="masthead">
     <div class="masthead__top">
       <a class="name" href="./index.html">Ron Bronson</a>
-      <a class="site-link" href="https://ronbronson.dev">ronbronson.dev &rarr;</a>
+      <span class="site-links">
+        <a href="https://thinkingweapons.com">Studio &#8599;</a>
+        <span class="sep" aria-hidden="true">&middot;</span>
+        <a href="https://ronbronson.dev">ronbronson.dev &#8599;</a>
+      </span>
     </div>
     <h2 class="tagline" id="tagline">
       <span>Finds messy systems.</span>
@@ -214,7 +224,11 @@
   <div class="nowstrip">
     <span class="np"><span class="nowstrip__label" id="np-label">Last played</span> <a id="np-link" href="https://listening.ronbronson.com" target="_blank" rel="noopener"><b id="np-track">Living My Life</b> &mdash; <span id="np-artist">Deerhunter</span></a></span>
     <span class="pages">
+      <a href="about.html">About &rarr;</a>
+      <span class="sep" aria-hidden="true">&middot;</span>
       <a href="how-i-work.html">How I work &rarr;</a>
+      <span class="sep" aria-hidden="true">&middot;</span>
+      <a href="talks.html">Talks &rarr;</a>
       <span class="sep" aria-hidden="true">&middot;</span>
       <a href="reading.html">Reading &rarr;</a>
     </span>
@@ -235,6 +249,7 @@
   <section class="section">
     <h2>Selected interviews</h2>
     <ul>
+      <li><a href="https://www.softlabor.biz/the-soft-labor-questionnaire-ron-bronson/" target="_blank" rel="noopener">The Soft Labor Questionnaire</a> <span class="src">— Soft Labor No. 26, Nov. 2025</span></li>
       <li><a href="https://podcasts.apple.com/br/podcast/repairing-service-design-for-the-age-of-ai-ron-bronson-ep-236/id1104665758?i=1000726081505" target="_blank" rel="noopener">Repairing Service Design for the Age of AI</a> <span class="src">— Service Design Show, Sep. 2025</span></li>
       <li><a href="https://codeforamerica.org/news/leading-the-field-ron-bronson/" target="_blank" rel="noopener">Q&amp;A with Ron Bronson</a> <span class="src">— Code for America, 2025</span></li>
       <li><a href="https://www.dididothat.design/episode/what-huh-me-huh-what-with-ron-bronson" target="_blank" rel="noopener">Interview with Ron Bronson</a> <span class="src">— Did I Do That? Design podcast, Ep. 72, Oct. 2025</span></li>
@@ -250,6 +265,7 @@
       <li><a href="https://www.ixda.no/talks/design-as-repair" target="_blank" rel="noopener">Design as Repair</a> <span class="src">— IxDA Oslo, Sep. 2025</span></li>
       <li><a href="https://digital.gov/resources/deceptive-design-how-to-identify-and-combat-consequence-design" target="_blank" rel="noopener">Deceptive Design / Consequence Design</a> <span class="src">— digital.gov, Oct. 2020</span></li>
       <li><a href="https://rosenfeldmedia.com/civic-design-2022/design-consequences-everyday-life-ron-bronson-readings-and-other-resources/" target="_blank" rel="noopener">Design Consequences in Everyday Life</a> <span class="src">— Rosenfeld Civic Design, 2022</span></li>
+      <li style="margin-top:6px;"><a href="talks.html" style="font-weight:700; color:var(--accent); border-bottom:var(--frame) solid var(--accent); padding-bottom:1px;">All talks &rarr;</a> <span class="src">— the full speaking history</span></li>
     </ul>
   </section>
 
@@ -259,6 +275,7 @@
       <li>UT 402 Public Mechanics <span class="src">— <a href="https://taubmancollege.umich.edu/course/ut402-public-mechanics-how-services-work-section-1-fall-2026/" target="_blank" rel="noopener">F26</a>, <a href="https://taubmancollege.umich.edu/course/ut402-public-mechanics-how-services-work-section-5-winter-2026/" target="_blank" rel="noopener">W26</a></span></li>
       <li>UT 330 Interaction Design <span class="src">— <a href="https://taubmancollege.umich.edu/course/ut330-interaction-design-and-urban-experiences-section-1-fall-2026/" target="_blank" rel="noopener">F26</a></span></li>
       <li>UT 360 Service Design and Urban Needs <span class="src">— <a href="https://taubmancollege.umich.edu/course/ut360-advanced-studio-service-design-and-urban-needs-section-2-winter-2026/" target="_blank" rel="noopener">W&rsquo;26</a>, <a href="https://taubmancollege.umich.edu/news/2024/04/25/taubman-college-students-create-innovative-concepts-to-welcome-new-residents-in-collaboration-with-the-state-of-michigans-population-growth-effort/" target="_blank" rel="noopener">W&rsquo;24</a></span></li>
+      <li>ART 230 Business of Visual Art <span class="src">— Community College of Aurora, Sp/Su/Fa &rsquo;09</span></li>
     </ul>
   </section>
 
