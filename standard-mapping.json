@@ -1,0 +1,33 @@
+{
+  "did": "did:plc:odgxwakrg5r2zjetnrkxuh5c",
+  "documents": {
+    "about.html": {
+      "rkey": "3mpff3klyjq2u",
+      "uri": "at://did:plc:odgxwakrg5r2zjetnrkxuh5c/site.standard.document/3mpff3klyjq2u"
+    },
+    "how-i-work.html": {
+      "rkey": "3mpff3knjea2u",
+      "uri": "at://did:plc:odgxwakrg5r2zjetnrkxuh5c/site.standard.document/3mpff3knjea2u"
+    },
+    "reading.html": {
+      "rkey": "3mpff3kotgw2q",
+      "uri": "at://did:plc:odgxwakrg5r2zjetnrkxuh5c/site.standard.document/3mpff3kotgw2q"
+    },
+    "talks.html": {
+      "rkey": "3mpff3kqahc2a",
+      "uri": "at://did:plc:odgxwakrg5r2zjetnrkxuh5c/site.standard.document/3mpff3kqahc2a"
+    }
+  },
+  "icon": {
+    "blob": {
+      "$type": "blob",
+      "mimeType": "image/png",
+      "ref": {
+        "$link": "bafkreihtof5e4f4kx47hd7oaxdxmt4pl6cnyiptfjr2quh4vua6odwhfwi"
+      },
+      "size": 29282
+    },
+    "sha": "f3717a4e178abf3e71fdc0b8eec9f1ebf09b843e654c750a1f95a03ce1d8e5b2"
+  },
+  "publicationRkey": "3mpff3kanmf2z"
+}
