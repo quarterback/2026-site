@@ -1,0 +1,14 @@
+{
+  "publication": {
+    "url": "https://ronbronson.design",
+    "name": "Ron Bronson",
+    "description": "Ron Bronson designs information systems — content strategy, information architecture, digital services, governance, and delivery leadership. Writing, teaching, talks, and the occasional invented sport.",
+    "icon": "assets/avatar.png",
+    "preferences": { "showInDiscover": true }
+  },
+  "documents": {
+    "include": ["about.html", "how-i-work.html", "reading.html", "talks.html"],
+    "exclude": [],
+    "overrides": {}
+  }
+}
