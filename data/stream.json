@@ -1,5 +1,10 @@
 [
   {
+    "title": "Closedtab: A Npm Shared Memory for You and Your Ai Agents",
+    "url": "https://blog.ronbronson.com/closedtab-a-npm-shared-memory-for-you-and-your-ai-agents",
+    "source": "blog.ronbronson.com"
+  },
+  {
     "title": "Link Sharing (Stuff I Read) 6.28.26",
     "url": "https://blog.ronbronson.com/link-sharing-stuff-i-read-6-28-26",
     "source": "blog.ronbronson.com"
@@ -23,10 +28,5 @@
     "title": "Skill issue is not a product strategy",
     "url": "https://makingpublicwork.com/3mo6zvmdvck2g",
     "source": "makingpublicwork.com"
-  },
-  {
-    "title": "I Built a Claude Skill for After-Action Reviews on Ai Agent Work",
-    "url": "https://blog.ronbronson.com/i-built-a-claude-skill-for-after-action-reviews-on-ai-agent-work",
-    "source": "blog.ronbronson.com"
   }
 ]
