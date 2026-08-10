@@ -5,6 +5,11 @@
     "source": "gamedesign.leaflet.pub"
   },
   {
+    "title": "Agent Experience Needs Failure Affordances",
+    "url": "https://blog.ronbronson.com/agent-experience-needs-failure-affordances",
+    "source": "blog.ronbronson.com"
+  },
+  {
     "title": "Public Delivery Is Statecraft",
     "url": "https://blog.ronbronson.com/public-delivery-is-statecraft",
     "source": "blog.ronbronson.com"
@@ -22,11 +27,6 @@
   {
     "title": "Closedtab: A Npm Shared Memory for You and Your Ai Agents",
     "url": "https://blog.ronbronson.com/closedtab-a-npm-shared-memory-for-you-and-your-ai-agents",
-    "source": "blog.ronbronson.com"
-  },
-  {
-    "title": "Link Sharing (Stuff I Read) 6.28.26",
-    "url": "https://blog.ronbronson.com/link-sharing-stuff-i-read-6-28-26",
     "source": "blog.ronbronson.com"
   }
 ]
