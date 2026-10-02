@@ -1,5 +1,10 @@
 [
   {
+    "title": "On Being Anything Other Than a Designer",
+    "url": "https://blog.ronbronson.com/on-being-anything-other-than-a-designer",
+    "source": "blog.ronbronson.com"
+  },
+  {
     "title": "Rebuilding player development in a PC sports sim",
     "url": "https://blog.ronbronson.dev/3mudm62kyes2n",
     "source": "gamedesign.leaflet.pub"
@@ -23,10 +28,5 @@
     "title": "Hiring the Right Shape of Designer",
     "url": "https://makingpublicwork.com/3mqlhsdd4uk22",
     "source": "makingpublicwork.com"
-  },
-  {
-    "title": "Closedtab: A Npm Shared Memory for You and Your Ai Agents",
-    "url": "https://blog.ronbronson.com/closedtab-a-npm-shared-memory-for-you-and-your-ai-agents",
-    "source": "blog.ronbronson.com"
   }
 ]
